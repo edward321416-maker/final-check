@@ -1,180 +1,129 @@
-# RESULT_CODEX — TASK 01
+# RESULT_CODEX — TASK 02
 Date: 2026-09-02 (Asia/Seoul)
-Status: **Mock MVP skeleton acceptance PASS. Original Validator v1.5 integration BLOCKED by missing source.**
-Delivery: local working tree only; no GitHub publication or PR.
+Integration acceptance: **PASS**. Public repository created; source push/PR publication is being finalized.
+TASK 01 baseline: commit 7bc3aeb37d2e4a5fbc96904409f0187d91ab6a39.
+Work branch: codex/task-02-frozen-v15.
 
-## 1. Repository inspection before code changes
-- Configured workspace `D:\Users\admin\Desktop\ai공모전\헬스 해커톤` did not exist; initial shell attempts failed with OS error 267.
-- Located `D:\Users\admin\Documents\ChatGPT\해커톤`: origin `https://github.com/byh020907/ai-development-methods.git`, branch `codex/autonomous-system-prompts`, base `c6dda0c`. It is an AI development-method catalog, not a FINAL CHECK app.
-- Initial and final catalog status stayed: modified AGENTS.md; untracked .gemini_sync.md and .github/. These pre-existing files were not edited by TASK 01.
-- Found `D:\Users\admin\Desktop\ai공모전\해커톤\FINAL_CHECK_Requirement_Extractor_v0.zip`. It contains README, gold/extracted requirements and v0 self-benchmark reports; no Python validator.
-- ZIP SHA-256 observed: `FFAE21577A736B097D4D73AF68F23887EFF30F2C5E7A9F28E54663F3DEF59BE7`. Original ZIP was not modified.
-- No confirmed FINAL CHECK remote or Validator v1.5 source was found in inspected locations or matching repository listings. A broader local filename scan was stopped when unrelated game validators dominated; this is not a claim that the source does not exist anywhere.
-- Created an independent local product directory: `D:\Users\admin\Desktop\ai공모전\해커톤\final-check`.
-- Local branch: `codex/task-01-mvp-skeleton`; no commits or remote. New files are intent-to-add for diff review. No unrelated branch, file, account setting or repository was changed.
+## ACTUAL EXECUTION
 
-## 2. Implemented
-- Locked product scope in docs/PRODUCT_SPEC_V1.md; role ownership and unresolved decisions recorded.
-- Next.js 16.3.4 / React 19.2.8 / TypeScript 5.9.3 frontend with exactly five routes: /, /announcement, /upload, /results, /recheck.
-- Real interactions: demo session creation, requirement evidence, package selection, actual multipart file receipt, preflight request, result filters, recheck comparison, refresh restore and missing-session recovery.
-- FastAPI 0.135.1 / Pydantic 2.13.5 backend, Python 3.14 virtual environment, pinned resolved dependencies.
-- CheckSession, Requirement, ValidationResult and SubmissionStatus exist in both Python and TypeScript.
-- BLOCKER requires two nonblank evidence objects. R19 automatic BLOCKER is rejected.
-- Empty/incomplete results cannot READY; REVIEW and EXTERNAL remain unresolved. Fixed demo clears two BLOCKERs but remains NEEDS_REVIEW.
-- Mock source and mode are visible. Custom uploads clear demo requirements, findings and history; real validation returns explicit 503 without invented findings.
-- One-hour in-memory session TTL, 100-session cap, bounded file metadata hashing, no retained file content.
-- Generated synthetic PDF/MP4 fixtures: two broken files and three fixed files. Results are canned JSON, not v1.5 output.
-- Added original-Python adapter boundary **after** desktop/mobile mock golden path first passed. Adapter availability is false and validation intentionally raises ValidatorUnavailable.
-- English execution/custom-instruction files and active project AGENTS.md. Existing relevant skills reused; no plugin/skill installed. Account-level ChatGPT settings were not changed.
-- Local hidden-process start/stop scripts; binary Git attributes prevent PDF/media newline conversion.
+- Verified the ZIP's original validator SHA before integration; matched the user-specified hash. Verified all six manifest-listed artifact hashes and preserved source/reference bytes.
+- Reran TASK 01 frontend typecheck, production build, Playwright and backend pytest before integration edits.
+- Created a local baseline commit and main reference, then a separate TASK 02 branch. The unrelated ai-development-methods checkout was not touched.
+- Copied original frozen source and manifests to backend/app/validators/frozen_v15/. Stored historical gate reports separately under docs/reference_full_gate/.
+- Installed only actual engine imports into the project virtual environment: numpy 2.5.2, opencv-python-headless 5.0.0.93, pypdf 6.16.2, PyMuPDF 1.28.2. Python 3.14.0; FastAPI 0.135.1; Pydantic 2.13.5. Imports passed. Backend-executable ffprobe: 8.1.2-full_build-www.gyan.dev.
+- Generated new actual synthetic acceptance fixtures under fixtures/v15/. Historical 12s/8s, 320x180 TASK 01 files were preserved and are not used for v1.5 acceptance.
+- Independently audited video container, exact duration, dimensions, ratio, byte size, and extracted PDF section content **before scoring**. Both videos fully decoded.
+- Executed the original native validate_case(Path) against both packages. Then executed the same frozen engine through the adapter and real API upload/recheck flow.
+- Adapter verifies the fixed requirement profile, uploaded names/sizes/SHA-256, original engine SHA and structured outputs. Worker runs in the same Python environment with UTF-8 and a 180-second timeout. Original code/globals/thresholds were not patched.
+- Submission files now live in isolated temporary session directories. The app retains raw output separately; no output JSON is added to the submitted package.
+- Demo buttons fetch real file bytes into the browser and POST multipart files. No normal golden-path API response is intercepted or replaced.
+- Migrated serialized NEEDS_REVIEW to REVIEW_REQUIRED in Python and TypeScript. The three locked submission states are BLOCKED, REVIEW_REQUIRED and READY. Before validation, status=null and run_state=NOT_STARTED.
+- Preserved all five routes and the existing CSS/layout. Updated data labels and prioritized existing result cards by severity.
+- Created the dedicated public repository https://github.com/edward321416-maker/final-check and verified visibility/public ownership. It is separate from ai-development-methods.
 
-## 3. Actually executed
-| Check | Actual result | Evidence / scope |
-| --- | --- | --- |
-| frontend: npm run typecheck | PASS, exit 0 | TypeScript compiler; also checked by production build. |
-| frontend: npm run build | PASS, exit 0 | All five product routes built; latest functional build preceded final browser suite. |
-| frontend: npm run test:smoke | **8 PASS, 0 fail, 0 skip, 0 flaky** | 4 cases each on desktop Chromium and mobile Chromium emulation. Final suite duration 14.1 seconds; start 2026-09-02T10:25:30.025Z. |
-| backend: .venv/Scripts/python.exe -m pytest -q --junitxml=../artifacts/backend-smoke.xml | **16 PASS**, exit 0 | Product gates, complete-only READY, files, API, expiry, isolation and unavailable adapter. Final run 1.10 seconds; one dependency deprecation warning. |
-| python scripts/generate_fixtures.py | PASS | Actual synthetic PDFs and 12s/8s MP4s created. |
-| python scripts/verify_fixtures.py | PASS, exit 0 | Five files hashed; both H.264 videos fully decoded: 320×180, 10 fps, no audio; PDFs checked for header only. |
-| backend pip check | PASS | No broken dependency requirements. |
-| frontend npm audit --omit=dev --audit-level=high | PASS | Registry audit reported 0 vulnerabilities at execution time; not a full security audit. |
-| scripts/start-local.ps1 and stop-local.ps1 | PASS | Started, HTTP checked, stopped recorded processes, restarted. |
-| Live frontend and proxy health | PASS | HTTP 200 at / and /api/health; mode=mock, validator=unavailable. |
-| git diff --check | PASS, exit 0 | New files included using intent-to-add; media treated as binary. Final documentation-only changes checked again at delivery. |
+Actual acceptance outcomes:
 
-Browser golden path uses the actual production Next.js server and FastAPI mock fixture service; it does not intercept their normal API traffic.
-The outage scenario explicitly intercepts one request to return 503; it is an error-UX test, not an observed real outage.
-Golden path asserts two BLOCKERs have both evidence sources, R19 stays REVIEW, recheck changes two results, fixed is not READY, and page refresh restores state.
-Golden path collected zero console errors/page exceptions and no horizontal overflow at all six captures in each viewport.
+| Case | Independent facts | Raw frozen findings | Adapted summary |
+| --- | --- | --- | --- |
+| Broken | 61.000s; MP4; 1080x1920; 9:16; video 9,550 bytes; one correct-name PDF; application/portrait/description present, privacy absent | R09 BLOCKER, R13 BLOCKER, R19 REVIEW, R20 REVIEW, R21 REVIEW | BLOCKED; 16 adapted results; exactly two blockers |
+| Fixed | 45.000s; MP4; 1080x1920; 9:16; video 9,038 bytes; one correct-name PDF; all four sections present | R19 REVIEW, R20 REVIEW, R21 REVIEW | REVIEW_REQUIRED; R09/R13 PASS; zero blockers |
 
-## 4. Evidence
-- [Playwright machine report](artifacts/playwright-results.json)
-- [Backend JUnit report](artifacts/backend-smoke.xml)
-- [Fixture metadata / hashes / full decode verification](artifacts/fixture-verification.json)
-- [Desktop Home](artifacts/screenshots/desktop-01-home.png)
-- [Desktop broken results](artifacts/screenshots/desktop-04-results-broken.png)
-- [Desktop recheck](artifacts/screenshots/desktop-05-recheck.png)
-- [Desktop fixed results](artifacts/screenshots/desktop-06-results-fixed.png)
-- [Mobile Home](artifacts/screenshots/mobile-01-home.png)
-- [Mobile results](artifacts/screenshots/mobile-04-results-broken.png)
-- Twelve actual browser captures total: desktop 1440×1000 viewport; mobile 390×664 viewport with 3× device scale, full-page captures.
-- Screenshots were visually inspected. They are runtime captures, not generated design mockups.
+Videos are intentionally simple static construction at 2 fps without audio, permitted by the task's photo-only demo scope. Metadata and output are measured, not simulated.
 
-## 5. Failures corrected / limits
-- Initial invalid cwd: found surviving directories, preserved unrelated checkout, created isolated product root.
-- First backend suite had 14 passing tests and two setup/teardown errors because pytest embedded a 20 MiB byte parameter in its test ID. Added bounded explicit parameter IDs; final 16 tests pass.
-- First browser suite had 4 passes and 4 locator failures: the app alert and Next.js route announcer both matched role=alert. Gave the app alert a clear accessible name and used it in tests; final 8 pass.
-- Redundant Playwright install command emitted no progress and was interrupted. The already installed matching Chromium revision 1234 launched successfully; browser version observed: 151.0.7922.34. No claim of a new browser installation.
-- ffprobe JSON decoding initially failed under Windows cp949; explicit UTF-8 fixed the verifier.
-- New-file extra blank lines failed the first whitespace gate; removed through patches. Added Git binary attributes for generated PDFs/media. Final whitespace gate passes.
-- Starlette 1.6.0 emits one TestClient/httpx deprecation warning; tests pass. No runtime frontend error was observed in the golden path.
-- Node reports FORCE_COLOR/NO_COLOR environment warnings during the test runner; not application errors.
-- Upload checks currently enforce extension/size/count and record metadata; PDF semantics, malware checks and MP4 validity for arbitrary uploads are not implemented.
-- The server is a loopback-only local skeleton, not an internet deployment. In-memory sessions expire/restart; multi-worker persistence and production file storage are absent.
+## ACTUAL TEST
 
-## 6. NOT TESTED / unavailable
-- **Original Validator v1.5 integration: NOT TESTED / unavailable.** Only the absent-engine boundary and 503 behavior are tested.
-- Actual Requirement Extractor, blind test reproduction, semantic PDF and Vision analysis: NOT TESTED.
-- Frozen 39-package gate and user-reported recall/evidence metrics: NOT TESTED. The supplied success claims were preserved as handoff context; Kill Test was not restarted.
-- Real-motion/photo-only classification: NOT TESTED; R19 ambiguous demo is intentionally canned.
-- Firefox, Safari/WebKit, physical mobile devices, screen readers, load testing and public deployment: NOT TESTED.
-- Google Sheets/Drive live API sync: NOT TESTED / pending. One major-task event is durably queued at `%LOCALAPPDATA%/AIExecution/projects/final-check-task01/pending-events.jsonl`, ID `final-check-task-01-20260902`; token usage unknown. No schema was acquired/uploaded.
-- No GitHub issue, push, remote repository, PR or merge was created. No account authorization was requested or changed.
-- Prompt behavioral enforcement and claimed 80–90% token savings: NOT TESTED; no measured savings claim.
+| Executed command/check | Result |
+| --- | --- |
+| Baseline frontend npm run typecheck | PASS, exit 0 |
+| Baseline frontend npm run build | PASS, exit 0 |
+| Baseline frontend npm run test:smoke | 8 passed; desktop/mobile Chromium; 11.4s |
+| Baseline backend pytest | 16 passed, 1 dependency warning; 1.10s |
+| Updated frontend npm run typecheck | PASS, exit 0 |
+| Updated frontend npm run build | PASS, exit 0 |
+| Updated frontend npm run test:smoke | **8 passed, 0 failed, 0 skipped, 0 flaky**; 35.1s |
+| Updated backend pytest | **26 passed, 0 failed**, 1 dependency warning; 16.69s |
+| scripts/generate_v15_fixtures.py | PASS; actual PDF/MP4 files generated |
+| scripts/audit_v15_fixtures.py | PASS; both intended ground truths independently confirmed before scoring |
+| scripts/run_v15_acceptance.py | PASS; broken BLOCKED, fixed REVIEW_REQUIRED |
+| Frozen hash, actual imports and ffprobe smoke | PASS |
+| pip check | PASS; no broken requirements |
+| git diff --check | PASS, exit 0 |
 
-## 7. Acceptance / next work
-The seven TASK 01 skeleton acceptance criteria are met locally: five-screen flow, actual interactions with mocked data, TypeScript schemas, backend skeleton, running frontend, executed smoke tests and this report.
-Step 7's real validator connection remains blocked by missing original source; this is not represented as completed.
-Next: resolve I01 with the exact GitHub repository; resolve I02 with the original frozen Python v1.5, native I/O and reference fixture package. Then wire actual extraction/validation and run the existing frozen regression gate.
-Product decisions I03–I05 remain explicitly recorded rather than silently finalized.
+The real browser suite began at 2026-09-02T10:59:56.349Z. Each viewport's golden path asserts real multipart upload twice, original engine SHA, R09/R13 BLOCKER, both evidence sources, R19 REVIEW, BLOCKED, recheck clearing R09/R13, REVIEW_REQUIRED, reload persistence and no horizontal overflow.
+It observed zero page exceptions/console errors in the golden path. The separate outage test intentionally injects one 503; it is labelled fault injection, not a real outage claim.
+Backend tests prove all seven requested safety invariants, plus actual upload/recheck, source integrity, status contract parity, receipt tampering, expiry cleanup, input boundaries and unknown-profile rejection.
+An actual raster-only PDF was generated, confirmed to have no extracted text, and executed through v1.5. The engine returned four VISION_PENDING requests; adapter returned R09/R10/R11 REVIEW, incomplete validation and REVIEW_REQUIRED.
+Policy/runtime failure tests use explicitly injected malformed outputs/errors. Their test outcomes were actually executed; they are not claimed as observed native classifications.
 
-## 8. Changed files
-All files below were newly created under the isolated final-check root; no original app files were overwritten.
-[Plain file inventory](artifacts/changed-files.txt)
+Evidence:
+- [TASK 01 baseline logs and reports](artifacts/task01-baseline/)
+- [Independent fixture audit](artifacts/demo-fixture-audit.json)
+- [Broken raw](artifacts/v15-broken-raw.json) / [broken adapted](artifacts/v15-broken-adapted.json)
+- [Fixed raw](artifacts/v15-fixed-raw.json) / [fixed adapted](artifacts/v15-fixed-adapted.json)
+- [Runtime dependencies](artifacts/v15-runtime-smoke.json)
+- [Backend JUnit](artifacts/backend-smoke.xml) / [Playwright report](artifacts/playwright-results.json)
+- [Broken UI](artifacts/screenshots/desktop-04-results-broken.png) / [fixed UI](artifacts/screenshots/desktop-06-results-fixed.png)
+- Twelve actual desktop/mobile browser screenshots under artifacts/screenshots/. Upload and result screenshots were visually inspected.
 
-```text
-.gemini_sync.md
-.gitattributes
-.github/system_prompts/chatgpt_custom_instructions.md
-.github/system_prompts/codex_system_prompt.md
-.gitignore
-AGENTS.md
-DECISIONS.md
-IMPLEMENTATION_ISSUES.md
-README.md
-RESULT_CODEX.md
-TASKS.md
-artifacts/backend-smoke.xml
-artifacts/changed-files.txt
-artifacts/fixture-verification.json
-artifacts/playwright-results.json
-artifacts/screenshots/desktop-01-home.png
-artifacts/screenshots/desktop-02-announcement.png
-artifacts/screenshots/desktop-03-upload.png
-artifacts/screenshots/desktop-04-results-broken.png
-artifacts/screenshots/desktop-05-recheck.png
-artifacts/screenshots/desktop-06-results-fixed.png
-artifacts/screenshots/mobile-01-home.png
-artifacts/screenshots/mobile-02-announcement.png
-artifacts/screenshots/mobile-03-upload.png
-artifacts/screenshots/mobile-04-results-broken.png
-artifacts/screenshots/mobile-05-recheck.png
-artifacts/screenshots/mobile-06-results-fixed.png
-backend/app/__init__.py
-backend/app/api/__init__.py
-backend/app/api/routes.py
-backend/app/main.py
-backend/app/models/__init__.py
-backend/app/models/schemas.py
-backend/app/services/__init__.py
-backend/app/services/demo.py
-backend/app/services/policy.py
-backend/app/services/sessions.py
-backend/app/validators/__init__.py
-backend/app/validators/v15_adapter.py
-backend/requirements.lock.txt
-backend/requirements.txt
-backend/tests/test_smoke.py
-docs/DEMO_SCRIPT.md
-docs/PRODUCT_SPEC_V1.md
-docs/VALIDATOR_POLICY.md
-fixtures/demo-announcement.txt
-fixtures/demo-broken/README.md
-fixtures/demo-broken/clip.mp4
-fixtures/demo-broken/proposal.pdf
-fixtures/demo-broken/results.json
-fixtures/demo-fixed/README.md
-fixtures/demo-fixed/clip.mp4
-fixtures/demo-fixed/consent.pdf
-fixtures/demo-fixed/proposal.pdf
-fixtures/demo-fixed/results.json
-fixtures/requirements.json
-frontend/.env.example
-frontend/app/announcement/page.tsx
-frontend/app/error.tsx
-frontend/app/globals.css
-frontend/app/layout.tsx
-frontend/app/loading.tsx
-frontend/app/not-found.tsx
-frontend/app/page.tsx
-frontend/app/recheck/page.tsx
-frontend/app/results/page.tsx
-frontend/app/upload/page.tsx
-frontend/components/screens.tsx
-frontend/components/session-provider.tsx
-frontend/components/ui.tsx
-frontend/lib/api.ts
-frontend/next-env.d.ts
-frontend/next.config.ts
-frontend/package-lock.json
-frontend/package.json
-frontend/playwright.config.ts
-frontend/tests/golden-path.spec.ts
-frontend/tsconfig.json
-frontend/types/check.ts
-scripts/generate_fixtures.py
-scripts/start-local.ps1
-scripts/stop-local.ps1
-scripts/verify_fixtures.py
-```
+## NOT TESTED
+
+- Exact historical 39-case Final Full Gate corpus: **NOT TESTED**. Handoff contains source/policy/reports only; the historical fixture corpus was absent.
+- Independent Requirement Extractor blind evaluation: NOT TESTED; no generic extractor implementation was supplied.
+- Actual Vision provider or model accuracy: NOT TESTED / no provider connected. No visual result was invented.
+- General R19 motion accuracy/recall or a new benchmark: NOT TESTED. The new still-video demo and policy guardrails were tested only.
+- Firefox, Safari/WebKit, physical mobile devices, screen-reader audit, load/fuzz testing and public app hosting: NOT TESTED.
+- Cross-platform frozen-engine behavior: local Windows execution verified; Linux/macOS runtime not executed.
+- Google Sheets/Drive API synchronization: unavailable; task event remains pending outside Git. No new account/OAuth/plugin schema was acquired.
+- No claim that prior Full Gate reference scores are reproduced by these new integration tests.
+
+## FAILURES CORRECTED
+
+- PyMuPDF built-in Korean CID encoding produced PDFs that pypdf could not extract reliably. Independent audit failed before scoring. Embedded the CJK font with Unicode mapping, regenerated and reran audit. This invalid fixture was not counted as a validator failure.
+- PyMuPDF's deprecated fitz import emitted a notice to stdout, contaminating child-process JSON. Adapter worker redirects incidental output to stderr while emitting original raw JSON separately. The frozen source was not modified.
+- Actual receipt verification initially compared the browser's MIME declaration too. Changed it to compare actual names, byte sizes and SHA-256; MIME declarations are not treated as file identity.
+- Two newly authored helper scripts initially landed in the tool's stale workspace. Corrected absolute patch targets and copied them into final-check. Automatic approval review rejected a combined move/delete cleanup with the generic reason "blocked by policy"; duplicate helper copies remain outside this repository under 헬스 해커톤/scripts. No deletion was retried through another tool.
+- One Starlette TestClient/httpx deprecation warning remains. PyMuPDF retains the original engine's fitz import warning. Neither prevented successful actual execution.
+- Node FORCE_COLOR/NO_COLOR notices are test-runner environment warnings, not frontend runtime errors.
+
+## PRODUCT LIMITATIONS
+
+- **Vision:** pending scanned-PDF sections remain REVIEW and validation_complete=false. This is visible in the mode notice and result explanations.
+- **R19 review noise:** both deliberately static videos remain REVIEW. No automatic photo-only BLOCKER exists. No claim about general false-review rates.
+- **R20/R21:** licensing and AI provenance remain REVIEW; source-file inspection cannot establish external rights or creation history.
+- **Supported announcement:** the supplied frozen engine is a childcare short-form competition profile, with fixed 테스트어린이집 filenames. TASK 02 text's Wanted reference does not match that artifact; the UI identifies the supplied frozen profile rather than claiming Wanted integration.
+- **Announcement evidence:** source quotes come from the frozen SOURCE_RULES handoff. Original announcement PDF/URL was not included. No new source location/page number was invented.
+- **Semantic boundary:** text-PDF PASS establishes presence of section markers, not document truth, signatures or eligibility.
+- **Sessions:** local in-memory metadata and temporary files; one-hour inactivity TTL, replacement/shutdown cleanup and per-session operation lock. No durable or multi-worker service.
+- **Uploads:** 8 files, 320 MiB each, 350 MiB aggregate transport. These local limits allow normal <=300MB inputs but are not frozen threshold changes. Extension admission is not malware scanning.
+- **Deployment:** source repository is public; application remains loopback-only. No public application hosting, login, payment, dashboard or automatic submission was added.
+- Other Product questions are tracked in IMPLEMENTATION_ISSUES.md; no UI redesign or source rewrite was performed.
+
+## SOURCE INTEGRITY
+
+- Expected SHA-256: **4b506c3b692f2cef39e2be7cb44b4ce74bcc4ce829064ac655e16f545042bb11**
+- Actual SHA-256: **4b506c3b692f2cef39e2be7cb44b4ce74bcc4ce829064ac655e16f545042bb11**
+- Match: **YES**; source size 15,851 bytes.
+- Original source modified/reformatted/renamed internally: **NO**.
+- Original ZIP SHA-256: d4aa135bc36565845c0fe3b00779a2c353a708d43f05764bd74f7a0d87f46fa7.
+- Source and all six manifest-listed reference artifacts were checked again after tests.
+- [Hash evidence](artifacts/source-integrity.json). Git disables text conversion on frozen/reference artifacts.
+- Runtime adaptation is solely in the adapter; the service calls it and never patches engine constants or algorithms.
+
+## GITHUB PUBLICATION
+
+GITHUB_PUBLICATION = PENDING_PUSH
+Dedicated public repository ownership and visibility were verified under edward321416-maker/final-check.
+Baseline main and the integration branch will be pushed, then a normal PR will carry the tested integration.
+
+## CHANGED FILES
+
+Core changes:
+- backend/app/validators/v15_adapter.py; new frozen_v15/ original artifacts.
+- backend/app/api/routes.py, main.py, models/schemas.py, services/{sessions,demo,policy}.py.
+- backend/requirements.txt, requirements.lock.txt and tests/test_smoke.py.
+- frontend/types/check.ts, lib/api.ts, components/{screens,session-provider,ui}.tsx, app/layout.tsx and tests/golden-path.spec.ts.
+- scripts/generate_v15_fixtures.py, audit_v15_fixtures.py and run_v15_acceptance.py.
+- New actual fixtures/v15/ package and source/reference/audit/raw/adapted/test evidence.
+- Product/validator/demo/README/decision/issue/task/execution/sync documents and .gitattributes.
+- frontend/app/globals.css was not changed.
+A full TASK 02 diff is relative to baseline 7bc3aeb; the previous TASK 01 report is retained in artifacts/task01-baseline/RESULT_CODEX_TASK01.md.

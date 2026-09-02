@@ -1,0 +1,14 @@
+{
+  "imports": "PASS",
+  "entrypoint": "validate_case(Path)",
+  "sha256": "4b506c3b692f2cef39e2be7cb44b4ce74bcc4ce829064ac655e16f545042bb11",
+  "versions": {
+    "numpy": "2.5.2",
+    "opencv-python-headless": "5.0.0.93",
+    "pypdf": "6.16.2",
+    "PyMuPDF": "1.28.2",
+    "fastapi": "0.135.1",
+    "pydantic": "2.13.5"
+  },
+  "ffprobe": "ffprobe version 8.1.2-full_build-www.gyan.dev Copyright (c) 2007-2026 the FFmpeg developers"
+}

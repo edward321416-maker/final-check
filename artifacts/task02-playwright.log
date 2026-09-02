@@ -1,0 +1,31 @@
+
+> final-check-frontend@0.1.0 test:smoke
+> playwright test
+
+[WebServer] INFO:     Started server process [33976]
+[WebServer] INFO:     Waiting for application startup.
+[WebServer] INFO:     Application startup complete.
+[WebServer] INFO:     Uvicorn running on http://127.0.0.1:8100 (Press CTRL+C to quit)
+[WebServer] (node:31496) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 8 tests using 2 workers
+
+(node:16140) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:39220) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 2 [desktop] › tests\golden-path.spec.ts:88:5 › deep link without a session has a recovery path (1.9s)
+  ok 3 [desktop] › tests\golden-path.spec.ts:95:5 › custom file upload never receives mocked findings (929ms)
+  ok 4 [desktop] › tests\golden-path.spec.ts:110:5 › backend failure is recoverable and does not advance (1.2s)
+  ok 1 [desktop] › tests\golden-path.spec.ts:28:5 › five-screen golden path, evidence, filter, reload and recheck (12.3s)
+(node:11164) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:37248) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 6 [mobile] › tests\golden-path.spec.ts:88:5 › deep link without a session has a recovery path (795ms)
+  ok 7 [mobile] › tests\golden-path.spec.ts:95:5 › custom file upload never receives mocked findings (991ms)
+  ok 8 [mobile] › tests\golden-path.spec.ts:110:5 › backend failure is recoverable and does not advance (538ms)
+  ok 5 [mobile] › tests\golden-path.spec.ts:28:5 › five-screen golden path, evidence, filter, reload and recheck (14.5s)
+
+  8 passed (35.1s)

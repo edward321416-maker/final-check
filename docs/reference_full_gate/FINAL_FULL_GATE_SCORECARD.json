@@ -1,0 +1,109 @@
+{
+  "test_label": "ACTUAL FROZEN v1.5 FINAL FULL GATE",
+  "test_scope": "Executable synthetic PDF/MP4 submission fixtures; not a third-party real-world submission corpus.",
+  "freeze_sha256": "4b506c3b692f2cef39e2be7cb44b4ce74bcc4ce829064ac655e16f545042bb11",
+  "fixture_audit_pass": true,
+  "cases": {
+    "total": 39,
+    "clean": 12,
+    "critical_blocker": 15,
+    "r19_risk": 5,
+    "ambiguous": 4,
+    "review_only": 3
+  },
+  "extractor_prior_actual_independent_chat": {
+    "re_run_in_this_gate": false,
+    "recall": 1.0,
+    "evidence_coverage": 1.0,
+    "unsupported_blockers": 0,
+    "atomicity_violations": 1
+  },
+  "critical_blocker_recall": 1.0,
+  "critical_blocker_misses": [],
+  "deterministic_blocker_recall": 1.0,
+  "text_pdf_semantic_recall": 1.0,
+  "scanned_pdf_vision_recall": 1.0,
+  "clean_scanned_pdf_document_false_block_rate": 0.0,
+  "r19_clear_photo_risk_intercept_rate": 1.0,
+  "r19_clear_photo_intercepted_cases": [
+    "GR01_ONE_STILL",
+    "GR02_FOUR_STILLS",
+    "GR03_NINE_STILLS",
+    "GR04_FIVE_CROSSFADE",
+    "GR05_SEVENTEEN_STILLS"
+  ],
+  "r19_real_motion_false_block_rate": 0.0,
+  "r19_real_motion_unnecessary_review_rate_observational": 0.8333,
+  "r19_real_motion_review_cases": [
+    "GC02_ROTATE_41",
+    "GC03_TWO_SPEED_44",
+    "GC04_TINY_MOTION_47",
+    "GC05_SUBTLE_52",
+    "GC06_CAMERA_LOCAL_33",
+    "GC07_STATIC_INTRO_39",
+    "GC08_OCCLUSION_43",
+    "GC10_VALID_59_7",
+    "GC11_SCANNED_VALID",
+    "GC12_VALID_30_3"
+  ],
+  "r19_ambiguous_false_block_rate": 0.0,
+  "r19_ambiguous_review_rate": 1.0,
+  "review_only_target_accuracy": 1.0,
+  "evidence_coverage": 1.0,
+  "submission_level": {
+    "bad_or_risky_package_READY_rate": 0.0,
+    "bad_or_risky_packages_READY": [],
+    "clean_package_BLOCKED_rate": 0.0,
+    "clean_packages_BLOCKED": [],
+    "note": "R20/R21 produce REVIEW on video packages by design; READY rate is therefore a safety metric, not a clean-pass usability metric."
+  },
+  "vision_test_status": "ACTUAL SAME-SESSION VISUAL INSPECTION, NOT INDEPENDENT VISION-MODEL BLIND",
+  "pre_registered_policy": {
+    "version": "v1.5-pre-registered-full-gate-policy",
+    "registered_before_holdout": true,
+    "r19_policy": {
+      "auto_blocker_allowed": false,
+      "PHOTO_ONLY": "REVIEW",
+      "REVIEW": "REVIEW",
+      "MOTION_VIDEO": "NO_R19_FINDING",
+      "UNKNOWN": "REVIEW"
+    },
+    "hard_gate_thresholds": {
+      "requirement_extractor_recall": ">=0.90 (prior independent-chat test; unchanged component)",
+      "evidence_coverage": "=1.00",
+      "unsupported_blocker": "=0",
+      "critical_blocker_recall_excluding_R19": ">=0.90",
+      "deterministic_blocker_recall": ">=0.98",
+      "text_pdf_semantic_recall": ">=0.95",
+      "scanned_pdf_vision_recall": ">=0.90",
+      "clean_scanned_pdf_document_false_block_rate": "<=0.05",
+      "R19_clear_photo_risk_intercept_REVIEW_or_BLOCKER": ">=0.90",
+      "R19_real_motion_false_BLOCKER_rate": "=0",
+      "R19_ambiguous_false_BLOCKER_rate": "=0",
+      "bad_package_READY_rate": "=0",
+      "clean_package_BLOCKED_rate": "<=0.05"
+    },
+    "observational_metrics": {
+      "R19_real_motion_unnecessary_REVIEW_rate": "report only; not a hard gate",
+      "overall_REVIEW_load": "report only; not a hard gate"
+    },
+    "reason_for_R19_reclassification": "Actual frozen v1.4 Full Gate showed unsafe R19 blocker behavior: photo-only recall 50% and real-motion false blocker 41.7%."
+  },
+  "gate_checks": {
+    "extractor_recall": true,
+    "extractor_evidence": true,
+    "extractor_unsupported_blocker": true,
+    "validator_evidence": true,
+    "critical_blocker_recall": true,
+    "deterministic_recall": true,
+    "text_pdf_recall": true,
+    "vision_pdf_recall": true,
+    "vision_clean_false_block": true,
+    "r19_risk_intercept": true,
+    "r19_real_motion_false_block": true,
+    "r19_ambiguous_false_block": true,
+    "bad_package_ready": true,
+    "clean_package_blocked": true
+  },
+  "result": "PASS"
+}

@@ -8,4 +8,4 @@ No demo finding may be presented as real AI output. Missing evidence cannot prod
 R19 automatic BLOCKER is forbidden. REVIEW applies to suspected photo-only, Ken Burns, pan, zoom and ambiguity.
 Use the five locked screens and four finding states. Add no excluded SaaS functionality.
 Run relevant tests and record actual commands, outcomes, modified files and NOT TESTED limits in RESULT_CODEX.md.
-Do not add a remote or publish to a guessed repository.
+TASK 02 authorizes the dedicated public FINAL CHECK repository under the authenticated owner. Confirm actual ownership/visibility before reporting publication.

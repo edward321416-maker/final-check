@@ -3,7 +3,7 @@ import { createContext, useContext, useEffect, useState, type ReactNode } from "
 import { ApiError, request } from "@/lib/api";
 import type { CheckSession } from "@/types/check";
 
-const KEY = "final-check-session-id-v1";
+const KEY = "final-check-session-id-v2";
 type State = { session: CheckSession | null; loading: boolean; recoveryError: string;
   update: (session: CheckSession) => void };
 const Context = createContext<State | null>(null);

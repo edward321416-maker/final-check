@@ -1,16 +1,16 @@
-# TASK 01 demo script
-All findings in this script are MOCK. The announcement and submission package are synthetic.
+# TASK 02 real validator demo
+These are synthetic submission files processed by the real frozen engine; findings are not canned.
 
-1. Open http://127.0.0.1:3100. Read the visible demo label.
-2. Click "demo 검사 시작하기". Announcement Analysis displays five requirements and announcement excerpts.
-3. Click "제출파일 선택하기". On Submission Upload choose "문제 있는 demo 불러오기".
-4. Confirm proposal.pdf and clip.mp4 are listed; consent.pdf is missing. Click "Preflight 실행하기".
-5. Results: BLOCKED, two BLOCKERs, one REVIEW, one PASS, one EXTERNAL. Open/read both evidence columns. Filter BLOCKER, then return to all.
-6. Click "수정 후 재검사". On Recheck choose "수정한 demo 불러오기".
-7. Confirm consent.pdf has been added. Click "재검사 실행하기".
-8. Results: two statuses change BLOCKER → PASS. The summary is NEEDS_REVIEW. R19 REVIEW and portal EXTERNAL remain.
-9. Reload: session is restored from its opaque session ID while the backend is alive.
+1. Open http://127.0.0.1:3100. Click "demo 검사 시작하기".
+2. Announcement Analysis shows 16 fixed requirements from the supplied frozen SOURCE_RULES. This is a handoff excerpt, not fresh AI extraction.
+3. On Submission Upload click "문제 있는 demo 불러오기". The browser downloads the actual 61-second MP4 and PDF, then uploads their bytes to FastAPI.
+4. Click "Preflight 실행하기". The original frozen Python validate_case runs in a child process.
+5. Results: BLOCKED. R09 privacy consent and R13 duration are BLOCKER with both evidence sources. R19/R20/R21 are REVIEW.
+6. Filter BLOCKER and inspect the extracted PDF section text and measured 61-second duration.
+7. Click "수정 후 재검사", then "수정한 demo 불러오기". The replacement files are actually uploaded: privacy section restored and 45-second MP4.
+8. Click "재검사 실행하기". A new frozen run clears R09/R13 blockers. Two changes are shown. Summary remains REVIEW_REQUIRED because R19/R20/R21 require review.
+9. Reload the page: the session persists while its local backend process and one-hour TTL remain active.
 
-Custom-file branch: Home → select a PDF/TXT announcement → "파일 정보 확인" → Upload PDF/MP4 → run.
-The server receives names, sizes and SHA-256 metadata; no real requirements/results are invented. Validation returns an explicit unavailable error and stays on Upload.
-Restart or one hour of inactivity expires local sessions; the UI provides a route back Home.
+You can also choose local PDF/MP4 files under the selected fixed profile. The expected team/file names remain 테스트어린이집_숏폼공모서류.pdf and 테스트어린이집_숏폼영상.MP4.
+Arbitrary announcement upload remains unsupported for automatic extraction. No generic profile is invented.
+Image-only PDFs are rendered by the frozen engine but stay REVIEW without a Vision provider.

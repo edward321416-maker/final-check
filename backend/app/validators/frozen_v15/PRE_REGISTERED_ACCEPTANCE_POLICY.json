@@ -1,0 +1,31 @@
+{
+  "version": "v1.5-pre-registered-full-gate-policy",
+  "registered_before_holdout": true,
+  "r19_policy": {
+    "auto_blocker_allowed": false,
+    "PHOTO_ONLY": "REVIEW",
+    "REVIEW": "REVIEW",
+    "MOTION_VIDEO": "NO_R19_FINDING",
+    "UNKNOWN": "REVIEW"
+  },
+  "hard_gate_thresholds": {
+    "requirement_extractor_recall": ">=0.90 (prior independent-chat test; unchanged component)",
+    "evidence_coverage": "=1.00",
+    "unsupported_blocker": "=0",
+    "critical_blocker_recall_excluding_R19": ">=0.90",
+    "deterministic_blocker_recall": ">=0.98",
+    "text_pdf_semantic_recall": ">=0.95",
+    "scanned_pdf_vision_recall": ">=0.90",
+    "clean_scanned_pdf_document_false_block_rate": "<=0.05",
+    "R19_clear_photo_risk_intercept_REVIEW_or_BLOCKER": ">=0.90",
+    "R19_real_motion_false_BLOCKER_rate": "=0",
+    "R19_ambiguous_false_BLOCKER_rate": "=0",
+    "bad_package_READY_rate": "=0",
+    "clean_package_BLOCKED_rate": "<=0.05"
+  },
+  "observational_metrics": {
+    "R19_real_motion_unnecessary_REVIEW_rate": "report only; not a hard gate",
+    "overall_REVIEW_load": "report only; not a hard gate"
+  },
+  "reason_for_R19_reclassification": "Actual frozen v1.4 Full Gate showed unsafe R19 blocker behavior: photo-only recall 50% and real-motion false blocker 41.7%."
+}

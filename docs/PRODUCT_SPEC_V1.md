@@ -1,56 +1,69 @@
 # FINAL CHECK — AI Submission Preflight
-Version: 1.0 | Product lock supplied by Product / Business Lead on 2026-09-02.
+Version: 1.1 | TASK 02 product instructions supplied 2026-09-02.
 
 ## Ownership and source of truth
 ChatGPT planning: Product / Business Lead. Codex: AI / Engineering Lead.
-This file is the implementation source of truth. The eventual confirmed GitHub repository is the shared source of truth for both leads. Local work is provisional until that repository is supplied.
-Product decisions must be recorded in IMPLEMENTATION_ISSUES.md, never silently resolved in code.
+This file is the product implementation source of truth; the dedicated FINAL CHECK GitHub repository is the shared project record.
+Do not attach this product to ai-development-methods. Record undecided product choices in IMPLEMENTATION_ISSUES.md.
 
 ## Product
 “공고문과 실제 제출파일을 넣으면, AI가 제출 전에 탈락요인을 찾아주고 각 판정의 근거까지 보여준다.”
 
-## Locked golden path
-1. Home — start a check, choose the clearly labelled demo.
-2. Announcement Analysis — inspect extracted requirements and announcement evidence.
-3. Submission Upload — inspect selected submission files and run preflight.
-4. Preflight Results — read findings, both evidence sources, and corrections.
-5. Recheck — replace the submission package, run again, compare the previous result.
+## Locked golden path and scope
+Home → Announcement Analysis → Submission Upload → Preflight Results → Recheck.
+Routes remain /, /announcement, /upload, /results, /recheck. Recheck returns to Results.
+Preserve TASK 01 styling/layout. No login, payments, collaboration, admin, analytics dashboard, automatic submission, new verticals or incidental SaaS features.
+Frontend Next.js + TypeScript. Backend FastAPI + Python. Never rewrite the frozen validator in another language.
 
-The routes are /, /announcement, /upload, /results, /recheck. Empty or expired sessions provide a recovery link. Recheck returns to Results without introducing a sixth screen.
-
-## Locked finding statuses
-BLOCKER, REVIEW, PASS, EXTERNAL.
-BLOCKER always requires nonempty announcement evidence AND submission evidence.
-Missing evidence cannot produce BLOCKER or an optimistic PASS.
-SubmissionStatus is a separate conservative summary: NOT_CHECKED, BLOCKED, NEEDS_REVIEW, READY. READY requires a complete nonempty result set with only PASS. EXTERNAL remains unresolved and prevents READY in this skeleton; final external-attestation UX is an open product issue.
+## Locked finding and submission contracts
+FindingStatus: BLOCKER, REVIEW, PASS, EXTERNAL.
+Every BLOCKER requires nonblank announcement evidence and submission evidence.
+SubmissionStatus: **BLOCKED, REVIEW_REQUIRED, READY**.
+TASK 02 explicitly replaces serialized NEEDS_REVIEW with REVIEW_REQUIRED.
+Before validation, status is null; run_state independently records NOT_STARTED, RUNNING, COMPLETE or FAILED.
+Incomplete or failed execution cannot READY. Any REVIEW/EXTERNAL prevents READY.
+R20 licensing and R21 AI provenance have no automated verification: REVIEW/EXTERNAL only; no unsupported PASS or BLOCKER.
 
 ## R19 lock
-- PHOTO_ONLY suspicion: REVIEW.
-- Ken Burns / pan / zoom: REVIEW.
-- Ambiguous motion: REVIEW.
-- Confident real motion: no R19 issue.
-- Never automatically emit R19 BLOCKER.
+PHOTO_ONLY suspicion, Ken Burns, pan, zoom and ambiguous motion → REVIEW.
+Confident actual motion → no R19 issue.
+Never automatically emit R19 BLOCKER. Preserve frozen thresholds and policies byte-for-byte.
 
-## Technical lock
-Next.js + TypeScript frontend; FastAPI + Python backend.
-Preserve the original Python Validator v1.5. Do not rewrite its algorithm in another language.
-First validate the mock UI in a real browser, then implement the Python adapter boundary.
-No login, payments, team collaboration, admin, analytics dashboard, automatic submission, vertical expansion, or incidental SaaS features.
+## Frozen source
+Original validator_v1_5.py SHA-256:
+4b506c3b692f2cef39e2be7cb44b4ce74bcc4ce829064ac655e16f545042bb11
+Store immutable source/manifests under backend/app/validators/frozen_v15/.
+Application input/output adaptation belongs in v15_adapter.py. No source reformat, function rename or threshold edit.
 
-## TASK 01 scope
-Typed CheckSession, Requirement, ValidationResult and SubmissionStatus.
-Accessible responsive five-screen UI, FastAPI skeleton, explicitly mocked requirement/result fixtures, broken/fixed recheck, real browser smoke, and truthful execution record.
-Demo rules, evidence and files are synthetic examples only; they are not official announcement requirements or the previous 39-package benchmark.
-Real arbitrary uploads can be selected and received, but extraction/validation stays unavailable until verified engines are supplied. Never attach demo PASS/BLOCKER findings to arbitrary user files.
+## Current supported validation profile
+The provided engine contains a fixed childcare short-form competition profile, R05–R17 and R19–R21, including the literal team name 테스트어린이집.
+The application uses its SOURCE_RULES as handoff announcement excerpts. They are not newly extracted from an original announcement PDF.
+Arbitrary announcement extraction is unavailable; custom announcement sessions cannot inherit this profile.
+Demo selection downloads actual fixture bytes to the browser and uploads them through the same multipart submission endpoint used by file selection.
+Actual files are hashed, held in an isolated temporary session package and executed by the original Python validator.
+Review findings and factual measurements are shown with both source references; raw engine output is retained separately.
 
-## User-reported technical gate (not rerun in TASK 01)
-Requirement Extractor independent blind test PASS; Validator v1.5 Final Full Gate PASS.
-39 new synthetic PDF/MP4 packages after freeze.
-Critical blocker, deterministic blocker, text-PDF semantic, scanned-PDF vision and evidence coverage: 100% as reported. Vision was a same-session visual test.
-Dangerous submission to READY: 0%; normal submission to BLOCKED: 0%.
-These are handoff claims, not independently verified artifacts in this checkout. Kill Test is closed; do not restart it.
+## New TASK 02 demo acceptance
+Old fixtures/demo-broken and demo-fixed (12s/8s, 320x180) remain historical skeleton fixtures only.
+New fixtures/v15/demo-broken: one correctly named PDF containing application, portrait and description sections but missing privacy; correct MP4 filename, 1080x1920, 9:16, under 300MB, exactly 61 seconds.
+Expected raw: R09/R13 BLOCKER; R19/R20/R21 REVIEW; no unintended technical blocker.
+New fixtures/v15/demo-fixed: privacy restored; video 45 seconds; same other properties.
+Expected raw: R09/R13 BLOCKER absent; submission REVIEW_REQUIRED, never READY.
+Independently audit actual file properties before scoring. Do not use invalid fixture ground truth to score the validator.
 
-## Demo acceptance
-Broken package: two evidence-backed BLOCKER findings plus R19 REVIEW and EXTERNAL.
-Fixed package: the deterministic blockers clear; R19 and EXTERNAL remain REVIEW/EXTERNAL. The UI must never imply that clearing blockers means full READY.
-Every screen visibly states demo/mock mode. Uploaded custom package shows unavailable analysis explicitly.
+## Vision boundary
+Image-only PDF triggers the frozen engine's VISION_PENDING requests.
+No actual vision provider is integrated. Map pending concepts to REVIEW and mark validation incomplete; never invent PASS.
+This limitation must be visible in the UI.
+
+## Runtime limits
+Loopback-only local service; no cloud upload or new provider call.
+Session metadata, temporary submission files and raw results last until replacement, expiry (one hour), or shutdown. Restart invalidates sessions.
+100 concurrent stored sessions; one upload/run at a time per session; maximum 8 files, 320 MiB per file, 350 MiB package transport.
+These are local resource limits, not modifications to the frozen 300MB rule.
+Production storage, multi-worker coordination, public app deployment and arbitrary announcement extraction remain outside TASK 02.
+
+## Prior gate context
+User-reported independent extractor PASS and frozen 39-package Final Full Gate PASS are reference history.
+The exact historical 39-case corpus is absent from this handoff; do not claim reproduction.
+Technical Kill Test is closed. TASK 02 executes new local fixtures and integration invariants only.

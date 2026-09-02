@@ -3,3 +3,5 @@
 *.mp4 binary
 *.png binary
 *.ps1 text eol=crlf
+backend/app/validators/frozen_v15/* -text
+docs/reference_full_gate/* -text

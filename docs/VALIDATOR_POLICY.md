@@ -1,37 +1,38 @@
-# Validator policy — frozen Product Lock
+# Frozen v1.5 integration policy
 
-The original Validator v1.5 Python implementation must remain authoritative.
-TASK 01 contains fixture rendering and an explicitly unavailable adapter boundary.
-It does not reimplement v1.5 and does not claim the frozen gate was rerun.
+## Immutable engine
+backend/app/validators/frozen_v15/validator_v1_5.py is the original 15,851-byte source.
+SHA-256: 4b506c3b692f2cef39e2be7cb44b4ce74bcc4ce829064ac655e16f545042bb11.
+Git disables text conversion for frozen artifacts. Verify the hash before importing and before every worker run.
+The module's validate_case(Path) is the native entrypoint. Do not patch its globals, rename files to hide violations, change thresholds or replace algorithms.
+All adaptation lives in v15_adapter.py; the engine runs in a bounded child process using the backend Python runtime and UTF-8.
+Dependency notices go to stderr; stdout carries unchanged raw JSON.
 
-## Finding contract
-- Exactly BLOCKER, REVIEW, PASS, EXTERNAL.
-- BLOCKER requires nonblank announcement evidence and submission evidence, including source, locator and excerpt.
-- R19 must never be an automatic BLOCKER, even if both evidence fields exist.
-- PHOTO_ONLY suspicion, Ken Burns, pan, zoom and ambiguous motion require REVIEW.
-- Confident real motion creates no R19 issue. A future complete evaluation may represent a checked no-issue condition as PASS; do not infer it merely from an absent result.
-- Empty, incomplete, duplicate or unresolved findings never produce READY.
-- EXTERNAL remains external. A file check cannot prove portal submission.
+## Input and mapping
+Only the exact pinned SOURCE_RULES requirement profile is supported.
+CheckSession contains that profile plus actual upload receipts. Adapter verifies names, byte sizes and SHA-256 against stored files before executing.
+Frozen BLOCKER maps to BLOCKER only with matching announcement quote and actual file evidence.
+Frozen REVIEW maps to REVIEW. VISION_PENDING maps to REVIEW and incomplete.
+Absent violations map to PASS only for an applicable completed check with supporting actual file/metadata/section evidence.
+Text-section PASS verifies extracted section markers; it does not verify the truth or signatures of document contents.
+Unknown fields/statuses, missing result envelope, bad hashes, execution errors and timeout cannot produce READY.
+Protected R19 BLOCKER output is downgraded to REVIEW; R20/R21 always remain REVIEW/EXTERNAL.
+Schema guards independently reject unsupported R19/R20/R21 automatic judgments.
 
-## Current execution
-Mock results are loaded only for demo sessions and allowlisted fixture IDs.
-Custom upload replaces all mock requirements/results/history and returns source_mode=unavailable.
-No content extraction, semantic model, Vision call or real validator is running.
-Uploads are streamed for bounded metadata/hash collection, then closed; this skeleton retains no durable upload content.
+## Output and summary
+Raw JSON and UI-adapted results are separate artifacts.
+Backend summary is BLOCKED if an evidence-backed blocker exists; otherwise REVIEW_REQUIRED if execution is incomplete or any REVIEW/EXTERNAL exists.
+READY requires explicit completion, a complete unique result set, and only verified PASS results.
+The current frozen profile necessarily keeps R20/R21 unresolved, so its normal fixed demo is REVIEW_REQUIRED.
 
-## Adapter sequence and next integration
-The desktop/mobile golden path passed before v15_adapter.py was added.
-ValidatorInput describes proposed application inputs, not the unknown native v1.5 signature.
-The adapter currently always raises ValidatorUnavailable; the API returns 503.
+## Vision and historical limits
+No Vision model/provider is connected. Real scanned-PDF test returns four VISION_PENDING findings, mapped to R09/R10/R11 REVIEW with incomplete=true.
+No blind Vision accuracy or historical 39-case gate reproduction is claimed.
+Reference scorecard/report remain byte-for-byte handoff evidence under docs/reference_full_gate/.
 
-Before wiring:
-1. Supply the original versioned Python source, checksum/commit, native entrypoint, requirements and result schema.
-2. Supply the frozen 39-package test assets and expected outputs without editing them.
-3. Map native I/O inside the Python adapter; retain original engine code and algorithms.
-4. Add local file-lifecycle handling and extraction based on approved retention/provider decisions.
-5. Run contract checks, then the existing frozen regression gate. Report actual results separately from handoff claims.
-
-## Demo fixture limits
-The 10-second threshold, consent filename and synthetic announcement are demonstration data only.
-R19=ambiguous is a mocked output independent of the generated test-pattern video.
-The fixture's metadata agrees with its generated video duration, but the product UI does not measure video duration in TASK 01.
+## Actual artifacts
+- artifacts/demo-fixture-audit.json: independent ffprobe/filesystem/pypdf audit before scoring.
+- artifacts/v15-broken-raw.json and v15-fixed-raw.json: original engine output.
+- artifacts/v15-broken-adapted.json and v15-fixed-adapted.json: UI result contract and submission summary.
+- artifacts/source-integrity.json and v15-runtime-smoke.json: source and dependency evidence.
+- artifacts/task01-baseline/: pre-integration baseline.

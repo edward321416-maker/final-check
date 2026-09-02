@@ -38,8 +38,8 @@ export function Badge({ status }: { status: FindingStatus }) {
 }
 export function ModeNote() {
   const { session } = useSession();
-  return <div className="mode-note"><span className="dot" /><strong>{session?.mode === "custom" ? "실제 파일 · 분석 미연결" : "DEMO · MOCK DATA"}</strong>
-    <span>{session?.mode === "custom" ? "파일 정보만 확인하며, 판정을 생성하지 않습니다." : "가상 공고와 예시 판정으로 검사 흐름을 체험합니다."}</span></div>;
+  return <div className="mode-note"><span className="dot" /><strong>{session?.validation_profile ? "DEMO FILES · VALIDATOR v1.5" : "임의 공고 · 분석 미연결"}</strong>
+    <span>{session?.validation_profile ? "실제 파일을 동결 규칙으로 검사합니다. 스캔 PDF Vision 미연결 → REVIEW." : "공고 추출기가 연결되지 않아 요구사항과 판정을 만들지 않습니다."}</span></div>;
 }
 export function Guard({ children, requireResults = false }: { children: ReactNode; requireResults?: boolean }) {
   const { session, loading, recoveryError } = useSession();

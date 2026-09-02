@@ -1,6 +1,24 @@
-from fastapi import FastAPI
-from app.api.routes import router
+from contextlib import asynccontextmanager
+from fastapi import FastAPI, Request
+from fastapi.responses import JSONResponse
+from app.api.routes import router, MAX_PACKAGE_BYTES
+from app.services import sessions
 
-app = FastAPI(title="FINAL CHECK — AI Submission Preflight", version="0.1.0",
-              description="Local TASK 01 skeleton. Demo findings are mocked. Validator v1.5 is unavailable.")
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    yield
+    sessions.close_all()
+
+
+app = FastAPI(title="FINAL CHECK — AI Submission Preflight", version="0.2.0", lifespan=lifespan,
+              description="Frozen v1.5 with actual uploaded files and synthetic demo packages. No Vision provider.")
 app.include_router(router)
+
+
+@app.middleware("http")
+async def bound_request_size(request: Request, call_next):
+    length = request.headers.get("content-length")
+    if length and (not length.isdigit() or int(length) > MAX_PACKAGE_BYTES + 1024 * 1024):
+        return JSONResponse(status_code=413, content={"detail": "Upload package exceeds transport limit."})
+    return await call_next(request)
