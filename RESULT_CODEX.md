@@ -1,6 +1,6 @@
 # RESULT_CODEX — TASK 02
 Date: 2026-09-02 (Asia/Seoul)
-Integration acceptance: **PASS**. Public repository created; source push/PR publication is being finalized.
+Integration acceptance: **PASS**. **GITHUB_PUBLICATION = PUBLISHED**.
 TASK 01 baseline: commit 7bc3aeb37d2e4a5fbc96904409f0187d91ab6a39.
 Work branch: codex/task-02-frozen-v15.
 
@@ -111,9 +111,13 @@ Evidence:
 
 ## GITHUB PUBLICATION
 
-GITHUB_PUBLICATION = PENDING_PUSH
-Dedicated public repository ownership and visibility were verified under edward321416-maker/final-check.
-Baseline main and the integration branch will be pushed, then a normal PR will carry the tested integration.
+GITHUB_PUBLICATION = PUBLISHED
+- Dedicated public repository: https://github.com/edward321416-maker/final-check.
+- TASK 01 baseline and tested TASK 02 source were pushed to the dedicated repository.
+- Delivery PR: https://github.com/edward321416-maker/final-check/pull/1. Use the linked PR for live merge state.
+- GitHub content API retrieval of the published validator matched the original SHA-256 exactly.
+- [Publication verification](artifacts/github-publication.json) records the verified integration commit, public visibility, PR and frozen source hash before the normal PR merge.
+- Application hosting remains local; public repository publication does not expose the running API.
 
 ## CHANGED FILES
 

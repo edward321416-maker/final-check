@@ -17,7 +17,7 @@
 - [x] Migrate status enum to BLOCKED / REVIEW_REQUIRED / READY.
 - [x] Visibly disclose absent Vision and generic announcement extractor.
 - [x] Create dedicated public FINAL CHECK repository.
-- [ ] Push source and complete normal publication PR.
+- [x] Push source through the dedicated public repository and normal delivery PR #1.
 - [x] Document actual execution, tests, limitations and source integrity.
 
 ## Future work requiring scoped input
