@@ -1,0 +1,57 @@
+[
+  {
+    "id": "R01",
+    "title": "참가 동의서 제출",
+    "description": "서명한 참가 동의서 consent.pdf를 제출합니다.",
+    "verifier": "DETERMINISTIC",
+    "announcement_evidence": {
+      "source": "demo-announcement.txt",
+      "locator": "제출 서류 · 2항",
+      "excerpt": "참가 동의서(consent.pdf)를 필수로 첨부해야 합니다."
+    }
+  },
+  {
+    "id": "R02",
+    "title": "영상 길이 10초 이내",
+    "description": "demo 영상의 재생 시간은 10초 이하여야 합니다.",
+    "verifier": "DETERMINISTIC",
+    "announcement_evidence": {
+      "source": "demo-announcement.txt",
+      "locator": "영상 규격 · 3항",
+      "excerpt": "영상은 MP4 형식이며 재생 시간은 10초 이내여야 합니다."
+    }
+  },
+  {
+    "id": "R03",
+    "title": "기획서 PDF 제출",
+    "description": "기획서를 PDF 파일로 첨부합니다.",
+    "verifier": "DETERMINISTIC",
+    "announcement_evidence": {
+      "source": "demo-announcement.txt",
+      "locator": "제출 서류 · 1항",
+      "excerpt": "기획서는 proposal.pdf 파일로 제출해야 합니다."
+    }
+  },
+  {
+    "id": "R19",
+    "title": "사진만으로 구성된 영상 확인",
+    "description": "사진 구성 의심, pan/zoom 또는 불확실한 영상은 사람이 확인합니다.",
+    "verifier": "VISION",
+    "announcement_evidence": {
+      "source": "demo-announcement.txt",
+      "locator": "영상 내용 · 4항",
+      "excerpt": "사진만으로 구성된 영상은 인정하지 않습니다. 판단이 불확실하면 검토합니다."
+    }
+  },
+  {
+    "id": "E01",
+    "title": "제출 포털 접수 확인",
+    "description": "파일 외부의 접수 여부는 제출 포털에서 확인합니다.",
+    "verifier": "EXTERNAL",
+    "announcement_evidence": {
+      "source": "demo-announcement.txt",
+      "locator": "접수 · 5항",
+      "excerpt": "제출자는 지정 포털에서 최종 접수 완료 여부를 확인해야 합니다."
+    }
+  }
+]

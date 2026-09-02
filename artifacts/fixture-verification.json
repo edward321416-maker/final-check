@@ -1,0 +1,44 @@
+[
+  {
+    "path": "fixtures/demo-broken/clip.mp4",
+    "bytes": 209638,
+    "sha256": "cf4b6371280fba0b39dec95fdbb5d880ba5955cb21d89cd59808bd1e1ef3e38e",
+    "duration_seconds": 12,
+    "codec": "h264",
+    "width": 320,
+    "height": 180,
+    "fps": 10,
+    "audio_streams": 0,
+    "full_decode": "PASS"
+  },
+  {
+    "path": "fixtures/demo-broken/proposal.pdf",
+    "bytes": 642,
+    "sha256": "9f8a4fc2089313456fe8d9100f6ef5f3a97a2d52cbc53dbc4c499fffb4a2d54a",
+    "header_check": "PASS (not semantic PDF validation)"
+  },
+  {
+    "path": "fixtures/demo-fixed/clip.mp4",
+    "bytes": 142618,
+    "sha256": "78461770d2c5b9ebcdadf259cac25de62a32ddad5261b4d5c5ae3449c43a6298",
+    "duration_seconds": 8,
+    "codec": "h264",
+    "width": 320,
+    "height": 180,
+    "fps": 10,
+    "audio_streams": 0,
+    "full_decode": "PASS"
+  },
+  {
+    "path": "fixtures/demo-fixed/consent.pdf",
+    "bytes": 650,
+    "sha256": "1f7002623179c494aad764b0f17e38c7a9cfea3a04acd0597e734dcb9e474e41",
+    "header_check": "PASS (not semantic PDF validation)"
+  },
+  {
+    "path": "fixtures/demo-fixed/proposal.pdf",
+    "bytes": 642,
+    "sha256": "9f8a4fc2089313456fe8d9100f6ef5f3a97a2d52cbc53dbc4c499fffb4a2d54a",
+    "header_check": "PASS (not semantic PDF validation)"
+  }
+]

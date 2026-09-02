@@ -1,0 +1,93 @@
+[
+  {
+    "id": "fixed-R01",
+    "requirement_id": "R01",
+    "status": "PASS",
+    "title": "참가 동의서 제출",
+    "explanation": "수정 demo 패키지에 consent.pdf가 포함되어 있습니다.",
+    "action": "추가 수정 없음",
+    "announcement_evidence": {
+      "source": "demo-announcement.txt",
+      "locator": "제출 서류 · 2항",
+      "excerpt": "참가 동의서(consent.pdf)를 필수로 첨부해야 합니다."
+    },
+    "submission_evidence": {
+      "source": "제출파일 목록",
+      "locator": "패키지 전체",
+      "excerpt": "proposal.pdf, clip.mp4, consent.pdf"
+    },
+    "source_mode": "mock"
+  },
+  {
+    "id": "fixed-R02",
+    "requirement_id": "R02",
+    "status": "PASS",
+    "title": "영상 길이 10초 이내",
+    "explanation": "수정 demo 영상은 8초로 설정되어 있습니다.",
+    "action": "추가 수정 없음",
+    "announcement_evidence": {
+      "source": "demo-announcement.txt",
+      "locator": "영상 규격 · 3항",
+      "excerpt": "영상은 MP4 형식이며 재생 시간은 10초 이내여야 합니다."
+    },
+    "submission_evidence": {
+      "source": "clip.mp4",
+      "locator": "demo fixture 메타데이터",
+      "excerpt": "Mock duration_seconds = 8"
+    },
+    "source_mode": "mock"
+  },
+  {
+    "id": "fixed-R03",
+    "requirement_id": "R03",
+    "status": "PASS",
+    "title": "기획서 PDF 제출",
+    "explanation": "demo 패키지에 proposal.pdf가 포함되어 있습니다.",
+    "action": "추가 수정 없음",
+    "announcement_evidence": {
+      "source": "demo-announcement.txt",
+      "locator": "제출 서류 · 1항",
+      "excerpt": "기획서는 proposal.pdf 파일로 제출해야 합니다."
+    },
+    "submission_evidence": {
+      "source": "proposal.pdf",
+      "locator": "파일 형식",
+      "excerpt": "PDF 형식의 demo 기획서 존재"
+    },
+    "source_mode": "mock"
+  },
+  {
+    "id": "fixed-R19",
+    "requirement_id": "R19",
+    "status": "REVIEW",
+    "title": "사진만으로 구성된 영상 확인",
+    "explanation": "mock 시나리오의 영상 내용은 자동 판정을 확정하지 않습니다. R19는 사람의 확인이 필요합니다.",
+    "action": "원본 영상을 보고 실제 움직임 여부를 확인하세요.",
+    "announcement_evidence": {
+      "source": "demo-announcement.txt",
+      "locator": "영상 내용 · 4항",
+      "excerpt": "사진만으로 구성된 영상은 인정하지 않습니다. 판단이 불확실하면 검토합니다."
+    },
+    "submission_evidence": {
+      "source": "clip.mp4",
+      "locator": "demo fixture 메타데이터",
+      "excerpt": "Mock R19 = ambiguous; 실제 Vision 분석을 실행하지 않았습니다."
+    },
+    "source_mode": "mock"
+  },
+  {
+    "id": "fixed-E01",
+    "requirement_id": "E01",
+    "status": "EXTERNAL",
+    "title": "제출 포털 접수 확인",
+    "explanation": "접수 포털은 이 검사 범위 밖입니다. 사용자가 별도로 확인해야 합니다.",
+    "action": "공식 접수 포털에서 접수 완료를 확인하세요.",
+    "announcement_evidence": {
+      "source": "demo-announcement.txt",
+      "locator": "접수 · 5항",
+      "excerpt": "제출자는 지정 포털에서 최종 접수 완료 여부를 확인해야 합니다."
+    },
+    "submission_evidence": null,
+    "source_mode": "mock"
+  }
+]
