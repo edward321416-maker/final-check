@@ -5,7 +5,7 @@ export class ApiError extends Error {
 }
 export async function request<T>(path: string, body?: object | FormData): Promise<T> {
   const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), 30_000);
+  const timer = setTimeout(() => controller.abort(), 200_000);
   try {
     const response = await fetch(`/api${path}`, {
       method: body === undefined ? "GET" : "POST",
@@ -16,7 +16,7 @@ export async function request<T>(path: string, body?: object | FormData): Promis
     if (!response.ok) {
       const payload = await response.json().catch(() => null);
       const detail = typeof payload?.detail === "string" ? payload.detail : "요청을 완료하지 못했습니다.";
-      const message = response.status === 503 ? "실제 분석 엔진이 아직 연결되지 않았습니다. demo로 화면 흐름을 확인할 수 있습니다."
+      const message = response.status === 503 ? "이 공고의 분석 프로필 또는 검증 엔진을 사용할 수 없습니다. 제공된 동결 공고 demo로 확인해 주세요."
         : response.status === 404 ? "검사 세션이 만료되었습니다. 홈에서 새 검사를 시작해 주세요."
         : detail;
       throw new ApiError(response.status, message);

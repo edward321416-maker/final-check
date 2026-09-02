@@ -16,9 +16,8 @@ class FindingStatus(StrEnum):
 
 
 class SubmissionStatus(StrEnum):
-    NOT_CHECKED = "NOT_CHECKED"
     BLOCKED = "BLOCKED"
-    NEEDS_REVIEW = "NEEDS_REVIEW"
+    REVIEW_REQUIRED = "REVIEW_REQUIRED"
     READY = "READY"
 
 
@@ -45,10 +44,12 @@ class ValidationResult(Model):
     action: str
     announcement_evidence: Evidence | None = None
     submission_evidence: Evidence | None = None
-    source_mode: Literal["mock", "validator"] = "mock"
+    source_mode: Literal["validator"] = "validator"
 
     @model_validator(mode="after")
     def enforce_product_lock(self) -> "ValidationResult":
+        if self.requirement_id in {"R20", "R21"} and self.status not in {FindingStatus.REVIEW, FindingStatus.EXTERNAL}:
+            raise ValueError("Licensing and AI provenance have no automatic verification")
         if self.status == FindingStatus.BLOCKER:
             if self.requirement_id == "R19":
                 raise ValueError("R19 must never be an automatic BLOCKER")
@@ -69,13 +70,18 @@ class CheckSession(Model):
     created_at: datetime
     updated_at: datetime
     mode: Literal["demo", "custom"]
-    source_mode: Literal["mock", "unavailable"] = "mock"
+    source_mode: Literal["validator", "unavailable"] = "unavailable"
+    validation_profile: Literal["frozen_v15"] | None = None
+    engine_sha256: str | None = None
+    run_state: Literal["NOT_STARTED", "RUNNING", "COMPLETE", "FAILED"] = "NOT_STARTED"
+    validation_complete: bool = False
+    run_error: str | None = None
     announcement_name: str | None = None
     requirements: list[Requirement] = Field(default_factory=list)
     files: list[SubmissionFile] = Field(default_factory=list)
     results: list[ValidationResult] = Field(default_factory=list)
     previous_results: list[ValidationResult] = Field(default_factory=list)
-    status: SubmissionStatus = SubmissionStatus.NOT_CHECKED
+    status: SubmissionStatus | None = None
     revision: int = 0
     fixture: Literal["demo-broken", "demo-fixed"] | None = None
 

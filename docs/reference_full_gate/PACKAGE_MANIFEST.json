@@ -1,0 +1,39 @@
+{
+  "package": "FINAL_CHECK_V15_CODEX_HANDOFF.zip",
+  "source_package": "FINAL_CHECK_V15_FINAL_FULL_GATE_RESULTS.zip",
+  "validator_expected_sha256": "4b506c3b692f2cef39e2be7cb44b4ce74bcc4ce829064ac655e16f545042bb11",
+  "validator_actual_sha256": "4b506c3b692f2cef39e2be7cb44b4ce74bcc4ce829064ac655e16f545042bb11",
+  "sha_match": true,
+  "files": [
+    {
+      "archive_path": "frozen_v15/validator_v1_5.py",
+      "sha256": "4b506c3b692f2cef39e2be7cb44b4ce74bcc4ce829064ac655e16f545042bb11",
+      "bytes": 15851
+    },
+    {
+      "archive_path": "frozen_v15/FREEZE_MANIFEST.json",
+      "sha256": "89d047519d4145d9fb4fb24f26a022c00f9d5b7dfe50ab7c42a4f67894117670",
+      "bytes": 850
+    },
+    {
+      "archive_path": "frozen_v15/PRE_REGISTERED_ACCEPTANCE_POLICY.json",
+      "sha256": "c65a3bae3275df5f8cc93811991bca0bb4df07e57bcbdaa5d9fd8467afe332cc",
+      "bytes": 1282
+    },
+    {
+      "archive_path": "frozen_v15/VISION_PROTOCOL.md",
+      "sha256": "d4d0a849b789f241e3b4fbc15f858bc5a3814dcb6018bdb186af55b5dc8f37da",
+      "bytes": 670
+    },
+    {
+      "archive_path": "reference_full_gate/FINAL_FULL_GATE_SCORECARD.json",
+      "sha256": "53ff389c19984bb53b8b765e91a16f11f4c2b5df581cd50efb8b10d2157364d9",
+      "bytes": 3942
+    },
+    {
+      "archive_path": "reference_full_gate/FINAL_FULL_GATE_REPORT.md",
+      "sha256": "acd00337f271055e70751124b96498e34a3ed2289d7ae9bae71e09cb2e365732",
+      "bytes": 3674
+    }
+  ]
+}

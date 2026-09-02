@@ -3,3 +3,7 @@ uvicorn==0.41.0
 python-multipart==0.0.22
 httpx==0.28.1
 pytest==9.0.2
+numpy==2.5.2
+opencv-python-headless==5.0.0.93
+pypdf==6.16.2
+PyMuPDF==1.28.2

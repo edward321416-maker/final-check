@@ -1,0 +1,36 @@
+{
+  "expected_validator_sha256": "4b506c3b692f2cef39e2be7cb44b4ce74bcc4ce829064ac655e16f545042bb11",
+  "zip_sha256": "d4aa135bc36565845c0fe3b00779a2c353a708d43f05764bd74f7a0d87f46fa7",
+  "files": [
+    {
+      "path": "backend/app/validators/frozen_v15/validator_v1_5.py",
+      "sha256": "4b506c3b692f2cef39e2be7cb44b4ce74bcc4ce829064ac655e16f545042bb11",
+      "archive_sha_match": true
+    },
+    {
+      "path": "backend/app/validators/frozen_v15/FREEZE_MANIFEST.json",
+      "sha256": "89d047519d4145d9fb4fb24f26a022c00f9d5b7dfe50ab7c42a4f67894117670",
+      "archive_sha_match": true
+    },
+    {
+      "path": "backend/app/validators/frozen_v15/PRE_REGISTERED_ACCEPTANCE_POLICY.json",
+      "sha256": "c65a3bae3275df5f8cc93811991bca0bb4df07e57bcbdaa5d9fd8467afe332cc",
+      "archive_sha_match": true
+    },
+    {
+      "path": "backend/app/validators/frozen_v15/VISION_PROTOCOL.md",
+      "sha256": "d4d0a849b789f241e3b4fbc15f858bc5a3814dcb6018bdb186af55b5dc8f37da",
+      "archive_sha_match": true
+    },
+    {
+      "path": "docs/reference_full_gate/FINAL_FULL_GATE_SCORECARD.json",
+      "sha256": "53ff389c19984bb53b8b765e91a16f11f4c2b5df581cd50efb8b10d2157364d9",
+      "archive_sha_match": true
+    },
+    {
+      "path": "docs/reference_full_gate/FINAL_FULL_GATE_REPORT.md",
+      "sha256": "acd00337f271055e70751124b96498e34a3ed2289d7ae9bae71e09cb2e365732",
+      "archive_sha_match": true
+    }
+  ]
+}

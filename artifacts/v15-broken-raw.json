@@ -1,0 +1,65 @@
+{
+  "case_id": "demo-broken",
+  "findings": [
+    {
+      "requirement_id": "R09",
+      "status": "BLOCKER",
+      "message": "개인정보 수집·이용 동의서가 확인되지 않습니다.",
+      "details": {},
+      "evidence_quote": "붙임1. 참가 신청서 및 개인정보 수집·이용 동의서"
+    },
+    {
+      "requirement_id": "R13",
+      "status": "BLOCKER",
+      "message": "영상 길이가 30~60초 범위를 벗어납니다.",
+      "details": {
+        "duration_seconds": 61.0
+      },
+      "evidence_quote": "영상길이: 30초~60초 이내"
+    },
+    {
+      "requirement_id": "R19",
+      "status": "REVIEW",
+      "message": "사진-only/슬라이드쇼 가능성이 감지되었습니다. 공고상 심사 제외 대상일 수 있어 직접 확인이 필요합니다.",
+      "details": {
+        "classification": "PHOTO_ONLY",
+        "sampled_frames": 122,
+        "scene_cuts": 0,
+        "noncut_pairs": 121,
+        "local_motion_fraction": 0.0,
+        "global_only_fraction": 0.0,
+        "static_fraction": 1.0,
+        "policy": "R19_REVIEW_ONLY"
+      },
+      "evidence_quote": "사진으로만 제작한 영상은 심사에서 제외"
+    },
+    {
+      "requirement_id": "R20",
+      "status": "REVIEW",
+      "message": "외부 소스 라이선스 보유 여부는 제출 파일만으로 확정할 수 없습니다.",
+      "details": {
+        "automatic_verification": "UNAVAILABLE"
+      },
+      "evidence_quote": "영상에 사용된 소스(음악, 이미지, 폰트 등)는 저작권 문제가 없는 무료 소스 또는 라이선스를 확보한 것이어야 함"
+    },
+    {
+      "requirement_id": "R21",
+      "status": "REVIEW",
+      "message": "생성형 AI만으로 제작됐는지는 제출 파일만으로 신뢰성 있게 확정할 수 없습니다.",
+      "details": {
+        "automatic_verification": "UNAVAILABLE"
+      },
+      "evidence_quote": "생성형 AI만을 활용하여 제작한 영상(AI 생성 영상물)은 제출할 수 없음"
+    }
+  ],
+  "blocker_rule_ids": [
+    "R09",
+    "R13"
+  ],
+  "review_rule_ids": [
+    "R19",
+    "R20",
+    "R21"
+  ],
+  "vision_pending": []
+}

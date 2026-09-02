@@ -1,21 +1,13 @@
 # FINAL CHECK — AI Submission Preflight
 공고문과 실제 제출파일을 넣으면, AI가 제출 전에 탈락요인을 찾아주고 각 판정의 근거까지 보여준다.
 
-TASK 01 is a working **mock MVP skeleton**. Actual Requirement Extractor / Validator v1.5 integration is unavailable until original sources are supplied.
-Product source of truth: [docs/PRODUCT_SPEC_V1.md](docs/PRODUCT_SPEC_V1.md).
-Actual execution evidence: [RESULT_CODEX.md](RESULT_CODEX.md).
+TASK 02 connects the original **frozen Validator v1.5** to real multipart uploads and the existing five-screen UI.
+The demo uses newly generated synthetic files. Its findings come from actual Python execution, not canned JSON.
+[Product lock](docs/PRODUCT_SPEC_V1.md) · [Actual execution report](RESULT_CODEX.md) · [Demo script](docs/DEMO_SCRIPT.md)
 
-## Structure
-- frontend/: Next.js App Router, TypeScript contracts and Playwright browser smoke.
-- backend/: FastAPI, Pydantic, in-memory local session store and unavailable Python validator adapter.
-- fixtures/: synthetic announcement, demo-broken / demo-fixed PDF/MP4 and mocked results.
-- docs/: product lock, validator policy and click-through demo script.
-- artifacts/: actual test reports, fixture verification and browser screenshots.
-- scripts/: local launcher and fixture tooling.
-
-## Setup (Windows PowerShell)
-Prerequisites used here: Node 24, Python 3.14, FFmpeg (only to regenerate/verify demo media).
-From the project root:
+## Local setup
+Verified runtime: Node 24, Python 3.14, FFmpeg/ffprobe 8.1.2.
+PowerShell from the project root:
 ```powershell
 python -m venv backend/.venv
 backend/.venv/Scripts/python.exe -m pip install -r backend/requirements.lock.txt
@@ -23,39 +15,50 @@ npm --prefix frontend ci --ignore-scripts
 npm --prefix frontend run build
 powershell -File scripts/start-local.ps1
 ```
-Open http://127.0.0.1:3100. API docs: http://127.0.0.1:8100/docs.
-The launcher starts hidden local processes, saves their IDs/logs under ignored artifacts/runtime, and refuses occupied ports.
-Stop only these launcher processes with `powershell -File scripts/stop-local.ps1`.
+Open http://127.0.0.1:3100; API docs http://127.0.0.1:8100/docs.
+Stop the recorded local processes with `powershell -File scripts/stop-local.ps1`.
+The launcher starts hidden loopback processes and refuses occupied ports.
+On macOS/Linux, use python3 and backend/.venv/bin/python; start uvicorn and Next manually.
 
-For development, use two terminals:
+Development terminals:
 ```powershell
-# Terminal 1, backend directory
-.venv/Scripts/python.exe -m uvicorn app.main:app --host 127.0.0.1 --port 8100
-# Terminal 2, frontend directory
+# backend/
+.venv/Scripts/python.exe -X utf8 -m uvicorn app.main:app --host 127.0.0.1 --port 8100
+# frontend/
 npm run dev
 ```
-On macOS/Linux use python3 and backend/.venv/bin/python instead. The Windows launcher itself is Windows-only.
-API_ORIGIN can override the Next.js server-side proxy target; no browser-exposed credentials are used.
 
 ## Verification
-Stop the demo launcher before smoke tests: Playwright deliberately requires free 3100/8100 ports.
+Stop the launcher before Playwright; it starts its own production frontend and API.
+From the project root:
 ```powershell
-# From backend/
-.venv/Scripts/python.exe -m pytest -q --junitxml=../artifacts/backend-smoke.xml
-# From frontend/
-npm run typecheck
-npm run build
-npx playwright install chromium
-npm run test:smoke
+backend/.venv/Scripts/python.exe -X utf8 scripts/audit_v15_fixtures.py
+backend/.venv/Scripts/python.exe -X utf8 scripts/run_v15_acceptance.py
 ```
-Playwright starts/stops the production frontend and FastAPI for each suite; runs desktop Chromium and mobile Chromium emulation. No mocked network is used for the golden path. Only the explicit outage test intercepts one request.
-Generated media are committed; regenerate with `python scripts/generate_fixtures.py`.
-Verify with `python scripts/verify_fixtures.py`.
+From backend/: `.venv/Scripts/python.exe -X utf8 -m pytest -q --junitxml=../artifacts/backend-smoke.xml`.
+From frontend/: `npm run typecheck`, `npm run build`, `npx playwright install chromium`, `npm run test:smoke`.
+Normal golden-path requests use actual files and the actual engine without API interception. The isolated outage scenario intentionally returns an injected error.
 
-## Boundaries
-No login, payment, analytics, automatic submission, team/admin features or remote AI call.
-Data are per-session and in-memory, with a one-hour TTL and 100-session cap.
-Actual upload content is discarded after metadata hashing. PDF/MP4 are accepted by extension in this skeleton; content safety/semantic validity is not asserted. Limits: 8 files, 20 MiB each, 40 MiB aggregate.
-R19 can never automatically BLOCKER. Clearing blockers does not clear REVIEW/EXTERNAL.
-The reported 39-package freeze benchmark was **NOT TESTED** here.
-The intended GitHub repository is unconfirmed; this standalone local repository has no remote.
+New fixtures are committed under fixtures/v15/. Regenerate using the backend Python runtime and scripts/generate_v15_fixtures.py; always audit before scoring.
+Historical TASK 01 fixtures stay in their original directories and are never used for v1.5 acceptance.
+
+## Contract and limits
+- Frozen source hash: 4b506c3b692f2cef39e2be7cb44b4ce74bcc4ce829064ac655e16f545042bb11.
+- Native engine input: a directory of files. App adaptation is in backend/app/validators/v15_adapter.py.
+- Supported announcement profile: the provided childcare short-form competition SOURCE_RULES, with fixed 테스트어린이집 file names.
+- Arbitrary announcement extraction is not integrated. No custom announcement silently inherits the profile.
+- R19 uncertainty → REVIEW. R20/R21 licensing and provenance → REVIEW. No unsupported automatic PASS/BLOCKER.
+- Scanned PDF Vision is unavailable → REVIEW, incomplete. No invented model result.
+- Submission status: BLOCKED / REVIEW_REQUIRED / READY. Before a run: null plus run_state=NOT_STARTED.
+- Upload receipts, temporary files and raw outputs are isolated per local session; removed on replacement/expiry/shutdown. In-memory sessions expire after one hour or restart.
+- No auth, payment, analytics, automatic submission, remote AI call or public app deployment.
+- A public source repository is distinct from a publicly hosted application.
+- The exact historical 39-case corpus was not included or rerun. Its report is reference evidence only.
+
+## Layout
+frontend/: existing Next.js routes, UI and browser smoke.
+backend/: FastAPI, typed schema, session storage, immutable frozen source and adapter.
+fixtures/v15/: real broken/fixed submissions.
+artifacts/: raw/adapted results, independent audit, tests and screenshots.
+docs/: product policy, demo, original handoff/reference gate.
+scripts/: fixture generation, audit, acceptance and local launcher.

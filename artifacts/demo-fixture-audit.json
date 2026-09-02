@@ -1,0 +1,71 @@
+{
+  "audit_method": "Independent ffprobe/filesystem/pypdf; completed before validator scoring",
+  "historical_corpus": false,
+  "cases": {
+    "demo-broken": {
+      "audit_pass": true,
+      "video": {
+        "filename": "테스트어린이집_숏폼영상.MP4",
+        "duration_seconds": 61,
+        "width": 1080,
+        "height": 1920,
+        "ratio": "9:16",
+        "container": "mov,mp4,m4a,3gp,3g2,mj2",
+        "bytes": 9550,
+        "sha256": "d88988f8e48dcaa5d2ebe3b39a903ae5d9629def051cc22cc127a6f43f63c6e1",
+        "full_decode": "PASS",
+        "fps": "2/1"
+      },
+      "pdf": {
+        "filename": "테스트어린이집_숏폼공모서류.pdf",
+        "count": 1,
+        "page_count": 3,
+        "section_presence": {
+          "application": true,
+          "privacy": false,
+          "portrait": true,
+          "description": true
+        },
+        "page_text": [
+          "FINAL CHECK / SYNTHETIC FIXTURE\n참가 신청서\n검증용 가상 서류입니다. 실제 신청 또는 법적 동의가 아닙니다.\n기관: 테스트어린이집 / 작성자: 가상 참가자",
+          "FINAL CHECK / SYNTHETIC FIXTURE\n초상권 사용 동의서\n검증용 가상 서류입니다. 실제 신청 또는 법적 동의가 아닙니다.\n기관: 테스트어린이집 / 작성자: 가상 참가자",
+          "FINAL CHECK / SYNTHETIC FIXTURE\n출품 영상작품 설명서\n검증용 가상 서류입니다. 실제 신청 또는 법적 동의가 아닙니다.\n기관: 테스트어린이집 / 작성자: 가상 참가자"
+        ],
+        "sha256": "a51f6cdd09d1dc5506a454ef85b4276a8ee5e0618a40a8200564094e4e6aea53"
+      }
+    },
+    "demo-fixed": {
+      "audit_pass": true,
+      "video": {
+        "filename": "테스트어린이집_숏폼영상.MP4",
+        "duration_seconds": 45,
+        "width": 1080,
+        "height": 1920,
+        "ratio": "9:16",
+        "container": "mov,mp4,m4a,3gp,3g2,mj2",
+        "bytes": 9038,
+        "sha256": "a80bae23c4d6557972e8abd58a7ae64c911cd7a4db0747a2798bfc7ddb13223d",
+        "full_decode": "PASS",
+        "fps": "2/1"
+      },
+      "pdf": {
+        "filename": "테스트어린이집_숏폼공모서류.pdf",
+        "count": 1,
+        "page_count": 4,
+        "section_presence": {
+          "application": true,
+          "privacy": true,
+          "portrait": true,
+          "description": true
+        },
+        "page_text": [
+          "FINAL CHECK / SYNTHETIC FIXTURE\n참가 신청서\n검증용 가상 서류입니다. 실제 신청 또는 법적 동의가 아닙니다.\n기관: 테스트어린이집 / 작성자: 가상 참가자",
+          "FINAL CHECK / SYNTHETIC FIXTURE\n개인정보 수집 이용 동의서\n검증용 가상 서류입니다. 실제 신청 또는 법적 동의가 아닙니다.\n기관: 테스트어린이집 / 작성자: 가상 참가자",
+          "FINAL CHECK / SYNTHETIC FIXTURE\n초상권 사용 동의서\n검증용 가상 서류입니다. 실제 신청 또는 법적 동의가 아닙니다.\n기관: 테스트어린이집 / 작성자: 가상 참가자",
+          "FINAL CHECK / SYNTHETIC FIXTURE\n출품 영상작품 설명서\n검증용 가상 서류입니다. 실제 신청 또는 법적 동의가 아닙니다.\n기관: 테스트어린이집 / 작성자: 가상 참가자"
+        ],
+        "sha256": "2307e2a47ff0b7a6bcd0e32713acb417ab68edd3e8843b09e464beaaa70b8f4b"
+      }
+    }
+  }
+}

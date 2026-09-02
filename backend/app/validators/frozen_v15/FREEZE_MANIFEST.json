@@ -1,0 +1,20 @@
+{
+  "validator_version": "v1.5-frozen-final-full-gate",
+  "frozen_at_utc": "2026-09-02T04:12:42.894807+00:00",
+  "files": {
+    "validator_v1_5.py": {
+      "sha256": "4b506c3b692f2cef39e2be7cb44b4ce74bcc4ce829064ac655e16f545042bb11",
+      "bytes": 15851
+    },
+    "VISION_PROTOCOL.md": {
+      "sha256": "d4d0a849b789f241e3b4fbc15f858bc5a3814dcb6018bdb186af55b5dc8f37da",
+      "bytes": 670
+    },
+    "PRE_REGISTERED_ACCEPTANCE_POLICY.json": {
+      "sha256": "c65a3bae3275df5f8cc93811991bca0bb4df07e57bcbdaa5d9fd8467afe332cc",
+      "bytes": 1282
+    }
+  },
+  "scope_lock": "Only R19 output policy changed from v1.4: automatic BLOCKER is forbidden and mapped to REVIEW. No other validator logic changed.",
+  "holdout_rule": "The final holdout must be created only after this freeze and no code/policy edits are allowed after holdout creation."
+}

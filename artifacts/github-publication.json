@@ -1,0 +1,9 @@
+{
+  "phase": "published integration branch verified before normal PR merge",
+  "verified_at": "2026-09-02T11:09:40.0747238Z",
+  "repository": "https://github.com/edward321416-maker/final-check",
+  "public": true,
+  "pr": "https://github.com/edward321416-maker/final-check/pull/1",
+  "code_commit": "325352edbd117bd8cd3a180cec72b34da0e38838",
+  "frozen_sha256": "4b506c3b692f2cef39e2be7cb44b4ce74bcc4ce829064ac655e16f545042bb11"
+}

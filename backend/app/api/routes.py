@@ -1,31 +1,42 @@
 import hashlib
-from pathlib import PurePosixPath
-from typing import Annotated
+import json
+from pathlib import Path, PurePosixPath
+from typing import Annotated, Literal
 from fastapi import APIRouter, File, HTTPException, UploadFile
-from app.models.schemas import CheckSession, CreateSession, FixtureRequest, SubmissionFile, SubmissionStatus
+from fastapi.responses import FileResponse
+from starlette.concurrency import run_in_threadpool
+from app.models.schemas import CheckSession, CreateSession, SubmissionFile, SubmissionStatus
 from app.services import demo, sessions
 from app.services.policy import summarize
-from app.validators.v15_adapter import ValidatorUnavailable, validator_v15
+from app.validators.v15_adapter import EXPECTED_SHA256, ValidatorUnavailable, profile_requirements, validator_v15
 
 router = APIRouter(prefix="/api")
-MAX_FILE_BYTES = 20 * 1024 * 1024
-MAX_PACKAGE_BYTES = 40 * 1024 * 1024
+MAX_FILE_BYTES = 320 * 1024 * 1024
+MAX_PACKAGE_BYTES = 350 * 1024 * 1024
 MAX_FILES = 8
 
 
-async def file_metadata(upload: UploadFile, allowed: set[str]) -> SubmissionFile:
-    name = PurePosixPath((upload.filename or "").replace("\\", "/")).name
+async def receive(upload: UploadFile, allowed: set[str], directory: Path | None = None) -> SubmissionFile:
+    original = upload.filename or ""
+    name = PurePosixPath(original.replace("\\", "/")).name
+    if not name or name != original or any(char in name for char in '<>:"|?*') or name.endswith((" ", ".")):
+        raise HTTPException(422, "Invalid filename.")
     if PurePosixPath(name).suffix.lower() not in allowed:
         raise HTTPException(415, "Unsupported file type.")
     digest = hashlib.sha256()
     size = 0
+    stream = (directory / name).open("xb") if directory else None
     try:
         while chunk := await upload.read(64 * 1024):
             size += len(chunk)
             if size > MAX_FILE_BYTES:
-                raise HTTPException(413, "Each file must be at most 20 MiB.")
+                raise HTTPException(413, "Each file must be at most 320 MiB.")
             digest.update(chunk)
+            if stream:
+                await run_in_threadpool(stream.write, chunk)
     finally:
+        if stream:
+            stream.close()
         await upload.close()
     if not size:
         raise HTTPException(422, "Empty files are not accepted.")
@@ -34,7 +45,9 @@ async def file_metadata(upload: UploadFile, allowed: set[str]) -> SubmissionFile
 
 @router.get("/health")
 async def health() -> dict:
-    return {"status": "ok", "mode": "mock", "validator": "available" if validator_v15.available else "unavailable", "version": "0.1.0"}
+    available = await run_in_threadpool(lambda: validator_v15.available)
+    return {"status": "ok", "mode": "frozen_v15", "validator": "available" if available else "unavailable",
+            "engine_sha256": EXPECTED_SHA256, "vision_provider": "unavailable", "version": "0.2.0"}
 
 
 @router.post("/sessions", response_model=CheckSession, status_code=201)
@@ -51,9 +64,16 @@ async def get_session(session_id: str) -> CheckSession:
 async def announcement(session_id: str) -> CheckSession:
     session = sessions.get(session_id)
     if session.mode != "demo":
-        raise HTTPException(409, "Demo evidence cannot be attached to custom uploads.")
-    session.announcement_name = "demo-announcement.txt"
-    session.requirements = demo.load_requirements()
+        raise HTTPException(409, "Custom announcements need their own verified requirement profile.")
+    try:
+        requirements = await run_in_threadpool(profile_requirements)
+    except Exception as error:
+        raise HTTPException(503, "Frozen validator profile is unavailable.") from error
+    session.announcement_name = "동결 handoff 공고 발췌 · 숏폼 공모전"
+    session.requirements = requirements
+    session.validation_profile = "frozen_v15"
+    session.source_mode = "validator"
+    session.engine_sha256 = EXPECTED_SHA256
     return sessions.save(session)
 
 
@@ -62,30 +82,26 @@ async def upload_announcement(session_id: str, file: Annotated[UploadFile, File(
     session = sessions.get(session_id)
     if session.mode != "custom":
         raise HTTPException(409, "Start a custom session to upload your announcement.")
-    metadata = await file_metadata(file, {".pdf", ".txt"})
-    session.announcement_name = metadata.name
+    receipt = await receive(file, {".pdf", ".txt"})
+    session.announcement_name = receipt.name
     session.requirements = []
-    session.revision = 0
-    session.files = []
-    session.results = []
-    session.previous_results = []
-    session.status = SubmissionStatus.NOT_CHECKED
+    session.validation_profile = None
+    session.source_mode = "unavailable"
     return sessions.save(session)
 
 
-@router.post("/sessions/{session_id}/fixture", response_model=CheckSession)
-async def select_fixture(session_id: str, body: FixtureRequest) -> CheckSession:
-    session = sessions.get(session_id)
-    if session.mode != "demo" or not session.requirements:
-        raise HTTPException(409, "Analyze the demo announcement first.")
-    session.files = demo.fixture_files(body.fixture)
-    session.fixture = body.fixture
-    session.status = SubmissionStatus.NOT_CHECKED
-    # Keep the latest checked results separately until the next run completes.
-    if session.results:
-        session.previous_results = session.results
-    session.results = []
-    return sessions.save(session)
+@router.get("/demo-files/{case}", response_model=list[SubmissionFile])
+def demo_manifest(case: Literal["demo-broken", "demo-fixed"]) -> list[SubmissionFile]:
+    return demo.fixture_files(case)
+
+
+@router.get("/demo-files/{case}/{filename}")
+def demo_download(case: Literal["demo-broken", "demo-fixed"], filename: str) -> FileResponse:
+    try:
+        file = demo.fixture_path(case, filename)
+    except ValueError as error:
+        raise HTTPException(404, "Unknown demo file") from error
+    return FileResponse(file, filename=file.name, media_type="application/pdf" if file.suffix == ".pdf" else "video/mp4")
 
 
 @router.post("/sessions/{session_id}/files", response_model=CheckSession)
@@ -95,43 +111,72 @@ async def upload_files(session_id: str, files: Annotated[list[UploadFile], File(
         raise HTTPException(409, "Select an announcement first.")
     if not 1 <= len(files) <= MAX_FILES:
         raise HTTPException(422, "Select between 1 and 8 files.")
-    try:
-        metadata = [await file_metadata(file, {".pdf", ".mp4"}) for file in files]
-    finally:
-        for file in files:
-            await file.close()
-    if sum(file.size_bytes for file in metadata) > MAX_PACKAGE_BYTES:
-        raise HTTPException(413, "Package must be at most 40 MiB.")
-    if len({file.name.lower() for file in metadata}) != len(metadata):
+    names = [(file.filename or "").casefold() for file in files]
+    if len(set(names)) != len(names):
         raise HTTPException(422, "Duplicate file names are not accepted.")
-    # Custom files are never validated against synthetic demo results.
-    session.mode = "custom"
-    session.source_mode = "unavailable"
-    session.fixture = None
-    session.files = metadata
-    session.revision = 0
-    session.requirements = []
-    session.results = []
-    session.previous_results = []
-    session.status = SubmissionStatus.NOT_CHECKED
-    return sessions.save(session)
+    lock = sessions.LOCKS[session_id]
+    if lock.locked():
+        raise HTTPException(409, "Another upload or validation is already running.")
+    async with lock:
+        package = sessions.new_package(session_id)
+        committed = False
+        try:
+            receipt = [await receive(file, {".pdf", ".mp4"}, Path(package.name)) for file in files]
+            if sum(file.size_bytes for file in receipt) > MAX_PACKAGE_BYTES:
+                raise HTTPException(413, "Package must be at most 350 MiB.")
+            session.previous_results = session.results or session.previous_results
+            session.files = receipt
+            session.results = []
+            session.status = None
+            session.validation_complete = False
+            session.run_state = "NOT_STARTED"
+            session.run_error = None
+            session.fixture = await run_in_threadpool(demo.identify_fixture, receipt)
+            sessions.replace_package(session_id, package)
+            committed = True
+            return sessions.save(session)
+        finally:
+            for file in files:
+                await file.close()
+            if not committed:
+                package.cleanup()
 
 
 @router.post("/sessions/{session_id}/validate", response_model=CheckSession)
 async def validate(session_id: str) -> CheckSession:
     session = sessions.get(session_id)
-    if session.mode != "demo":
+    if session.validation_profile != "frozen_v15":
+        raise HTTPException(503, "Announcement extraction is not connected; no verified requirement profile.")
+    package = sessions.package_path(session_id)
+    lock = sessions.LOCKS[session_id]
+    if lock.locked():
+        raise HTTPException(409, "Another upload or validation is already running.")
+    async with lock:
+        if session.results:
+            session.previous_results = session.results
+        session.results = []
+        session.status = SubmissionStatus.REVIEW_REQUIRED
+        session.run_state = "RUNNING"
+        session.validation_complete = False
+        session.run_error = None
+        sessions.save(session)
         try:
-            validator_v15.require_available()
-        except ValidatorUnavailable as error:
-            raise HTTPException(503, str(error)) from error
-        # Real file retention/dispatch requires the verified native engine contract.
-        raise HTTPException(503, "Real validation dispatch is not configured.")
-    if not session.requirements or not session.files or not session.fixture:
-        raise HTTPException(409, "Select the announcement and submission package first.")
-    if session.results:
-        session.previous_results = session.results
-    session.results = demo.fixture_results(session.fixture)
-    session.status = summarize(session.requirements, session.results)
-    session.revision += 1
-    return sessions.save(session)
+            run = await run_in_threadpool(validator_v15.validate, session.model_copy(deep=True), package)
+            # Preserve raw output privately without adding output files to the submitted package.
+            raw_path = Path(sessions.WORKSPACES[session_id].name) / f"run-{session.revision + 1}-raw.json"
+            await run_in_threadpool(raw_path.write_text, json.dumps(run.raw, ensure_ascii=False, indent=2), encoding="utf-8")
+            session.results = run.results
+            session.validation_complete = run.complete
+            session.status = summarize(session.requirements, run.results, validation_complete=run.complete)
+            session.engine_sha256 = run.engine_sha256
+            session.run_state = "COMPLETE"
+            session.revision += 1
+            return sessions.save(session)
+        except Exception as error:
+            session.results = []
+            session.status = SubmissionStatus.REVIEW_REQUIRED
+            session.validation_complete = False
+            session.run_state = "FAILED"
+            session.run_error = "실제 검증 실행이 완료되지 않았습니다. 파일을 확인하고 다시 시도하세요."
+            sessions.save(session)
+            raise HTTPException(503 if isinstance(error, ValidatorUnavailable) else 502, session.run_error) from error
