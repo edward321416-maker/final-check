@@ -1,0 +1,22 @@
+{
+  "recorded_at": "2026-09-03T11:32:03.0726343Z",
+  "base_commit": "81bf2551c5967836d3e54869de2e86261428c78e",
+  "files": [
+    {
+      "path": "backend/app/validators/frozen_v15/validator_v1_5.py",
+      "sha256": "4b506c3b692f2cef39e2be7cb44b4ce74bcc4ce829064ac655e16f545042bb11"
+    },
+    {
+      "path": "backend/app/services/extractors.py",
+      "sha256": "df7b732322dc570b70b96cc47b45ae508bc2a84b2c61bd98074d0366c12f59a0"
+    },
+    {
+      "path": "backend/app/services/profiles.py",
+      "sha256": "1b43e5134e93a126fd5810ebda2f1c2d3efd14f7178b55a98d2f83f2cd7a03fc"
+    },
+    {
+      "path": "backend/app/models/profiles.py",
+      "sha256": "342286025c6314a55eda671f68f7afbac38c746e1162faeab9fb7a33f8cb036f"
+    }
+  ]
+}

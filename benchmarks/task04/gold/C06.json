@@ -1,0 +1,79 @@
+[
+  {
+    "gold_id": "C06-R001",
+    "rule": "데이터 기반 신산업 또는 국가·지역·사회 현안 해결에 관한 명시된 기획 분야로 응모해야 한다.",
+    "modality": "MUST",
+    "condition": "always",
+    "evidence": {
+      "start_line": 4,
+      "end_line": 7,
+      "quote": "3. 공모주제 : 데이터 기반 협의체의 신산업 발굴과 국가(지역)·사회 현안 해결\n- 융·복합 데이터 발굴 및 활용 기획\n- 공공데이터 활용 창업 아이디어 기획\n- 분석과제 발굴 및 기획"
+    }
+  },
+  {
+    "gold_id": "C06-R002",
+    "rule": "참가자는 대한민국 국민이어야 한다.",
+    "modality": "MUST",
+    "condition": "always",
+    "evidence": {
+      "start_line": 8,
+      "end_line": 8,
+      "quote": "4. 참가대상 : 대한민국 국민 누구나(개인 또는 5인 이내 팀 단위로 참가)"
+    }
+  },
+  {
+    "gold_id": "C06-R003",
+    "rule": "개인 또는 팀으로 참가할 수 있다.",
+    "modality": "MAY",
+    "condition": "always",
+    "evidence": {
+      "start_line": 8,
+      "end_line": 8,
+      "quote": "4. 참가대상 : 대한민국 국민 누구나(개인 또는 5인 이내 팀 단위로 참가)"
+    }
+  },
+  {
+    "gold_id": "C06-R004",
+    "rule": "팀은 5인 이내여야 한다.",
+    "modality": "MUST",
+    "condition": "팀 참가",
+    "evidence": {
+      "start_line": 8,
+      "end_line": 8,
+      "quote": "4. 참가대상 : 대한민국 국민 누구나(개인 또는 5인 이내 팀 단위로 참가)"
+    }
+  },
+  {
+    "gold_id": "C06-R005",
+    "rule": "공모 신청은 2025-04-10부터 04-24까지 해야 한다.",
+    "modality": "MUST",
+    "condition": "always",
+    "evidence": {
+      "start_line": 14,
+      "end_line": 17,
+      "quote": "공모 신청\n|\n2025.4.10. ~ 2025.4.24.\n|"
+    }
+  },
+  {
+    "gold_id": "C06-R006",
+    "rule": "공모 접수는 2025-05-12부터 05-16까지 해야 한다.",
+    "modality": "MUST",
+    "condition": "always",
+    "evidence": {
+      "start_line": 22,
+      "end_line": 25,
+      "quote": "공모 접수\n|\n2025.5.12. ~ 2025.5.16.\n|"
+    }
+  },
+  {
+    "gold_id": "C06-R007",
+    "rule": "국토안전관리원 빅데이터 개방 포털 https://bigtori.kalis.or.kr 공모전 게시판에서 접수해야 한다.",
+    "modality": "MUST",
+    "condition": "always",
+    "evidence": {
+      "start_line": 42,
+      "end_line": 43,
+      "quote": "6. 신청방법\nㅇ 국토안전관리원 빅데이터 개방 포털 홈페이지(https://bigtori.kalis.or.kr) 공모전 게시판에서 접수"
+    }
+  }
+]

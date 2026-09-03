@@ -1,0 +1,68 @@
+[
+  {
+    "gold_id": "C03-R001",
+    "rule": "국민대학교의 명시된 HUSS 참여학과에 재학 중인 학부생이어야 한다.",
+    "modality": "MUST",
+    "condition": "always",
+    "evidence": {
+      "start_line": 14,
+      "end_line": 14,
+      "quote": "✅ 참가 대상: HUSS 참여학과(한국어문학부, 한국역사학과, KIBS, 경영정보학부, 건설시스템공학부, 임산생명공학과, 행정학과, 사회학과, 정치외교학과) 재학생(학부생)"
+    }
+  },
+  {
+    "gold_id": "C03-R002",
+    "rule": "지속가능한 미래를 위한 Futur-Agora 주제로 참여해야 한다.",
+    "modality": "MUST",
+    "condition": "always",
+    "evidence": {
+      "start_line": 17,
+      "end_line": 17,
+      "quote": "*주제: \"지속가능한 미래를 위한 Futur-Agora\""
+    }
+  },
+  {
+    "gold_id": "C03-R003",
+    "rule": "팀당 인원은 5명이어야 한다.",
+    "modality": "MUST",
+    "condition": "해커톤 참가 시",
+    "evidence": {
+      "start_line": 18,
+      "end_line": 20,
+      "quote": "- 각 대 주제 별 미래 사회 문제해결을 위한 하나의 팀을 구성\n- 10개 주제 * 5개 팀(팀당 5인) = 총 50개 팀\n- 대학 별 5인을 모집하되, 당일 현장에서 타 컨소시엄과 연합하여 5인 1연합 팀 구성"
+    }
+  },
+  {
+    "gold_id": "C03-R004",
+    "rule": "현장에서 타 컨소시엄과 연합 팀을 구성해야 한다.",
+    "modality": "MUST",
+    "condition": "해커톤 참가 시",
+    "evidence": {
+      "start_line": 20,
+      "end_line": 20,
+      "quote": "- 대학 별 5인을 모집하되, 당일 현장에서 타 컨소시엄과 연합하여 5인 1연합 팀 구성"
+    }
+  },
+  {
+    "gold_id": "C03-R005",
+    "rule": "신청은 2025-06-27까지 완료해야 한다.",
+    "modality": "MUST",
+    "condition": "always",
+    "evidence": {
+      "start_line": 21,
+      "end_line": 21,
+      "quote": "✅ 신청 마감 : 2025년 6월 27일(금)까지"
+    }
+  },
+  {
+    "gold_id": "C03-R006",
+    "rule": "공고에 명시된 Google Forms 주소로 신청해야 한다.",
+    "modality": "MUST",
+    "condition": "always",
+    "evidence": {
+      "start_line": 22,
+      "end_line": 22,
+      "quote": "✅ 신청 방법 : 구글폼 주소 (https://docs.google.com/forms/d/e/1FAIpQLSd_-S-43dgVzd1qI2uahdJ0zI15_rnsfVQ_VLlRhPhmvo4pJw/viewform)"
+    }
+  }
+]
