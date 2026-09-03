@@ -11,7 +11,10 @@ Base: `81bf2551c5967836d3e54869de2e86261428c78e` (TASK03 PR #2, MERGED).
 Engineering recommendation: **AI-FIRST + DETERMINISTIC EVIDENCE GATE**, subject to
 ChatGPT Product/Business Lead review. This recommends a future bounded comparison;
 no AI model/provider was tested or selected and TASK05 has not started.
-Delivery PR: pending creation after the tested benchmark commit; not authorized to merge.
+Delivery: [PR #3](https://github.com/edward321416-maker/final-check/pull/3), **OPEN / NOT MERGED**.
+Published benchmark commit: `92b7e5085937892ebbf3e1a7a9bc9c11a4978b1c`.
+The PR includes a documentation-only follow-up recording publication; its live head
+is the final delivery reference. Main remains at the TASK03 baseline.
 
 ## Start condition and source integrity
 
@@ -89,6 +92,9 @@ zero BLOCKER do not establish useful recall or submission safety.
   regex tuning, post-hoc Gold correction or synthetic score replacement occurred.
 - Subsequent benchmark commands reused hash-verified saved outputs and recomputed
   metrics/pairs/report; they did not execute or tune the extractor again.
+- Automatic approval review rejected one combined publication shell command with
+  the generic reason `blocked by policy`. Separate body-file preparation and a
+  single PR-creation command succeeded; PR3 was created once and remains open.
 - Two supported output items outside the frozen Gold duty list and one unannotated
   historical-offence condition are explicitly discussed in the analysis. No hidden
   score adjustment. Semantic judgments and scope may change under human review.

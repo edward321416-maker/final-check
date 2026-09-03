@@ -51,5 +51,5 @@
 - [x] Record broad keyword/condition/table failures and 35 repeated-quote anchor mismatches; no tuning.
 - [x] Backend47, browser14, typecheck/build and frozen before/after checks pass.
 - [x] Record GO direction and AI-first comparison recommendation with same-agent annotation limits.
-- [ ] Publish TASK04 PR and leave OPEN for Product/Business Lead review.
+- [x] Publish benchmark commit92b7e50 and PR #3; verified OPEN, left unmerged for Product/Business Lead review.
 - [ ] TASK05 scope decision by Product/Business Lead; no implementation started.

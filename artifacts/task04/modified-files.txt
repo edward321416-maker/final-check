@@ -18,6 +18,7 @@ artifacts/task04/collection-errors.json
 artifacts/task04/diff-check-initial.log
 artifacts/task04/diff-check.log
 artifacts/task04/execution-log.md
+artifacts/task04/local-health.json
 artifacts/task04/modified-files.txt
 artifacts/task04/source-after.json
 artifacts/task04/source-before.json
