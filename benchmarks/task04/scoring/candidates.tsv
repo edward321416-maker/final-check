@@ -1,0 +1,212 @@
+case_id	extracted_id	gold_ids	match_type	semantic_support	atomicity	hallucinated	failure_categories	reason
+C01	G001	-	NO_MATCH	0	0	0	FALSE_POSITIVE	Announcement title, not an applicant rule.
+C01	G002	-	NO_MATCH	0	0	0	FALSE_POSITIVE	Promotional invitation.
+C01	G003	7	MATCH	1	0	0	WRONG_MODALITY	Complete 60-second video limit; INFO instead of MUST.
+C01	G004	1	PARTIAL	0	0	0	EVIDENCE_NOT_SUPPORTING	Eligibility heading contains no eligible population.
+C01	G005	20	MATCH	1	0	0	WRONG_MODALITY	Complete email submission route; implicit duty labelled INFO.
+C01	G006	21	PARTIAL	0	0	0	EVIDENCE_NOT_SUPPORTING	Date split after 2025.; remaining dates discarded.
+C01	G007	21	PARTIAL	0	0	0	PDF_READING_ORDER	Midnight fragment lacks dates from preceding PDF line.
+C01	G008	22	PARTIAL	0	0	0	TABLE_FAILURE	Filename column heading without required value.
+C01	G009	7	NO_MATCH	1	0	0	DUPLICATE,WRONG_MODALITY	Restates already matched duration limit.
+C01	G010	13,14,15	PARTIAL	1	1	0	ATOMICITY,WRONG_MODALITY	Originality, copyright and portrait rights combined.
+C01	G011	11	PARTIAL	0	0	0	TABLE_FAILURE	Bare MP4 cell lacks recommendation and alternative formats.
+C01	G012	24,26,28	PARTIAL	0	0	0	TABLE_FAILURE	Second filename heading lacks form-to-value associations.
+C01	G013	23	MATCH	1	0	0	WRONG_MODALITY	Application form required per work; INFO instead of MUST.
+C01	G014	24	PARTIAL	0	0	0	TABLE_FAILURE	Filename value lacks its column relationship.
+C01	G015	29	PARTIAL	0	0	0	TABLE_FAILURE	PDF cell loses the recommended-format heading.
+C01	G016	25	PARTIAL	0	0	0	TABLE_FAILURE	Consent name loses per-person submission qualifier.
+C01	G017	25	PARTIAL	0	0	0	TABLE_FAILURE	Per-person fragment loses document name.
+C01	G018	26	PARTIAL	0	0	0	TABLE_FAILURE	Consent filename loses column relationship.
+C01	G019	27	PARTIAL	0	0	0	TABLE_FAILURE	Portrait consent label loses actor scope and submission duty.
+C01	G020	27	PARTIAL	0	0	0	TABLE_FAILURE	All-actors fragment loses the document identity.
+C01	G021	28	PARTIAL	0	0	0	TABLE_FAILURE	Portrait filename loses column relationship.
+C01	G022	1	PARTIAL	0	0	0	EVIDENCE_NOT_SUPPORTING	Section heading without actual eligibility.
+C01	G023	1	PARTIAL	0	0	0	EVIDENCE_NOT_SUPPORTING	Repeated heading without eligible population.
+C01	G024	1	PARTIAL	0	0	0	TABLE_FAILURE	Table heading without eligible population.
+C01	G025	4	MATCH	1	0	0	-	Explicit individual-or-team permission retained.
+C01	G026	2	MATCH	1	0	0	WRONG_MODALITY	All team members must qualify is complete despite sentence split; INFO wrong.
+C01	G027	3	MATCH	0	0	0	WRONG_MODALITY	Same-category-only team restriction retained but weakened to MAY.
+C01	G028	3	PARTIAL	0	0	0	MISS_CONDITION,WRONG_MODALITY	Narrow examples do not express the full grouping restriction; mixed permission and prohibition.
+C01	G029	7	PARTIAL	0	0	0	EVIDENCE_NOT_SUPPORTING	Video field label lacks the duration limit.
+C01	G030	11,12	PARTIAL	1	1	0	ATOMICITY	Format recommendation and file-versus-link recommendation combined.
+C01	G031	13,14,15	PARTIAL	1	1	0	ATOMICITY,DUPLICATE,WRONG_MODALITY	Repeated compound originality and rights statement.
+C01	G032	16	PARTIAL	0	0	0	EVIDENCE_NOT_SUPPORTING	AI-type footnote has no prohibition.
+C01	G033	14,15,16	PARTIAL	0	1	0	PDF_READING_ORDER,ATOMICITY	Multiple rights/AI clauses cut before disqualification predicate.
+C01	G034	19	MATCH	1	0	0	-	Explicit BI permission retained.
+C01	G035	30	PARTIAL	0	1	0	PDF_READING_ORDER,ATOMICITY	Multiple noncompliance conditions cut before consequence.
+C01	G036	23,25	PARTIAL	0	1	0	PDF_READING_ORDER,ATOMICITY	Two form names combined and second form truncated.
+C01	G037	25	PARTIAL	0	0	0	MISS_CONDITION	Consent duty loses full name and per-person scope.
+C01	G038	27	PARTIAL	0	0	0	PDF_READING_ORDER	Actor condition retained but form name and duty cut across lines.
+C01	G039	27	PARTIAL	0	0	0	MISS_CONDITION	Submission fragment omits the all-actors condition.
+C01	G040	12	MATCH	1	0	0	-	Complete recommendation to submit video files rather than links.
+C01	G041	14	PARTIAL	0	0	0	PDF_READING_ORDER	Copyright dispute condition cut before consequence.
+C01	G042	14,15	PARTIAL	0	1	0	PDF_READING_ORDER,ATOMICITY	Two rights constraints cut before duty predicate.
+C01	G043	33	PARTIAL	0	0	0	PDF_READING_ORDER	Legal-liability condition cut before responsible party.
+C01	G044	-	NO_MATCH	0	0	0	FALSE_POSITIVE	Ownership statement imposes no submission requirement.
+C01	G045	-	NO_MATCH	0	0	0	EVIDENCE_NOT_SUPPORTING	Incomplete dispute-resolution lead-in outside scoped duties.
+C01	G046	-	NO_MATCH	0	0	0	MISS_CONDITION	Optional dispute remedy loses dispute condition and parties; not a submission duty.
+C01	G047	23	PARTIAL	0	0	0	DUPLICATE	Form title does not add a per-work submission obligation.
+C01	G048	-	NO_MATCH	0	0	0	FALSE_POSITIVE	Empty receipt-number label is not a requirement to fill it.
+C01	G049	-	NO_MATCH	0	0	0	FALSE_POSITIVE	Form declaration fragment, not an independent obligation.
+C01	G050	39	PARTIAL	0	0	0	EVIDENCE_NOT_SUPPORTING	Signature label not bound to application form in candidate.
+C01	G051	-	NO_MATCH	0	0	0	FALSE_POSITIVE	Repeated contest title.
+C01	G052	25	PARTIAL	0	0	0	EVIDENCE_NOT_SUPPORTING	Document title lacks per-person submission scope.
+C01	G053	-	NO_MATCH	0	0	0	FALSE_POSITIVE	Empty receipt-number label.
+C01	G054	25	PARTIAL	0	0	0	MISS_CONDITION	Team-member consent fragment omits individual applicants and form identity.
+C01	G055	-	NO_MATCH	0	0	0	EVIDENCE_NOT_SUPPORTING	Bare consent label has no rule.
+C01	G056	-	NO_MATCH	0	0	0	FALSE_POSITIVE	Organizer data-processing purpose.
+C01	G057	43	PARTIAL	0	0	0	EVIDENCE_NOT_SUPPORTING	Bare signature lacks form and signer identity.
+C01	G058	44	PARTIAL	0	0	0	MISS_CONDITION	Guardian signature loses under-14 condition and signer identity.
+C01	G059	-	NO_MATCH	0	0	0	EVIDENCE_NOT_SUPPORTING	Bare consent label.
+C01	G060	-	NO_MATCH	0	0	0	FALSE_POSITIVE	Organizer publicity purpose.
+C01	G061	43	PARTIAL	0	0	0	EVIDENCE_NOT_SUPPORTING	Bare signature lacks form and signer identity.
+C01	G062	44	PARTIAL	0	0	0	MISS_CONDITION	Guardian signature loses under-14 condition.
+C01	G063	-	NO_MATCH	0	0	0	EVIDENCE_NOT_SUPPORTING	Bare consent label.
+C01	G064	42	PARTIAL	0	0	0	PDF_READING_ORDER	Work-use license cut before permitted uses and consent requirement.
+C01	G065	43	PARTIAL	0	0	0	EVIDENCE_NOT_SUPPORTING	Bare signature lacks consent identity.
+C01	G066	44	PARTIAL	0	0	0	MISS_CONDITION	Guardian signature loses under-14 condition.
+C01	G067	-	NO_MATCH	0	0	0	FALSE_POSITIVE	Generic form declaration.
+C01	G068	43	PARTIAL	0	0	0	EVIDENCE_NOT_SUPPORTING	Bare confirmation signature lacks document identity.
+C01	G069	44	PARTIAL	0	0	0	MISS_CONDITION	Guardian confirmation loses under-14 condition.
+C01	G070	27	PARTIAL	1	0	0	MISS_IMPLICIT_RULE	Form3 all-actors completion instruction is supported but omits submission step.
+C01	G071	-	NO_MATCH	0	0	0	FALSE_POSITIVE	Repeated contest title.
+C01	G072	27	PARTIAL	0	0	0	EVIDENCE_NOT_SUPPORTING	Portrait consent title lacks actor scope and submission duty.
+C01	G073	-	NO_MATCH	0	0	0	FALSE_POSITIVE	Empty receipt-number label.
+C01	G074	-	NO_MATCH	0	0	0	EVIDENCE_NOT_SUPPORTING	Portrait-rights-holder label alone.
+C01	G075	-	NO_MATCH	0	0	0	EVIDENCE_NOT_SUPPORTING	Bare consent label.
+C01	G076	-	NO_MATCH	0	0	0	FALSE_POSITIVE	Organizer processing purpose.
+C01	G077	-	NO_MATCH	0	0	0	FALSE_POSITIVE	Data-item label, not an applicant action.
+C01	G078	-	NO_MATCH	0	0	0	FALSE_POSITIVE	Organizer retention period, not an applicant obligation.
+C01	G079	-	NO_MATCH	0	0	0	FALSE_POSITIVE	Organizer retention period for non-winners.
+C01	G080	48	PARTIAL	0	0	0	EVIDENCE_NOT_SUPPORTING	Bare signature loses portrait-consent document binding.
+C01	G081	49	PARTIAL	0	0	0	MISS_CONDITION	Guardian signature loses under-14 actor condition.
+C01	G082	-	NO_MATCH	0	0	0	EVIDENCE_NOT_SUPPORTING	Bare consent label.
+C01	G083	-	NO_MATCH	0	0	0	FALSE_POSITIVE	Organizer publicity purpose.
+C01	G084	-	NO_MATCH	0	0	0	FALSE_POSITIVE	Data-item label.
+C01	G085	48	PARTIAL	0	0	0	EVIDENCE_NOT_SUPPORTING	Bare signature lacks document binding.
+C01	G086	49	PARTIAL	0	0	0	MISS_CONDITION	Guardian signature loses under-14 actor condition.
+C01	G087	-	NO_MATCH	0	0	0	FALSE_POSITIVE	Generic participation consent declaration lacks an actionable document constraint.
+C01	G088	48	PARTIAL	0	0	0	EVIDENCE_NOT_SUPPORTING	Bare signature lacks portrait form binding.
+C01	G089	49	PARTIAL	0	0	0	MISS_CONDITION	Guardian signature lacks age and actor scope.
+C02	G001	-	NO_MATCH	0	0	0	FALSE_POSITIVE	Announcement title.
+C02	G002	-	NO_MATCH	0	0	0	FALSE_POSITIVE	Announcement introduction.
+C02	G003	1	PARTIAL	0	0	0	EVIDENCE_NOT_SUPPORTING	Slogan title is not the full climate-action subject constraint.
+C02	G004	1,2	PARTIAL	1	1	0	ATOMICITY,WRONG_MODALITY	Theme and duration combined in an INFO item.
+C02	G005	2,3	PARTIAL	1	1	0	ATOMICITY,WRONG_MODALITY	Duration limit and orientation permission combined.
+C02	G006	3,4,5	PARTIAL	1	1	0	ATOMICITY	Orientation permission and two recommendations combined.
+C02	G007	6	MATCH	1	0	0	WRONG_MODALITY	Complete eligibility condition but INFO.
+C02	G008	7	MATCH	1	0	0	WRONG_MODALITY	General division birth-year condition retained; INFO instead of MUST.
+C02	G009	8	MATCH	1	0	0	WRONG_MODALITY	Youth division birth-year condition retained; INFO instead of MUST.
+C02	G010	10,11,12,13	PARTIAL	0	1	0	ATOMICITY,WRONG_MODALITY	SNS upload, tags, application and privacy ban combined under one MUST_NOT label.
+C02	G011	13	MATCH	1	0	0	-	Complete mandatory tag/mention set retained.
+C02	G012	11	PARTIAL	1	0	0	MISS_CONDITION	Valid application URL but upload-before-application condition absent.
+C02	G013	9	PARTIAL	1	0	0	OTHER	Captures only 23:50; misses conflicting 23:59 elsewhere in source.
+C02	G014	-	NO_MATCH	0	0	0	FALSE_POSITIVE	Organizer winner-announcement plan.
+C03	G001	-	NO_MATCH	0	0	0	FALSE_POSITIVE	Promotional recruitment sentence.
+C03	G002	-	NO_MATCH	0	0	0	FALSE_POSITIVE	Selection criteria are not instructions to submit essay fields.
+C03	G003	1	MATCH	1	0	0	WRONG_MODALITY,WRONG_VERIFIER	Eligibility population complete; INFO/SEMANTIC instead of mandatory external eligibility check.
+C03	G004	5	MATCH	1	0	0	WRONG_MODALITY	Complete June27 deadline; INFO instead of MUST.
+C03	G005	-	NO_MATCH	0	0	0	FALSE_POSITIVE	Organizer workflow does not establish discrete participant duties.
+C04	G001	2	MATCH	1	0	0	-	Individual submission without team registration is correctly permitted.
+C04	G002	3	MATCH	0	0	0	WRONG_MODALITY	Team registration route retained but treated as optional MAY.
+C04	G003	3	PARTIAL	0	0	0	DUPLICATE	Generic pointer lacks the full team registration route.
+C04	G004	17	MATCH	0	0	0	WRONG_MODALITY	Proof must be possible is misread as optional permission.
+C04	G005	17	PARTIAL	0	0	0	MISS_CONDITION	Disqualification tail refers to absent proof context.
+C04	G006	18	MATCH	1	0	0	WRONG_MODALITY	Complete augmentation-code submission obligation labelled INFO.
+C04	G007	20	PARTIAL	0	0	0	EVIDENCE_NOT_SUPPORTING	Resource-link heading lacks all resource specifications.
+C04	G008	-	NO_MATCH	0	0	0	FALSE_POSITIVE	Section heading.
+C04	G009	24,25,26,27	PARTIAL	1	1	0	ATOMICITY,WRONG_MODALITY	Email route and multiple separate submission artifacts combined.
+C04	G010	25	PARTIAL	0	0	0	MISS_CONDITION,WRONG_MODALITY	Code reproducibility is weakened to MAY and loses finalist condition.
+C04	G011	-	NO_MATCH	0	0	0	FALSE_POSITIVE	Section heading.
+C04	G012	33	MATCH	1	0	0	-	Separate inference-code-file requirement retained with MUST.
+C04	G013	26	PARTIAL	0	0	0	MISS_CONDITION	Weight-file requirement loses finalist scope from section lead-in.
+C04	G014	-	NO_MATCH	0	0	0	FALSE_POSITIVE	File-list heading.
+C04	G015	26	PARTIAL	0	0	0	MISS_CONDITION,WRONG_MODALITY	Required model file becomes MAY because it can reproduce a score; finalist scope absent.
+C04	G016	34	MATCH	1	0	0	WRONG_MODALITY	Complete three-submissions-per-day cap labelled INFO.
+C04	G017	36	MATCH	1	0	0	WRONG_MODALITY	Complete UTF-8 data/submission-file requirement labelled INFO.
+C04	G018	39	MATCH	1	0	0	WRONG_MODALITY	Abnormally obtained submissions violate rules; INFO instead of prohibition.
+C04	G019	40	MATCH	0	0	0	WRONG_MODALITY	Mandatory final file selection weakened to MAY.
+C04	G020	39	PARTIAL	1	1	0	ATOMICITY	Unfair-submission ban combined with historical-offence evaluation restriction.
+C04	G021	-	NO_MATCH	0	0	0	FALSE_POSITIVE	Unresolved generic link reference.
+C04	G022	-	NO_MATCH	1	0	0	OTHER	Supported route for other questions; omitted from frozen Gold (recorded annotation limitation).
+C04	G023	44	MATCH	1	0	0	WRONG_MODALITY	Conditional official-answer inquiry route retained; INFO instead of MUST.
+C04	G024	-	NO_MATCH	0	0	0	FALSE_POSITIVE	Application-start label lacks date and is not a closing obligation.
+C04	G025	41	PARTIAL	0	0	0	TABLE_FAILURE	Team-merger deadline label loses adjacent date.
+C04	G026	43	PARTIAL	0	0	0	TABLE_FAILURE	Code/report deadline label loses adjacent date.
+C05	G001	2	PARTIAL	0	0	0	PDF_READING_ORDER	Date heading only; numeric PDF text is separated.
+C05	G002	2	PARTIAL	0	0	0	PDF_READING_ORDER	Registration-period label lacks dates.
+C05	G003	-	NO_MATCH	0	0	0	FALSE_POSITIVE	Organizer may extend dates; not applicant permission to extend them.
+C06	G001	2,3,4	PARTIAL	1	1	0	ATOMICITY,WRONG_MODALITY	Nationality, individual/team permission and five-person limit combined.
+C06	G002	6	PARTIAL	0	0	0	TABLE_FAILURE	Receipt heading loses its date cells.
+C06	G003	7	MATCH	1	0	0	WRONG_MODALITY	Complete portal submission route labelled INFO.
+C06	G004	-	NO_MATCH	0	0	0	FALSE_POSITIVE	Award-table organization name.
+C06	G005	-	NO_MATCH	0	0	0	FALSE_POSITIVE	Award title, not an applicant constraint.
+C06	G006	-	NO_MATCH	0	0	0	FALSE_POSITIVE	Repeated award-table organization.
+C06	G007	-	NO_MATCH	0	0	0	FALSE_POSITIVE	Repeated award title.
+C06	G008	-	NO_MATCH	0	0	0	FALSE_POSITIVE	Repeated award-table organization.
+C06	G009	-	NO_MATCH	0	0	0	FALSE_POSITIVE	Repeated award title.
+C06	G010	-	NO_MATCH	0	0	0	FALSE_POSITIVE	Contact information without an obligation.
+C07	G001	1	MATCH	1	0	0	WRONG_MODALITY	Complete nationality eligibility condition labelled INFO.
+C07	G002	-	NO_MATCH	0	0	0	FALSE_POSITIVE	Submission section title.
+C07	G003	3	PARTIAL	0	0	0	EVIDENCE_NOT_SUPPORTING	Date broken after year punctuation.
+C07	G004	3	PARTIAL	0	0	0	EVIDENCE_NOT_SUPPORTING	Closing date broken after year punctuation.
+C07	G005	3	PARTIAL	0	0	0	EVIDENCE_NOT_SUPPORTING	Day/time tail loses year and month.
+C07	G006	4	PARTIAL	1	0	0	PDF_READING_ORDER	Email alternative valid but postal/visit alternatives on next line omitted.
+C07	G007	5,6	PARTIAL	1	1	0	ATOMICITY,WRONG_MODALITY	Application and consent combined.
+C07	G008	-	NO_MATCH	0	0	0	FALSE_POSITIVE	Winner-announcement schedule.
+C07	G009	-	NO_MATCH	0	0	0	FALSE_POSITIVE	Organizer priority policy, no distinct applicant obligation.
+C07	G010	3	PARTIAL	0	0	0	EVIDENCE_NOT_SUPPORTING	Must arrive during receipt window but no actual dates.
+C07	G011	-	NO_MATCH	0	0	0	PDF_READING_ORDER	Truncated non-return statement.
+C07	G012	5	MATCH	1	0	0	WRONG_MODALITY	Complete required application artifact and copy count from attachment list; INFO.
+C07	G013	6	MATCH	1	0	0	WRONG_MODALITY	Complete required consent artifact and copy count from attachment list; INFO.
+C07	G014	5	PARTIAL	0	0	0	DUPLICATE	Application title adds no new requirement.
+C07	G015	10	PARTIAL	0	0	0	TABLE_FAILURE	Receipt-number heading loses instruction to leave it blank.
+C07	G016	6	PARTIAL	0	0	0	DUPLICATE	Consent title adds no new duty.
+C07	G017	6	PARTIAL	0	0	0	DUPLICATE	Repeated consent title.
+C07	G018	18	PARTIAL	0	0	0	PDF_READING_ORDER	Form declaration fragment lacks consent-refusal permission.
+C07	G019	-	NO_MATCH	0	0	0	FALSE_POSITIVE	Organizer retention period.
+C07	G020	19	PARTIAL	0	0	0	EVIDENCE_NOT_SUPPORTING	Signature label lacks consent-form identity.
+C08	G001	3	MATCH	1	0	0	WRONG_MODALITY	Prototype completion by close conditional on product track retained; INFO wrong.
+C08	G002	29	PARTIAL	1	0	0	MISS_CONDITION	Theft/copyright example covers only part of broader plagiarism prohibition.
+C08	G003	5,6	PARTIAL	0	0	0	EVIDENCE_NOT_SUPPORTING	Unrestricted eligibility heading omits following nationality/residence restrictions.
+C08	G004	7,8	PARTIAL	1	1	0	ATOMICITY	Team permission and six-person membership constraint combined.
+C08	G005	9	PARTIAL	0	0	0	EVIDENCE_NOT_SUPPORTING	Receipt-period heading without dates.
+C08	G006	9	PARTIAL	0	0	0	EVIDENCE_NOT_SUPPORTING	Repeated receipt-period heading.
+C08	G007	9	PARTIAL	0	0	0	EVIDENCE_NOT_SUPPORTING	Submission window split after month punctuation.
+C08	G008	11	PARTIAL	0	0	0	EVIDENCE_NOT_SUPPORTING	Submission-count heading without per-form count.
+C08	G009	10	MATCH	1	0	0	-	Explicit unlimited-submissions permission retained.
+C08	G010	11	MATCH	1	0	0	-	One result per application retained with MUST.
+C08	G011	-	NO_MATCH	0	0	0	FALSE_POSITIVE	Document/route section heading.
+C08	G012	-	NO_MATCH	0	0	0	FALSE_POSITIVE	Document table heading.
+C08	G013	12	PARTIAL	0	0	0	TABLE_FAILURE	Submission-route table heading without address.
+C08	G014	13	PARTIAL	0	0	0	TABLE_FAILURE	Application cell lacks copy count and duty context.
+C08	G015	12	PARTIAL	0	0	0	TABLE_FAILURE	Email method loses address on next line.
+C08	G016	14	PARTIAL	0	0	0	TABLE_FAILURE	Pledge cell loses copy count and submission context.
+C08	G017	15	PARTIAL	0	0	0	TABLE_FAILURE	Privacy-consent cell loses copy count and submission context.
+C08	G018	16	PARTIAL	0	0	0	TABLE_FAILURE	Disclosure-consent cell loses copy count and submission context.
+C08	G019	21	PARTIAL	0	0	0	TABLE_FAILURE	Broken file example loses product track and development-complete condition.
+C08	G020	22	MATCH	1	0	0	WRONG_MODALITY	Product-track presentation-stage demonstration instruction retained; INFO wrong.
+C08	G021	17,18	PARTIAL	1	1	0	ATOMICITY,WRONG_MODALITY	Free format and separate presentation file combined.
+C08	G022	-	NO_MATCH	0	0	0	FALSE_POSITIVE	Final-round opportunity without qualifying context.
+C08	G023	-	NO_MATCH	0	0	0	FALSE_POSITIVE	Organizer evaluation-track description.
+C08	G024	-	NO_MATCH	0	0	0	FALSE_POSITIVE	Organizer evaluation-change discretion.
+C08	G025	-	NO_MATCH	0	0	0	FALSE_POSITIVE	Result-publication schedule.
+C08	G026	-	NO_MATCH	0	0	0	FALSE_POSITIVE	Final-result publication schedule.
+C08	G027	-	NO_MATCH	0	0	0	FALSE_POSITIVE	Organizer result-announcement identifier.
+C08	G028	-	NO_MATCH	0	0	0	FALSE_POSITIVE	Award/support heading.
+C08	G029	-	NO_MATCH	0	0	0	PDF_READING_ORDER	Fragment of organizer advancement opportunity.
+C08	G030	-	NO_MATCH	0	0	0	FALSE_POSITIVE	Estimated ceremony audience is not mandatory attendance.
+C08	G031	-	NO_MATCH	0	0	0	FALSE_POSITIVE	Follow-up support heading.
+C08	G032	-	NO_MATCH	0	0	0	PDF_READING_ORDER	Advancement fragment lacks top-two qualification and optionality.
+C08	G033	-	NO_MATCH	0	0	0	FALSE_POSITIVE	Organizer consulting support.
+C08	G034	-	NO_MATCH	0	0	0	FALSE_POSITIVE	Organizer presentation-material support.
+C08	G035	-	NO_MATCH	0	0	0	FALSE_POSITIVE	General organizer support.
+C08	G036	25	PARTIAL	1	0	0	MISS_CONDITION	Example covers only leader-to-other-member overlap.
+C08	G037	25	PARTIAL	1	0	0	MISS_CONDITION	Example covers only member-to-other-team overlap.
+C08	G038	4	PARTIAL	0	1	0	PDF_READING_ORDER,ATOMICITY	Prior-award and eligibility conditions combined then truncated.
+C08	G039	5,6	PARTIAL	0	0	0	PDF_READING_ORDER	Eligibility consequence lacks actual nationality/residence criteria.
+C08	G040	-	NO_MATCH	1	0	0	OTHER	Supported clerical-error liability information outside frozen duty list; Gold scope limitation.
+C08	G041	-	NO_MATCH	0	0	0	FALSE_POSITIVE	Organizer non-return policy.
+C08	G042	31	PARTIAL	1	0	0	MISS_CONDITION	Specific infringement liability is narrower than the complete source liability scope.
+C08	G043	-	NO_MATCH	0	0	0	PDF_READING_ORDER	Ownership statement cut before predicate.
+C08	G044	-	NO_MATCH	0	0	0	FALSE_POSITIVE	Public-data help heading.

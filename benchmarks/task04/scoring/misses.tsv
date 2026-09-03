@@ -1,0 +1,22 @@
+case_id	gold_ids	failure_category	reason
+C01	5,6,8,9,10,17,18,31,32	MISS_KEYWORD	Source duty or permission has no retained subject keyword; no candidate expresses it.
+C01	34,35,36,37,45	MISS_CONDITION	Form instructions for representatives, members and contact exceptions are absent.
+C01	38	TABLE_FAILURE	Work-description form instruction and approximate length are omitted.
+C01	40,41,46,47	MISS_IMPLICIT_RULE	Required consent is implied by refusal preventing entry; only form labels survive.
+C02	14	MISS_CONDITION	Conditional out-of-hours email inquiry route omitted.
+C03	2	MISS_KEYWORD	Theme line omitted.
+C03	3	MISS_IMPLICIT_RULE	Five-person team requirement expressed in descriptive program lines is omitted.
+C03	4	MISS_CONDITION	Onsite cross-consortium formation instruction omitted.
+C03	6	MISS_KEYWORD	Google Forms URL is present but URL pattern is not a subject selector; no application-route candidate.
+C04	1,5,6,7,8,9,10,11,12,13,14,15,16,21,22,23,29,30,31,32,37,38	MISS_KEYWORD	Unchanged subject selector drops this actual participation, model, data, code or inference rule.
+C04	4,19,28,35	MISS_IMPLICIT_RULE	Concise team cap, inference-time, report-file or Python-language requirement omitted.
+C04	42	TABLE_FAILURE	Preliminary close date and its label are separated in schedule; neither yields the deadline.
+C05	1	PDF_READING_ORDER	Fragmented PDF theme text produces no complete topic requirement.
+C06	1	MISS_KEYWORD	Data/planning topic lines omitted.
+C06	5	TABLE_FAILURE	Application-stage label and date cells fail to become a requirement.
+C07	2,7,8,9	MISS_KEYWORD	Program subject, false-information ban, rights and non-appeal conditions are omitted.
+C07	11,12,13,14,15,16	TABLE_FAILURE	Proposal-form instructions are in table cells and not extracted as obligations.
+C07	17	MISS_CONDITION	Optional extra sheet for long proposals omitted.
+C08	1,2,23,28,32	MISS_KEYWORD	Public-data scope, real-name entry, originality and winner tax duties omitted.
+C08	19,20	TABLE_FAILURE	Track-specific idea proposal and business-plan table cells omitted.
+C08	24,26,27,30	MISS_CONDITION	Conditional winner choice, team identification and lawful use obligations omitted.

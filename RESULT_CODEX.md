@@ -1,4 +1,149 @@
-# RESULT_CODEX — TASK 03
+# RESULT_CODEX — TASK 04
+
+Date: 2026-09-03 (Asia/Seoul). Repository: edward321416-maker/final-check.
+Branch: `codex/task-04-independent-extractor-benchmark`.
+Base: `81bf2551c5967836d3e54869de2e86261428c78e` (TASK03 PR #2, MERGED).
+
+## TASK 04 STATUS / DIRECTION
+
+**TASK 04 PASS — independent reality check completed; low scores retained.**
+**FINAL CHECK: GO. Local extractor: REPLACE as primary extraction strategy.**
+Engineering recommendation: **AI-FIRST + DETERMINISTIC EVIDENCE GATE**, subject to
+ChatGPT Product/Business Lead review. This recommends a future bounded comparison;
+no AI model/provider was tested or selected and TASK05 has not started.
+Delivery PR: pending creation after the tested benchmark commit; not authorized to merge.
+
+## Start condition and source integrity
+
+- Directly checked PR #2 is MERGED at `81bf2551c5967836d3e54869de2e86261428c78e`.
+- Fetched origin; origin/main matched that exact commit. Switched to local main,
+  fast-forward sync reported up to date, verified clean tree, then created TASK04 branch.
+- Read TASK03 reports/tasks/decisions/issues/README and extractor/profile interfaces.
+- Frozen SHA before and after is identical:
+  `4b506c3b692f2cef39e2be7cb44b4ce74bcc4ce829064ac655e16f545042bb11`.
+- Extractor, profile service and profile model hashes also match. No diff in backend,
+  frontend, fixtures, product spec or validator policy from TASK03 baseline.
+- The previous TASK04 FAIL was a prerequisite non-start, not a benchmark failure;
+  it contributes no cases, requirements or scores here.
+
+## Corpus and Gold freeze
+
+Eight distinct real 2025 announcements: four complete text PDFs and four scoped
+HTML article bodies. Education/video, climate/video, university hackathon, financial
+AI, weather startup ideas, public-data planning, festival programs, regional data
+products. Private-company-only coverage is absent. C05 is an actual one-page
+official document; case Gold counts vary from 2 to 49.
+
+Gold **173** requirements was written before extractor output and frozen at
+**2026-09-03T11:46:35.794398+00:00**. Gold commit: `5d4bb99`.
+Raw-byte preservation commit: `978b911f3230ab00c995426e9ccf3c806ae8b3c5`.
+Gold manifest SHA:
+`035ebc06d3d62db6ab9c47c53d30cbc206be02667d845e9db59da6b9c5f7fe89`.
+Valid capture started **2026-09-03T11:49:55.205838+00:00**, after freeze.
+Gold was not changed after output. Both working files and the Git freeze commit
+bytes were hash-verified. Regression tests were also deferred until after freeze.
+
+Independence means actual third-party sources plus pre-output frozen Gold. The same
+engineering agent authored Gold and scored, with prior implementation knowledge;
+this is **not independent human or implementation-blind adjudication**.
+Full scope/provenance: [manifest](benchmarks/task04/manifest.json),
+[source notes](benchmarks/task04/SOURCE_NOTES.md), [protocol](benchmarks/task04/PROTOCOL.md).
+
+## INDEPENDENT RESULTS — unchanged local-rules-v1
+
+| Metric | Actual result |
+|---|---:|
+| Announcements | 8 |
+| Gold / raw extracted | 173 / 211 |
+| Recall | 32/173 = **18.50%** |
+| Precision | 32/211 = **15.17%** |
+| Modality accuracy, full MATCH only | 8/32 = **25.00%** |
+| Evidence exactness | 211/211 = **100%** |
+| Evidence semantic support | 51/211 = **24.17%** |
+| Atomicity violations | 18/211 = **8.53%** |
+| Hallucinated constraints | **0** |
+| Unsupported BLOCKER / all BLOCKER | **0 / 0** |
+
+Strict one-to-one MATCH; PARTIAL earns zero. 65 Gold have only partial coverage;
+76 have none. All raw candidates passed the current exact-evidence gate. Its
+NEEDS_REVIEW flag catches only 1 of the 18 manually identified atomicity violations.
+There are 35 first-occurrence anchors that differ from the candidate's declared line.
+Neither these gate issues nor the extractor were changed.
+
+Top failure groups: **FALSE_POSITIVE 58 candidates**, **MISS_KEYWORD 43 wholly
+uncovered Gold**, **WRONG_MODALITY 37 candidate annotations** (24/32 full matches
+have wrong modality). Counts have different units and may overlap; see
+[taxonomy](benchmarks/task04/report/failure-taxonomy.md).
+
+The broad misses in actual data/model/eligibility rules and high output noise do
+not support keeping this local heuristic as the primary MVP extractor. Exact
+quotes do not establish semantic support or completeness. Zero invented rules and
+zero BLOCKER do not establish useful recall or submission safety.
+
+## Actual execution, failures and limitations
+
+- One collection candidate returned HTTP404 and was replaced before Gold.
+- Initial post-freeze capture failed to serialize Pydantic objects. Original failed
+  saves are retained; only the harness serializer was repaired. Valid primary
+  outputs are under `benchmarks/task04/extracted/baseline/`. No product change,
+  regex tuning, post-hoc Gold correction or synthetic score replacement occurred.
+- Subsequent benchmark commands reused hash-verified saved outputs and recomputed
+  metrics/pairs/report; they did not execute or tune the extractor again.
+- Two supported output items outside the frozen Gold duty list and one unannotated
+  historical-offence condition are explicitly discussed in the analysis. No hidden
+  score adjustment. Semantic judgments and scope may change under human review.
+- C02 internally conflicts on closing minute; Gold records the unresolved conflict.
+  Exact phrase `제출하지 않아도 된다` was absent and is NOT TESTED; real negative
+  conditions and their failures are discussed without inventing new cases.
+
+## Regression — ACTUAL TEST
+
+| Execution | Result | Evidence |
+|---|---|---|
+| Backend full pytest | **47 passed**, one existing deprecation warning | [log](artifacts/task04/backend-tests.log), [JUnit](artifacts/task04/backend-tests.xml) |
+| Desktop/mobile Chromium smoke | **14 passed** | [log](artifacts/task04/browser-tests.log), [JSON](artifacts/task04/browser-results.json) |
+| TypeScript typecheck | **PASS** | [log](artifacts/task04/typecheck.log) |
+| Next production build | **PASS** | [log](artifacts/task04/build.log) |
+| Frozen source / Git snapshot audit | **PASS** | [before](artifacts/task04/source-before.json), [after](artifacts/task04/source-after.json) |
+| Scoring coverage and one-to-one assertions | **PASS** | [execution](artifacts/task04/benchmark-scoring.log) |
+
+Full commands and diff-check outcome: [execution log](artifacts/task04/execution-log.md).
+Generated TASK03 artifacts were copied for this run and their historical tracked
+versions restored. No existing tests were rewritten. Browser regression exercised
+actual routing, upload, evidence, profile review and recheck within the locked UI.
+
+## Classification / NOT TESTED
+
+- **INDEPENDENT:** these eight actual announcements and pre-output frozen Gold.
+- **ACTUAL:** real local ingestion/extraction/gate, hash checks, backend/browser and
+  build execution. Actual execution does not imply independent/AI accuracy.
+- **SELF:** existing synthetic demo/text/PDF regression; excluded from primary scores.
+- **SIMULATED:** existing fixture providers and fault-injection regression; excluded.
+- **NOT TESTED:** external AI comparison, Vision/OCR, generic automatic verification,
+  mixed-image semantic extraction, historical 39-case reproduction, production
+  hosting, independent human adjudication and other browser engines.
+
+## Modified files, delivery and next work
+
+Added `benchmarks/task04/` source snapshots, frozen Gold, actual/failed captures,
+manual scoring, metrics, taxonomy and report; four small collection/freeze/run
+scripts; `artifacts/task04/` execution evidence. Updated README, TASKS, DECISIONS,
+IMPLEMENTATION_ISSUES, this report and `.gemini_sync.md`.
+Exact list: [modified files](artifacts/task04/modified-files.txt).
+
+[Benchmark report](benchmarks/task04/report/report.md) ·
+[Detailed analysis / decision](benchmarks/task04/report/analysis.md) ·
+[Scoring pairs](benchmarks/task04/scoring/pairs.csv).
+
+Next recommendation only: bounded AI-first extraction comparison with deterministic
+evidence checks and full-source human review. Product/Business Lead decides scope
+after reviewing TASK04. **Do not start TASK05; do not merge this delivery PR.**
+Google API logging remains pending in local durable state; no schema acquisition
+or Drive upload and no measured token-savings claim.
+
+---
+
+# Historical TASK 03 report (status at its delivery; PR #2 is now MERGED)
 Date: 2026-09-03 (Asia/Seoul). Base: main e1fab59c83185ad1ddf438046a5ae9f12cf17789.
 Branch: codex/task-03-generic-requirement-profile.
 

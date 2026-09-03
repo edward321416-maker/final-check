@@ -1,0 +1,92 @@
+Verified frozen inputs and saved actual outputs; baseline not re-executed.
+{
+  "gold_total": 173,
+  "extracted_total": 211,
+  "semantic_supported": 51,
+  "atomicity_violations": 18,
+  "hallucinated_rules": 0,
+  "exact_quotes": 211,
+  "blockers": 0,
+  "unsupported_blockers": 0,
+  "matched": 32,
+  "modality_correct": 8,
+  "recall": 0.18497109826589594,
+  "precision": 0.15165876777251186,
+  "modality_accuracy": 0.25,
+  "evidence_exactness": 1.0,
+  "evidence_semantic_support": 0.24170616113744076,
+  "atomicity_rate": 0.08530805687203792,
+  "candidate_failure_counts": {
+    "FALSE_POSITIVE": 58,
+    "WRONG_MODALITY": 37,
+    "EVIDENCE_NOT_SUPPORTING": 35,
+    "TABLE_FAILURE": 23,
+    "MISS_CONDITION": 21,
+    "PDF_READING_ORDER": 19,
+    "ATOMICITY": 18,
+    "DUPLICATE": 7,
+    "OTHER": 3,
+    "MISS_IMPLICIT_RULE": 1,
+    "WRONG_VERIFIER": 1
+  },
+  "uncovered_gold_failure_counts": {
+    "MISS_KEYWORD": 43,
+    "MISS_CONDITION": 12,
+    "TABLE_FAILURE": 11,
+    "MISS_IMPLICIT_RULE": 9,
+    "PDF_READING_ORDER": 1
+  },
+  "fully_uncovered_gold": 76,
+  "partial_only_gold": 65,
+  "per_case": [
+    {
+      "case_id": "C01",
+      "gold": 49,
+      "extracted": 89,
+      "matched": 8
+    },
+    {
+      "case_id": "C02",
+      "gold": 14,
+      "extracted": 14,
+      "matched": 4
+    },
+    {
+      "case_id": "C03",
+      "gold": 6,
+      "extracted": 5,
+      "matched": 2
+    },
+    {
+      "case_id": "C04",
+      "gold": 44,
+      "extracted": 26,
+      "matched": 10
+    },
+    {
+      "case_id": "C05",
+      "gold": 2,
+      "extracted": 3,
+      "matched": 0
+    },
+    {
+      "case_id": "C06",
+      "gold": 7,
+      "extracted": 10,
+      "matched": 1
+    },
+    {
+      "case_id": "C07",
+      "gold": 19,
+      "extracted": 20,
+      "matched": 3
+    },
+    {
+      "case_id": "C08",
+      "gold": 32,
+      "extracted": 44,
+      "matched": 4
+    }
+  ]
+}
+Audit: Git freeze bytes verified; 35 repeated quotes anchored to a different source occurrence.

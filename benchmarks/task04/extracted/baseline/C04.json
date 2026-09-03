@@ -1,0 +1,1150 @@
+{
+  "case_id": "C04",
+  "invoked_at": "2026-09-03T11:49:56.137393+00:00",
+  "source_sha256": "d43c91ec0107f5373a3b85044ad608b3eeb0ffa3d543b22650e25dbf521f0844",
+  "input_sha256": "d43c91ec0107f5373a3b85044ad608b3eeb0ffa3d543b22650e25dbf521f0844",
+  "profile": {
+    "profile_type": "generic",
+    "profile_id": "0e89fd76-4360-43d7-9bbe-3510b62acc62",
+    "status": "REVIEW_REQUIRED",
+    "requirements": [
+      {
+        "requirement_id": "G001",
+        "rule": "개인 참가 방법 : 팀 신청 없이, 자유롭게 제출탭에서 제출 가능",
+        "modality": "MAY",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 3",
+          "quote": "개인 참가 방법 : 팀 신청 없이, 자유롭게 제출탭에서 제출 가능"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 31,
+        "evidence_end": 67,
+        "issues": [],
+        "original": {
+          "requirement_id": "G001",
+          "rule": "개인 참가 방법 : 팀 신청 없이, 자유롭게 제출탭에서 제출 가능",
+          "modality": "MAY",
+          "severity": "INFO",
+          "verifier": "SEMANTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 3",
+            "quote": "개인 참가 방법 : 팀 신청 없이, 자유롭게 제출탭에서 제출 가능"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G002",
+        "rule": "팀 참가 방법 : 팀 탭에서 가능, 상세 내용은 팀 탭에서 팀 병합 정책 확인",
+        "modality": "MAY",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 4",
+          "quote": "팀 참가 방법 : 팀 탭에서 가능, 상세 내용은 팀 탭에서 팀 병합 정책 확인"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 68,
+        "evidence_end": 111,
+        "issues": [],
+        "original": {
+          "requirement_id": "G002",
+          "rule": "팀 참가 방법 : 팀 탭에서 가능, 상세 내용은 팀 탭에서 팀 병합 정책 확인",
+          "modality": "MAY",
+          "severity": "INFO",
+          "verifier": "SEMANTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 4",
+            "quote": "팀 참가 방법 : 팀 탭에서 가능, 상세 내용은 팀 탭에서 팀 병합 정책 확인"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G003",
+        "rule": "팀 구성 방법: 팀 페이지에서 팀 구성 안내 확인",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "DETERMINISTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 5",
+          "quote": "팀 구성 방법: 팀 페이지에서 팀 구성 안내 확인"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 112,
+        "evidence_end": 139,
+        "issues": [],
+        "original": {
+          "requirement_id": "G003",
+          "rule": "팀 구성 방법: 팀 페이지에서 팀 구성 안내 확인",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "DETERMINISTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 5",
+            "quote": "팀 구성 방법: 팀 페이지에서 팀 구성 안내 확인"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G004",
+        "rule": "🔹모든 외부 데이터는 출처, 사용 방식, 데이터 파일 등 증빙이 가능해야",
+        "modality": "MAY",
+        "severity": "INFO",
+        "verifier": "DETERMINISTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 21",
+          "quote": "🔹모든 외부 데이터는 출처, 사용 방식, 데이터 파일 등 증빙이 가능해야"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 1188,
+        "evidence_end": 1228,
+        "issues": [],
+        "original": {
+          "requirement_id": "G004",
+          "rule": "🔹모든 외부 데이터는 출처, 사용 방식, 데이터 파일 등 증빙이 가능해야",
+          "modality": "MAY",
+          "severity": "INFO",
+          "verifier": "DETERMINISTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 21",
+            "quote": "🔹모든 외부 데이터는 출처, 사용 방식, 데이터 파일 등 증빙이 가능해야"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G005",
+        "rule": ", 이에 대한 확인이 이루어지지 않거나 라이센스가 저작권 침해 등 법적 문제가 있는 경우 실격 처리됩니다.",
+        "modality": "INFO",
+        "severity": "EXTERNAL",
+        "verifier": "EXTERNAL",
+        "condition": ", 이에 대한 확인이 이루어지지 않거나 라이센스가 저작권 침해 등 법적 문제가 있는 경우 실격 처리됩니다.",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 21",
+          "quote": ", 이에 대한 확인이 이루어지지 않거나 라이센스가 저작권 침해 등 법적 문제가 있는 경우 실격 처리됩니다."
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 1231,
+        "evidence_end": 1290,
+        "issues": [],
+        "original": {
+          "requirement_id": "G005",
+          "rule": ", 이에 대한 확인이 이루어지지 않거나 라이센스가 저작권 침해 등 법적 문제가 있는 경우 실격 처리됩니다.",
+          "modality": "INFO",
+          "severity": "EXTERNAL",
+          "verifier": "EXTERNAL",
+          "condition": ", 이에 대한 확인이 이루어지지 않거나 라이센스가 저작권 침해 등 법적 문제가 있는 경우 실격 처리됩니다.",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 21",
+            "quote": ", 이에 대한 확인이 이루어지지 않거나 라이센스가 저작권 침해 등 법적 문제가 있는 경우 실격 처리됩니다."
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G006",
+        "rule": "🔹모든 데이터 증강 과정은 관련 코드와 함께 제출되어야합니다.",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 22",
+          "quote": "🔹모든 데이터 증강 과정은 관련 코드와 함께 제출되어야합니다."
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 1291,
+        "evidence_end": 1325,
+        "issues": [],
+        "original": {
+          "requirement_id": "G006",
+          "rule": "🔹모든 데이터 증강 과정은 관련 코드와 함께 제출되어야합니다.",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "SEMANTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 22",
+            "quote": "🔹모든 데이터 증강 과정은 관련 코드와 함께 제출되어야합니다."
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G007",
+        "rule": "🔹추론 환경(리소스) [Runpod 링크]",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "URL_CHECK",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 27",
+          "quote": "🔹추론 환경(리소스) [Runpod 링크]"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 1546,
+        "evidence_end": 1569,
+        "issues": [],
+        "original": {
+          "requirement_id": "G007",
+          "rule": "🔹추론 환경(리소스) [Runpod 링크]",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "URL_CHECK",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 27",
+            "quote": "🔹추론 환경(리소스) [Runpod 링크]"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G008",
+        "rule": "코드 및 결과 보고서 제출 규칙",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 36",
+          "quote": "코드 및 결과 보고서 제출 규칙"
+        },
+        "confidence": 0.5,
+        "extraction_status": "NEEDS_REVIEW",
+        "evidence_start": 1959,
+        "evidence_end": 1976,
+        "issues": [
+          "ATOMICITY_REVIEW: 독립 조건을 한 항목에 합쳤는지 확인하고 단일 조건으로 수정하세요."
+        ],
+        "original": {
+          "requirement_id": "G008",
+          "rule": "코드 및 결과 보고서 제출 규칙",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "SEMANTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 36",
+            "quote": "코드 및 결과 보고서 제출 규칙"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G009",
+        "rule": "예선 종료 후 본선 평가 대상자는 아래의 양식에 맞추어 코드와 모델 체크포인트, 코드 실행 방법이 담긴 자료를 dacon@dacon.io 메일로 기한 내에 제출",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "예선 종료 후 본선 평가 대상자는 아래의 양식에 맞추어 코드와 모델 체크포인트, 코드 실행 방법이 담긴 자료를 dacon@dacon.io 메일로 기한 내에 제출",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 37",
+          "quote": "예선 종료 후 본선 평가 대상자는 아래의 양식에 맞추어 코드와 모델 체크포인트, 코드 실행 방법이 담긴 자료를 dacon@dacon.io 메일로 기한 내에 제출"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 1977,
+        "evidence_end": 2066,
+        "issues": [],
+        "original": {
+          "requirement_id": "G009",
+          "rule": "예선 종료 후 본선 평가 대상자는 아래의 양식에 맞추어 코드와 모델 체크포인트, 코드 실행 방법이 담긴 자료를 dacon@dacon.io 메일로 기한 내에 제출",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "SEMANTIC",
+          "condition": "예선 종료 후 본선 평가 대상자는 아래의 양식에 맞추어 코드와 모델 체크포인트, 코드 실행 방법이 담긴 자료를 dacon@dacon.io 메일로 기한 내에 제출",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 37",
+            "quote": "예선 종료 후 본선 평가 대상자는 아래의 양식에 맞추어 코드와 모델 체크포인트, 코드 실행 방법이 담긴 자료를 dacon@dacon.io 메일로 기한 내에 제출"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G010",
+        "rule": "제출한 코드는 대회 규칙을 준수하고 Private Score 복원이 가능해야 코드 검증 과정을 통과할 수 있습니다.",
+        "modality": "MAY",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 38",
+          "quote": "제출한 코드는 대회 규칙을 준수하고 Private Score 복원이 가능해야 코드 검증 과정을 통과할 수 있습니다."
+        },
+        "confidence": 0.5,
+        "extraction_status": "NEEDS_REVIEW",
+        "evidence_start": 2067,
+        "evidence_end": 2131,
+        "issues": [
+          "ATOMICITY_REVIEW: 독립 조건을 한 항목에 합쳤는지 확인하고 단일 조건으로 수정하세요."
+        ],
+        "original": {
+          "requirement_id": "G010",
+          "rule": "제출한 코드는 대회 규칙을 준수하고 Private Score 복원이 가능해야 코드 검증 과정을 통과할 수 있습니다.",
+          "modality": "MAY",
+          "severity": "INFO",
+          "verifier": "SEMANTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 38",
+            "quote": "제출한 코드는 대회 규칙을 준수하고 Private Score 복원이 가능해야 코드 검증 과정을 통과할 수 있습니다."
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G011",
+        "rule": "[제출 코드 관련]",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 39",
+          "quote": "[제출 코드 관련]"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 2132,
+        "evidence_end": 2142,
+        "issues": [],
+        "original": {
+          "requirement_id": "G011",
+          "rule": "[제출 코드 관련]",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "SEMANTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 39",
+            "quote": "[제출 코드 관련]"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G012",
+        "rule": "🔹추론(Inference) 코드는 반드시 별도의 코드 파일로 작성(예시: inference.py 혹은 inference.ipynb)해야",
+        "modality": "MUST",
+        "severity": "REVIEW",
+        "verifier": "DETERMINISTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 45",
+          "quote": "🔹추론(Inference) 코드는 반드시 별도의 코드 파일로 작성(예시: inference.py 혹은 inference.ipynb)해야"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 2325,
+        "evidence_end": 2400,
+        "issues": [],
+        "original": {
+          "requirement_id": "G012",
+          "rule": "🔹추론(Inference) 코드는 반드시 별도의 코드 파일로 작성(예시: inference.py 혹은 inference.ipynb)해야",
+          "modality": "MUST",
+          "severity": "REVIEW",
+          "verifier": "DETERMINISTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 45",
+            "quote": "🔹추론(Inference) 코드는 반드시 별도의 코드 파일로 작성(예시: inference.py 혹은 inference.ipynb)해야"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G013",
+        "rule": ", 추론에 활용하는 모델 가중치(Weight) 파일을 필수로 포함",
+        "modality": "MUST",
+        "severity": "REVIEW",
+        "verifier": "DETERMINISTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 45",
+          "quote": ", 추론에 활용하는 모델 가중치(Weight) 파일을 필수로 포함"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 2403,
+        "evidence_end": 2439,
+        "issues": [],
+        "original": {
+          "requirement_id": "G013",
+          "rule": ", 추론에 활용하는 모델 가중치(Weight) 파일을 필수로 포함",
+          "modality": "MUST",
+          "severity": "REVIEW",
+          "verifier": "DETERMINISTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 45",
+            "quote": ", 추론에 활용하는 모델 가중치(Weight) 파일을 필수로 포함"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G014",
+        "rule": "[제출 파일 목록]",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "DETERMINISTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 46",
+          "quote": "[제출 파일 목록]"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 2440,
+        "evidence_end": 2450,
+        "issues": [],
+        "original": {
+          "requirement_id": "G014",
+          "rule": "[제출 파일 목록]",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "DETERMINISTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 46",
+            "quote": "[제출 파일 목록]"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G015",
+        "rule": "🔹Private Score 복원이 가능한 모델 가중치(Weight) 파일",
+        "modality": "MAY",
+        "severity": "INFO",
+        "verifier": "DETERMINISTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 48",
+          "quote": "🔹Private Score 복원이 가능한 모델 가중치(Weight) 파일"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 2497,
+        "evidence_end": 2537,
+        "issues": [],
+        "original": {
+          "requirement_id": "G015",
+          "rule": "🔹Private Score 복원이 가능한 모델 가중치(Weight) 파일",
+          "modality": "MAY",
+          "severity": "INFO",
+          "verifier": "DETERMINISTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 48",
+            "quote": "🔹Private Score 복원이 가능한 모델 가중치(Weight) 파일"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G016",
+        "rule": "1일 최대 제출 횟수: 3회",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 52",
+          "quote": "1일 최대 제출 횟수: 3회"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 2576,
+        "evidence_end": 2591,
+        "issues": [],
+        "original": {
+          "requirement_id": "G016",
+          "rule": "1일 최대 제출 횟수: 3회",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "SEMANTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 52",
+            "quote": "1일 최대 제출 횟수: 3회"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G017",
+        "rule": "모든 csv 형식의 데이터와 제출 파일은 UTF-8 인코딩을 적용합니다.",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "DETERMINISTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 54",
+          "quote": "모든 csv 형식의 데이터와 제출 파일은 UTF-8 인코딩을 적용합니다."
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 2609,
+        "evidence_end": 2649,
+        "issues": [],
+        "original": {
+          "requirement_id": "G017",
+          "rule": "모든 csv 형식의 데이터와 제출 파일은 UTF-8 인코딩을 적용합니다.",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "DETERMINISTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 54",
+            "quote": "모든 csv 형식의 데이터와 제출 파일은 UTF-8 인코딩을 적용합니다."
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G018",
+        "rule": ", 비정상적인 방법으로 얻은 제출물들은 적발 시 규칙 위반에 해당됩니다.",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 57",
+          "quote": ", 비정상적인 방법으로 얻은 제출물들은 적발 시 규칙 위반에 해당됩니다."
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 2849,
+        "evidence_end": 2889,
+        "issues": [],
+        "original": {
+          "requirement_id": "G018",
+          "rule": ", 비정상적인 방법으로 얻은 제출물들은 적발 시 규칙 위반에 해당됩니다.",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "SEMANTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 57",
+            "quote": ", 비정상적인 방법으로 얻은 제출물들은 적발 시 규칙 위반에 해당됩니다."
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G019",
+        "rule": "최종 순위는 선택된 파일 중에서 채점되므로 참가자는 제출 창에서 자신이 최종적으로 채점 받고 싶은 파일 1개를 선택해야 함",
+        "modality": "MAY",
+        "severity": "INFO",
+        "verifier": "DETERMINISTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 58",
+          "quote": "최종 순위는 선택된 파일 중에서 채점되므로 참가자는 제출 창에서 자신이 최종적으로 채점 받고 싶은 파일 1개를 선택해야 함"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 2890,
+        "evidence_end": 2958,
+        "issues": [],
+        "original": {
+          "requirement_id": "G019",
+          "rule": "최종 순위는 선택된 파일 중에서 채점되므로 참가자는 제출 창에서 자신이 최종적으로 채점 받고 싶은 파일 1개를 선택해야 함",
+          "modality": "MAY",
+          "severity": "INFO",
+          "verifier": "DETERMINISTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 58",
+            "quote": "최종 순위는 선택된 파일 중에서 채점되므로 참가자는 제출 창에서 자신이 최종적으로 채점 받고 싶은 파일 1개를 선택해야 함"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G020",
+        "rule": "데이콘은 부정 제출 행위를 엄격히 금지하고 있으며, 데이콘 대회 부정 제출 이력이 있는 경우 평가가 제한됩니다.",
+        "modality": "MUST_NOT",
+        "severity": "REVIEW",
+        "verifier": "SEMANTIC",
+        "condition": "데이콘은 부정 제출 행위를 엄격히 금지하고 있으며, 데이콘 대회 부정 제출 이력이 있는 경우 평가가 제한됩니다.",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 60",
+          "quote": "데이콘은 부정 제출 행위를 엄격히 금지하고 있으며, 데이콘 대회 부정 제출 이력이 있는 경우 평가가 제한됩니다."
+        },
+        "confidence": 0.5,
+        "extraction_status": "NEEDS_REVIEW",
+        "evidence_start": 3010,
+        "evidence_end": 3072,
+        "issues": [
+          "ATOMICITY_REVIEW: 독립 조건을 한 항목에 합쳤는지 확인하고 단일 조건으로 수정하세요."
+        ],
+        "original": {
+          "requirement_id": "G020",
+          "rule": "데이콘은 부정 제출 행위를 엄격히 금지하고 있으며, 데이콘 대회 부정 제출 이력이 있는 경우 평가가 제한됩니다.",
+          "modality": "MUST_NOT",
+          "severity": "REVIEW",
+          "verifier": "SEMANTIC",
+          "condition": "데이콘은 부정 제출 행위를 엄격히 금지하고 있으며, 데이콘 대회 부정 제출 이력이 있는 경우 평가가 제한됩니다.",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 60",
+            "quote": "데이콘은 부정 제출 행위를 엄격히 금지하고 있으며, 데이콘 대회 부정 제출 이력이 있는 경우 평가가 제한됩니다."
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G021",
+        "rule": "자세한 사항은 링크를 참고해 주시기 바랍니다.",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "URL_CHECK",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 61",
+          "quote": "자세한 사항은 링크를 참고해 주시기 바랍니다."
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 3073,
+        "evidence_end": 3098,
+        "issues": [],
+        "original": {
+          "requirement_id": "G021",
+          "rule": "자세한 사항은 링크를 참고해 주시기 바랍니다.",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "URL_CHECK",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 61",
+            "quote": "자세한 사항은 링크를 참고해 주시기 바랍니다."
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G022",
+        "rule": "기타 질문은 토론 페이지를 통해 자유롭게 토론해 주시기 바랍니다.",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "DETERMINISTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 63",
+          "quote": "기타 질문은 토론 페이지를 통해 자유롭게 토론해 주시기 바랍니다."
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 3154,
+        "evidence_end": 3190,
+        "issues": [],
+        "original": {
+          "requirement_id": "G022",
+          "rule": "기타 질문은 토론 페이지를 통해 자유롭게 토론해 주시기 바랍니다.",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "DETERMINISTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 63",
+            "quote": "기타 질문은 토론 페이지를 통해 자유롭게 토론해 주시기 바랍니다."
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G023",
+        "rule": "데이콘 답변을 희망하는 경우 [토크] 페이지 대회 문의 게시글에 댓글을 올려 주시기 바랍니다.",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "DETERMINISTIC",
+        "condition": "데이콘 답변을 희망하는 경우 [토크] 페이지 대회 문의 게시글에 댓글을 올려 주시기 바랍니다.",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 64",
+          "quote": "데이콘 답변을 희망하는 경우 [토크] 페이지 대회 문의 게시글에 댓글을 올려 주시기 바랍니다."
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 3191,
+        "evidence_end": 3243,
+        "issues": [],
+        "original": {
+          "requirement_id": "G023",
+          "rule": "데이콘 답변을 희망하는 경우 [토크] 페이지 대회 문의 게시글에 댓글을 올려 주시기 바랍니다.",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "DETERMINISTIC",
+          "condition": "데이콘 답변을 희망하는 경우 [토크] 페이지 대회 문의 게시글에 댓글을 올려 주시기 바랍니다.",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 64",
+            "quote": "데이콘 답변을 희망하는 경우 [토크] 페이지 대회 문의 게시글에 댓글을 올려 주시기 바랍니다."
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G024",
+        "rule": "참가 신청 시작",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 67",
+          "quote": "참가 신청 시작"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 3259,
+        "evidence_end": 3267,
+        "issues": [],
+        "original": {
+          "requirement_id": "G024",
+          "rule": "참가 신청 시작",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "SEMANTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 67",
+            "quote": "참가 신청 시작"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G025",
+        "rule": "팀 병합 마감",
+        "modality": "INFO",
+        "severity": "EXTERNAL",
+        "verifier": "EXTERNAL",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 71",
+          "quote": "팀 병합 마감"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 3286,
+        "evidence_end": 3293,
+        "issues": [],
+        "original": {
+          "requirement_id": "G025",
+          "rule": "팀 병합 마감",
+          "modality": "INFO",
+          "severity": "EXTERNAL",
+          "verifier": "EXTERNAL",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 71",
+            "quote": "팀 병합 마감"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G026",
+        "rule": "코드 및 결과보고서 제출 마감",
+        "modality": "INFO",
+        "severity": "EXTERNAL",
+        "verifier": "EXTERNAL",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 75",
+          "quote": "코드 및 결과보고서 제출 마감"
+        },
+        "confidence": 0.5,
+        "extraction_status": "NEEDS_REVIEW",
+        "evidence_start": 3312,
+        "evidence_end": 3328,
+        "issues": [
+          "ATOMICITY_REVIEW: 독립 조건을 한 항목에 합쳤는지 확인하고 단일 조건으로 수정하세요."
+        ],
+        "original": {
+          "requirement_id": "G026",
+          "rule": "코드 및 결과보고서 제출 마감",
+          "modality": "INFO",
+          "severity": "EXTERNAL",
+          "verifier": "EXTERNAL",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 75",
+            "quote": "코드 및 결과보고서 제출 마감"
+          },
+          "confidence": 0.5
+        }
+      }
+    ],
+    "provider": "local-rules-v1 (no AI model)",
+    "execution_kind": "ACTUAL",
+    "extraction_complete": true,
+    "notices": [
+      "로컬 규칙 후보입니다. confidence=0.5는 미보정 값이며 정확도가 아닙니다. 원문 전체를 검토하세요."
+    ],
+    "version": 2,
+    "created_at": "2026-09-03T11:49:56.137445Z",
+    "updated_at": "2026-09-03T11:49:56.138904Z"
+  },
+  "raw": [
+    {
+      "requirement_id": "G001",
+      "rule": "개인 참가 방법 : 팀 신청 없이, 자유롭게 제출탭에서 제출 가능",
+      "modality": "MAY",
+      "severity": "INFO",
+      "verifier": "SEMANTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 3",
+        "quote": "개인 참가 방법 : 팀 신청 없이, 자유롭게 제출탭에서 제출 가능"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G002",
+      "rule": "팀 참가 방법 : 팀 탭에서 가능, 상세 내용은 팀 탭에서 팀 병합 정책 확인",
+      "modality": "MAY",
+      "severity": "INFO",
+      "verifier": "SEMANTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 4",
+        "quote": "팀 참가 방법 : 팀 탭에서 가능, 상세 내용은 팀 탭에서 팀 병합 정책 확인"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G003",
+      "rule": "팀 구성 방법: 팀 페이지에서 팀 구성 안내 확인",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "DETERMINISTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 5",
+        "quote": "팀 구성 방법: 팀 페이지에서 팀 구성 안내 확인"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G004",
+      "rule": "🔹모든 외부 데이터는 출처, 사용 방식, 데이터 파일 등 증빙이 가능해야",
+      "modality": "MAY",
+      "severity": "INFO",
+      "verifier": "DETERMINISTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 21",
+        "quote": "🔹모든 외부 데이터는 출처, 사용 방식, 데이터 파일 등 증빙이 가능해야"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G005",
+      "rule": ", 이에 대한 확인이 이루어지지 않거나 라이센스가 저작권 침해 등 법적 문제가 있는 경우 실격 처리됩니다.",
+      "modality": "INFO",
+      "severity": "EXTERNAL",
+      "verifier": "EXTERNAL",
+      "condition": ", 이에 대한 확인이 이루어지지 않거나 라이센스가 저작권 침해 등 법적 문제가 있는 경우 실격 처리됩니다.",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 21",
+        "quote": ", 이에 대한 확인이 이루어지지 않거나 라이센스가 저작권 침해 등 법적 문제가 있는 경우 실격 처리됩니다."
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G006",
+      "rule": "🔹모든 데이터 증강 과정은 관련 코드와 함께 제출되어야합니다.",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "SEMANTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 22",
+        "quote": "🔹모든 데이터 증강 과정은 관련 코드와 함께 제출되어야합니다."
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G007",
+      "rule": "🔹추론 환경(리소스) [Runpod 링크]",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "URL_CHECK",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 27",
+        "quote": "🔹추론 환경(리소스) [Runpod 링크]"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G008",
+      "rule": "코드 및 결과 보고서 제출 규칙",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "SEMANTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 36",
+        "quote": "코드 및 결과 보고서 제출 규칙"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G009",
+      "rule": "예선 종료 후 본선 평가 대상자는 아래의 양식에 맞추어 코드와 모델 체크포인트, 코드 실행 방법이 담긴 자료를 dacon@dacon.io 메일로 기한 내에 제출",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "SEMANTIC",
+      "condition": "예선 종료 후 본선 평가 대상자는 아래의 양식에 맞추어 코드와 모델 체크포인트, 코드 실행 방법이 담긴 자료를 dacon@dacon.io 메일로 기한 내에 제출",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 37",
+        "quote": "예선 종료 후 본선 평가 대상자는 아래의 양식에 맞추어 코드와 모델 체크포인트, 코드 실행 방법이 담긴 자료를 dacon@dacon.io 메일로 기한 내에 제출"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G010",
+      "rule": "제출한 코드는 대회 규칙을 준수하고 Private Score 복원이 가능해야 코드 검증 과정을 통과할 수 있습니다.",
+      "modality": "MAY",
+      "severity": "INFO",
+      "verifier": "SEMANTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 38",
+        "quote": "제출한 코드는 대회 규칙을 준수하고 Private Score 복원이 가능해야 코드 검증 과정을 통과할 수 있습니다."
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G011",
+      "rule": "[제출 코드 관련]",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "SEMANTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 39",
+        "quote": "[제출 코드 관련]"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G012",
+      "rule": "🔹추론(Inference) 코드는 반드시 별도의 코드 파일로 작성(예시: inference.py 혹은 inference.ipynb)해야",
+      "modality": "MUST",
+      "severity": "REVIEW",
+      "verifier": "DETERMINISTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 45",
+        "quote": "🔹추론(Inference) 코드는 반드시 별도의 코드 파일로 작성(예시: inference.py 혹은 inference.ipynb)해야"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G013",
+      "rule": ", 추론에 활용하는 모델 가중치(Weight) 파일을 필수로 포함",
+      "modality": "MUST",
+      "severity": "REVIEW",
+      "verifier": "DETERMINISTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 45",
+        "quote": ", 추론에 활용하는 모델 가중치(Weight) 파일을 필수로 포함"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G014",
+      "rule": "[제출 파일 목록]",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "DETERMINISTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 46",
+        "quote": "[제출 파일 목록]"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G015",
+      "rule": "🔹Private Score 복원이 가능한 모델 가중치(Weight) 파일",
+      "modality": "MAY",
+      "severity": "INFO",
+      "verifier": "DETERMINISTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 48",
+        "quote": "🔹Private Score 복원이 가능한 모델 가중치(Weight) 파일"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G016",
+      "rule": "1일 최대 제출 횟수: 3회",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "SEMANTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 52",
+        "quote": "1일 최대 제출 횟수: 3회"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G017",
+      "rule": "모든 csv 형식의 데이터와 제출 파일은 UTF-8 인코딩을 적용합니다.",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "DETERMINISTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 54",
+        "quote": "모든 csv 형식의 데이터와 제출 파일은 UTF-8 인코딩을 적용합니다."
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G018",
+      "rule": ", 비정상적인 방법으로 얻은 제출물들은 적발 시 규칙 위반에 해당됩니다.",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "SEMANTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 57",
+        "quote": ", 비정상적인 방법으로 얻은 제출물들은 적발 시 규칙 위반에 해당됩니다."
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G019",
+      "rule": "최종 순위는 선택된 파일 중에서 채점되므로 참가자는 제출 창에서 자신이 최종적으로 채점 받고 싶은 파일 1개를 선택해야 함",
+      "modality": "MAY",
+      "severity": "INFO",
+      "verifier": "DETERMINISTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 58",
+        "quote": "최종 순위는 선택된 파일 중에서 채점되므로 참가자는 제출 창에서 자신이 최종적으로 채점 받고 싶은 파일 1개를 선택해야 함"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G020",
+      "rule": "데이콘은 부정 제출 행위를 엄격히 금지하고 있으며, 데이콘 대회 부정 제출 이력이 있는 경우 평가가 제한됩니다.",
+      "modality": "MUST_NOT",
+      "severity": "REVIEW",
+      "verifier": "SEMANTIC",
+      "condition": "데이콘은 부정 제출 행위를 엄격히 금지하고 있으며, 데이콘 대회 부정 제출 이력이 있는 경우 평가가 제한됩니다.",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 60",
+        "quote": "데이콘은 부정 제출 행위를 엄격히 금지하고 있으며, 데이콘 대회 부정 제출 이력이 있는 경우 평가가 제한됩니다."
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G021",
+      "rule": "자세한 사항은 링크를 참고해 주시기 바랍니다.",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "URL_CHECK",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 61",
+        "quote": "자세한 사항은 링크를 참고해 주시기 바랍니다."
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G022",
+      "rule": "기타 질문은 토론 페이지를 통해 자유롭게 토론해 주시기 바랍니다.",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "DETERMINISTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 63",
+        "quote": "기타 질문은 토론 페이지를 통해 자유롭게 토론해 주시기 바랍니다."
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G023",
+      "rule": "데이콘 답변을 희망하는 경우 [토크] 페이지 대회 문의 게시글에 댓글을 올려 주시기 바랍니다.",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "DETERMINISTIC",
+      "condition": "데이콘 답변을 희망하는 경우 [토크] 페이지 대회 문의 게시글에 댓글을 올려 주시기 바랍니다.",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 64",
+        "quote": "데이콘 답변을 희망하는 경우 [토크] 페이지 대회 문의 게시글에 댓글을 올려 주시기 바랍니다."
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G024",
+      "rule": "참가 신청 시작",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "SEMANTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 67",
+        "quote": "참가 신청 시작"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G025",
+      "rule": "팀 병합 마감",
+      "modality": "INFO",
+      "severity": "EXTERNAL",
+      "verifier": "EXTERNAL",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 71",
+        "quote": "팀 병합 마감"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G026",
+      "rule": "코드 및 결과보고서 제출 마감",
+      "modality": "INFO",
+      "severity": "EXTERNAL",
+      "verifier": "EXTERNAL",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 75",
+        "quote": "코드 및 결과보고서 제출 마감"
+      },
+      "confidence": 0.5
+    }
+  ]
+}

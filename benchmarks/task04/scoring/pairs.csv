@@ -1,0 +1,316 @@
+﻿case_id,gold_id,extracted_id,match_type,reason,failure_category
+C01,,G001,NO_MATCH,"Announcement title, not an applicant rule.",FALSE_POSITIVE
+C01,,G002,NO_MATCH,Promotional invitation.,FALSE_POSITIVE
+C01,C01-R007,G003,MATCH,Complete 60-second video limit; INFO instead of MUST.,WRONG_MODALITY
+C01,C01-R001,G004,PARTIAL,Eligibility heading contains no eligible population.,EVIDENCE_NOT_SUPPORTING
+C01,C01-R020,G005,MATCH,Complete email submission route; implicit duty labelled INFO.,WRONG_MODALITY
+C01,C01-R021,G006,PARTIAL,Date split after 2025.; remaining dates discarded.,EVIDENCE_NOT_SUPPORTING
+C01,C01-R021,G007,PARTIAL,Midnight fragment lacks dates from preceding PDF line.,PDF_READING_ORDER
+C01,C01-R022,G008,PARTIAL,Filename column heading without required value.,TABLE_FAILURE
+C01,C01-R007,G009,NO_MATCH,Restates already matched duration limit.,"DUPLICATE,WRONG_MODALITY"
+C01,C01-R013,G010,PARTIAL,"Originality, copyright and portrait rights combined.","ATOMICITY,WRONG_MODALITY"
+C01,C01-R014,G010,PARTIAL,"Originality, copyright and portrait rights combined.","ATOMICITY,WRONG_MODALITY"
+C01,C01-R015,G010,PARTIAL,"Originality, copyright and portrait rights combined.","ATOMICITY,WRONG_MODALITY"
+C01,C01-R011,G011,PARTIAL,Bare MP4 cell lacks recommendation and alternative formats.,TABLE_FAILURE
+C01,C01-R024,G012,PARTIAL,Second filename heading lacks form-to-value associations.,TABLE_FAILURE
+C01,C01-R026,G012,PARTIAL,Second filename heading lacks form-to-value associations.,TABLE_FAILURE
+C01,C01-R028,G012,PARTIAL,Second filename heading lacks form-to-value associations.,TABLE_FAILURE
+C01,C01-R023,G013,MATCH,Application form required per work; INFO instead of MUST.,WRONG_MODALITY
+C01,C01-R024,G014,PARTIAL,Filename value lacks its column relationship.,TABLE_FAILURE
+C01,C01-R029,G015,PARTIAL,PDF cell loses the recommended-format heading.,TABLE_FAILURE
+C01,C01-R025,G016,PARTIAL,Consent name loses per-person submission qualifier.,TABLE_FAILURE
+C01,C01-R025,G017,PARTIAL,Per-person fragment loses document name.,TABLE_FAILURE
+C01,C01-R026,G018,PARTIAL,Consent filename loses column relationship.,TABLE_FAILURE
+C01,C01-R027,G019,PARTIAL,Portrait consent label loses actor scope and submission duty.,TABLE_FAILURE
+C01,C01-R027,G020,PARTIAL,All-actors fragment loses the document identity.,TABLE_FAILURE
+C01,C01-R028,G021,PARTIAL,Portrait filename loses column relationship.,TABLE_FAILURE
+C01,C01-R001,G022,PARTIAL,Section heading without actual eligibility.,EVIDENCE_NOT_SUPPORTING
+C01,C01-R001,G023,PARTIAL,Repeated heading without eligible population.,EVIDENCE_NOT_SUPPORTING
+C01,C01-R001,G024,PARTIAL,Table heading without eligible population.,TABLE_FAILURE
+C01,C01-R004,G025,MATCH,Explicit individual-or-team permission retained.,-
+C01,C01-R002,G026,MATCH,All team members must qualify is complete despite sentence split; INFO wrong.,WRONG_MODALITY
+C01,C01-R003,G027,MATCH,Same-category-only team restriction retained but weakened to MAY.,WRONG_MODALITY
+C01,C01-R003,G028,PARTIAL,Narrow examples do not express the full grouping restriction; mixed permission and prohibition.,"MISS_CONDITION,WRONG_MODALITY"
+C01,C01-R007,G029,PARTIAL,Video field label lacks the duration limit.,EVIDENCE_NOT_SUPPORTING
+C01,C01-R011,G030,PARTIAL,Format recommendation and file-versus-link recommendation combined.,ATOMICITY
+C01,C01-R012,G030,PARTIAL,Format recommendation and file-versus-link recommendation combined.,ATOMICITY
+C01,C01-R013,G031,PARTIAL,Repeated compound originality and rights statement.,"ATOMICITY,DUPLICATE,WRONG_MODALITY"
+C01,C01-R014,G031,PARTIAL,Repeated compound originality and rights statement.,"ATOMICITY,DUPLICATE,WRONG_MODALITY"
+C01,C01-R015,G031,PARTIAL,Repeated compound originality and rights statement.,"ATOMICITY,DUPLICATE,WRONG_MODALITY"
+C01,C01-R016,G032,PARTIAL,AI-type footnote has no prohibition.,EVIDENCE_NOT_SUPPORTING
+C01,C01-R014,G033,PARTIAL,Multiple rights/AI clauses cut before disqualification predicate.,"PDF_READING_ORDER,ATOMICITY"
+C01,C01-R015,G033,PARTIAL,Multiple rights/AI clauses cut before disqualification predicate.,"PDF_READING_ORDER,ATOMICITY"
+C01,C01-R016,G033,PARTIAL,Multiple rights/AI clauses cut before disqualification predicate.,"PDF_READING_ORDER,ATOMICITY"
+C01,C01-R019,G034,MATCH,Explicit BI permission retained.,-
+C01,C01-R030,G035,PARTIAL,Multiple noncompliance conditions cut before consequence.,"PDF_READING_ORDER,ATOMICITY"
+C01,C01-R023,G036,PARTIAL,Two form names combined and second form truncated.,"PDF_READING_ORDER,ATOMICITY"
+C01,C01-R025,G036,PARTIAL,Two form names combined and second form truncated.,"PDF_READING_ORDER,ATOMICITY"
+C01,C01-R025,G037,PARTIAL,Consent duty loses full name and per-person scope.,MISS_CONDITION
+C01,C01-R027,G038,PARTIAL,Actor condition retained but form name and duty cut across lines.,PDF_READING_ORDER
+C01,C01-R027,G039,PARTIAL,Submission fragment omits the all-actors condition.,MISS_CONDITION
+C01,C01-R012,G040,MATCH,Complete recommendation to submit video files rather than links.,-
+C01,C01-R014,G041,PARTIAL,Copyright dispute condition cut before consequence.,PDF_READING_ORDER
+C01,C01-R014,G042,PARTIAL,Two rights constraints cut before duty predicate.,"PDF_READING_ORDER,ATOMICITY"
+C01,C01-R015,G042,PARTIAL,Two rights constraints cut before duty predicate.,"PDF_READING_ORDER,ATOMICITY"
+C01,C01-R033,G043,PARTIAL,Legal-liability condition cut before responsible party.,PDF_READING_ORDER
+C01,,G044,NO_MATCH,Ownership statement imposes no submission requirement.,FALSE_POSITIVE
+C01,,G045,NO_MATCH,Incomplete dispute-resolution lead-in outside scoped duties.,EVIDENCE_NOT_SUPPORTING
+C01,,G046,NO_MATCH,Optional dispute remedy loses dispute condition and parties; not a submission duty.,MISS_CONDITION
+C01,C01-R023,G047,PARTIAL,Form title does not add a per-work submission obligation.,DUPLICATE
+C01,,G048,NO_MATCH,Empty receipt-number label is not a requirement to fill it.,FALSE_POSITIVE
+C01,,G049,NO_MATCH,"Form declaration fragment, not an independent obligation.",FALSE_POSITIVE
+C01,C01-R039,G050,PARTIAL,Signature label not bound to application form in candidate.,EVIDENCE_NOT_SUPPORTING
+C01,,G051,NO_MATCH,Repeated contest title.,FALSE_POSITIVE
+C01,C01-R025,G052,PARTIAL,Document title lacks per-person submission scope.,EVIDENCE_NOT_SUPPORTING
+C01,,G053,NO_MATCH,Empty receipt-number label.,FALSE_POSITIVE
+C01,C01-R025,G054,PARTIAL,Team-member consent fragment omits individual applicants and form identity.,MISS_CONDITION
+C01,,G055,NO_MATCH,Bare consent label has no rule.,EVIDENCE_NOT_SUPPORTING
+C01,,G056,NO_MATCH,Organizer data-processing purpose.,FALSE_POSITIVE
+C01,C01-R043,G057,PARTIAL,Bare signature lacks form and signer identity.,EVIDENCE_NOT_SUPPORTING
+C01,C01-R044,G058,PARTIAL,Guardian signature loses under-14 condition and signer identity.,MISS_CONDITION
+C01,,G059,NO_MATCH,Bare consent label.,EVIDENCE_NOT_SUPPORTING
+C01,,G060,NO_MATCH,Organizer publicity purpose.,FALSE_POSITIVE
+C01,C01-R043,G061,PARTIAL,Bare signature lacks form and signer identity.,EVIDENCE_NOT_SUPPORTING
+C01,C01-R044,G062,PARTIAL,Guardian signature loses under-14 condition.,MISS_CONDITION
+C01,,G063,NO_MATCH,Bare consent label.,EVIDENCE_NOT_SUPPORTING
+C01,C01-R042,G064,PARTIAL,Work-use license cut before permitted uses and consent requirement.,PDF_READING_ORDER
+C01,C01-R043,G065,PARTIAL,Bare signature lacks consent identity.,EVIDENCE_NOT_SUPPORTING
+C01,C01-R044,G066,PARTIAL,Guardian signature loses under-14 condition.,MISS_CONDITION
+C01,,G067,NO_MATCH,Generic form declaration.,FALSE_POSITIVE
+C01,C01-R043,G068,PARTIAL,Bare confirmation signature lacks document identity.,EVIDENCE_NOT_SUPPORTING
+C01,C01-R044,G069,PARTIAL,Guardian confirmation loses under-14 condition.,MISS_CONDITION
+C01,C01-R027,G070,PARTIAL,Form3 all-actors completion instruction is supported but omits submission step.,MISS_IMPLICIT_RULE
+C01,,G071,NO_MATCH,Repeated contest title.,FALSE_POSITIVE
+C01,C01-R027,G072,PARTIAL,Portrait consent title lacks actor scope and submission duty.,EVIDENCE_NOT_SUPPORTING
+C01,,G073,NO_MATCH,Empty receipt-number label.,FALSE_POSITIVE
+C01,,G074,NO_MATCH,Portrait-rights-holder label alone.,EVIDENCE_NOT_SUPPORTING
+C01,,G075,NO_MATCH,Bare consent label.,EVIDENCE_NOT_SUPPORTING
+C01,,G076,NO_MATCH,Organizer processing purpose.,FALSE_POSITIVE
+C01,,G077,NO_MATCH,"Data-item label, not an applicant action.",FALSE_POSITIVE
+C01,,G078,NO_MATCH,"Organizer retention period, not an applicant obligation.",FALSE_POSITIVE
+C01,,G079,NO_MATCH,Organizer retention period for non-winners.,FALSE_POSITIVE
+C01,C01-R048,G080,PARTIAL,Bare signature loses portrait-consent document binding.,EVIDENCE_NOT_SUPPORTING
+C01,C01-R049,G081,PARTIAL,Guardian signature loses under-14 actor condition.,MISS_CONDITION
+C01,,G082,NO_MATCH,Bare consent label.,EVIDENCE_NOT_SUPPORTING
+C01,,G083,NO_MATCH,Organizer publicity purpose.,FALSE_POSITIVE
+C01,,G084,NO_MATCH,Data-item label.,FALSE_POSITIVE
+C01,C01-R048,G085,PARTIAL,Bare signature lacks document binding.,EVIDENCE_NOT_SUPPORTING
+C01,C01-R049,G086,PARTIAL,Guardian signature loses under-14 actor condition.,MISS_CONDITION
+C01,,G087,NO_MATCH,Generic participation consent declaration lacks an actionable document constraint.,FALSE_POSITIVE
+C01,C01-R048,G088,PARTIAL,Bare signature lacks portrait form binding.,EVIDENCE_NOT_SUPPORTING
+C01,C01-R049,G089,PARTIAL,Guardian signature lacks age and actor scope.,MISS_CONDITION
+C02,,G001,NO_MATCH,Announcement title.,FALSE_POSITIVE
+C02,,G002,NO_MATCH,Announcement introduction.,FALSE_POSITIVE
+C02,C02-R001,G003,PARTIAL,Slogan title is not the full climate-action subject constraint.,EVIDENCE_NOT_SUPPORTING
+C02,C02-R001,G004,PARTIAL,Theme and duration combined in an INFO item.,"ATOMICITY,WRONG_MODALITY"
+C02,C02-R002,G004,PARTIAL,Theme and duration combined in an INFO item.,"ATOMICITY,WRONG_MODALITY"
+C02,C02-R002,G005,PARTIAL,Duration limit and orientation permission combined.,"ATOMICITY,WRONG_MODALITY"
+C02,C02-R003,G005,PARTIAL,Duration limit and orientation permission combined.,"ATOMICITY,WRONG_MODALITY"
+C02,C02-R003,G006,PARTIAL,Orientation permission and two recommendations combined.,ATOMICITY
+C02,C02-R004,G006,PARTIAL,Orientation permission and two recommendations combined.,ATOMICITY
+C02,C02-R005,G006,PARTIAL,Orientation permission and two recommendations combined.,ATOMICITY
+C02,C02-R006,G007,MATCH,Complete eligibility condition but INFO.,WRONG_MODALITY
+C02,C02-R007,G008,MATCH,General division birth-year condition retained; INFO instead of MUST.,WRONG_MODALITY
+C02,C02-R008,G009,MATCH,Youth division birth-year condition retained; INFO instead of MUST.,WRONG_MODALITY
+C02,C02-R010,G010,PARTIAL,"SNS upload, tags, application and privacy ban combined under one MUST_NOT label.","ATOMICITY,WRONG_MODALITY"
+C02,C02-R011,G010,PARTIAL,"SNS upload, tags, application and privacy ban combined under one MUST_NOT label.","ATOMICITY,WRONG_MODALITY"
+C02,C02-R012,G010,PARTIAL,"SNS upload, tags, application and privacy ban combined under one MUST_NOT label.","ATOMICITY,WRONG_MODALITY"
+C02,C02-R013,G010,PARTIAL,"SNS upload, tags, application and privacy ban combined under one MUST_NOT label.","ATOMICITY,WRONG_MODALITY"
+C02,C02-R013,G011,MATCH,Complete mandatory tag/mention set retained.,-
+C02,C02-R011,G012,PARTIAL,Valid application URL but upload-before-application condition absent.,MISS_CONDITION
+C02,C02-R009,G013,PARTIAL,Captures only 23:50; misses conflicting 23:59 elsewhere in source.,OTHER
+C02,,G014,NO_MATCH,Organizer winner-announcement plan.,FALSE_POSITIVE
+C03,,G001,NO_MATCH,Promotional recruitment sentence.,FALSE_POSITIVE
+C03,,G002,NO_MATCH,Selection criteria are not instructions to submit essay fields.,FALSE_POSITIVE
+C03,C03-R001,G003,MATCH,Eligibility population complete; INFO/SEMANTIC instead of mandatory external eligibility check.,"WRONG_MODALITY,WRONG_VERIFIER"
+C03,C03-R005,G004,MATCH,Complete June27 deadline; INFO instead of MUST.,WRONG_MODALITY
+C03,,G005,NO_MATCH,Organizer workflow does not establish discrete participant duties.,FALSE_POSITIVE
+C04,C04-R002,G001,MATCH,Individual submission without team registration is correctly permitted.,-
+C04,C04-R003,G002,MATCH,Team registration route retained but treated as optional MAY.,WRONG_MODALITY
+C04,C04-R003,G003,PARTIAL,Generic pointer lacks the full team registration route.,DUPLICATE
+C04,C04-R017,G004,MATCH,Proof must be possible is misread as optional permission.,WRONG_MODALITY
+C04,C04-R017,G005,PARTIAL,Disqualification tail refers to absent proof context.,MISS_CONDITION
+C04,C04-R018,G006,MATCH,Complete augmentation-code submission obligation labelled INFO.,WRONG_MODALITY
+C04,C04-R020,G007,PARTIAL,Resource-link heading lacks all resource specifications.,EVIDENCE_NOT_SUPPORTING
+C04,,G008,NO_MATCH,Section heading.,FALSE_POSITIVE
+C04,C04-R024,G009,PARTIAL,Email route and multiple separate submission artifacts combined.,"ATOMICITY,WRONG_MODALITY"
+C04,C04-R025,G009,PARTIAL,Email route and multiple separate submission artifacts combined.,"ATOMICITY,WRONG_MODALITY"
+C04,C04-R026,G009,PARTIAL,Email route and multiple separate submission artifacts combined.,"ATOMICITY,WRONG_MODALITY"
+C04,C04-R027,G009,PARTIAL,Email route and multiple separate submission artifacts combined.,"ATOMICITY,WRONG_MODALITY"
+C04,C04-R025,G010,PARTIAL,Code reproducibility is weakened to MAY and loses finalist condition.,"MISS_CONDITION,WRONG_MODALITY"
+C04,,G011,NO_MATCH,Section heading.,FALSE_POSITIVE
+C04,C04-R033,G012,MATCH,Separate inference-code-file requirement retained with MUST.,-
+C04,C04-R026,G013,PARTIAL,Weight-file requirement loses finalist scope from section lead-in.,MISS_CONDITION
+C04,,G014,NO_MATCH,File-list heading.,FALSE_POSITIVE
+C04,C04-R026,G015,PARTIAL,Required model file becomes MAY because it can reproduce a score; finalist scope absent.,"MISS_CONDITION,WRONG_MODALITY"
+C04,C04-R034,G016,MATCH,Complete three-submissions-per-day cap labelled INFO.,WRONG_MODALITY
+C04,C04-R036,G017,MATCH,Complete UTF-8 data/submission-file requirement labelled INFO.,WRONG_MODALITY
+C04,C04-R039,G018,MATCH,Abnormally obtained submissions violate rules; INFO instead of prohibition.,WRONG_MODALITY
+C04,C04-R040,G019,MATCH,Mandatory final file selection weakened to MAY.,WRONG_MODALITY
+C04,C04-R039,G020,PARTIAL,Unfair-submission ban combined with historical-offence evaluation restriction.,ATOMICITY
+C04,,G021,NO_MATCH,Unresolved generic link reference.,FALSE_POSITIVE
+C04,,G022,NO_MATCH,Supported route for other questions; omitted from frozen Gold (recorded annotation limitation).,OTHER
+C04,C04-R044,G023,MATCH,Conditional official-answer inquiry route retained; INFO instead of MUST.,WRONG_MODALITY
+C04,,G024,NO_MATCH,Application-start label lacks date and is not a closing obligation.,FALSE_POSITIVE
+C04,C04-R041,G025,PARTIAL,Team-merger deadline label loses adjacent date.,TABLE_FAILURE
+C04,C04-R043,G026,PARTIAL,Code/report deadline label loses adjacent date.,TABLE_FAILURE
+C05,C05-R002,G001,PARTIAL,Date heading only; numeric PDF text is separated.,PDF_READING_ORDER
+C05,C05-R002,G002,PARTIAL,Registration-period label lacks dates.,PDF_READING_ORDER
+C05,,G003,NO_MATCH,Organizer may extend dates; not applicant permission to extend them.,FALSE_POSITIVE
+C06,C06-R002,G001,PARTIAL,"Nationality, individual/team permission and five-person limit combined.","ATOMICITY,WRONG_MODALITY"
+C06,C06-R003,G001,PARTIAL,"Nationality, individual/team permission and five-person limit combined.","ATOMICITY,WRONG_MODALITY"
+C06,C06-R004,G001,PARTIAL,"Nationality, individual/team permission and five-person limit combined.","ATOMICITY,WRONG_MODALITY"
+C06,C06-R006,G002,PARTIAL,Receipt heading loses its date cells.,TABLE_FAILURE
+C06,C06-R007,G003,MATCH,Complete portal submission route labelled INFO.,WRONG_MODALITY
+C06,,G004,NO_MATCH,Award-table organization name.,FALSE_POSITIVE
+C06,,G005,NO_MATCH,"Award title, not an applicant constraint.",FALSE_POSITIVE
+C06,,G006,NO_MATCH,Repeated award-table organization.,FALSE_POSITIVE
+C06,,G007,NO_MATCH,Repeated award title.,FALSE_POSITIVE
+C06,,G008,NO_MATCH,Repeated award-table organization.,FALSE_POSITIVE
+C06,,G009,NO_MATCH,Repeated award title.,FALSE_POSITIVE
+C06,,G010,NO_MATCH,Contact information without an obligation.,FALSE_POSITIVE
+C07,C07-R001,G001,MATCH,Complete nationality eligibility condition labelled INFO.,WRONG_MODALITY
+C07,,G002,NO_MATCH,Submission section title.,FALSE_POSITIVE
+C07,C07-R003,G003,PARTIAL,Date broken after year punctuation.,EVIDENCE_NOT_SUPPORTING
+C07,C07-R003,G004,PARTIAL,Closing date broken after year punctuation.,EVIDENCE_NOT_SUPPORTING
+C07,C07-R003,G005,PARTIAL,Day/time tail loses year and month.,EVIDENCE_NOT_SUPPORTING
+C07,C07-R004,G006,PARTIAL,Email alternative valid but postal/visit alternatives on next line omitted.,PDF_READING_ORDER
+C07,C07-R005,G007,PARTIAL,Application and consent combined.,"ATOMICITY,WRONG_MODALITY"
+C07,C07-R006,G007,PARTIAL,Application and consent combined.,"ATOMICITY,WRONG_MODALITY"
+C07,,G008,NO_MATCH,Winner-announcement schedule.,FALSE_POSITIVE
+C07,,G009,NO_MATCH,"Organizer priority policy, no distinct applicant obligation.",FALSE_POSITIVE
+C07,C07-R003,G010,PARTIAL,Must arrive during receipt window but no actual dates.,EVIDENCE_NOT_SUPPORTING
+C07,,G011,NO_MATCH,Truncated non-return statement.,PDF_READING_ORDER
+C07,C07-R005,G012,MATCH,Complete required application artifact and copy count from attachment list; INFO.,WRONG_MODALITY
+C07,C07-R006,G013,MATCH,Complete required consent artifact and copy count from attachment list; INFO.,WRONG_MODALITY
+C07,C07-R005,G014,PARTIAL,Application title adds no new requirement.,DUPLICATE
+C07,C07-R010,G015,PARTIAL,Receipt-number heading loses instruction to leave it blank.,TABLE_FAILURE
+C07,C07-R006,G016,PARTIAL,Consent title adds no new duty.,DUPLICATE
+C07,C07-R006,G017,PARTIAL,Repeated consent title.,DUPLICATE
+C07,C07-R018,G018,PARTIAL,Form declaration fragment lacks consent-refusal permission.,PDF_READING_ORDER
+C07,,G019,NO_MATCH,Organizer retention period.,FALSE_POSITIVE
+C07,C07-R019,G020,PARTIAL,Signature label lacks consent-form identity.,EVIDENCE_NOT_SUPPORTING
+C08,C08-R003,G001,MATCH,Prototype completion by close conditional on product track retained; INFO wrong.,WRONG_MODALITY
+C08,C08-R029,G002,PARTIAL,Theft/copyright example covers only part of broader plagiarism prohibition.,MISS_CONDITION
+C08,C08-R005,G003,PARTIAL,Unrestricted eligibility heading omits following nationality/residence restrictions.,EVIDENCE_NOT_SUPPORTING
+C08,C08-R006,G003,PARTIAL,Unrestricted eligibility heading omits following nationality/residence restrictions.,EVIDENCE_NOT_SUPPORTING
+C08,C08-R007,G004,PARTIAL,Team permission and six-person membership constraint combined.,ATOMICITY
+C08,C08-R008,G004,PARTIAL,Team permission and six-person membership constraint combined.,ATOMICITY
+C08,C08-R009,G005,PARTIAL,Receipt-period heading without dates.,EVIDENCE_NOT_SUPPORTING
+C08,C08-R009,G006,PARTIAL,Repeated receipt-period heading.,EVIDENCE_NOT_SUPPORTING
+C08,C08-R009,G007,PARTIAL,Submission window split after month punctuation.,EVIDENCE_NOT_SUPPORTING
+C08,C08-R011,G008,PARTIAL,Submission-count heading without per-form count.,EVIDENCE_NOT_SUPPORTING
+C08,C08-R010,G009,MATCH,Explicit unlimited-submissions permission retained.,-
+C08,C08-R011,G010,MATCH,One result per application retained with MUST.,-
+C08,,G011,NO_MATCH,Document/route section heading.,FALSE_POSITIVE
+C08,,G012,NO_MATCH,Document table heading.,FALSE_POSITIVE
+C08,C08-R012,G013,PARTIAL,Submission-route table heading without address.,TABLE_FAILURE
+C08,C08-R013,G014,PARTIAL,Application cell lacks copy count and duty context.,TABLE_FAILURE
+C08,C08-R012,G015,PARTIAL,Email method loses address on next line.,TABLE_FAILURE
+C08,C08-R014,G016,PARTIAL,Pledge cell loses copy count and submission context.,TABLE_FAILURE
+C08,C08-R015,G017,PARTIAL,Privacy-consent cell loses copy count and submission context.,TABLE_FAILURE
+C08,C08-R016,G018,PARTIAL,Disclosure-consent cell loses copy count and submission context.,TABLE_FAILURE
+C08,C08-R021,G019,PARTIAL,Broken file example loses product track and development-complete condition.,TABLE_FAILURE
+C08,C08-R022,G020,MATCH,Product-track presentation-stage demonstration instruction retained; INFO wrong.,WRONG_MODALITY
+C08,C08-R017,G021,PARTIAL,Free format and separate presentation file combined.,"ATOMICITY,WRONG_MODALITY"
+C08,C08-R018,G021,PARTIAL,Free format and separate presentation file combined.,"ATOMICITY,WRONG_MODALITY"
+C08,,G022,NO_MATCH,Final-round opportunity without qualifying context.,FALSE_POSITIVE
+C08,,G023,NO_MATCH,Organizer evaluation-track description.,FALSE_POSITIVE
+C08,,G024,NO_MATCH,Organizer evaluation-change discretion.,FALSE_POSITIVE
+C08,,G025,NO_MATCH,Result-publication schedule.,FALSE_POSITIVE
+C08,,G026,NO_MATCH,Final-result publication schedule.,FALSE_POSITIVE
+C08,,G027,NO_MATCH,Organizer result-announcement identifier.,FALSE_POSITIVE
+C08,,G028,NO_MATCH,Award/support heading.,FALSE_POSITIVE
+C08,,G029,NO_MATCH,Fragment of organizer advancement opportunity.,PDF_READING_ORDER
+C08,,G030,NO_MATCH,Estimated ceremony audience is not mandatory attendance.,FALSE_POSITIVE
+C08,,G031,NO_MATCH,Follow-up support heading.,FALSE_POSITIVE
+C08,,G032,NO_MATCH,Advancement fragment lacks top-two qualification and optionality.,PDF_READING_ORDER
+C08,,G033,NO_MATCH,Organizer consulting support.,FALSE_POSITIVE
+C08,,G034,NO_MATCH,Organizer presentation-material support.,FALSE_POSITIVE
+C08,,G035,NO_MATCH,General organizer support.,FALSE_POSITIVE
+C08,C08-R025,G036,PARTIAL,Example covers only leader-to-other-member overlap.,MISS_CONDITION
+C08,C08-R025,G037,PARTIAL,Example covers only member-to-other-team overlap.,MISS_CONDITION
+C08,C08-R004,G038,PARTIAL,Prior-award and eligibility conditions combined then truncated.,"PDF_READING_ORDER,ATOMICITY"
+C08,C08-R005,G039,PARTIAL,Eligibility consequence lacks actual nationality/residence criteria.,PDF_READING_ORDER
+C08,C08-R006,G039,PARTIAL,Eligibility consequence lacks actual nationality/residence criteria.,PDF_READING_ORDER
+C08,,G040,NO_MATCH,Supported clerical-error liability information outside frozen duty list; Gold scope limitation.,OTHER
+C08,,G041,NO_MATCH,Organizer non-return policy.,FALSE_POSITIVE
+C08,C08-R031,G042,PARTIAL,Specific infringement liability is narrower than the complete source liability scope.,MISS_CONDITION
+C08,,G043,NO_MATCH,Ownership statement cut before predicate.,PDF_READING_ORDER
+C08,,G044,NO_MATCH,Public-data help heading.,FALSE_POSITIVE
+C01,C01-R005,,NO_MATCH,Source duty or permission has no retained subject keyword; no candidate expresses it.,MISS_KEYWORD
+C01,C01-R006,,NO_MATCH,Source duty or permission has no retained subject keyword; no candidate expresses it.,MISS_KEYWORD
+C01,C01-R008,,NO_MATCH,Source duty or permission has no retained subject keyword; no candidate expresses it.,MISS_KEYWORD
+C01,C01-R009,,NO_MATCH,Source duty or permission has no retained subject keyword; no candidate expresses it.,MISS_KEYWORD
+C01,C01-R010,,NO_MATCH,Source duty or permission has no retained subject keyword; no candidate expresses it.,MISS_KEYWORD
+C01,C01-R017,,NO_MATCH,Source duty or permission has no retained subject keyword; no candidate expresses it.,MISS_KEYWORD
+C01,C01-R018,,NO_MATCH,Source duty or permission has no retained subject keyword; no candidate expresses it.,MISS_KEYWORD
+C01,C01-R031,,NO_MATCH,Source duty or permission has no retained subject keyword; no candidate expresses it.,MISS_KEYWORD
+C01,C01-R032,,NO_MATCH,Source duty or permission has no retained subject keyword; no candidate expresses it.,MISS_KEYWORD
+C01,C01-R034,,NO_MATCH,"Form instructions for representatives, members and contact exceptions are absent.",MISS_CONDITION
+C01,C01-R035,,NO_MATCH,"Form instructions for representatives, members and contact exceptions are absent.",MISS_CONDITION
+C01,C01-R036,,NO_MATCH,"Form instructions for representatives, members and contact exceptions are absent.",MISS_CONDITION
+C01,C01-R037,,NO_MATCH,"Form instructions for representatives, members and contact exceptions are absent.",MISS_CONDITION
+C01,C01-R045,,NO_MATCH,"Form instructions for representatives, members and contact exceptions are absent.",MISS_CONDITION
+C01,C01-R038,,NO_MATCH,Work-description form instruction and approximate length are omitted.,TABLE_FAILURE
+C01,C01-R040,,NO_MATCH,Required consent is implied by refusal preventing entry; only form labels survive.,MISS_IMPLICIT_RULE
+C01,C01-R041,,NO_MATCH,Required consent is implied by refusal preventing entry; only form labels survive.,MISS_IMPLICIT_RULE
+C01,C01-R046,,NO_MATCH,Required consent is implied by refusal preventing entry; only form labels survive.,MISS_IMPLICIT_RULE
+C01,C01-R047,,NO_MATCH,Required consent is implied by refusal preventing entry; only form labels survive.,MISS_IMPLICIT_RULE
+C02,C02-R014,,NO_MATCH,Conditional out-of-hours email inquiry route omitted.,MISS_CONDITION
+C03,C03-R002,,NO_MATCH,Theme line omitted.,MISS_KEYWORD
+C03,C03-R003,,NO_MATCH,Five-person team requirement expressed in descriptive program lines is omitted.,MISS_IMPLICIT_RULE
+C03,C03-R004,,NO_MATCH,Onsite cross-consortium formation instruction omitted.,MISS_CONDITION
+C03,C03-R006,,NO_MATCH,Google Forms URL is present but URL pattern is not a subject selector; no application-route candidate.,MISS_KEYWORD
+C04,C04-R001,,NO_MATCH,"Unchanged subject selector drops this actual participation, model, data, code or inference rule.",MISS_KEYWORD
+C04,C04-R005,,NO_MATCH,"Unchanged subject selector drops this actual participation, model, data, code or inference rule.",MISS_KEYWORD
+C04,C04-R006,,NO_MATCH,"Unchanged subject selector drops this actual participation, model, data, code or inference rule.",MISS_KEYWORD
+C04,C04-R007,,NO_MATCH,"Unchanged subject selector drops this actual participation, model, data, code or inference rule.",MISS_KEYWORD
+C04,C04-R008,,NO_MATCH,"Unchanged subject selector drops this actual participation, model, data, code or inference rule.",MISS_KEYWORD
+C04,C04-R009,,NO_MATCH,"Unchanged subject selector drops this actual participation, model, data, code or inference rule.",MISS_KEYWORD
+C04,C04-R010,,NO_MATCH,"Unchanged subject selector drops this actual participation, model, data, code or inference rule.",MISS_KEYWORD
+C04,C04-R011,,NO_MATCH,"Unchanged subject selector drops this actual participation, model, data, code or inference rule.",MISS_KEYWORD
+C04,C04-R012,,NO_MATCH,"Unchanged subject selector drops this actual participation, model, data, code or inference rule.",MISS_KEYWORD
+C04,C04-R013,,NO_MATCH,"Unchanged subject selector drops this actual participation, model, data, code or inference rule.",MISS_KEYWORD
+C04,C04-R014,,NO_MATCH,"Unchanged subject selector drops this actual participation, model, data, code or inference rule.",MISS_KEYWORD
+C04,C04-R015,,NO_MATCH,"Unchanged subject selector drops this actual participation, model, data, code or inference rule.",MISS_KEYWORD
+C04,C04-R016,,NO_MATCH,"Unchanged subject selector drops this actual participation, model, data, code or inference rule.",MISS_KEYWORD
+C04,C04-R021,,NO_MATCH,"Unchanged subject selector drops this actual participation, model, data, code or inference rule.",MISS_KEYWORD
+C04,C04-R022,,NO_MATCH,"Unchanged subject selector drops this actual participation, model, data, code or inference rule.",MISS_KEYWORD
+C04,C04-R023,,NO_MATCH,"Unchanged subject selector drops this actual participation, model, data, code or inference rule.",MISS_KEYWORD
+C04,C04-R029,,NO_MATCH,"Unchanged subject selector drops this actual participation, model, data, code or inference rule.",MISS_KEYWORD
+C04,C04-R030,,NO_MATCH,"Unchanged subject selector drops this actual participation, model, data, code or inference rule.",MISS_KEYWORD
+C04,C04-R031,,NO_MATCH,"Unchanged subject selector drops this actual participation, model, data, code or inference rule.",MISS_KEYWORD
+C04,C04-R032,,NO_MATCH,"Unchanged subject selector drops this actual participation, model, data, code or inference rule.",MISS_KEYWORD
+C04,C04-R037,,NO_MATCH,"Unchanged subject selector drops this actual participation, model, data, code or inference rule.",MISS_KEYWORD
+C04,C04-R038,,NO_MATCH,"Unchanged subject selector drops this actual participation, model, data, code or inference rule.",MISS_KEYWORD
+C04,C04-R004,,NO_MATCH,"Concise team cap, inference-time, report-file or Python-language requirement omitted.",MISS_IMPLICIT_RULE
+C04,C04-R019,,NO_MATCH,"Concise team cap, inference-time, report-file or Python-language requirement omitted.",MISS_IMPLICIT_RULE
+C04,C04-R028,,NO_MATCH,"Concise team cap, inference-time, report-file or Python-language requirement omitted.",MISS_IMPLICIT_RULE
+C04,C04-R035,,NO_MATCH,"Concise team cap, inference-time, report-file or Python-language requirement omitted.",MISS_IMPLICIT_RULE
+C04,C04-R042,,NO_MATCH,Preliminary close date and its label are separated in schedule; neither yields the deadline.,TABLE_FAILURE
+C05,C05-R001,,NO_MATCH,Fragmented PDF theme text produces no complete topic requirement.,PDF_READING_ORDER
+C06,C06-R001,,NO_MATCH,Data/planning topic lines omitted.,MISS_KEYWORD
+C06,C06-R005,,NO_MATCH,Application-stage label and date cells fail to become a requirement.,TABLE_FAILURE
+C07,C07-R002,,NO_MATCH,"Program subject, false-information ban, rights and non-appeal conditions are omitted.",MISS_KEYWORD
+C07,C07-R007,,NO_MATCH,"Program subject, false-information ban, rights and non-appeal conditions are omitted.",MISS_KEYWORD
+C07,C07-R008,,NO_MATCH,"Program subject, false-information ban, rights and non-appeal conditions are omitted.",MISS_KEYWORD
+C07,C07-R009,,NO_MATCH,"Program subject, false-information ban, rights and non-appeal conditions are omitted.",MISS_KEYWORD
+C07,C07-R011,,NO_MATCH,Proposal-form instructions are in table cells and not extracted as obligations.,TABLE_FAILURE
+C07,C07-R012,,NO_MATCH,Proposal-form instructions are in table cells and not extracted as obligations.,TABLE_FAILURE
+C07,C07-R013,,NO_MATCH,Proposal-form instructions are in table cells and not extracted as obligations.,TABLE_FAILURE
+C07,C07-R014,,NO_MATCH,Proposal-form instructions are in table cells and not extracted as obligations.,TABLE_FAILURE
+C07,C07-R015,,NO_MATCH,Proposal-form instructions are in table cells and not extracted as obligations.,TABLE_FAILURE
+C07,C07-R016,,NO_MATCH,Proposal-form instructions are in table cells and not extracted as obligations.,TABLE_FAILURE
+C07,C07-R017,,NO_MATCH,Optional extra sheet for long proposals omitted.,MISS_CONDITION
+C08,C08-R001,,NO_MATCH,"Public-data scope, real-name entry, originality and winner tax duties omitted.",MISS_KEYWORD
+C08,C08-R002,,NO_MATCH,"Public-data scope, real-name entry, originality and winner tax duties omitted.",MISS_KEYWORD
+C08,C08-R023,,NO_MATCH,"Public-data scope, real-name entry, originality and winner tax duties omitted.",MISS_KEYWORD
+C08,C08-R028,,NO_MATCH,"Public-data scope, real-name entry, originality and winner tax duties omitted.",MISS_KEYWORD
+C08,C08-R032,,NO_MATCH,"Public-data scope, real-name entry, originality and winner tax duties omitted.",MISS_KEYWORD
+C08,C08-R019,,NO_MATCH,Track-specific idea proposal and business-plan table cells omitted.,TABLE_FAILURE
+C08,C08-R020,,NO_MATCH,Track-specific idea proposal and business-plan table cells omitted.,TABLE_FAILURE
+C08,C08-R024,,NO_MATCH,"Conditional winner choice, team identification and lawful use obligations omitted.",MISS_CONDITION
+C08,C08-R026,,NO_MATCH,"Conditional winner choice, team identification and lawful use obligations omitted.",MISS_CONDITION
+C08,C08-R027,,NO_MATCH,"Conditional winner choice, team identification and lawful use obligations omitted.",MISS_CONDITION
+C08,C08-R030,,NO_MATCH,"Conditional winner choice, team identification and lawful use obligations omitted.",MISS_CONDITION

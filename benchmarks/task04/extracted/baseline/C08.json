@@ -1,0 +1,1936 @@
+{
+  "case_id": "C08",
+  "invoked_at": "2026-09-03T11:49:58.169309+00:00",
+  "source_sha256": "a13886249cfbe075111ea17cbdbafc5a984af52d5fef72ce518c3644a89e0c51",
+  "input_sha256": "75d61955aa0f5055e87efb3733ec3a57795e910b7ff91cdf9f137080f8e5ee3b",
+  "profile": {
+    "profile_type": "generic",
+    "profile_id": "a841e423-3565-4afd-b25d-3d40849f2d7d",
+    "status": "REVIEW_REQUIRED",
+    "requirements": [
+      {
+        "requirement_id": "G001",
+        "rule": "- 제품 및 서비스 개발 부문은 접수 마감일까지 시제품이 완료되어야 함",
+        "modality": "INFO",
+        "severity": "EXTERNAL",
+        "verifier": "EXTERNAL",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 31",
+          "quote": "- 제품 및 서비스 개발 부문은 접수 마감일까지 시제품이 완료되어야 함"
+        },
+        "confidence": 0.5,
+        "extraction_status": "NEEDS_REVIEW",
+        "evidence_start": 675,
+        "evidence_end": 714,
+        "issues": [
+          "ATOMICITY_REVIEW: 독립 조건을 한 항목에 합쳤는지 확인하고 단일 조건으로 수정하세요."
+        ],
+        "original": {
+          "requirement_id": "G001",
+          "rule": "- 제품 및 서비스 개발 부문은 접수 마감일까지 시제품이 완료되어야 함",
+          "modality": "INFO",
+          "severity": "EXTERNAL",
+          "verifier": "EXTERNAL",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 31",
+            "quote": "- 제품 및 서비스 개발 부문은 접수 마감일까지 시제품이 완료되어야 함"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G002",
+        "rule": "아이템을 도용해 저작권을 침해한 경우 입상 취소",
+        "modality": "INFO",
+        "severity": "EXTERNAL",
+        "verifier": "EXTERNAL",
+        "condition": "아이템을 도용해 저작권을 침해한 경우 입상 취소",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 33",
+          "quote": "아이템을 도용해 저작권을 침해한 경우 입상 취소"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 752,
+        "evidence_end": 778,
+        "issues": [],
+        "original": {
+          "requirement_id": "G002",
+          "rule": "아이템을 도용해 저작권을 침해한 경우 입상 취소",
+          "modality": "INFO",
+          "severity": "EXTERNAL",
+          "verifier": "EXTERNAL",
+          "condition": "아이템을 도용해 저작권을 침해한 경우 입상 취소",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 33",
+            "quote": "아이템을 도용해 저작권을 침해한 경우 입상 취소"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G003",
+        "rule": "□참가자격: 제한 없음",
+        "modality": "INFO",
+        "severity": "EXTERNAL",
+        "verifier": "EXTERNAL",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 35",
+          "quote": "□참가자격: 제한 없음"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 780,
+        "evidence_end": 792,
+        "issues": [],
+        "original": {
+          "requirement_id": "G003",
+          "rule": "□참가자격: 제한 없음",
+          "modality": "INFO",
+          "severity": "EXTERNAL",
+          "verifier": "EXTERNAL",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 35",
+            "quote": "□참가자격: 제한 없음"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G004",
+        "rule": "○개인 또는 팀 단위(6인 이내, 팀장/팀원으로 구성) 참가 가능",
+        "modality": "MAY",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 37",
+          "quote": "○개인 또는 팀 단위(6인 이내, 팀장/팀원으로 구성) 참가 가능"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 815,
+        "evidence_end": 851,
+        "issues": [],
+        "original": {
+          "requirement_id": "G004",
+          "rule": "○개인 또는 팀 단위(6인 이내, 팀장/팀원으로 구성) 참가 가능",
+          "modality": "MAY",
+          "severity": "INFO",
+          "verifier": "SEMANTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 37",
+            "quote": "○개인 또는 팀 단위(6인 이내, 팀장/팀원으로 구성) 참가 가능"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G005",
+        "rule": "접수기간",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 39",
+          "quote": "접수기간"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 855,
+        "evidence_end": 859,
+        "issues": [],
+        "original": {
+          "requirement_id": "G005",
+          "rule": "접수기간",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "SEMANTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 39",
+            "quote": "접수기간"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G006",
+        "rule": "☐ 접수기간",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 40",
+          "quote": "☐ 접수기간"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 860,
+        "evidence_end": 866,
+        "issues": [],
+        "original": {
+          "requirement_id": "G006",
+          "rule": "☐ 접수기간",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "SEMANTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 40",
+            "quote": "☐ 접수기간"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G007",
+        "rule": "○서류 제출기간: 5.",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 41",
+          "quote": "○서류 제출기간: 5."
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 867,
+        "evidence_end": 879,
+        "issues": [],
+        "original": {
+          "requirement_id": "G007",
+          "rule": "○서류 제출기간: 5.",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "SEMANTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 41",
+            "quote": "○서류 제출기간: 5."
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G008",
+        "rule": "○제출건수",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 42",
+          "quote": "○제출건수"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 904,
+        "evidence_end": 909,
+        "issues": [],
+        "original": {
+          "requirement_id": "G008",
+          "rule": "○제출건수",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "SEMANTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 42",
+            "quote": "○제출건수"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G009",
+        "rule": "- 신청 및 결과물 제출 제한 없음(다수의 작품 응모 가능)",
+        "modality": "MAY",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 43",
+          "quote": "- 신청 및 결과물 제출 제한 없음(다수의 작품 응모 가능)"
+        },
+        "confidence": 0.5,
+        "extraction_status": "NEEDS_REVIEW",
+        "evidence_start": 910,
+        "evidence_end": 943,
+        "issues": [
+          "ATOMICITY_REVIEW: 독립 조건을 한 항목에 합쳤는지 확인하고 단일 조건으로 수정하세요."
+        ],
+        "original": {
+          "requirement_id": "G009",
+          "rule": "- 신청 및 결과물 제출 제한 없음(다수의 작품 응모 가능)",
+          "modality": "MAY",
+          "severity": "INFO",
+          "verifier": "SEMANTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 43",
+            "quote": "- 신청 및 결과물 제출 제한 없음(다수의 작품 응모 가능)"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G010",
+        "rule": "- 참가신청서 1부당 1개 결과물 제출 필수",
+        "modality": "MUST",
+        "severity": "REVIEW",
+        "verifier": "SEMANTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 44",
+          "quote": "- 참가신청서 1부당 1개 결과물 제출 필수"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 944,
+        "evidence_end": 968,
+        "issues": [],
+        "original": {
+          "requirement_id": "G010",
+          "rule": "- 참가신청서 1부당 1개 결과물 제출 필수",
+          "modality": "MUST",
+          "severity": "REVIEW",
+          "verifier": "SEMANTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 44",
+            "quote": "- 참가신청서 1부당 1개 결과물 제출 필수"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G011",
+        "rule": "☐ 신청서류 및 제출처",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 45",
+          "quote": "☐ 신청서류 및 제출처"
+        },
+        "confidence": 0.5,
+        "extraction_status": "NEEDS_REVIEW",
+        "evidence_start": 969,
+        "evidence_end": 981,
+        "issues": [
+          "ATOMICITY_REVIEW: 독립 조건을 한 항목에 합쳤는지 확인하고 단일 조건으로 수정하세요."
+        ],
+        "original": {
+          "requirement_id": "G011",
+          "rule": "☐ 신청서류 및 제출처",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "SEMANTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 45",
+            "quote": "☐ 신청서류 및 제출처"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G012",
+        "rule": "신청서류",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 47",
+          "quote": "신청서류"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 971,
+        "evidence_end": 975,
+        "issues": [],
+        "original": {
+          "requirement_id": "G012",
+          "rule": "신청서류",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "SEMANTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 47",
+            "quote": "신청서류"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G013",
+        "rule": "제출방법/제출처",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 49",
+          "quote": "제출방법/제출처"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 995,
+        "evidence_end": 1003,
+        "issues": [],
+        "original": {
+          "requirement_id": "G013",
+          "rule": "제출방법/제출처",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "SEMANTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 49",
+            "quote": "제출방법/제출처"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G014",
+        "rule": "참가신청서",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 51",
+          "quote": "참가신청서"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 946,
+        "evidence_end": 951,
+        "issues": [],
+        "original": {
+          "requirement_id": "G014",
+          "rule": "참가신청서",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "SEMANTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 51",
+            "quote": "참가신청서"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G015",
+        "rule": "담당자 이메일 제출",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 53",
+          "quote": "담당자 이메일 제출"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 1016,
+        "evidence_end": 1026,
+        "issues": [],
+        "original": {
+          "requirement_id": "G015",
+          "rule": "담당자 이메일 제출",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "SEMANTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 53",
+            "quote": "담당자 이메일 제출"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G016",
+        "rule": "참가자 서약서",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 55",
+          "quote": "참가자 서약서"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 1044,
+        "evidence_end": 1051,
+        "issues": [],
+        "original": {
+          "requirement_id": "G016",
+          "rule": "참가자 서약서",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "SEMANTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 55",
+            "quote": "참가자 서약서"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G017",
+        "rule": "개인정보 수집이용 동의서",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 57",
+          "quote": "개인정보 수집이용 동의서"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 1055,
+        "evidence_end": 1068,
+        "issues": [],
+        "original": {
+          "requirement_id": "G017",
+          "rule": "개인정보 수집이용 동의서",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "SEMANTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 57",
+            "quote": "개인정보 수집이용 동의서"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G018",
+        "rule": "아이디어 제3자 공개공유 동의서",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 59",
+          "quote": "아이디어 제3자 공개공유 동의서"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 1072,
+        "evidence_end": 1089,
+        "issues": [],
+        "original": {
+          "requirement_id": "G018",
+          "rule": "아이디어 제3자 공개공유 동의서",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "SEMANTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 59",
+            "quote": "아이디어 제3자 공개공유 동의서"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G019",
+        "rule": "있는 파일 제출, 동영상 파일 등)",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "DETERMINISTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 72",
+          "quote": "있는 파일 제출, 동영상 파일 등)"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 1184,
+        "evidence_end": 1203,
+        "issues": [],
+        "original": {
+          "requirement_id": "G019",
+          "rule": "있는 파일 제출, 동영상 파일 등)",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "DETERMINISTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 72",
+            "quote": "있는 파일 제출, 동영상 파일 등)"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G020",
+        "rule": "* 제품 및 서비스는 발표평가시 제품 및 서비스 실물 제출/시연진행 예정",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 74",
+          "quote": "* 제품 및 서비스는 발표평가시 제품 및 서비스 실물 제출/시연진행 예정"
+        },
+        "confidence": 0.5,
+        "extraction_status": "NEEDS_REVIEW",
+        "evidence_start": 1207,
+        "evidence_end": 1247,
+        "issues": [
+          "ATOMICITY_REVIEW: 독립 조건을 한 항목에 합쳤는지 확인하고 단일 조건으로 수정하세요."
+        ],
+        "original": {
+          "requirement_id": "G020",
+          "rule": "* 제품 및 서비스는 발표평가시 제품 및 서비스 실물 제출/시연진행 예정",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "SEMANTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 74",
+            "quote": "* 제품 및 서비스는 발표평가시 제품 및 서비스 실물 제출/시연진행 예정"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G021",
+        "rule": "** 발표자료 자유양식으로 파일 별도 제출",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "DETERMINISTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 75",
+          "quote": "** 발표자료 자유양식으로 파일 별도 제출"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 1248,
+        "evidence_end": 1271,
+        "issues": [],
+        "original": {
+          "requirement_id": "G021",
+          "rule": "** 발표자료 자유양식으로 파일 별도 제출",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "DETERMINISTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 75",
+            "quote": "** 발표자료 자유양식으로 파일 별도 제출"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G022",
+        "rule": "(본선 진출 자격 부여)",
+        "modality": "INFO",
+        "severity": "EXTERNAL",
+        "verifier": "EXTERNAL",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 100",
+          "quote": "(본선 진출 자격 부여)"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 1481,
+        "evidence_end": 1494,
+        "issues": [],
+        "original": {
+          "requirement_id": "G022",
+          "rule": "(본선 진출 자격 부여)",
+          "modality": "INFO",
+          "severity": "EXTERNAL",
+          "verifier": "EXTERNAL",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 100",
+            "quote": "(본선 진출 자격 부여)"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G023",
+        "rule": "※ 평가는 접수에 따라 2개 트랙으로 진행(①아이디어 기획, ②제품 및 서비스 개발)",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 111",
+          "quote": "※ 평가는 접수에 따라 2개 트랙으로 진행(①아이디어 기획, ②제품 및 서비스 개발)"
+        },
+        "confidence": 0.5,
+        "extraction_status": "NEEDS_REVIEW",
+        "evidence_start": 1674,
+        "evidence_end": 1721,
+        "issues": [
+          "ATOMICITY_REVIEW: 독립 조건을 한 항목에 합쳤는지 확인하고 단일 조건으로 수정하세요."
+        ],
+        "original": {
+          "requirement_id": "G023",
+          "rule": "※ 평가는 접수에 따라 2개 트랙으로 진행(①아이디어 기획, ②제품 및 서비스 개발)",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "SEMANTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 111",
+            "quote": "※ 평가는 접수에 따라 2개 트랙으로 진행(①아이디어 기획, ②제품 및 서비스 개발)"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G024",
+        "rule": "※※※ 평가방식은 접수 상황에 따라 변동될 수 있음",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 113",
+          "quote": "※※※ 평가방식은 접수 상황에 따라 변동될 수 있음"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 1749,
+        "evidence_end": 1777,
+        "issues": [],
+        "original": {
+          "requirement_id": "G024",
+          "rule": "※※※ 평가방식은 접수 상황에 따라 변동될 수 있음",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "SEMANTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 113",
+            "quote": "※※※ 평가방식은 접수 상황에 따라 변동될 수 있음"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G025",
+        "rule": "○서류발표: 7월 중(예정) 진흥원 홈페이지 및 개별 연락",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "DETERMINISTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 166",
+          "quote": "○서류발표: 7월 중(예정) 진흥원 홈페이지 및 개별 연락"
+        },
+        "confidence": 0.5,
+        "extraction_status": "NEEDS_REVIEW",
+        "evidence_start": 2771,
+        "evidence_end": 2803,
+        "issues": [
+          "ATOMICITY_REVIEW: 독립 조건을 한 항목에 합쳤는지 확인하고 단일 조건으로 수정하세요."
+        ],
+        "original": {
+          "requirement_id": "G025",
+          "rule": "○서류발표: 7월 중(예정) 진흥원 홈페이지 및 개별 연락",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "DETERMINISTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 166",
+            "quote": "○서류발표: 7월 중(예정) 진흥원 홈페이지 및 개별 연락"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G026",
+        "rule": "○최종 수상작 발표: 7월 중 (예정) 진흥원 홈페이지 및 개별 연락",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "DETERMINISTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 167",
+          "quote": "○최종 수상작 발표: 7월 중 (예정) 진흥원 홈페이지 및 개별 연락"
+        },
+        "confidence": 0.5,
+        "extraction_status": "NEEDS_REVIEW",
+        "evidence_start": 2804,
+        "evidence_end": 2842,
+        "issues": [
+          "ATOMICITY_REVIEW: 독립 조건을 한 항목에 합쳤는지 확인하고 단일 조건으로 수정하세요."
+        ],
+        "original": {
+          "requirement_id": "G026",
+          "rule": "○최종 수상작 발표: 7월 중 (예정) 진흥원 홈페이지 및 개별 연락",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "DETERMINISTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 167",
+            "quote": "○최종 수상작 발표: 7월 중 (예정) 진흥원 홈페이지 및 개별 연락"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G027",
+        "rule": "※ 접수번호로 발표",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 168",
+          "quote": "※ 접수번호로 발표"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 2843,
+        "evidence_end": 2853,
+        "issues": [],
+        "original": {
+          "requirement_id": "G027",
+          "rule": "※ 접수번호로 발표",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "SEMANTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 168",
+            "quote": "※ 접수번호로 발표"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G028",
+        "rule": "시상 및 후속지원",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 171",
+          "quote": "시상 및 후속지원"
+        },
+        "confidence": 0.5,
+        "extraction_status": "NEEDS_REVIEW",
+        "evidence_start": 2858,
+        "evidence_end": 2867,
+        "issues": [
+          "ATOMICITY_REVIEW: 독립 조건을 한 항목에 합쳤는지 확인하고 단일 조건으로 수정하세요."
+        ],
+        "original": {
+          "requirement_id": "G028",
+          "rule": "시상 및 후속지원",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "SEMANTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 171",
+            "quote": "시상 및 후속지원"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G029",
+        "rule": "데이터 활용 창업경진대회 본선 진출 자격 부여하되, 출전 팀(개인)의 의사에 따라",
+        "modality": "INFO",
+        "severity": "EXTERNAL",
+        "verifier": "EXTERNAL",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 215",
+          "quote": "데이터 활용 창업경진대회 본선 진출 자격 부여하되, 출전 팀(개인)의 의사에 따라"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 3207,
+        "evidence_end": 3252,
+        "issues": [],
+        "original": {
+          "requirement_id": "G029",
+          "rule": "데이터 활용 창업경진대회 본선 진출 자격 부여하되, 출전 팀(개인)의 의사에 따라",
+          "modality": "INFO",
+          "severity": "EXTERNAL",
+          "verifier": "EXTERNAL",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 215",
+            "quote": "데이터 활용 창업경진대회 본선 진출 자격 부여하되, 출전 팀(개인)의 의사에 따라"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G030",
+        "rule": "- 참    석: 40여명(공모전 수상자, 참가자 등)",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 219",
+          "quote": "- 참    석: 40여명(공모전 수상자, 참가자 등)"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 3324,
+        "evidence_end": 3354,
+        "issues": [],
+        "original": {
+          "requirement_id": "G030",
+          "rule": "- 참    석: 40여명(공모전 수상자, 참가자 등)",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "SEMANTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 219",
+            "quote": "- 참    석: 40여명(공모전 수상자, 참가자 등)"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G031",
+        "rule": "☐ 후속지원",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 221",
+          "quote": "☐ 후속지원"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 3385,
+        "evidence_end": 3391,
+        "issues": [],
+        "original": {
+          "requirement_id": "G031",
+          "rule": "☐ 후속지원",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "SEMANTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 221",
+            "quote": "☐ 후속지원"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G032",
+        "rule": "창업경진대회 지자체 대표 자격 출전",
+        "modality": "INFO",
+        "severity": "EXTERNAL",
+        "verifier": "EXTERNAL",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 223",
+          "quote": "창업경진대회 지자체 대표 자격 출전"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 3432,
+        "evidence_end": 3451,
+        "issues": [],
+        "original": {
+          "requirement_id": "G032",
+          "rule": "창업경진대회 지자체 대표 자격 출전",
+          "modality": "INFO",
+          "severity": "EXTERNAL",
+          "verifier": "EXTERNAL",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 223",
+            "quote": "창업경진대회 지자체 대표 자격 출전"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G033",
+        "rule": "○특허 취득 및 저작권 등록 컨설팅, 마케팅, 기술자문",
+        "modality": "INFO",
+        "severity": "EXTERNAL",
+        "verifier": "EXTERNAL",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 224",
+          "quote": "○특허 취득 및 저작권 등록 컨설팅, 마케팅, 기술자문"
+        },
+        "confidence": 0.5,
+        "extraction_status": "NEEDS_REVIEW",
+        "evidence_start": 3452,
+        "evidence_end": 3482,
+        "issues": [
+          "ATOMICITY_REVIEW: 독립 조건을 한 항목에 합쳤는지 확인하고 단일 조건으로 수정하세요."
+        ],
+        "original": {
+          "requirement_id": "G033",
+          "rule": "○특허 취득 및 저작권 등록 컨설팅, 마케팅, 기술자문",
+          "modality": "INFO",
+          "severity": "EXTERNAL",
+          "verifier": "EXTERNAL",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 224",
+            "quote": "○특허 취득 및 저작권 등록 컨설팅, 마케팅, 기술자문"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G034",
+        "rule": "○우수자 발표자료 제작 지원(PPT)",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 225",
+          "quote": "○우수자 발표자료 제작 지원(PPT)"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 3484,
+        "evidence_end": 3504,
+        "issues": [],
+        "original": {
+          "requirement_id": "G034",
+          "rule": "○우수자 발표자료 제작 지원(PPT)",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "SEMANTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 225",
+            "quote": "○우수자 발표자료 제작 지원(PPT)"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G035",
+        "rule": "○기타 필요사항에 대한 지원 등",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 226",
+          "quote": "○기타 필요사항에 대한 지원 등"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 3505,
+        "evidence_end": 3522,
+        "issues": [],
+        "original": {
+          "requirement_id": "G035",
+          "rule": "○기타 필요사항에 대한 지원 등",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "SEMANTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 226",
+            "quote": "○기타 필요사항에 대한 지원 등"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G036",
+        "rule": "※ 예시) A작품 팀장이 B작품의 팀원으로 참가 불가",
+        "modality": "MUST_NOT",
+        "severity": "REVIEW",
+        "verifier": "SEMANTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 236",
+          "quote": "※ 예시) A작품 팀장이 B작품의 팀원으로 참가 불가"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 3664,
+        "evidence_end": 3693,
+        "issues": [],
+        "original": {
+          "requirement_id": "G036",
+          "rule": "※ 예시) A작품 팀장이 B작품의 팀원으로 참가 불가",
+          "modality": "MUST_NOT",
+          "severity": "REVIEW",
+          "verifier": "SEMANTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 236",
+            "quote": "※ 예시) A작품 팀장이 B작품의 팀원으로 참가 불가"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G037",
+        "rule": "※ 예시) A작품 팀원이 B작품의 팀장 또는 팀원으로 참가 불가",
+        "modality": "MUST_NOT",
+        "severity": "REVIEW",
+        "verifier": "SEMANTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 237",
+          "quote": "※ 예시) A작품 팀원이 B작품의 팀장 또는 팀원으로 참가 불가"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 3694,
+        "evidence_end": 3729,
+        "issues": [],
+        "original": {
+          "requirement_id": "G037",
+          "rule": "※ 예시) A작품 팀원이 B작품의 팀장 또는 팀원으로 참가 불가",
+          "modality": "MUST_NOT",
+          "severity": "REVIEW",
+          "verifier": "SEMANTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 237",
+            "quote": "※ 예시) A작품 팀원이 B작품의 팀장 또는 팀원으로 참가 불가"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G038",
+        "rule": "○유사 작품이 타 기관 공모에 당선되었거나, 입상자의 신분이 참가",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 246",
+          "quote": "○유사 작품이 타 기관 공모에 당선되었거나, 입상자의 신분이 참가"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 3995,
+        "evidence_end": 4031,
+        "issues": [],
+        "original": {
+          "requirement_id": "G038",
+          "rule": "○유사 작품이 타 기관 공모에 당선되었거나, 입상자의 신분이 참가",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "SEMANTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 246",
+            "quote": "○유사 작품이 타 기관 공모에 당선되었거나, 입상자의 신분이 참가"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G039",
+        "rule": "자격에서 벗어난 경우 등에는 입상을 취소함",
+        "modality": "INFO",
+        "severity": "EXTERNAL",
+        "verifier": "EXTERNAL",
+        "condition": "자격에서 벗어난 경우 등에는 입상을 취소함",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 247",
+          "quote": "자격에서 벗어난 경우 등에는 입상을 취소함"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 4032,
+        "evidence_end": 4055,
+        "issues": [],
+        "original": {
+          "requirement_id": "G039",
+          "rule": "자격에서 벗어난 경우 등에는 입상을 취소함",
+          "modality": "INFO",
+          "severity": "EXTERNAL",
+          "verifier": "EXTERNAL",
+          "condition": "자격에서 벗어난 경우 등에는 입상을 취소함",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 247",
+            "quote": "자격에서 벗어난 경우 등에는 입상을 취소함"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G040",
+        "rule": "○제출 서류상의 기재오류나 연락불능으로 인한 불이익은 일체 제출자의 책임임",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 258",
+          "quote": "○제출 서류상의 기재오류나 연락불능으로 인한 불이익은 일체 제출자의 책임임"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 4330,
+        "evidence_end": 4371,
+        "issues": [],
+        "original": {
+          "requirement_id": "G040",
+          "rule": "○제출 서류상의 기재오류나 연락불능으로 인한 불이익은 일체 제출자의 책임임",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "SEMANTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 258",
+            "quote": "○제출 서류상의 기재오류나 연락불능으로 인한 불이익은 일체 제출자의 책임임"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G041",
+        "rule": "○접수된 서류는 일체 반환하지 않음",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 261",
+          "quote": "○접수된 서류는 일체 반환하지 않음"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 4422,
+        "evidence_end": 4441,
+        "issues": [],
+        "original": {
+          "requirement_id": "G041",
+          "rule": "○접수된 서류는 일체 반환하지 않음",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "SEMANTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 261",
+            "quote": "○접수된 서류는 일체 반환하지 않음"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G042",
+        "rule": "○표절, 명예훼손, 저작권법 위반에 대한 모든 책임은 응모자에게 있음",
+        "modality": "INFO",
+        "severity": "EXTERNAL",
+        "verifier": "EXTERNAL",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 262",
+          "quote": "○표절, 명예훼손, 저작권법 위반에 대한 모든 책임은 응모자에게 있음"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 4442,
+        "evidence_end": 4480,
+        "issues": [],
+        "original": {
+          "requirement_id": "G042",
+          "rule": "○표절, 명예훼손, 저작권법 위반에 대한 모든 책임은 응모자에게 있음",
+          "modality": "INFO",
+          "severity": "EXTERNAL",
+          "verifier": "EXTERNAL",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 262",
+            "quote": "○표절, 명예훼손, 저작권법 위반에 대한 모든 책임은 응모자에게 있음"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G043",
+        "rule": "○출품작 및 아이디어에 대한 권리, 저작권은 응모자(제안자)에게",
+        "modality": "INFO",
+        "severity": "EXTERNAL",
+        "verifier": "EXTERNAL",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 263",
+          "quote": "○출품작 및 아이디어에 대한 권리, 저작권은 응모자(제안자)에게"
+        },
+        "confidence": 0.5,
+        "extraction_status": "NEEDS_REVIEW",
+        "evidence_start": 4481,
+        "evidence_end": 4516,
+        "issues": [
+          "ATOMICITY_REVIEW: 독립 조건을 한 항목에 합쳤는지 확인하고 단일 조건으로 수정하세요."
+        ],
+        "original": {
+          "requirement_id": "G043",
+          "rule": "○출품작 및 아이디어에 대한 권리, 저작권은 응모자(제안자)에게",
+          "modality": "INFO",
+          "severity": "EXTERNAL",
+          "verifier": "EXTERNAL",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 263",
+            "quote": "○출품작 및 아이디어에 대한 권리, 저작권은 응모자(제안자)에게"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G044",
+        "rule": "☐ 공공데이터 활용 지원",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 269",
+          "quote": "☐ 공공데이터 활용 지원"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 4654,
+        "evidence_end": 4667,
+        "issues": [],
+        "original": {
+          "requirement_id": "G044",
+          "rule": "☐ 공공데이터 활용 지원",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "SEMANTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 269",
+            "quote": "☐ 공공데이터 활용 지원"
+          },
+          "confidence": 0.5
+        }
+      }
+    ],
+    "provider": "local-rules-v1 (no AI model)",
+    "execution_kind": "ACTUAL",
+    "extraction_complete": true,
+    "notices": [
+      "로컬 규칙 후보입니다. confidence=0.5는 미보정 값이며 정확도가 아닙니다. 원문 전체를 검토하세요."
+    ],
+    "version": 2,
+    "created_at": "2026-09-03T11:49:58.169385Z",
+    "updated_at": "2026-09-03T11:49:58.173257Z"
+  },
+  "raw": [
+    {
+      "requirement_id": "G001",
+      "rule": "- 제품 및 서비스 개발 부문은 접수 마감일까지 시제품이 완료되어야 함",
+      "modality": "INFO",
+      "severity": "EXTERNAL",
+      "verifier": "EXTERNAL",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 31",
+        "quote": "- 제품 및 서비스 개발 부문은 접수 마감일까지 시제품이 완료되어야 함"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G002",
+      "rule": "아이템을 도용해 저작권을 침해한 경우 입상 취소",
+      "modality": "INFO",
+      "severity": "EXTERNAL",
+      "verifier": "EXTERNAL",
+      "condition": "아이템을 도용해 저작권을 침해한 경우 입상 취소",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 33",
+        "quote": "아이템을 도용해 저작권을 침해한 경우 입상 취소"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G003",
+      "rule": "□참가자격: 제한 없음",
+      "modality": "INFO",
+      "severity": "EXTERNAL",
+      "verifier": "EXTERNAL",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 35",
+        "quote": "□참가자격: 제한 없음"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G004",
+      "rule": "○개인 또는 팀 단위(6인 이내, 팀장/팀원으로 구성) 참가 가능",
+      "modality": "MAY",
+      "severity": "INFO",
+      "verifier": "SEMANTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 37",
+        "quote": "○개인 또는 팀 단위(6인 이내, 팀장/팀원으로 구성) 참가 가능"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G005",
+      "rule": "접수기간",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "SEMANTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 39",
+        "quote": "접수기간"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G006",
+      "rule": "☐ 접수기간",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "SEMANTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 40",
+        "quote": "☐ 접수기간"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G007",
+      "rule": "○서류 제출기간: 5.",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "SEMANTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 41",
+        "quote": "○서류 제출기간: 5."
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G008",
+      "rule": "○제출건수",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "SEMANTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 42",
+        "quote": "○제출건수"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G009",
+      "rule": "- 신청 및 결과물 제출 제한 없음(다수의 작품 응모 가능)",
+      "modality": "MAY",
+      "severity": "INFO",
+      "verifier": "SEMANTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 43",
+        "quote": "- 신청 및 결과물 제출 제한 없음(다수의 작품 응모 가능)"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G010",
+      "rule": "- 참가신청서 1부당 1개 결과물 제출 필수",
+      "modality": "MUST",
+      "severity": "REVIEW",
+      "verifier": "SEMANTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 44",
+        "quote": "- 참가신청서 1부당 1개 결과물 제출 필수"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G011",
+      "rule": "☐ 신청서류 및 제출처",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "SEMANTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 45",
+        "quote": "☐ 신청서류 및 제출처"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G012",
+      "rule": "신청서류",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "SEMANTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 47",
+        "quote": "신청서류"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G013",
+      "rule": "제출방법/제출처",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "SEMANTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 49",
+        "quote": "제출방법/제출처"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G014",
+      "rule": "참가신청서",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "SEMANTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 51",
+        "quote": "참가신청서"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G015",
+      "rule": "담당자 이메일 제출",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "SEMANTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 53",
+        "quote": "담당자 이메일 제출"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G016",
+      "rule": "참가자 서약서",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "SEMANTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 55",
+        "quote": "참가자 서약서"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G017",
+      "rule": "개인정보 수집이용 동의서",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "SEMANTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 57",
+        "quote": "개인정보 수집이용 동의서"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G018",
+      "rule": "아이디어 제3자 공개공유 동의서",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "SEMANTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 59",
+        "quote": "아이디어 제3자 공개공유 동의서"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G019",
+      "rule": "있는 파일 제출, 동영상 파일 등)",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "DETERMINISTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 72",
+        "quote": "있는 파일 제출, 동영상 파일 등)"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G020",
+      "rule": "* 제품 및 서비스는 발표평가시 제품 및 서비스 실물 제출/시연진행 예정",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "SEMANTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 74",
+        "quote": "* 제품 및 서비스는 발표평가시 제품 및 서비스 실물 제출/시연진행 예정"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G021",
+      "rule": "** 발표자료 자유양식으로 파일 별도 제출",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "DETERMINISTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 75",
+        "quote": "** 발표자료 자유양식으로 파일 별도 제출"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G022",
+      "rule": "(본선 진출 자격 부여)",
+      "modality": "INFO",
+      "severity": "EXTERNAL",
+      "verifier": "EXTERNAL",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 100",
+        "quote": "(본선 진출 자격 부여)"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G023",
+      "rule": "※ 평가는 접수에 따라 2개 트랙으로 진행(①아이디어 기획, ②제품 및 서비스 개발)",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "SEMANTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 111",
+        "quote": "※ 평가는 접수에 따라 2개 트랙으로 진행(①아이디어 기획, ②제품 및 서비스 개발)"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G024",
+      "rule": "※※※ 평가방식은 접수 상황에 따라 변동될 수 있음",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "SEMANTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 113",
+        "quote": "※※※ 평가방식은 접수 상황에 따라 변동될 수 있음"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G025",
+      "rule": "○서류발표: 7월 중(예정) 진흥원 홈페이지 및 개별 연락",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "DETERMINISTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 166",
+        "quote": "○서류발표: 7월 중(예정) 진흥원 홈페이지 및 개별 연락"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G026",
+      "rule": "○최종 수상작 발표: 7월 중 (예정) 진흥원 홈페이지 및 개별 연락",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "DETERMINISTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 167",
+        "quote": "○최종 수상작 발표: 7월 중 (예정) 진흥원 홈페이지 및 개별 연락"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G027",
+      "rule": "※ 접수번호로 발표",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "SEMANTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 168",
+        "quote": "※ 접수번호로 발표"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G028",
+      "rule": "시상 및 후속지원",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "SEMANTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 171",
+        "quote": "시상 및 후속지원"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G029",
+      "rule": "데이터 활용 창업경진대회 본선 진출 자격 부여하되, 출전 팀(개인)의 의사에 따라",
+      "modality": "INFO",
+      "severity": "EXTERNAL",
+      "verifier": "EXTERNAL",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 215",
+        "quote": "데이터 활용 창업경진대회 본선 진출 자격 부여하되, 출전 팀(개인)의 의사에 따라"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G030",
+      "rule": "- 참    석: 40여명(공모전 수상자, 참가자 등)",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "SEMANTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 219",
+        "quote": "- 참    석: 40여명(공모전 수상자, 참가자 등)"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G031",
+      "rule": "☐ 후속지원",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "SEMANTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 221",
+        "quote": "☐ 후속지원"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G032",
+      "rule": "창업경진대회 지자체 대표 자격 출전",
+      "modality": "INFO",
+      "severity": "EXTERNAL",
+      "verifier": "EXTERNAL",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 223",
+        "quote": "창업경진대회 지자체 대표 자격 출전"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G033",
+      "rule": "○특허 취득 및 저작권 등록 컨설팅, 마케팅, 기술자문",
+      "modality": "INFO",
+      "severity": "EXTERNAL",
+      "verifier": "EXTERNAL",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 224",
+        "quote": "○특허 취득 및 저작권 등록 컨설팅, 마케팅, 기술자문"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G034",
+      "rule": "○우수자 발표자료 제작 지원(PPT)",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "SEMANTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 225",
+        "quote": "○우수자 발표자료 제작 지원(PPT)"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G035",
+      "rule": "○기타 필요사항에 대한 지원 등",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "SEMANTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 226",
+        "quote": "○기타 필요사항에 대한 지원 등"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G036",
+      "rule": "※ 예시) A작품 팀장이 B작품의 팀원으로 참가 불가",
+      "modality": "MUST_NOT",
+      "severity": "REVIEW",
+      "verifier": "SEMANTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 236",
+        "quote": "※ 예시) A작품 팀장이 B작품의 팀원으로 참가 불가"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G037",
+      "rule": "※ 예시) A작품 팀원이 B작품의 팀장 또는 팀원으로 참가 불가",
+      "modality": "MUST_NOT",
+      "severity": "REVIEW",
+      "verifier": "SEMANTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 237",
+        "quote": "※ 예시) A작품 팀원이 B작품의 팀장 또는 팀원으로 참가 불가"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G038",
+      "rule": "○유사 작품이 타 기관 공모에 당선되었거나, 입상자의 신분이 참가",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "SEMANTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 246",
+        "quote": "○유사 작품이 타 기관 공모에 당선되었거나, 입상자의 신분이 참가"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G039",
+      "rule": "자격에서 벗어난 경우 등에는 입상을 취소함",
+      "modality": "INFO",
+      "severity": "EXTERNAL",
+      "verifier": "EXTERNAL",
+      "condition": "자격에서 벗어난 경우 등에는 입상을 취소함",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 247",
+        "quote": "자격에서 벗어난 경우 등에는 입상을 취소함"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G040",
+      "rule": "○제출 서류상의 기재오류나 연락불능으로 인한 불이익은 일체 제출자의 책임임",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "SEMANTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 258",
+        "quote": "○제출 서류상의 기재오류나 연락불능으로 인한 불이익은 일체 제출자의 책임임"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G041",
+      "rule": "○접수된 서류는 일체 반환하지 않음",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "SEMANTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 261",
+        "quote": "○접수된 서류는 일체 반환하지 않음"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G042",
+      "rule": "○표절, 명예훼손, 저작권법 위반에 대한 모든 책임은 응모자에게 있음",
+      "modality": "INFO",
+      "severity": "EXTERNAL",
+      "verifier": "EXTERNAL",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 262",
+        "quote": "○표절, 명예훼손, 저작권법 위반에 대한 모든 책임은 응모자에게 있음"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G043",
+      "rule": "○출품작 및 아이디어에 대한 권리, 저작권은 응모자(제안자)에게",
+      "modality": "INFO",
+      "severity": "EXTERNAL",
+      "verifier": "EXTERNAL",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 263",
+        "quote": "○출품작 및 아이디어에 대한 권리, 저작권은 응모자(제안자)에게"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G044",
+      "rule": "☐ 공공데이터 활용 지원",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "SEMANTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 269",
+        "quote": "☐ 공공데이터 활용 지원"
+      },
+      "confidence": 0.5
+    }
+  ]
+}
