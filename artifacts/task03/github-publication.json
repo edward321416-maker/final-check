@@ -1,0 +1,23 @@
+{
+  "verified_at": "2026-09-03T02:49:24.4021854Z",
+  "repository": "https://github.com/edward321416-maker/final-check",
+  "phase": "implementation publication before final documentation commit",
+  "pr": {
+    "baseRefName": "main",
+    "headRefName": "codex/task-03-generic-requirement-profile",
+    "headRefOid": "690200cd7dd4986dc57fd15626c85bd743542588",
+    "isDraft": false,
+    "state": "OPEN",
+    "statusCheckRollup": [
+      {
+        "__typename": "StatusContext",
+        "context": "CodeRabbit",
+        "startedAt": "2026-09-03T02:48:52Z",
+        "state": "SUCCESS",
+        "targetUrl": ""
+      }
+    ],
+    "url": "https://github.com/edward321416-maker/final-check/pull/2"
+  },
+  "frozen_sha256": "4b506c3b692f2cef39e2be7cb44b4ce74bcc4ce829064ac655e16f545042bb11"
+}

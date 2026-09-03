@@ -2,6 +2,7 @@ from datetime import datetime
 from enum import StrEnum
 from typing import Literal
 from pydantic import BaseModel, ConfigDict, Field, model_validator
+from app.models.profiles import GenericRequirementProfile
 
 
 class Model(BaseModel):
@@ -31,7 +32,7 @@ class Requirement(Model):
     id: str
     title: str
     description: str
-    verifier: Literal["DETERMINISTIC", "SEMANTIC", "VISION", "EXTERNAL"]
+    verifier: Literal["DETERMINISTIC", "SEMANTIC", "VISION", "VISION_SEMANTIC", "URL_CHECK", "EXTERNAL"]
     announcement_evidence: Evidence
 
 
@@ -44,10 +45,12 @@ class ValidationResult(Model):
     action: str
     announcement_evidence: Evidence | None = None
     submission_evidence: Evidence | None = None
-    source_mode: Literal["validator"] = "validator"
+    source_mode: Literal["validator", "generic_review"] = "validator"
 
     @model_validator(mode="after")
     def enforce_product_lock(self) -> "ValidationResult":
+        if self.source_mode == "generic_review" and self.status not in {FindingStatus.REVIEW, FindingStatus.EXTERNAL}:
+            raise ValueError("Generic automatic verification is unsupported; no PASS/BLOCKER")
         if self.requirement_id in {"R20", "R21"} and self.status not in {FindingStatus.REVIEW, FindingStatus.EXTERNAL}:
             raise ValueError("Licensing and AI provenance have no automatic verification")
         if self.status == FindingStatus.BLOCKER:
@@ -70,8 +73,9 @@ class CheckSession(Model):
     created_at: datetime
     updated_at: datetime
     mode: Literal["demo", "custom"]
-    source_mode: Literal["validator", "unavailable"] = "unavailable"
-    validation_profile: Literal["frozen_v15"] | None = None
+    source_mode: Literal["validator", "generic_review", "unavailable"] = "unavailable"
+    validation_profile: Literal["frozen_v15", "generic"] | None = None
+    generic_profile: GenericRequirementProfile | None = None
     engine_sha256: str | None = None
     run_state: Literal["NOT_STARTED", "RUNNING", "COMPLETE", "FAILED"] = "NOT_STARTED"
     validation_complete: bool = False

@@ -21,7 +21,20 @@
 - [x] Document actual execution, tests, limitations and source integrity.
 
 ## Future work requiring scoped input
-- Obtain the actual generic Requirement Extractor implementation and original announcement evidence.
+- TASK 04: independently benchmark generic extraction with separately authored announcements/gold, including modality, evidence, atomicity and omissions. No accuracy claim from TASK 03.
 - Select a Vision provider only with required authorization and test it separately.
 - Confirm production storage, deployment, retention and supported announcement profiles.
 - Historical 39-case reproduction requires the exact original corpus; do not substitute new fixtures.
+
+## TASK 03 — Generic Announcement → Requirement Profile Integration
+- [x] Verify main e1fab59 and unchanged frozen SHA before edits; work on codex/task-03-generic-requirement-profile.
+- [x] Rerun unchanged baseline: 26 backend / 8 browser passed.
+- [x] Add separate Python/TypeScript generic canonical schema and injectable provider boundary.
+- [x] Implement ACTUAL local-rule extraction with explicit no-AI labeling and evidence/schema/atomicity gates.
+- [x] Accept text and actual text-PDF; scanned/unreadable input generates no rules.
+- [x] Human edit/delete/review/approve → explicit profile CONFIRMED; original evidence and history preserved.
+- [x] Hand off confirmed profile to generic orchestration with REVIEW/EXTERNAL only; no fake PASS/BLOCKER/READY.
+- [x] Execute all updated tests: 47 backend, 14 browser; typecheck and production build pass.
+- [x] Verify frozen directory after tests; preserve original CSS and five routes.
+- [x] Record ACTUAL TEST / SELF-BENCHMARK / SIMULATED / NOT TESTED and first browser failure evidence.
+- [x] Commit/push implementation 690200c and create delivery PR #2 (OPEN, not merged).

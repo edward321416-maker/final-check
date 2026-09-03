@@ -38,6 +38,7 @@ export function Badge({ status }: { status: FindingStatus }) {
 }
 export function ModeNote() {
   const { session } = useSession();
+  if (session?.generic_profile) return <div className="mode-note"><span className="dot" /><strong>GENERIC · {session.generic_profile.execution_kind ?? "실행 전"}</strong><span>로컬 규칙 후보 · AI 모델 미연결. 자동 검증 미지원 → REVIEW / EXTERNAL. 스캔 PDF Vision 미연결.</span></div>;
   return <div className="mode-note"><span className="dot" /><strong>{session?.validation_profile ? "DEMO FILES · VALIDATOR v1.5" : "임의 공고 · 분석 미연결"}</strong>
     <span>{session?.validation_profile ? "실제 파일을 동결 규칙으로 검사합니다. 스캔 PDF Vision 미연결 → REVIEW." : "공고 추출기가 연결되지 않아 요구사항과 판정을 만들지 않습니다."}</span></div>;
 }
@@ -55,10 +56,10 @@ export function Guard({ children, requireResults = false }: { children: ReactNod
 export function PageTitle({ step, title, description }: { step: string; title: string; description: string }) {
   return <div className="page-heading"><div><span className="eyebrow">{step}</span><h1>{title}</h1><p>{description}</p></div><span className="stamp">FINAL<br />CHECK<span>SUBMISSION PREFLIGHT</span></span></div>;
 }
-export function EvidenceBox({ label, evidence }: { label: string; evidence: Evidence | null }) {
+export function EvidenceBox({ label, evidence, emptyText }: { label: string; evidence: Evidence | null; emptyText?: string }) {
   return <div className="evidence"><span className="evidence-label">{label}</span>
     {evidence ? <><blockquote>{evidence.excerpt}</blockquote><small>{evidence.source} · {evidence.locator}</small></>
-      : <p className="muted">제출파일로 확인할 수 없는 외부 항목입니다.</p>}</div>;
+      : <p className="muted">{emptyText ?? "제출파일로 확인할 수 없는 외부 항목입니다."}</p>}</div>;
 }
 export function FileList({ files }: { files: SubmissionFile[] }) {
   return <ul className="file-list">{files.map(file => <li key={file.name}><span className="file-icon">{file.name.toLowerCase().endsWith(".mp4") ? "MP4" : "PDF"}</span><div><strong>{file.name}</strong><small>{(file.size_bytes / 1024).toFixed(1)} KB · {file.media_type}</small></div><span className="file-check" aria-label="선택됨">✓</span></li>)}</ul>;

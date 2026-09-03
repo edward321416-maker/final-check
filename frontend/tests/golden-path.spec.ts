@@ -97,8 +97,11 @@ test("custom file upload never receives mocked findings", async ({ page }) => {
   await page.getByLabel("공고문 파일").setInputFiles(path.resolve("../fixtures/demo-announcement.txt"));
   await page.getByRole("button", { name: "파일 정보 확인" }).click();
   await expect(page).toHaveURL(/\/announcement$/);
-  await expect(page.getByText("실제 공고 분석은 아직 연결되지 않았습니다")).toBeVisible();
-  await page.getByRole("link", { name: "제출파일 선택하기" }).click();
+  await expect(page.getByRole("heading", { name: "요구사항 검토" })).toBeVisible();
+  await expect(page.getByTestId("profile-status")).toHaveText("DRAFT");
+  await expect(page.getByRole("article")).toHaveCount(0);
+  // TASK 03 adds extraction/review; merely receiving a file still grants no verified profile.
+  await page.getByRole("link", { name: /파일 업로드/ }).click();
   await page.getByLabel("제출파일", { exact: true }).setInputFiles(path.resolve("../fixtures/demo-fixed/proposal.pdf"));
   await page.getByRole("button", { name: "선택한 1개 파일 확인" }).click();
   await page.getByRole("button", { name: "Preflight 실행하기" }).click();

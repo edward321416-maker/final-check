@@ -8,6 +8,6 @@ export const metadata: Metadata = { title: "FINAL CHECK — AI Submission Prefli
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return <html lang="ko"><body><SessionProvider><a className="skip-link" href="#main">본문으로 이동</a>
     <header className="site-header"><Link href="/" className="brand"><span className="brand-mark">✓</span>FINAL CHECK<span className="brand-sub">AI SUBMISSION PREFLIGHT</span></Link><span className="header-note"><span className="dot" /> MVP / DEMO</span></header>
-    <div className="shell"><Navigation /><main id="main">{children}</main><footer className="site-footer"><strong>FINAL CHECK</strong><span>확신은, 근거에서 시작됩니다.</span><span>FROZEN v1.5 · LOCAL DEMO</span></footer></div>
+    <div className="shell"><Navigation /><main id="main">{children}</main><footer className="site-footer"><strong>FINAL CHECK</strong><span>확신은, 근거에서 시작됩니다.</span><span>LOCAL MVP · EVIDENCE FIRST</span></footer></div>
   </SessionProvider></body></html>;
 }

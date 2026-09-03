@@ -1,0 +1,14 @@
+{
+  "verified_at": "2026-09-03T02:50:20.9795403Z",
+  "frontend_http": 200,
+  "health": {
+    "status": "ok",
+    "mode": "frozen_v15",
+    "validator": "available",
+    "engine_sha256": "4b506c3b692f2cef39e2be7cb44b4ce74bcc4ce829064ac655e16f545042bb11",
+    "vision_provider": "unavailable",
+    "version": "0.3.0",
+    "generic_extractor": "local-rules-v1 (no AI model)",
+    "generic_verification": "unsupported"
+  }
+}

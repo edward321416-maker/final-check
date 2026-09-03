@@ -1,5 +1,13 @@
 # Engineering decisions
 
+- 2026-09-03 TASK 03: Branch from verified main e1fab59; preserve frozen directory and original CSS byte-for-byte.
+- 2026-09-03 TASK 03: Use an injectable RequirementExtractor with an ACTUAL local-rule implementation, no AI provider account/key/network dependency. Do not label actual code execution as AI accuracy. Test-only fixture providers are SIMULATED.
+- 2026-09-03 TASK 03: Keep generic canonical profile models separate from frozen legacy requirements. Populate the validation representation only after explicit profile confirmation; generic results are review-only and never execute frozen childcare rules.
+- 2026-09-03 TASK 03: Store exact source text, input/text SHA, quote offsets, immutable original candidates and before/after review events. Reject missing evidence and unsupported BLOCKER modalities; syntactic atomicity issues require human correction.
+- 2026-09-03 TASK 03: Every edit invalidates previous approval/activation and findings; explicit APPROVE may save and approve the edited candidate in one user-authorized action. Whole-profile confirmation requires all retained items approved plus full-source acknowledgement. Version checks protect stale review requests.
+- 2026-09-03 TASK 03: Reuse existing process-local session storage and TTL. Bound PDF parsing in a worker; do not add OCR or new persistence. New form styles are scoped to a CSS module; existing globals.css and five routes are preserved.
+- 2026-09-03 TASK 03: Adapt the existing custom-upload browser regression assertion to the new DRAFT view, retaining its no-extraction/no-frozen-profile/no-fake-finding invariant. Keep all 26 original backend tests intact.
+
 - 2026-09-02 TASK 02: Baseline 7bc3aeb preserves TASK 01; integration on codex/task-02-frozen-v15.
 - 2026-09-02 TASK 02: Original v1.5 SHA matched. Keep source and reference artifacts byte-identical with Git text conversion disabled.
 - 2026-09-02 TASK 02: Replace serialized NEEDS_REVIEW with REVIEW_REQUIRED. Separate run lifecycle and null pre-run summary.
