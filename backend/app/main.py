@@ -2,6 +2,7 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
 from app.api.routes import router, MAX_PACKAGE_BYTES
+from app.api.profiles import router as profile_router
 from app.services import sessions
 
 
@@ -11,9 +12,10 @@ async def lifespan(app: FastAPI):
     sessions.close_all()
 
 
-app = FastAPI(title="FINAL CHECK — AI Submission Preflight", version="0.2.0", lifespan=lifespan,
+app = FastAPI(title="FINAL CHECK — AI Submission Preflight", version="0.3.0", lifespan=lifespan,
               description="Frozen v1.5 with actual uploaded files and synthetic demo packages. No Vision provider.")
 app.include_router(router)
+app.include_router(profile_router)
 
 
 @app.middleware("http")

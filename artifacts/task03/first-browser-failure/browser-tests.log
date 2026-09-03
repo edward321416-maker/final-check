@@ -1,0 +1,72 @@
+
+> final-check-frontend@0.1.0 test:smoke
+> playwright test
+
+[WebServer] INFO:     Started server process [37048]
+[WebServer] INFO:     Waiting for application startup.
+[WebServer] INFO:     Application startup complete.
+[WebServer] INFO:     Uvicorn running on http://127.0.0.1:8100 (Press CTRL+C to quit)
+[WebServer] (node:23312) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 14 tests using 2 workers
+
+(node:41260) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:22620) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok  2 [desktop] › tests\generic-profile.spec.ts:85:7 › actual text PDF announcement path (1.5s)
+  ok  1 [desktop] › tests\generic-profile.spec.ts:29:5 › generic text, evidence, human edit/delete/approve, confirmation and real handoff (2.3s)
+  ok  3 [desktop] › tests\generic-profile.spec.ts:85:7 › actual scanned PDF announcement path (1.3s)
+  ok  5 [desktop] › tests\golden-path.spec.ts:88:5 › deep link without a session has a recovery path (444ms)
+  ok  6 [desktop] › tests\golden-path.spec.ts:95:5 › custom file upload never receives mocked findings (800ms)
+  ok  7 [desktop] › tests\golden-path.spec.ts:113:5 › backend failure is recoverable and does not advance (521ms)
+(node:27608) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok  8 [mobile] › tests\generic-profile.spec.ts:29:5 › generic text, evidence, human edit/delete/approve, confirmation and real handoff (5.5s)
+  ok  4 [desktop] › tests\golden-path.spec.ts:28:5 › five-screen golden path, evidence, filter, reload and recheck (9.6s)
+(node:41248) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok  9 [mobile] › tests\generic-profile.spec.ts:85:7 › actual text PDF announcement path (2.2s)
+  ok 10 [mobile] › tests\generic-profile.spec.ts:85:7 › actual scanned PDF announcement path (1.5s)
+  ok 12 [mobile] › tests\golden-path.spec.ts:88:5 › deep link without a session has a recovery path (397ms)
+  ok 11 [mobile] › tests\golden-path.spec.ts:28:5 › five-screen golden path, evidence, filter, reload and recheck (10.3s)
+  ok 14 [mobile] › tests\golden-path.spec.ts:113:5 › backend failure is recoverable and does not advance (496ms)
+  x  13 [mobile] › tests\golden-path.spec.ts:95:5 › custom file upload never receives mocked findings (45.2s)
+
+
+  1) [mobile] › tests\golden-path.spec.ts:95:5 › custom file upload never receives mocked findings ─
+
+    Test timeout of 45000ms exceeded.
+
+    Error: locator.click: Test timeout of 45000ms exceeded.
+    Call log:
+      - waiting for getByRole('link', { name: /Submission Upload/ })
+
+
+      102 |   await expect(page.getByRole("article")).toHaveCount(0);
+      103 |   // TASK 03 adds extraction/review; merely receiving a file still grants no verified profile.
+    > 104 |   await page.getByRole("link", { name: /Submission Upload/ }).click();
+          |                                                               ^
+      105 |   await page.getByLabel("제출파일", { exact: true }).setInputFiles(path.resolve("../fixtures/demo-fixed/proposal.pdf"));
+      106 |   await page.getByRole("button", { name: "선택한 1개 파일 확인" }).click();
+      107 |   await page.getByRole("button", { name: "Preflight 실행하기" }).click();
+        at D:\Users\admin\Desktop\ai공모전\해커톤\final-check\frontend\tests\golden-path.spec.ts:104:63
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\golden-path-custom-file-up-faba1-er-receives-mocked-findings-mobile\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\golden-path-custom-file-up-faba1-er-receives-mocked-findings-mobile\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\golden-path-custom-file-up-faba1-er-receives-mocked-findings-mobile\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\golden-path-custom-file-up-faba1-er-receives-mocked-findings-mobile\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    [mobile] › tests\golden-path.spec.ts:95:5 › custom file upload never receives mocked findings ──
+  13 passed (1.0m)

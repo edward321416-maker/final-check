@@ -1,5 +1,5 @@
 # FINAL CHECK — AI Submission Preflight
-Version: 1.1 | TASK 02 product instructions supplied 2026-09-02.
+Version: 1.2 | TASK 03 integration instructions supplied 2026-09-03.
 
 ## Ownership and source of truth
 ChatGPT planning: Product / Business Lead. Codex: AI / Engineering Lead.
@@ -38,7 +38,7 @@ Application input/output adaptation belongs in v15_adapter.py. No source reforma
 ## Current supported validation profile
 The provided engine contains a fixed childcare short-form competition profile, R05–R17 and R19–R21, including the literal team name 테스트어린이집.
 The application uses its SOURCE_RULES as handoff announcement excerpts. They are not newly extracted from an original announcement PDF.
-Arbitrary announcement extraction is unavailable; custom announcement sessions cannot inherit this profile.
+Custom announcement sessions never inherit this frozen profile. TASK 03 uses the separate generic profile layer below.
 Demo selection downloads actual fixture bytes to the browser and uploads them through the same multipart submission endpoint used by file selection.
 Actual files are hashed, held in an isolated temporary session package and executed by the original Python validator.
 Review findings and factual measurements are shown with both source references; raw engine output is retained separately.
@@ -67,3 +67,19 @@ Production storage, multi-worker coordination, public app deployment and arbitra
 User-reported independent extractor PASS and frozen 39-package Final Full Gate PASS are reference history.
 The exact historical 39-case corpus is absent from this handoff; do not claim reproduction.
 Technical Kill Test is closed. TASK 02 executes new local fixtures and integration invariants only.
+
+## TASK 03 generic announcement contract
+Keep the same five screens. Text/PDF input lives on Home; extraction, evidence and human review live within Announcement Analysis.
+Flow: input → extraction → draft profile → per-item review/edit/delete/approval → explicit whole-profile confirmation → upload/validation orchestration.
+Requirement extraction statuses: EXTRACTED, NEEDS_REVIEW, CONFIRMED, UNSUPPORTED. Profile statuses: DRAFT, REVIEW_REQUIRED, CONFIRMED.
+No provider may automatically confirm an item or profile. Each retained item needs an explicit user approval; profile confirmation requires acknowledgement that the entire source was reviewed.
+Canonical fields: requirement_id, rule, modality, severity, verifier, condition, evidence.source_section, evidence.quote, confidence.
+Modality: MUST/MUST_NOT/SHOULD/MAY/INFO. Severity: BLOCKER/REVIEW/INFO/EXTERNAL. Verifier: DETERMINISTIC/SEMANTIC/VISION_SEMANTIC/URL_CHECK/EXTERNAL.
+Every candidate needs nonblank exact source evidence, anchored to source-text character offsets. Reject missing or rewritten quotes. SHOULD/MAY/INFO + BLOCKER is a schema error. Compound candidates are split by supported syntax or held for atomicity review; flagged items cannot be approved until edited.
+The provider interface is injectable. Default local-rules-v1 executes deterministic Korean keyword/line heuristics; it is **not an AI model**. Its output is actual local execution, with uncalibrated confidence 0.5 and no independent accuracy claim.
+The original input SHA-256, extracted-text SHA-256, full text, source type/name, profile ID/version and review history preserve provenance. Exact substring matching is not proof of semantic entailment; a human must review wording, modality, conditions and omissions.
+Generic profile mutations invalidate its activation and prior results. Optimistic version checks reject stale approval. Stored profile JSON is available in the session response and preserved in the generic run envelope.
+Only CONFIRMED generic profiles populate the validation handoff. Their automatic submission verifiers are not implemented: results are REVIEW/EXTERNAL, validation_complete=false, engine_sha256=null, never fake PASS/BLOCKER/READY. Confirmation means requirements reviewed, not submission verified.
+Input bounds: UTF-8 text, 100,000 characters; announcement uploads up to 10 MiB; PDF up to 50 pages with a 30-second parsing worker timeout. A PDF with a textless page is VISION_REQUIRED and generates zero candidates. Invalid/encrypted/oversized sources use unreadable/unsupported paths. Embedded image contents and complex PDF reading order are not interpreted.
+Generic profiles inherit the existing single-process, temporary-session lifetime. No paid provider, OAuth, Vision, production hosting, R19 change or historical benchmark claim is added.
+Correct delivery claim: **Generic announcement requirement-profile pipeline is integrated and executable.** General accuracy is for TASK 04 independent evaluation.

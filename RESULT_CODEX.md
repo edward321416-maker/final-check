@@ -1,4 +1,129 @@
-# RESULT_CODEX — TASK 02
+# RESULT_CODEX — TASK 03
+Date: 2026-09-03 (Asia/Seoul). Base: main e1fab59c83185ad1ddf438046a5ae9f12cf17789.
+Branch: codex/task-03-generic-requirement-profile.
+
+## TASK 03 STATUS
+
+**PASS — integration acceptance (all 10 gates).**
+Generic announcement requirement-profile pipeline is integrated and executable.
+This is not a claim that FINAL CHECK accurately understands every competition announcement.
+GitHub delivery is recorded below once actually published. The unchanged TASK 02 report is retained below and in [its baseline archive](artifacts/task02-baseline/RESULT_CODEX_TASK02.md).
+
+## ACTUAL EXECUTION
+
+- Verified the real checkout, origin, clean main, fetched origin/main (0 ahead / 0 behind), read project policy/source-of-truth documents and stack metadata before code changes.
+- Created the requested branch; preserved frozen source/manifests/reference artifacts, fixtures and existing globals.css. No unrelated repository was modified.
+- Added separate generic Python/TypeScript schemas supporting all requested canonical fields, modality/severity/verifier enums, four extraction states and three profile states.
+- Added an injectable RequirementExtractor boundary and executable local-rules-v1. It uses Korean keywords and clause/line patterns, no remote calls or AI model. Actual execution and uncalibrated confidence are visibly labelled.
+- Implemented exact quote/offset and source-text hash validation, NO EVIDENCE → NO RULE, SHOULD/MAY/INFO + BLOCKER schema rejection, compound-rule review gates and explicit user-only approval.
+- Text input and UTF-8 TXT/PDF uploads preserve source SHA, text SHA, exact source text, source type/name and profile identity. PDF parsing runs in a bounded local worker. Scanned/unreadable input creates no requirements.
+- Added edit/delete/NEEDS_REVIEW/APPROVE controls inside the existing Announcement Analysis screen. Before/after history and original candidates preserve provenance. Version checks reject stale edits. Whole-profile confirmation requires every retained item approved and a full-source-review acknowledgement.
+- Generic profile changes invalidate activation and prior findings. Only CONFIRMED profiles populate the canonical validation handoff. Frozen and generic branches remain distinct.
+- Generic orchestration verifies uploaded-byte receipts, then returns REVIEW/EXTERNAL with validation_complete=false and engine_sha256=null. No generic submission verifier is fabricated, and the frozen engine is never repurposed for a generic profile.
+- Preserved the five routes and original global layout/CSS. Added only scoped form styles and truthful provider/result labels.
+- Generated actual new text-PDF and raster-only PDF bytes; checked their text layers with pypdf separately from application PyMuPDF parsing. No new dependency, account, OAuth, paid API or plugin installation was needed.
+
+## ACTUAL TEST
+
+All commands below were actually executed locally on Windows. Paths are relative to the specified working directory.
+
+| Working directory / command | Actual result |
+| --- | --- |
+| backend: `.venv/Scripts/python.exe -X utf8 -m pytest -q --junitxml=../artifacts/task03/backend-baseline.xml` | Original **26 passed**, 16.77s, one existing Starlette deprecation warning |
+| frontend: `npm run test:smoke` before edits | Original **8 passed**, 21.7s |
+| root: `backend/.venv/Scripts/python.exe -X utf8 scripts/generate_announcement_fixtures.py` | PASS; actual text PDF and raster-only PDF, second-parser content checks passed |
+| backend: `.venv/Scripts/python.exe -X utf8 -c "from app.main import app; print('API import OK:', len(app.routes))"` | API import PASS |
+| backend: `.venv/Scripts/python.exe -X utf8 -m pytest -q --junitxml=../artifacts/task03/backend-tests.xml` | **47 passed**, 10.01s; original 26 plus 21 new cases; one existing warning |
+| frontend: `npm run typecheck` | PASS, exit 0 |
+| frontend: `npm run build` | PASS, exit 0; five product routes preserved |
+| frontend: `npm run test:smoke` after final UI changes | **14 passed**, 22.2s; 0 failed, skipped or flaky; original 8 plus 6 new desktop/mobile cases |
+| root: `git diff --check` | PASS |
+| root: `git diff --cached --check` | PASS after normalizing generated-log whitespace |
+| Frozen directory before/after SHA-256 comparison | PASS, all four files unchanged |
+
+The final browser run began **2026-09-03T02:40:42.8Z**, using Desktop Chrome 1440×1000 and existing iPhone 13 Chromium emulation, 2 workers, 0 retries.
+The new text golden path actually inputs source text, runs extraction, checks quotes, edits/saves/keeps review, deletes one item, approves every retained item, confirms/reloads the profile, uploads an actual PDF and reaches REVIEW/EXTERNAL results and Recheck. Normal requests are not intercepted. Page/console error collections were empty in the generic and frozen golden paths.
+Actual text-PDF and scanned-PDF browser paths ran in both viewports. Captures assert no horizontal overflow. Desktop review/result and mobile scan screenshots were visually inspected.
+Backend cases cover every A–J requirement: missing/rewritten evidence, all three forbidden BLOCKER modalities, atomicity rejection, text/PDF/scan, review lifecycle, edited provenance and before/current frozen integrity. Additional guards cover deletion audit, empty confirmation, source/hash tampering, stale versions, provider failure, malformed PDF/timeout and generic fake verdict rejection.
+
+Evidence:
+- [Backend JUnit](artifacts/task03/backend-tests.xml) / [backend log](artifacts/task03/backend-tests.log)
+- [Browser JSON](artifacts/task03/browser-tests.json) / [browser log](artifacts/task03/browser-tests.log)
+- [Typecheck](artifacts/task03/typecheck.log) / [build](artifacts/task03/build.log)
+- [Fixture audit](artifacts/task03/announcement-fixture-audit.json)
+- [Text extraction profile](artifacts/task03/text-profile-extracted.json)
+- [Actual text-PDF profile](artifacts/task03/submission.pdf-profile.json) / [scanned-PDF profile](artifacts/task03/scanned.pdf-profile.json)
+- [Confirmed profile and validation handoff](artifacts/task03/confirmed-handoff.json)
+- [Ten generic browser screenshots](artifacts/task03/screenshots/) and current frozen-flow captures in artifacts/screenshots/.
+
+## SELF-BENCHMARK
+
+The synthetic announcement, generated PDFs and expected five extraction candidates were authored in this same task. Atomic split, modality and expected-candidate comparisons are **SELF-BENCHMARK**, not independently labelled evaluation.
+Execution of real files and code is ACTUAL TEST; that does not convert same-session ground truth into independent accuracy evidence. No recall, precision, general coverage or 90%+ claim is made.
+
+## SIMULATED
+
+- Test-only MockProvider injections explicitly return execution_kind=SIMULATED. They exercise rewritten evidence rejection and compound-rule review, not real AI/model extraction.
+- Provider exceptions and PDF timeouts are labelled fault injections. The existing isolated browser outage test injects a 503 response.
+- The default application provider is ACTUAL local rules, not MOCK and not an AI model. Generic submission verification is UNSUPPORTED, not simulated PASS/BLOCKER.
+
+## NOT TESTED
+
+- Independent generic extraction accuracy, held-out gold, general competition recall/precision or external-model extraction.
+- Actual Vision/OCR/model integration, URL fetching, semantic submission compliance, malware scanning or R19 improvements.
+- Historical 39-case reproduction: exact corpus absent; no replacement corpus or prior-score reproduction claim.
+- Firefox/WebKit, physical phones, screen-reader audit, production hosting, load testing or multi-worker operation.
+- Robust PDF table/reading-order interpretation, embedded image requirements, arbitrary languages/encodings and exhaustive semantic atomicity/entailment.
+- Google Sheets/Drive API synchronization; no authenticated API write is claimed. Completion logging is queued privately when publication is complete.
+
+## REGRESSION
+
+- The unchanged original backend suite ran before edits (26 passed) and remains intact in the final 47-test run.
+- Original browser suite ran unchanged before edits (8 passed). Final run retains all 8 scenarios. One custom-upload assertion now expects the new DRAFT review UI and still proves no implicit extraction, frozen-profile inheritance or fake findings.
+- Actual frozen broken path remains R09/R13 BLOCKER, BLOCKED; fixed clears both blockers with zero remaining blockers and REVIEW_REQUIRED. R19/R20/R21 remain REVIEW. Evidence-first requirements are asserted by the existing tests.
+- No frozen source, constants, filename rules, threshold, algorithm, global CSS or route changes.
+
+## SOURCE INTEGRITY
+
+Before SHA-256: **4b506c3b692f2cef39e2be7cb44b4ce74bcc4ce829064ac655e16f545042bb11**
+
+After SHA-256: **4b506c3b692f2cef39e2be7cb44b4ce74bcc4ce829064ac655e16f545042bb11**
+
+**Identical.** Entire frozen directory: [before](artifacts/task03/frozen-before.json) / [after](artifacts/task03/frozen-after.json). Both measurements were made in this task. Git diff for frozen_v15 and frontend/app/globals.css is empty.
+
+## PRODUCT LIMITATIONS
+
+- Local rules are a narrow, uncalibrated Korean heuristic. Implicit obligations, negations, multi-line context, exceptions, cross-references and applicant-facing scope can be missed or misclassified. Users must review the full source, not only extracted candidates.
+- Exact evidence matching proves textual provenance, not semantic entailment. Atomicity checks are conservative syntax checks, not an exhaustive semantic proof. Original clause fragments may need wording edits.
+- Provider candidates default to conservative REVIEW/INFO/EXTERNAL severities. User-edited MUST/MUST_NOT BLOCKER severity is allowed in the profile; it still cannot create an unsupported automatic submission BLOCKER.
+- CONFIRMED means human-reviewed requirements. Generic compliance verification is not implemented: all results REVIEW/EXTERNAL, summary REVIEW_REQUIRED, validation incomplete. Evidence panels explicitly say submission verification was not run.
+- Input limits: 10 MiB announcement, 100,000 text characters, 50 PDF pages, 30-second worker timeout. Any textless PDF page prevents extraction. A readable text layer does not prove that image-based conditions were captured.
+- Profiles/history/source bytes remain in the existing local temporary session lifecycle (one-hour inactivity TTL, restart/shutdown expiry), without durable production storage.
+- TASK 04 should use independently collected announcements and independently authored gold to assess extraction before any broad product accuracy claim. External provider and generic automatic-verifier selection remain separately scoped.
+
+## FAILURES CORRECTED
+
+The first updated browser run produced **13 passed / 1 failed**: the mobile custom-upload regression searched an English navigation label hidden by the existing responsive CSS. The page snapshot showed the visible Korean label. Changed the selector to that Korean label, preserved all safety assertions, rebuilt and reran the entire suite: **14 passed**. [Original failure log, JSON, snapshot and screenshot](artifacts/task03/first-browser-failure/).
+The initial staged whitespace check flagged trailing spaces/blank EOF lines in generated terminal logs and the failure snapshot. Normalized only artifact whitespace; the subsequent staged check passed. Test results, JSON findings and frozen bytes were unchanged.
+One existing Starlette TestClient/httpx deprecation warning and Node color-environment notices remain; they did not cause runtime or final test failures.
+
+## CHANGED FILES
+
+- New backend: app/models/profiles.py; app/api/profiles.py; app/services/{announcement_input,extractors,profiles,generic_validation}.py; tests/test_profiles.py.
+- Updated backend: app/models/schemas.py, app/api/routes.py, app/main.py. Original backend/tests/test_smoke.py and frozen_v15 directory unchanged.
+- New frontend: types/profile.ts; components/generic-profile.tsx and profile.module.css; tests/generic-profile.spec.ts.
+- Updated frontend: types/check.ts; components/screens.tsx and ui.tsx; app/layout.tsx; tests/golden-path.spec.ts. Original globals.css unchanged.
+- New fixtures/announcements/ and scripts/generate_announcement_fixtures.py.
+- Updated product/README/demo/decision/issues/tasks/result/sync documents; baseline archives, fixture audit, profile outputs, test reports and screenshots.
+- Full path inventory: [changed-files.txt](artifacts/task03/changed-files.txt). Review the TASK 03 PR diff against main for every change.
+
+## GITHUB DELIVERY
+
+Tests and integration gates passed locally. Commit/push/PR metadata is appended after actual publication; no publication or merge is implied by this local status.
+
+---
+
+# Historical TASK 02 report — unchanged results, not a TASK 03 rerun claim
 Date: 2026-09-02 (Asia/Seoul)
 Integration acceptance: **PASS**. **GITHUB_PUBLICATION = PUBLISHED**.
 TASK 01 baseline: commit 7bc3aeb37d2e4a5fbc96904409f0187d91ab6a39.

@@ -1,0 +1,18 @@
+[
+  {
+    "file": "FREEZE_MANIFEST.json",
+    "sha256": "89d047519d4145d9fb4fb24f26a022c00f9d5b7dfe50ab7c42a4f67894117670"
+  },
+  {
+    "file": "PRE_REGISTERED_ACCEPTANCE_POLICY.json",
+    "sha256": "c65a3bae3275df5f8cc93811991bca0bb4df07e57bcbdaa5d9fd8467afe332cc"
+  },
+  {
+    "file": "validator_v1_5.py",
+    "sha256": "4b506c3b692f2cef39e2be7cb44b4ce74bcc4ce829064ac655e16f545042bb11"
+  },
+  {
+    "file": "VISION_PROTOCOL.md",
+    "sha256": "d4d0a849b789f241e3b4fbc15f858bc5a3814dcb6018bdb186af55b5dc8f37da"
+  }
+]

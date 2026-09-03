@@ -7,6 +7,9 @@ from fastapi.responses import FileResponse
 from starlette.concurrency import run_in_threadpool
 from app.models.schemas import CheckSession, CreateSession, SubmissionFile, SubmissionStatus
 from app.services import demo, sessions
+from app.services import generic_validation, profiles
+from app.services.announcement_input import MAX_ANNOUNCEMENT_BYTES, source_from_bytes
+from app.api.profiles import custom_session, invalidate
 from app.services.policy import summarize
 from app.validators.v15_adapter import EXPECTED_SHA256, ValidatorUnavailable, profile_requirements, validator_v15
 
@@ -16,10 +19,11 @@ MAX_PACKAGE_BYTES = 350 * 1024 * 1024
 MAX_FILES = 8
 
 
-async def receive(upload: UploadFile, allowed: set[str], directory: Path | None = None) -> SubmissionFile:
+async def receive(upload: UploadFile, allowed: set[str], directory: Path | None = None,
+                  max_bytes: int | None = None) -> SubmissionFile:
     original = upload.filename or ""
     name = PurePosixPath(original.replace("\\", "/")).name
-    if not name or name != original or any(char in name for char in '<>:"|?*') or name.endswith((" ", ".")):
+    if not name or len(name) > 200 or name != original or any(char in name for char in '<>:"|?*') or name.endswith((" ", ".")):
         raise HTTPException(422, "Invalid filename.")
     if PurePosixPath(name).suffix.lower() not in allowed:
         raise HTTPException(415, "Unsupported file type.")
@@ -29,8 +33,8 @@ async def receive(upload: UploadFile, allowed: set[str], directory: Path | None 
     try:
         while chunk := await upload.read(64 * 1024):
             size += len(chunk)
-            if size > MAX_FILE_BYTES:
-                raise HTTPException(413, "Each file must be at most 320 MiB.")
+            if size > (MAX_FILE_BYTES if max_bytes is None else max_bytes):
+                raise HTTPException(413, "File exceeds the upload size limit.")
             digest.update(chunk)
             if stream:
                 await run_in_threadpool(stream.write, chunk)
@@ -47,7 +51,8 @@ async def receive(upload: UploadFile, allowed: set[str], directory: Path | None 
 async def health() -> dict:
     available = await run_in_threadpool(lambda: validator_v15.available)
     return {"status": "ok", "mode": "frozen_v15", "validator": "available" if available else "unavailable",
-            "engine_sha256": EXPECTED_SHA256, "vision_provider": "unavailable", "version": "0.2.0"}
+            "engine_sha256": EXPECTED_SHA256, "vision_provider": "unavailable", "version": "0.3.0",
+            "generic_extractor": "local-rules-v1 (no AI model)", "generic_verification": "unsupported"}
 
 
 @router.post("/sessions", response_model=CheckSession, status_code=201)
@@ -79,15 +84,20 @@ async def announcement(session_id: str) -> CheckSession:
 
 @router.post("/sessions/{session_id}/announcement", response_model=CheckSession)
 async def upload_announcement(session_id: str, file: Annotated[UploadFile, File()]) -> CheckSession:
-    session = sessions.get(session_id)
-    if session.mode != "custom":
-        raise HTTPException(409, "Start a custom session to upload your announcement.")
-    receipt = await receive(file, {".pdf", ".txt"})
-    session.announcement_name = receipt.name
-    session.requirements = []
-    session.validation_profile = None
-    session.source_mode = "unavailable"
-    return sessions.save(session)
+    session = custom_session(session_id)
+    async with sessions.LOCKS[session_id]:
+        # Input files never share a directory with the submission package.
+        with sessions.new_package(session_id) as temporary:
+            receipt = await receive(file, {".pdf", ".txt"}, Path(temporary), MAX_ANNOUNCEMENT_BYTES)
+            path = Path(temporary) / receipt.name
+            data = await run_in_threadpool(path.read_bytes)
+            source = await run_in_threadpool(source_from_bytes, receipt.name, data,
+                                            "PDF" if path.suffix.lower() == ".pdf" else "TEXT", path)
+            await run_in_threadpool((Path(sessions.WORKSPACES[session_id].name) / "announcement.bin").write_bytes, data)
+        invalidate(session)
+        session.announcement_name = receipt.name
+        session.generic_profile = profiles.new_profile(source)
+        return sessions.save(session)
 
 
 @router.get("/demo-files/{case}", response_model=list[SubmissionFile])
@@ -145,7 +155,7 @@ async def upload_files(session_id: str, files: Annotated[list[UploadFile], File(
 @router.post("/sessions/{session_id}/validate", response_model=CheckSession)
 async def validate(session_id: str) -> CheckSession:
     session = sessions.get(session_id)
-    if session.validation_profile != "frozen_v15":
+    if session.validation_profile not in {"frozen_v15", "generic"}:
         raise HTTPException(503, "Announcement extraction is not connected; no verified requirement profile.")
     package = sessions.package_path(session_id)
     lock = sessions.LOCKS[session_id]
@@ -161,7 +171,8 @@ async def validate(session_id: str) -> CheckSession:
         session.run_error = None
         sessions.save(session)
         try:
-            run = await run_in_threadpool(validator_v15.validate, session.model_copy(deep=True), package)
+            runner = generic_validation.validate if session.validation_profile == "generic" else validator_v15.validate
+            run = await run_in_threadpool(runner, session.model_copy(deep=True), package)
             # Preserve raw output privately without adding output files to the submitted package.
             raw_path = Path(sessions.WORKSPACES[session_id].name) / f"run-{session.revision + 1}-raw.json"
             await run_in_threadpool(raw_path.write_text, json.dumps(run.raw, ensure_ascii=False, indent=2), encoding="utf-8")

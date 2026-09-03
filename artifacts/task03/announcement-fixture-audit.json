@@ -1,0 +1,23 @@
+{
+  "classification": "ACTUAL TEST / same-session synthetic fixtures",
+  "accuracy_evaluation": "SELF-BENCHMARK only",
+  "text_pdf_extractable": true,
+  "scan_text_empty": true,
+  "files": [
+    {
+      "name": "scanned.pdf",
+      "bytes": 19891,
+      "sha256": "85ee14a30eadb7926e0aa8cf17d0e401e3b88db64f25bb2536936b53b4fe98ca"
+    },
+    {
+      "name": "submission.pdf",
+      "bytes": 1705116,
+      "sha256": "90a5dcac18bb34c25dfbc528bfe84ad2e49144a65200495155b673e55aa12427"
+    },
+    {
+      "name": "submission.txt",
+      "bytes": 378,
+      "sha256": "38be279a337d7c12b4757812f6e924da4086d4a3d927578d357319a9e3879d62"
+    }
+  ]
+}

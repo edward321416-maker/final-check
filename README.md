@@ -1,7 +1,8 @@
 # FINAL CHECK — AI Submission Preflight
 공고문과 실제 제출파일을 넣으면, AI가 제출 전에 탈락요인을 찾아주고 각 판정의 근거까지 보여준다.
 
-TASK 02 connects the original **frozen Validator v1.5** to real multipart uploads and the existing five-screen UI.
+TASK 03 adds a generic announcement → human-reviewed requirement profile → validation handoff path to the existing five-screen UI. Its default extractor is local rules, **not an external AI model**. Generic automatic submission verification is unsupported and returns REVIEW/EXTERNAL.
+TASK 02 connects the original **frozen Validator v1.5** to real multipart uploads and remains unchanged in behavior.
 The demo uses newly generated synthetic files. Its findings come from actual Python execution, not canned JSON.
 [Product lock](docs/PRODUCT_SPEC_V1.md) · [Actual execution report](RESULT_CODEX.md) · [Demo script](docs/DEMO_SCRIPT.md)
 
@@ -46,7 +47,7 @@ Historical TASK 01 fixtures stay in their original directories and are never use
 - Frozen source hash: 4b506c3b692f2cef39e2be7cb44b4ce74bcc4ce829064ac655e16f545042bb11.
 - Native engine input: a directory of files. App adaptation is in backend/app/validators/v15_adapter.py.
 - Supported announcement profile: the provided childcare short-form competition SOURCE_RULES, with fixed 테스트어린이집 file names.
-- Arbitrary announcement extraction is not integrated. No custom announcement silently inherits the profile.
+- Custom text/text-PDF announcements use a separate generic profile, explicit per-item approval and whole-profile confirmation. No custom announcement inherits frozen rules.
 - R19 uncertainty → REVIEW. R20/R21 licensing and provenance → REVIEW. No unsupported automatic PASS/BLOCKER.
 - Scanned PDF Vision is unavailable → REVIEW, incomplete. No invented model result.
 - Submission status: BLOCKED / REVIEW_REQUIRED / READY. Before a run: null plus run_state=NOT_STARTED.
@@ -54,6 +55,15 @@ Historical TASK 01 fixtures stay in their original directories and are never use
 - No auth, payment, analytics, automatic submission, remote AI call or public app deployment.
 - A public source repository is distinct from a publicly hosted application.
 - The exact historical 39-case corpus was not included or rerun. Its report is reference evidence only.
+
+## Generic announcement review
+On Home, paste the source text or choose a UTF-8 TXT/text-based PDF. Run "요구사항 추출 실행" on Announcement Analysis.
+Review each original quote and its source offset; edit/delete candidates, keep NEEDS_REVIEW or approve each item. Check the full-source acknowledgement and choose "Profile 확정" before handing off to validation.
+PDF input limit: 10 MiB, 50 pages, 100,000 extracted characters; no OCR/Vision. Textless pages require Vision and cannot produce a confirmed profile.
+The local provider uses narrow Korean patterns. Confidence 0.5 is uncalibrated. It can miss rules, misclassify modality/conditions or require manual splitting. No recall/precision or universal competition coverage is claimed.
+The generic pipeline checks actual upload identity but does not test submission compliance. Its findings remain REVIEW/EXTERNAL and its summary REVIEW_REQUIRED.
+Canonical schemas: backend/app/models/profiles.py and frontend/types/profile.ts. Provider interface: backend/app/services/extractors.py. Human review: backend/app/services/profiles.py. Generic handoff: backend/app/services/generic_validation.py.
+New checks run with the same pytest and Playwright commands above. To regenerate only TASK 03 synthetic PDF fixtures: `backend/.venv/Scripts/python.exe -X utf8 scripts/generate_announcement_fixtures.py`. Fixture generation and expected candidates are from the same session, so comparisons are SELF-BENCHMARK, not independent accuracy evidence.
 
 ## Layout
 frontend/: existing Next.js routes, UI and browser smoke.
