@@ -37,4 +37,4 @@
 - [x] Execute all updated tests: 47 backend, 14 browser; typecheck and production build pass.
 - [x] Verify frozen directory after tests; preserve original CSS and five routes.
 - [x] Record ACTUAL TEST / SELF-BENCHMARK / SIMULATED / NOT TESTED and first browser failure evidence.
-- [ ] Commit/push and create delivery PR (update after actual publication).
+- [x] Commit/push implementation 690200c and create delivery PR #2 (OPEN, not merged).

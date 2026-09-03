@@ -33,6 +33,8 @@ artifacts/task03/first-browser-failure/error-context.md
 artifacts/task03/first-browser-failure/test-failed-1.png
 artifacts/task03/frozen-after.json
 artifacts/task03/frozen-before.json
+artifacts/task03/github-publication.json
+artifacts/task03/local-runtime.json
 artifacts/task03/scanned.pdf-profile.json
 artifacts/task03/screenshots/desktop-01-extracted.png
 artifacts/task03/screenshots/desktop-02-confirmed.png

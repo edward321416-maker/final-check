@@ -7,7 +7,7 @@ Branch: codex/task-03-generic-requirement-profile.
 **PASS — integration acceptance (all 10 gates).**
 Generic announcement requirement-profile pipeline is integrated and executable.
 This is not a claim that FINAL CHECK accurately understands every competition announcement.
-GitHub delivery is recorded below once actually published. The unchanged TASK 02 report is retained below and in [its baseline archive](artifacts/task02-baseline/RESULT_CODEX_TASK02.md).
+Published via [PR #2](https://github.com/edward321416-maker/final-check/pull/2), **OPEN**, not merged. The unchanged TASK 02 report is retained below and in [its baseline archive](artifacts/task02-baseline/RESULT_CODEX_TASK02.md).
 
 ## ACTUAL EXECUTION
 
@@ -40,6 +40,7 @@ All commands below were actually executed locally on Windows. Paths are relative
 | root: `git diff --check` | PASS |
 | root: `git diff --cached --check` | PASS after normalizing generated-log whitespace |
 | Frozen directory before/after SHA-256 comparison | PASS, all four files unchanged |
+| root: `scripts/start-local.ps1`, then HTTP GET `/` and `/api/health` | PASS; local frontend HTTP 200, API 0.3.0, frozen available, local generic extractor available, generic verification unsupported |
 
 The final browser run began **2026-09-03T02:40:42.8Z**, using Desktop Chrome 1440×1000 and existing iPhone 13 Chromium emulation, 2 workers, 0 retries.
 The new text golden path actually inputs source text, runs extraction, checks quotes, edits/saves/keeps review, deletes one item, approves every retained item, confirms/reloads the profile, uploads an actual PDF and reaches REVIEW/EXTERNAL results and Recheck. Normal requests are not intercepted. Page/console error collections were empty in the generic and frozen golden paths.
@@ -55,6 +56,7 @@ Evidence:
 - [Actual text-PDF profile](artifacts/task03/submission.pdf-profile.json) / [scanned-PDF profile](artifacts/task03/scanned.pdf-profile.json)
 - [Confirmed profile and validation handoff](artifacts/task03/confirmed-handoff.json)
 - [Ten generic browser screenshots](artifacts/task03/screenshots/) and current frozen-flow captures in artifacts/screenshots/.
+- [Final local runtime](artifacts/task03/local-runtime.json) / [published branch and source verification](artifacts/task03/github-publication.json).
 
 ## SELF-BENCHMARK
 
@@ -74,7 +76,7 @@ Execution of real files and code is ACTUAL TEST; that does not convert same-sess
 - Historical 39-case reproduction: exact corpus absent; no replacement corpus or prior-score reproduction claim.
 - Firefox/WebKit, physical phones, screen-reader audit, production hosting, load testing or multi-worker operation.
 - Robust PDF table/reading-order interpretation, embedded image requirements, arbitrary languages/encodings and exhaustive semantic atomicity/entailment.
-- Google Sheets/Drive API synchronization; no authenticated API write is claimed. Completion logging is queued privately when publication is complete.
+- Google Sheets/Drive API synchronization; no authenticated API write is claimed. Completion event final-check-task-03-20260903 is durably queued outside Git under the OS application-data directory; token usage remains unknown.
 
 ## REGRESSION
 
@@ -119,7 +121,12 @@ One existing Starlette TestClient/httpx deprecation warning and Node color-envir
 
 ## GITHUB DELIVERY
 
-Tests and integration gates passed locally. Commit/push/PR metadata is appended after actual publication; no publication or merge is implied by this local status.
+- Repository: https://github.com/edward321416-maker/final-check (verified PUBLIC and authorized owner access).
+- Tested implementation commit: **690200cd7dd4986dc57fd15626c85bd743542588**. Subsequent publication/runtime documentation updates do not change application code.
+- Branch: codex/task-03-generic-requirement-profile, pushed to origin.
+- PR: https://github.com/edward321416-maker/final-check/pull/2 — **OPEN**, not draft, not merged. Use the PR for current head/status.
+- Downloaded the published branch's frozen source through the GitHub Contents API and verified the same SHA-256. Recorded actual publication evidence in artifacts/task03/github-publication.json.
+- Local demo is running at http://127.0.0.1:3100. Public source publication does not deploy a public application.
 
 ---
 
