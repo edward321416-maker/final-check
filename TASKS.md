@@ -52,4 +52,14 @@
 - [x] Backend47, browser14, typecheck/build and frozen before/after checks pass.
 - [x] Record GO direction and AI-first comparison recommendation with same-agent annotation limits.
 - [x] Publish benchmark commit92b7e50 and PR #3; verified OPEN, left unmerged for Product/Business Lead review.
-- [ ] TASK05 scope decision by Product/Business Lead; no implementation started.
+- [x] TASK05 scope authorized by Product/Business Lead after PR3 merged at 0125f05.
+
+## TASK 05 — Blind AI-First Extractor Comparison
+
+- [x] Fetch and synchronize clean main; verify Gold173 and frozen hashes.
+- [x] Freeze one prompt/schema/candidate before output; eight fresh isolated invocations.
+- [x] Preserve354 actual RAW candidates,237 GATED candidates and all execution traces.
+- [x] Apply unchanged TASK03 gate and TASK04 scoring; Gold and local extractor unchanged.
+- [x] Score every candidate/Gold pair; measurement PASS, locked AI candidate STOP.
+- [x] Backend47, browser14, TypeScript/build, diff and before/after integrity checks pass.
+- [x] Publish TASK05 PR #4 (https://github.com/edward321416-maker/final-check/pull/4); verified OPEN / NOT MERGED. Benchmark commit a48bfbff28cacf053eab848710c05632eaeb6fbc. No subsequent task.

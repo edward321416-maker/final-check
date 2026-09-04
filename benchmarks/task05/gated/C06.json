@@ -1,0 +1,189 @@
+{
+  "requirements": [
+    {
+      "requirement_id": "R01",
+      "rule": "참가자는 대한민국 국민이어야 한다.",
+      "modality": "MUST",
+      "severity": "BLOCKER",
+      "verifier": "EXTERNAL",
+      "condition": "always",
+      "evidence": {
+        "source_section": "4. 참가대상",
+        "quote": "4. 참가대상 : 대한민국 국민 누구나(개인 또는 5인 이내 팀 단위로 참가)"
+      },
+      "confidence": 0.99,
+      "extraction_status": "EXTRACTED",
+      "evidence_start": 192,
+      "evidence_end": 235,
+      "issues": [],
+      "original": {
+        "requirement_id": "R01",
+        "rule": "참가자는 대한민국 국민이어야 한다.",
+        "modality": "MUST",
+        "severity": "BLOCKER",
+        "verifier": "EXTERNAL",
+        "condition": "always",
+        "evidence": {
+          "source_section": "4. 참가대상",
+          "quote": "4. 참가대상 : 대한민국 국민 누구나(개인 또는 5인 이내 팀 단위로 참가)"
+        },
+        "confidence": 0.99
+      }
+    },
+    {
+      "requirement_id": "R02",
+      "rule": "개인 또는 팀 단위로 참가할 수 있으며, 팀은 5인 이내로 구성해야 한다.",
+      "modality": "MUST",
+      "severity": "BLOCKER",
+      "verifier": "DETERMINISTIC",
+      "condition": "팀 참가 시",
+      "evidence": {
+        "source_section": "4. 참가대상",
+        "quote": "개인 또는 5인 이내 팀 단위로 참가"
+      },
+      "confidence": 0.99,
+      "extraction_status": "EXTRACTED",
+      "evidence_start": 214,
+      "evidence_end": 234,
+      "issues": [],
+      "original": {
+        "requirement_id": "R02",
+        "rule": "개인 또는 팀 단위로 참가할 수 있으며, 팀은 5인 이내로 구성해야 한다.",
+        "modality": "MUST",
+        "severity": "BLOCKER",
+        "verifier": "DETERMINISTIC",
+        "condition": "팀 참가 시",
+        "evidence": {
+          "source_section": "4. 참가대상",
+          "quote": "개인 또는 5인 이내 팀 단위로 참가"
+        },
+        "confidence": 0.99
+      }
+    },
+    {
+      "requirement_id": "R03",
+      "rule": "출품 주제는 데이터 기반 협의체의 신산업 발굴과 국가(지역)·사회 현안 해결에 관한 것으로, ‘융·복합 데이터 발굴 및 활용 기획’, ‘공공데이터 활용 창업 아이디어 기획’, ‘분석과제 발굴 및 기획’ 중 하나여야 한다.",
+      "modality": "MUST",
+      "severity": "BLOCKER",
+      "verifier": "SEMANTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "3. 공모주제",
+        "quote": "3. 공모주제 : 데이터 기반 협의체의 신산업 발굴과 국가(지역)·사회 현안 해결\n- 융·복합 데이터 발굴 및 활용 기획\n- 공공데이터 활용 창업 아이디어 기획\n- 분석과제 발굴 및 기획"
+      },
+      "confidence": 0.97,
+      "extraction_status": "NEEDS_REVIEW",
+      "evidence_start": 87,
+      "evidence_end": 191,
+      "issues": [
+        "ATOMICITY_REVIEW: 독립 조건을 한 항목에 합쳤는지 확인하고 단일 조건으로 수정하세요."
+      ],
+      "original": {
+        "requirement_id": "R03",
+        "rule": "출품 주제는 데이터 기반 협의체의 신산업 발굴과 국가(지역)·사회 현안 해결에 관한 것으로, ‘융·복합 데이터 발굴 및 활용 기획’, ‘공공데이터 활용 창업 아이디어 기획’, ‘분석과제 발굴 및 기획’ 중 하나여야 한다.",
+        "modality": "MUST",
+        "severity": "BLOCKER",
+        "verifier": "SEMANTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "3. 공모주제",
+          "quote": "3. 공모주제 : 데이터 기반 협의체의 신산업 발굴과 국가(지역)·사회 현안 해결\n- 융·복합 데이터 발굴 및 활용 기획\n- 공공데이터 활용 창업 아이디어 기획\n- 분석과제 발굴 및 기획"
+        },
+        "confidence": 0.97
+      }
+    },
+    {
+      "requirement_id": "R04",
+      "rule": "공모 신청은 2025년 4월 10일부터 2025년 4월 24일까지 해야 한다.",
+      "modality": "MUST",
+      "severity": "BLOCKER",
+      "verifier": "DETERMINISTIC",
+      "condition": "공모 신청 시",
+      "evidence": {
+        "source_section": "5. 공모일정",
+        "quote": "공모 신청\n|\n2025.4.10. ~ 2025.4.24."
+      },
+      "confidence": 0.98,
+      "extraction_status": "EXTRACTED",
+      "evidence_start": 257,
+      "evidence_end": 288,
+      "issues": [],
+      "original": {
+        "requirement_id": "R04",
+        "rule": "공모 신청은 2025년 4월 10일부터 2025년 4월 24일까지 해야 한다.",
+        "modality": "MUST",
+        "severity": "BLOCKER",
+        "verifier": "DETERMINISTIC",
+        "condition": "공모 신청 시",
+        "evidence": {
+          "source_section": "5. 공모일정",
+          "quote": "공모 신청\n|\n2025.4.10. ~ 2025.4.24."
+        },
+        "confidence": 0.98
+      }
+    },
+    {
+      "requirement_id": "R05",
+      "rule": "공모 접수는 2025년 5월 12일부터 2025년 5월 16일까지 해야 한다.",
+      "modality": "MUST",
+      "severity": "BLOCKER",
+      "verifier": "DETERMINISTIC",
+      "condition": "공모 접수 시",
+      "evidence": {
+        "source_section": "5. 공모일정",
+        "quote": "공모 접수\n|\n2025.5.12. ~ 2025.5.16."
+      },
+      "confidence": 0.98,
+      "extraction_status": "EXTRACTED",
+      "evidence_start": 324,
+      "evidence_end": 355,
+      "issues": [],
+      "original": {
+        "requirement_id": "R05",
+        "rule": "공모 접수는 2025년 5월 12일부터 2025년 5월 16일까지 해야 한다.",
+        "modality": "MUST",
+        "severity": "BLOCKER",
+        "verifier": "DETERMINISTIC",
+        "condition": "공모 접수 시",
+        "evidence": {
+          "source_section": "5. 공모일정",
+          "quote": "공모 접수\n|\n2025.5.12. ~ 2025.5.16."
+        },
+        "confidence": 0.98
+      }
+    },
+    {
+      "requirement_id": "R06",
+      "rule": "국토안전관리원 빅데이터 개방 포털 홈페이지의 공모전 게시판에서 접수해야 한다.",
+      "modality": "MUST",
+      "severity": "BLOCKER",
+      "verifier": "EXTERNAL",
+      "condition": "공모 접수 시",
+      "evidence": {
+        "source_section": "6. 신청방법",
+        "quote": "ㅇ 국토안전관리원 빅데이터 개방 포털 홈페이지(https://bigtori.kalis.or.kr) 공모전 게시판에서 접수"
+      },
+      "confidence": 0.99,
+      "extraction_status": "EXTRACTED",
+      "evidence_start": 501,
+      "evidence_end": 568,
+      "issues": [],
+      "original": {
+        "requirement_id": "R06",
+        "rule": "국토안전관리원 빅데이터 개방 포털 홈페이지의 공모전 게시판에서 접수해야 한다.",
+        "modality": "MUST",
+        "severity": "BLOCKER",
+        "verifier": "EXTERNAL",
+        "condition": "공모 접수 시",
+        "evidence": {
+          "source_section": "6. 신청방법",
+          "quote": "ㅇ 국토안전관리원 빅데이터 개방 포털 홈페이지(https://bigtori.kalis.or.kr) 공모전 게시판에서 접수"
+        },
+        "confidence": 0.99
+      }
+    }
+  ],
+  "rejected": [],
+  "profile_status": "REVIEW_REQUIRED",
+  "automatic_confirmation": false
+}

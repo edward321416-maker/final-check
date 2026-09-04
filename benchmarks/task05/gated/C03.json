@@ -1,0 +1,309 @@
+{
+  "requirements": [
+    {
+      "requirement_id": "R01",
+      "rule": "참가자는 HUSS 참여학과인 한국어문학부, 한국역사학과, KIBS, 경영정보학부, 건설시스템공학부, 임산생명공학과, 행정학과, 사회학과, 정치외교학과 중 하나에 소속되어야 한다.",
+      "modality": "MUST",
+      "severity": "BLOCKER",
+      "verifier": "DETERMINISTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "참가 대상",
+        "quote": "✅ 참가 대상: HUSS 참여학과(한국어문학부, 한국역사학과, KIBS, 경영정보학부, 건설시스템공학부, 임산생명공학과, 행정학과, 사회학과, 정치외교학과) 재학생(학부생)"
+      },
+      "confidence": 0.99,
+      "extraction_status": "EXTRACTED",
+      "evidence_start": 378,
+      "evidence_end": 474,
+      "issues": [],
+      "original": {
+        "requirement_id": "R01",
+        "rule": "참가자는 HUSS 참여학과인 한국어문학부, 한국역사학과, KIBS, 경영정보학부, 건설시스템공학부, 임산생명공학과, 행정학과, 사회학과, 정치외교학과 중 하나에 소속되어야 한다.",
+        "modality": "MUST",
+        "severity": "BLOCKER",
+        "verifier": "DETERMINISTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "참가 대상",
+          "quote": "✅ 참가 대상: HUSS 참여학과(한국어문학부, 한국역사학과, KIBS, 경영정보학부, 건설시스템공학부, 임산생명공학과, 행정학과, 사회학과, 정치외교학과) 재학생(학부생)"
+        },
+        "confidence": 0.99
+      }
+    },
+    {
+      "requirement_id": "R02",
+      "rule": "참가자는 재학생이어야 한다.",
+      "modality": "MUST",
+      "severity": "BLOCKER",
+      "verifier": "DETERMINISTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "참가 대상",
+        "quote": "✅ 참가 대상: HUSS 참여학과(한국어문학부, 한국역사학과, KIBS, 경영정보학부, 건설시스템공학부, 임산생명공학과, 행정학과, 사회학과, 정치외교학과) 재학생(학부생)"
+      },
+      "confidence": 0.99,
+      "extraction_status": "EXTRACTED",
+      "evidence_start": 378,
+      "evidence_end": 474,
+      "issues": [],
+      "original": {
+        "requirement_id": "R02",
+        "rule": "참가자는 재학생이어야 한다.",
+        "modality": "MUST",
+        "severity": "BLOCKER",
+        "verifier": "DETERMINISTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "참가 대상",
+          "quote": "✅ 참가 대상: HUSS 참여학과(한국어문학부, 한국역사학과, KIBS, 경영정보학부, 건설시스템공학부, 임산생명공학과, 행정학과, 사회학과, 정치외교학과) 재학생(학부생)"
+        },
+        "confidence": 0.99
+      }
+    },
+    {
+      "requirement_id": "R03",
+      "rule": "참가자는 학부생이어야 한다.",
+      "modality": "MUST",
+      "severity": "BLOCKER",
+      "verifier": "DETERMINISTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "참가 대상",
+        "quote": "✅ 참가 대상: HUSS 참여학과(한국어문학부, 한국역사학과, KIBS, 경영정보학부, 건설시스템공학부, 임산생명공학과, 행정학과, 사회학과, 정치외교학과) 재학생(학부생)"
+      },
+      "confidence": 0.98,
+      "extraction_status": "EXTRACTED",
+      "evidence_start": 378,
+      "evidence_end": 474,
+      "issues": [],
+      "original": {
+        "requirement_id": "R03",
+        "rule": "참가자는 학부생이어야 한다.",
+        "modality": "MUST",
+        "severity": "BLOCKER",
+        "verifier": "DETERMINISTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "참가 대상",
+          "quote": "✅ 참가 대상: HUSS 참여학과(한국어문학부, 한국역사학과, KIBS, 경영정보학부, 건설시스템공학부, 임산생명공학과, 행정학과, 사회학과, 정치외교학과) 재학생(학부생)"
+        },
+        "confidence": 0.98
+      }
+    },
+    {
+      "requirement_id": "R04",
+      "rule": "신청은 2025년 6월 27일(금)까지 완료해야 한다.",
+      "modality": "MUST",
+      "severity": "BLOCKER",
+      "verifier": "DETERMINISTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "신청 마감",
+        "quote": "✅ 신청 마감 : 2025년 6월 27일(금)까지"
+      },
+      "confidence": 0.99,
+      "extraction_status": "EXTRACTED",
+      "evidence_start": 708,
+      "evidence_end": 735,
+      "issues": [],
+      "original": {
+        "requirement_id": "R04",
+        "rule": "신청은 2025년 6월 27일(금)까지 완료해야 한다.",
+        "modality": "MUST",
+        "severity": "BLOCKER",
+        "verifier": "DETERMINISTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "신청 마감",
+          "quote": "✅ 신청 마감 : 2025년 6월 27일(금)까지"
+        },
+        "confidence": 0.99
+      }
+    },
+    {
+      "requirement_id": "R05",
+      "rule": "신청은 공고에 기재된 구글폼으로 제출해야 한다.",
+      "modality": "MUST",
+      "severity": "BLOCKER",
+      "verifier": "DETERMINISTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "신청 방법",
+        "quote": "✅ 신청 방법 : 구글폼 주소 (https://docs.google.com/forms/d/e/1FAIpQLSd_-S-43dgVzd1qI2uahdJ0zI15_rnsfVQ_VLlRhPhmvo4pJw/viewform)"
+      },
+      "confidence": 0.99,
+      "extraction_status": "EXTRACTED",
+      "evidence_start": 736,
+      "evidence_end": 854,
+      "issues": [],
+      "original": {
+        "requirement_id": "R05",
+        "rule": "신청은 공고에 기재된 구글폼으로 제출해야 한다.",
+        "modality": "MUST",
+        "severity": "BLOCKER",
+        "verifier": "DETERMINISTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "신청 방법",
+          "quote": "✅ 신청 방법 : 구글폼 주소 (https://docs.google.com/forms/d/e/1FAIpQLSd_-S-43dgVzd1qI2uahdJ0zI15_rnsfVQ_VLlRhPhmvo4pJw/viewform)"
+        },
+        "confidence": 0.99
+      }
+    },
+    {
+      "requirement_id": "R06",
+      "rule": "서류 평가에서 지원 동기를 평가한다.",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "SEMANTIC",
+      "condition": "서류 평가 시",
+      "evidence": {
+        "source_section": "모집 인원 및 서류 평가",
+        "quote": "*지원 동기, 본인 역량, 해커톤 및 팀 프로젝트 관련 경험, 협업 태도 등을 평가"
+      },
+      "confidence": 0.99,
+      "extraction_status": "EXTRACTED",
+      "evidence_start": 271,
+      "evidence_end": 317,
+      "issues": [],
+      "original": {
+        "requirement_id": "R06",
+        "rule": "서류 평가에서 지원 동기를 평가한다.",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "서류 평가 시",
+        "evidence": {
+          "source_section": "모집 인원 및 서류 평가",
+          "quote": "*지원 동기, 본인 역량, 해커톤 및 팀 프로젝트 관련 경험, 협업 태도 등을 평가"
+        },
+        "confidence": 0.99
+      }
+    },
+    {
+      "requirement_id": "R07",
+      "rule": "서류 평가에서 본인 역량을 평가한다.",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "SEMANTIC",
+      "condition": "서류 평가 시",
+      "evidence": {
+        "source_section": "모집 인원 및 서류 평가",
+        "quote": "*지원 동기, 본인 역량, 해커톤 및 팀 프로젝트 관련 경험, 협업 태도 등을 평가"
+      },
+      "confidence": 0.99,
+      "extraction_status": "EXTRACTED",
+      "evidence_start": 271,
+      "evidence_end": 317,
+      "issues": [],
+      "original": {
+        "requirement_id": "R07",
+        "rule": "서류 평가에서 본인 역량을 평가한다.",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "서류 평가 시",
+        "evidence": {
+          "source_section": "모집 인원 및 서류 평가",
+          "quote": "*지원 동기, 본인 역량, 해커톤 및 팀 프로젝트 관련 경험, 협업 태도 등을 평가"
+        },
+        "confidence": 0.99
+      }
+    },
+    {
+      "requirement_id": "R08",
+      "rule": "서류 평가에서 해커톤 및 팀 프로젝트 관련 경험을 평가한다.",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "SEMANTIC",
+      "condition": "서류 평가 시",
+      "evidence": {
+        "source_section": "모집 인원 및 서류 평가",
+        "quote": "*지원 동기, 본인 역량, 해커톤 및 팀 프로젝트 관련 경험, 협업 태도 등을 평가"
+      },
+      "confidence": 0.99,
+      "extraction_status": "NEEDS_REVIEW",
+      "evidence_start": 271,
+      "evidence_end": 317,
+      "issues": [
+        "ATOMICITY_REVIEW: 독립 조건을 한 항목에 합쳤는지 확인하고 단일 조건으로 수정하세요."
+      ],
+      "original": {
+        "requirement_id": "R08",
+        "rule": "서류 평가에서 해커톤 및 팀 프로젝트 관련 경험을 평가한다.",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "서류 평가 시",
+        "evidence": {
+          "source_section": "모집 인원 및 서류 평가",
+          "quote": "*지원 동기, 본인 역량, 해커톤 및 팀 프로젝트 관련 경험, 협업 태도 등을 평가"
+        },
+        "confidence": 0.99
+      }
+    },
+    {
+      "requirement_id": "R09",
+      "rule": "서류 평가에서 협업 태도를 평가한다.",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "SEMANTIC",
+      "condition": "서류 평가 시",
+      "evidence": {
+        "source_section": "모집 인원 및 서류 평가",
+        "quote": "*지원 동기, 본인 역량, 해커톤 및 팀 프로젝트 관련 경험, 협업 태도 등을 평가"
+      },
+      "confidence": 0.99,
+      "extraction_status": "EXTRACTED",
+      "evidence_start": 271,
+      "evidence_end": 317,
+      "issues": [],
+      "original": {
+        "requirement_id": "R09",
+        "rule": "서류 평가에서 협업 태도를 평가한다.",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "서류 평가 시",
+        "evidence": {
+          "source_section": "모집 인원 및 서류 평가",
+          "quote": "*지원 동기, 본인 역량, 해커톤 및 팀 프로젝트 관련 경험, 협업 태도 등을 평가"
+        },
+        "confidence": 0.99
+      }
+    },
+    {
+      "requirement_id": "R10",
+      "rule": "행사 당일 타 컨소시엄과 연합하여 5인 1연합 팀을 구성한다.",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "EXTERNAL",
+      "condition": "행사 당일",
+      "evidence": {
+        "source_section": "해커톤 프로그램",
+        "quote": "- 대학 별 5인을 모집하되, 당일 현장에서 타 컨소시엄과 연합하여 5인 1연합 팀 구성"
+      },
+      "confidence": 0.96,
+      "extraction_status": "EXTRACTED",
+      "evidence_start": 658,
+      "evidence_end": 707,
+      "issues": [],
+      "original": {
+        "requirement_id": "R10",
+        "rule": "행사 당일 타 컨소시엄과 연합하여 5인 1연합 팀을 구성한다.",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "EXTERNAL",
+        "condition": "행사 당일",
+        "evidence": {
+          "source_section": "해커톤 프로그램",
+          "quote": "- 대학 별 5인을 모집하되, 당일 현장에서 타 컨소시엄과 연합하여 5인 1연합 팀 구성"
+        },
+        "confidence": 0.96
+      }
+    }
+  ],
+  "rejected": [],
+  "profile_status": "REVIEW_REQUIRED",
+  "automatic_confirmation": false
+}

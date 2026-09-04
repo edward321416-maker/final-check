@@ -1,0 +1,70 @@
+case_id	extracted_id	gold_ids	match_type	semantic_support	atomicity	hallucinated	failure_categories	reason
+C08	R01	5	MATCH	1	0	0	-	Korean nationality preserved.
+C08	R02	6	MATCH	1	0	0	-	Domestic residence preserved.
+C08	R03	7	MATCH	1	0	0	-	Individual or team permission.
+C08	R04	8	MATCH	1	0	0	-	Six-person maximum including leader and members.
+C08	R05	1	PARTIAL	1	0	0	FRAGMENTATION	Only idea-division branch of the overall public-data submission scope.
+C08	R06	1	PARTIAL	1	0	0	FRAGMENTATION	Only product/service division branch of overall public-data scope.
+C08	R07	2	PARTIAL	1	0	0	FRAGMENTATION	Newly needed data permission alone omits nationwide public-data scope.
+C08	R08	2	PARTIAL	1	0	0	FRAGMENTATION	Nationwide existing data permission omits data needing opening.
+C08	R09	3	MATCH	1	0	0	-	Prototype complete by close for product/service division.
+C08	R10	4	PARTIAL	1	0	0	FRAGMENTATION,WRONG_MODALITY	Cancellation consequence for similar awarded work does not state complete same-item entry prohibition.
+C08	R11	9	PARTIAL	1	0	0	FRAGMENTATION	End month/day/time omits the start date and year of submission period.
+C08	R12	10	MATCH	1	0	0	-	Unlimited number of submissions.
+C08	R13	11	MATCH	1	0	0	-	One result per application.
+C08	R14	12	MATCH	1	0	0	-	Correct submission email.
+C08	R15	13	MATCH	1	0	0	-	One application copy in submission-document table.
+C08	R16	14	MATCH	1	0	0	-	One participant pledge copy.
+C08	R17	15	MATCH	1	0	0	-	One privacy consent copy.
+C08	R18	16	MATCH	1	0	0	-	One idea third-party disclosure consent copy.
+C08	R19	17	PARTIAL	1	0	0	FRAGMENTATION	Presentation copy count without separate-file obligation.
+C08	R20	18	MATCH	1	0	0	-	Free presentation format.
+C08	R21	17	PARTIAL	1	0	0	FRAGMENTATION	Separate presentation file without complete one-copy submission unit.
+C08	R22	19	MATCH	1	0	0	-	One idea proposal with division condition.
+C08	R23	20	MATCH	1	0	0	-	One business plan with division condition.
+C08	R24	21,22	PARTIAL	0	1	0	ATOMICITY,MISS_CONDITION,EVIDENCE_NOT_SUPPORTING	Conflates file representing completed demonstrable product with additional product submission; presentation-stage condition is absent. Treated as scope conflation, not a clearly invented new constraint.
+C08	R25	22	MATCH	1	0	0	-	Physical submission and demonstration at product/service presentation stage.
+C08	R26	-	NO_MATCH	0	0	0	FALSE_POSITIVE	Organizer scoring scale excluded.
+C08	R27	-	NO_MATCH	0	0	0	FALSE_POSITIVE	Organizer scoring criterion excluded.
+C08	R28	-	NO_MATCH	0	0	0	FALSE_POSITIVE	Organizer scoring criterion excluded.
+C08	R29	-	NO_MATCH	0	0	0	FALSE_POSITIVE	Organizer scoring criterion excluded.
+C08	R30	-	NO_MATCH	0	0	0	FALSE_POSITIVE	Organizer scoring criterion excluded.
+C08	R31	-	NO_MATCH	0	0	0	FALSE_POSITIVE	Organizer scoring criterion excluded.
+C08	R32	-	NO_MATCH	0	0	0	FALSE_POSITIVE	Organizer scoring criterion excluded.
+C08	R33	-	NO_MATCH	0	0	0	FALSE_POSITIVE	Organizer scoring criterion excluded.
+C08	R34	-	NO_MATCH	0	0	0	FALSE_POSITIVE	Organizer scoring criterion excluded.
+C08	R35	-	NO_MATCH	0	0	0	FALSE_POSITIVE	Organizer bonus-score allocation excluded.
+C08	R36	-	NO_MATCH	0	0	0	FALSE_POSITIVE	Organizer tie-break process excluded.
+C08	R37	-	NO_MATCH	0	0	0	FALSE_POSITIVE	Award benefit and onward-event invitation excluded from frozen scope.
+C08	R38	23	MATCH	1	0	0	-	Real-name entry principle.
+C08	R39	24	MATCH	1	0	0	-	Select one if multiple works are chosen.
+C08	R40	25	MATCH	1	0	0	-	Cross-work team participation ban with role examples.
+C08	R41	26	MATCH	1	0	0	-	Joint entrants identify team name.
+C08	R42	27	PARTIAL	1	0	0	FRAGMENTATION	Leader name alone omits member names.
+C08	R43	27	PARTIAL	1	0	0	FRAGMENTATION	Member names alone omit leader name.
+C08	R44	-	NO_MATCH	0	0	0	FALSE_POSITIVE	Award receipt arrangement excluded.
+C08	R45	-	NO_MATCH	0	0	0	FALSE_POSITIVE	Internal award-certificate allocation excluded.
+C08	R46	-	NO_MATCH	0	0	0	FALSE_POSITIVE	Internal prize-money allocation excluded.
+C08	R47	28	PARTIAL	1	0	0	FRAGMENTATION	Unpublished status alone omits original creation.
+C08	R48	28	PARTIAL	1	0	0	FRAGMENTATION	Original creation alone omits unpublished status.
+C08	R49	29	PARTIAL	1	0	0	FRAGMENTATION	Plagiarism alone from complete prohibited-copying set.
+C08	R50	29	PARTIAL	1	0	0	FRAGMENTATION	Misappropriation alone from complete prohibited-copying set.
+C08	R51	29	PARTIAL	1	0	0	FRAGMENTATION	Imitation alone from complete prohibited-copying set.
+C08	R52	-	NO_MATCH	1	0	0	OUTSIDE_GOLD	Supported negotiated-rights information outside frozen Gold.
+C08	R53	-	NO_MATCH	1	0	0	OUTSIDE_GOLD	Supported negotiated-use information outside frozen Gold.
+C08	R54	30	PARTIAL	1	0	0	FRAGMENTATION	Legality only at entry, not subsequent awarded-work use.
+C08	R55	30	PARTIAL	1	0	0	FRAGMENTATION	Legality only at awarded-work use, not entry.
+C08	R56	31	PARTIAL	1	0	0	FRAGMENTATION	Organization damages only; incomplete wider loss/dispute responsibility.
+C08	R57	-	NO_MATCH	1	0	0	OUTSIDE_GOLD	Supported publication-use information outside Gold.
+C08	R58	-	NO_MATCH	1	0	0	OUTSIDE_GOLD	Explicit submission-error responsibility absent from frozen Gold.
+C08	R59	-	NO_MATCH	1	0	0	OUTSIDE_GOLD	Explicit unreachable-contact responsibility absent from frozen Gold.
+C08	R60	31	PARTIAL	1	0	0	FRAGMENTATION	Awarded-work disputes only, not complete loss/dispute scope.
+C08	R61	-	NO_MATCH	0	0	0	FALSE_POSITIVE	Administrative document non-return excluded.
+C08	R62	31	PARTIAL	1	0	0	FRAGMENTATION	Plagiarism responsibility alone from wider legal duty.
+C08	R63	31	PARTIAL	1	0	0	FRAGMENTATION	Defamation responsibility alone from wider legal duty.
+C08	R64	31	PARTIAL	1	0	0	FRAGMENTATION	Copyright responsibility alone from wider legal duty.
+C08	R65	-	NO_MATCH	1	0	0	OUTSIDE_GOLD	Supported ownership information outside Gold.
+C08	R66	-	NO_MATCH	1	0	0	DUPLICATE	Copyright ownership repeats the rights-ownership information.
+C08	R67	-	NO_MATCH	1	0	0	OUTSIDE_GOLD	Supported prior-negotiation information outside Gold.
+C08	R68	32	MATCH	1	0	0	-	Winner pays award taxes.
+C08	R69	-	NO_MATCH	0	0	0	FALSE_POSITIVE	Organizer residual internal-policy statement excluded.

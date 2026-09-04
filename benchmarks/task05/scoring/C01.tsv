@@ -1,0 +1,118 @@
+case_id	extracted_id	gold_ids	match_type	semantic_support	atomicity	hallucinated	failure_categories	reason
+C01	R01	1	PARTIAL	1	0	0	FRAGMENTATION	Only elementary eligibility branch; does not preserve the complete eligibility alternatives.
+C01	R02	1	PARTIAL	1	0	0	FRAGMENTATION	Only middle-school eligibility branch.
+C01	R03	1	PARTIAL	1	0	0	FRAGMENTATION	Only high-school eligibility branch.
+C01	R04	1	PARTIAL	1	0	0	FRAGMENTATION	Only staff eligibility branch.
+C01	R05	4	MATCH	1	0	0	-	Complete individual-or-team permission.
+C01	R06	2	MATCH	1	0	0	-	All team members must qualify.
+C01	R07	3	MATCH	1	0	0	-	Same eligibility division within a team.
+C01	R08	5	MATCH	1	0	0	-	Student-made production including planning, filming and editing.
+C01	R09	6	MATCH	1	0	0	-	Teacher guidance remains permitted for student entries.
+C01	R10	7	PARTIAL	1	0	0	FRAGMENTATION	Video medium alone omits the duration condition.
+C01	R11	7	MATCH	1	0	0	-	Complete allowed duration interval; no minimum is a qualification of the same limit.
+C01	R12	8	MATCH	1	0	0	-	Complete announced contest theme.
+C01	R13	8	NO_MATCH	1	0	0	DUPLICATE	Permitted thematic examples restate the already matched theme.
+C01	R14	9	MATCH	1	0	0	-	Free format and examples preserved.
+C01	R15	10	MATCH	1	0	0	-	Resolution remains a recommendation.
+C01	R16	11	MATCH	1	0	0	-	Recommended file formats preserved.
+C01	R17	12	MATCH	1	0	0	-	File rather than sharing-link recommendation preserved.
+C01	R18	13	MATCH	1	0	0	-	Original creation requirement.
+C01	R19	14,15	PARTIAL	1	1	0	ATOMICITY	Combines independently infringed copyright and portrait rights.
+C01	R20	16	MATCH	1	0	0	-	All generative AI types prohibited.
+C01	R21	17	MATCH	1	0	0	-	Prior-award prohibition preserves student school-contest exception in the rule.
+C01	R22	18	MATCH	1	0	0	-	Two-entry maximum per person or team.
+C01	R23	-	NO_MATCH	0	0	0	FALSE_POSITIVE	Prize allocation is excluded by frozen scope.
+C01	R24	19	MATCH	1	0	0	-	Optional official BI use.
+C01	R25	20	MATCH	1	0	0	-	Correct submission email and materials.
+C01	R26	21	MATCH	1	0	0	-	Complete period, mailbox timestamp and both material types.
+C01	R27	22	MATCH	1	0	0	-	Video filename supported by table heading and value.
+C01	R28	24	MATCH	1	0	0	-	Application filename convention.
+C01	R29	26	MATCH	1	0	0	-	Applicant consent filename convention.
+C01	R30	28	MATCH	1	0	0	-	Portrait consent filename with applicable submission condition.
+C01	R31	23	MATCH	1	0	0	-	Application submitted for each work.
+C01	R32	25	MATCH	0	0	0	EVIDENCE_NOT_SUPPORTING	Content matches per-person submission but chosen quote only instructs preparation, not submission.
+C01	R33	27	MATCH	1	0	0	-	Every appearing person must supply portrait consent.
+C01	R34	34	MATCH	1	0	0	-	Team representative prepares application.
+C01	R35	-	NO_MATCH	0	0	0	FORM_LABEL	Empty checkbox labels alone are not obligations under frozen protocol.
+C01	R36	-	NO_MATCH	0	0	0	FORM_LABEL	Empty team-name field converted to mandatory rule.
+C01	R37	-	NO_MATCH	0	0	0	FORM_LABEL	Empty name field converted to mandatory rule.
+C01	R38	-	NO_MATCH	0	0	0	FORM_LABEL	Empty affiliation field converted to mandatory rule.
+C01	R39	-	NO_MATCH	0	0	0	FORM_LABEL	Empty grade/job field converted to mandatory rule.
+C01	R40	36	PARTIAL	0	0	0	FORM_LABEL	Contact field label omits reachability and guardian exception.
+C01	R41	-	NO_MATCH	0	0	0	FORM_LABEL	Empty email field converted to mandatory rule.
+C01	R42	35	MATCH	1	0	0	-	Representative particulars in applicant section.
+C01	R43	36	PARTIAL	1	0	0	MISS_CONDITION	Reachable contact preserved but guardian-contact permission is omitted.
+C01	R44	36	PARTIAL	1	0	0	FRAGMENTATION	Guardian exception alone does not include reachable contact obligation.
+C01	R45	37	PARTIAL	1	0	0	FRAGMENTATION	Only affiliation from the complete team-member particulars requirement.
+C01	R46	37	PARTIAL	1	0	0	FRAGMENTATION	Only grade/job from team-member particulars.
+C01	R47	37	PARTIAL	1	0	0	FRAGMENTATION	Only name from team-member particulars.
+C01	R48	-	NO_MATCH	0	0	0	FORM_LABEL	Empty work-title label alone is not an obligation.
+C01	R49	38	MATCH	1	0	0	-	Description content and approximate 200 characters preserved.
+C01	R50	30	MATCH	1	0	0	WRONG_MODALITY	Same ban on false application content expressed as MUST rather than MUST_NOT.
+C01	R51	-	NO_MATCH	0	0	0	FORM_LABEL	Empty date line converted to obligation.
+C01	R52	39	PARTIAL	0	1	0	ATOMICITY,FORM_LABEL	Signature combined with independent name-field completion inferred from a label.
+C01	R53	-	NO_MATCH	0	0	0	FORM_LABEL	Consent form checkbox labels alone.
+C01	R54	-	NO_MATCH	0	0	0	FORM_LABEL	Consent form team-name label alone.
+C01	R55	-	NO_MATCH	0	0	0	FORM_LABEL	Consent form name label alone.
+C01	R56	-	NO_MATCH	0	0	0	FORM_LABEL	Consent form affiliation label alone.
+C01	R57	-	NO_MATCH	0	0	0	FORM_LABEL	Consent form grade/job label alone.
+C01	R58	-	NO_MATCH	0	0	0	FORM_LABEL	Consent form birth-date label alone.
+C01	R59	-	NO_MATCH	0	0	0	FORM_LABEL	Consent form gender label alone.
+C01	R60	36	PARTIAL	0	0	0	FORM_LABEL	Contact label without the complete explicit instruction.
+C01	R61	36	NO_MATCH	1	0	0	DUPLICATE	Repeated reachable-contact portion; does not recover omitted exception.
+C01	R62	36	NO_MATCH	1	0	0	DUPLICATE	Repeated guardian-contact exception.
+C01	R63	40	MATCH	1	0	0	-	Mandatory applicant data collection/use consent.
+C01	R64	41	MATCH	1	0	0	-	Mandatory third-party data consent.
+C01	R65	42	PARTIAL	1	0	0	FRAGMENTATION	Consent lacks five-year and nonprofit/public-interest scope.
+C01	R66	44	PARTIAL	0	0	0	EVIDENCE_NOT_SUPPORTING	Privacy-collection assertion quotes copyright-use consent instead.
+C01	R67	44	PARTIAL	1	0	0	FRAGMENTATION	Only one of the required guardian consents and confirmation.
+C01	R68	44	PARTIAL	1	0	0	FRAGMENTATION	Copyright guardian consent alone omits remaining consent/confirmation.
+C01	R69	44	PARTIAL	0	0	0	FORM_LABEL	Guardian name label alone cannot support complete conditioned consent.
+C01	R70	44	PARTIAL	0	0	0	EVIDENCE_NOT_SUPPORTING	Signature field fragment lacks under-14 scope and complete consent/confirmation.
+C01	R71	-	NO_MATCH	0	0	0	FORM_LABEL	Guardian relationship label alone.
+C01	R72	-	NO_MATCH	0	0	0	FORM_LABEL	Guardian contact label alone.
+C01	R73	-	NO_MATCH	0	0	0	FORM_LABEL	Empty date line alone.
+C01	R74	43	PARTIAL	0	1	0	ATOMICITY,FORM_LABEL	Signature combined with independent name-field requirement.
+C01	R75	44	PARTIAL	1	0	0	FRAGMENTATION	Final guardian confirmation alone omits required consents.
+C01	R76	27	NO_MATCH	1	0	0	DUPLICATE	Preparation by all appearing people repeats part of R33.
+C01	R77	-	NO_MATCH	0	0	0	FORM_LABEL	Portrait form checkbox labels alone.
+C01	R78	-	NO_MATCH	0	0	0	FORM_LABEL	Portrait form applicant name label alone.
+C01	R79	-	NO_MATCH	0	0	0	FORM_LABEL	Portrait form applicant affiliation label alone.
+C01	R80	-	NO_MATCH	0	0	0	FORM_LABEL	Portrait form applicant grade/job label alone.
+C01	R81	-	NO_MATCH	0	0	0	FORM_LABEL	Portrait form work-title label alone.
+C01	R82	-	NO_MATCH	0	0	0	FORM_LABEL	Portrait-holder name label alone.
+C01	R83	-	NO_MATCH	0	0	0	FORM_LABEL	Portrait-holder birth-date label alone.
+C01	R84	45	PARTIAL	0	0	0	FORM_LABEL	Contact label omits explicit reachability and exception.
+C01	R85	45	PARTIAL	1	0	0	MISS_CONDITION	Reachability without guardian-contact exception.
+C01	R86	45	PARTIAL	1	0	0	FRAGMENTATION	Guardian-contact exception alone.
+C01	R87	46	MATCH	1	0	0	-	Portrait-holder data collection/use consent.
+C01	R88	47	MATCH	1	0	0	-	Third-party heading establishes consent despite source's repeated collection wording.
+C01	R89	49	PARTIAL	1	0	0	FRAGMENTATION	Only data collection guardian consent.
+C01	R90	49	PARTIAL	1	0	0	FRAGMENTATION	Only third-party guardian consent.
+C01	R91	49	PARTIAL	0	0	0	FORM_LABEL	Guardian name label alone omits full under-14 obligation.
+C01	R92	49	PARTIAL	0	0	0	EVIDENCE_NOT_SUPPORTING	Guardian signature fragment lacks condition and remaining consents.
+C01	R93	-	NO_MATCH	0	0	0	FORM_LABEL	Guardian relationship label alone.
+C01	R94	-	NO_MATCH	0	0	0	FORM_LABEL	Guardian contact label alone.
+C01	R95	-	NO_MATCH	0	0	0	FORM_LABEL	Portrait form date label alone.
+C01	R96	48	PARTIAL	0	1	0	ATOMICITY,FORM_LABEL	Combines consent marking, name and signature; extra labels not explicit obligations.
+C01	R97	49	PARTIAL	1	0	0	FRAGMENTATION	Final guardian confirmation alone omits consents.
+C01	R98	-	NO_MATCH	0	0	0	FALSE_POSITIVE	Organizer verification process, not applicant-facing requirement.
+C01	R99	-	NO_MATCH	1	0	0	OUTSIDE_GOLD	Supported possible disqualification information without an additional frozen Gold duty.
+C01	R100	31	MATCH	1	0	0	-	Return awards after cancellation.
+C01	R101	32	MATCH	1	0	0	-	Applicant bears award-return costs.
+C01	R102	33	MATCH	1	0	0	WRONG_MODALITY	Complete legal responsibility stated as INFO rather than MUST.
+C01	R103	-	NO_MATCH	1	0	0	OUTSIDE_GOLD	Supported reuse-editing information, no additional frozen Gold obligation.
+C01	R104	-	NO_MATCH	1	0	0	OUTSIDE_GOLD	Supported publication information without an applicant action.
+C01	R105	-	NO_MATCH	1	0	0	OUTSIDE_GOLD	Supported educational reuse information without additional Gold duty.
+C01	R106	42	PARTIAL	1	0	0	FRAGMENTATION	Describes five-year nonprofit rights but not applicant's consent obligation.
+C01	R107	42	PARTIAL	1	0	0	FRAGMENTATION	Deemed consent omits duration and nonprofit use scope.
+C01	R108	-	NO_MATCH	0	0	0	FALSE_POSITIVE	Prize/remuneration description excluded by frozen scope.
+C01	R109	-	NO_MATCH	1	0	0	OUTSIDE_GOLD	Supported copyright ownership information has no corresponding Gold duty.
+C01	R110	-	NO_MATCH	1	0	0	OUTSIDE_GOLD	Organizer secondary-use permission is not a new applicant obligation.
+C01	R111	-	NO_MATCH	1	0	0	OUTSIDE_GOLD	Supported dispute mediation permission absent from frozen Gold.
+C01	R112	-	NO_MATCH	0	0	0	FALSE_POSITIVE	Organizer communication procedure excluded.
+C01	R113	-	NO_MATCH	0	0	0	FALSE_POSITIVE	Prize delivery excluded.
+C01	R114	-	NO_MATCH	0	0	0	FALSE_POSITIVE	Organizer noninvolvement in prize allocation excluded.
+C01	R115	-	NO_MATCH	0	0	0	FALSE_POSITIVE	Organizer document disposal procedure excluded.
+C01	R116	-	NO_MATCH	0	0	0	FALSE_POSITIVE	Administrative non-return notice excluded.
+C01	R117	-	NO_MATCH	0	0	0	FALSE_POSITIVE	Organizer result disclosure policy excluded.

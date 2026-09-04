@@ -1,5 +1,9 @@
 # Engineering decisions
 
+- 2026-09-04 TASK05: FINAL CHECK GO; local rules STOP AS PRIMARY. One real blind gpt-5.6-sol/high candidate, one frozen prompt, eight isolated sessions, zero tool calls or retries.
+- 2026-09-04 TASK05: Measurement PASS; AI-FIRST — STOP for this primary candidate. GATED recall47.98%, precision35.02%, semantic support78.48%, unsupported BLOCKER3. Improvement over local is insufficient for the authorized thresholds.
+- 2026-09-04 TASK05: Preserve existing100-candidate cap (C01 rejects117), Gold173, all matching units, scoring policy and source hashes. Do not tune prompts/regex, change Gold, integrate production or begin another task. Full evidence in benchmarks/task05/report/report.md.
+
 - 2026-09-03 TASK 03: Branch from verified main e1fab59; preserve frozen directory and original CSS byte-for-byte.
 - 2026-09-03 TASK 03: Use an injectable RequirementExtractor with an ACTUAL local-rule implementation, no AI provider account/key/network dependency. Do not label actual code execution as AI accuracy. Test-only fixture providers are SIMULATED.
 - 2026-09-03 TASK 03: Keep generic canonical profile models separate from frozen legacy requirements. Populate the validation representation only after explicit profile confirmation; generic results are review-only and never execute frozen childcare rules.

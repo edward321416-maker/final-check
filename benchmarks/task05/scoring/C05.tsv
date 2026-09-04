@@ -1,0 +1,5 @@
+case_id	extracted_id	gold_ids	match_type	semantic_support	atomicity	hallucinated	failure_categories	reason
+C05	R01	1	MATCH	1	0	0	-	Complete announced daily-life weather/climate idea theme.
+C05	R02	1	NO_MATCH	1	0	0	DUPLICATE	Detailed field examples restate the already matched weather/climate theme.
+C05	R03	2	MATCH	1	0	0	-	Full application date interval recovered from fragmented PDF text.
+C05	R04	-	NO_MATCH	0	0	0	FALSE_POSITIVE	Organizer's possible extension is administrative information.

@@ -1,0 +1,99 @@
+{
+  "frozen_at": "2026-09-04T09:47:47.775833+00:00",
+  "baseline_commit": "0125f05e8b7d68362dcf9e781f0a627e097eaddd",
+  "candidate": "gpt-5.6-sol",
+  "provider": "OpenAI via existing ChatGPT-authenticated Codex CLI",
+  "reasoning_effort": "high",
+  "temperature": "UNKNOWN / provider default",
+  "seed": "UNKNOWN / provider default",
+  "prompt_sha256": "9edc46cbdcb37a619bb5c02d5e1b8f443fbf56c7dcda0f714b4b9103c1e85155",
+  "schema_sha256": "f9a4ff385b7ad8f15b59880cb15ddaf67b0cca159539cca9866a89b5a02cdbc8",
+  "runner_sha256": "c7d6c3910509515009f21bb21e26c55cf53f8cfe12e6787e5e948c919d089644",
+  "sources": [
+    {
+      "case_id": "C01",
+      "input_path": "benchmarks/task04/sources/C01.txt",
+      "input_sha256": "5cbc4861932dcad2b55420549667f9a466d7044167717b8dd363cda9063051e6"
+    },
+    {
+      "case_id": "C02",
+      "input_path": "benchmarks/task04/sources/C02.txt",
+      "input_sha256": "b7e91b6970427c8b4e81dc49baff1f9fb6926da67f4f36179394d7bc28672b2b"
+    },
+    {
+      "case_id": "C03",
+      "input_path": "benchmarks/task04/sources/C03.txt",
+      "input_sha256": "5c93e8ab7506e074db8bd983f078f96e6fc9e60cf33e48a53a571640d99f2db6"
+    },
+    {
+      "case_id": "C04",
+      "input_path": "benchmarks/task04/sources/C04.txt",
+      "input_sha256": "d43c91ec0107f5373a3b85044ad608b3eeb0ffa3d543b22650e25dbf521f0844"
+    },
+    {
+      "case_id": "C05",
+      "input_path": "benchmarks/task04/sources/C05.txt",
+      "input_sha256": "89dbcef02927ea472150ff7fbe902de31054973161b5b0be799d0c9774fb1d75"
+    },
+    {
+      "case_id": "C06",
+      "input_path": "benchmarks/task04/sources/C06.txt",
+      "input_sha256": "f2e27c16c7f26477617fe8545a9645867a7fceb46655979ebddcd6a36d512d37"
+    },
+    {
+      "case_id": "C07",
+      "input_path": "benchmarks/task04/sources/C07.txt",
+      "input_sha256": "1ea9be43594fcdad2f3f9ad0b595d4088fd6d30eff4ac21b7b66f8af26e05519"
+    },
+    {
+      "case_id": "C08",
+      "input_path": "benchmarks/task04/sources/C08.txt",
+      "input_sha256": "75d61955aa0f5055e87efb3733ec3a57795e910b7ff91cdf9f137080f8e5ee3b"
+    }
+  ],
+  "config_overrides": [
+    "approval_policy=\"never\"",
+    "sandbox_mode=\"read-only\"",
+    "web_search=\"disabled\"",
+    "project_doc_max_bytes=0",
+    "skills.include_instructions=false",
+    "skills.bundled.enabled=false",
+    "mcp_servers={}",
+    "model=\"gpt-5.6-sol\"",
+    "model_reasoning_effort=\"high\""
+  ],
+  "disabled_features": [
+    "shell_tool",
+    "unified_exec",
+    "apps",
+    "plugins",
+    "remote_plugin",
+    "memories",
+    "external_agent_memory_import",
+    "multi_agent",
+    "multi_agent_v2",
+    "browser_use",
+    "browser_use_external",
+    "computer_use",
+    "in_app_browser",
+    "image_generation",
+    "view_image",
+    "hooks",
+    "shell_snapshot",
+    "workspace_dependencies",
+    "code_mode",
+    "code_mode_host",
+    "skill_search",
+    "skill_mcp_dependency_install",
+    "tool_suggest",
+    "goals"
+  ],
+  "integrity_before": {
+    "gold_count": 173,
+    "gold_manifest_sha256": "035ebc06d3d62db6ab9c47c53d30cbc206be02667d845e9db59da6b9c5f7fe89",
+    "validator_sha256": "4b506c3b692f2cef39e2be7cb44b4ce74bcc4ce829064ac655e16f545042bb11",
+    "frozen_files_checked": 27
+  },
+  "policy": "One candidate, one locked prompt, one fresh isolated invocation per case; no retries or tuning.",
+  "isolation": "Fresh cwd and CODEX_HOME. Only prompt/schema/current source staged. Existing auth copied locally for transport and removed in finally. No repo path in candidate prompt; no inherited config, skills, memory or MCP. Built-in CLI instructions/environment and unavailable tool stubs remain. Any tool-call event invalidates execution."
+}

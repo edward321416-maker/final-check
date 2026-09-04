@@ -1,0 +1,78 @@
+case_id	extracted_id	gold_ids	match_type	semantic_support	atomicity	hallucinated	failure_categories	reason
+C04	R01	1	MATCH	1	0	0	-	Individual/team permission preserved.
+C04	R02	4	MATCH	1	0	0	-	Four-person team maximum.
+C04	R03	5	MATCH	1	0	0	-	Duplicate registration ban including individual and multiple teams.
+C04	R04	6	PARTIAL	1	0	0	FRAGMENTATION	Generated text requirement without explicit exclusion of predefined answer selection.
+C04	R05	6	PARTIAL	1	0	0	FRAGMENTATION	Rule/list-only ban without positive LLM-generated output obligation.
+C04	R06	-	NO_MATCH	1	0	0	OUTSIDE_GOLD	Supported RAG permission without an additional Gold unit.
+C04	R07	7	PARTIAL	1	0	0	FRAGMENTATION	Ban on returning retrieval alone omits generative processing requirement.
+C04	R08	7	MATCH	1	0	0	-	Mandatory generative processing excludes unchanged retrieval and preserves RAG condition.
+C04	R09	8	MATCH	1	0	0	-	Model-weight public release cutoff.
+C04	R10	9	MATCH	1	0	0	-	Noncommercial open-source model license requirement.
+C04	R11	10	MATCH	1	0	0	-	Remote API-based models prohibited.
+C04	R12	11	MATCH	1	0	0	-	All models directly executable on local CPU/GPU; same local-execution obligation.
+C04	R13	11	NO_MATCH	1	0	0	DUPLICATE	External-server ban restates local execution requirement.
+C04	R14	12	MATCH	1	0	0	-	External-data public release cutoff.
+C04	R15	13	MATCH	1	0	0	-	External-data license requirement.
+C04	R16	14	MATCH	1	0	0	-	Directly collected data prohibited.
+C04	R17	15	PARTIAL	0	0	0	MISS_CONDITION	Unconditional augmentation permission omits explicit source-data/model compliance condition.
+C04	R18	16	MATCH	1	0	0	-	Augmentation must be implementable in code.
+C04	R19	15	PARTIAL	1	0	0	FRAGMENTATION	Source-data compliance alone omits complete conditioned augmentation permission.
+C04	R20	15	PARTIAL	1	0	0	FRAGMENTATION	Model compliance alone omits complete conditioned augmentation permission.
+C04	R21	17	MATCH	1	0	0	-	Source, usage and file proof for all external data.
+C04	R22	-	NO_MATCH	1	0	0	OUTSIDE_GOLD	Supported disqualification consequence without an additional Gold duty.
+C04	R23	18	MATCH	1	0	0	-	All augmentation code submitted.
+C04	R24	20	PARTIAL	1	0	0	FRAGMENTATION	Refers to resource conditions without identifying the complete configuration.
+C04	R25	19	PARTIAL	1	0	0	FRAGMENTATION	270-minute cap omits five-run average measurement basis.
+C04	R26	19	PARTIAL	1	0	0	FRAGMENTATION	Five-run average alone omits the 270-minute limit.
+C04	R27	20	PARTIAL	1	0	0	FRAGMENTATION	GPU portion of full execution environment.
+C04	R28	20	PARTIAL	1	0	0	FRAGMENTATION	CPU/RAM portion of the single specified resource configuration.
+C04	R29	20	PARTIAL	1	0	0	FRAGMENTATION	Disk portion of full execution environment.
+C04	R30	20	PARTIAL	1	0	0	FRAGMENTATION	Software portion of full execution environment.
+C04	R31	21	PARTIAL	1	0	0	FRAGMENTATION	Preprocessing alone from complete inference pipeline.
+C04	R32	21	PARTIAL	1	0	0	FRAGMENTATION	Model loading alone from complete inference pipeline.
+C04	R33	21	PARTIAL	1	0	0	FRAGMENTATION	Inference alone from complete inference pipeline.
+C04	R34	21	PARTIAL	1	0	0	FRAGMENTATION	Output generation alone from complete inference pipeline.
+C04	R35	22	NO_MATCH	1	0	0	DUPLICATE	Offline execution repeats the internet prohibition fully expressed in R36.
+C04	R36	22	MATCH	1	0	0	-	Internet communication prohibited during inference.
+C04	R37	23	MATCH	1	0	0	-	Single LLM inference requirement.
+C04	R38	23	NO_MATCH	1	0	0	DUPLICATE	Ensemble prohibition restates single LLM constraint.
+C04	R39	23	NO_MATCH	1	0	0	DUPLICATE	Input-dependent LLM switching prohibition restates single LLM constraint.
+C04	R40	24	MATCH	1	0	0	-	Finalist submission email, materials and stage preserved.
+C04	R41	25	PARTIAL	1	0	0	FRAGMENTATION	Code submission alone omits Private Score reproduction.
+C04	R42	26	MATCH	1	0	0	-	Finalists submit model checkpoint.
+C04	R43	27	MATCH	1	0	0	-	Finalists submit execution instructions.
+C04	R44	-	NO_MATCH	1	0	0	OUTSIDE_GOLD	General rule-compliance restatement adds no independently specified Gold obligation.
+C04	R45	25	MATCH	1	0	0	-	Verification-stage code must reproduce Private Score.
+C04	R46	29	PARTIAL	1	0	0	FRAGMENTATION	Relative input paths alone omit output paths.
+C04	R47	29	PARTIAL	1	0	0	FRAGMENTATION	Relative output paths alone omit input paths.
+C04	R48	30	PARTIAL	1	0	0	FRAGMENTATION	Code encoding alone omits comment encoding.
+C04	R49	30	PARTIAL	1	0	0	FRAGMENTATION	Comment encoding alone omits code encoding.
+C04	R50	20	PARTIAL	1	0	0	FRAGMENTATION	Installability without complete specified resource configuration.
+C04	R51	20	NO_MATCH	1	0	0	DUPLICATE	Repeats generic resource compliance already represented by R24.
+C04	R52	31	MATCH	1	0	0	-	Library versions in requirement.txt.
+C04	R53	32	PARTIAL	1	0	0	FRAGMENTATION	External data files alone omit preprocessing code.
+C04	R54	32	PARTIAL	1	0	0	FRAGMENTATION	Preprocessing code alone omits external data files.
+C04	R55	17	PARTIAL	1	0	0	FRAGMENTATION	Source proof alone omits complete source/use/file evidence bundle.
+C04	R56	33	MATCH	1	0	0	-	Separate inference code file.
+C04	R57	26	NO_MATCH	1	0	0	DUPLICATE	Repeats model-weight submission already credited to R42.
+C04	R58	28	MATCH	0	0	0	EVIDENCE_NOT_SUPPORTING	Report submission content matches but bare report heading and generic file-list label omit finalist applicability.
+C04	R59	43	PARTIAL	1	0	0	FRAGMENTATION,WRONG_MODALITY	Month/day INFO omits the full 2025 deadline and required submission statement.
+C04	R60	34	MATCH	1	0	0	WRONG_MODALITY	Equivalent three-submission cap expressed as MUST_NOT rather than Gold MUST.
+C04	R61	35	MATCH	1	0	0	-	Python-only language requirement.
+C04	R62	36	PARTIAL	1	0	0	FRAGMENTATION	CSV data encoding alone omits submission files.
+C04	R63	36	PARTIAL	1	0	0	FRAGMENTATION	Submission-file encoding alone omits CSV inputs.
+C04	R64	37	PARTIAL	1	0	0	FRAGMENTATION	Leakage ban only during training.
+C04	R65	37	PARTIAL	1	0	0	FRAGMENTATION	Leakage ban only during inference.
+C04	R66	38	PARTIAL	1	0	0	FRAGMENTATION	Insight sharing alone omits code sharing.
+C04	R67	38	PARTIAL	1	0	0	FRAGMENTATION	Code sharing alone omits insight sharing.
+C04	R68	38	NO_MATCH	1	0	0	DUPLICATE	Private-sharing definition restates partial sharing restrictions.
+C04	R69	39	PARTIAL	1	0	0	FRAGMENTATION	Normal training code alone omits inference/results requirement.
+C04	R70	39	PARTIAL	1	0	0	FRAGMENTATION	Normal inference code alone omits result-generation requirement.
+C04	R71	39	MATCH	1	0	0	WRONG_MODALITY	Normal-code generation of all outputs expresses the Gold abnormal-output ban positively.
+C04	R72	39	NO_MATCH	1	0	0	DUPLICATE	Consequence of abnormal submissions repeats credited constraint.
+C04	R73	40	MATCH	1	0	0	-	Select one final scoring file.
+C04	R74	-	NO_MATCH	0	0	0	FALSE_POSITIVE	Organizer ranking workflow excluded.
+C04	R75	39	NO_MATCH	1	0	0	DUPLICATE	General fraudulent-submission prohibition adds no distinct Gold unit.
+C04	R76	-	NO_MATCH	1	0	0	OUTSIDE_GOLD	Supported past-misconduct evaluation restriction absent from frozen Gold.
+C04	R77	41	PARTIAL	1	0	0	FRAGMENTATION,WRONG_MODALITY	Month/day INFO omits complete 2025 team-merger deadline obligation.

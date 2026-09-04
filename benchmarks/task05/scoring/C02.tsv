@@ -1,0 +1,28 @@
+case_id	extracted_id	gold_ids	match_type	semantic_support	atomicity	hallucinated	failure_categories	reason
+C02	R01	9	PARTIAL	0	0	0	SOURCE_CONFLICT,WRONG_MODALITY	Selects one mandatory deadline despite the conflicting 23:50 entry; does not preserve unresolved conflict.
+C02	R02	9	PARTIAL	1	0	0	SOURCE_CONFLICT	Accurately quotes the second table value but does not state the complete unresolved conflict.
+C02	R03	2	PARTIAL	1	0	0	FRAGMENTATION	Short-form medium without complete duration limit.
+C02	R04	2	MATCH	1	0	0	-	Complete 60-second maximum.
+C02	R05	3	MATCH	1	0	0	-	Both orientations permitted.
+C02	R06	4	MATCH	1	0	0	-	FHD resolution remains recommended.
+C02	R07	5	MATCH	1	0	0	-	MP4 remains recommended.
+C02	R08	6	PARTIAL	1	0	0	FRAGMENTATION	Interest alone omits minimum school-age eligibility.
+C02	R09	6	PARTIAL	1	0	0	FRAGMENTATION	School-age eligibility alone omits the stated interest qualification.
+C02	R10	7	MATCH	1	0	0	-	Birth-year condition and general division preserved.
+C02	R11	8	MATCH	1	0	0	-	Child/youth birth-year interval preserved.
+C02	R12	1	MATCH	1	0	0	-	Complete climate-action and transition theme.
+C02	R13	1	NO_MATCH	1	0	0	DUPLICATE	Slogan restates the already credited theme.
+C02	R14	10	MATCH	0	0	0	EVIDENCE_NOT_SUPPORTING	Correct upload duty and platforms, but quote lists eligible SNS without the upload obligation.
+C02	R15	13	PARTIAL	1	0	0	FRAGMENTATION	Only first element of the required marking set.
+C02	R16	13	PARTIAL	1	0	0	FRAGMENTATION	Only second element of the required marking set.
+C02	R17	13	PARTIAL	1	0	0	FRAGMENTATION	Only account mention from required marking set.
+C02	R18	11	PARTIAL	1	0	0	FRAGMENTATION	After-upload application duty omits the specified URL.
+C02	R19	11	PARTIAL	1	0	0	FRAGMENTATION	Application URL alone omits after-upload submission obligation.
+C02	R20	12	MATCH	1	0	0	-	Private SNS accounts prohibited.
+C02	R21	-	NO_MATCH	0	0	0	FALSE_POSITIVE	Prize allocation excluded from frozen scope.
+C02	R22	-	NO_MATCH	0	0	0	FALSE_POSITIVE	Organizer scoring process, not applicant requirement.
+C02	R23	-	NO_MATCH	0	0	0	FALSE_POSITIVE	Scoring weight is an organizer operation.
+C02	R24	-	NO_MATCH	0	0	0	FALSE_POSITIVE	Scoring weight is an organizer operation.
+C02	R25	-	NO_MATCH	0	0	0	FALSE_POSITIVE	Scoring weight is an organizer operation.
+C02	R26	-	NO_MATCH	0	0	0	FALSE_POSITIVE	Scoring weight is an organizer operation.
+C02	R27	-	NO_MATCH	0	0	0	FALSE_POSITIVE	Organizer tie-break process excluded.

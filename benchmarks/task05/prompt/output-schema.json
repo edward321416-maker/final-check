@@ -1,0 +1,112 @@
+{
+  "type": "object",
+  "properties": {
+    "requirements": {
+      "type": "array",
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "requirement_id": {
+            "pattern": "^[A-Za-z][A-Za-z0-9_-]{0,39}$",
+            "title": "Requirement Id",
+            "type": "string"
+          },
+          "rule": {
+            "maxLength": 2000,
+            "minLength": 1,
+            "title": "Rule",
+            "type": "string"
+          },
+          "modality": {
+            "enum": [
+              "MUST",
+              "MUST_NOT",
+              "SHOULD",
+              "MAY",
+              "INFO"
+            ],
+            "title": "Modality",
+            "type": "string"
+          },
+          "severity": {
+            "enum": [
+              "BLOCKER",
+              "REVIEW",
+              "INFO",
+              "EXTERNAL"
+            ],
+            "title": "Severity",
+            "type": "string"
+          },
+          "verifier": {
+            "enum": [
+              "DETERMINISTIC",
+              "SEMANTIC",
+              "VISION_SEMANTIC",
+              "URL_CHECK",
+              "EXTERNAL"
+            ],
+            "title": "Verifier",
+            "type": "string"
+          },
+          "condition": {
+            "maxLength": 1000,
+            "minLength": 1,
+            "title": "Condition",
+            "type": "string"
+          },
+          "evidence": {
+            "$ref": "#/$defs/SourceEvidence"
+          },
+          "confidence": {
+            "maximum": 1,
+            "minimum": 0,
+            "title": "Confidence",
+            "type": "number"
+          }
+        },
+        "required": [
+          "requirement_id",
+          "rule",
+          "modality",
+          "severity",
+          "verifier",
+          "condition",
+          "evidence",
+          "confidence"
+        ],
+        "title": "ExtractedRequirement",
+        "type": "object"
+      }
+    }
+  },
+  "required": [
+    "requirements"
+  ],
+  "additionalProperties": false,
+  "$defs": {
+    "SourceEvidence": {
+      "additionalProperties": false,
+      "properties": {
+        "source_section": {
+          "maxLength": 300,
+          "minLength": 1,
+          "title": "Source Section",
+          "type": "string"
+        },
+        "quote": {
+          "maxLength": 4000,
+          "minLength": 1,
+          "title": "Quote",
+          "type": "string"
+        }
+      },
+      "required": [
+        "source_section",
+        "quote"
+      ],
+      "title": "SourceEvidence",
+      "type": "object"
+    }
+  }
+}

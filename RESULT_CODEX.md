@@ -1,4 +1,106 @@
-# RESULT_CODEX — TASK 04
+# RESULT_CODEX — TASK 05
+
+Date: 2026-09-04 (Asia/Seoul). Repository: edward321416-maker/final-check.
+Branch: `codex/task-05-blind-ai-extractor-comparison`.
+Base: `0125f05e8b7d68362dcf9e781f0a627e097eaddd` (TASK04 PR #3, MERGED).
+
+Delivery: [PR #4](https://github.com/edward321416-maker/final-check/pull/4), verified
+**OPEN / NOT MERGED**. Benchmark commit:
+`a48bfbff28cacf053eab848710c05632eaeb6fbc`.
+
+## TASK05 STATUS
+
+**PASS — measurement completed. AI-FIRST — STOP for this locked candidate.**
+
+## DIRECTION
+
+FINAL CHECK = GO. LocalRuleExtractor = STOP AS PRIMARY; preserved as baseline.
+AI candidate = STOP AS PRIMARY under the supplied direction thresholds. No
+production integration or next-task implementation.
+
+## MODEL EXECUTION
+
+OpenAI via existing ChatGPT-authenticated Codex CLI 0.147.0; requested model alias
+`gpt-5.6-sol`, high reasoning; underlying dated snapshot UNKNOWN. One locked prompt,
+one pass, eight fresh cwd/CODEX_HOME/thread invocations, zero tool calls/retries.
+No Gold/scoring/TASK04 outputs/history supplied to the extractor. Common CLI
+instructions and unavailable tool names remain; no OS-container isolation claim.
+All local auth transport copies removed; no new credentials/account/OAuth/plan.
+Prompt SHA: `9edc46cbdcb37a619bb5c02d5e1b8f443fbf56c7dcda0f714b4b9103c1e85155`.
+
+## BENCHMARK RESULTS
+
+| Metric | Local frozen | AI RAW | AI GATED (primary) |
+|---|---:|---:|---:|
+| Candidates / Gold | 211 / 173 | 354 / 173 | 237 / 173 |
+| Complete MATCH | 32 | 119 | 83 |
+| Recall | 18.50% | 68.79% | 47.98% |
+| Precision | 15.17% | 33.62% | 35.02% |
+| Modality accuracy on MATCH | 25.00% | 96.64% | 97.59% |
+| Exact evidence | 100% | 100% | 100% |
+| Semantic support | 24.17% | 71.75% | 78.48% |
+| Atomicity violations | 18 | 7 | 3 |
+| Hallucinated constraints | 0 | 0 | 0 |
+| Unsupported BLOCKER | 0 | 5 | 3 |
+
+GATED recall +29.48 percentage points and precision +19.86 points over local.
+Both remain below minimum direction thresholds; unsupported BLOCKERs also fail
+the safety criterion. RAW cannot replace GATED as the product decision basis.
+
+## SAFETY
+
+117 C01 candidates exceed the existing100 cap; entire case rejected, including36
+RAW MATCH candidates. No truncation, cap change or prompt repair. All other
+schema/exact-quote/ID checks pass. The unchanged syntax gate flags29 retained
+items; manual semantic atomicity finds3. Unsupported GATED blockers: C02 R14,
+C04 R58, C08 R24. Every profile remains REVIEW_REQUIRED. These are extraction
+severity labels, never generated submission verdicts.
+
+## LIMITATIONS
+
+PRE-OUTPUT FROZEN REAL BENCHMARK; same engineering workflow for Gold/scoring, no
+independent human adjudication. Eight purposive cases and frozen multi-detail
+matching units limit generalization. Additional supported items outside Gold get
+no credit. PARTIAL=0, duplicate credit forbidden; Gold/scoring policy unchanged.
+Earlier prerequisite BLOCKED attempts and the synthetic isolation probe excluded.
+
+## REGRESSION
+
+47 backend passed; 14 desktop/mobile browser passed; TypeScript and production
+build PASS; diff check PASS. Initial wrong-cwd pytest collection error corrected
+without code change. Existing regression is SELF; mock/fault paths SIMULATED.
+Other providers, Vision/OCR, production integration, generic automatic verifier,
+deployment and independent human scoring remain NOT TESTED.
+
+## SOURCE INTEGRITY
+
+Gold173 and all27 frozen manifest members unchanged. Product/extractor/validator,
+tests and fixtures unchanged. Before/after SHA-256:
+
+```text
+Gold manifest 035ebc06d3d62db6ab9c47c53d30cbc206be02667d845e9db59da6b9c5f7fe89
+Validator     4b506c3b692f2cef39e2be7cb44b4ce74bcc4ce829064ac655e16f545042bb11
+Prompt        9edc46cbdcb37a619bb5c02d5e1b8f443fbf56c7dcda0f714b4b9103c1e85155
+Schema        f9a4ff385b7ad8f15b59880cb15ddaf67b0cca159539cca9866a89b5a02cdbc8
+```
+
+## NEXT RECOMMENDATION
+
+Product/Business Lead should review failure scope and frozen Gold granularity
+before authorizing another separately frozen experiment or assisted workflow.
+No subsequent task started. TASK05 PR must remain OPEN / NOT MERGED.
+
+Detailed evidence: [report](benchmarks/task05/report/report.md),
+[execution manifest](benchmarks/task05/execution.json),
+[manual judgements](benchmarks/task05/scoring/candidates.tsv),
+[regression and integrity](artifacts/task05/).
+
+---
+
+# Historical RESULT_CODEX — TASK 04
+
+The following is the preserved TASK04 delivery record. Its pending PR/TASK05
+statements are historical and superseded by the TASK05 record above.
 
 Date: 2026-09-03 (Asia/Seoul). Repository: edward321416-maker/final-check.
 Branch: `codex/task-04-independent-extractor-benchmark`.

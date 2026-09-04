@@ -1,0 +1,475 @@
+{
+  "requirements": [],
+  "rejected": [
+    {
+      "index": 0,
+      "reason": "Too many extraction candidates"
+    },
+    {
+      "index": 1,
+      "reason": "Too many extraction candidates"
+    },
+    {
+      "index": 2,
+      "reason": "Too many extraction candidates"
+    },
+    {
+      "index": 3,
+      "reason": "Too many extraction candidates"
+    },
+    {
+      "index": 4,
+      "reason": "Too many extraction candidates"
+    },
+    {
+      "index": 5,
+      "reason": "Too many extraction candidates"
+    },
+    {
+      "index": 6,
+      "reason": "Too many extraction candidates"
+    },
+    {
+      "index": 7,
+      "reason": "Too many extraction candidates"
+    },
+    {
+      "index": 8,
+      "reason": "Too many extraction candidates"
+    },
+    {
+      "index": 9,
+      "reason": "Too many extraction candidates"
+    },
+    {
+      "index": 10,
+      "reason": "Too many extraction candidates"
+    },
+    {
+      "index": 11,
+      "reason": "Too many extraction candidates"
+    },
+    {
+      "index": 12,
+      "reason": "Too many extraction candidates"
+    },
+    {
+      "index": 13,
+      "reason": "Too many extraction candidates"
+    },
+    {
+      "index": 14,
+      "reason": "Too many extraction candidates"
+    },
+    {
+      "index": 15,
+      "reason": "Too many extraction candidates"
+    },
+    {
+      "index": 16,
+      "reason": "Too many extraction candidates"
+    },
+    {
+      "index": 17,
+      "reason": "Too many extraction candidates"
+    },
+    {
+      "index": 18,
+      "reason": "Too many extraction candidates"
+    },
+    {
+      "index": 19,
+      "reason": "Too many extraction candidates"
+    },
+    {
+      "index": 20,
+      "reason": "Too many extraction candidates"
+    },
+    {
+      "index": 21,
+      "reason": "Too many extraction candidates"
+    },
+    {
+      "index": 22,
+      "reason": "Too many extraction candidates"
+    },
+    {
+      "index": 23,
+      "reason": "Too many extraction candidates"
+    },
+    {
+      "index": 24,
+      "reason": "Too many extraction candidates"
+    },
+    {
+      "index": 25,
+      "reason": "Too many extraction candidates"
+    },
+    {
+      "index": 26,
+      "reason": "Too many extraction candidates"
+    },
+    {
+      "index": 27,
+      "reason": "Too many extraction candidates"
+    },
+    {
+      "index": 28,
+      "reason": "Too many extraction candidates"
+    },
+    {
+      "index": 29,
+      "reason": "Too many extraction candidates"
+    },
+    {
+      "index": 30,
+      "reason": "Too many extraction candidates"
+    },
+    {
+      "index": 31,
+      "reason": "Too many extraction candidates"
+    },
+    {
+      "index": 32,
+      "reason": "Too many extraction candidates"
+    },
+    {
+      "index": 33,
+      "reason": "Too many extraction candidates"
+    },
+    {
+      "index": 34,
+      "reason": "Too many extraction candidates"
+    },
+    {
+      "index": 35,
+      "reason": "Too many extraction candidates"
+    },
+    {
+      "index": 36,
+      "reason": "Too many extraction candidates"
+    },
+    {
+      "index": 37,
+      "reason": "Too many extraction candidates"
+    },
+    {
+      "index": 38,
+      "reason": "Too many extraction candidates"
+    },
+    {
+      "index": 39,
+      "reason": "Too many extraction candidates"
+    },
+    {
+      "index": 40,
+      "reason": "Too many extraction candidates"
+    },
+    {
+      "index": 41,
+      "reason": "Too many extraction candidates"
+    },
+    {
+      "index": 42,
+      "reason": "Too many extraction candidates"
+    },
+    {
+      "index": 43,
+      "reason": "Too many extraction candidates"
+    },
+    {
+      "index": 44,
+      "reason": "Too many extraction candidates"
+    },
+    {
+      "index": 45,
+      "reason": "Too many extraction candidates"
+    },
+    {
+      "index": 46,
+      "reason": "Too many extraction candidates"
+    },
+    {
+      "index": 47,
+      "reason": "Too many extraction candidates"
+    },
+    {
+      "index": 48,
+      "reason": "Too many extraction candidates"
+    },
+    {
+      "index": 49,
+      "reason": "Too many extraction candidates"
+    },
+    {
+      "index": 50,
+      "reason": "Too many extraction candidates"
+    },
+    {
+      "index": 51,
+      "reason": "Too many extraction candidates"
+    },
+    {
+      "index": 52,
+      "reason": "Too many extraction candidates"
+    },
+    {
+      "index": 53,
+      "reason": "Too many extraction candidates"
+    },
+    {
+      "index": 54,
+      "reason": "Too many extraction candidates"
+    },
+    {
+      "index": 55,
+      "reason": "Too many extraction candidates"
+    },
+    {
+      "index": 56,
+      "reason": "Too many extraction candidates"
+    },
+    {
+      "index": 57,
+      "reason": "Too many extraction candidates"
+    },
+    {
+      "index": 58,
+      "reason": "Too many extraction candidates"
+    },
+    {
+      "index": 59,
+      "reason": "Too many extraction candidates"
+    },
+    {
+      "index": 60,
+      "reason": "Too many extraction candidates"
+    },
+    {
+      "index": 61,
+      "reason": "Too many extraction candidates"
+    },
+    {
+      "index": 62,
+      "reason": "Too many extraction candidates"
+    },
+    {
+      "index": 63,
+      "reason": "Too many extraction candidates"
+    },
+    {
+      "index": 64,
+      "reason": "Too many extraction candidates"
+    },
+    {
+      "index": 65,
+      "reason": "Too many extraction candidates"
+    },
+    {
+      "index": 66,
+      "reason": "Too many extraction candidates"
+    },
+    {
+      "index": 67,
+      "reason": "Too many extraction candidates"
+    },
+    {
+      "index": 68,
+      "reason": "Too many extraction candidates"
+    },
+    {
+      "index": 69,
+      "reason": "Too many extraction candidates"
+    },
+    {
+      "index": 70,
+      "reason": "Too many extraction candidates"
+    },
+    {
+      "index": 71,
+      "reason": "Too many extraction candidates"
+    },
+    {
+      "index": 72,
+      "reason": "Too many extraction candidates"
+    },
+    {
+      "index": 73,
+      "reason": "Too many extraction candidates"
+    },
+    {
+      "index": 74,
+      "reason": "Too many extraction candidates"
+    },
+    {
+      "index": 75,
+      "reason": "Too many extraction candidates"
+    },
+    {
+      "index": 76,
+      "reason": "Too many extraction candidates"
+    },
+    {
+      "index": 77,
+      "reason": "Too many extraction candidates"
+    },
+    {
+      "index": 78,
+      "reason": "Too many extraction candidates"
+    },
+    {
+      "index": 79,
+      "reason": "Too many extraction candidates"
+    },
+    {
+      "index": 80,
+      "reason": "Too many extraction candidates"
+    },
+    {
+      "index": 81,
+      "reason": "Too many extraction candidates"
+    },
+    {
+      "index": 82,
+      "reason": "Too many extraction candidates"
+    },
+    {
+      "index": 83,
+      "reason": "Too many extraction candidates"
+    },
+    {
+      "index": 84,
+      "reason": "Too many extraction candidates"
+    },
+    {
+      "index": 85,
+      "reason": "Too many extraction candidates"
+    },
+    {
+      "index": 86,
+      "reason": "Too many extraction candidates"
+    },
+    {
+      "index": 87,
+      "reason": "Too many extraction candidates"
+    },
+    {
+      "index": 88,
+      "reason": "Too many extraction candidates"
+    },
+    {
+      "index": 89,
+      "reason": "Too many extraction candidates"
+    },
+    {
+      "index": 90,
+      "reason": "Too many extraction candidates"
+    },
+    {
+      "index": 91,
+      "reason": "Too many extraction candidates"
+    },
+    {
+      "index": 92,
+      "reason": "Too many extraction candidates"
+    },
+    {
+      "index": 93,
+      "reason": "Too many extraction candidates"
+    },
+    {
+      "index": 94,
+      "reason": "Too many extraction candidates"
+    },
+    {
+      "index": 95,
+      "reason": "Too many extraction candidates"
+    },
+    {
+      "index": 96,
+      "reason": "Too many extraction candidates"
+    },
+    {
+      "index": 97,
+      "reason": "Too many extraction candidates"
+    },
+    {
+      "index": 98,
+      "reason": "Too many extraction candidates"
+    },
+    {
+      "index": 99,
+      "reason": "Too many extraction candidates"
+    },
+    {
+      "index": 100,
+      "reason": "Too many extraction candidates"
+    },
+    {
+      "index": 101,
+      "reason": "Too many extraction candidates"
+    },
+    {
+      "index": 102,
+      "reason": "Too many extraction candidates"
+    },
+    {
+      "index": 103,
+      "reason": "Too many extraction candidates"
+    },
+    {
+      "index": 104,
+      "reason": "Too many extraction candidates"
+    },
+    {
+      "index": 105,
+      "reason": "Too many extraction candidates"
+    },
+    {
+      "index": 106,
+      "reason": "Too many extraction candidates"
+    },
+    {
+      "index": 107,
+      "reason": "Too many extraction candidates"
+    },
+    {
+      "index": 108,
+      "reason": "Too many extraction candidates"
+    },
+    {
+      "index": 109,
+      "reason": "Too many extraction candidates"
+    },
+    {
+      "index": 110,
+      "reason": "Too many extraction candidates"
+    },
+    {
+      "index": 111,
+      "reason": "Too many extraction candidates"
+    },
+    {
+      "index": 112,
+      "reason": "Too many extraction candidates"
+    },
+    {
+      "index": 113,
+      "reason": "Too many extraction candidates"
+    },
+    {
+      "index": 114,
+      "reason": "Too many extraction candidates"
+    },
+    {
+      "index": 115,
+      "reason": "Too many extraction candidates"
+    },
+    {
+      "index": 116,
+      "reason": "Too many extraction candidates"
+    }
+  ],
+  "profile_status": "REVIEW_REQUIRED",
+  "automatic_confirmation": false
+}

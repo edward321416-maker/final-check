@@ -1,0 +1,239 @@
+{
+  "started_at": "2026-09-04T09:48:00.652000+00:00",
+  "cli_version": "codex-cli 0.147.0",
+  "candidate": "gpt-5.6-sol",
+  "cases": [
+    {
+      "case_id": "C01",
+      "started_at": "2026-09-04T09:48:00.722294+00:00",
+      "source_sha256": "5cbc4861932dcad2b55420549667f9a466d7044167717b8dd363cda9063051e6",
+      "input_sha256": "13eecb4590d3925b57021e01db6ce32ee43c78a6f780b61970e2a9f0398d0922",
+      "staged_files": [
+        "prompt.txt",
+        "schema.json",
+        "source.txt"
+      ],
+      "completed_at": "2026-09-04T09:53:44.326770+00:00",
+      "returncode": 0,
+      "raw_sha256": "ac1314aff9edfdaba172bd5b18fc8fc740aa4a4bc6fb51aad02350139fd5f880",
+      "raw_count": 117,
+      "tool_calls": 0,
+      "thread_id": "01a06bd1-6f7d-7dd3-a44c-6dc18ab510bf",
+      "usage": {
+        "input_tokens": 13106,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 18722,
+        "reasoning_output_tokens": 5665
+      },
+      "gated_sha256": "f345ed1a7f60fe5f730f16eac620b8c37f52acfaf5f52d2b3d6e773913dda664",
+      "gated_count": 0,
+      "rejected_count": 117,
+      "atomicity_flag_count": 0
+    },
+    {
+      "case_id": "C02",
+      "started_at": "2026-09-04T09:53:44.332809+00:00",
+      "source_sha256": "b7e91b6970427c8b4e81dc49baff1f9fb6926da67f4f36179394d7bc28672b2b",
+      "input_sha256": "b07f4b5920e3e70e3c1de1b6acdc0057b7459920d8d1374cf8d649e574fc8b1f",
+      "staged_files": [
+        "prompt.txt",
+        "schema.json",
+        "source.txt"
+      ],
+      "completed_at": "2026-09-04T09:56:24.687454+00:00",
+      "returncode": 0,
+      "raw_sha256": "c6f124e5c8046706dbbfccbb301ffbe07400d6e0b86de0fb283bb6cfc56f419f",
+      "raw_count": 27,
+      "tool_calls": 0,
+      "thread_id": "01a06bd6-aee5-7920-904e-87b237559db7",
+      "usage": {
+        "input_tokens": 9195,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 8539,
+        "reasoning_output_tokens": 5696
+      },
+      "gated_sha256": "6c6b94ebc6043074ccdb8e0140d0de55bfb5ac8584c76422e83ac5d3f6e3a270",
+      "gated_count": 27,
+      "rejected_count": 0,
+      "atomicity_flag_count": 2
+    },
+    {
+      "case_id": "C03",
+      "started_at": "2026-09-04T09:56:24.693762+00:00",
+      "source_sha256": "5c93e8ab7506e074db8bd983f078f96e6fc9e60cf33e48a53a571640d99f2db6",
+      "input_sha256": "0d4e901b95e5341f3881f256729f7db5b9795ab36fdcc74bff21a70373894292",
+      "staged_files": [
+        "prompt.txt",
+        "schema.json",
+        "source.txt"
+      ],
+      "completed_at": "2026-09-04T09:57:20.382361+00:00",
+      "returncode": 0,
+      "raw_sha256": "48fe2d04374045e311cc5768cdc23fe89800cad38db1483c1d735fcbfd0467ef",
+      "raw_count": 10,
+      "tool_calls": 0,
+      "thread_id": "01a06bd9-21fb-7030-a507-a24e5d1702e9",
+      "usage": {
+        "input_tokens": 8524,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 2731,
+        "reasoning_output_tokens": 1552
+      },
+      "gated_sha256": "b363a7d8697278f62118cefe9ce4cb2cf68bf8c4479d96cd9ea10f3b13e49949",
+      "gated_count": 10,
+      "rejected_count": 0,
+      "atomicity_flag_count": 1
+    },
+    {
+      "case_id": "C04",
+      "started_at": "2026-09-04T09:57:20.388630+00:00",
+      "source_sha256": "d43c91ec0107f5373a3b85044ad608b3eeb0ffa3d543b22650e25dbf521f0844",
+      "input_sha256": "a2835a071e649f9d9a5a9bd766baea764ca5c40cbabd34c453ff21dbf414ee3d",
+      "staged_files": [
+        "prompt.txt",
+        "schema.json",
+        "source.txt"
+      ],
+      "completed_at": "2026-09-04T10:00:34.100078+00:00",
+      "returncode": 0,
+      "raw_sha256": "fa353bd09b27b3c450245738b3bc80899bd83ddb75ace73973eaa9a9a509080b",
+      "raw_count": 77,
+      "tool_calls": 0,
+      "thread_id": "01a06bd9-fab1-7ce1-9478-51fea9f1253b",
+      "usage": {
+        "input_tokens": 9769,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 10386,
+        "reasoning_output_tokens": 2351
+      },
+      "gated_sha256": "cd0be0ae24e6d06a8591a74e1f6f716cfe67aa379917cd960e183532c5954bbf",
+      "gated_count": 77,
+      "rejected_count": 0,
+      "atomicity_flag_count": 4
+    },
+    {
+      "case_id": "C05",
+      "started_at": "2026-09-04T10:00:34.113932+00:00",
+      "source_sha256": "89dbcef02927ea472150ff7fbe902de31054973161b5b0be799d0c9774fb1d75",
+      "input_sha256": "f21038ad9a51c5e950dba221612c03833be766486b044bca5fd98c01afa54986",
+      "staged_files": [
+        "prompt.txt",
+        "schema.json",
+        "source.txt"
+      ],
+      "completed_at": "2026-09-04T10:00:57.326896+00:00",
+      "returncode": 0,
+      "raw_sha256": "1f45d50b3faa0a55f6d68b1562b43e2673eb5bc71204fe975e5be5758878fa51",
+      "raw_count": 4,
+      "tool_calls": 0,
+      "thread_id": "01a06bdc-ef19-78f0-9acb-23914125aa7e",
+      "usage": {
+        "input_tokens": 8621,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 899,
+        "reasoning_output_tokens": 408
+      },
+      "gated_sha256": "050b1881becdb009c08fe66fef861e4bae74d8ba1305461be64d9f8293335b0b",
+      "gated_count": 4,
+      "rejected_count": 0,
+      "atomicity_flag_count": 2
+    },
+    {
+      "case_id": "C06",
+      "started_at": "2026-09-04T10:00:57.341428+00:00",
+      "source_sha256": "f2e27c16c7f26477617fe8545a9645867a7fceb46655979ebddcd6a36d512d37",
+      "input_sha256": "867bb8ab6a04a8b12fc74e4bd12cc74a74d5b6b03843a15ca6dfe0e34b812572",
+      "staged_files": [
+        "prompt.txt",
+        "schema.json",
+        "source.txt"
+      ],
+      "completed_at": "2026-09-04T10:01:25.643860+00:00",
+      "returncode": 0,
+      "raw_sha256": "98d0970ef8ee785ddce588b2e90178f258081f7e8e6989b1688e9c52cc7cdc55",
+      "raw_count": 6,
+      "tool_calls": 0,
+      "thread_id": "01a06bdd-48ca-7782-a14b-a5e378ab720f",
+      "usage": {
+        "input_tokens": 9175,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1236,
+        "reasoning_output_tokens": 516
+      },
+      "gated_sha256": "fdec59b5d97fc4b26baadc261c45f26be95b4ee495d743a69969b1472ceebd9e",
+      "gated_count": 6,
+      "rejected_count": 0,
+      "atomicity_flag_count": 1
+    },
+    {
+      "case_id": "C07",
+      "started_at": "2026-09-04T10:01:25.649788+00:00",
+      "source_sha256": "1ea9be43594fcdad2f3f9ad0b595d4088fd6d30eff4ac21b7b66f8af26e05519",
+      "input_sha256": "ca65b2663f063a66b25fdb71eccec05cc9991141991b45499fa7893f637e1cf6",
+      "staged_files": [
+        "prompt.txt",
+        "schema.json",
+        "source.txt"
+      ],
+      "completed_at": "2026-09-04T10:04:03.994309+00:00",
+      "returncode": 0,
+      "raw_sha256": "c7120a9017655814cdeeeeda3acb0be7a15d8214c437d8041a9b764998b90150",
+      "raw_count": 44,
+      "tool_calls": 0,
+      "thread_id": "01a06bdd-b7b0-7d70-a775-1ab2b43c6590",
+      "usage": {
+        "input_tokens": 9664,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 8403,
+        "reasoning_output_tokens": 3624
+      },
+      "gated_sha256": "04372de34b7011f429b422495f8f3a334de44baa6d01a55a86dc085ca7c0ec66",
+      "gated_count": 44,
+      "rejected_count": 0,
+      "atomicity_flag_count": 5
+    },
+    {
+      "case_id": "C08",
+      "started_at": "2026-09-04T10:04:04.000793+00:00",
+      "source_sha256": "75d61955aa0f5055e87efb3733ec3a57795e910b7ff91cdf9f137080f8e5ee3b",
+      "input_sha256": "b4eb3e27b0a989e5a789a3852e1dbdeb2d3c32977607541a2e11f9ee8c796e18",
+      "staged_files": [
+        "prompt.txt",
+        "schema.json",
+        "source.txt"
+      ],
+      "completed_at": "2026-09-04T10:08:35.615090+00:00",
+      "returncode": 0,
+      "raw_sha256": "4b02dd3a4a36cb8552047e4a6def6b77e77e4f1defb384c6edf81e71c3414e5f",
+      "raw_count": 69,
+      "tool_calls": 0,
+      "thread_id": "01a06be0-2325-76a0-b2e0-1d6e95aa7bf6",
+      "usage": {
+        "input_tokens": 11093,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 14711,
+        "reasoning_output_tokens": 7201
+      },
+      "gated_sha256": "5f00d9ff9b57a47babf7d3aedf1ef1a9d2c2eafefbe8a25fcd2cbed50bd60f59",
+      "gated_count": 69,
+      "rejected_count": 0,
+      "atomicity_flag_count": 14
+    }
+  ],
+  "completed_at": "2026-09-04T10:08:35.616557+00:00",
+  "integrity_after_ai": {
+    "gold_count": 173,
+    "gold_manifest_sha256": "035ebc06d3d62db6ab9c47c53d30cbc206be02667d845e9db59da6b9c5f7fe89",
+    "validator_sha256": "4b506c3b692f2cef39e2be7cb44b4ce74bcc4ce829064ac655e16f545042bb11",
+    "frozen_files_checked": 27
+  },
+  "gate_completed_at": "2026-09-04T10:08:48.017116+00:00"
+}
