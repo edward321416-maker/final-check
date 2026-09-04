@@ -1,0 +1,132 @@
+{
+  "frozen_at": "2026-09-03T11:46:35.794398+00:00",
+  "extractor_executed": false,
+  "baseline_commit": "81bf2551c5967836d3e54869de2e86261428c78e",
+  "gold_counts": {
+    "C01": 49,
+    "C02": 14,
+    "C03": 6,
+    "C04": 44,
+    "C05": 2,
+    "C06": 7,
+    "C07": 19,
+    "C08": 32
+  },
+  "modality_counts": {
+    "MUST": 133,
+    "MAY": 15,
+    "SHOULD": 6,
+    "MUST_NOT": 18,
+    "INFO": 1
+  },
+  "files": [
+    {
+      "path": "benchmarks/task04/PROTOCOL.md",
+      "sha256": "881928cf53ee0b8954621bae83a91d6b84538d75821ec4d8b660477b68dc6919"
+    },
+    {
+      "path": "benchmarks/task04/manifest.json",
+      "sha256": "50219d12e04fe77ace35bc994968b6a7a1297cdb36d0fb43ddb86d280ba0b271"
+    },
+    {
+      "path": "benchmarks/task04/gold/annotations.tsv",
+      "sha256": "0cf41d96748c2715ac67fedbd8f16086d39c36c94479418e05b53dba8e2f3bd3"
+    },
+    {
+      "path": "benchmarks/task04/gold/C01.json",
+      "sha256": "9cbc1432b16a480c94c7be7a13bbc3789efe9f23355c249a07e48db7859b7039"
+    },
+    {
+      "path": "benchmarks/task04/gold/C02.json",
+      "sha256": "ea380dd0699250dade773c4b33798cbb095437998f8ba1572ffed7b68249a9e1"
+    },
+    {
+      "path": "benchmarks/task04/gold/C03.json",
+      "sha256": "3e4732f646ecc3692b2ffae9758d9c915fe189892685c772350983971cfe9f97"
+    },
+    {
+      "path": "benchmarks/task04/gold/C04.json",
+      "sha256": "77c9cc28f1f2a357b34fca21ce73c9075ffd05128977329b313667935282a34a"
+    },
+    {
+      "path": "benchmarks/task04/gold/C05.json",
+      "sha256": "a6880da65c03fcd99b3742b84a87d609e62af49eacbc792cde11afb5a44e0203"
+    },
+    {
+      "path": "benchmarks/task04/gold/C06.json",
+      "sha256": "ae71524b0440010fddd9d7588f9587ba3b78f62913226bfb43a3ebf745ea7a0d"
+    },
+    {
+      "path": "benchmarks/task04/gold/C07.json",
+      "sha256": "b4a3a9abd98b70c7a76c4c0de73a034958a950e57909a4bb56301eb8acf1d117"
+    },
+    {
+      "path": "benchmarks/task04/gold/C08.json",
+      "sha256": "b8e62e042ccfe26adb4deeade275ff26348998df5d4ea56b3302b241bd27d4f7"
+    },
+    {
+      "path": "benchmarks/task04/sources/C01.pdf",
+      "sha256": "37405e2e7d58fae052430437b78328525ee9fd6a177bddf53c272dfb5e33dfe3"
+    },
+    {
+      "path": "benchmarks/task04/sources/C01.txt",
+      "sha256": "5cbc4861932dcad2b55420549667f9a466d7044167717b8dd363cda9063051e6"
+    },
+    {
+      "path": "benchmarks/task04/sources/C02.html",
+      "sha256": "a9e2213166bf81e5da7ef68625c5010e6f4ccb958e063ea06eeea97e0f04a8ed"
+    },
+    {
+      "path": "benchmarks/task04/sources/C02.txt",
+      "sha256": "b7e91b6970427c8b4e81dc49baff1f9fb6926da67f4f36179394d7bc28672b2b"
+    },
+    {
+      "path": "benchmarks/task04/sources/C03.html",
+      "sha256": "e5519a93fe2bfe98ced84156482f1c321e74697109a4a41f4fa8cd4f147f230d"
+    },
+    {
+      "path": "benchmarks/task04/sources/C03.txt",
+      "sha256": "5c93e8ab7506e074db8bd983f078f96e6fc9e60cf33e48a53a571640d99f2db6"
+    },
+    {
+      "path": "benchmarks/task04/sources/C04.html",
+      "sha256": "a6656d4b57999339623dc53abfa98ba4a2e2f9bcd16b3136777fd95a6dfd5bfa"
+    },
+    {
+      "path": "benchmarks/task04/sources/C04.txt",
+      "sha256": "d43c91ec0107f5373a3b85044ad608b3eeb0ffa3d543b22650e25dbf521f0844"
+    },
+    {
+      "path": "benchmarks/task04/sources/C05.pdf",
+      "sha256": "8c500d1bcef6b70e709ad599a0422e939dd9ba4184a77bb79fbd85cda5e54b99"
+    },
+    {
+      "path": "benchmarks/task04/sources/C05.txt",
+      "sha256": "89dbcef02927ea472150ff7fbe902de31054973161b5b0be799d0c9774fb1d75"
+    },
+    {
+      "path": "benchmarks/task04/sources/C06.html",
+      "sha256": "0b64167380db3c330dff7b301d89fac8f51515d817f32b4585b9720863771434"
+    },
+    {
+      "path": "benchmarks/task04/sources/C06.txt",
+      "sha256": "f2e27c16c7f26477617fe8545a9645867a7fceb46655979ebddcd6a36d512d37"
+    },
+    {
+      "path": "benchmarks/task04/sources/C07.pdf",
+      "sha256": "51ea2eb831ef228ec2637ba9d80402d22a7f54d514fa6810ba0bdb6a1bb5dfb0"
+    },
+    {
+      "path": "benchmarks/task04/sources/C07.txt",
+      "sha256": "1ea9be43594fcdad2f3f9ad0b595d4088fd6d30eff4ac21b7b66f8af26e05519"
+    },
+    {
+      "path": "benchmarks/task04/sources/C08.pdf",
+      "sha256": "a13886249cfbe075111ea17cbdbafc5a984af52d5fef72ce518c3644a89e0c51"
+    },
+    {
+      "path": "benchmarks/task04/sources/C08.txt",
+      "sha256": "75d61955aa0f5055e87efb3733ec3a57795e910b7ff91cdf9f137080f8e5ee3b"
+    }
+  ]
+}

@@ -1,0 +1,211 @@
+[
+  {
+    "gold_id": "C07-R001",
+    "rule": "참가자는 대한민국 국민이어야 한다.",
+    "modality": "MUST",
+    "condition": "always",
+    "evidence": {
+      "start_line": 13,
+      "end_line": 13,
+      "quote": " 3. 공모자격: 대한민국 국민 누구나"
+    }
+  },
+  {
+    "gold_id": "C07-R002",
+    "rule": "상주세계모자페스티벌의 성공적인 개최를 위한 프로그램 아이디어여야 한다.",
+    "modality": "MUST",
+    "condition": "always",
+    "evidence": {
+      "start_line": 14,
+      "end_line": 18,
+      "quote": " 4. 공모주제: 2025 상주세계모자페스티벌 이거 해보자?\n  - 축제의 성공적인 홍보를 위한 창의적 붐업(Boom-Up) 프로그램\n  - 많은 국민(시민)들이 참여할 수 있는 프로그램\n  - 모자와 연계된 체험 및 참여 프로그램\n  - 그 밖에 성공적인 축제 개최를 위한 프로그램 등"
+    }
+  },
+  {
+    "gold_id": "C07-R003",
+    "rule": "2025-02-03부터 03-07 18:00까지 제출서류가 접수되어야 한다.",
+    "modality": "MUST",
+    "condition": "always",
+    "evidence": {
+      "start_line": 37,
+      "end_line": 38,
+      "quote": " 1. 접수기간: 2025. 2. 3.(월) ~ 3. 7.(금) \n  - 접수마감: 2025. 3. 7.(금) 18:00 접수분까지 유효"
+    }
+  },
+  {
+    "gold_id": "C07-R004",
+    "rule": "codud07@korea.kr 이메일 또는 상주시 상산로 223 관광진흥과 방문·우편으로 접수해야 한다.",
+    "modality": "MUST",
+    "condition": "always",
+    "evidence": {
+      "start_line": 39,
+      "end_line": 40,
+      "quote": " 2. 접수방법: 전자우편(codud07@korea.kr)\n             방문, 우편(상주시 상산로 223, 관광진흥과)"
+    }
+  },
+  {
+    "gold_id": "C07-R005",
+    "rule": "붙임1 신청서·제안서를 제출해야 한다.",
+    "modality": "MUST",
+    "condition": "always",
+    "evidence": {
+      "start_line": 41,
+      "end_line": 41,
+      "quote": " 3. 제출서류: [붙임1] 신청서(제안서), [붙임2] 개인정보 수집·이용 동의서"
+    }
+  },
+  {
+    "gold_id": "C07-R006",
+    "rule": "붙임2 개인정보 수집·이용 동의서를 제출해야 한다.",
+    "modality": "MUST",
+    "condition": "always",
+    "evidence": {
+      "start_line": 41,
+      "end_line": 41,
+      "quote": " 3. 제출서류: [붙임1] 신청서(제안서), [붙임2] 개인정보 수집·이용 동의서"
+    }
+  },
+  {
+    "gold_id": "C07-R007",
+    "rule": "개인정보를 허위로 작성해서는 안 된다.",
+    "modality": "MUST_NOT",
+    "condition": "always",
+    "evidence": {
+      "start_line": 102,
+      "end_line": 103,
+      "quote": " 3. 개인정보 허위 작성 시 심사에 제외될 수 있으며, 향후 공모전 참여 \n제한 등 불이익이 있을 수 있음"
+    }
+  },
+  {
+    "gold_id": "C07-R008",
+    "rule": "선정 제안서 권리는 상주시에 귀속되며 홍보 활용과 수정·변형에 동의해야 한다.",
+    "modality": "MUST",
+    "condition": "제안 선정 시",
+    "evidence": {
+      "start_line": 106,
+      "end_line": 107,
+      "quote": " 5. 선정된 제안서의 일체의 권리는 상주시에 귀속되며, 향후 홍보자료 등으로 \n활용될 수 있음(필요에 따라 수정 또는 변형하여 사용)"
+    }
+  },
+  {
+    "gold_id": "C07-R009",
+    "rule": "심사 결과에 이의를 제기하지 않는다.",
+    "modality": "MUST_NOT",
+    "condition": "심사 결과",
+    "evidence": {
+      "start_line": 109,
+      "end_line": 110,
+      "quote": " 7. 위에 언급되지 않은 내용 등에 대해서는 상주시의 결정에 따르며, 심사 \n결과에 대하여 이의를 제기하지 않음"
+    }
+  },
+  {
+    "gold_id": "C07-R010",
+    "rule": "접수번호를 기재하지 않는다.",
+    "modality": "MUST_NOT",
+    "condition": "신청서 작성",
+    "evidence": {
+      "start_line": 117,
+      "end_line": 118,
+      "quote": "접수번호\n2025 - 미기재   "
+    }
+  },
+  {
+    "gold_id": "C07-R011",
+    "rule": "제안 제목은 제안내용을 함축적으로 표현해야 한다.",
+    "modality": "MUST",
+    "condition": "신청서 작성",
+    "evidence": {
+      "start_line": 119,
+      "end_line": 119,
+      "quote": "➀제안제목 제안내용을 함축적으로 표현"
+    }
+  },
+  {
+    "gold_id": "C07-R012",
+    "rule": "주소란에 주소를 기입해야 한다.",
+    "modality": "MUST",
+    "condition": "일반 국민 신청자",
+    "evidence": {
+      "start_line": 125,
+      "end_line": 126,
+      "quote": "주소ㆍ소속\n(국민) 주소 기입 / (내부직원) 소속 기입"
+    }
+  },
+  {
+    "gold_id": "C07-R013",
+    "rule": "주소·소속란에 소속을 기입해야 한다.",
+    "modality": "MUST",
+    "condition": "내부 직원 신청자",
+    "evidence": {
+      "start_line": 125,
+      "end_line": 126,
+      "quote": "주소ㆍ소속\n(국민) 주소 기입 / (내부직원) 소속 기입"
+    }
+  },
+  {
+    "gold_id": "C07-R014",
+    "rule": "개요에 제안 내용을 알기 쉽게 요약해야 한다.",
+    "modality": "MUST",
+    "condition": "신청서 작성",
+    "evidence": {
+      "start_line": 127,
+      "end_line": 129,
+      "quote": "➁개   요\n (제안요지)\n제안내용을 알기 쉽게 요약하여 기술"
+    }
+  },
+  {
+    "gold_id": "C07-R015",
+    "rule": "프로그램 방안을 구체적으로 기술해야 한다.",
+    "modality": "MUST",
+    "condition": "신청서 작성",
+    "evidence": {
+      "start_line": 130,
+      "end_line": 137,
+      "quote": "③프로그램\n(콘텐츠)\n(제안내용)\n상주세계모자페스티벌 프로그램(콘텐츠) 방안을 구체적으로 기술\n     ① 축제의 성공적인 홍보를 위한 붐업 프로그램\n     ② 많은 국민(시민)들이 참여할 수 있는 프로그램\n     ③ 모자와 연계된 아이들이 참여 할 수 있는 프로그램\n     ④ 그 밖에 성공적인 축제 개최를 위한 프로그램 등"
+    }
+  },
+  {
+    "gold_id": "C07-R016",
+    "rule": "기대효과에 제안 실행의 효과와 성과를 기재해야 한다.",
+    "modality": "MUST",
+    "condition": "신청서 작성",
+    "evidence": {
+      "start_line": 138,
+      "end_line": 139,
+      "quote": "④기대효과\n제안의 실시로 얻을 수 있는 효과 및 성과 기재"
+    }
+  },
+  {
+    "gold_id": "C07-R017",
+    "rule": "별지를 작성할 수 있다.",
+    "modality": "MAY",
+    "condition": "제안 내용이 많은 경우",
+    "evidence": {
+      "start_line": 140,
+      "end_line": 140,
+      "quote": "※제안의 내용이 많을 경우 별지 작성 가능"
+    }
+  },
+  {
+    "gold_id": "C07-R018",
+    "rule": "개인정보 수집·이용 동의를 거부할 수 있다.",
+    "modality": "MAY",
+    "condition": "수상 제한 가능성 수반",
+    "evidence": {
+      "start_line": 150,
+      "end_line": 154,
+      "quote": "  4. 동의거부 권리 및 거부에 따른 불이익: 개인정보 수집 및 이용에 동의\n하지 않을 수 있는 권리가 있으며, 동의 거부 시에는 공모전 수상에 \n제한이 있을 수 있습니다.\n개인정보의 수집 및 이용목적에 동의하십니까?\n□동의함         □동의하지 않음"
+    }
+  },
+  {
+    "gold_id": "C07-R019",
+    "rule": "개인정보 동의서에 서명 또는 날인해야 한다.",
+    "modality": "MUST",
+    "condition": "동의서 작성",
+    "evidence": {
+      "start_line": 142,
+      "end_line": 157,
+      "quote": "붙임2 개인정보 수집･이용 동의서\n개인정보 수집·이용 동의서\n  상기 본인은 「2025 상주세계모자페스티벌 대표 프로그램 아이디어 공모전」에 \n지원함에 있어 개인정보보호법 제15조에 따라 아래와 같이 개인정보를 제공에 \n동의합니다.\n  1. 수집목적: 공모전 수상작 선정 및 당선사실 통지 등\n  2. 수집항목: 성명, 생년월일, 연락처, 주소, E-mail 등\n  3. 보유･이용기간: 접수일로부터 1년\n  4. 동의거부 권리 및 거부에 따른 불이익: 개인정보 수집 및 이용에 동의\n하지 않을 수 있는 권리가 있으며, 동의 거부 시에는 공모전 수상에 \n제한이 있을 수 있습니다.\n개인정보의 수집 및 이용목적에 동의하십니까?\n□동의함         □동의하지 않음\n                                                 2025년   월   일\n                                       성명:              (서명/인)\n상주시장 귀하"
+    }
+  }
+]

@@ -6,6 +6,17 @@ TASK 02 connects the original **frozen Validator v1.5** to real multipart upload
 The demo uses newly generated synthetic files. Its findings come from actual Python execution, not canned JSON.
 [Product lock](docs/PRODUCT_SPEC_V1.md) · [Actual execution report](RESULT_CODEX.md) · [Demo script](docs/DEMO_SCRIPT.md)
 
+TASK04 independently measured the unchanged local extractor on eight real
+announcements with 173 pre-output frozen Gold requirements: recall 18.50%, precision
+15.17%, modality accuracy 25.00%. Exact quotes were 100%, semantic support 24.17%.
+This is a same-agent manual benchmark, not independent human adjudication.
+[Report and limitations](benchmarks/task04/report/report.md). Engineering recommends
+an AI-first comparison for Product Lead review; no AI provider or TASK05 work is added.
+
+Replay the saved benchmark and verify frozen hashes with
+`backend/.venv/Scripts/python.exe -X utf8 scripts/run_task04_benchmark.py`.
+Existing output is reused; source collection and Gold rewriting refuse after freeze.
+
 ## Local setup
 Verified runtime: Node 24, Python 3.14, FFmpeg/ffprobe 8.1.2.
 PowerShell from the project root:

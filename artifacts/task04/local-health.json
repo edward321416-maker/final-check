@@ -1,0 +1,15 @@
+{
+  "recorded_at": "2026-09-03T12:13:07.4706747Z",
+  "classification": "ACTUAL local launcher restoration",
+  "frontend_status": 200,
+  "backend": {
+    "status": "ok",
+    "mode": "frozen_v15",
+    "validator": "available",
+    "engine_sha256": "4b506c3b692f2cef39e2be7cb44b4ce74bcc4ce829064ac655e16f545042bb11",
+    "vision_provider": "unavailable",
+    "version": "0.3.0",
+    "generic_extractor": "local-rules-v1 (no AI model)",
+    "generic_verification": "unsupported"
+  }
+}

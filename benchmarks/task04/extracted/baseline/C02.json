@@ -1,0 +1,628 @@
+{
+  "case_id": "C02",
+  "invoked_at": "2026-09-03T11:49:56.129219+00:00",
+  "source_sha256": "b7e91b6970427c8b4e81dc49baff1f9fb6926da67f4f36179394d7bc28672b2b",
+  "input_sha256": "b7e91b6970427c8b4e81dc49baff1f9fb6926da67f4f36179394d7bc28672b2b",
+  "profile": {
+    "profile_type": "generic",
+    "profile_id": "6c65fda7-3f5c-4a70-b0e2-2bdcc9642867",
+    "status": "REVIEW_REQUIRED",
+    "requirements": [
+      {
+        "requirement_id": "G001",
+        "rule": "「기후 · 환경 숏폼 영상 공모전」 공모",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 1",
+          "quote": "「기후 · 환경 숏폼 영상 공모전」 공모"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 0,
+        "evidence_end": 22,
+        "issues": [],
+        "original": {
+          "requirement_id": "G001",
+          "rule": "「기후 · 환경 숏폼 영상 공모전」 공모",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "SEMANTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 1",
+            "quote": "「기후 · 환경 숏폼 영상 공모전」 공모"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G002",
+        "rule": "「2025년 기후·환경 숏폼 영상공모전」을 다음과 같이 공고합니다.",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 4",
+          "quote": "「2025년 기후·환경 숏폼 영상공모전」을 다음과 같이 공고합니다."
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 72,
+        "evidence_end": 109,
+        "issues": [],
+        "original": {
+          "requirement_id": "G002",
+          "rule": "「2025년 기후·환경 숏폼 영상공모전」을 다음과 같이 공고합니다.",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "SEMANTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 4",
+            "quote": "「2025년 기후·환경 숏폼 영상공모전」을 다음과 같이 공고합니다."
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G003",
+        "rule": "o 공 모 명: 2025년 기후·환경 숏폼 영상공모전 「지구의 1℃를 되돌리기 위한 1분 메시지」",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 9",
+          "quote": "o 공 모 명: 2025년 기후·환경 숏폼 영상공모전 「지구의 1℃를 되돌리기 위한 1분 메시지」"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 163,
+        "evidence_end": 217,
+        "issues": [],
+        "original": {
+          "requirement_id": "G003",
+          "rule": "o 공 모 명: 2025년 기후·환경 숏폼 영상공모전 「지구의 1℃를 되돌리기 위한 1분 메시지」",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "SEMANTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 9",
+            "quote": "o 공 모 명: 2025년 기후·환경 숏폼 영상공모전 「지구의 1℃를 되돌리기 위한 1분 메시지」"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G004",
+        "rule": "o 공모내용: 기후위기에 대응하는 실천과 전환의 이야기를 미디어로 공유하는 숏폼 영상(60초 이내) 공모전",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "DETERMINISTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 10",
+          "quote": "o 공모내용: 기후위기에 대응하는 실천과 전환의 이야기를 미디어로 공유하는 숏폼 영상(60초 이내) 공모전"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 218,
+        "evidence_end": 277,
+        "issues": [],
+        "original": {
+          "requirement_id": "G004",
+          "rule": "o 공모내용: 기후위기에 대응하는 실천과 전환의 이야기를 미디어로 공유하는 숏폼 영상(60초 이내) 공모전",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "DETERMINISTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 10",
+            "quote": "o 공모내용: 기후위기에 대응하는 실천과 전환의 이야기를 미디어로 공유하는 숏폼 영상(60초 이내) 공모전"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G005",
+        "rule": "o 공모부문: 숏폼 영상(60초 이내, 가로·세로 영상 제한 없음)",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "DETERMINISTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 16",
+          "quote": "o 공모부문: 숏폼 영상(60초 이내, 가로·세로 영상 제한 없음)"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 406,
+        "evidence_end": 443,
+        "issues": [],
+        "original": {
+          "requirement_id": "G005",
+          "rule": "o 공모부문: 숏폼 영상(60초 이내, 가로·세로 영상 제한 없음)",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "DETERMINISTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 16",
+            "quote": "o 공모부문: 숏폼 영상(60초 이내, 가로·세로 영상 제한 없음)"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G006",
+        "rule": "※ 영상의 방향은 제한이 없으나, 해상도 FHD(1,080px*1,920px 이상), 포맷 mp4 권장",
+        "modality": "SHOULD",
+        "severity": "REVIEW",
+        "verifier": "DETERMINISTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 17",
+          "quote": "※ 영상의 방향은 제한이 없으나, 해상도 FHD(1,080px*1,920px 이상), 포맷 mp4 권장"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 444,
+        "evidence_end": 501,
+        "issues": [],
+        "original": {
+          "requirement_id": "G006",
+          "rule": "※ 영상의 방향은 제한이 없으나, 해상도 FHD(1,080px*1,920px 이상), 포맷 mp4 권장",
+          "modality": "SHOULD",
+          "severity": "REVIEW",
+          "verifier": "DETERMINISTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 17",
+            "quote": "※ 영상의 방향은 제한이 없으나, 해상도 FHD(1,080px*1,920px 이상), 포맷 mp4 권장"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G007",
+        "rule": "o 응모자격: 기후·환경에 관심 있는 초등학생 이상 누구나",
+        "modality": "INFO",
+        "severity": "EXTERNAL",
+        "verifier": "EXTERNAL",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 18",
+          "quote": "o 응모자격: 기후·환경에 관심 있는 초등학생 이상 누구나"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 502,
+        "evidence_end": 534,
+        "issues": [],
+        "original": {
+          "requirement_id": "G007",
+          "rule": "o 응모자격: 기후·환경에 관심 있는 초등학생 이상 누구나",
+          "modality": "INFO",
+          "severity": "EXTERNAL",
+          "verifier": "EXTERNAL",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 18",
+            "quote": "o 응모자격: 기후·환경에 관심 있는 초등학생 이상 누구나"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G008",
+        "rule": "※ 2006년생을 포함한 이전 출생자는 일반부로 지원",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 19",
+          "quote": "※ 2006년생을 포함한 이전 출생자는 일반부로 지원"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 535,
+        "evidence_end": 564,
+        "issues": [],
+        "original": {
+          "requirement_id": "G008",
+          "rule": "※ 2006년생을 포함한 이전 출생자는 일반부로 지원",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "SEMANTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 19",
+            "quote": "※ 2006년생을 포함한 이전 출생자는 일반부로 지원"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G009",
+        "rule": "※ 2007년생부터 2018년생까지는 아동·청소년부로 지원",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 20",
+          "quote": "※ 2007년생부터 2018년생까지는 아동·청소년부로 지원"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 565,
+        "evidence_end": 597,
+        "issues": [],
+        "original": {
+          "requirement_id": "G009",
+          "rule": "※ 2007년생부터 2018년생까지는 아동·청소년부로 지원",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "SEMANTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 20",
+            "quote": "※ 2007년생부터 2018년생까지는 아동·청소년부로 지원"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G010",
+        "rule": "o 공모방법: SNS*에 필수 해시태그**와 함께 영상 업로드 후 온라인 지원서*** 제출 ※ SNS 비공개 계정 참여 불가",
+        "modality": "MUST_NOT",
+        "severity": "REVIEW",
+        "verifier": "SEMANTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 23",
+          "quote": "o 공모방법: SNS*에 필수 해시태그**와 함께 영상 업로드 후 온라인 지원서*** 제출 ※ SNS 비공개 계정 참여 불가"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 700,
+        "evidence_end": 769,
+        "issues": [],
+        "original": {
+          "requirement_id": "G010",
+          "rule": "o 공모방법: SNS*에 필수 해시태그**와 함께 영상 업로드 후 온라인 지원서*** 제출 ※ SNS 비공개 계정 참여 불가",
+          "modality": "MUST_NOT",
+          "severity": "REVIEW",
+          "verifier": "SEMANTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 23",
+            "quote": "o 공모방법: SNS*에 필수 해시태그**와 함께 영상 업로드 후 온라인 지원서*** 제출 ※ SNS 비공개 계정 참여 불가"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G011",
+        "rule": "**필수해시태그(#기후환경숏폼영상공모전 #기후위기적응 @gori_eco)",
+        "modality": "MUST",
+        "severity": "REVIEW",
+        "verifier": "SEMANTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 25",
+          "quote": "**필수해시태그(#기후환경숏폼영상공모전 #기후위기적응 @gori_eco)"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 806,
+        "evidence_end": 846,
+        "issues": [],
+        "original": {
+          "requirement_id": "G011",
+          "rule": "**필수해시태그(#기후환경숏폼영상공모전 #기후위기적응 @gori_eco)",
+          "modality": "MUST",
+          "severity": "REVIEW",
+          "verifier": "SEMANTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 25",
+            "quote": "**필수해시태그(#기후환경숏폼영상공모전 #기후위기적응 @gori_eco)"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G012",
+        "rule": "***온라인 지원서 링크 (https://forms.gle/56QCGBP9bFYfmr6T8)",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "URL_CHECK",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 26",
+          "quote": "***온라인 지원서 링크 (https://forms.gle/56QCGBP9bFYfmr6T8)"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 847,
+        "evidence_end": 898,
+        "issues": [],
+        "original": {
+          "requirement_id": "G012",
+          "rule": "***온라인 지원서 링크 (https://forms.gle/56QCGBP9bFYfmr6T8)",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "URL_CHECK",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 26",
+            "quote": "***온라인 지원서 링크 (https://forms.gle/56QCGBP9bFYfmr6T8)"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G013",
+        "rule": "접수일정 |  2025년 6월 30일(월) ~ 9월 5일(금) 23:50까지 |",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 37",
+          "quote": "접수일정 |  2025년 6월 30일(월) ~ 9월 5일(금) 23:50까지 |"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 1238,
+        "evidence_end": 1282,
+        "issues": [],
+        "original": {
+          "requirement_id": "G013",
+          "rule": "접수일정 |  2025년 6월 30일(월) ~ 9월 5일(금) 23:50까지 |",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "SEMANTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 37",
+            "quote": "접수일정 |  2025년 6월 30일(월) ~ 9월 5일(금) 23:50까지 |"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G014",
+        "rule": "o 발표방법: 시청자미디어재단·한국환경연구원 홈페이지 및 SNS 채널 게재, 수상자 개별 통보",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "DETERMINISTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 50",
+          "quote": "o 발표방법: 시청자미디어재단·한국환경연구원 홈페이지 및 SNS 채널 게재, 수상자 개별 통보"
+        },
+        "confidence": 0.5,
+        "extraction_status": "NEEDS_REVIEW",
+        "evidence_start": 1655,
+        "evidence_end": 1707,
+        "issues": [
+          "ATOMICITY_REVIEW: 독립 조건을 한 항목에 합쳤는지 확인하고 단일 조건으로 수정하세요."
+        ],
+        "original": {
+          "requirement_id": "G014",
+          "rule": "o 발표방법: 시청자미디어재단·한국환경연구원 홈페이지 및 SNS 채널 게재, 수상자 개별 통보",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "DETERMINISTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 50",
+            "quote": "o 발표방법: 시청자미디어재단·한국환경연구원 홈페이지 및 SNS 채널 게재, 수상자 개별 통보"
+          },
+          "confidence": 0.5
+        }
+      }
+    ],
+    "provider": "local-rules-v1 (no AI model)",
+    "execution_kind": "ACTUAL",
+    "extraction_complete": true,
+    "notices": [
+      "로컬 규칙 후보입니다. confidence=0.5는 미보정 값이며 정확도가 아닙니다. 원문 전체를 검토하세요."
+    ],
+    "version": 2,
+    "created_at": "2026-09-03T11:49:56.129381Z",
+    "updated_at": "2026-09-03T11:49:56.130142Z"
+  },
+  "raw": [
+    {
+      "requirement_id": "G001",
+      "rule": "「기후 · 환경 숏폼 영상 공모전」 공모",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "SEMANTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 1",
+        "quote": "「기후 · 환경 숏폼 영상 공모전」 공모"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G002",
+      "rule": "「2025년 기후·환경 숏폼 영상공모전」을 다음과 같이 공고합니다.",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "SEMANTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 4",
+        "quote": "「2025년 기후·환경 숏폼 영상공모전」을 다음과 같이 공고합니다."
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G003",
+      "rule": "o 공 모 명: 2025년 기후·환경 숏폼 영상공모전 「지구의 1℃를 되돌리기 위한 1분 메시지」",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "SEMANTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 9",
+        "quote": "o 공 모 명: 2025년 기후·환경 숏폼 영상공모전 「지구의 1℃를 되돌리기 위한 1분 메시지」"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G004",
+      "rule": "o 공모내용: 기후위기에 대응하는 실천과 전환의 이야기를 미디어로 공유하는 숏폼 영상(60초 이내) 공모전",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "DETERMINISTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 10",
+        "quote": "o 공모내용: 기후위기에 대응하는 실천과 전환의 이야기를 미디어로 공유하는 숏폼 영상(60초 이내) 공모전"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G005",
+      "rule": "o 공모부문: 숏폼 영상(60초 이내, 가로·세로 영상 제한 없음)",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "DETERMINISTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 16",
+        "quote": "o 공모부문: 숏폼 영상(60초 이내, 가로·세로 영상 제한 없음)"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G006",
+      "rule": "※ 영상의 방향은 제한이 없으나, 해상도 FHD(1,080px*1,920px 이상), 포맷 mp4 권장",
+      "modality": "SHOULD",
+      "severity": "REVIEW",
+      "verifier": "DETERMINISTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 17",
+        "quote": "※ 영상의 방향은 제한이 없으나, 해상도 FHD(1,080px*1,920px 이상), 포맷 mp4 권장"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G007",
+      "rule": "o 응모자격: 기후·환경에 관심 있는 초등학생 이상 누구나",
+      "modality": "INFO",
+      "severity": "EXTERNAL",
+      "verifier": "EXTERNAL",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 18",
+        "quote": "o 응모자격: 기후·환경에 관심 있는 초등학생 이상 누구나"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G008",
+      "rule": "※ 2006년생을 포함한 이전 출생자는 일반부로 지원",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "SEMANTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 19",
+        "quote": "※ 2006년생을 포함한 이전 출생자는 일반부로 지원"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G009",
+      "rule": "※ 2007년생부터 2018년생까지는 아동·청소년부로 지원",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "SEMANTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 20",
+        "quote": "※ 2007년생부터 2018년생까지는 아동·청소년부로 지원"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G010",
+      "rule": "o 공모방법: SNS*에 필수 해시태그**와 함께 영상 업로드 후 온라인 지원서*** 제출 ※ SNS 비공개 계정 참여 불가",
+      "modality": "MUST_NOT",
+      "severity": "REVIEW",
+      "verifier": "SEMANTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 23",
+        "quote": "o 공모방법: SNS*에 필수 해시태그**와 함께 영상 업로드 후 온라인 지원서*** 제출 ※ SNS 비공개 계정 참여 불가"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G011",
+      "rule": "**필수해시태그(#기후환경숏폼영상공모전 #기후위기적응 @gori_eco)",
+      "modality": "MUST",
+      "severity": "REVIEW",
+      "verifier": "SEMANTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 25",
+        "quote": "**필수해시태그(#기후환경숏폼영상공모전 #기후위기적응 @gori_eco)"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G012",
+      "rule": "***온라인 지원서 링크 (https://forms.gle/56QCGBP9bFYfmr6T8)",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "URL_CHECK",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 26",
+        "quote": "***온라인 지원서 링크 (https://forms.gle/56QCGBP9bFYfmr6T8)"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G013",
+      "rule": "접수일정 |  2025년 6월 30일(월) ~ 9월 5일(금) 23:50까지 |",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "SEMANTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 37",
+        "quote": "접수일정 |  2025년 6월 30일(월) ~ 9월 5일(금) 23:50까지 |"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G014",
+      "rule": "o 발표방법: 시청자미디어재단·한국환경연구원 홈페이지 및 SNS 채널 게재, 수상자 개별 통보",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "DETERMINISTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 50",
+        "quote": "o 발표방법: 시청자미디어재단·한국환경연구원 홈페이지 및 SNS 채널 게재, 수상자 개별 통보"
+      },
+      "confidence": 0.5
+    }
+  ]
+}

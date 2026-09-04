@@ -1,0 +1,8 @@
+{
+  "case_id": "C02",
+  "invoked_at": "2026-09-03T11:49:13.323790+00:00",
+  "source_sha256": "b7e91b6970427c8b4e81dc49baff1f9fb6926da67f4f36179394d7bc28672b2b",
+  "input_sha256": "b7e91b6970427c8b4e81dc49baff1f9fb6926da67f4f36179394d7bc28672b2b",
+  "error": "TypeError: Object of type ExtractedRequirement is not JSON serializable",
+  "raw": []
+}

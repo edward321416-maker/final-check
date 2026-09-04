@@ -21,7 +21,7 @@
 - [x] Document actual execution, tests, limitations and source integrity.
 
 ## Future work requiring scoped input
-- TASK 04: independently benchmark generic extraction with separately authored announcements/gold, including modality, evidence, atomicity and omissions. No accuracy claim from TASK 03.
+- TASK 04 completed below. Product/Business Lead review is required before choosing the next task.
 - Select a Vision provider only with required authorization and test it separately.
 - Confirm production storage, deployment, retention and supported announcement profiles.
 - Historical 39-case reproduction requires the exact original corpus; do not substitute new fixtures.
@@ -37,4 +37,19 @@
 - [x] Execute all updated tests: 47 backend, 14 browser; typecheck and production build pass.
 - [x] Verify frozen directory after tests; preserve original CSS and five routes.
 - [x] Record ACTUAL TEST / SELF-BENCHMARK / SIMULATED / NOT TESTED and first browser failure evidence.
-- [x] Commit/push implementation 690200c and create delivery PR #2 (OPEN, not merged).
+- [x] Commit/push implementation 690200c and create delivery PR #2; now MERGED at 81bf2551c5967836d3e54869de2e86261428c78e.
+
+## TASK 04 — Independent Extractor Reality Check
+
+- [x] Reconfirm merged PR2, fetch/synchronize clean main and create the requested branch.
+- [x] Verify frozen validator and TASK03 baseline source hashes before execution.
+- [x] Capture eight real independent announcements with original bytes and documented input scopes.
+- [x] Author 173 atomic Gold before output; freeze hashes/timestamp and commit before running baseline.
+- [x] Execute unchanged local-rules-v1; preserve failed harness attempt separately from valid raw outputs.
+- [x] Manually score all 211 candidates and all 173 Gold; no partial/duplicate full credit.
+- [x] Measure recall, precision, modality, exact/semantic evidence, atomicity, hallucinations and blockers.
+- [x] Record broad keyword/condition/table failures and 35 repeated-quote anchor mismatches; no tuning.
+- [x] Backend47, browser14, typecheck/build and frozen before/after checks pass.
+- [x] Record GO direction and AI-first comparison recommendation with same-agent annotation limits.
+- [x] Publish benchmark commit92b7e50 and PR #3; verified OPEN, left unmerged for Product/Business Lead review.
+- [ ] TASK05 scope decision by Product/Business Lead; no implementation started.

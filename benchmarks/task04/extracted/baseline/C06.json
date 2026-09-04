@@ -1,0 +1,454 @@
+{
+  "case_id": "C06",
+  "invoked_at": "2026-09-03T11:49:56.919542+00:00",
+  "source_sha256": "f2e27c16c7f26477617fe8545a9645867a7fceb46655979ebddcd6a36d512d37",
+  "input_sha256": "f2e27c16c7f26477617fe8545a9645867a7fceb46655979ebddcd6a36d512d37",
+  "profile": {
+    "profile_type": "generic",
+    "profile_id": "1aa94dca-d657-49f4-adc1-bb10a3fec58e",
+    "status": "DRAFT",
+    "requirements": [
+      {
+        "requirement_id": "G001",
+        "rule": "참가대상 : 대한민국 국민 누구나(개인 또는 5인 이내 팀 단위로 참가)",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "참가대상 : 대한민국 국민 누구나(개인 또는 5인 이내 팀 단위로 참가)",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 8",
+          "quote": "참가대상 : 대한민국 국민 누구나(개인 또는 5인 이내 팀 단위로 참가)"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 195,
+        "evidence_end": 235,
+        "issues": [],
+        "original": {
+          "requirement_id": "G001",
+          "rule": "참가대상 : 대한민국 국민 누구나(개인 또는 5인 이내 팀 단위로 참가)",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "SEMANTIC",
+          "condition": "참가대상 : 대한민국 국민 누구나(개인 또는 5인 이내 팀 단위로 참가)",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 8",
+            "quote": "참가대상 : 대한민국 국민 누구나(개인 또는 5인 이내 팀 단위로 참가)"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G002",
+        "rule": "공모 접수",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 22",
+          "quote": "공모 접수"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 324,
+        "evidence_end": 329,
+        "issues": [],
+        "original": {
+          "requirement_id": "G002",
+          "rule": "공모 접수",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "SEMANTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 22",
+            "quote": "공모 접수"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G003",
+        "rule": "ㅇ 국토안전관리원 빅데이터 개방 포털 홈페이지(https://bigtori.kalis.or.kr) 공모전 게시판에서 접수",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "URL_CHECK",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 43",
+          "quote": "ㅇ 국토안전관리원 빅데이터 개방 포털 홈페이지(https://bigtori.kalis.or.kr) 공모전 게시판에서 접수"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 501,
+        "evidence_end": 568,
+        "issues": [],
+        "original": {
+          "requirement_id": "G003",
+          "rule": "ㅇ 국토안전관리원 빅데이터 개방 포털 홈페이지(https://bigtori.kalis.or.kr) 공모전 게시판에서 접수",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "URL_CHECK",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 43",
+            "quote": "ㅇ 국토안전관리원 빅데이터 개방 포털 홈페이지(https://bigtori.kalis.or.kr) 공모전 게시판에서 접수"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G004",
+        "rule": "한국저작권위원회",
+        "modality": "INFO",
+        "severity": "EXTERNAL",
+        "verifier": "EXTERNAL",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 97",
+          "quote": "한국저작권위원회"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 839,
+        "evidence_end": 847,
+        "issues": [],
+        "original": {
+          "requirement_id": "G004",
+          "rule": "한국저작권위원회",
+          "modality": "INFO",
+          "severity": "EXTERNAL",
+          "verifier": "EXTERNAL",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 97",
+            "quote": "한국저작권위원회"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G005",
+        "rule": "한국저작권위원회 위원장상",
+        "modality": "INFO",
+        "severity": "EXTERNAL",
+        "verifier": "EXTERNAL",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 101",
+          "quote": "한국저작권위원회 위원장상"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 858,
+        "evidence_end": 871,
+        "issues": [],
+        "original": {
+          "requirement_id": "G005",
+          "rule": "한국저작권위원회 위원장상",
+          "modality": "INFO",
+          "severity": "EXTERNAL",
+          "verifier": "EXTERNAL",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 101",
+            "quote": "한국저작권위원회 위원장상"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G006",
+        "rule": "한국저작권위원회",
+        "modality": "INFO",
+        "severity": "EXTERNAL",
+        "verifier": "EXTERNAL",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 155",
+          "quote": "한국저작권위원회"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 839,
+        "evidence_end": 847,
+        "issues": [],
+        "original": {
+          "requirement_id": "G006",
+          "rule": "한국저작권위원회",
+          "modality": "INFO",
+          "severity": "EXTERNAL",
+          "verifier": "EXTERNAL",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 155",
+            "quote": "한국저작권위원회"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G007",
+        "rule": "한국저작권위원회 위원장상",
+        "modality": "INFO",
+        "severity": "EXTERNAL",
+        "verifier": "EXTERNAL",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 159",
+          "quote": "한국저작권위원회 위원장상"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 858,
+        "evidence_end": 871,
+        "issues": [],
+        "original": {
+          "requirement_id": "G007",
+          "rule": "한국저작권위원회 위원장상",
+          "modality": "INFO",
+          "severity": "EXTERNAL",
+          "verifier": "EXTERNAL",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 159",
+            "quote": "한국저작권위원회 위원장상"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G008",
+        "rule": "한국저작권위원회",
+        "modality": "INFO",
+        "severity": "EXTERNAL",
+        "verifier": "EXTERNAL",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 213",
+          "quote": "한국저작권위원회"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 839,
+        "evidence_end": 847,
+        "issues": [],
+        "original": {
+          "requirement_id": "G008",
+          "rule": "한국저작권위원회",
+          "modality": "INFO",
+          "severity": "EXTERNAL",
+          "verifier": "EXTERNAL",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 213",
+            "quote": "한국저작권위원회"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G009",
+        "rule": "한국저작권위원회 위원장상",
+        "modality": "INFO",
+        "severity": "EXTERNAL",
+        "verifier": "EXTERNAL",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 217",
+          "quote": "한국저작권위원회 위원장상"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 858,
+        "evidence_end": 871,
+        "issues": [],
+        "original": {
+          "requirement_id": "G009",
+          "rule": "한국저작권위원회 위원장상",
+          "modality": "INFO",
+          "severity": "EXTERNAL",
+          "verifier": "EXTERNAL",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 217",
+            "quote": "한국저작권위원회 위원장상"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G010",
+        "rule": "ㅇ 한국저작권위원회 정보기술팀: 055-792-0145",
+        "modality": "INFO",
+        "severity": "EXTERNAL",
+        "verifier": "EXTERNAL",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 230",
+          "quote": "ㅇ 한국저작권위원회 정보기술팀: 055-792-0145"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 1558,
+        "evidence_end": 1588,
+        "issues": [],
+        "original": {
+          "requirement_id": "G010",
+          "rule": "ㅇ 한국저작권위원회 정보기술팀: 055-792-0145",
+          "modality": "INFO",
+          "severity": "EXTERNAL",
+          "verifier": "EXTERNAL",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 230",
+            "quote": "ㅇ 한국저작권위원회 정보기술팀: 055-792-0145"
+          },
+          "confidence": 0.5
+        }
+      }
+    ],
+    "provider": "local-rules-v1 (no AI model)",
+    "execution_kind": "ACTUAL",
+    "extraction_complete": true,
+    "notices": [
+      "로컬 규칙 후보입니다. confidence=0.5는 미보정 값이며 정확도가 아닙니다. 원문 전체를 검토하세요."
+    ],
+    "version": 2,
+    "created_at": "2026-09-03T11:49:56.919619Z",
+    "updated_at": "2026-09-03T11:49:56.921111Z"
+  },
+  "raw": [
+    {
+      "requirement_id": "G001",
+      "rule": "참가대상 : 대한민국 국민 누구나(개인 또는 5인 이내 팀 단위로 참가)",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "SEMANTIC",
+      "condition": "참가대상 : 대한민국 국민 누구나(개인 또는 5인 이내 팀 단위로 참가)",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 8",
+        "quote": "참가대상 : 대한민국 국민 누구나(개인 또는 5인 이내 팀 단위로 참가)"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G002",
+      "rule": "공모 접수",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "SEMANTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 22",
+        "quote": "공모 접수"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G003",
+      "rule": "ㅇ 국토안전관리원 빅데이터 개방 포털 홈페이지(https://bigtori.kalis.or.kr) 공모전 게시판에서 접수",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "URL_CHECK",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 43",
+        "quote": "ㅇ 국토안전관리원 빅데이터 개방 포털 홈페이지(https://bigtori.kalis.or.kr) 공모전 게시판에서 접수"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G004",
+      "rule": "한국저작권위원회",
+      "modality": "INFO",
+      "severity": "EXTERNAL",
+      "verifier": "EXTERNAL",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 97",
+        "quote": "한국저작권위원회"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G005",
+      "rule": "한국저작권위원회 위원장상",
+      "modality": "INFO",
+      "severity": "EXTERNAL",
+      "verifier": "EXTERNAL",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 101",
+        "quote": "한국저작권위원회 위원장상"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G006",
+      "rule": "한국저작권위원회",
+      "modality": "INFO",
+      "severity": "EXTERNAL",
+      "verifier": "EXTERNAL",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 155",
+        "quote": "한국저작권위원회"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G007",
+      "rule": "한국저작권위원회 위원장상",
+      "modality": "INFO",
+      "severity": "EXTERNAL",
+      "verifier": "EXTERNAL",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 159",
+        "quote": "한국저작권위원회 위원장상"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G008",
+      "rule": "한국저작권위원회",
+      "modality": "INFO",
+      "severity": "EXTERNAL",
+      "verifier": "EXTERNAL",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 213",
+        "quote": "한국저작권위원회"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G009",
+      "rule": "한국저작권위원회 위원장상",
+      "modality": "INFO",
+      "severity": "EXTERNAL",
+      "verifier": "EXTERNAL",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 217",
+        "quote": "한국저작권위원회 위원장상"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G010",
+      "rule": "ㅇ 한국저작권위원회 정보기술팀: 055-792-0145",
+      "modality": "INFO",
+      "severity": "EXTERNAL",
+      "verifier": "EXTERNAL",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 230",
+        "quote": "ㅇ 한국저작권위원회 정보기술팀: 055-792-0145"
+      },
+      "confidence": 0.5
+    }
+  ]
+}

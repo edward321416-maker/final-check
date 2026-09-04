@@ -1,0 +1,7 @@
+# Preserve downloaded bytes exactly for SHA-256 replay on every platform.
+sources/*.html -text -whitespace
+sources/*.pdf -text
+sources/*.txt text eol=lf -whitespace
+*.json text eol=lf
+gold/*.json text eol=lf
+gold/*.tsv text eol=lf

@@ -1,0 +1,8 @@
+artifacts/task04/build.log:14: trailing whitespace.
++  Generating static pages using 8 workers (1/7) 
+artifacts/task04/build.log:15: trailing whitespace.
++  Generating static pages using 8 workers (3/7) 
+artifacts/task04/build.log:16: trailing whitespace.
++  Generating static pages using 8 workers (5/7) 
+artifacts/task04/build.log:30: new blank line at EOF.
+artifacts/task04/typecheck.log:4: new blank line at EOF.

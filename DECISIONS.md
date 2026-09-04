@@ -16,6 +16,14 @@
 - 2026-09-02 TASK 02: Use temporary per-session storage with verified receipts and explicit incomplete/error handling. No generic announcement or Vision profile is fabricated.
 - 2026-09-02 TASK 02: User authorizes dedicated public source publication. Do not publicly deploy the unauthenticated app.
 
+## TASK 04 measurement decisions
+
+- 2026-09-03: Start from merged TASK03 main 81bf2551; prior prerequisite non-start contributes no benchmark data.
+- 2026-09-03: Eight actual scoped announcements; freeze173 Gold before output, preserve original input bytes, no extractor tuning or Gold score adjustment.
+- 2026-09-03: Primary denominator is raw candidates; one-to-one complete atomic MATCH only. Same-agent manual scoring and known Gold boundary limitations are disclosed.
+- 2026-09-03: Measured recall18.50%, precision15.17%, modality25.00%, semantic support24.17%; FINAL CHECK remains GO. Engineering recommends replacing local rules as primary with a future AI-first comparison plus deterministic evidence gate. Product Lead must review before scope/provider selection.
+- 2026-09-03: Keep current product, validator, tests and five-screen UI unchanged. No repeated regex fixes, TASK05, Vision/OCR, provider integration or deployment. Deliver PR without merge.
+
 ## TASK 01 historical decisions (superseded where TASK 02 says so)
 
 - 2026-09-02: Preserve the dirty method-catalog checkout and original Extractor v0 ZIP byte-for-byte. Create an independent local product folder because the configured workspace is missing. Repository binding remains I01.

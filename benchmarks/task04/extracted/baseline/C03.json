@@ -1,0 +1,243 @@
+{
+  "case_id": "C03",
+  "invoked_at": "2026-09-03T11:49:56.133894+00:00",
+  "source_sha256": "5c93e8ab7506e074db8bd983f078f96e6fc9e60cf33e48a53a571640d99f2db6",
+  "input_sha256": "5c93e8ab7506e074db8bd983f078f96e6fc9e60cf33e48a53a571640d99f2db6",
+  "profile": {
+    "profile_type": "generic",
+    "profile_id": "e30ea49f-a3df-4754-9265-55d2b357efbc",
+    "status": "REVIEW_REQUIRED",
+    "requirements": [
+      {
+        "requirement_id": "G001",
+        "rule": "「2025 HUSS 융합캠프(인사이트)」 참가자를 모집합니다!",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 2",
+          "quote": "「2025 HUSS 융합캠프(인사이트)」 참가자를 모집합니다!"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 31,
+        "evidence_end": 65,
+        "issues": [],
+        "original": {
+          "requirement_id": "G001",
+          "rule": "「2025 HUSS 융합캠프(인사이트)」 참가자를 모집합니다!",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "SEMANTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 2",
+            "quote": "「2025 HUSS 융합캠프(인사이트)」 참가자를 모집합니다!"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G002",
+        "rule": "*지원 동기, 본인 역량, 해커톤 및 팀 프로젝트 관련 경험, 협업 태도 등을 평가",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 11",
+          "quote": "*지원 동기, 본인 역량, 해커톤 및 팀 프로젝트 관련 경험, 협업 태도 등을 평가"
+        },
+        "confidence": 0.5,
+        "extraction_status": "NEEDS_REVIEW",
+        "evidence_start": 271,
+        "evidence_end": 317,
+        "issues": [
+          "ATOMICITY_REVIEW: 독립 조건을 한 항목에 합쳤는지 확인하고 단일 조건으로 수정하세요."
+        ],
+        "original": {
+          "requirement_id": "G002",
+          "rule": "*지원 동기, 본인 역량, 해커톤 및 팀 프로젝트 관련 경험, 협업 태도 등을 평가",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "SEMANTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 11",
+            "quote": "*지원 동기, 본인 역량, 해커톤 및 팀 프로젝트 관련 경험, 협업 태도 등을 평가"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G003",
+        "rule": "✅ 참가 대상: HUSS 참여학과(한국어문학부, 한국역사학과, KIBS, 경영정보학부, 건설시스템공학부, 임산생명공학과, 행정학과, 사회학과, 정치외교학과) 재학생(학부생)",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "✅ 참가 대상: HUSS 참여학과(한국어문학부, 한국역사학과, KIBS, 경영정보학부, 건설시스템공학부, 임산생명공학과, 행정학과, 사회학과, 정치외교학과) 재학생(학부생)",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 14",
+          "quote": "✅ 참가 대상: HUSS 참여학과(한국어문학부, 한국역사학과, KIBS, 경영정보학부, 건설시스템공학부, 임산생명공학과, 행정학과, 사회학과, 정치외교학과) 재학생(학부생)"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 378,
+        "evidence_end": 474,
+        "issues": [],
+        "original": {
+          "requirement_id": "G003",
+          "rule": "✅ 참가 대상: HUSS 참여학과(한국어문학부, 한국역사학과, KIBS, 경영정보학부, 건설시스템공학부, 임산생명공학과, 행정학과, 사회학과, 정치외교학과) 재학생(학부생)",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "SEMANTIC",
+          "condition": "✅ 참가 대상: HUSS 참여학과(한국어문학부, 한국역사학과, KIBS, 경영정보학부, 건설시스템공학부, 임산생명공학과, 행정학과, 사회학과, 정치외교학과) 재학생(학부생)",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 14",
+            "quote": "✅ 참가 대상: HUSS 참여학과(한국어문학부, 한국역사학과, KIBS, 경영정보학부, 건설시스템공학부, 임산생명공학과, 행정학과, 사회학과, 정치외교학과) 재학생(학부생)"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G004",
+        "rule": "✅ 신청 마감 : 2025년 6월 27일(금)까지",
+        "modality": "INFO",
+        "severity": "EXTERNAL",
+        "verifier": "EXTERNAL",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 21",
+          "quote": "✅ 신청 마감 : 2025년 6월 27일(금)까지"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 708,
+        "evidence_end": 735,
+        "issues": [],
+        "original": {
+          "requirement_id": "G004",
+          "rule": "✅ 신청 마감 : 2025년 6월 27일(금)까지",
+          "modality": "INFO",
+          "severity": "EXTERNAL",
+          "verifier": "EXTERNAL",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 21",
+            "quote": "✅ 신청 마감 : 2025년 6월 27일(금)까지"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G005",
+        "rule": "참가팀 신청 -> 설명회 개최 -> 사전 학습 -> [HUSS 해커톤] 문제해결 -> [HUSS 해커톤] 공유 및 디브리프",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 25",
+          "quote": "참가팀 신청 -> 설명회 개최 -> 사전 학습 -> [HUSS 해커톤] 문제해결 -> [HUSS 해커톤] 공유 및 디브리프"
+        },
+        "confidence": 0.5,
+        "extraction_status": "NEEDS_REVIEW",
+        "evidence_start": 868,
+        "evidence_end": 936,
+        "issues": [
+          "ATOMICITY_REVIEW: 독립 조건을 한 항목에 합쳤는지 확인하고 단일 조건으로 수정하세요."
+        ],
+        "original": {
+          "requirement_id": "G005",
+          "rule": "참가팀 신청 -> 설명회 개최 -> 사전 학습 -> [HUSS 해커톤] 문제해결 -> [HUSS 해커톤] 공유 및 디브리프",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "SEMANTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 25",
+            "quote": "참가팀 신청 -> 설명회 개최 -> 사전 학습 -> [HUSS 해커톤] 문제해결 -> [HUSS 해커톤] 공유 및 디브리프"
+          },
+          "confidence": 0.5
+        }
+      }
+    ],
+    "provider": "local-rules-v1 (no AI model)",
+    "execution_kind": "ACTUAL",
+    "extraction_complete": true,
+    "notices": [
+      "로컬 규칙 후보입니다. confidence=0.5는 미보정 값이며 정확도가 아닙니다. 원문 전체를 검토하세요."
+    ],
+    "version": 2,
+    "created_at": "2026-09-03T11:49:56.133953Z",
+    "updated_at": "2026-09-03T11:49:56.134845Z"
+  },
+  "raw": [
+    {
+      "requirement_id": "G001",
+      "rule": "「2025 HUSS 융합캠프(인사이트)」 참가자를 모집합니다!",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "SEMANTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 2",
+        "quote": "「2025 HUSS 융합캠프(인사이트)」 참가자를 모집합니다!"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G002",
+      "rule": "*지원 동기, 본인 역량, 해커톤 및 팀 프로젝트 관련 경험, 협업 태도 등을 평가",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "SEMANTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 11",
+        "quote": "*지원 동기, 본인 역량, 해커톤 및 팀 프로젝트 관련 경험, 협업 태도 등을 평가"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G003",
+      "rule": "✅ 참가 대상: HUSS 참여학과(한국어문학부, 한국역사학과, KIBS, 경영정보학부, 건설시스템공학부, 임산생명공학과, 행정학과, 사회학과, 정치외교학과) 재학생(학부생)",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "SEMANTIC",
+      "condition": "✅ 참가 대상: HUSS 참여학과(한국어문학부, 한국역사학과, KIBS, 경영정보학부, 건설시스템공학부, 임산생명공학과, 행정학과, 사회학과, 정치외교학과) 재학생(학부생)",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 14",
+        "quote": "✅ 참가 대상: HUSS 참여학과(한국어문학부, 한국역사학과, KIBS, 경영정보학부, 건설시스템공학부, 임산생명공학과, 행정학과, 사회학과, 정치외교학과) 재학생(학부생)"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G004",
+      "rule": "✅ 신청 마감 : 2025년 6월 27일(금)까지",
+      "modality": "INFO",
+      "severity": "EXTERNAL",
+      "verifier": "EXTERNAL",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 21",
+        "quote": "✅ 신청 마감 : 2025년 6월 27일(금)까지"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G005",
+      "rule": "참가팀 신청 -> 설명회 개최 -> 사전 학습 -> [HUSS 해커톤] 문제해결 -> [HUSS 해커톤] 공유 및 디브리프",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "SEMANTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 25",
+        "quote": "참가팀 신청 -> 설명회 개최 -> 사전 학습 -> [HUSS 해커톤] 문제해결 -> [HUSS 해커톤] 공유 및 디브리프"
+      },
+      "confidence": 0.5
+    }
+  ]
+}

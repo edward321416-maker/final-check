@@ -1,0 +1,886 @@
+{
+  "case_id": "C07",
+  "invoked_at": "2026-09-03T11:49:57.610447+00:00",
+  "source_sha256": "51ea2eb831ef228ec2637ba9d80402d22a7f54d514fa6810ba0bdb6a1bb5dfb0",
+  "input_sha256": "1ea9be43594fcdad2f3f9ad0b595d4088fd6d30eff4ac21b7b66f8af26e05519",
+  "profile": {
+    "profile_type": "generic",
+    "profile_id": "e2d57583-acdb-477c-a42e-e1b6efdaeb3e",
+    "status": "REVIEW_REQUIRED",
+    "requirements": [
+      {
+        "requirement_id": "G001",
+        "rule": "공모자격: 대한민국 국민 누구나",
+        "modality": "INFO",
+        "severity": "EXTERNAL",
+        "verifier": "EXTERNAL",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 13",
+          "quote": "공모자격: 대한민국 국민 누구나"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 270,
+        "evidence_end": 287,
+        "issues": [],
+        "original": {
+          "requirement_id": "G001",
+          "rule": "공모자격: 대한민국 국민 누구나",
+          "modality": "INFO",
+          "severity": "EXTERNAL",
+          "verifier": "EXTERNAL",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 13",
+            "quote": "공모자격: 대한민국 국민 누구나"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G002",
+        "rule": "공모접수",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 36",
+          "quote": "공모접수"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 590,
+        "evidence_end": 594,
+        "issues": [],
+        "original": {
+          "requirement_id": "G002",
+          "rule": "공모접수",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "SEMANTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 36",
+            "quote": "공모접수"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G003",
+        "rule": "접수기간: 2025.",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 37",
+          "quote": "접수기간: 2025."
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 600,
+        "evidence_end": 611,
+        "issues": [],
+        "original": {
+          "requirement_id": "G003",
+          "rule": "접수기간: 2025.",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "SEMANTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 37",
+            "quote": "접수기간: 2025."
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G004",
+        "rule": "- 접수마감: 2025.",
+        "modality": "INFO",
+        "severity": "EXTERNAL",
+        "verifier": "EXTERNAL",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 38",
+          "quote": "- 접수마감: 2025."
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 635,
+        "evidence_end": 648,
+        "issues": [],
+        "original": {
+          "requirement_id": "G004",
+          "rule": "- 접수마감: 2025.",
+          "modality": "INFO",
+          "severity": "EXTERNAL",
+          "verifier": "EXTERNAL",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 38",
+            "quote": "- 접수마감: 2025."
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G005",
+        "rule": "7.(금) 18:00 접수분까지 유효",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 38",
+          "quote": "7.(금) 18:00 접수분까지 유효"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 652,
+        "evidence_end": 672,
+        "issues": [],
+        "original": {
+          "requirement_id": "G005",
+          "rule": "7.(금) 18:00 접수분까지 유효",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "SEMANTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 38",
+            "quote": "7.(금) 18:00 접수분까지 유효"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G006",
+        "rule": "접수방법: 전자우편(codud07@korea.kr)",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 39",
+          "quote": "접수방법: 전자우편(codud07@korea.kr)"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 677,
+        "evidence_end": 705,
+        "issues": [],
+        "original": {
+          "requirement_id": "G006",
+          "rule": "접수방법: 전자우편(codud07@korea.kr)",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "SEMANTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 39",
+            "quote": "접수방법: 전자우편(codud07@korea.kr)"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G007",
+        "rule": "제출서류: [붙임1] 신청서(제안서), [붙임2] 개인정보 수집·이용 동의서",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 41",
+          "quote": "제출서류: [붙임1] 신청서(제안서), [붙임2] 개인정보 수집·이용 동의서"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 750,
+        "evidence_end": 792,
+        "issues": [],
+        "original": {
+          "requirement_id": "G007",
+          "rule": "제출서류: [붙임1] 신청서(제안서), [붙임2] 개인정보 수집·이용 동의서",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "SEMANTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 41",
+            "quote": "제출서류: [붙임1] 신청서(제안서), [붙임2] 개인정보 수집·이용 동의서"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G008",
+        "rule": "결과발표: 2025년 5월 중(시 홈페이지 및 개별 통지)",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "DETERMINISTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 64",
+          "quote": "결과발표: 2025년 5월 중(시 홈페이지 및 개별 통지)"
+        },
+        "confidence": 0.5,
+        "extraction_status": "NEEDS_REVIEW",
+        "evidence_start": 996,
+        "evidence_end": 1028,
+        "issues": [
+          "ATOMICITY_REVIEW: 독립 조건을 한 항목에 합쳤는지 확인하고 단일 조건으로 수정하세요."
+        ],
+        "original": {
+          "requirement_id": "G008",
+          "rule": "결과발표: 2025년 5월 중(시 홈페이지 및 개별 통지)",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "DETERMINISTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 64",
+            "quote": "결과발표: 2025년 5월 중(시 홈페이지 및 개별 통지)"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G009",
+        "rule": "동일 또는 유사한 제안이 제출된 경우, 먼저 접수한 제안을 우선함",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "동일 또는 유사한 제안이 제출된 경우, 먼저 접수한 제안을 우선함",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 100",
+          "quote": "동일 또는 유사한 제안이 제출된 경우, 먼저 접수한 제안을 우선함"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 1309,
+        "evidence_end": 1345,
+        "issues": [],
+        "original": {
+          "requirement_id": "G009",
+          "rule": "동일 또는 유사한 제안이 제출된 경우, 먼저 접수한 제안을 우선함",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "SEMANTIC",
+          "condition": "동일 또는 유사한 제안이 제출된 경우, 먼저 접수한 제안을 우선함",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 100",
+            "quote": "동일 또는 유사한 제안이 제출된 경우, 먼저 접수한 제안을 우선함"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G010",
+        "rule": "제출서류는 반드시 접수기간 내에 접수되어야 유효",
+        "modality": "MUST",
+        "severity": "REVIEW",
+        "verifier": "SEMANTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 104",
+          "quote": "제출서류는 반드시 접수기간 내에 접수되어야 유효"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 1451,
+        "evidence_end": 1477,
+        "issues": [],
+        "original": {
+          "requirement_id": "G010",
+          "rule": "제출서류는 반드시 접수기간 내에 접수되어야 유효",
+          "modality": "MUST",
+          "severity": "REVIEW",
+          "verifier": "SEMANTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 104",
+            "quote": "제출서류는 반드시 접수기간 내에 접수되어야 유효"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G011",
+        "rule": ", 접수된 서류",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 104",
+          "quote": ", 접수된 서류"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 1479,
+        "evidence_end": 1487,
+        "issues": [],
+        "original": {
+          "requirement_id": "G011",
+          "rule": ", 접수된 서류",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "SEMANTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 104",
+            "quote": ", 접수된 서류"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G012",
+        "rule": "참가 신청서(제안서) 1부.",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 111",
+          "quote": "참가 신청서(제안서) 1부."
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 1687,
+        "evidence_end": 1702,
+        "issues": [],
+        "original": {
+          "requirement_id": "G012",
+          "rule": "참가 신청서(제안서) 1부.",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "SEMANTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 111",
+            "quote": "참가 신청서(제안서) 1부."
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G013",
+        "rule": "개인정보 수집·이용 동의서 1부.",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 112",
+          "quote": "개인정보 수집·이용 동의서 1부."
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 1711,
+        "evidence_end": 1729,
+        "issues": [],
+        "original": {
+          "requirement_id": "G013",
+          "rule": "개인정보 수집·이용 동의서 1부.",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "SEMANTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 112",
+            "quote": "개인정보 수집·이용 동의서 1부."
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G014",
+        "rule": "붙임1 참가 신청서(제안서)",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 114",
+          "quote": "붙임1 참가 신청서(제안서)"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 1735,
+        "evidence_end": 1750,
+        "issues": [],
+        "original": {
+          "requirement_id": "G014",
+          "rule": "붙임1 참가 신청서(제안서)",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "SEMANTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 114",
+            "quote": "붙임1 참가 신청서(제안서)"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G015",
+        "rule": "접수번호",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 117",
+          "quote": "접수번호"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 1788,
+        "evidence_end": 1792,
+        "issues": [],
+        "original": {
+          "requirement_id": "G015",
+          "rule": "접수번호",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "SEMANTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 117",
+            "quote": "접수번호"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G016",
+        "rule": "붙임2 개인정보 수집･이용 동의서",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 142",
+          "quote": "붙임2 개인정보 수집･이용 동의서"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 2169,
+        "evidence_end": 2187,
+        "issues": [],
+        "original": {
+          "requirement_id": "G016",
+          "rule": "붙임2 개인정보 수집･이용 동의서",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "SEMANTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 142",
+            "quote": "붙임2 개인정보 수집･이용 동의서"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G017",
+        "rule": "개인정보 수집·이용 동의서",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 143",
+          "quote": "개인정보 수집·이용 동의서"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 778,
+        "evidence_end": 792,
+        "issues": [],
+        "original": {
+          "requirement_id": "G017",
+          "rule": "개인정보 수집·이용 동의서",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "SEMANTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 143",
+            "quote": "개인정보 수집·이용 동의서"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G018",
+        "rule": "지원함에 있어 개인정보보호법 제15조에 따라 아래와 같이 개인정보를 제공에",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 145",
+          "quote": "지원함에 있어 개인정보보호법 제15조에 따라 아래와 같이 개인정보를 제공에"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 2249,
+        "evidence_end": 2290,
+        "issues": [],
+        "original": {
+          "requirement_id": "G018",
+          "rule": "지원함에 있어 개인정보보호법 제15조에 따라 아래와 같이 개인정보를 제공에",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "SEMANTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 145",
+            "quote": "지원함에 있어 개인정보보호법 제15조에 따라 아래와 같이 개인정보를 제공에"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G019",
+        "rule": "보유･이용기간: 접수일로부터 1년",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 149",
+          "quote": "보유･이용기간: 접수일로부터 1년"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 2377,
+        "evidence_end": 2395,
+        "issues": [],
+        "original": {
+          "requirement_id": "G019",
+          "rule": "보유･이용기간: 접수일로부터 1년",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "SEMANTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 149",
+            "quote": "보유･이용기간: 접수일로부터 1년"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G020",
+        "rule": "성명:              (서명/인)",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 156",
+          "quote": "성명:              (서명/인)"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 2643,
+        "evidence_end": 2666,
+        "issues": [],
+        "original": {
+          "requirement_id": "G020",
+          "rule": "성명:              (서명/인)",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "SEMANTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 156",
+            "quote": "성명:              (서명/인)"
+          },
+          "confidence": 0.5
+        }
+      }
+    ],
+    "provider": "local-rules-v1 (no AI model)",
+    "execution_kind": "ACTUAL",
+    "extraction_complete": true,
+    "notices": [
+      "로컬 규칙 후보입니다. confidence=0.5는 미보정 값이며 정확도가 아닙니다. 원문 전체를 검토하세요."
+    ],
+    "version": 2,
+    "created_at": "2026-09-03T11:49:57.610529Z",
+    "updated_at": "2026-09-03T11:49:57.611871Z"
+  },
+  "raw": [
+    {
+      "requirement_id": "G001",
+      "rule": "공모자격: 대한민국 국민 누구나",
+      "modality": "INFO",
+      "severity": "EXTERNAL",
+      "verifier": "EXTERNAL",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 13",
+        "quote": "공모자격: 대한민국 국민 누구나"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G002",
+      "rule": "공모접수",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "SEMANTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 36",
+        "quote": "공모접수"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G003",
+      "rule": "접수기간: 2025.",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "SEMANTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 37",
+        "quote": "접수기간: 2025."
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G004",
+      "rule": "- 접수마감: 2025.",
+      "modality": "INFO",
+      "severity": "EXTERNAL",
+      "verifier": "EXTERNAL",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 38",
+        "quote": "- 접수마감: 2025."
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G005",
+      "rule": "7.(금) 18:00 접수분까지 유효",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "SEMANTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 38",
+        "quote": "7.(금) 18:00 접수분까지 유효"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G006",
+      "rule": "접수방법: 전자우편(codud07@korea.kr)",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "SEMANTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 39",
+        "quote": "접수방법: 전자우편(codud07@korea.kr)"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G007",
+      "rule": "제출서류: [붙임1] 신청서(제안서), [붙임2] 개인정보 수집·이용 동의서",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "SEMANTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 41",
+        "quote": "제출서류: [붙임1] 신청서(제안서), [붙임2] 개인정보 수집·이용 동의서"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G008",
+      "rule": "결과발표: 2025년 5월 중(시 홈페이지 및 개별 통지)",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "DETERMINISTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 64",
+        "quote": "결과발표: 2025년 5월 중(시 홈페이지 및 개별 통지)"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G009",
+      "rule": "동일 또는 유사한 제안이 제출된 경우, 먼저 접수한 제안을 우선함",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "SEMANTIC",
+      "condition": "동일 또는 유사한 제안이 제출된 경우, 먼저 접수한 제안을 우선함",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 100",
+        "quote": "동일 또는 유사한 제안이 제출된 경우, 먼저 접수한 제안을 우선함"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G010",
+      "rule": "제출서류는 반드시 접수기간 내에 접수되어야 유효",
+      "modality": "MUST",
+      "severity": "REVIEW",
+      "verifier": "SEMANTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 104",
+        "quote": "제출서류는 반드시 접수기간 내에 접수되어야 유효"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G011",
+      "rule": ", 접수된 서류",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "SEMANTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 104",
+        "quote": ", 접수된 서류"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G012",
+      "rule": "참가 신청서(제안서) 1부.",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "SEMANTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 111",
+        "quote": "참가 신청서(제안서) 1부."
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G013",
+      "rule": "개인정보 수집·이용 동의서 1부.",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "SEMANTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 112",
+        "quote": "개인정보 수집·이용 동의서 1부."
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G014",
+      "rule": "붙임1 참가 신청서(제안서)",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "SEMANTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 114",
+        "quote": "붙임1 참가 신청서(제안서)"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G015",
+      "rule": "접수번호",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "SEMANTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 117",
+        "quote": "접수번호"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G016",
+      "rule": "붙임2 개인정보 수집･이용 동의서",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "SEMANTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 142",
+        "quote": "붙임2 개인정보 수집･이용 동의서"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G017",
+      "rule": "개인정보 수집·이용 동의서",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "SEMANTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 143",
+        "quote": "개인정보 수집·이용 동의서"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G018",
+      "rule": "지원함에 있어 개인정보보호법 제15조에 따라 아래와 같이 개인정보를 제공에",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "SEMANTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 145",
+        "quote": "지원함에 있어 개인정보보호법 제15조에 따라 아래와 같이 개인정보를 제공에"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G019",
+      "rule": "보유･이용기간: 접수일로부터 1년",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "SEMANTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 149",
+        "quote": "보유･이용기간: 접수일로부터 1년"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G020",
+      "rule": "성명:              (서명/인)",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "SEMANTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 156",
+        "quote": "성명:              (서명/인)"
+      },
+      "confidence": 0.5
+    }
+  ]
+}

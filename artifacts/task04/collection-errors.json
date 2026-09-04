@@ -1,0 +1,9 @@
+[
+  {
+    "case_id": "initial C02 candidate (not in frozen corpus)",
+    "url": "https://ie.korea.ac.kr/ie/news/g_notice.do?articleNo=769552&mode=view",
+    "at": "2026-09-03T11:38:35.701027+00:00",
+    "error": "HTTP 404 during direct httpx capture; replaced before Gold by the climate-video announcement",
+    "record_note": "Restored from the actual collection tool output; the initial collection helper had overwritten its error list on resume. No source or Gold changes."
+  }
+]

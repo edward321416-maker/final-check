@@ -1,0 +1,377 @@
+{
+  "gates": [
+    {
+      "case_id": "C01",
+      "raw": 89,
+      "accepted": 89,
+      "profile_status": "REVIEW_REQUIRED",
+      "needs_review": 5
+    },
+    {
+      "case_id": "C02",
+      "raw": 14,
+      "accepted": 14,
+      "profile_status": "REVIEW_REQUIRED",
+      "needs_review": 1
+    },
+    {
+      "case_id": "C03",
+      "raw": 5,
+      "accepted": 5,
+      "profile_status": "REVIEW_REQUIRED",
+      "needs_review": 2
+    },
+    {
+      "case_id": "C04",
+      "raw": 26,
+      "accepted": 26,
+      "profile_status": "REVIEW_REQUIRED",
+      "needs_review": 4
+    },
+    {
+      "case_id": "C05",
+      "raw": 3,
+      "accepted": 3,
+      "profile_status": "REVIEW_REQUIRED",
+      "needs_review": 2
+    },
+    {
+      "case_id": "C06",
+      "raw": 10,
+      "accepted": 10,
+      "profile_status": "DRAFT",
+      "needs_review": 0
+    },
+    {
+      "case_id": "C07",
+      "raw": 20,
+      "accepted": 20,
+      "profile_status": "REVIEW_REQUIRED",
+      "needs_review": 1
+    },
+    {
+      "case_id": "C08",
+      "raw": 44,
+      "accepted": 44,
+      "profile_status": "REVIEW_REQUIRED",
+      "needs_review": 10
+    }
+  ],
+  "misanchored_repeated_quotes": [
+    {
+      "case_id": "C01",
+      "extracted_id": "G012",
+      "quote": "제출 파일명",
+      "declared_line": 39,
+      "intended_start": 840,
+      "actual_start": 562,
+      "source_find_start": 562
+    },
+    {
+      "case_id": "C01",
+      "extracted_id": "G023",
+      "quote": "❍ 응모 자격",
+      "declared_line": 57,
+      "intended_start": 1063,
+      "actual_start": 280,
+      "source_find_start": 280
+    },
+    {
+      "case_id": "C01",
+      "extracted_id": "G024",
+      "quote": "응모 자격",
+      "declared_line": 59,
+      "intended_start": 1074,
+      "actual_start": 282,
+      "source_find_start": 282
+    },
+    {
+      "case_id": "C01",
+      "extracted_id": "G051",
+      "quote": "｢제2회 청렴 60초 영상 공모전｣",
+      "declared_line": 251,
+      "intended_start": 5050,
+      "actual_start": 27,
+      "source_find_start": 27
+    },
+    {
+      "case_id": "C01",
+      "extracted_id": "G053",
+      "quote": "접수번호",
+      "declared_line": 253,
+      "intended_start": 5107,
+      "actual_start": 4494,
+      "source_find_start": 4494
+    },
+    {
+      "case_id": "C01",
+      "extracted_id": "G055",
+      "quote": "동의서",
+      "declared_line": 272,
+      "intended_start": 5280,
+      "actual_start": 913,
+      "source_find_start": 913
+    },
+    {
+      "case_id": "C01",
+      "extracted_id": "G057",
+      "quote": "서명",
+      "declared_line": 286,
+      "intended_start": 5583,
+      "actual_start": 4979,
+      "source_find_start": 4979
+    },
+    {
+      "case_id": "C01",
+      "extracted_id": "G058",
+      "quote": "서명",
+      "declared_line": 292,
+      "intended_start": 5673,
+      "actual_start": 4979,
+      "source_find_start": 4979
+    },
+    {
+      "case_id": "C01",
+      "extracted_id": "G059",
+      "quote": "동의서",
+      "declared_line": 301,
+      "intended_start": 5723,
+      "actual_start": 913,
+      "source_find_start": 913
+    },
+    {
+      "case_id": "C01",
+      "extracted_id": "G061",
+      "quote": "서명",
+      "declared_line": 319,
+      "intended_start": 6076,
+      "actual_start": 4979,
+      "source_find_start": 4979
+    },
+    {
+      "case_id": "C01",
+      "extracted_id": "G062",
+      "quote": "서명",
+      "declared_line": 325,
+      "intended_start": 6171,
+      "actual_start": 4979,
+      "source_find_start": 4979
+    },
+    {
+      "case_id": "C01",
+      "extracted_id": "G063",
+      "quote": "동의서",
+      "declared_line": 332,
+      "intended_start": 6200,
+      "actual_start": 913,
+      "source_find_start": 913
+    },
+    {
+      "case_id": "C01",
+      "extracted_id": "G065",
+      "quote": "서명",
+      "declared_line": 342,
+      "intended_start": 6449,
+      "actual_start": 4979,
+      "source_find_start": 4979
+    },
+    {
+      "case_id": "C01",
+      "extracted_id": "G066",
+      "quote": "서명",
+      "declared_line": 348,
+      "intended_start": 6539,
+      "actual_start": 4979,
+      "source_find_start": 4979
+    },
+    {
+      "case_id": "C01",
+      "extracted_id": "G068",
+      "quote": "서명",
+      "declared_line": 356,
+      "intended_start": 6686,
+      "actual_start": 4979,
+      "source_find_start": 4979
+    },
+    {
+      "case_id": "C01",
+      "extracted_id": "G069",
+      "quote": "서명",
+      "declared_line": 361,
+      "intended_start": 6725,
+      "actual_start": 4979,
+      "source_find_start": 4979
+    },
+    {
+      "case_id": "C01",
+      "extracted_id": "G071",
+      "quote": "｢제2회 청렴 60초 영상 공모전｣",
+      "declared_line": 369,
+      "intended_start": 6787,
+      "actual_start": 27,
+      "source_find_start": 27
+    },
+    {
+      "case_id": "C01",
+      "extracted_id": "G073",
+      "quote": "접수번호",
+      "declared_line": 371,
+      "intended_start": 6837,
+      "actual_start": 4494,
+      "source_find_start": 4494
+    },
+    {
+      "case_id": "C01",
+      "extracted_id": "G075",
+      "quote": "동의서",
+      "declared_line": 392,
+      "intended_start": 6996,
+      "actual_start": 913,
+      "source_find_start": 913
+    },
+    {
+      "case_id": "C01",
+      "extracted_id": "G080",
+      "quote": "서명",
+      "declared_line": 407,
+      "intended_start": 7288,
+      "actual_start": 4979,
+      "source_find_start": 4979
+    },
+    {
+      "case_id": "C01",
+      "extracted_id": "G081",
+      "quote": "서명",
+      "declared_line": 413,
+      "intended_start": 7382,
+      "actual_start": 4979,
+      "source_find_start": 4979
+    },
+    {
+      "case_id": "C01",
+      "extracted_id": "G082",
+      "quote": "동의서",
+      "declared_line": 419,
+      "intended_start": 7410,
+      "actual_start": 913,
+      "source_find_start": 913
+    },
+    {
+      "case_id": "C01",
+      "extracted_id": "G084",
+      "quote": "- 수상작에 사용된 초상권",
+      "declared_line": 425,
+      "intended_start": 7543,
+      "actual_start": 7111,
+      "source_find_start": 7111
+    },
+    {
+      "case_id": "C01",
+      "extracted_id": "G085",
+      "quote": "서명",
+      "declared_line": 435,
+      "intended_start": 7722,
+      "actual_start": 4979,
+      "source_find_start": 4979
+    },
+    {
+      "case_id": "C01",
+      "extracted_id": "G086",
+      "quote": "서명",
+      "declared_line": 441,
+      "intended_start": 7817,
+      "actual_start": 4979,
+      "source_find_start": 4979
+    },
+    {
+      "case_id": "C01",
+      "extracted_id": "G088",
+      "quote": "서명",
+      "declared_line": 455,
+      "intended_start": 8029,
+      "actual_start": 4979,
+      "source_find_start": 4979
+    },
+    {
+      "case_id": "C01",
+      "extracted_id": "G089",
+      "quote": "서명",
+      "declared_line": 460,
+      "intended_start": 8068,
+      "actual_start": 4979,
+      "source_find_start": 4979
+    },
+    {
+      "case_id": "C05",
+      "extracted_id": "G002",
+      "quote": "접수 기간",
+      "declared_line": 112,
+      "intended_start": 838,
+      "actual_start": 777,
+      "source_find_start": 777
+    },
+    {
+      "case_id": "C06",
+      "extracted_id": "G006",
+      "quote": "한국저작권위원회",
+      "declared_line": 155,
+      "intended_start": 1156,
+      "actual_start": 839,
+      "source_find_start": 839
+    },
+    {
+      "case_id": "C06",
+      "extracted_id": "G007",
+      "quote": "한국저작권위원회 위원장상",
+      "declared_line": 159,
+      "intended_start": 1175,
+      "actual_start": 858,
+      "source_find_start": 858
+    },
+    {
+      "case_id": "C06",
+      "extracted_id": "G008",
+      "quote": "한국저작권위원회",
+      "declared_line": 213,
+      "intended_start": 1466,
+      "actual_start": 839,
+      "source_find_start": 839
+    },
+    {
+      "case_id": "C06",
+      "extracted_id": "G009",
+      "quote": "한국저작권위원회 위원장상",
+      "declared_line": 217,
+      "intended_start": 1485,
+      "actual_start": 858,
+      "source_find_start": 858
+    },
+    {
+      "case_id": "C07",
+      "extracted_id": "G017",
+      "quote": "개인정보 수집·이용 동의서",
+      "declared_line": 143,
+      "intended_start": 2188,
+      "actual_start": 778,
+      "source_find_start": 778
+    },
+    {
+      "case_id": "C08",
+      "extracted_id": "G012",
+      "quote": "신청서류",
+      "declared_line": 47,
+      "intended_start": 986,
+      "actual_start": 971,
+      "source_find_start": 971
+    },
+    {
+      "case_id": "C08",
+      "extracted_id": "G014",
+      "quote": "참가신청서",
+      "declared_line": 51,
+      "intended_start": 1007,
+      "actual_start": 946,
+      "source_find_start": 946
+    }
+  ]
+}

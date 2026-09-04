@@ -1,0 +1,37 @@
+
+> final-check-frontend@0.1.0 test:smoke
+> playwright test
+
+[WebServer] INFO:     Started server process [41304]
+[WebServer] INFO:     Waiting for application startup.
+[WebServer] INFO:     Application startup complete.
+[WebServer] INFO:     Uvicorn running on http://127.0.0.1:8100 (Press CTRL+C to quit)
+[WebServer] (node:26140) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 14 tests using 2 workers
+
+(node:32860) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:31004) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok  2 [desktop] › tests\generic-profile.spec.ts:85:7 › actual text PDF announcement path (3.1s)
+  ok  1 [desktop] › tests\generic-profile.spec.ts:29:5 › generic text, evidence, human edit/delete/approve, confirmation and real handoff (3.8s)
+  ok  3 [desktop] › tests\generic-profile.spec.ts:85:7 › actual scanned PDF announcement path (1.1s)
+  ok  5 [desktop] › tests\golden-path.spec.ts:88:5 › deep link without a session has a recovery path (296ms)
+  ok  6 [desktop] › tests\golden-path.spec.ts:95:5 › custom file upload never receives mocked findings (541ms)
+  ok  7 [desktop] › tests\golden-path.spec.ts:113:5 › backend failure is recoverable and does not advance (325ms)
+(node:18880) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok  8 [mobile] › tests\generic-profile.spec.ts:29:5 › generic text, evidence, human edit/delete/approve, confirmation and real handoff (2.7s)
+  ok  4 [desktop] › tests\golden-path.spec.ts:28:5 › five-screen golden path, evidence, filter, reload and recheck (5.4s)
+(node:31100) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok  9 [mobile] › tests\generic-profile.spec.ts:85:7 › actual text PDF announcement path (1.6s)
+  ok 10 [mobile] › tests\generic-profile.spec.ts:85:7 › actual scanned PDF announcement path (1.3s)
+  ok 12 [mobile] › tests\golden-path.spec.ts:88:5 › deep link without a session has a recovery path (305ms)
+  ok 13 [mobile] › tests\golden-path.spec.ts:95:5 › custom file upload never receives mocked findings (556ms)
+  ok 14 [mobile] › tests\golden-path.spec.ts:113:5 › backend failure is recoverable and does not advance (346ms)
+  ok 11 [mobile] › tests\golden-path.spec.ts:28:5 › five-screen golden path, evidence, filter, reload and recheck (6.5s)
+
+  14 passed (21.5s)

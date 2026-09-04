@@ -1,0 +1,3861 @@
+{
+  "case_id": "C01",
+  "invoked_at": "2026-09-03T11:49:56.023368+00:00",
+  "source_sha256": "37405e2e7d58fae052430437b78328525ee9fd6a177bddf53c272dfb5e33dfe3",
+  "input_sha256": "5cbc4861932dcad2b55420549667f9a466d7044167717b8dd363cda9063051e6",
+  "profile": {
+    "profile_type": "generic",
+    "profile_id": "61e2bb2f-7cc8-42dd-b66c-292760a44c10",
+    "status": "REVIEW_REQUIRED",
+    "requirements": [
+      {
+        "requirement_id": "G001",
+        "rule": "｢제2회 청렴 60초 영상 공모전｣ 공고",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "DETERMINISTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 3",
+          "quote": "｢제2회 청렴 60초 영상 공모전｣ 공고"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 27,
+        "evidence_end": 49,
+        "issues": [],
+        "original": {
+          "requirement_id": "G001",
+          "rule": "｢제2회 청렴 60초 영상 공모전｣ 공고",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "DETERMINISTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 3",
+            "quote": "｢제2회 청렴 60초 영상 공모전｣ 공고"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G002",
+        "rule": "경기교육 가족 대상 ｢제2회 청렴 60초 영상 공모전｣을 개최합니다.",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "DETERMINISTIC",
+        "condition": "경기교육 가족 대상 ｢제2회 청렴 60초 영상 공모전｣을 개최합니다.",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 5",
+          "quote": "경기교육 가족 대상 ｢제2회 청렴 60초 영상 공모전｣을 개최합니다."
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 93,
+        "evidence_end": 131,
+        "issues": [],
+        "original": {
+          "requirement_id": "G002",
+          "rule": "경기교육 가족 대상 ｢제2회 청렴 60초 영상 공모전｣을 개최합니다.",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "DETERMINISTIC",
+          "condition": "경기교육 가족 대상 ｢제2회 청렴 60초 영상 공모전｣을 개최합니다.",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 5",
+            "quote": "경기교육 가족 대상 ｢제2회 청렴 60초 영상 공모전｣을 개최합니다."
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G003",
+        "rule": "❍ 공모 분야: 영상(60초 이내‘숏폼[short-form]’)",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "DETERMINISTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 10",
+          "quote": "❍ 공모 분야: 영상(60초 이내‘숏폼[short-form]’)"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 243,
+        "evidence_end": 278,
+        "issues": [],
+        "original": {
+          "requirement_id": "G003",
+          "rule": "❍ 공모 분야: 영상(60초 이내‘숏폼[short-form]’)",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "DETERMINISTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 10",
+            "quote": "❍ 공모 분야: 영상(60초 이내‘숏폼[short-form]’)"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G004",
+        "rule": "❍ 응모 자격",
+        "modality": "INFO",
+        "severity": "EXTERNAL",
+        "verifier": "EXTERNAL",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 11",
+          "quote": "❍ 응모 자격"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 280,
+        "evidence_end": 287,
+        "issues": [],
+        "original": {
+          "requirement_id": "G004",
+          "rule": "❍ 응모 자격",
+          "modality": "INFO",
+          "severity": "EXTERNAL",
+          "verifier": "EXTERNAL",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 11",
+            "quote": "❍ 응모 자격"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G005",
+        "rule": "❍ 응모 방법: 전자메일(goeclean@korea.kr)로 작품과 서류(붙임 서식) 제출",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 15",
+          "quote": "❍ 응모 방법: 전자메일(goeclean@korea.kr)로 작품과 서류(붙임 서식) 제출"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 383,
+        "evidence_end": 433,
+        "issues": [],
+        "original": {
+          "requirement_id": "G005",
+          "rule": "❍ 응모 방법: 전자메일(goeclean@korea.kr)로 작품과 서류(붙임 서식) 제출",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "SEMANTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 15",
+            "quote": "❍ 응모 방법: 전자메일(goeclean@korea.kr)로 작품과 서류(붙임 서식) 제출"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G006",
+        "rule": "※ 전자메일함에 기록된 접수 일시를 기준으로 2025.",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 16",
+          "quote": "※ 전자메일함에 기록된 접수 일시를 기준으로 2025."
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 439,
+        "evidence_end": 469,
+        "issues": [],
+        "original": {
+          "requirement_id": "G006",
+          "rule": "※ 전자메일함에 기록된 접수 일시를 기준으로 2025.",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "SEMANTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 16",
+            "quote": "※ 전자메일함에 기록된 접수 일시를 기준으로 2025."
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G007",
+        "rule": "24:00까지 응모 작품과 응모 서류가 모두 접수된 경우에 한하여 심사",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "24:00까지 응모 작품과 응모 서류가 모두 접수된 경우에 한하여 심사",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 17",
+          "quote": "24:00까지 응모 작품과 응모 서류가 모두 접수된 경우에 한하여 심사"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 504,
+        "evidence_end": 543,
+        "issues": [],
+        "original": {
+          "requirement_id": "G007",
+          "rule": "24:00까지 응모 작품과 응모 서류가 모두 접수된 경우에 한하여 심사",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "SEMANTIC",
+          "condition": "24:00까지 응모 작품과 응모 서류가 모두 접수된 경우에 한하여 심사",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 17",
+            "quote": "24:00까지 응모 작품과 응모 서류가 모두 접수된 경우에 한하여 심사"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G008",
+        "rule": "제출 파일명",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "DETERMINISTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 21",
+          "quote": "제출 파일명"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 562,
+        "evidence_end": 568,
+        "issues": [],
+        "original": {
+          "requirement_id": "G008",
+          "rule": "제출 파일명",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "DETERMINISTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 21",
+            "quote": "제출 파일명"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G009",
+        "rule": "- 전체 길이 60초 이내 영상(최소 길이 제한 없음)",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "DETERMINISTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 25",
+          "quote": "- 전체 길이 60초 이내 영상(최소 길이 제한 없음)"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 578,
+        "evidence_end": 608,
+        "issues": [],
+        "original": {
+          "requirement_id": "G009",
+          "rule": "- 전체 길이 60초 이내 영상(최소 길이 제한 없음)",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "DETERMINISTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 25",
+            "quote": "- 전체 길이 60초 이내 영상(최소 길이 제한 없음)"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G010",
+        "rule": "- 제3자의 저작권, 초상권 등을 침해하지 않은 순수 창작물",
+        "modality": "INFO",
+        "severity": "EXTERNAL",
+        "verifier": "EXTERNAL",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 27",
+          "quote": "- 제3자의 저작권, 초상권 등을 침해하지 않은 순수 창작물"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 633,
+        "evidence_end": 666,
+        "issues": [],
+        "original": {
+          "requirement_id": "G010",
+          "rule": "- 제3자의 저작권, 초상권 등을 침해하지 않은 순수 창작물",
+          "modality": "INFO",
+          "severity": "EXTERNAL",
+          "verifier": "EXTERNAL",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 27",
+            "quote": "- 제3자의 저작권, 초상권 등을 침해하지 않은 순수 창작물"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G011",
+        "rule": "MP4",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "DETERMINISTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 33",
+          "quote": "MP4"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 813,
+        "evidence_end": 816,
+        "issues": [],
+        "original": {
+          "requirement_id": "G011",
+          "rule": "MP4",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "DETERMINISTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 33",
+            "quote": "MP4"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G012",
+        "rule": "제출 파일명",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "DETERMINISTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 39",
+          "quote": "제출 파일명"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 562,
+        "evidence_end": 568,
+        "issues": [],
+        "original": {
+          "requirement_id": "G012",
+          "rule": "제출 파일명",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "DETERMINISTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 39",
+            "quote": "제출 파일명"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G013",
+        "rule": "① 응모 신청서(붙임1): 작품별로 제출",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 43",
+          "quote": "① 응모 신청서(붙임1): 작품별로 제출"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 856,
+        "evidence_end": 878,
+        "issues": [],
+        "original": {
+          "requirement_id": "G013",
+          "rule": "① 응모 신청서(붙임1): 작품별로 제출",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "SEMANTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 43",
+            "quote": "① 응모 신청서(붙임1): 작품별로 제출"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G014",
+        "rule": "작품명-신청서",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 44",
+          "quote": "작품명-신청서"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 879,
+        "evidence_end": 886,
+        "issues": [],
+        "original": {
+          "requirement_id": "G014",
+          "rule": "작품명-신청서",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "SEMANTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 44",
+            "quote": "작품명-신청서"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G015",
+        "rule": "PDF",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "DETERMINISTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 45",
+          "quote": "PDF"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 887,
+        "evidence_end": 890,
+        "issues": [],
+        "original": {
+          "requirement_id": "G015",
+          "rule": "PDF",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "DETERMINISTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 45",
+            "quote": "PDF"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G016",
+        "rule": "② 개인정보 수집·이용 및 저작물 활용 동의서(붙임2)",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 46",
+          "quote": "② 개인정보 수집·이용 및 저작물 활용 동의서(붙임2)"
+        },
+        "confidence": 0.5,
+        "extraction_status": "NEEDS_REVIEW",
+        "evidence_start": 891,
+        "evidence_end": 921,
+        "issues": [
+          "ATOMICITY_REVIEW: 독립 조건을 한 항목에 합쳤는지 확인하고 단일 조건으로 수정하세요."
+        ],
+        "original": {
+          "requirement_id": "G016",
+          "rule": "② 개인정보 수집·이용 및 저작물 활용 동의서(붙임2)",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "SEMANTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 46",
+            "quote": "② 개인정보 수집·이용 및 저작물 활용 동의서(붙임2)"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G017",
+        "rule": ": 개인별로 제출",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 47",
+          "quote": ": 개인별로 제출"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 925,
+        "evidence_end": 934,
+        "issues": [],
+        "original": {
+          "requirement_id": "G017",
+          "rule": ": 개인별로 제출",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "SEMANTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 47",
+            "quote": ": 개인별로 제출"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G018",
+        "rule": "작품명-동의서",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 48",
+          "quote": "작품명-동의서"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 935,
+        "evidence_end": 942,
+        "issues": [],
+        "original": {
+          "requirement_id": "G018",
+          "rule": "작품명-동의서",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "SEMANTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 48",
+            "quote": "작품명-동의서"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G019",
+        "rule": "③ 초상권 사용 동의서(붙임3)",
+        "modality": "INFO",
+        "severity": "EXTERNAL",
+        "verifier": "EXTERNAL",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 49",
+          "quote": "③ 초상권 사용 동의서(붙임3)"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 943,
+        "evidence_end": 960,
+        "issues": [],
+        "original": {
+          "requirement_id": "G019",
+          "rule": "③ 초상권 사용 동의서(붙임3)",
+          "modality": "INFO",
+          "severity": "EXTERNAL",
+          "verifier": "EXTERNAL",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 49",
+            "quote": "③ 초상권 사용 동의서(붙임3)"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G020",
+        "rule": ": 영상에 출연한 모든 사람에게 받아서 제출",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 50",
+          "quote": ": 영상에 출연한 모든 사람에게 받아서 제출"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 964,
+        "evidence_end": 988,
+        "issues": [],
+        "original": {
+          "requirement_id": "G020",
+          "rule": ": 영상에 출연한 모든 사람에게 받아서 제출",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "SEMANTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 50",
+            "quote": ": 영상에 출연한 모든 사람에게 받아서 제출"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G021",
+        "rule": "작품명-초상권",
+        "modality": "INFO",
+        "severity": "EXTERNAL",
+        "verifier": "EXTERNAL",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 51",
+          "quote": "작품명-초상권"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 989,
+        "evidence_end": 996,
+        "issues": [],
+        "original": {
+          "requirement_id": "G021",
+          "rule": "작품명-초상권",
+          "modality": "INFO",
+          "severity": "EXTERNAL",
+          "verifier": "EXTERNAL",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 51",
+            "quote": "작품명-초상권"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G022",
+        "rule": "응모 자격 및 요건",
+        "modality": "INFO",
+        "severity": "EXTERNAL",
+        "verifier": "EXTERNAL",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 56",
+          "quote": "응모 자격 및 요건"
+        },
+        "confidence": 0.5,
+        "extraction_status": "NEEDS_REVIEW",
+        "evidence_start": 1051,
+        "evidence_end": 1061,
+        "issues": [
+          "ATOMICITY_REVIEW: 독립 조건을 한 항목에 합쳤는지 확인하고 단일 조건으로 수정하세요."
+        ],
+        "original": {
+          "requirement_id": "G022",
+          "rule": "응모 자격 및 요건",
+          "modality": "INFO",
+          "severity": "EXTERNAL",
+          "verifier": "EXTERNAL",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 56",
+            "quote": "응모 자격 및 요건"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G023",
+        "rule": "❍ 응모 자격",
+        "modality": "INFO",
+        "severity": "EXTERNAL",
+        "verifier": "EXTERNAL",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 57",
+          "quote": "❍ 응모 자격"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 280,
+        "evidence_end": 287,
+        "issues": [],
+        "original": {
+          "requirement_id": "G023",
+          "rule": "❍ 응모 자격",
+          "modality": "INFO",
+          "severity": "EXTERNAL",
+          "verifier": "EXTERNAL",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 57",
+            "quote": "❍ 응모 자격"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G024",
+        "rule": "응모 자격",
+        "modality": "INFO",
+        "severity": "EXTERNAL",
+        "verifier": "EXTERNAL",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 59",
+          "quote": "응모 자격"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 282,
+        "evidence_end": 287,
+        "issues": [],
+        "original": {
+          "requirement_id": "G024",
+          "rule": "응모 자격",
+          "modality": "INFO",
+          "severity": "EXTERNAL",
+          "verifier": "EXTERNAL",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 59",
+            "quote": "응모 자격"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G025",
+        "rule": "※ 개인 또는 팀 단위 참가 가능",
+        "modality": "MAY",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 71",
+          "quote": "※ 개인 또는 팀 단위 참가 가능"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 1195,
+        "evidence_end": 1213,
+        "issues": [],
+        "original": {
+          "requirement_id": "G025",
+          "rule": "※ 개인 또는 팀 단위 참가 가능",
+          "modality": "MAY",
+          "severity": "INFO",
+          "verifier": "SEMANTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 71",
+            "quote": "※ 개인 또는 팀 단위 참가 가능"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G026",
+        "rule": "- 팀으로 응모하는 경우 팀원 모두 자격 요건을 갖춰야",
+        "modality": "INFO",
+        "severity": "EXTERNAL",
+        "verifier": "EXTERNAL",
+        "condition": "- 팀으로 응모하는 경우 팀원 모두 자격 요건을 갖춰야",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 72",
+          "quote": "- 팀으로 응모하는 경우 팀원 모두 자격 요건을 갖춰야"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 1217,
+        "evidence_end": 1247,
+        "issues": [],
+        "original": {
+          "requirement_id": "G026",
+          "rule": "- 팀으로 응모하는 경우 팀원 모두 자격 요건을 갖춰야",
+          "modality": "INFO",
+          "severity": "EXTERNAL",
+          "verifier": "EXTERNAL",
+          "condition": "- 팀으로 응모하는 경우 팀원 모두 자격 요건을 갖춰야",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 72",
+            "quote": "- 팀으로 응모하는 경우 팀원 모두 자격 요건을 갖춰야"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G027",
+        "rule": ", 팀 구성은 응모 자격별로만 가능",
+        "modality": "MAY",
+        "severity": "EXTERNAL",
+        "verifier": "EXTERNAL",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 72",
+          "quote": ", 팀 구성은 응모 자격별로만 가능"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 1250,
+        "evidence_end": 1269,
+        "issues": [],
+        "original": {
+          "requirement_id": "G027",
+          "rule": ", 팀 구성은 응모 자격별로만 가능",
+          "modality": "MAY",
+          "severity": "EXTERNAL",
+          "verifier": "EXTERNAL",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 72",
+            "quote": ", 팀 구성은 응모 자격별로만 가능"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G028",
+        "rule": "(예: 중학생 다수가 한 팀을 이루어 참가 가능, 초등학생과 성인이 한 팀을 이루어 참가 불가)",
+        "modality": "MAY",
+        "severity": "INFO",
+        "verifier": "DETERMINISTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 73",
+          "quote": "(예: 중학생 다수가 한 팀을 이루어 참가 가능, 초등학생과 성인이 한 팀을 이루어 참가 불가)"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 1275,
+        "evidence_end": 1328,
+        "issues": [],
+        "original": {
+          "requirement_id": "G028",
+          "rule": "(예: 중학생 다수가 한 팀을 이루어 참가 가능, 초등학생과 성인이 한 팀을 이루어 참가 불가)",
+          "modality": "MAY",
+          "severity": "INFO",
+          "verifier": "DETERMINISTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 73",
+            "quote": "(예: 중학생 다수가 한 팀을 이루어 참가 가능, 초등학생과 성인이 한 팀을 이루어 참가 불가)"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G029",
+        "rule": "- 분야: 영상",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 77",
+          "quote": "- 분야: 영상"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 1415,
+        "evidence_end": 1423,
+        "issues": [],
+        "original": {
+          "requirement_id": "G029",
+          "rule": "- 분야: 영상",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "SEMANTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 77",
+            "quote": "- 분야: 영상"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G030",
+        "rule": "- 권장 서식: MP4, WMV, AVI(공유 링크가 아닌 파일 제출 권장)",
+        "modality": "SHOULD",
+        "severity": "REVIEW",
+        "verifier": "URL_CHECK",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 84",
+          "quote": "- 권장 서식: MP4, WMV, AVI(공유 링크가 아닌 파일 제출 권장)"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 1625,
+        "evidence_end": 1667,
+        "issues": [],
+        "original": {
+          "requirement_id": "G030",
+          "rule": "- 권장 서식: MP4, WMV, AVI(공유 링크가 아닌 파일 제출 권장)",
+          "modality": "SHOULD",
+          "severity": "REVIEW",
+          "verifier": "URL_CHECK",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 84",
+            "quote": "- 권장 서식: MP4, WMV, AVI(공유 링크가 아닌 파일 제출 권장)"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G031",
+        "rule": "∙ 제3자의 저작권, 초상권 등을 침해하지 않는 순수 창작물",
+        "modality": "INFO",
+        "severity": "EXTERNAL",
+        "verifier": "EXTERNAL",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 86",
+          "quote": "∙ 제3자의 저작권, 초상권 등을 침해하지 않는 순수 창작물"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 1678,
+        "evidence_end": 1711,
+        "issues": [],
+        "original": {
+          "requirement_id": "G031",
+          "rule": "∙ 제3자의 저작권, 초상권 등을 침해하지 않는 순수 창작물",
+          "modality": "INFO",
+          "severity": "EXTERNAL",
+          "verifier": "EXTERNAL",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 86",
+            "quote": "∙ 제3자의 저작권, 초상권 등을 침해하지 않는 순수 창작물"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G032",
+        "rule": "* 이미지형, 영상형 등 유형에 관계 없이 생성형 인공지능 일체",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 88",
+          "quote": "* 이미지형, 영상형 등 유형에 관계 없이 생성형 인공지능 일체"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 1755,
+        "evidence_end": 1790,
+        "issues": [],
+        "original": {
+          "requirement_id": "G032",
+          "rule": "* 이미지형, 영상형 등 유형에 관계 없이 생성형 인공지능 일체",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "SEMANTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 88",
+            "quote": "* 이미지형, 영상형 등 유형에 관계 없이 생성형 인공지능 일체"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G033",
+        "rule": "※ 제3자의 저작권, 초상권을 침해하거나 생성형 인공지능(AI)을 활용하여 제작한 사실이",
+        "modality": "INFO",
+        "severity": "EXTERNAL",
+        "verifier": "EXTERNAL",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 89",
+          "quote": "※ 제3자의 저작권, 초상권을 침해하거나 생성형 인공지능(AI)을 활용하여 제작한 사실이"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 1797,
+        "evidence_end": 1846,
+        "issues": [],
+        "original": {
+          "requirement_id": "G033",
+          "rule": "※ 제3자의 저작권, 초상권을 침해하거나 생성형 인공지능(AI)을 활용하여 제작한 사실이",
+          "modality": "INFO",
+          "severity": "EXTERNAL",
+          "verifier": "EXTERNAL",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 89",
+            "quote": "※ 제3자의 저작권, 초상권을 침해하거나 생성형 인공지능(AI)을 활용하여 제작한 사실이"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G034",
+        "rule": "∙ 영상 내 경기도교육청 상징(BI) 활용 가능",
+        "modality": "MAY",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 95",
+          "quote": "∙ 영상 내 경기도교육청 상징(BI) 활용 가능"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 2044,
+        "evidence_end": 2070,
+        "issues": [],
+        "original": {
+          "requirement_id": "G034",
+          "rule": "∙ 영상 내 경기도교육청 상징(BI) 활용 가능",
+          "modality": "MAY",
+          "severity": "INFO",
+          "verifier": "SEMANTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 95",
+            "quote": "∙ 영상 내 경기도교육청 상징(BI) 활용 가능"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G035",
+        "rule": "❍ 응모 요건을 준수하지 않은 경우, 응모 서류를 제출하지 않거나 허위로 작성한",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "❍ 응모 요건을 준수하지 않은 경우, 응모 서류를 제출하지 않거나 허위로 작성한",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 159",
+          "quote": "❍ 응모 요건을 준수하지 않은 경우, 응모 서류를 제출하지 않거나 허위로 작성한"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 2994,
+        "evidence_end": 3038,
+        "issues": [],
+        "original": {
+          "requirement_id": "G035",
+          "rule": "❍ 응모 요건을 준수하지 않은 경우, 응모 서류를 제출하지 않거나 허위로 작성한",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "SEMANTIC",
+          "condition": "❍ 응모 요건을 준수하지 않은 경우, 응모 서류를 제출하지 않거나 허위로 작성한",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 159",
+            "quote": "❍ 응모 요건을 준수하지 않은 경우, 응모 서류를 제출하지 않거나 허위로 작성한"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G036",
+        "rule": "- 모든 응모자는 ‘응모 신청서’(붙임1 서식)와 ‘개인정보 수집·이용 등에 관한",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 161",
+          "quote": "- 모든 응모자는 ‘응모 신청서’(붙임1 서식)와 ‘개인정보 수집·이용 등에 관한"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 3061,
+        "evidence_end": 3106,
+        "issues": [],
+        "original": {
+          "requirement_id": "G036",
+          "rule": "- 모든 응모자는 ‘응모 신청서’(붙임1 서식)와 ‘개인정보 수집·이용 등에 관한",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "SEMANTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 161",
+            "quote": "- 모든 응모자는 ‘응모 신청서’(붙임1 서식)와 ‘개인정보 수집·이용 등에 관한"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G037",
+        "rule": "동의서’(붙임2 서식)를 제출해야 합니다.",
+        "modality": "MUST",
+        "severity": "REVIEW",
+        "verifier": "SEMANTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 162",
+          "quote": "동의서’(붙임2 서식)를 제출해야 합니다."
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 3108,
+        "evidence_end": 3131,
+        "issues": [],
+        "original": {
+          "requirement_id": "G037",
+          "rule": "동의서’(붙임2 서식)를 제출해야 합니다.",
+          "modality": "MUST",
+          "severity": "REVIEW",
+          "verifier": "SEMANTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 162",
+            "quote": "동의서’(붙임2 서식)를 제출해야 합니다."
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G038",
+        "rule": "- 영상에 인물이 출연한 경우에는 출연한 모든 사람에게 ‘초상권 수집·이용",
+        "modality": "INFO",
+        "severity": "EXTERNAL",
+        "verifier": "EXTERNAL",
+        "condition": "- 영상에 인물이 출연한 경우에는 출연한 모든 사람에게 ‘초상권 수집·이용",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 163",
+          "quote": "- 영상에 인물이 출연한 경우에는 출연한 모든 사람에게 ‘초상권 수집·이용"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 3135,
+        "evidence_end": 3176,
+        "issues": [],
+        "original": {
+          "requirement_id": "G038",
+          "rule": "- 영상에 인물이 출연한 경우에는 출연한 모든 사람에게 ‘초상권 수집·이용",
+          "modality": "INFO",
+          "severity": "EXTERNAL",
+          "verifier": "EXTERNAL",
+          "condition": "- 영상에 인물이 출연한 경우에는 출연한 모든 사람에게 ‘초상권 수집·이용",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 163",
+            "quote": "- 영상에 인물이 출연한 경우에는 출연한 모든 사람에게 ‘초상권 수집·이용"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G039",
+        "rule": "등에 관한 동의서’(붙임3 서식)를 받아서 제출해야 합니다.",
+        "modality": "MUST",
+        "severity": "REVIEW",
+        "verifier": "SEMANTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 164",
+          "quote": "등에 관한 동의서’(붙임3 서식)를 받아서 제출해야 합니다."
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 3178,
+        "evidence_end": 3211,
+        "issues": [],
+        "original": {
+          "requirement_id": "G039",
+          "rule": "등에 관한 동의서’(붙임3 서식)를 받아서 제출해야 합니다.",
+          "modality": "MUST",
+          "severity": "REVIEW",
+          "verifier": "SEMANTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 164",
+            "quote": "등에 관한 동의서’(붙임3 서식)를 받아서 제출해야 합니다."
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G040",
+        "rule": "❍ 응모 작품은 공유 링크가 아닌 영상 파일 제출을 권장합니다.",
+        "modality": "SHOULD",
+        "severity": "REVIEW",
+        "verifier": "URL_CHECK",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 167",
+          "quote": "❍ 응모 작품은 공유 링크가 아닌 영상 파일 제출을 권장합니다."
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 3220,
+        "evidence_end": 3255,
+        "issues": [],
+        "original": {
+          "requirement_id": "G040",
+          "rule": "❍ 응모 작품은 공유 링크가 아닌 영상 파일 제출을 권장합니다.",
+          "modality": "SHOULD",
+          "severity": "REVIEW",
+          "verifier": "URL_CHECK",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 167",
+            "quote": "❍ 응모 작품은 공유 링크가 아닌 영상 파일 제출을 권장합니다."
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G041",
+        "rule": "- 후보작 공개 검증 과정에서 저작권 침해 또는 표절 시비 등이 발생하는 경우",
+        "modality": "INFO",
+        "severity": "EXTERNAL",
+        "verifier": "EXTERNAL",
+        "condition": "- 후보작 공개 검증 과정에서 저작권 침해 또는 표절 시비 등이 발생하는 경우",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 172",
+          "quote": "- 후보작 공개 검증 과정에서 저작권 침해 또는 표절 시비 등이 발생하는 경우"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 3409,
+        "evidence_end": 3452,
+        "issues": [],
+        "original": {
+          "requirement_id": "G041",
+          "rule": "- 후보작 공개 검증 과정에서 저작권 침해 또는 표절 시비 등이 발생하는 경우",
+          "modality": "INFO",
+          "severity": "EXTERNAL",
+          "verifier": "EXTERNAL",
+          "condition": "- 후보작 공개 검증 과정에서 저작권 침해 또는 표절 시비 등이 발생하는 경우",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 172",
+            "quote": "- 후보작 공개 검증 과정에서 저작권 침해 또는 표절 시비 등이 발생하는 경우"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G042",
+        "rule": "❍ 응모자는 응모작이 제3자의 저작권, 초상권 등을 침해하지 않도록 주의 의무를",
+        "modality": "INFO",
+        "severity": "EXTERNAL",
+        "verifier": "EXTERNAL",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 176",
+          "quote": "❍ 응모자는 응모작이 제3자의 저작권, 초상권 등을 침해하지 않도록 주의 의무를"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 3553,
+        "evidence_end": 3597,
+        "issues": [],
+        "original": {
+          "requirement_id": "G042",
+          "rule": "❍ 응모자는 응모작이 제3자의 저작권, 초상권 등을 침해하지 않도록 주의 의무를",
+          "modality": "INFO",
+          "severity": "EXTERNAL",
+          "verifier": "EXTERNAL",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 176",
+            "quote": "❍ 응모자는 응모작이 제3자의 저작권, 초상권 등을 침해하지 않도록 주의 의무를"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G043",
+        "rule": "제3자의 저작권, 초상권 등을 침해하여 분쟁이나 민·형사상",
+        "modality": "INFO",
+        "severity": "EXTERNAL",
+        "verifier": "EXTERNAL",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 177",
+          "quote": "제3자의 저작권, 초상권 등을 침해하여 분쟁이나 민·형사상"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 3609,
+        "evidence_end": 3641,
+        "issues": [],
+        "original": {
+          "requirement_id": "G043",
+          "rule": "제3자의 저작권, 초상권 등을 침해하여 분쟁이나 민·형사상",
+          "modality": "INFO",
+          "severity": "EXTERNAL",
+          "verifier": "EXTERNAL",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 177",
+            "quote": "제3자의 저작권, 초상권 등을 침해하여 분쟁이나 민·형사상"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G044",
+        "rule": "❍ 응모작의 저작권은 응모자에게 있으며, 수상 후에도 수상자에게 귀속됩니다.",
+        "modality": "INFO",
+        "severity": "EXTERNAL",
+        "verifier": "EXTERNAL",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 184",
+          "quote": "❍ 응모작의 저작권은 응모자에게 있으며, 수상 후에도 수상자에게 귀속됩니다."
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 3853,
+        "evidence_end": 3895,
+        "issues": [],
+        "original": {
+          "requirement_id": "G044",
+          "rule": "❍ 응모작의 저작권은 응모자에게 있으며, 수상 후에도 수상자에게 귀속됩니다.",
+          "modality": "INFO",
+          "severity": "EXTERNAL",
+          "verifier": "EXTERNAL",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 184",
+            "quote": "❍ 응모작의 저작권은 응모자에게 있으며, 수상 후에도 수상자에게 귀속됩니다."
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G045",
+        "rule": "❍ 수상작 저작권과 관련하여 분쟁이 발생할 경우, 응모자와 경기도교육청은",
+        "modality": "INFO",
+        "severity": "EXTERNAL",
+        "verifier": "EXTERNAL",
+        "condition": "❍ 수상작 저작권과 관련하여 분쟁이 발생할 경우, 응모자와 경기도교육청은",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 186",
+          "quote": "❍ 수상작 저작권과 관련하여 분쟁이 발생할 경우, 응모자와 경기도교육청은"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 3944,
+        "evidence_end": 3984,
+        "issues": [],
+        "original": {
+          "requirement_id": "G045",
+          "rule": "❍ 수상작 저작권과 관련하여 분쟁이 발생할 경우, 응모자와 경기도교육청은",
+          "modality": "INFO",
+          "severity": "EXTERNAL",
+          "verifier": "EXTERNAL",
+          "condition": "❍ 수상작 저작권과 관련하여 분쟁이 발생할 경우, 응모자와 경기도교육청은",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 186",
+            "quote": "❍ 수상작 저작권과 관련하여 분쟁이 발생할 경우, 응모자와 경기도교육청은"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G046",
+        "rule": "한국저작권위원회에 조정을 신청할 수 있습니다.",
+        "modality": "MAY",
+        "severity": "EXTERNAL",
+        "verifier": "EXTERNAL",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 187",
+          "quote": "한국저작권위원회에 조정을 신청할 수 있습니다."
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 3986,
+        "evidence_end": 4011,
+        "issues": [],
+        "original": {
+          "requirement_id": "G046",
+          "rule": "한국저작권위원회에 조정을 신청할 수 있습니다.",
+          "modality": "MAY",
+          "severity": "EXTERNAL",
+          "verifier": "EXTERNAL",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 187",
+            "quote": "한국저작권위원회에 조정을 신청할 수 있습니다."
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G047",
+        "rule": "｢제2회 청렴 60초 영상 공모전｣ 응모 신청서",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "DETERMINISTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 202",
+          "quote": "｢제2회 청렴 60초 영상 공모전｣ 응모 신청서"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 4467,
+        "evidence_end": 4493,
+        "issues": [],
+        "original": {
+          "requirement_id": "G047",
+          "rule": "｢제2회 청렴 60초 영상 공모전｣ 응모 신청서",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "DETERMINISTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 202",
+            "quote": "｢제2회 청렴 60초 영상 공모전｣ 응모 신청서"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G048",
+        "rule": "접수번호",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 203",
+          "quote": "접수번호"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 4494,
+        "evidence_end": 4498,
+        "issues": [],
+        "original": {
+          "requirement_id": "G048",
+          "rule": "접수번호",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "SEMANTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 203",
+            "quote": "접수번호"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G049",
+        "rule": "청렴 60초 영상 공모전에 작품을 응모합니다.",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "DETERMINISTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 244",
+          "quote": "청렴 60초 영상 공모전에 작품을 응모합니다."
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 4887,
+        "evidence_end": 4912,
+        "issues": [],
+        "original": {
+          "requirement_id": "G049",
+          "rule": "청렴 60초 영상 공모전에 작품을 응모합니다.",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "DETERMINISTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 244",
+            "quote": "청렴 60초 영상 공모전에 작품을 응모합니다."
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G050",
+        "rule": "성명                서명",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 246",
+          "quote": "성명                서명"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 4961,
+        "evidence_end": 4981,
+        "issues": [],
+        "original": {
+          "requirement_id": "G050",
+          "rule": "성명                서명",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "SEMANTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 246",
+            "quote": "성명                서명"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G051",
+        "rule": "｢제2회 청렴 60초 영상 공모전｣",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "DETERMINISTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 251",
+          "quote": "｢제2회 청렴 60초 영상 공모전｣"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 27,
+        "evidence_end": 46,
+        "issues": [],
+        "original": {
+          "requirement_id": "G051",
+          "rule": "｢제2회 청렴 60초 영상 공모전｣",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "DETERMINISTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 251",
+            "quote": "｢제2회 청렴 60초 영상 공모전｣"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G052",
+        "rule": "개인정보 수집·이용 및 제3자 제공, 저작물 이용에 대한 동의서",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 252",
+          "quote": "개인정보 수집·이용 및 제3자 제공, 저작물 이용에 대한 동의서"
+        },
+        "confidence": 0.5,
+        "extraction_status": "NEEDS_REVIEW",
+        "evidence_start": 5071,
+        "evidence_end": 5106,
+        "issues": [
+          "ATOMICITY_REVIEW: 독립 조건을 한 항목에 합쳤는지 확인하고 단일 조건으로 수정하세요."
+        ],
+        "original": {
+          "requirement_id": "G052",
+          "rule": "개인정보 수집·이용 및 제3자 제공, 저작물 이용에 대한 동의서",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "SEMANTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 252",
+            "quote": "개인정보 수집·이용 및 제3자 제공, 저작물 이용에 대한 동의서"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G053",
+        "rule": "접수번호",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 253",
+          "quote": "접수번호"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 4494,
+        "evidence_end": 4498,
+        "issues": [],
+        "original": {
+          "requirement_id": "G053",
+          "rule": "접수번호",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "SEMANTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 253",
+            "quote": "접수번호"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G054",
+        "rule": "- 팀으로 응모하는 경우 팀원별로 각각 동의서 작성",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "- 팀으로 응모하는 경우 팀원별로 각각 동의서 작성",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 267",
+          "quote": "- 팀으로 응모하는 경우 팀원별로 각각 동의서 작성"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 5175,
+        "evidence_end": 5203,
+        "issues": [],
+        "original": {
+          "requirement_id": "G054",
+          "rule": "- 팀으로 응모하는 경우 팀원별로 각각 동의서 작성",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "SEMANTIC",
+          "condition": "- 팀으로 응모하는 경우 팀원별로 각각 동의서 작성",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 267",
+            "quote": "- 팀으로 응모하는 경우 팀원별로 각각 동의서 작성"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G055",
+        "rule": "동의서",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 272",
+          "quote": "동의서"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 913,
+        "evidence_end": 916,
+        "issues": [],
+        "original": {
+          "requirement_id": "G055",
+          "rule": "동의서",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "SEMANTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 272",
+            "quote": "동의서"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G056",
+        "rule": "- ｢제2회 청렴 60초 영상 공모전｣ 응모자 확인, 수상자 공지, 시상, 수상작 이용 협의",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "DETERMINISTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 274",
+          "quote": "- ｢제2회 청렴 60초 영상 공모전｣ 응모자 확인, 수상자 공지, 시상, 수상작 이용 협의"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 5303,
+        "evidence_end": 5354,
+        "issues": [],
+        "original": {
+          "requirement_id": "G056",
+          "rule": "- ｢제2회 청렴 60초 영상 공모전｣ 응모자 확인, 수상자 공지, 시상, 수상작 이용 협의",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "DETERMINISTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 274",
+            "quote": "- ｢제2회 청렴 60초 영상 공모전｣ 응모자 확인, 수상자 공지, 시상, 수상작 이용 협의"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G057",
+        "rule": "서명",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 286",
+          "quote": "서명"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 4979,
+        "evidence_end": 4981,
+        "issues": [],
+        "original": {
+          "requirement_id": "G057",
+          "rule": "서명",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "SEMANTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 286",
+            "quote": "서명"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G058",
+        "rule": "서명",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 292",
+          "quote": "서명"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 4979,
+        "evidence_end": 4981,
+        "issues": [],
+        "original": {
+          "requirement_id": "G058",
+          "rule": "서명",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "SEMANTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 292",
+            "quote": "서명"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G059",
+        "rule": "동의서",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 301",
+          "quote": "동의서"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 913,
+        "evidence_end": 916,
+        "issues": [],
+        "original": {
+          "requirement_id": "G059",
+          "rule": "동의서",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "SEMANTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 301",
+            "quote": "동의서"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G060",
+        "rule": "- 경기도교육청 누리집과 업무포털을 통한 ｢제2회 청렴 60초 영상 공모전｣ 수상자 공개",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "DETERMINISTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 303",
+          "quote": "- 경기도교육청 누리집과 업무포털을 통한 ｢제2회 청렴 60초 영상 공모전｣ 수상자 공개"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 5747,
+        "evidence_end": 5796,
+        "issues": [],
+        "original": {
+          "requirement_id": "G060",
+          "rule": "- 경기도교육청 누리집과 업무포털을 통한 ｢제2회 청렴 60초 영상 공모전｣ 수상자 공개",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "DETERMINISTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 303",
+            "quote": "- 경기도교육청 누리집과 업무포털을 통한 ｢제2회 청렴 60초 영상 공모전｣ 수상자 공개"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G061",
+        "rule": "서명",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 319",
+          "quote": "서명"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 4979,
+        "evidence_end": 4981,
+        "issues": [],
+        "original": {
+          "requirement_id": "G061",
+          "rule": "서명",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "SEMANTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 319",
+            "quote": "서명"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G062",
+        "rule": "서명",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 325",
+          "quote": "서명"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 4979,
+        "evidence_end": 4981,
+        "issues": [],
+        "original": {
+          "requirement_id": "G062",
+          "rule": "서명",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "SEMANTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 325",
+            "quote": "서명"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G063",
+        "rule": "동의서",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 332",
+          "quote": "동의서"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 913,
+        "evidence_end": 916,
+        "issues": [],
+        "original": {
+          "requirement_id": "G063",
+          "rule": "동의서",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "SEMANTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 332",
+            "quote": "동의서"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G064",
+        "rule": "응모작에 대한 저작권은 응모자에게 있으며, 경기도교육청은 수상작 발표일부터 5년간",
+        "modality": "INFO",
+        "severity": "EXTERNAL",
+        "verifier": "EXTERNAL",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 333",
+          "quote": "응모작에 대한 저작권은 응모자에게 있으며, 경기도교육청은 수상작 발표일부터 5년간"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 6207,
+        "evidence_end": 6252,
+        "issues": [],
+        "original": {
+          "requirement_id": "G064",
+          "rule": "응모작에 대한 저작권은 응모자에게 있으며, 경기도교육청은 수상작 발표일부터 5년간",
+          "modality": "INFO",
+          "severity": "EXTERNAL",
+          "verifier": "EXTERNAL",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 333",
+            "quote": "응모작에 대한 저작권은 응모자에게 있으며, 경기도교육청은 수상작 발표일부터 5년간"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G065",
+        "rule": "서명",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 342",
+          "quote": "서명"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 4979,
+        "evidence_end": 4981,
+        "issues": [],
+        "original": {
+          "requirement_id": "G065",
+          "rule": "서명",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "SEMANTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 342",
+            "quote": "서명"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G066",
+        "rule": "서명",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 348",
+          "quote": "서명"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 4979,
+        "evidence_end": 4981,
+        "issues": [],
+        "original": {
+          "requirement_id": "G066",
+          "rule": "서명",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "SEMANTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 348",
+            "quote": "서명"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G067",
+        "rule": "경기도교육청에서 주최·주관하는 「제2회 청렴 60초 영상 공모전에 작품을 응모합니다.",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "DETERMINISTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 353",
+          "quote": "경기도교육청에서 주최·주관하는 「제2회 청렴 60초 영상 공모전에 작품을 응모합니다."
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 6589,
+        "evidence_end": 6636,
+        "issues": [],
+        "original": {
+          "requirement_id": "G067",
+          "rule": "경기도교육청에서 주최·주관하는 「제2회 청렴 60초 영상 공모전에 작품을 응모합니다.",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "DETERMINISTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 353",
+            "quote": "경기도교육청에서 주최·주관하는 「제2회 청렴 60초 영상 공모전에 작품을 응모합니다."
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G068",
+        "rule": "서명",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 356",
+          "quote": "서명"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 4979,
+        "evidence_end": 4981,
+        "issues": [],
+        "original": {
+          "requirement_id": "G068",
+          "rule": "서명",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "SEMANTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 356",
+            "quote": "서명"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G069",
+        "rule": "서명",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 361",
+          "quote": "서명"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 4979,
+        "evidence_end": 4981,
+        "issues": [],
+        "original": {
+          "requirement_id": "G069",
+          "rule": "서명",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "SEMANTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 361",
+            "quote": "서명"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G070",
+        "rule": "【붙임 3】 ※ 영상에 출연한 모든 사람이 작성",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 368",
+          "quote": "【붙임 3】 ※ 영상에 출연한 모든 사람이 작성"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 6760,
+        "evidence_end": 6786,
+        "issues": [],
+        "original": {
+          "requirement_id": "G070",
+          "rule": "【붙임 3】 ※ 영상에 출연한 모든 사람이 작성",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "SEMANTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 368",
+            "quote": "【붙임 3】 ※ 영상에 출연한 모든 사람이 작성"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G071",
+        "rule": "｢제2회 청렴 60초 영상 공모전｣",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "DETERMINISTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 369",
+          "quote": "｢제2회 청렴 60초 영상 공모전｣"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 27,
+        "evidence_end": 46,
+        "issues": [],
+        "original": {
+          "requirement_id": "G071",
+          "rule": "｢제2회 청렴 60초 영상 공모전｣",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "DETERMINISTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 369",
+            "quote": "｢제2회 청렴 60초 영상 공모전｣"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G072",
+        "rule": "개인정보(초상권) 수집·이용 및 제3자 제공 동의서",
+        "modality": "INFO",
+        "severity": "EXTERNAL",
+        "verifier": "EXTERNAL",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 370",
+          "quote": "개인정보(초상권) 수집·이용 및 제3자 제공 동의서"
+        },
+        "confidence": 0.5,
+        "extraction_status": "NEEDS_REVIEW",
+        "evidence_start": 6808,
+        "evidence_end": 6836,
+        "issues": [
+          "ATOMICITY_REVIEW: 독립 조건을 한 항목에 합쳤는지 확인하고 단일 조건으로 수정하세요."
+        ],
+        "original": {
+          "requirement_id": "G072",
+          "rule": "개인정보(초상권) 수집·이용 및 제3자 제공 동의서",
+          "modality": "INFO",
+          "severity": "EXTERNAL",
+          "verifier": "EXTERNAL",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 370",
+            "quote": "개인정보(초상권) 수집·이용 및 제3자 제공 동의서"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G073",
+        "rule": "접수번호",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 371",
+          "quote": "접수번호"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 4494,
+        "evidence_end": 4498,
+        "issues": [],
+        "original": {
+          "requirement_id": "G073",
+          "rule": "접수번호",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "SEMANTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 371",
+            "quote": "접수번호"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G074",
+        "rule": "(초상권자)",
+        "modality": "INFO",
+        "severity": "EXTERNAL",
+        "verifier": "EXTERNAL",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 385",
+          "quote": "(초상권자)"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 6908,
+        "evidence_end": 6914,
+        "issues": [],
+        "original": {
+          "requirement_id": "G074",
+          "rule": "(초상권자)",
+          "modality": "INFO",
+          "severity": "EXTERNAL",
+          "verifier": "EXTERNAL",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 385",
+            "quote": "(초상권자)"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G075",
+        "rule": "동의서",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 392",
+          "quote": "동의서"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 913,
+        "evidence_end": 916,
+        "issues": [],
+        "original": {
+          "requirement_id": "G075",
+          "rule": "동의서",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "SEMANTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 392",
+            "quote": "동의서"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G076",
+        "rule": "- ｢제2회 청렴 60초 영상 공모전｣ 응모작 접수 및 수상작 선정",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "DETERMINISTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 394",
+          "quote": "- ｢제2회 청렴 60초 영상 공모전｣ 응모작 접수 및 수상작 선정"
+        },
+        "confidence": 0.5,
+        "extraction_status": "NEEDS_REVIEW",
+        "evidence_start": 7019,
+        "evidence_end": 7056,
+        "issues": [
+          "ATOMICITY_REVIEW: 독립 조건을 한 항목에 합쳤는지 확인하고 단일 조건으로 수정하세요."
+        ],
+        "original": {
+          "requirement_id": "G076",
+          "rule": "- ｢제2회 청렴 60초 영상 공모전｣ 응모작 접수 및 수상작 선정",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "DETERMINISTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 394",
+            "quote": "- ｢제2회 청렴 60초 영상 공모전｣ 응모작 접수 및 수상작 선정"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G077",
+        "rule": "- 응모작에 사용된 초상권",
+        "modality": "INFO",
+        "severity": "EXTERNAL",
+        "verifier": "EXTERNAL",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 396",
+          "quote": "- 응모작에 사용된 초상권"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 7075,
+        "evidence_end": 7089,
+        "issues": [],
+        "original": {
+          "requirement_id": "G077",
+          "rule": "- 응모작에 사용된 초상권",
+          "modality": "INFO",
+          "severity": "EXTERNAL",
+          "verifier": "EXTERNAL",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 396",
+            "quote": "- 응모작에 사용된 초상권"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G078",
+        "rule": "- 수상작에 사용된 초상권: 수상작 발표일부터 5년",
+        "modality": "INFO",
+        "severity": "EXTERNAL",
+        "verifier": "EXTERNAL",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 398",
+          "quote": "- 수상작에 사용된 초상권: 수상작 발표일부터 5년"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 7111,
+        "evidence_end": 7139,
+        "issues": [],
+        "original": {
+          "requirement_id": "G078",
+          "rule": "- 수상작에 사용된 초상권: 수상작 발표일부터 5년",
+          "modality": "INFO",
+          "severity": "EXTERNAL",
+          "verifier": "EXTERNAL",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 398",
+            "quote": "- 수상작에 사용된 초상권: 수상작 발표일부터 5년"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G079",
+        "rule": "- 수상작 외 작품에 사용된 초상권: 수상작 발표일부터 3개월",
+        "modality": "INFO",
+        "severity": "EXTERNAL",
+        "verifier": "EXTERNAL",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 399",
+          "quote": "- 수상작 외 작품에 사용된 초상권: 수상작 발표일부터 3개월"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 7142,
+        "evidence_end": 7176,
+        "issues": [],
+        "original": {
+          "requirement_id": "G079",
+          "rule": "- 수상작 외 작품에 사용된 초상권: 수상작 발표일부터 3개월",
+          "modality": "INFO",
+          "severity": "EXTERNAL",
+          "verifier": "EXTERNAL",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 399",
+            "quote": "- 수상작 외 작품에 사용된 초상권: 수상작 발표일부터 3개월"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G080",
+        "rule": "서명",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 407",
+          "quote": "서명"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 4979,
+        "evidence_end": 4981,
+        "issues": [],
+        "original": {
+          "requirement_id": "G080",
+          "rule": "서명",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "SEMANTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 407",
+            "quote": "서명"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G081",
+        "rule": "서명",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 413",
+          "quote": "서명"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 4979,
+        "evidence_end": 4981,
+        "issues": [],
+        "original": {
+          "requirement_id": "G081",
+          "rule": "서명",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "SEMANTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 413",
+            "quote": "서명"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G082",
+        "rule": "동의서",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 419",
+          "quote": "동의서"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 913,
+        "evidence_end": 916,
+        "issues": [],
+        "original": {
+          "requirement_id": "G082",
+          "rule": "동의서",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "SEMANTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 419",
+            "quote": "동의서"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G083",
+        "rule": "- ｢제2회 청렴 60초 영상 공모전｣ 수상작 공개를 통한 청렴 홍보",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "DETERMINISTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 421",
+          "quote": "- ｢제2회 청렴 60초 영상 공모전｣ 수상작 공개를 통한 청렴 홍보"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 7434,
+        "evidence_end": 7472,
+        "issues": [],
+        "original": {
+          "requirement_id": "G083",
+          "rule": "- ｢제2회 청렴 60초 영상 공모전｣ 수상작 공개를 통한 청렴 홍보",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "DETERMINISTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 421",
+            "quote": "- ｢제2회 청렴 60초 영상 공모전｣ 수상작 공개를 통한 청렴 홍보"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G084",
+        "rule": "- 수상작에 사용된 초상권",
+        "modality": "INFO",
+        "severity": "EXTERNAL",
+        "verifier": "EXTERNAL",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 425",
+          "quote": "- 수상작에 사용된 초상권"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 7111,
+        "evidence_end": 7125,
+        "issues": [],
+        "original": {
+          "requirement_id": "G084",
+          "rule": "- 수상작에 사용된 초상권",
+          "modality": "INFO",
+          "severity": "EXTERNAL",
+          "verifier": "EXTERNAL",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 425",
+            "quote": "- 수상작에 사용된 초상권"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G085",
+        "rule": "서명",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 435",
+          "quote": "서명"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 4979,
+        "evidence_end": 4981,
+        "issues": [],
+        "original": {
+          "requirement_id": "G085",
+          "rule": "서명",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "SEMANTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 435",
+            "quote": "서명"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G086",
+        "rule": "서명",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 441",
+          "quote": "서명"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 4979,
+        "evidence_end": 4981,
+        "issues": [],
+        "original": {
+          "requirement_id": "G086",
+          "rule": "서명",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "SEMANTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 441",
+            "quote": "서명"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G087",
+        "rule": "경기도교육청에서 주최·주관하는 「제2회 청렴 60초 영상 공모전에 작품을 응모하는 것에 동의합니다.",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "DETERMINISTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 449",
+          "quote": "경기도교육청에서 주최·주관하는 「제2회 청렴 60초 영상 공모전에 작품을 응모하는 것에 동의합니다."
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 7891,
+        "evidence_end": 7946,
+        "issues": [],
+        "original": {
+          "requirement_id": "G087",
+          "rule": "경기도교육청에서 주최·주관하는 「제2회 청렴 60초 영상 공모전에 작품을 응모하는 것에 동의합니다.",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "DETERMINISTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 449",
+            "quote": "경기도교육청에서 주최·주관하는 「제2회 청렴 60초 영상 공모전에 작품을 응모하는 것에 동의합니다."
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G088",
+        "rule": "서명",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 455",
+          "quote": "서명"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 4979,
+        "evidence_end": 4981,
+        "issues": [],
+        "original": {
+          "requirement_id": "G088",
+          "rule": "서명",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "SEMANTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 455",
+            "quote": "서명"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G089",
+        "rule": "서명",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "공고 본문 · 줄 460",
+          "quote": "서명"
+        },
+        "confidence": 0.5,
+        "extraction_status": "EXTRACTED",
+        "evidence_start": 4979,
+        "evidence_end": 4981,
+        "issues": [],
+        "original": {
+          "requirement_id": "G089",
+          "rule": "서명",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "SEMANTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "공고 본문 · 줄 460",
+            "quote": "서명"
+          },
+          "confidence": 0.5
+        }
+      }
+    ],
+    "provider": "local-rules-v1 (no AI model)",
+    "execution_kind": "ACTUAL",
+    "extraction_complete": true,
+    "notices": [
+      "로컬 규칙 후보입니다. confidence=0.5는 미보정 값이며 정확도가 아닙니다. 원문 전체를 검토하세요."
+    ],
+    "version": 2,
+    "created_at": "2026-09-03T11:49:56.023509Z",
+    "updated_at": "2026-09-03T11:49:56.056800Z"
+  },
+  "raw": [
+    {
+      "requirement_id": "G001",
+      "rule": "｢제2회 청렴 60초 영상 공모전｣ 공고",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "DETERMINISTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 3",
+        "quote": "｢제2회 청렴 60초 영상 공모전｣ 공고"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G002",
+      "rule": "경기교육 가족 대상 ｢제2회 청렴 60초 영상 공모전｣을 개최합니다.",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "DETERMINISTIC",
+      "condition": "경기교육 가족 대상 ｢제2회 청렴 60초 영상 공모전｣을 개최합니다.",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 5",
+        "quote": "경기교육 가족 대상 ｢제2회 청렴 60초 영상 공모전｣을 개최합니다."
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G003",
+      "rule": "❍ 공모 분야: 영상(60초 이내‘숏폼[short-form]’)",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "DETERMINISTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 10",
+        "quote": "❍ 공모 분야: 영상(60초 이내‘숏폼[short-form]’)"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G004",
+      "rule": "❍ 응모 자격",
+      "modality": "INFO",
+      "severity": "EXTERNAL",
+      "verifier": "EXTERNAL",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 11",
+        "quote": "❍ 응모 자격"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G005",
+      "rule": "❍ 응모 방법: 전자메일(goeclean@korea.kr)로 작품과 서류(붙임 서식) 제출",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "SEMANTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 15",
+        "quote": "❍ 응모 방법: 전자메일(goeclean@korea.kr)로 작품과 서류(붙임 서식) 제출"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G006",
+      "rule": "※ 전자메일함에 기록된 접수 일시를 기준으로 2025.",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "SEMANTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 16",
+        "quote": "※ 전자메일함에 기록된 접수 일시를 기준으로 2025."
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G007",
+      "rule": "24:00까지 응모 작품과 응모 서류가 모두 접수된 경우에 한하여 심사",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "SEMANTIC",
+      "condition": "24:00까지 응모 작품과 응모 서류가 모두 접수된 경우에 한하여 심사",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 17",
+        "quote": "24:00까지 응모 작품과 응모 서류가 모두 접수된 경우에 한하여 심사"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G008",
+      "rule": "제출 파일명",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "DETERMINISTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 21",
+        "quote": "제출 파일명"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G009",
+      "rule": "- 전체 길이 60초 이내 영상(최소 길이 제한 없음)",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "DETERMINISTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 25",
+        "quote": "- 전체 길이 60초 이내 영상(최소 길이 제한 없음)"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G010",
+      "rule": "- 제3자의 저작권, 초상권 등을 침해하지 않은 순수 창작물",
+      "modality": "INFO",
+      "severity": "EXTERNAL",
+      "verifier": "EXTERNAL",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 27",
+        "quote": "- 제3자의 저작권, 초상권 등을 침해하지 않은 순수 창작물"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G011",
+      "rule": "MP4",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "DETERMINISTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 33",
+        "quote": "MP4"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G012",
+      "rule": "제출 파일명",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "DETERMINISTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 39",
+        "quote": "제출 파일명"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G013",
+      "rule": "① 응모 신청서(붙임1): 작품별로 제출",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "SEMANTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 43",
+        "quote": "① 응모 신청서(붙임1): 작품별로 제출"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G014",
+      "rule": "작품명-신청서",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "SEMANTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 44",
+        "quote": "작품명-신청서"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G015",
+      "rule": "PDF",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "DETERMINISTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 45",
+        "quote": "PDF"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G016",
+      "rule": "② 개인정보 수집·이용 및 저작물 활용 동의서(붙임2)",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "SEMANTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 46",
+        "quote": "② 개인정보 수집·이용 및 저작물 활용 동의서(붙임2)"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G017",
+      "rule": ": 개인별로 제출",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "SEMANTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 47",
+        "quote": ": 개인별로 제출"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G018",
+      "rule": "작품명-동의서",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "SEMANTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 48",
+        "quote": "작품명-동의서"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G019",
+      "rule": "③ 초상권 사용 동의서(붙임3)",
+      "modality": "INFO",
+      "severity": "EXTERNAL",
+      "verifier": "EXTERNAL",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 49",
+        "quote": "③ 초상권 사용 동의서(붙임3)"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G020",
+      "rule": ": 영상에 출연한 모든 사람에게 받아서 제출",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "SEMANTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 50",
+        "quote": ": 영상에 출연한 모든 사람에게 받아서 제출"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G021",
+      "rule": "작품명-초상권",
+      "modality": "INFO",
+      "severity": "EXTERNAL",
+      "verifier": "EXTERNAL",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 51",
+        "quote": "작품명-초상권"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G022",
+      "rule": "응모 자격 및 요건",
+      "modality": "INFO",
+      "severity": "EXTERNAL",
+      "verifier": "EXTERNAL",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 56",
+        "quote": "응모 자격 및 요건"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G023",
+      "rule": "❍ 응모 자격",
+      "modality": "INFO",
+      "severity": "EXTERNAL",
+      "verifier": "EXTERNAL",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 57",
+        "quote": "❍ 응모 자격"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G024",
+      "rule": "응모 자격",
+      "modality": "INFO",
+      "severity": "EXTERNAL",
+      "verifier": "EXTERNAL",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 59",
+        "quote": "응모 자격"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G025",
+      "rule": "※ 개인 또는 팀 단위 참가 가능",
+      "modality": "MAY",
+      "severity": "INFO",
+      "verifier": "SEMANTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 71",
+        "quote": "※ 개인 또는 팀 단위 참가 가능"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G026",
+      "rule": "- 팀으로 응모하는 경우 팀원 모두 자격 요건을 갖춰야",
+      "modality": "INFO",
+      "severity": "EXTERNAL",
+      "verifier": "EXTERNAL",
+      "condition": "- 팀으로 응모하는 경우 팀원 모두 자격 요건을 갖춰야",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 72",
+        "quote": "- 팀으로 응모하는 경우 팀원 모두 자격 요건을 갖춰야"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G027",
+      "rule": ", 팀 구성은 응모 자격별로만 가능",
+      "modality": "MAY",
+      "severity": "EXTERNAL",
+      "verifier": "EXTERNAL",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 72",
+        "quote": ", 팀 구성은 응모 자격별로만 가능"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G028",
+      "rule": "(예: 중학생 다수가 한 팀을 이루어 참가 가능, 초등학생과 성인이 한 팀을 이루어 참가 불가)",
+      "modality": "MAY",
+      "severity": "INFO",
+      "verifier": "DETERMINISTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 73",
+        "quote": "(예: 중학생 다수가 한 팀을 이루어 참가 가능, 초등학생과 성인이 한 팀을 이루어 참가 불가)"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G029",
+      "rule": "- 분야: 영상",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "SEMANTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 77",
+        "quote": "- 분야: 영상"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G030",
+      "rule": "- 권장 서식: MP4, WMV, AVI(공유 링크가 아닌 파일 제출 권장)",
+      "modality": "SHOULD",
+      "severity": "REVIEW",
+      "verifier": "URL_CHECK",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 84",
+        "quote": "- 권장 서식: MP4, WMV, AVI(공유 링크가 아닌 파일 제출 권장)"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G031",
+      "rule": "∙ 제3자의 저작권, 초상권 등을 침해하지 않는 순수 창작물",
+      "modality": "INFO",
+      "severity": "EXTERNAL",
+      "verifier": "EXTERNAL",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 86",
+        "quote": "∙ 제3자의 저작권, 초상권 등을 침해하지 않는 순수 창작물"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G032",
+      "rule": "* 이미지형, 영상형 등 유형에 관계 없이 생성형 인공지능 일체",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "SEMANTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 88",
+        "quote": "* 이미지형, 영상형 등 유형에 관계 없이 생성형 인공지능 일체"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G033",
+      "rule": "※ 제3자의 저작권, 초상권을 침해하거나 생성형 인공지능(AI)을 활용하여 제작한 사실이",
+      "modality": "INFO",
+      "severity": "EXTERNAL",
+      "verifier": "EXTERNAL",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 89",
+        "quote": "※ 제3자의 저작권, 초상권을 침해하거나 생성형 인공지능(AI)을 활용하여 제작한 사실이"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G034",
+      "rule": "∙ 영상 내 경기도교육청 상징(BI) 활용 가능",
+      "modality": "MAY",
+      "severity": "INFO",
+      "verifier": "SEMANTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 95",
+        "quote": "∙ 영상 내 경기도교육청 상징(BI) 활용 가능"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G035",
+      "rule": "❍ 응모 요건을 준수하지 않은 경우, 응모 서류를 제출하지 않거나 허위로 작성한",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "SEMANTIC",
+      "condition": "❍ 응모 요건을 준수하지 않은 경우, 응모 서류를 제출하지 않거나 허위로 작성한",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 159",
+        "quote": "❍ 응모 요건을 준수하지 않은 경우, 응모 서류를 제출하지 않거나 허위로 작성한"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G036",
+      "rule": "- 모든 응모자는 ‘응모 신청서’(붙임1 서식)와 ‘개인정보 수집·이용 등에 관한",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "SEMANTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 161",
+        "quote": "- 모든 응모자는 ‘응모 신청서’(붙임1 서식)와 ‘개인정보 수집·이용 등에 관한"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G037",
+      "rule": "동의서’(붙임2 서식)를 제출해야 합니다.",
+      "modality": "MUST",
+      "severity": "REVIEW",
+      "verifier": "SEMANTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 162",
+        "quote": "동의서’(붙임2 서식)를 제출해야 합니다."
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G038",
+      "rule": "- 영상에 인물이 출연한 경우에는 출연한 모든 사람에게 ‘초상권 수집·이용",
+      "modality": "INFO",
+      "severity": "EXTERNAL",
+      "verifier": "EXTERNAL",
+      "condition": "- 영상에 인물이 출연한 경우에는 출연한 모든 사람에게 ‘초상권 수집·이용",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 163",
+        "quote": "- 영상에 인물이 출연한 경우에는 출연한 모든 사람에게 ‘초상권 수집·이용"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G039",
+      "rule": "등에 관한 동의서’(붙임3 서식)를 받아서 제출해야 합니다.",
+      "modality": "MUST",
+      "severity": "REVIEW",
+      "verifier": "SEMANTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 164",
+        "quote": "등에 관한 동의서’(붙임3 서식)를 받아서 제출해야 합니다."
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G040",
+      "rule": "❍ 응모 작품은 공유 링크가 아닌 영상 파일 제출을 권장합니다.",
+      "modality": "SHOULD",
+      "severity": "REVIEW",
+      "verifier": "URL_CHECK",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 167",
+        "quote": "❍ 응모 작품은 공유 링크가 아닌 영상 파일 제출을 권장합니다."
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G041",
+      "rule": "- 후보작 공개 검증 과정에서 저작권 침해 또는 표절 시비 등이 발생하는 경우",
+      "modality": "INFO",
+      "severity": "EXTERNAL",
+      "verifier": "EXTERNAL",
+      "condition": "- 후보작 공개 검증 과정에서 저작권 침해 또는 표절 시비 등이 발생하는 경우",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 172",
+        "quote": "- 후보작 공개 검증 과정에서 저작권 침해 또는 표절 시비 등이 발생하는 경우"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G042",
+      "rule": "❍ 응모자는 응모작이 제3자의 저작권, 초상권 등을 침해하지 않도록 주의 의무를",
+      "modality": "INFO",
+      "severity": "EXTERNAL",
+      "verifier": "EXTERNAL",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 176",
+        "quote": "❍ 응모자는 응모작이 제3자의 저작권, 초상권 등을 침해하지 않도록 주의 의무를"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G043",
+      "rule": "제3자의 저작권, 초상권 등을 침해하여 분쟁이나 민·형사상",
+      "modality": "INFO",
+      "severity": "EXTERNAL",
+      "verifier": "EXTERNAL",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 177",
+        "quote": "제3자의 저작권, 초상권 등을 침해하여 분쟁이나 민·형사상"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G044",
+      "rule": "❍ 응모작의 저작권은 응모자에게 있으며, 수상 후에도 수상자에게 귀속됩니다.",
+      "modality": "INFO",
+      "severity": "EXTERNAL",
+      "verifier": "EXTERNAL",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 184",
+        "quote": "❍ 응모작의 저작권은 응모자에게 있으며, 수상 후에도 수상자에게 귀속됩니다."
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G045",
+      "rule": "❍ 수상작 저작권과 관련하여 분쟁이 발생할 경우, 응모자와 경기도교육청은",
+      "modality": "INFO",
+      "severity": "EXTERNAL",
+      "verifier": "EXTERNAL",
+      "condition": "❍ 수상작 저작권과 관련하여 분쟁이 발생할 경우, 응모자와 경기도교육청은",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 186",
+        "quote": "❍ 수상작 저작권과 관련하여 분쟁이 발생할 경우, 응모자와 경기도교육청은"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G046",
+      "rule": "한국저작권위원회에 조정을 신청할 수 있습니다.",
+      "modality": "MAY",
+      "severity": "EXTERNAL",
+      "verifier": "EXTERNAL",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 187",
+        "quote": "한국저작권위원회에 조정을 신청할 수 있습니다."
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G047",
+      "rule": "｢제2회 청렴 60초 영상 공모전｣ 응모 신청서",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "DETERMINISTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 202",
+        "quote": "｢제2회 청렴 60초 영상 공모전｣ 응모 신청서"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G048",
+      "rule": "접수번호",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "SEMANTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 203",
+        "quote": "접수번호"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G049",
+      "rule": "청렴 60초 영상 공모전에 작품을 응모합니다.",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "DETERMINISTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 244",
+        "quote": "청렴 60초 영상 공모전에 작품을 응모합니다."
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G050",
+      "rule": "성명                서명",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "SEMANTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 246",
+        "quote": "성명                서명"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G051",
+      "rule": "｢제2회 청렴 60초 영상 공모전｣",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "DETERMINISTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 251",
+        "quote": "｢제2회 청렴 60초 영상 공모전｣"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G052",
+      "rule": "개인정보 수집·이용 및 제3자 제공, 저작물 이용에 대한 동의서",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "SEMANTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 252",
+        "quote": "개인정보 수집·이용 및 제3자 제공, 저작물 이용에 대한 동의서"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G053",
+      "rule": "접수번호",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "SEMANTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 253",
+        "quote": "접수번호"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G054",
+      "rule": "- 팀으로 응모하는 경우 팀원별로 각각 동의서 작성",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "SEMANTIC",
+      "condition": "- 팀으로 응모하는 경우 팀원별로 각각 동의서 작성",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 267",
+        "quote": "- 팀으로 응모하는 경우 팀원별로 각각 동의서 작성"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G055",
+      "rule": "동의서",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "SEMANTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 272",
+        "quote": "동의서"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G056",
+      "rule": "- ｢제2회 청렴 60초 영상 공모전｣ 응모자 확인, 수상자 공지, 시상, 수상작 이용 협의",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "DETERMINISTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 274",
+        "quote": "- ｢제2회 청렴 60초 영상 공모전｣ 응모자 확인, 수상자 공지, 시상, 수상작 이용 협의"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G057",
+      "rule": "서명",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "SEMANTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 286",
+        "quote": "서명"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G058",
+      "rule": "서명",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "SEMANTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 292",
+        "quote": "서명"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G059",
+      "rule": "동의서",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "SEMANTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 301",
+        "quote": "동의서"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G060",
+      "rule": "- 경기도교육청 누리집과 업무포털을 통한 ｢제2회 청렴 60초 영상 공모전｣ 수상자 공개",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "DETERMINISTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 303",
+        "quote": "- 경기도교육청 누리집과 업무포털을 통한 ｢제2회 청렴 60초 영상 공모전｣ 수상자 공개"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G061",
+      "rule": "서명",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "SEMANTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 319",
+        "quote": "서명"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G062",
+      "rule": "서명",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "SEMANTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 325",
+        "quote": "서명"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G063",
+      "rule": "동의서",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "SEMANTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 332",
+        "quote": "동의서"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G064",
+      "rule": "응모작에 대한 저작권은 응모자에게 있으며, 경기도교육청은 수상작 발표일부터 5년간",
+      "modality": "INFO",
+      "severity": "EXTERNAL",
+      "verifier": "EXTERNAL",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 333",
+        "quote": "응모작에 대한 저작권은 응모자에게 있으며, 경기도교육청은 수상작 발표일부터 5년간"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G065",
+      "rule": "서명",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "SEMANTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 342",
+        "quote": "서명"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G066",
+      "rule": "서명",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "SEMANTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 348",
+        "quote": "서명"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G067",
+      "rule": "경기도교육청에서 주최·주관하는 「제2회 청렴 60초 영상 공모전에 작품을 응모합니다.",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "DETERMINISTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 353",
+        "quote": "경기도교육청에서 주최·주관하는 「제2회 청렴 60초 영상 공모전에 작품을 응모합니다."
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G068",
+      "rule": "서명",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "SEMANTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 356",
+        "quote": "서명"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G069",
+      "rule": "서명",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "SEMANTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 361",
+        "quote": "서명"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G070",
+      "rule": "【붙임 3】 ※ 영상에 출연한 모든 사람이 작성",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "SEMANTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 368",
+        "quote": "【붙임 3】 ※ 영상에 출연한 모든 사람이 작성"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G071",
+      "rule": "｢제2회 청렴 60초 영상 공모전｣",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "DETERMINISTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 369",
+        "quote": "｢제2회 청렴 60초 영상 공모전｣"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G072",
+      "rule": "개인정보(초상권) 수집·이용 및 제3자 제공 동의서",
+      "modality": "INFO",
+      "severity": "EXTERNAL",
+      "verifier": "EXTERNAL",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 370",
+        "quote": "개인정보(초상권) 수집·이용 및 제3자 제공 동의서"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G073",
+      "rule": "접수번호",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "SEMANTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 371",
+        "quote": "접수번호"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G074",
+      "rule": "(초상권자)",
+      "modality": "INFO",
+      "severity": "EXTERNAL",
+      "verifier": "EXTERNAL",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 385",
+        "quote": "(초상권자)"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G075",
+      "rule": "동의서",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "SEMANTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 392",
+        "quote": "동의서"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G076",
+      "rule": "- ｢제2회 청렴 60초 영상 공모전｣ 응모작 접수 및 수상작 선정",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "DETERMINISTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 394",
+        "quote": "- ｢제2회 청렴 60초 영상 공모전｣ 응모작 접수 및 수상작 선정"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G077",
+      "rule": "- 응모작에 사용된 초상권",
+      "modality": "INFO",
+      "severity": "EXTERNAL",
+      "verifier": "EXTERNAL",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 396",
+        "quote": "- 응모작에 사용된 초상권"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G078",
+      "rule": "- 수상작에 사용된 초상권: 수상작 발표일부터 5년",
+      "modality": "INFO",
+      "severity": "EXTERNAL",
+      "verifier": "EXTERNAL",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 398",
+        "quote": "- 수상작에 사용된 초상권: 수상작 발표일부터 5년"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G079",
+      "rule": "- 수상작 외 작품에 사용된 초상권: 수상작 발표일부터 3개월",
+      "modality": "INFO",
+      "severity": "EXTERNAL",
+      "verifier": "EXTERNAL",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 399",
+        "quote": "- 수상작 외 작품에 사용된 초상권: 수상작 발표일부터 3개월"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G080",
+      "rule": "서명",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "SEMANTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 407",
+        "quote": "서명"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G081",
+      "rule": "서명",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "SEMANTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 413",
+        "quote": "서명"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G082",
+      "rule": "동의서",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "SEMANTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 419",
+        "quote": "동의서"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G083",
+      "rule": "- ｢제2회 청렴 60초 영상 공모전｣ 수상작 공개를 통한 청렴 홍보",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "DETERMINISTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 421",
+        "quote": "- ｢제2회 청렴 60초 영상 공모전｣ 수상작 공개를 통한 청렴 홍보"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G084",
+      "rule": "- 수상작에 사용된 초상권",
+      "modality": "INFO",
+      "severity": "EXTERNAL",
+      "verifier": "EXTERNAL",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 425",
+        "quote": "- 수상작에 사용된 초상권"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G085",
+      "rule": "서명",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "SEMANTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 435",
+        "quote": "서명"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G086",
+      "rule": "서명",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "SEMANTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 441",
+        "quote": "서명"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G087",
+      "rule": "경기도교육청에서 주최·주관하는 「제2회 청렴 60초 영상 공모전에 작품을 응모하는 것에 동의합니다.",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "DETERMINISTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 449",
+        "quote": "경기도교육청에서 주최·주관하는 「제2회 청렴 60초 영상 공모전에 작품을 응모하는 것에 동의합니다."
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G088",
+      "rule": "서명",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "SEMANTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 455",
+        "quote": "서명"
+      },
+      "confidence": 0.5
+    },
+    {
+      "requirement_id": "G089",
+      "rule": "서명",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "SEMANTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "공고 본문 · 줄 460",
+        "quote": "서명"
+      },
+      "confidence": 0.5
+    }
+  ]
+}

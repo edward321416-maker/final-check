@@ -1,0 +1,49 @@
+{
+  "invoked_at": "2026-09-03T11:49:12.725398+00:00",
+  "gold_manifest_sha256": "035ebc06d3d62db6ab9c47c53d30cbc206be02667d845e9db59da6b9c5f7fe89",
+  "freeze_commit": "978b911f3230ab00c995426e9ccf3c806ae8b3c5",
+  "classification": "ACTUAL TEST against INDEPENDENT BENCHMARK",
+  "cases": [
+    {
+      "case_id": "C01",
+      "raw_count": 0,
+      "output_sha256": "708204f0ff427f922a6e6e4443f906bd66292be21d80cf9f24c72fd5d169b3c2"
+    },
+    {
+      "case_id": "C02",
+      "raw_count": 0,
+      "output_sha256": "37009b5c93265b61d40ae66728b0d6248df330784a5a0574915e8b48e1ba6066"
+    },
+    {
+      "case_id": "C03",
+      "raw_count": 0,
+      "output_sha256": "571c5721d08d0b9d3c1cd646fbb1595d933fb2f74a1e5d4a7b5272c360c8c28c"
+    },
+    {
+      "case_id": "C04",
+      "raw_count": 0,
+      "output_sha256": "97ab69b7e1aa25fe084c58832477d7f26959c4be9b3e2be72050d3c9d3faf95c"
+    },
+    {
+      "case_id": "C05",
+      "raw_count": 0,
+      "output_sha256": "037fccbe56917505e3ec4ce3ee921d9077a97af9fd4e4e9b04a58f3f3fdbfcbc"
+    },
+    {
+      "case_id": "C06",
+      "raw_count": 0,
+      "output_sha256": "e2db5ae76e380d6cd8e33d33ccf424d199b4d77418770c2ecbac8e25cdeea78a"
+    },
+    {
+      "case_id": "C07",
+      "raw_count": 0,
+      "output_sha256": "28ab997227860be78dff3fd030ae942f177b96e3031c85b3b0c6fbbf4202b1bd"
+    },
+    {
+      "case_id": "C08",
+      "raw_count": 0,
+      "output_sha256": "9c3b1ad1a07da80ff3b308b48f88beeea3f4091ccd9d43517be5d69a5764ed39"
+    }
+  ],
+  "completed_at": "2026-09-03T11:49:14.414495+00:00"
+}

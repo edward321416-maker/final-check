@@ -1,0 +1,154 @@
+[
+  {
+    "case_id": "C01",
+    "title": "제2회 청렴 60초 영상 공모전",
+    "organization": "경기도교육청",
+    "source_url": "https://www.goe.go.kr/resource/old/BBSMSTR_000000000112/BBS_202503090616385901.pdf",
+    "resolved_url": "https://www.goe.go.kr/resource/old/BBSMSTR_000000000112/BBS_202503090616385901.pdf",
+    "retrieved_at": "2026-09-03T11:37:57.066329+00:00",
+    "source_type": "PDF",
+    "source_sha256": "37405e2e7d58fae052430437b78328525ee9fd6a177bddf53c272dfb5e33dfe3",
+    "snapshot_path": "benchmarks/task04/sources/C01.pdf",
+    "scope": {
+      "kind": "complete attached PDF including forms",
+      "excluded": "other linked documents"
+    },
+    "input_path": "benchmarks/task04/sources/C01.txt",
+    "input_sha256": "5cbc4861932dcad2b55420549667f9a466d7044167717b8dd363cda9063051e6",
+    "text_extraction": "PyMuPDF page.get_text(), newline-joined; same as application"
+  },
+  {
+    "case_id": "C02",
+    "title": "2025년 기후·환경 숏폼 영상공모전",
+    "organization": "시청자미디어재단 / 한국환경연구원",
+    "source_url": "https://sotong.go.kr/front/epilogue/epilogueBbsViewPage.do?bbs_id=8ad235b5e1f045b5b2c3715d2c072aff&miv_pageNo=20&searchkey=A&searchtxt=",
+    "resolved_url": "https://sotong.go.kr/front/epilogue/epilogueBbsViewPage.do?bbs_id=8ad235b5e1f045b5b2c3715d2c072aff&miv_pageNo=20&searchkey=A&searchtxt=",
+    "retrieved_at": "2026-09-03T11:39:41.923479+00:00",
+    "source_type": "HTML",
+    "source_sha256": "a9e2213166bf81e5da7ef68625c5010e6f4ccb958e063ea06eeea97e0f04a8ed",
+    "snapshot_path": "benchmarks/task04/sources/C02.html",
+    "scope": {
+      "kind": "complete HTML article body, one responsive copy",
+      "start_inclusive": "「기후 · 환경 숏폼 영상 공모전」 공모",
+      "end_exclusive": "[붙임1] 2025 기후·환경 숏폼 영상공모전 공고문.hwp",
+      "excluded": "site navigation, responsive duplicate, linked forms/posters/other tabs"
+    },
+    "input_path": "benchmarks/task04/sources/C02.txt",
+    "input_sha256": "b7e91b6970427c8b4e81dc49baff1f9fb6926da67f4f36179394d7bc28672b2b",
+    "text_extraction": "stdlib HTMLParser block boundaries and whitespace collapse; explicit article scope"
+  },
+  {
+    "case_id": "C03",
+    "title": "2025 KIBS-HUSS 융합캠프(인사이트) 해커톤",
+    "organization": "국민대학교 KIBS",
+    "source_url": "https://kibs.kookmin.ac.kr/notice/91",
+    "resolved_url": "https://kibs.kookmin.ac.kr/notice/91",
+    "retrieved_at": "2026-09-03T11:38:35.793127+00:00",
+    "source_type": "HTML",
+    "source_sha256": "e5519a93fe2bfe98ced84156482f1c321e74697109a4a41f4fa8cd4f147f230d",
+    "snapshot_path": "benchmarks/task04/sources/C03.html",
+    "scope": {
+      "kind": "complete HTML article body, one responsive copy",
+      "start_inclusive": "미래 사회 문제 해결을 위한 인문사회 융합 아이디어톤,",
+      "end_exclusive": "HUSS 인사이트 해커톤 신청서.hwp",
+      "excluded": "site navigation, responsive duplicate, linked forms/posters/other tabs"
+    },
+    "input_path": "benchmarks/task04/sources/C03.txt",
+    "input_sha256": "5c93e8ab7506e074db8bd983f078f96e6fc9e60cf33e48a53a571640d99f2db6",
+    "text_extraction": "stdlib HTMLParser block boundaries and whitespace collapse; explicit article scope"
+  },
+  {
+    "case_id": "C04",
+    "title": "2025 금융 AI Challenge: 금융 AI 모델 경쟁",
+    "organization": "금융보안원 / DACON",
+    "source_url": "https://www.dacon.io/competitions/official/236527/overview/rules",
+    "resolved_url": "https://www.dacon.io/competitions/official/236527/overview/rules",
+    "retrieved_at": "2026-09-03T11:38:36.156794+00:00",
+    "source_type": "HTML",
+    "source_sha256": "a6656d4b57999339623dc53abfa98ba4a2e2f9bcd16b3136777fd95a6dfd5bfa",
+    "snapshot_path": "benchmarks/task04/sources/C04.html",
+    "scope": {
+      "kind": "complete HTML article body, one responsive copy",
+      "start_inclusive": "1. 참여\n",
+      "end_exclusive": "개요 평가 규칙 일정 상금 동의사항",
+      "excluded": "site navigation, responsive duplicate, linked forms/posters/other tabs"
+    },
+    "input_path": "benchmarks/task04/sources/C04.txt",
+    "input_sha256": "d43c91ec0107f5373a3b85044ad608b3eeb0ffa3d543b22650e25dbf521f0844",
+    "text_extraction": "stdlib HTMLParser block boundaries and whitespace collapse; explicit article scope"
+  },
+  {
+    "case_id": "C05",
+    "title": "제8회 기상·기후테크 창업 아이디어 공모전",
+    "organization": "부산지방기상청 외",
+    "source_url": "https://www.kma.go.kr/kma/servlet/NeoboardProcess?bid=gongzi&callback=https://www.kma.go.kr/kma/news/notice.jsp&fno=2&k=ATC202504221524372_b5c16558-e010-4c7e-a4cb-20cbf9e1b184.pdf&mode=download&num=1193622&ses=USERSESSION",
+    "resolved_url": "https://www.kma.go.kr/kma/servlet/NeoboardProcess?bid=gongzi&callback=https://www.kma.go.kr/kma/news/notice.jsp&fno=2&k=ATC202504221524372_b5c16558-e010-4c7e-a4cb-20cbf9e1b184.pdf&mode=download&num=1193622&ses=USERSESSION",
+    "retrieved_at": "2026-09-03T11:38:37.166072+00:00",
+    "source_type": "PDF",
+    "source_sha256": "8c500d1bcef6b70e709ad599a0422e939dd9ba4184a77bb79fbd85cda5e54b99",
+    "snapshot_path": "benchmarks/task04/sources/C05.pdf",
+    "scope": {
+      "kind": "complete attached PDF including forms",
+      "excluded": "other linked documents"
+    },
+    "input_path": "benchmarks/task04/sources/C05.txt",
+    "input_sha256": "89dbcef02927ea472150ff7fbe902de31054973161b5b0be799d0c9774fb1d75",
+    "text_extraction": "PyMuPDF page.get_text(), newline-joined; same as application"
+  },
+  {
+    "case_id": "C06",
+    "title": "제4회 융·복합 데이터 활용 창업 경진대회",
+    "organization": "한국저작권위원회 / 컨소시엄",
+    "source_url": "https://www.copyright.or.kr/notify/notice/view.do?brdctsno=54044",
+    "resolved_url": "https://www.copyright.or.kr/notify/notice/view.do?brdctsno=54044",
+    "retrieved_at": "2026-09-03T11:38:38.297869+00:00",
+    "source_type": "HTML",
+    "source_sha256": "0b64167380db3c330dff7b301d89fac8f51515d817f32b4585b9720863771434",
+    "snapshot_path": "benchmarks/task04/sources/C06.html",
+    "scope": {
+      "kind": "complete HTML article body, one responsive copy",
+      "start_inclusive": "[공모 요강]",
+      "end_exclusive": "이전글 다음글",
+      "excluded": "site navigation, responsive duplicate, linked forms/posters/other tabs"
+    },
+    "input_path": "benchmarks/task04/sources/C06.txt",
+    "input_sha256": "f2e27c16c7f26477617fe8545a9645867a7fceb46655979ebddcd6a36d512d37",
+    "text_extraction": "stdlib HTMLParser block boundaries and whitespace collapse; explicit article scope"
+  },
+  {
+    "case_id": "C07",
+    "title": "2025 상주세계모자페스티벌 대표프로그램 아이디어 공모전",
+    "organization": "상주시",
+    "source_url": "https://www.sangju.go.kr/swhf/file/readFile.tc?fileId=FL00000000557&fileNo=1",
+    "resolved_url": "https://www.sangju.go.kr/swhf/file/readFile.tc?fileId=FL00000000557&fileNo=1",
+    "retrieved_at": "2026-09-03T11:38:38.555587+00:00",
+    "source_type": "PDF",
+    "source_sha256": "51ea2eb831ef228ec2637ba9d80402d22a7f54d514fa6810ba0bdb6a1bb5dfb0",
+    "snapshot_path": "benchmarks/task04/sources/C07.pdf",
+    "scope": {
+      "kind": "complete attached PDF including forms",
+      "excluded": "other linked documents"
+    },
+    "input_path": "benchmarks/task04/sources/C07.txt",
+    "input_sha256": "1ea9be43594fcdad2f3f9ad0b595d4088fd6d30eff4ac21b7b66f8af26e05519",
+    "text_extraction": "PyMuPDF page.get_text(), newline-joined; same as application"
+  },
+  {
+    "case_id": "C08",
+    "title": "2025 전라남도 공공·빅데이터 활용 아이디어 공모전",
+    "organization": "전라남도 / 전남정보문화산업진흥원",
+    "source_url": "https://www.jcia.or.kr/async/MultiFile/download.do?FS_KEYNO=FS_0000013358",
+    "resolved_url": "https://www.jcia.or.kr/async/MultiFile/download.do?FS_KEYNO=FS_0000013358",
+    "retrieved_at": "2026-09-03T11:40:47.463423+00:00",
+    "source_type": "PDF",
+    "source_sha256": "a13886249cfbe075111ea17cbdbafc5a984af52d5fef72ce518c3644a89e0c51",
+    "snapshot_path": "benchmarks/task04/sources/C08.pdf",
+    "scope": {
+      "kind": "complete attached PDF including forms",
+      "excluded": "other linked documents"
+    },
+    "input_path": "benchmarks/task04/sources/C08.txt",
+    "input_sha256": "75d61955aa0f5055e87efb3733ec3a57795e910b7ff91cdf9f137080f8e5ee3b",
+    "text_extraction": "PyMuPDF page.get_text(), newline-joined; same as application"
+  }
+]
