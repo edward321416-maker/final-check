@@ -1,0 +1,366 @@
+case_id,gold_id,extracted_id,match_type,reason,failure_category
+C01,C01-R001,R01,PARTIAL,Only elementary eligibility branch; does not preserve the complete eligibility alternatives.,FRAGMENTATION
+C01,C01-R001,R02,PARTIAL,Only middle-school eligibility branch.,FRAGMENTATION
+C01,C01-R001,R03,PARTIAL,Only high-school eligibility branch.,FRAGMENTATION
+C01,C01-R001,R04,PARTIAL,Only staff eligibility branch.,FRAGMENTATION
+C01,C01-R004,R05,MATCH,Complete individual-or-team permission.,-
+C01,C01-R002,R06,MATCH,All team members must qualify.,-
+C01,C01-R003,R07,MATCH,Same eligibility division within a team.,-
+C01,C01-R005,R08,MATCH,"Student-made production including planning, filming and editing.",-
+C01,C01-R006,R09,MATCH,Teacher guidance remains permitted for student entries.,-
+C01,C01-R007,R10,PARTIAL,Video medium alone omits the duration condition.,FRAGMENTATION
+C01,C01-R007,R11,MATCH,Complete allowed duration interval; no minimum is a qualification of the same limit.,-
+C01,C01-R008,R12,MATCH,Complete announced contest theme.,-
+C01,C01-R008,R13,NO_MATCH,Permitted thematic examples restate the already matched theme.,DUPLICATE
+C01,C01-R009,R14,MATCH,Free format and examples preserved.,-
+C01,C01-R010,R15,MATCH,Resolution remains a recommendation.,-
+C01,C01-R011,R16,MATCH,Recommended file formats preserved.,-
+C01,C01-R012,R17,MATCH,File rather than sharing-link recommendation preserved.,-
+C01,C01-R013,R18,MATCH,Original creation requirement.,-
+C01,C01-R014,R19,PARTIAL,Combines independently infringed copyright and portrait rights.,ATOMICITY
+C01,C01-R015,R19,PARTIAL,Combines independently infringed copyright and portrait rights.,ATOMICITY
+C01,C01-R016,R20,MATCH,All generative AI types prohibited.,-
+C01,C01-R017,R21,MATCH,Prior-award prohibition preserves student school-contest exception in the rule.,-
+C01,C01-R018,R22,MATCH,Two-entry maximum per person or team.,-
+C01,,R23,NO_MATCH,Prize allocation is excluded by frozen scope.,FALSE_POSITIVE
+C01,C01-R019,R24,MATCH,Optional official BI use.,-
+C01,C01-R020,R25,MATCH,Correct submission email and materials.,-
+C01,C01-R021,R26,MATCH,"Complete period, mailbox timestamp and both material types.",-
+C01,C01-R022,R27,MATCH,Video filename supported by table heading and value.,-
+C01,C01-R024,R28,MATCH,Application filename convention.,-
+C01,C01-R026,R29,MATCH,Applicant consent filename convention.,-
+C01,C01-R028,R30,MATCH,Portrait consent filename with applicable submission condition.,-
+C01,C01-R023,R31,MATCH,Application submitted for each work.,-
+C01,C01-R025,R32,MATCH,"Content matches per-person submission but chosen quote only instructs preparation, not submission.",EVIDENCE_NOT_SUPPORTING
+C01,C01-R027,R33,MATCH,Every appearing person must supply portrait consent.,-
+C01,C01-R034,R34,MATCH,Team representative prepares application.,-
+C01,,R35,NO_MATCH,Empty checkbox labels alone are not obligations under frozen protocol.,FORM_LABEL
+C01,,R36,NO_MATCH,Empty team-name field converted to mandatory rule.,FORM_LABEL
+C01,,R37,NO_MATCH,Empty name field converted to mandatory rule.,FORM_LABEL
+C01,,R38,NO_MATCH,Empty affiliation field converted to mandatory rule.,FORM_LABEL
+C01,,R39,NO_MATCH,Empty grade/job field converted to mandatory rule.,FORM_LABEL
+C01,C01-R036,R40,PARTIAL,Contact field label omits reachability and guardian exception.,FORM_LABEL
+C01,,R41,NO_MATCH,Empty email field converted to mandatory rule.,FORM_LABEL
+C01,C01-R035,R42,MATCH,Representative particulars in applicant section.,-
+C01,C01-R036,R43,PARTIAL,Reachable contact preserved but guardian-contact permission is omitted.,MISS_CONDITION
+C01,C01-R036,R44,PARTIAL,Guardian exception alone does not include reachable contact obligation.,FRAGMENTATION
+C01,C01-R037,R45,PARTIAL,Only affiliation from the complete team-member particulars requirement.,FRAGMENTATION
+C01,C01-R037,R46,PARTIAL,Only grade/job from team-member particulars.,FRAGMENTATION
+C01,C01-R037,R47,PARTIAL,Only name from team-member particulars.,FRAGMENTATION
+C01,,R48,NO_MATCH,Empty work-title label alone is not an obligation.,FORM_LABEL
+C01,C01-R038,R49,MATCH,Description content and approximate 200 characters preserved.,-
+C01,C01-R030,R50,MATCH,Same ban on false application content expressed as MUST rather than MUST_NOT.,WRONG_MODALITY
+C01,,R51,NO_MATCH,Empty date line converted to obligation.,FORM_LABEL
+C01,C01-R039,R52,PARTIAL,Signature combined with independent name-field completion inferred from a label.,"ATOMICITY,FORM_LABEL"
+C01,,R53,NO_MATCH,Consent form checkbox labels alone.,FORM_LABEL
+C01,,R54,NO_MATCH,Consent form team-name label alone.,FORM_LABEL
+C01,,R55,NO_MATCH,Consent form name label alone.,FORM_LABEL
+C01,,R56,NO_MATCH,Consent form affiliation label alone.,FORM_LABEL
+C01,,R57,NO_MATCH,Consent form grade/job label alone.,FORM_LABEL
+C01,,R58,NO_MATCH,Consent form birth-date label alone.,FORM_LABEL
+C01,,R59,NO_MATCH,Consent form gender label alone.,FORM_LABEL
+C01,C01-R036,R60,PARTIAL,Contact label without the complete explicit instruction.,FORM_LABEL
+C01,C01-R036,R61,NO_MATCH,Repeated reachable-contact portion; does not recover omitted exception.,DUPLICATE
+C01,C01-R036,R62,NO_MATCH,Repeated guardian-contact exception.,DUPLICATE
+C01,C01-R040,R63,MATCH,Mandatory applicant data collection/use consent.,-
+C01,C01-R041,R64,MATCH,Mandatory third-party data consent.,-
+C01,C01-R042,R65,PARTIAL,Consent lacks five-year and nonprofit/public-interest scope.,FRAGMENTATION
+C01,C01-R044,R66,PARTIAL,Privacy-collection assertion quotes copyright-use consent instead.,EVIDENCE_NOT_SUPPORTING
+C01,C01-R044,R67,PARTIAL,Only one of the required guardian consents and confirmation.,FRAGMENTATION
+C01,C01-R044,R68,PARTIAL,Copyright guardian consent alone omits remaining consent/confirmation.,FRAGMENTATION
+C01,C01-R044,R69,PARTIAL,Guardian name label alone cannot support complete conditioned consent.,FORM_LABEL
+C01,C01-R044,R70,PARTIAL,Signature field fragment lacks under-14 scope and complete consent/confirmation.,EVIDENCE_NOT_SUPPORTING
+C01,,R71,NO_MATCH,Guardian relationship label alone.,FORM_LABEL
+C01,,R72,NO_MATCH,Guardian contact label alone.,FORM_LABEL
+C01,,R73,NO_MATCH,Empty date line alone.,FORM_LABEL
+C01,C01-R043,R74,PARTIAL,Signature combined with independent name-field requirement.,"ATOMICITY,FORM_LABEL"
+C01,C01-R044,R75,PARTIAL,Final guardian confirmation alone omits required consents.,FRAGMENTATION
+C01,C01-R027,R76,NO_MATCH,Preparation by all appearing people repeats part of R33.,DUPLICATE
+C01,,R77,NO_MATCH,Portrait form checkbox labels alone.,FORM_LABEL
+C01,,R78,NO_MATCH,Portrait form applicant name label alone.,FORM_LABEL
+C01,,R79,NO_MATCH,Portrait form applicant affiliation label alone.,FORM_LABEL
+C01,,R80,NO_MATCH,Portrait form applicant grade/job label alone.,FORM_LABEL
+C01,,R81,NO_MATCH,Portrait form work-title label alone.,FORM_LABEL
+C01,,R82,NO_MATCH,Portrait-holder name label alone.,FORM_LABEL
+C01,,R83,NO_MATCH,Portrait-holder birth-date label alone.,FORM_LABEL
+C01,C01-R045,R84,PARTIAL,Contact label omits explicit reachability and exception.,FORM_LABEL
+C01,C01-R045,R85,PARTIAL,Reachability without guardian-contact exception.,MISS_CONDITION
+C01,C01-R045,R86,PARTIAL,Guardian-contact exception alone.,FRAGMENTATION
+C01,C01-R046,R87,MATCH,Portrait-holder data collection/use consent.,-
+C01,C01-R047,R88,MATCH,Third-party heading establishes consent despite source's repeated collection wording.,-
+C01,C01-R049,R89,PARTIAL,Only data collection guardian consent.,FRAGMENTATION
+C01,C01-R049,R90,PARTIAL,Only third-party guardian consent.,FRAGMENTATION
+C01,C01-R049,R91,PARTIAL,Guardian name label alone omits full under-14 obligation.,FORM_LABEL
+C01,C01-R049,R92,PARTIAL,Guardian signature fragment lacks condition and remaining consents.,EVIDENCE_NOT_SUPPORTING
+C01,,R93,NO_MATCH,Guardian relationship label alone.,FORM_LABEL
+C01,,R94,NO_MATCH,Guardian contact label alone.,FORM_LABEL
+C01,,R95,NO_MATCH,Portrait form date label alone.,FORM_LABEL
+C01,C01-R048,R96,PARTIAL,"Combines consent marking, name and signature; extra labels not explicit obligations.","ATOMICITY,FORM_LABEL"
+C01,C01-R049,R97,PARTIAL,Final guardian confirmation alone omits consents.,FRAGMENTATION
+C01,,R98,NO_MATCH,"Organizer verification process, not applicant-facing requirement.",FALSE_POSITIVE
+C01,,R99,NO_MATCH,Supported possible disqualification information without an additional frozen Gold duty.,OUTSIDE_GOLD
+C01,C01-R031,R100,MATCH,Return awards after cancellation.,-
+C01,C01-R032,R101,MATCH,Applicant bears award-return costs.,-
+C01,C01-R033,R102,MATCH,Complete legal responsibility stated as INFO rather than MUST.,WRONG_MODALITY
+C01,,R103,NO_MATCH,"Supported reuse-editing information, no additional frozen Gold obligation.",OUTSIDE_GOLD
+C01,,R104,NO_MATCH,Supported publication information without an applicant action.,OUTSIDE_GOLD
+C01,,R105,NO_MATCH,Supported educational reuse information without additional Gold duty.,OUTSIDE_GOLD
+C01,C01-R042,R106,PARTIAL,Describes five-year nonprofit rights but not applicant's consent obligation.,FRAGMENTATION
+C01,C01-R042,R107,PARTIAL,Deemed consent omits duration and nonprofit use scope.,FRAGMENTATION
+C01,,R108,NO_MATCH,Prize/remuneration description excluded by frozen scope.,FALSE_POSITIVE
+C01,,R109,NO_MATCH,Supported copyright ownership information has no corresponding Gold duty.,OUTSIDE_GOLD
+C01,,R110,NO_MATCH,Organizer secondary-use permission is not a new applicant obligation.,OUTSIDE_GOLD
+C01,,R111,NO_MATCH,Supported dispute mediation permission absent from frozen Gold.,OUTSIDE_GOLD
+C01,,R112,NO_MATCH,Organizer communication procedure excluded.,FALSE_POSITIVE
+C01,,R113,NO_MATCH,Prize delivery excluded.,FALSE_POSITIVE
+C01,,R114,NO_MATCH,Organizer noninvolvement in prize allocation excluded.,FALSE_POSITIVE
+C01,,R115,NO_MATCH,Organizer document disposal procedure excluded.,FALSE_POSITIVE
+C01,,R116,NO_MATCH,Administrative non-return notice excluded.,FALSE_POSITIVE
+C01,,R117,NO_MATCH,Organizer result disclosure policy excluded.,FALSE_POSITIVE
+C02,C02-R009,R01,PARTIAL,Selects one mandatory deadline despite the conflicting 23:50 entry; does not preserve unresolved conflict.,"SOURCE_CONFLICT,WRONG_MODALITY"
+C02,C02-R009,R02,PARTIAL,Accurately quotes the second table value but does not state the complete unresolved conflict.,SOURCE_CONFLICT
+C02,C02-R002,R03,PARTIAL,Short-form medium without complete duration limit.,FRAGMENTATION
+C02,C02-R002,R04,MATCH,Complete 60-second maximum.,-
+C02,C02-R003,R05,MATCH,Both orientations permitted.,-
+C02,C02-R004,R06,MATCH,FHD resolution remains recommended.,-
+C02,C02-R005,R07,MATCH,MP4 remains recommended.,-
+C02,C02-R006,R08,PARTIAL,Interest alone omits minimum school-age eligibility.,FRAGMENTATION
+C02,C02-R006,R09,PARTIAL,School-age eligibility alone omits the stated interest qualification.,FRAGMENTATION
+C02,C02-R007,R10,MATCH,Birth-year condition and general division preserved.,-
+C02,C02-R008,R11,MATCH,Child/youth birth-year interval preserved.,-
+C02,C02-R001,R12,MATCH,Complete climate-action and transition theme.,-
+C02,C02-R001,R13,NO_MATCH,Slogan restates the already credited theme.,DUPLICATE
+C02,C02-R010,R14,MATCH,"Correct upload duty and platforms, but quote lists eligible SNS without the upload obligation.",EVIDENCE_NOT_SUPPORTING
+C02,C02-R013,R15,PARTIAL,Only first element of the required marking set.,FRAGMENTATION
+C02,C02-R013,R16,PARTIAL,Only second element of the required marking set.,FRAGMENTATION
+C02,C02-R013,R17,PARTIAL,Only account mention from required marking set.,FRAGMENTATION
+C02,C02-R011,R18,PARTIAL,After-upload application duty omits the specified URL.,FRAGMENTATION
+C02,C02-R011,R19,PARTIAL,Application URL alone omits after-upload submission obligation.,FRAGMENTATION
+C02,C02-R012,R20,MATCH,Private SNS accounts prohibited.,-
+C02,,R21,NO_MATCH,Prize allocation excluded from frozen scope.,FALSE_POSITIVE
+C02,,R22,NO_MATCH,"Organizer scoring process, not applicant requirement.",FALSE_POSITIVE
+C02,,R23,NO_MATCH,Scoring weight is an organizer operation.,FALSE_POSITIVE
+C02,,R24,NO_MATCH,Scoring weight is an organizer operation.,FALSE_POSITIVE
+C02,,R25,NO_MATCH,Scoring weight is an organizer operation.,FALSE_POSITIVE
+C02,,R26,NO_MATCH,Scoring weight is an organizer operation.,FALSE_POSITIVE
+C02,,R27,NO_MATCH,Organizer tie-break process excluded.,FALSE_POSITIVE
+C03,C03-R001,R01,PARTIAL,Department membership omits complete current-undergraduate eligibility.,FRAGMENTATION
+C03,C03-R001,R02,PARTIAL,Enrollment status alone omits department and undergraduate scope.,FRAGMENTATION
+C03,C03-R001,R03,PARTIAL,Undergraduate status alone omits department and enrollment scope.,FRAGMENTATION
+C03,C03-R005,R04,MATCH,Application deadline preserved.,-
+C03,C03-R006,R05,MATCH,Correct Google Forms application route in evidence.,-
+C03,,R06,NO_MATCH,Evaluation criterion is an organizer operation.,FALSE_POSITIVE
+C03,,R07,NO_MATCH,Evaluation criterion is an organizer operation.,FALSE_POSITIVE
+C03,,R08,NO_MATCH,Evaluation criterion is an organizer operation.,FALSE_POSITIVE
+C03,,R09,NO_MATCH,Evaluation criterion is an organizer operation.,FALSE_POSITIVE
+C03,C03-R003,R10,PARTIAL,Combines five-person size and cross-consortium formation as INFO.,"ATOMICITY,WRONG_MODALITY"
+C03,C03-R004,R10,PARTIAL,Combines five-person size and cross-consortium formation as INFO.,"ATOMICITY,WRONG_MODALITY"
+C04,C04-R001,R01,MATCH,Individual/team permission preserved.,-
+C04,C04-R004,R02,MATCH,Four-person team maximum.,-
+C04,C04-R005,R03,MATCH,Duplicate registration ban including individual and multiple teams.,-
+C04,C04-R006,R04,PARTIAL,Generated text requirement without explicit exclusion of predefined answer selection.,FRAGMENTATION
+C04,C04-R006,R05,PARTIAL,Rule/list-only ban without positive LLM-generated output obligation.,FRAGMENTATION
+C04,,R06,NO_MATCH,Supported RAG permission without an additional Gold unit.,OUTSIDE_GOLD
+C04,C04-R007,R07,PARTIAL,Ban on returning retrieval alone omits generative processing requirement.,FRAGMENTATION
+C04,C04-R007,R08,MATCH,Mandatory generative processing excludes unchanged retrieval and preserves RAG condition.,-
+C04,C04-R008,R09,MATCH,Model-weight public release cutoff.,-
+C04,C04-R009,R10,MATCH,Noncommercial open-source model license requirement.,-
+C04,C04-R010,R11,MATCH,Remote API-based models prohibited.,-
+C04,C04-R011,R12,MATCH,All models directly executable on local CPU/GPU; same local-execution obligation.,-
+C04,C04-R011,R13,NO_MATCH,External-server ban restates local execution requirement.,DUPLICATE
+C04,C04-R012,R14,MATCH,External-data public release cutoff.,-
+C04,C04-R013,R15,MATCH,External-data license requirement.,-
+C04,C04-R014,R16,MATCH,Directly collected data prohibited.,-
+C04,C04-R015,R17,PARTIAL,Unconditional augmentation permission omits explicit source-data/model compliance condition.,MISS_CONDITION
+C04,C04-R016,R18,MATCH,Augmentation must be implementable in code.,-
+C04,C04-R015,R19,PARTIAL,Source-data compliance alone omits complete conditioned augmentation permission.,FRAGMENTATION
+C04,C04-R015,R20,PARTIAL,Model compliance alone omits complete conditioned augmentation permission.,FRAGMENTATION
+C04,C04-R017,R21,MATCH,"Source, usage and file proof for all external data.",-
+C04,,R22,NO_MATCH,Supported disqualification consequence without an additional Gold duty.,OUTSIDE_GOLD
+C04,C04-R018,R23,MATCH,All augmentation code submitted.,-
+C04,C04-R020,R24,PARTIAL,Refers to resource conditions without identifying the complete configuration.,FRAGMENTATION
+C04,C04-R019,R25,PARTIAL,270-minute cap omits five-run average measurement basis.,FRAGMENTATION
+C04,C04-R019,R26,PARTIAL,Five-run average alone omits the 270-minute limit.,FRAGMENTATION
+C04,C04-R020,R27,PARTIAL,GPU portion of full execution environment.,FRAGMENTATION
+C04,C04-R020,R28,PARTIAL,CPU/RAM portion of the single specified resource configuration.,FRAGMENTATION
+C04,C04-R020,R29,PARTIAL,Disk portion of full execution environment.,FRAGMENTATION
+C04,C04-R020,R30,PARTIAL,Software portion of full execution environment.,FRAGMENTATION
+C04,C04-R021,R31,PARTIAL,Preprocessing alone from complete inference pipeline.,FRAGMENTATION
+C04,C04-R021,R32,PARTIAL,Model loading alone from complete inference pipeline.,FRAGMENTATION
+C04,C04-R021,R33,PARTIAL,Inference alone from complete inference pipeline.,FRAGMENTATION
+C04,C04-R021,R34,PARTIAL,Output generation alone from complete inference pipeline.,FRAGMENTATION
+C04,C04-R022,R35,NO_MATCH,Offline execution repeats the internet prohibition fully expressed in R36.,DUPLICATE
+C04,C04-R022,R36,MATCH,Internet communication prohibited during inference.,-
+C04,C04-R023,R37,MATCH,Single LLM inference requirement.,-
+C04,C04-R023,R38,NO_MATCH,Ensemble prohibition restates single LLM constraint.,DUPLICATE
+C04,C04-R023,R39,NO_MATCH,Input-dependent LLM switching prohibition restates single LLM constraint.,DUPLICATE
+C04,C04-R024,R40,MATCH,"Finalist submission email, materials and stage preserved.",-
+C04,C04-R025,R41,PARTIAL,Code submission alone omits Private Score reproduction.,FRAGMENTATION
+C04,C04-R026,R42,MATCH,Finalists submit model checkpoint.,-
+C04,C04-R027,R43,MATCH,Finalists submit execution instructions.,-
+C04,,R44,NO_MATCH,General rule-compliance restatement adds no independently specified Gold obligation.,OUTSIDE_GOLD
+C04,C04-R025,R45,MATCH,Verification-stage code must reproduce Private Score.,-
+C04,C04-R029,R46,PARTIAL,Relative input paths alone omit output paths.,FRAGMENTATION
+C04,C04-R029,R47,PARTIAL,Relative output paths alone omit input paths.,FRAGMENTATION
+C04,C04-R030,R48,PARTIAL,Code encoding alone omits comment encoding.,FRAGMENTATION
+C04,C04-R030,R49,PARTIAL,Comment encoding alone omits code encoding.,FRAGMENTATION
+C04,C04-R020,R50,PARTIAL,Installability without complete specified resource configuration.,FRAGMENTATION
+C04,C04-R020,R51,NO_MATCH,Repeats generic resource compliance already represented by R24.,DUPLICATE
+C04,C04-R031,R52,MATCH,Library versions in requirement.txt.,-
+C04,C04-R032,R53,PARTIAL,External data files alone omit preprocessing code.,FRAGMENTATION
+C04,C04-R032,R54,PARTIAL,Preprocessing code alone omits external data files.,FRAGMENTATION
+C04,C04-R017,R55,PARTIAL,Source proof alone omits complete source/use/file evidence bundle.,FRAGMENTATION
+C04,C04-R033,R56,MATCH,Separate inference code file.,-
+C04,C04-R026,R57,NO_MATCH,Repeats model-weight submission already credited to R42.,DUPLICATE
+C04,C04-R028,R58,MATCH,Report submission content matches but bare report heading and generic file-list label omit finalist applicability.,EVIDENCE_NOT_SUPPORTING
+C04,C04-R043,R59,PARTIAL,Month/day INFO omits the full 2025 deadline and required submission statement.,"FRAGMENTATION,WRONG_MODALITY"
+C04,C04-R034,R60,MATCH,Equivalent three-submission cap expressed as MUST_NOT rather than Gold MUST.,WRONG_MODALITY
+C04,C04-R035,R61,MATCH,Python-only language requirement.,-
+C04,C04-R036,R62,PARTIAL,CSV data encoding alone omits submission files.,FRAGMENTATION
+C04,C04-R036,R63,PARTIAL,Submission-file encoding alone omits CSV inputs.,FRAGMENTATION
+C04,C04-R037,R64,PARTIAL,Leakage ban only during training.,FRAGMENTATION
+C04,C04-R037,R65,PARTIAL,Leakage ban only during inference.,FRAGMENTATION
+C04,C04-R038,R66,PARTIAL,Insight sharing alone omits code sharing.,FRAGMENTATION
+C04,C04-R038,R67,PARTIAL,Code sharing alone omits insight sharing.,FRAGMENTATION
+C04,C04-R038,R68,NO_MATCH,Private-sharing definition restates partial sharing restrictions.,DUPLICATE
+C04,C04-R039,R69,PARTIAL,Normal training code alone omits inference/results requirement.,FRAGMENTATION
+C04,C04-R039,R70,PARTIAL,Normal inference code alone omits result-generation requirement.,FRAGMENTATION
+C04,C04-R039,R71,MATCH,Normal-code generation of all outputs expresses the Gold abnormal-output ban positively.,WRONG_MODALITY
+C04,C04-R039,R72,NO_MATCH,Consequence of abnormal submissions repeats credited constraint.,DUPLICATE
+C04,C04-R040,R73,MATCH,Select one final scoring file.,-
+C04,,R74,NO_MATCH,Organizer ranking workflow excluded.,FALSE_POSITIVE
+C04,C04-R039,R75,NO_MATCH,General fraudulent-submission prohibition adds no distinct Gold unit.,DUPLICATE
+C04,,R76,NO_MATCH,Supported past-misconduct evaluation restriction absent from frozen Gold.,OUTSIDE_GOLD
+C04,C04-R041,R77,PARTIAL,Month/day INFO omits complete 2025 team-merger deadline obligation.,"FRAGMENTATION,WRONG_MODALITY"
+C05,C05-R001,R01,MATCH,Complete announced daily-life weather/climate idea theme.,-
+C05,C05-R001,R02,NO_MATCH,Detailed field examples restate the already matched weather/climate theme.,DUPLICATE
+C05,C05-R002,R03,MATCH,Full application date interval recovered from fragmented PDF text.,-
+C05,,R04,NO_MATCH,Organizer's possible extension is administrative information.,FALSE_POSITIVE
+C06,C06-R002,R01,MATCH,Korean nationality requirement.,-
+C06,C06-R003,R02,PARTIAL,Combines individual/team permission and five-person team cap as MUST.,"ATOMICITY,WRONG_MODALITY"
+C06,C06-R004,R02,PARTIAL,Combines individual/team permission and five-person team cap as MUST.,"ATOMICITY,WRONG_MODALITY"
+C06,C06-R001,R03,MATCH,Complete subject and permitted planning fields.,-
+C06,C06-R005,R04,MATCH,Application interval preserved.,-
+C06,C06-R006,R05,MATCH,Submission interval preserved.,-
+C06,C06-R007,R06,MATCH,"Named official portal, board and URL in evidence identify correct submission route.",-
+C07,C07-R001,R01,MATCH,Korean nationality.,-
+C07,C07-R002,R02,MATCH,Festival program theme and permitted alternatives.,-
+C07,C07-R003,R03,MATCH,Complete receipt interval and 18:00 cutoff.,-
+C07,C07-R004,R04,MATCH,All permitted channels and correct addresses preserved as alternatives.,-
+C07,C07-R005,R05,MATCH,Application/proposal attachment submitted.,-
+C07,C07-R006,R06,MATCH,Privacy consent attachment submitted.,-
+C07,C07-R010,R07,MATCH,Application receipt number must remain blank.,-
+C07,C07-R011,R08,MATCH,Title expresses proposal concisely.,-
+C07,,R09,NO_MATCH,Empty applicant name label alone.,FORM_LABEL
+C07,,R10,NO_MATCH,Empty birth-date label alone.,FORM_LABEL
+C07,,R11,NO_MATCH,Empty contact label alone.,FORM_LABEL
+C07,,R12,NO_MATCH,Empty email label alone.,FORM_LABEL
+C07,C07-R012,R13,MATCH,Public applicant address condition preserved.,-
+C07,C07-R013,R14,MATCH,Internal employee affiliation condition preserved.,-
+C07,C07-R014,R15,MATCH,Understandable proposal summary.,-
+C07,C07-R015,R16,MATCH,Concrete program description.,-
+C07,C07-R016,R17,MATCH,Expected outcomes described.,-
+C07,C07-R017,R18,MATCH,Additional sheet permitted when content is extensive.,-
+C07,,R19,NO_MATCH,Consent-choice checkbox converted into an independent MUST.,FORM_LABEL
+C07,,R20,NO_MATCH,Empty date line alone.,FORM_LABEL
+C07,,R21,NO_MATCH,Name label alone; signing is separately scored in R22.,FORM_LABEL
+C07,C07-R019,R22,MATCH,"Consent signature or seal, accepted explicit signing field under frozen protocol.",-
+C07,,R23,NO_MATCH,Supported privacy-use purpose information without another frozen Gold unit.,OUTSIDE_GOLD
+C07,,R24,NO_MATCH,"Supported collected-data disclosure, not an extra Gold obligation.",OUTSIDE_GOLD
+C07,,R25,NO_MATCH,Supported privacy-retention information outside frozen Gold.,OUTSIDE_GOLD
+C07,C07-R018,R26,PARTIAL,Refusal permission omits possible award restriction.,FRAGMENTATION
+C07,C07-R018,R27,PARTIAL,Possible award restriction omits permission to refuse consent.,FRAGMENTATION
+C07,,R28,NO_MATCH,Organizer scoring criterion excluded.,FALSE_POSITIVE
+C07,,R29,NO_MATCH,Organizer scoring criterion excluded.,FALSE_POSITIVE
+C07,,R30,NO_MATCH,Organizer scoring criterion excluded.,FALSE_POSITIVE
+C07,,R31,NO_MATCH,Organizer scoring criterion excluded.,FALSE_POSITIVE
+C07,,R32,NO_MATCH,Organizer scoring criterion excluded.,FALSE_POSITIVE
+C07,,R33,NO_MATCH,Organizer priority procedure excluded.,FALSE_POSITIVE
+C07,,R34,NO_MATCH,Award allocation excluded.,FALSE_POSITIVE
+C07,C07-R007,R35,MATCH,False personal particulars prohibited.,-
+C07,C07-R007,R36,NO_MATCH,Possible exclusion repeats consequence of already matched false-information ban.,DUPLICATE
+C07,C07-R007,R37,NO_MATCH,Possible future restriction repeats consequence of false-information ban.,DUPLICATE
+C07,,R38,NO_MATCH,Document return administration excluded.,FALSE_POSITIVE
+C07,C07-R008,R39,PARTIAL,Rights transfer alone omits promotional use and modification consent.,"FRAGMENTATION,WRONG_MODALITY"
+C07,C07-R008,R40,PARTIAL,Promotional use alone omits rights transfer and modification consent.,"FRAGMENTATION,WRONG_MODALITY"
+C07,C07-R008,R41,PARTIAL,Modification use alone omits remaining rights and consent scope.,"FRAGMENTATION,WRONG_MODALITY"
+C07,,R42,NO_MATCH,Organizer implementation discretion excluded.,FALSE_POSITIVE
+C07,,R43,NO_MATCH,Explicit residual city-decision duty absent from immutable Gold; no retrospective addition.,OUTSIDE_GOLD
+C07,C07-R009,R44,MATCH,No objection to judging result.,-
+C08,C08-R005,R01,MATCH,Korean nationality preserved.,-
+C08,C08-R006,R02,MATCH,Domestic residence preserved.,-
+C08,C08-R007,R03,MATCH,Individual or team permission.,-
+C08,C08-R008,R04,MATCH,Six-person maximum including leader and members.,-
+C08,C08-R001,R05,PARTIAL,Only idea-division branch of the overall public-data submission scope.,FRAGMENTATION
+C08,C08-R001,R06,PARTIAL,Only product/service division branch of overall public-data scope.,FRAGMENTATION
+C08,C08-R002,R07,PARTIAL,Newly needed data permission alone omits nationwide public-data scope.,FRAGMENTATION
+C08,C08-R002,R08,PARTIAL,Nationwide existing data permission omits data needing opening.,FRAGMENTATION
+C08,C08-R003,R09,MATCH,Prototype complete by close for product/service division.,-
+C08,C08-R004,R10,PARTIAL,Cancellation consequence for similar awarded work does not state complete same-item entry prohibition.,"FRAGMENTATION,WRONG_MODALITY"
+C08,C08-R009,R11,PARTIAL,End month/day/time omits the start date and year of submission period.,FRAGMENTATION
+C08,C08-R010,R12,MATCH,Unlimited number of submissions.,-
+C08,C08-R011,R13,MATCH,One result per application.,-
+C08,C08-R012,R14,MATCH,Correct submission email.,-
+C08,C08-R013,R15,MATCH,One application copy in submission-document table.,-
+C08,C08-R014,R16,MATCH,One participant pledge copy.,-
+C08,C08-R015,R17,MATCH,One privacy consent copy.,-
+C08,C08-R016,R18,MATCH,One idea third-party disclosure consent copy.,-
+C08,C08-R017,R19,PARTIAL,Presentation copy count without separate-file obligation.,FRAGMENTATION
+C08,C08-R018,R20,MATCH,Free presentation format.,-
+C08,C08-R017,R21,PARTIAL,Separate presentation file without complete one-copy submission unit.,FRAGMENTATION
+C08,C08-R019,R22,MATCH,One idea proposal with division condition.,-
+C08,C08-R020,R23,MATCH,One business plan with division condition.,-
+C08,C08-R021,R24,PARTIAL,"Conflates file representing completed demonstrable product with additional product submission; presentation-stage condition is absent. Treated as scope conflation, not a clearly invented new constraint.","ATOMICITY,MISS_CONDITION,EVIDENCE_NOT_SUPPORTING"
+C08,C08-R022,R24,PARTIAL,"Conflates file representing completed demonstrable product with additional product submission; presentation-stage condition is absent. Treated as scope conflation, not a clearly invented new constraint.","ATOMICITY,MISS_CONDITION,EVIDENCE_NOT_SUPPORTING"
+C08,C08-R022,R25,MATCH,Physical submission and demonstration at product/service presentation stage.,-
+C08,,R26,NO_MATCH,Organizer scoring scale excluded.,FALSE_POSITIVE
+C08,,R27,NO_MATCH,Organizer scoring criterion excluded.,FALSE_POSITIVE
+C08,,R28,NO_MATCH,Organizer scoring criterion excluded.,FALSE_POSITIVE
+C08,,R29,NO_MATCH,Organizer scoring criterion excluded.,FALSE_POSITIVE
+C08,,R30,NO_MATCH,Organizer scoring criterion excluded.,FALSE_POSITIVE
+C08,,R31,NO_MATCH,Organizer scoring criterion excluded.,FALSE_POSITIVE
+C08,,R32,NO_MATCH,Organizer scoring criterion excluded.,FALSE_POSITIVE
+C08,,R33,NO_MATCH,Organizer scoring criterion excluded.,FALSE_POSITIVE
+C08,,R34,NO_MATCH,Organizer scoring criterion excluded.,FALSE_POSITIVE
+C08,,R35,NO_MATCH,Organizer bonus-score allocation excluded.,FALSE_POSITIVE
+C08,,R36,NO_MATCH,Organizer tie-break process excluded.,FALSE_POSITIVE
+C08,,R37,NO_MATCH,Award benefit and onward-event invitation excluded from frozen scope.,FALSE_POSITIVE
+C08,C08-R023,R38,MATCH,Real-name entry principle.,-
+C08,C08-R024,R39,MATCH,Select one if multiple works are chosen.,-
+C08,C08-R025,R40,MATCH,Cross-work team participation ban with role examples.,-
+C08,C08-R026,R41,MATCH,Joint entrants identify team name.,-
+C08,C08-R027,R42,PARTIAL,Leader name alone omits member names.,FRAGMENTATION
+C08,C08-R027,R43,PARTIAL,Member names alone omit leader name.,FRAGMENTATION
+C08,,R44,NO_MATCH,Award receipt arrangement excluded.,FALSE_POSITIVE
+C08,,R45,NO_MATCH,Internal award-certificate allocation excluded.,FALSE_POSITIVE
+C08,,R46,NO_MATCH,Internal prize-money allocation excluded.,FALSE_POSITIVE
+C08,C08-R028,R47,PARTIAL,Unpublished status alone omits original creation.,FRAGMENTATION
+C08,C08-R028,R48,PARTIAL,Original creation alone omits unpublished status.,FRAGMENTATION
+C08,C08-R029,R49,PARTIAL,Plagiarism alone from complete prohibited-copying set.,FRAGMENTATION
+C08,C08-R029,R50,PARTIAL,Misappropriation alone from complete prohibited-copying set.,FRAGMENTATION
+C08,C08-R029,R51,PARTIAL,Imitation alone from complete prohibited-copying set.,FRAGMENTATION
+C08,,R52,NO_MATCH,Supported negotiated-rights information outside frozen Gold.,OUTSIDE_GOLD
+C08,,R53,NO_MATCH,Supported negotiated-use information outside frozen Gold.,OUTSIDE_GOLD
+C08,C08-R030,R54,PARTIAL,"Legality only at entry, not subsequent awarded-work use.",FRAGMENTATION
+C08,C08-R030,R55,PARTIAL,"Legality only at awarded-work use, not entry.",FRAGMENTATION
+C08,C08-R031,R56,PARTIAL,Organization damages only; incomplete wider loss/dispute responsibility.,FRAGMENTATION
+C08,,R57,NO_MATCH,Supported publication-use information outside Gold.,OUTSIDE_GOLD
+C08,,R58,NO_MATCH,Explicit submission-error responsibility absent from frozen Gold.,OUTSIDE_GOLD
+C08,,R59,NO_MATCH,Explicit unreachable-contact responsibility absent from frozen Gold.,OUTSIDE_GOLD
+C08,C08-R031,R60,PARTIAL,"Awarded-work disputes only, not complete loss/dispute scope.",FRAGMENTATION
+C08,,R61,NO_MATCH,Administrative document non-return excluded.,FALSE_POSITIVE
+C08,C08-R031,R62,PARTIAL,Plagiarism responsibility alone from wider legal duty.,FRAGMENTATION
+C08,C08-R031,R63,PARTIAL,Defamation responsibility alone from wider legal duty.,FRAGMENTATION
+C08,C08-R031,R64,PARTIAL,Copyright responsibility alone from wider legal duty.,FRAGMENTATION
+C08,,R65,NO_MATCH,Supported ownership information outside Gold.,OUTSIDE_GOLD
+C08,,R66,NO_MATCH,Copyright ownership repeats the rights-ownership information.,DUPLICATE
+C08,,R67,NO_MATCH,Supported prior-negotiation information outside Gold.,OUTSIDE_GOLD
+C08,C08-R032,R68,MATCH,Winner pays award taxes.,-
+C08,,R69,NO_MATCH,Organizer residual internal-policy statement excluded.,FALSE_POSITIVE
+C01,C01-R029,,NO_MATCH,No candidate represents this complete scoped obligation.,OMISSION
+C02,C02-R014,,NO_MATCH,No candidate represents this complete scoped obligation.,OMISSION
+C03,C03-R002,,NO_MATCH,No candidate represents this complete scoped obligation.,OMISSION
+C04,C04-R002,,NO_MATCH,No candidate represents this complete scoped obligation.,OMISSION
+C04,C04-R003,,NO_MATCH,No candidate represents this complete scoped obligation.,OMISSION
+C04,C04-R042,,NO_MATCH,No candidate represents this complete scoped obligation.,OMISSION
+C04,C04-R044,,NO_MATCH,No candidate represents this complete scoped obligation.,OMISSION

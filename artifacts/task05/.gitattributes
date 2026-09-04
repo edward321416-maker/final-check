@@ -1,0 +1,5 @@
+*.json -text whitespace=cr-at-eol
+*.jsonl -text whitespace=cr-at-eol
+*.xml -text whitespace=cr-at-eol
+# Preserve actual terminal whitespace, following artifacts/task04 policy.
+*.log -text -whitespace

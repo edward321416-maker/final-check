@@ -1,0 +1,23 @@
+{
+  "verified_at": "2026-09-04T10:11:52.849825+00:00",
+  "baseline_commit": "0125f05e8b7d68362dcf9e781f0a627e097eaddd",
+  "gold_count": 173,
+  "gold_manifest_sha256": "035ebc06d3d62db6ab9c47c53d30cbc206be02667d845e9db59da6b9c5f7fe89",
+  "validator_sha256": "4b506c3b692f2cef39e2be7cb44b4ce74bcc4ce829064ac655e16f545042bb11",
+  "frozen_files_checked": 27,
+  "prompt_sha256": "9edc46cbdcb37a619bb5c02d5e1b8f443fbf56c7dcda0f714b4b9103c1e85155",
+  "schema_sha256": "f9a4ff385b7ad8f15b59880cb15ddaf67b0cca159539cca9866a89b5a02cdbc8",
+  "runner_sha256": "c7d6c3910509515009f21bb21e26c55cf53f8cfe12e6787e5e948c919d089644",
+  "case_count": 8,
+  "unique_threads": 8,
+  "tool_calls": 0,
+  "temporary_auth_copies_removed": true,
+  "product_source_diff": "",
+  "usage": {
+    "input_tokens": 79147,
+    "cached_input_tokens": 0,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 65627,
+    "reasoning_output_tokens": 27013
+  }
+}

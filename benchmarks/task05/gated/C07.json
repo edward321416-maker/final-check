@@ -1,0 +1,1337 @@
+{
+  "requirements": [
+    {
+      "requirement_id": "R01",
+      "rule": "응모자는 대한민국 국민이어야 한다.",
+      "modality": "MUST",
+      "severity": "BLOCKER",
+      "verifier": "EXTERNAL",
+      "condition": "always",
+      "evidence": {
+        "source_section": "Ⅰ 공모개요 3. 공모자격",
+        "quote": "3. 공모자격: 대한민국 국민 누구나"
+      },
+      "confidence": 0.99,
+      "extraction_status": "EXTRACTED",
+      "evidence_start": 267,
+      "evidence_end": 287,
+      "issues": [],
+      "original": {
+        "requirement_id": "R01",
+        "rule": "응모자는 대한민국 국민이어야 한다.",
+        "modality": "MUST",
+        "severity": "BLOCKER",
+        "verifier": "EXTERNAL",
+        "condition": "always",
+        "evidence": {
+          "source_section": "Ⅰ 공모개요 3. 공모자격",
+          "quote": "3. 공모자격: 대한민국 국민 누구나"
+        },
+        "confidence": 0.99
+      }
+    },
+    {
+      "requirement_id": "R02",
+      "rule": "제안은 축제 홍보를 위한 창의적 붐업 프로그램, 많은 국민·시민이 참여할 수 있는 프로그램, 모자와 연계된 체험·참여 프로그램 또는 그 밖의 성공적인 축제 개최를 위한 프로그램에 관한 것이어야 한다.",
+      "modality": "MUST",
+      "severity": "BLOCKER",
+      "verifier": "SEMANTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "Ⅰ 공모개요 4. 공모주제",
+        "quote": "4. 공모주제: 2025 상주세계모자페스티벌 이거 해보자?\n  - 축제의 성공적인 홍보를 위한 창의적 붐업(Boom-Up) 프로그램\n  - 많은 국민(시민)들이 참여할 수 있는 프로그램\n  - 모자와 연계된 체험 및 참여 프로그램\n  - 그 밖에 성공적인 축제 개최를 위한 프로그램 등"
+      },
+      "confidence": 0.97,
+      "extraction_status": "EXTRACTED",
+      "evidence_start": 289,
+      "evidence_end": 448,
+      "issues": [],
+      "original": {
+        "requirement_id": "R02",
+        "rule": "제안은 축제 홍보를 위한 창의적 붐업 프로그램, 많은 국민·시민이 참여할 수 있는 프로그램, 모자와 연계된 체험·참여 프로그램 또는 그 밖의 성공적인 축제 개최를 위한 프로그램에 관한 것이어야 한다.",
+        "modality": "MUST",
+        "severity": "BLOCKER",
+        "verifier": "SEMANTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "Ⅰ 공모개요 4. 공모주제",
+          "quote": "4. 공모주제: 2025 상주세계모자페스티벌 이거 해보자?\n  - 축제의 성공적인 홍보를 위한 창의적 붐업(Boom-Up) 프로그램\n  - 많은 국민(시민)들이 참여할 수 있는 프로그램\n  - 모자와 연계된 체험 및 참여 프로그램\n  - 그 밖에 성공적인 축제 개최를 위한 프로그램 등"
+        },
+        "confidence": 0.97
+      }
+    },
+    {
+      "requirement_id": "R03",
+      "rule": "제출서류는 2025년 2월 3일부터 3월 7일 18:00까지 접수되어야 한다.",
+      "modality": "MUST",
+      "severity": "BLOCKER",
+      "verifier": "DETERMINISTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "Ⅱ 공모접수 1. 접수기간",
+        "quote": "1. 접수기간: 2025. 2. 3.(월) ~ 3. 7.(금) \n  - 접수마감: 2025. 3. 7.(금) 18:00 접수분까지 유효"
+      },
+      "confidence": 1.0,
+      "extraction_status": "EXTRACTED",
+      "evidence_start": 597,
+      "evidence_end": 672,
+      "issues": [],
+      "original": {
+        "requirement_id": "R03",
+        "rule": "제출서류는 2025년 2월 3일부터 3월 7일 18:00까지 접수되어야 한다.",
+        "modality": "MUST",
+        "severity": "BLOCKER",
+        "verifier": "DETERMINISTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "Ⅱ 공모접수 1. 접수기간",
+          "quote": "1. 접수기간: 2025. 2. 3.(월) ~ 3. 7.(금) \n  - 접수마감: 2025. 3. 7.(금) 18:00 접수분까지 유효"
+        },
+        "confidence": 1.0
+      }
+    },
+    {
+      "requirement_id": "R04",
+      "rule": "전자우편(codud07@korea.kr), 방문 또는 우편(상주시 상산로 223, 관광진흥과) 중 한 방법으로 접수해야 한다.",
+      "modality": "MUST",
+      "severity": "BLOCKER",
+      "verifier": "DETERMINISTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "Ⅱ 공모접수 2. 접수방법",
+        "quote": "2. 접수방법: 전자우편(codud07@korea.kr)\n             방문, 우편(상주시 상산로 223, 관광진흥과)"
+      },
+      "confidence": 1.0,
+      "extraction_status": "EXTRACTED",
+      "evidence_start": 674,
+      "evidence_end": 745,
+      "issues": [],
+      "original": {
+        "requirement_id": "R04",
+        "rule": "전자우편(codud07@korea.kr), 방문 또는 우편(상주시 상산로 223, 관광진흥과) 중 한 방법으로 접수해야 한다.",
+        "modality": "MUST",
+        "severity": "BLOCKER",
+        "verifier": "DETERMINISTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "Ⅱ 공모접수 2. 접수방법",
+          "quote": "2. 접수방법: 전자우편(codud07@korea.kr)\n             방문, 우편(상주시 상산로 223, 관광진흥과)"
+        },
+        "confidence": 1.0
+      }
+    },
+    {
+      "requirement_id": "R05",
+      "rule": "[붙임1] 신청서(제안서)를 제출해야 한다.",
+      "modality": "MUST",
+      "severity": "BLOCKER",
+      "verifier": "DETERMINISTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "Ⅱ 공모접수 3. 제출서류",
+        "quote": "3. 제출서류: [붙임1] 신청서(제안서), [붙임2] 개인정보 수집·이용 동의서"
+      },
+      "confidence": 1.0,
+      "extraction_status": "EXTRACTED",
+      "evidence_start": 747,
+      "evidence_end": 792,
+      "issues": [],
+      "original": {
+        "requirement_id": "R05",
+        "rule": "[붙임1] 신청서(제안서)를 제출해야 한다.",
+        "modality": "MUST",
+        "severity": "BLOCKER",
+        "verifier": "DETERMINISTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "Ⅱ 공모접수 3. 제출서류",
+          "quote": "3. 제출서류: [붙임1] 신청서(제안서), [붙임2] 개인정보 수집·이용 동의서"
+        },
+        "confidence": 1.0
+      }
+    },
+    {
+      "requirement_id": "R06",
+      "rule": "[붙임2] 개인정보 수집·이용 동의서를 제출해야 한다.",
+      "modality": "MUST",
+      "severity": "BLOCKER",
+      "verifier": "DETERMINISTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "Ⅱ 공모접수 3. 제출서류",
+        "quote": "3. 제출서류: [붙임1] 신청서(제안서), [붙임2] 개인정보 수집·이용 동의서"
+      },
+      "confidence": 1.0,
+      "extraction_status": "EXTRACTED",
+      "evidence_start": 747,
+      "evidence_end": 792,
+      "issues": [],
+      "original": {
+        "requirement_id": "R06",
+        "rule": "[붙임2] 개인정보 수집·이용 동의서를 제출해야 한다.",
+        "modality": "MUST",
+        "severity": "BLOCKER",
+        "verifier": "DETERMINISTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "Ⅱ 공모접수 3. 제출서류",
+          "quote": "3. 제출서류: [붙임1] 신청서(제안서), [붙임2] 개인정보 수집·이용 동의서"
+        },
+        "confidence": 1.0
+      }
+    },
+    {
+      "requirement_id": "R07",
+      "rule": "신청서의 접수번호란은 기재하지 않아야 한다.",
+      "modality": "MUST_NOT",
+      "severity": "BLOCKER",
+      "verifier": "DETERMINISTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "붙임1 참가 신청서(제안서)",
+        "quote": "접수번호\n2025 - 미기재"
+      },
+      "confidence": 0.98,
+      "extraction_status": "EXTRACTED",
+      "evidence_start": 1788,
+      "evidence_end": 1803,
+      "issues": [],
+      "original": {
+        "requirement_id": "R07",
+        "rule": "신청서의 접수번호란은 기재하지 않아야 한다.",
+        "modality": "MUST_NOT",
+        "severity": "BLOCKER",
+        "verifier": "DETERMINISTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "붙임1 참가 신청서(제안서)",
+          "quote": "접수번호\n2025 - 미기재"
+        },
+        "confidence": 0.98
+      }
+    },
+    {
+      "requirement_id": "R08",
+      "rule": "제안제목은 제안내용을 함축적으로 표현해야 한다.",
+      "modality": "MUST",
+      "severity": "REVIEW",
+      "verifier": "SEMANTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "붙임1 참가 신청서(제안서)",
+        "quote": "➀제안제목 제안내용을 함축적으로 표현"
+      },
+      "confidence": 0.96,
+      "extraction_status": "EXTRACTED",
+      "evidence_start": 1807,
+      "evidence_end": 1827,
+      "issues": [],
+      "original": {
+        "requirement_id": "R08",
+        "rule": "제안제목은 제안내용을 함축적으로 표현해야 한다.",
+        "modality": "MUST",
+        "severity": "REVIEW",
+        "verifier": "SEMANTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "붙임1 참가 신청서(제안서)",
+          "quote": "➀제안제목 제안내용을 함축적으로 표현"
+        },
+        "confidence": 0.96
+      }
+    },
+    {
+      "requirement_id": "R09",
+      "rule": "신청서에 제안자 성명을 기재해야 한다.",
+      "modality": "MUST",
+      "severity": "REVIEW",
+      "verifier": "DETERMINISTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "붙임1 참가 신청서(제안서)",
+        "quote": "제 안 자\n성    명\n생년월일\n연 락 처\n이 메 일"
+      },
+      "confidence": 0.9,
+      "extraction_status": "EXTRACTED",
+      "evidence_start": 1828,
+      "evidence_end": 1857,
+      "issues": [],
+      "original": {
+        "requirement_id": "R09",
+        "rule": "신청서에 제안자 성명을 기재해야 한다.",
+        "modality": "MUST",
+        "severity": "REVIEW",
+        "verifier": "DETERMINISTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "붙임1 참가 신청서(제안서)",
+          "quote": "제 안 자\n성    명\n생년월일\n연 락 처\n이 메 일"
+        },
+        "confidence": 0.9
+      }
+    },
+    {
+      "requirement_id": "R10",
+      "rule": "신청서에 제안자 생년월일을 기재해야 한다.",
+      "modality": "MUST",
+      "severity": "REVIEW",
+      "verifier": "DETERMINISTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "붙임1 참가 신청서(제안서)",
+        "quote": "제 안 자\n성    명\n생년월일\n연 락 처\n이 메 일"
+      },
+      "confidence": 0.9,
+      "extraction_status": "EXTRACTED",
+      "evidence_start": 1828,
+      "evidence_end": 1857,
+      "issues": [],
+      "original": {
+        "requirement_id": "R10",
+        "rule": "신청서에 제안자 생년월일을 기재해야 한다.",
+        "modality": "MUST",
+        "severity": "REVIEW",
+        "verifier": "DETERMINISTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "붙임1 참가 신청서(제안서)",
+          "quote": "제 안 자\n성    명\n생년월일\n연 락 처\n이 메 일"
+        },
+        "confidence": 0.9
+      }
+    },
+    {
+      "requirement_id": "R11",
+      "rule": "신청서에 제안자 연락처를 기재해야 한다.",
+      "modality": "MUST",
+      "severity": "REVIEW",
+      "verifier": "DETERMINISTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "붙임1 참가 신청서(제안서)",
+        "quote": "제 안 자\n성    명\n생년월일\n연 락 처\n이 메 일"
+      },
+      "confidence": 0.9,
+      "extraction_status": "EXTRACTED",
+      "evidence_start": 1828,
+      "evidence_end": 1857,
+      "issues": [],
+      "original": {
+        "requirement_id": "R11",
+        "rule": "신청서에 제안자 연락처를 기재해야 한다.",
+        "modality": "MUST",
+        "severity": "REVIEW",
+        "verifier": "DETERMINISTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "붙임1 참가 신청서(제안서)",
+          "quote": "제 안 자\n성    명\n생년월일\n연 락 처\n이 메 일"
+        },
+        "confidence": 0.9
+      }
+    },
+    {
+      "requirement_id": "R12",
+      "rule": "신청서에 제안자 이메일을 기재해야 한다.",
+      "modality": "MUST",
+      "severity": "REVIEW",
+      "verifier": "DETERMINISTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "붙임1 참가 신청서(제안서)",
+        "quote": "제 안 자\n성    명\n생년월일\n연 락 처\n이 메 일"
+      },
+      "confidence": 0.9,
+      "extraction_status": "EXTRACTED",
+      "evidence_start": 1828,
+      "evidence_end": 1857,
+      "issues": [],
+      "original": {
+        "requirement_id": "R12",
+        "rule": "신청서에 제안자 이메일을 기재해야 한다.",
+        "modality": "MUST",
+        "severity": "REVIEW",
+        "verifier": "DETERMINISTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "붙임1 참가 신청서(제안서)",
+          "quote": "제 안 자\n성    명\n생년월일\n연 락 처\n이 메 일"
+        },
+        "confidence": 0.9
+      }
+    },
+    {
+      "requirement_id": "R13",
+      "rule": "국민 신청자는 신청서의 주소·소속란에 주소를 기재해야 한다.",
+      "modality": "MUST",
+      "severity": "REVIEW",
+      "verifier": "DETERMINISTIC",
+      "condition": "국민 신청자인 경우",
+      "evidence": {
+        "source_section": "붙임1 참가 신청서(제안서)",
+        "quote": "주소ㆍ소속\n(국민) 주소 기입 / (내부직원) 소속 기입"
+      },
+      "confidence": 0.96,
+      "extraction_status": "EXTRACTED",
+      "evidence_start": 1858,
+      "evidence_end": 1889,
+      "issues": [],
+      "original": {
+        "requirement_id": "R13",
+        "rule": "국민 신청자는 신청서의 주소·소속란에 주소를 기재해야 한다.",
+        "modality": "MUST",
+        "severity": "REVIEW",
+        "verifier": "DETERMINISTIC",
+        "condition": "국민 신청자인 경우",
+        "evidence": {
+          "source_section": "붙임1 참가 신청서(제안서)",
+          "quote": "주소ㆍ소속\n(국민) 주소 기입 / (내부직원) 소속 기입"
+        },
+        "confidence": 0.96
+      }
+    },
+    {
+      "requirement_id": "R14",
+      "rule": "내부직원 신청자는 신청서의 주소·소속란에 소속을 기재해야 한다.",
+      "modality": "MUST",
+      "severity": "REVIEW",
+      "verifier": "DETERMINISTIC",
+      "condition": "내부직원인 경우",
+      "evidence": {
+        "source_section": "붙임1 참가 신청서(제안서)",
+        "quote": "주소ㆍ소속\n(국민) 주소 기입 / (내부직원) 소속 기입"
+      },
+      "confidence": 0.96,
+      "extraction_status": "EXTRACTED",
+      "evidence_start": 1858,
+      "evidence_end": 1889,
+      "issues": [],
+      "original": {
+        "requirement_id": "R14",
+        "rule": "내부직원 신청자는 신청서의 주소·소속란에 소속을 기재해야 한다.",
+        "modality": "MUST",
+        "severity": "REVIEW",
+        "verifier": "DETERMINISTIC",
+        "condition": "내부직원인 경우",
+        "evidence": {
+          "source_section": "붙임1 참가 신청서(제안서)",
+          "quote": "주소ㆍ소속\n(국민) 주소 기입 / (내부직원) 소속 기입"
+        },
+        "confidence": 0.96
+      }
+    },
+    {
+      "requirement_id": "R15",
+      "rule": "신청서의 개요(제안요지)에는 제안내용을 알기 쉽게 요약하여 기술해야 한다.",
+      "modality": "MUST",
+      "severity": "REVIEW",
+      "verifier": "SEMANTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "붙임1 참가 신청서(제안서)",
+        "quote": "➁개   요\n (제안요지)\n제안내용을 알기 쉽게 요약하여 기술"
+      },
+      "confidence": 0.97,
+      "extraction_status": "EXTRACTED",
+      "evidence_start": 1890,
+      "evidence_end": 1924,
+      "issues": [],
+      "original": {
+        "requirement_id": "R15",
+        "rule": "신청서의 개요(제안요지)에는 제안내용을 알기 쉽게 요약하여 기술해야 한다.",
+        "modality": "MUST",
+        "severity": "REVIEW",
+        "verifier": "SEMANTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "붙임1 참가 신청서(제안서)",
+          "quote": "➁개   요\n (제안요지)\n제안내용을 알기 쉽게 요약하여 기술"
+        },
+        "confidence": 0.97
+      }
+    },
+    {
+      "requirement_id": "R16",
+      "rule": "신청서의 프로그램(콘텐츠) 항목에는 상주세계모자페스티벌 프로그램 방안을 구체적으로 기술해야 한다.",
+      "modality": "MUST",
+      "severity": "REVIEW",
+      "verifier": "SEMANTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "붙임1 참가 신청서(제안서)",
+        "quote": "③프로그램\n(콘텐츠)\n(제안내용)\n상주세계모자페스티벌 프로그램(콘텐츠) 방안을 구체적으로 기술"
+      },
+      "confidence": 0.98,
+      "extraction_status": "EXTRACTED",
+      "evidence_start": 1925,
+      "evidence_end": 1977,
+      "issues": [],
+      "original": {
+        "requirement_id": "R16",
+        "rule": "신청서의 프로그램(콘텐츠) 항목에는 상주세계모자페스티벌 프로그램 방안을 구체적으로 기술해야 한다.",
+        "modality": "MUST",
+        "severity": "REVIEW",
+        "verifier": "SEMANTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "붙임1 참가 신청서(제안서)",
+          "quote": "③프로그램\n(콘텐츠)\n(제안내용)\n상주세계모자페스티벌 프로그램(콘텐츠) 방안을 구체적으로 기술"
+        },
+        "confidence": 0.98
+      }
+    },
+    {
+      "requirement_id": "R17",
+      "rule": "신청서의 기대효과 항목에는 제안 실시로 얻을 수 있는 효과 및 성과를 기재해야 한다.",
+      "modality": "MUST",
+      "severity": "REVIEW",
+      "verifier": "SEMANTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "붙임1 참가 신청서(제안서)",
+        "quote": "④기대효과\n제안의 실시로 얻을 수 있는 효과 및 성과 기재"
+      },
+      "confidence": 0.98,
+      "extraction_status": "NEEDS_REVIEW",
+      "evidence_start": 2111,
+      "evidence_end": 2143,
+      "issues": [
+        "ATOMICITY_REVIEW: 독립 조건을 한 항목에 합쳤는지 확인하고 단일 조건으로 수정하세요."
+      ],
+      "original": {
+        "requirement_id": "R17",
+        "rule": "신청서의 기대효과 항목에는 제안 실시로 얻을 수 있는 효과 및 성과를 기재해야 한다.",
+        "modality": "MUST",
+        "severity": "REVIEW",
+        "verifier": "SEMANTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "붙임1 참가 신청서(제안서)",
+          "quote": "④기대효과\n제안의 실시로 얻을 수 있는 효과 및 성과 기재"
+        },
+        "confidence": 0.98
+      }
+    },
+    {
+      "requirement_id": "R18",
+      "rule": "제안내용이 많으면 별지를 작성할 수 있다.",
+      "modality": "MAY",
+      "severity": "INFO",
+      "verifier": "DETERMINISTIC",
+      "condition": "제안내용이 많은 경우",
+      "evidence": {
+        "source_section": "붙임1 참가 신청서(제안서)",
+        "quote": "※제안의 내용이 많을 경우 별지 작성 가능"
+      },
+      "confidence": 1.0,
+      "extraction_status": "EXTRACTED",
+      "evidence_start": 2144,
+      "evidence_end": 2167,
+      "issues": [],
+      "original": {
+        "requirement_id": "R18",
+        "rule": "제안내용이 많으면 별지를 작성할 수 있다.",
+        "modality": "MAY",
+        "severity": "INFO",
+        "verifier": "DETERMINISTIC",
+        "condition": "제안내용이 많은 경우",
+        "evidence": {
+          "source_section": "붙임1 참가 신청서(제안서)",
+          "quote": "※제안의 내용이 많을 경우 별지 작성 가능"
+        },
+        "confidence": 1.0
+      }
+    },
+    {
+      "requirement_id": "R19",
+      "rule": "개인정보 수집 및 이용목적에 대한 동의 여부를 ‘동의함’ 또는 ‘동의하지 않음’ 중에서 표시해야 한다.",
+      "modality": "MUST",
+      "severity": "REVIEW",
+      "verifier": "VISION_SEMANTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "붙임2 개인정보 수집·이용 동의서",
+        "quote": "개인정보의 수집 및 이용목적에 동의하십니까?\n□동의함         □동의하지 않음"
+      },
+      "confidence": 0.92,
+      "extraction_status": "NEEDS_REVIEW",
+      "evidence_start": 2494,
+      "evidence_end": 2540,
+      "issues": [
+        "ATOMICITY_REVIEW: 독립 조건을 한 항목에 합쳤는지 확인하고 단일 조건으로 수정하세요."
+      ],
+      "original": {
+        "requirement_id": "R19",
+        "rule": "개인정보 수집 및 이용목적에 대한 동의 여부를 ‘동의함’ 또는 ‘동의하지 않음’ 중에서 표시해야 한다.",
+        "modality": "MUST",
+        "severity": "REVIEW",
+        "verifier": "VISION_SEMANTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "붙임2 개인정보 수집·이용 동의서",
+          "quote": "개인정보의 수집 및 이용목적에 동의하십니까?\n□동의함         □동의하지 않음"
+        },
+        "confidence": 0.92
+      }
+    },
+    {
+      "requirement_id": "R20",
+      "rule": "개인정보 수집·이용 동의서에 작성일을 기재해야 한다.",
+      "modality": "MUST",
+      "severity": "REVIEW",
+      "verifier": "DETERMINISTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "붙임2 개인정보 수집·이용 동의서",
+        "quote": "2025년   월   일"
+      },
+      "confidence": 0.88,
+      "extraction_status": "EXTRACTED",
+      "evidence_start": 2590,
+      "evidence_end": 2603,
+      "issues": [],
+      "original": {
+        "requirement_id": "R20",
+        "rule": "개인정보 수집·이용 동의서에 작성일을 기재해야 한다.",
+        "modality": "MUST",
+        "severity": "REVIEW",
+        "verifier": "DETERMINISTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "붙임2 개인정보 수집·이용 동의서",
+          "quote": "2025년   월   일"
+        },
+        "confidence": 0.88
+      }
+    },
+    {
+      "requirement_id": "R21",
+      "rule": "개인정보 수집·이용 동의서에 성명을 기재해야 한다.",
+      "modality": "MUST",
+      "severity": "REVIEW",
+      "verifier": "DETERMINISTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "붙임2 개인정보 수집·이용 동의서",
+        "quote": "성명:              (서명/인)"
+      },
+      "confidence": 0.88,
+      "extraction_status": "EXTRACTED",
+      "evidence_start": 2643,
+      "evidence_end": 2666,
+      "issues": [],
+      "original": {
+        "requirement_id": "R21",
+        "rule": "개인정보 수집·이용 동의서에 성명을 기재해야 한다.",
+        "modality": "MUST",
+        "severity": "REVIEW",
+        "verifier": "DETERMINISTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "붙임2 개인정보 수집·이용 동의서",
+          "quote": "성명:              (서명/인)"
+        },
+        "confidence": 0.88
+      }
+    },
+    {
+      "requirement_id": "R22",
+      "rule": "개인정보 수집·이용 동의서에 서명하거나 날인해야 한다.",
+      "modality": "MUST",
+      "severity": "REVIEW",
+      "verifier": "VISION_SEMANTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "붙임2 개인정보 수집·이용 동의서",
+        "quote": "성명:              (서명/인)"
+      },
+      "confidence": 0.86,
+      "extraction_status": "EXTRACTED",
+      "evidence_start": 2643,
+      "evidence_end": 2666,
+      "issues": [],
+      "original": {
+        "requirement_id": "R22",
+        "rule": "개인정보 수집·이용 동의서에 서명하거나 날인해야 한다.",
+        "modality": "MUST",
+        "severity": "REVIEW",
+        "verifier": "VISION_SEMANTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "붙임2 개인정보 수집·이용 동의서",
+          "quote": "성명:              (서명/인)"
+        },
+        "confidence": 0.86
+      }
+    },
+    {
+      "requirement_id": "R23",
+      "rule": "수집된 개인정보는 공모전 수상작 선정 및 당선사실 통지 등의 목적으로 이용된다.",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "SEMANTIC",
+      "condition": "개인정보가 수집된 경우",
+      "evidence": {
+        "source_section": "붙임2 개인정보 수집·이용 동의서",
+        "quote": "1. 수집목적: 공모전 수상작 선정 및 당선사실 통지 등"
+      },
+      "confidence": 1.0,
+      "extraction_status": "NEEDS_REVIEW",
+      "evidence_start": 2301,
+      "evidence_end": 2332,
+      "issues": [
+        "ATOMICITY_REVIEW: 독립 조건을 한 항목에 합쳤는지 확인하고 단일 조건으로 수정하세요."
+      ],
+      "original": {
+        "requirement_id": "R23",
+        "rule": "수집된 개인정보는 공모전 수상작 선정 및 당선사실 통지 등의 목적으로 이용된다.",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "개인정보가 수집된 경우",
+        "evidence": {
+          "source_section": "붙임2 개인정보 수집·이용 동의서",
+          "quote": "1. 수집목적: 공모전 수상작 선정 및 당선사실 통지 등"
+        },
+        "confidence": 1.0
+      }
+    },
+    {
+      "requirement_id": "R24",
+      "rule": "수집되는 개인정보 항목은 성명, 생년월일, 연락처, 주소, E-mail 등이다.",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "DETERMINISTIC",
+      "condition": "개인정보가 수집된 경우",
+      "evidence": {
+        "source_section": "붙임2 개인정보 수집·이용 동의서",
+        "quote": "2. 수집항목: 성명, 생년월일, 연락처, 주소, E-mail 등"
+      },
+      "confidence": 1.0,
+      "extraction_status": "EXTRACTED",
+      "evidence_start": 2335,
+      "evidence_end": 2371,
+      "issues": [],
+      "original": {
+        "requirement_id": "R24",
+        "rule": "수집되는 개인정보 항목은 성명, 생년월일, 연락처, 주소, E-mail 등이다.",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "DETERMINISTIC",
+        "condition": "개인정보가 수집된 경우",
+        "evidence": {
+          "source_section": "붙임2 개인정보 수집·이용 동의서",
+          "quote": "2. 수집항목: 성명, 생년월일, 연락처, 주소, E-mail 등"
+        },
+        "confidence": 1.0
+      }
+    },
+    {
+      "requirement_id": "R25",
+      "rule": "수집된 개인정보의 보유·이용기간은 접수일로부터 1년이다.",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "DETERMINISTIC",
+      "condition": "개인정보가 수집된 경우",
+      "evidence": {
+        "source_section": "붙임2 개인정보 수집·이용 동의서",
+        "quote": "3. 보유･이용기간: 접수일로부터 1년"
+      },
+      "confidence": 1.0,
+      "extraction_status": "EXTRACTED",
+      "evidence_start": 2374,
+      "evidence_end": 2395,
+      "issues": [],
+      "original": {
+        "requirement_id": "R25",
+        "rule": "수집된 개인정보의 보유·이용기간은 접수일로부터 1년이다.",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "DETERMINISTIC",
+        "condition": "개인정보가 수집된 경우",
+        "evidence": {
+          "source_section": "붙임2 개인정보 수집·이용 동의서",
+          "quote": "3. 보유･이용기간: 접수일로부터 1년"
+        },
+        "confidence": 1.0
+      }
+    },
+    {
+      "requirement_id": "R26",
+      "rule": "신청자는 개인정보 수집 및 이용에 동의하지 않을 수 있다.",
+      "modality": "MAY",
+      "severity": "INFO",
+      "verifier": "DETERMINISTIC",
+      "condition": "always",
+      "evidence": {
+        "source_section": "붙임2 개인정보 수집·이용 동의서",
+        "quote": "4. 동의거부 권리 및 거부에 따른 불이익: 개인정보 수집 및 이용에 동의\n하지 않을 수 있는 권리가 있으며, 동의 거부 시에는 공모전 수상에 \n제한이 있을 수 있습니다."
+      },
+      "confidence": 1.0,
+      "extraction_status": "NEEDS_REVIEW",
+      "evidence_start": 2398,
+      "evidence_end": 2493,
+      "issues": [
+        "ATOMICITY_REVIEW: 독립 조건을 한 항목에 합쳤는지 확인하고 단일 조건으로 수정하세요."
+      ],
+      "original": {
+        "requirement_id": "R26",
+        "rule": "신청자는 개인정보 수집 및 이용에 동의하지 않을 수 있다.",
+        "modality": "MAY",
+        "severity": "INFO",
+        "verifier": "DETERMINISTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "붙임2 개인정보 수집·이용 동의서",
+          "quote": "4. 동의거부 권리 및 거부에 따른 불이익: 개인정보 수집 및 이용에 동의\n하지 않을 수 있는 권리가 있으며, 동의 거부 시에는 공모전 수상에 \n제한이 있을 수 있습니다."
+        },
+        "confidence": 1.0
+      }
+    },
+    {
+      "requirement_id": "R27",
+      "rule": "개인정보 수집 및 이용 동의를 거부하면 공모전 수상에 제한이 있을 수 있다.",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "EXTERNAL",
+      "condition": "개인정보 수집 및 이용 동의를 거부한 경우",
+      "evidence": {
+        "source_section": "붙임2 개인정보 수집·이용 동의서",
+        "quote": "4. 동의거부 권리 및 거부에 따른 불이익: 개인정보 수집 및 이용에 동의\n하지 않을 수 있는 권리가 있으며, 동의 거부 시에는 공모전 수상에 \n제한이 있을 수 있습니다."
+      },
+      "confidence": 1.0,
+      "extraction_status": "NEEDS_REVIEW",
+      "evidence_start": 2398,
+      "evidence_end": 2493,
+      "issues": [
+        "ATOMICITY_REVIEW: 독립 조건을 한 항목에 합쳤는지 확인하고 단일 조건으로 수정하세요."
+      ],
+      "original": {
+        "requirement_id": "R27",
+        "rule": "개인정보 수집 및 이용 동의를 거부하면 공모전 수상에 제한이 있을 수 있다.",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "EXTERNAL",
+        "condition": "개인정보 수집 및 이용 동의를 거부한 경우",
+        "evidence": {
+          "source_section": "붙임2 개인정보 수집·이용 동의서",
+          "quote": "4. 동의거부 권리 및 거부에 따른 불이익: 개인정보 수집 및 이용에 동의\n하지 않을 수 있는 권리가 있으며, 동의 거부 시에는 공모전 수상에 \n제한이 있을 수 있습니다."
+        },
+        "confidence": 1.0
+      }
+    },
+    {
+      "requirement_id": "R28",
+      "rule": "제안은 차별성·독창성 등의 창의성 항목으로 25점 평가된다.",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "SEMANTIC",
+      "condition": "심사 대상인 경우",
+      "evidence": {
+        "source_section": "Ⅲ 심사 및 시상 2. 심사기준",
+        "quote": "창 의 성\n25점\n차별성, 독창성 등"
+      },
+      "confidence": 1.0,
+      "extraction_status": "EXTRACTED",
+      "evidence_start": 872,
+      "evidence_end": 892,
+      "issues": [],
+      "original": {
+        "requirement_id": "R28",
+        "rule": "제안은 차별성·독창성 등의 창의성 항목으로 25점 평가된다.",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "심사 대상인 경우",
+        "evidence": {
+          "source_section": "Ⅲ 심사 및 시상 2. 심사기준",
+          "quote": "창 의 성\n25점\n차별성, 독창성 등"
+        },
+        "confidence": 1.0
+      }
+    },
+    {
+      "requirement_id": "R29",
+      "rule": "제안은 성공 가능성·축제 기여도 등의 능률성 항목으로 25점 평가된다.",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "SEMANTIC",
+      "condition": "심사 대상인 경우",
+      "evidence": {
+        "source_section": "Ⅲ 심사 및 시상 2. 심사기준",
+        "quote": "능 률 성\n25점\n성공 가능성, 축제 기여도 등"
+      },
+      "confidence": 1.0,
+      "extraction_status": "EXTRACTED",
+      "evidence_start": 893,
+      "evidence_end": 919,
+      "issues": [],
+      "original": {
+        "requirement_id": "R29",
+        "rule": "제안은 성공 가능성·축제 기여도 등의 능률성 항목으로 25점 평가된다.",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "심사 대상인 경우",
+        "evidence": {
+          "source_section": "Ⅲ 심사 및 시상 2. 심사기준",
+          "quote": "능 률 성\n25점\n성공 가능성, 축제 기여도 등"
+        },
+        "confidence": 1.0
+      }
+    },
+    {
+      "requirement_id": "R30",
+      "rule": "제안은 지속가능성·경쟁력 등의 계속성 항목으로 20점 평가된다.",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "SEMANTIC",
+      "condition": "심사 대상인 경우",
+      "evidence": {
+        "source_section": "Ⅲ 심사 및 시상 2. 심사기준",
+        "quote": "계 속 성\n20점\n지속가능성, 경쟁력 등"
+      },
+      "confidence": 1.0,
+      "extraction_status": "EXTRACTED",
+      "evidence_start": 920,
+      "evidence_end": 942,
+      "issues": [],
+      "original": {
+        "requirement_id": "R30",
+        "rule": "제안은 지속가능성·경쟁력 등의 계속성 항목으로 20점 평가된다.",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "심사 대상인 경우",
+        "evidence": {
+          "source_section": "Ⅲ 심사 및 시상 2. 심사기준",
+          "quote": "계 속 성\n20점\n지속가능성, 경쟁력 등"
+        },
+        "confidence": 1.0
+      }
+    },
+    {
+      "requirement_id": "R31",
+      "rule": "제안은 축제 연계성·활용도·대중화 등의 적용범위 항목으로 20점 평가된다.",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "SEMANTIC",
+      "condition": "심사 대상인 경우",
+      "evidence": {
+        "source_section": "Ⅲ 심사 및 시상 2. 심사기준",
+        "quote": "적용범위\n20점\n축제 연계성, 활용도, 대중화 등"
+      },
+      "confidence": 1.0,
+      "extraction_status": "EXTRACTED",
+      "evidence_start": 943,
+      "evidence_end": 970,
+      "issues": [],
+      "original": {
+        "requirement_id": "R31",
+        "rule": "제안은 축제 연계성·활용도·대중화 등의 적용범위 항목으로 20점 평가된다.",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "심사 대상인 경우",
+        "evidence": {
+          "source_section": "Ⅲ 심사 및 시상 2. 심사기준",
+          "quote": "적용범위\n20점\n축제 연계성, 활용도, 대중화 등"
+        },
+        "confidence": 1.0
+      }
+    },
+    {
+      "requirement_id": "R32",
+      "rule": "제안은 노력도·완성도 등의 노력도 항목으로 10점 평가된다.",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "SEMANTIC",
+      "condition": "심사 대상인 경우",
+      "evidence": {
+        "source_section": "Ⅲ 심사 및 시상 2. 심사기준",
+        "quote": "노 력 도\n10점\n노력도, 완성도 등"
+      },
+      "confidence": 1.0,
+      "extraction_status": "EXTRACTED",
+      "evidence_start": 971,
+      "evidence_end": 991,
+      "issues": [],
+      "original": {
+        "requirement_id": "R32",
+        "rule": "제안은 노력도·완성도 등의 노력도 항목으로 10점 평가된다.",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "심사 대상인 경우",
+        "evidence": {
+          "source_section": "Ⅲ 심사 및 시상 2. 심사기준",
+          "quote": "노 력 도\n10점\n노력도, 완성도 등"
+        },
+        "confidence": 1.0
+      }
+    },
+    {
+      "requirement_id": "R33",
+      "rule": "동일하거나 유사한 제안이 제출되면 먼저 접수된 제안이 우선된다.",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "EXTERNAL",
+      "condition": "동일하거나 유사한 제안이 제출된 경우",
+      "evidence": {
+        "source_section": "Ⅳ 기타사항 1",
+        "quote": "1. 동일 또는 유사한 제안이 제출된 경우, 먼저 접수한 제안을 우선함"
+      },
+      "confidence": 1.0,
+      "extraction_status": "EXTRACTED",
+      "evidence_start": 1306,
+      "evidence_end": 1345,
+      "issues": [],
+      "original": {
+        "requirement_id": "R33",
+        "rule": "동일하거나 유사한 제안이 제출되면 먼저 접수된 제안이 우선된다.",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "EXTERNAL",
+        "condition": "동일하거나 유사한 제안이 제출된 경우",
+        "evidence": {
+          "source_section": "Ⅳ 기타사항 1",
+          "quote": "1. 동일 또는 유사한 제안이 제출된 경우, 먼저 접수한 제안을 우선함"
+        },
+        "confidence": 1.0
+      }
+    },
+    {
+      "requirement_id": "R34",
+      "rule": "동일인의 제안이 여러 건 선정되면 최상위 제안 1건만 선정된다.",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "EXTERNAL",
+      "condition": "동일인의 제안이 다수 선정된 경우",
+      "evidence": {
+        "source_section": "Ⅳ 기타사항 2",
+        "quote": "2. 동일인의 제안이 다수 선정된 경우, 최상위 1건에 대해서만 선정"
+      },
+      "confidence": 1.0,
+      "extraction_status": "EXTRACTED",
+      "evidence_start": 1347,
+      "evidence_end": 1385,
+      "issues": [],
+      "original": {
+        "requirement_id": "R34",
+        "rule": "동일인의 제안이 여러 건 선정되면 최상위 제안 1건만 선정된다.",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "EXTERNAL",
+        "condition": "동일인의 제안이 다수 선정된 경우",
+        "evidence": {
+          "source_section": "Ⅳ 기타사항 2",
+          "quote": "2. 동일인의 제안이 다수 선정된 경우, 최상위 1건에 대해서만 선정"
+        },
+        "confidence": 1.0
+      }
+    },
+    {
+      "requirement_id": "R35",
+      "rule": "개인정보를 허위로 작성해서는 안 된다.",
+      "modality": "MUST_NOT",
+      "severity": "BLOCKER",
+      "verifier": "EXTERNAL",
+      "condition": "always",
+      "evidence": {
+        "source_section": "Ⅳ 기타사항 3",
+        "quote": "3. 개인정보 허위 작성 시 심사에 제외될 수 있으며, 향후 공모전 참여 \n제한 등 불이익이 있을 수 있음"
+      },
+      "confidence": 0.96,
+      "extraction_status": "EXTRACTED",
+      "evidence_start": 1387,
+      "evidence_end": 1446,
+      "issues": [],
+      "original": {
+        "requirement_id": "R35",
+        "rule": "개인정보를 허위로 작성해서는 안 된다.",
+        "modality": "MUST_NOT",
+        "severity": "BLOCKER",
+        "verifier": "EXTERNAL",
+        "condition": "always",
+        "evidence": {
+          "source_section": "Ⅳ 기타사항 3",
+          "quote": "3. 개인정보 허위 작성 시 심사에 제외될 수 있으며, 향후 공모전 참여 \n제한 등 불이익이 있을 수 있음"
+        },
+        "confidence": 0.96
+      }
+    },
+    {
+      "requirement_id": "R36",
+      "rule": "개인정보를 허위로 작성하면 심사에서 제외될 수 있다.",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "EXTERNAL",
+      "condition": "개인정보를 허위로 작성한 경우",
+      "evidence": {
+        "source_section": "Ⅳ 기타사항 3",
+        "quote": "3. 개인정보 허위 작성 시 심사에 제외될 수 있으며, 향후 공모전 참여 \n제한 등 불이익이 있을 수 있음"
+      },
+      "confidence": 1.0,
+      "extraction_status": "EXTRACTED",
+      "evidence_start": 1387,
+      "evidence_end": 1446,
+      "issues": [],
+      "original": {
+        "requirement_id": "R36",
+        "rule": "개인정보를 허위로 작성하면 심사에서 제외될 수 있다.",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "EXTERNAL",
+        "condition": "개인정보를 허위로 작성한 경우",
+        "evidence": {
+          "source_section": "Ⅳ 기타사항 3",
+          "quote": "3. 개인정보 허위 작성 시 심사에 제외될 수 있으며, 향후 공모전 참여 \n제한 등 불이익이 있을 수 있음"
+        },
+        "confidence": 1.0
+      }
+    },
+    {
+      "requirement_id": "R37",
+      "rule": "개인정보를 허위로 작성하면 향후 공모전 참여 제한 등의 불이익을 받을 수 있다.",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "EXTERNAL",
+      "condition": "개인정보를 허위로 작성한 경우",
+      "evidence": {
+        "source_section": "Ⅳ 기타사항 3",
+        "quote": "3. 개인정보 허위 작성 시 심사에 제외될 수 있으며, 향후 공모전 참여 \n제한 등 불이익이 있을 수 있음"
+      },
+      "confidence": 1.0,
+      "extraction_status": "EXTRACTED",
+      "evidence_start": 1387,
+      "evidence_end": 1446,
+      "issues": [],
+      "original": {
+        "requirement_id": "R37",
+        "rule": "개인정보를 허위로 작성하면 향후 공모전 참여 제한 등의 불이익을 받을 수 있다.",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "EXTERNAL",
+        "condition": "개인정보를 허위로 작성한 경우",
+        "evidence": {
+          "source_section": "Ⅳ 기타사항 3",
+          "quote": "3. 개인정보 허위 작성 시 심사에 제외될 수 있으며, 향후 공모전 참여 \n제한 등 불이익이 있을 수 있음"
+        },
+        "confidence": 1.0
+      }
+    },
+    {
+      "requirement_id": "R38",
+      "rule": "접수된 서류 등은 반환되지 않는다.",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "EXTERNAL",
+      "condition": "서류가 접수된 경우",
+      "evidence": {
+        "source_section": "Ⅳ 기타사항 4",
+        "quote": "접수된 서류 \n등은 일체 반환하지 않음"
+      },
+      "confidence": 1.0,
+      "extraction_status": "EXTRACTED",
+      "evidence_start": 1481,
+      "evidence_end": 1502,
+      "issues": [],
+      "original": {
+        "requirement_id": "R38",
+        "rule": "접수된 서류 등은 반환되지 않는다.",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "EXTERNAL",
+        "condition": "서류가 접수된 경우",
+        "evidence": {
+          "source_section": "Ⅳ 기타사항 4",
+          "quote": "접수된 서류 \n등은 일체 반환하지 않음"
+        },
+        "confidence": 1.0
+      }
+    },
+    {
+      "requirement_id": "R39",
+      "rule": "선정된 제안서의 일체의 권리는 상주시에 귀속된다.",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "SEMANTIC",
+      "condition": "제안서가 선정된 경우",
+      "evidence": {
+        "source_section": "Ⅳ 기타사항 5",
+        "quote": "5. 선정된 제안서의 일체의 권리는 상주시에 귀속되며, 향후 홍보자료 등으로 \n활용될 수 있음(필요에 따라 수정 또는 변형하여 사용)"
+      },
+      "confidence": 0.99,
+      "extraction_status": "EXTRACTED",
+      "evidence_start": 1504,
+      "evidence_end": 1578,
+      "issues": [],
+      "original": {
+        "requirement_id": "R39",
+        "rule": "선정된 제안서의 일체의 권리는 상주시에 귀속된다.",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "제안서가 선정된 경우",
+        "evidence": {
+          "source_section": "Ⅳ 기타사항 5",
+          "quote": "5. 선정된 제안서의 일체의 권리는 상주시에 귀속되며, 향후 홍보자료 등으로 \n활용될 수 있음(필요에 따라 수정 또는 변형하여 사용)"
+        },
+        "confidence": 0.99
+      }
+    },
+    {
+      "requirement_id": "R40",
+      "rule": "선정된 제안서는 향후 홍보자료 등으로 활용될 수 있다.",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "SEMANTIC",
+      "condition": "제안서가 선정된 경우",
+      "evidence": {
+        "source_section": "Ⅳ 기타사항 5",
+        "quote": "5. 선정된 제안서의 일체의 권리는 상주시에 귀속되며, 향후 홍보자료 등으로 \n활용될 수 있음(필요에 따라 수정 또는 변형하여 사용)"
+      },
+      "confidence": 1.0,
+      "extraction_status": "EXTRACTED",
+      "evidence_start": 1504,
+      "evidence_end": 1578,
+      "issues": [],
+      "original": {
+        "requirement_id": "R40",
+        "rule": "선정된 제안서는 향후 홍보자료 등으로 활용될 수 있다.",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "제안서가 선정된 경우",
+        "evidence": {
+          "source_section": "Ⅳ 기타사항 5",
+          "quote": "5. 선정된 제안서의 일체의 권리는 상주시에 귀속되며, 향후 홍보자료 등으로 \n활용될 수 있음(필요에 따라 수정 또는 변형하여 사용)"
+        },
+        "confidence": 1.0
+      }
+    },
+    {
+      "requirement_id": "R41",
+      "rule": "선정된 제안서는 필요에 따라 수정 또는 변형되어 사용될 수 있다.",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "SEMANTIC",
+      "condition": "제안서가 선정된 경우",
+      "evidence": {
+        "source_section": "Ⅳ 기타사항 5",
+        "quote": "활용될 수 있음(필요에 따라 수정 또는 변형하여 사용)"
+      },
+      "confidence": 1.0,
+      "extraction_status": "EXTRACTED",
+      "evidence_start": 1548,
+      "evidence_end": 1578,
+      "issues": [],
+      "original": {
+        "requirement_id": "R41",
+        "rule": "선정된 제안서는 필요에 따라 수정 또는 변형되어 사용될 수 있다.",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "제안서가 선정된 경우",
+        "evidence": {
+          "source_section": "Ⅳ 기타사항 5",
+          "quote": "활용될 수 있음(필요에 따라 수정 또는 변형하여 사용)"
+        },
+        "confidence": 1.0
+      }
+    },
+    {
+      "requirement_id": "R42",
+      "rule": "채택된 제안도 내부사정 등으로 정책에 반영되지 않을 수 있다.",
+      "modality": "INFO",
+      "severity": "INFO",
+      "verifier": "EXTERNAL",
+      "condition": "제안이 채택된 경우",
+      "evidence": {
+        "source_section": "Ⅳ 기타사항 6",
+        "quote": "6. 채택된 제안이 내부사정 등으로 정책에 반영되지 않을 수 있음"
+      },
+      "confidence": 1.0,
+      "extraction_status": "EXTRACTED",
+      "evidence_start": 1580,
+      "evidence_end": 1616,
+      "issues": [],
+      "original": {
+        "requirement_id": "R42",
+        "rule": "채택된 제안도 내부사정 등으로 정책에 반영되지 않을 수 있다.",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "EXTERNAL",
+        "condition": "제안이 채택된 경우",
+        "evidence": {
+          "source_section": "Ⅳ 기타사항 6",
+          "quote": "6. 채택된 제안이 내부사정 등으로 정책에 반영되지 않을 수 있음"
+        },
+        "confidence": 1.0
+      }
+    },
+    {
+      "requirement_id": "R43",
+      "rule": "공고에 언급되지 않은 사항은 상주시의 결정에 따라야 한다.",
+      "modality": "MUST",
+      "severity": "REVIEW",
+      "verifier": "EXTERNAL",
+      "condition": "공고에 언급되지 않은 사항이 있는 경우",
+      "evidence": {
+        "source_section": "Ⅳ 기타사항 7",
+        "quote": "7. 위에 언급되지 않은 내용 등에 대해서는 상주시의 결정에 따르며, 심사 \n결과에 대하여 이의를 제기하지 않음"
+      },
+      "confidence": 0.98,
+      "extraction_status": "EXTRACTED",
+      "evidence_start": 1618,
+      "evidence_end": 1680,
+      "issues": [],
+      "original": {
+        "requirement_id": "R43",
+        "rule": "공고에 언급되지 않은 사항은 상주시의 결정에 따라야 한다.",
+        "modality": "MUST",
+        "severity": "REVIEW",
+        "verifier": "EXTERNAL",
+        "condition": "공고에 언급되지 않은 사항이 있는 경우",
+        "evidence": {
+          "source_section": "Ⅳ 기타사항 7",
+          "quote": "7. 위에 언급되지 않은 내용 등에 대해서는 상주시의 결정에 따르며, 심사 \n결과에 대하여 이의를 제기하지 않음"
+        },
+        "confidence": 0.98
+      }
+    },
+    {
+      "requirement_id": "R44",
+      "rule": "심사 결과에 이의를 제기하지 않아야 한다.",
+      "modality": "MUST_NOT",
+      "severity": "REVIEW",
+      "verifier": "EXTERNAL",
+      "condition": "심사 결과가 나온 경우",
+      "evidence": {
+        "source_section": "Ⅳ 기타사항 7",
+        "quote": "심사 \n결과에 대하여 이의를 제기하지 않음"
+      },
+      "confidence": 0.99,
+      "extraction_status": "EXTRACTED",
+      "evidence_start": 1657,
+      "evidence_end": 1680,
+      "issues": [],
+      "original": {
+        "requirement_id": "R44",
+        "rule": "심사 결과에 이의를 제기하지 않아야 한다.",
+        "modality": "MUST_NOT",
+        "severity": "REVIEW",
+        "verifier": "EXTERNAL",
+        "condition": "심사 결과가 나온 경우",
+        "evidence": {
+          "source_section": "Ⅳ 기타사항 7",
+          "quote": "심사 \n결과에 대하여 이의를 제기하지 않음"
+        },
+        "confidence": 0.99
+      }
+    }
+  ],
+  "rejected": [],
+  "profile_status": "REVIEW_REQUIRED",
+  "automatic_confirmation": false
+}

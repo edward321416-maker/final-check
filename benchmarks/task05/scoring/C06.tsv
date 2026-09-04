@@ -1,0 +1,7 @@
+case_id	extracted_id	gold_ids	match_type	semantic_support	atomicity	hallucinated	failure_categories	reason
+C06	R01	2	MATCH	1	0	0	-	Korean nationality requirement.
+C06	R02	3,4	PARTIAL	1	1	0	ATOMICITY,WRONG_MODALITY	Combines individual/team permission and five-person team cap as MUST.
+C06	R03	1	MATCH	1	0	0	-	Complete subject and permitted planning fields.
+C06	R04	5	MATCH	1	0	0	-	Application interval preserved.
+C06	R05	6	MATCH	1	0	0	-	Submission interval preserved.
+C06	R06	7	MATCH	1	0	0	-	Named official portal, board and URL in evidence identify correct submission route.

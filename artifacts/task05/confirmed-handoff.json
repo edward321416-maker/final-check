@@ -1,0 +1,806 @@
+{
+  "id": "e08262b1-5f29-406d-a8e7-851a80730ea4",
+  "created_at": "2026-09-04T09:49:14.673558Z",
+  "updated_at": "2026-09-04T09:49:14.876258Z",
+  "mode": "custom",
+  "source_mode": "generic_review",
+  "validation_profile": "generic",
+  "generic_profile": {
+    "profile_type": "generic",
+    "profile_id": "450996a2-7e1a-4f4b-a022-6a11b935943d",
+    "announcement": {
+      "source_type": "TEXT",
+      "name": "synthetic announcement",
+      "sha256": "38be279a337d7c12b4757812f6e924da4086d4a3d927578d357319a9e3879d62",
+      "text_sha256": "38be279a337d7c12b4757812f6e924da4086d4a3d927578d357319a9e3879d62",
+      "text": "# 지역 이야기 공모전 — 합성 integration fixture\n# 제출방법\n제안서는 PDF 형식으로 제출해야 한다.\nPDF는 10페이지 이하여야 하며 파일명은 이름_작품명 형식이어야 한다.\n영상 제출은 권장한다.\n# 접수\n접수 마감은 2026년 10월 1일 18시이다.\n# 심사 안내\n심사는 주최 측의 심사위원이 진행한다.\n",
+      "ingestion_status": "READABLE",
+      "page_count": null,
+      "notice": ""
+    },
+    "status": "CONFIRMED",
+    "requirements": [
+      {
+        "requirement_id": "G001",
+        "rule": "제안서는 PDF 형식으로 제출해야 한다",
+        "modality": "MUST",
+        "severity": "REVIEW",
+        "verifier": "DETERMINISTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "제출방법",
+          "quote": "제안서는 PDF 형식으로 제출해야 한다."
+        },
+        "confidence": 0.5,
+        "extraction_status": "CONFIRMED",
+        "evidence_start": 45,
+        "evidence_end": 67,
+        "issues": [],
+        "original": {
+          "requirement_id": "G001",
+          "rule": "제안서는 PDF 형식으로 제출해야 한다.",
+          "modality": "MUST",
+          "severity": "REVIEW",
+          "verifier": "DETERMINISTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "# 제출방법 · 줄 3",
+            "quote": "제안서는 PDF 형식으로 제출해야 한다."
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G002",
+        "rule": "PDF는 10페이지 이하여야",
+        "modality": "MUST",
+        "severity": "REVIEW",
+        "verifier": "DETERMINISTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "# 제출방법 · 줄 4",
+          "quote": "PDF는 10페이지 이하여야"
+        },
+        "confidence": 0.5,
+        "extraction_status": "CONFIRMED",
+        "evidence_start": 68,
+        "evidence_end": 83,
+        "issues": [],
+        "original": {
+          "requirement_id": "G002",
+          "rule": "PDF는 10페이지 이하여야",
+          "modality": "MUST",
+          "severity": "REVIEW",
+          "verifier": "DETERMINISTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "# 제출방법 · 줄 4",
+            "quote": "PDF는 10페이지 이하여야"
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G003",
+        "rule": "파일명은 이름_작품명 형식이어야 한다.",
+        "modality": "MUST",
+        "severity": "REVIEW",
+        "verifier": "DETERMINISTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "# 제출방법 · 줄 4",
+          "quote": "파일명은 이름_작품명 형식이어야 한다."
+        },
+        "confidence": 0.5,
+        "extraction_status": "CONFIRMED",
+        "evidence_start": 87,
+        "evidence_end": 108,
+        "issues": [],
+        "original": {
+          "requirement_id": "G003",
+          "rule": "파일명은 이름_작품명 형식이어야 한다.",
+          "modality": "MUST",
+          "severity": "REVIEW",
+          "verifier": "DETERMINISTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "# 제출방법 · 줄 4",
+            "quote": "파일명은 이름_작품명 형식이어야 한다."
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G004",
+        "rule": "영상 제출은 권장한다.",
+        "modality": "SHOULD",
+        "severity": "REVIEW",
+        "verifier": "SEMANTIC",
+        "condition": "always",
+        "evidence": {
+          "source_section": "# 제출방법 · 줄 5",
+          "quote": "영상 제출은 권장한다."
+        },
+        "confidence": 0.5,
+        "extraction_status": "CONFIRMED",
+        "evidence_start": 109,
+        "evidence_end": 121,
+        "issues": [],
+        "original": {
+          "requirement_id": "G004",
+          "rule": "영상 제출은 권장한다.",
+          "modality": "SHOULD",
+          "severity": "REVIEW",
+          "verifier": "SEMANTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "# 제출방법 · 줄 5",
+            "quote": "영상 제출은 권장한다."
+          },
+          "confidence": 0.5
+        }
+      },
+      {
+        "requirement_id": "G005",
+        "rule": "접수 마감은 2026년 10월 1일 18시이다.",
+        "modality": "INFO",
+        "severity": "EXTERNAL",
+        "verifier": "EXTERNAL",
+        "condition": "always",
+        "evidence": {
+          "source_section": "# 접수 · 줄 7",
+          "quote": "접수 마감은 2026년 10월 1일 18시이다."
+        },
+        "confidence": 0.5,
+        "extraction_status": "CONFIRMED",
+        "evidence_start": 127,
+        "evidence_end": 153,
+        "issues": [],
+        "original": {
+          "requirement_id": "G005",
+          "rule": "접수 마감은 2026년 10월 1일 18시이다.",
+          "modality": "INFO",
+          "severity": "EXTERNAL",
+          "verifier": "EXTERNAL",
+          "condition": "always",
+          "evidence": {
+            "source_section": "# 접수 · 줄 7",
+            "quote": "접수 마감은 2026년 10월 1일 18시이다."
+          },
+          "confidence": 0.5
+        }
+      }
+    ],
+    "provider": "local-rules-v1 (no AI model)",
+    "execution_kind": "ACTUAL",
+    "extraction_complete": true,
+    "notices": [
+      "로컬 규칙 후보입니다. confidence=0.5는 미보정 값이며 정확도가 아닙니다. 원문 전체를 검토하세요."
+    ],
+    "history": [
+      {
+        "action": "EXTRACT",
+        "requirement_id": null,
+        "at": "2026-09-04T09:49:14.679532Z",
+        "before": null,
+        "after": null
+      },
+      {
+        "action": "NEEDS_REVIEW",
+        "requirement_id": "G001",
+        "at": "2026-09-04T09:49:14.687149Z",
+        "before": {
+          "requirement_id": "G001",
+          "rule": "제안서는 PDF 형식으로 제출해야 한다.",
+          "modality": "MUST",
+          "severity": "REVIEW",
+          "verifier": "DETERMINISTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "# 제출방법 · 줄 3",
+            "quote": "제안서는 PDF 형식으로 제출해야 한다."
+          },
+          "confidence": 0.5,
+          "extraction_status": "EXTRACTED",
+          "evidence_start": 45,
+          "evidence_end": 67,
+          "issues": [],
+          "original": {
+            "requirement_id": "G001",
+            "rule": "제안서는 PDF 형식으로 제출해야 한다.",
+            "modality": "MUST",
+            "severity": "REVIEW",
+            "verifier": "DETERMINISTIC",
+            "condition": "always",
+            "evidence": {
+              "source_section": "# 제출방법 · 줄 3",
+              "quote": "제안서는 PDF 형식으로 제출해야 한다."
+            },
+            "confidence": 0.5
+          }
+        },
+        "after": {
+          "requirement_id": "G001",
+          "rule": "제안서는 PDF 형식으로 제출해야 한다.",
+          "modality": "MUST",
+          "severity": "REVIEW",
+          "verifier": "DETERMINISTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "# 제출방법 · 줄 3",
+            "quote": "제안서는 PDF 형식으로 제출해야 한다."
+          },
+          "confidence": 0.5,
+          "extraction_status": "NEEDS_REVIEW",
+          "evidence_start": 45,
+          "evidence_end": 67,
+          "issues": [],
+          "original": {
+            "requirement_id": "G001",
+            "rule": "제안서는 PDF 형식으로 제출해야 한다.",
+            "modality": "MUST",
+            "severity": "REVIEW",
+            "verifier": "DETERMINISTIC",
+            "condition": "always",
+            "evidence": {
+              "source_section": "# 제출방법 · 줄 3",
+              "quote": "제안서는 PDF 형식으로 제출해야 한다."
+            },
+            "confidence": 0.5
+          }
+        }
+      },
+      {
+        "action": "EDIT",
+        "requirement_id": "G001",
+        "at": "2026-09-04T09:49:14.689339Z",
+        "before": {
+          "requirement_id": "G001",
+          "rule": "제안서는 PDF 형식으로 제출해야 한다.",
+          "modality": "MUST",
+          "severity": "REVIEW",
+          "verifier": "DETERMINISTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "# 제출방법 · 줄 3",
+            "quote": "제안서는 PDF 형식으로 제출해야 한다."
+          },
+          "confidence": 0.5,
+          "extraction_status": "NEEDS_REVIEW",
+          "evidence_start": 45,
+          "evidence_end": 67,
+          "issues": [],
+          "original": {
+            "requirement_id": "G001",
+            "rule": "제안서는 PDF 형식으로 제출해야 한다.",
+            "modality": "MUST",
+            "severity": "REVIEW",
+            "verifier": "DETERMINISTIC",
+            "condition": "always",
+            "evidence": {
+              "source_section": "# 제출방법 · 줄 3",
+              "quote": "제안서는 PDF 형식으로 제출해야 한다."
+            },
+            "confidence": 0.5
+          }
+        },
+        "after": {
+          "requirement_id": "G001",
+          "rule": "제안서는 PDF 형식으로 제출해야 한다",
+          "modality": "MUST",
+          "severity": "REVIEW",
+          "verifier": "DETERMINISTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "제출방법",
+            "quote": "제안서는 PDF 형식으로 제출해야 한다."
+          },
+          "confidence": 0.5,
+          "extraction_status": "NEEDS_REVIEW",
+          "evidence_start": 45,
+          "evidence_end": 67,
+          "issues": [],
+          "original": {
+            "requirement_id": "G001",
+            "rule": "제안서는 PDF 형식으로 제출해야 한다.",
+            "modality": "MUST",
+            "severity": "REVIEW",
+            "verifier": "DETERMINISTIC",
+            "condition": "always",
+            "evidence": {
+              "source_section": "# 제출방법 · 줄 3",
+              "quote": "제안서는 PDF 형식으로 제출해야 한다."
+            },
+            "confidence": 0.5
+          }
+        }
+      },
+      {
+        "action": "APPROVE",
+        "requirement_id": "G001",
+        "at": "2026-09-04T09:49:14.691672Z",
+        "before": {
+          "requirement_id": "G001",
+          "rule": "제안서는 PDF 형식으로 제출해야 한다",
+          "modality": "MUST",
+          "severity": "REVIEW",
+          "verifier": "DETERMINISTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "제출방법",
+            "quote": "제안서는 PDF 형식으로 제출해야 한다."
+          },
+          "confidence": 0.5,
+          "extraction_status": "NEEDS_REVIEW",
+          "evidence_start": 45,
+          "evidence_end": 67,
+          "issues": [],
+          "original": {
+            "requirement_id": "G001",
+            "rule": "제안서는 PDF 형식으로 제출해야 한다.",
+            "modality": "MUST",
+            "severity": "REVIEW",
+            "verifier": "DETERMINISTIC",
+            "condition": "always",
+            "evidence": {
+              "source_section": "# 제출방법 · 줄 3",
+              "quote": "제안서는 PDF 형식으로 제출해야 한다."
+            },
+            "confidence": 0.5
+          }
+        },
+        "after": {
+          "requirement_id": "G001",
+          "rule": "제안서는 PDF 형식으로 제출해야 한다",
+          "modality": "MUST",
+          "severity": "REVIEW",
+          "verifier": "DETERMINISTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "제출방법",
+            "quote": "제안서는 PDF 형식으로 제출해야 한다."
+          },
+          "confidence": 0.5,
+          "extraction_status": "CONFIRMED",
+          "evidence_start": 45,
+          "evidence_end": 67,
+          "issues": [],
+          "original": {
+            "requirement_id": "G001",
+            "rule": "제안서는 PDF 형식으로 제출해야 한다.",
+            "modality": "MUST",
+            "severity": "REVIEW",
+            "verifier": "DETERMINISTIC",
+            "condition": "always",
+            "evidence": {
+              "source_section": "# 제출방법 · 줄 3",
+              "quote": "제안서는 PDF 형식으로 제출해야 한다."
+            },
+            "confidence": 0.5
+          }
+        }
+      },
+      {
+        "action": "APPROVE",
+        "requirement_id": "G002",
+        "at": "2026-09-04T09:49:14.694236Z",
+        "before": {
+          "requirement_id": "G002",
+          "rule": "PDF는 10페이지 이하여야",
+          "modality": "MUST",
+          "severity": "REVIEW",
+          "verifier": "DETERMINISTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "# 제출방법 · 줄 4",
+            "quote": "PDF는 10페이지 이하여야"
+          },
+          "confidence": 0.5,
+          "extraction_status": "EXTRACTED",
+          "evidence_start": 68,
+          "evidence_end": 83,
+          "issues": [],
+          "original": {
+            "requirement_id": "G002",
+            "rule": "PDF는 10페이지 이하여야",
+            "modality": "MUST",
+            "severity": "REVIEW",
+            "verifier": "DETERMINISTIC",
+            "condition": "always",
+            "evidence": {
+              "source_section": "# 제출방법 · 줄 4",
+              "quote": "PDF는 10페이지 이하여야"
+            },
+            "confidence": 0.5
+          }
+        },
+        "after": {
+          "requirement_id": "G002",
+          "rule": "PDF는 10페이지 이하여야",
+          "modality": "MUST",
+          "severity": "REVIEW",
+          "verifier": "DETERMINISTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "# 제출방법 · 줄 4",
+            "quote": "PDF는 10페이지 이하여야"
+          },
+          "confidence": 0.5,
+          "extraction_status": "CONFIRMED",
+          "evidence_start": 68,
+          "evidence_end": 83,
+          "issues": [],
+          "original": {
+            "requirement_id": "G002",
+            "rule": "PDF는 10페이지 이하여야",
+            "modality": "MUST",
+            "severity": "REVIEW",
+            "verifier": "DETERMINISTIC",
+            "condition": "always",
+            "evidence": {
+              "source_section": "# 제출방법 · 줄 4",
+              "quote": "PDF는 10페이지 이하여야"
+            },
+            "confidence": 0.5
+          }
+        }
+      },
+      {
+        "action": "APPROVE",
+        "requirement_id": "G003",
+        "at": "2026-09-04T09:49:14.697314Z",
+        "before": {
+          "requirement_id": "G003",
+          "rule": "파일명은 이름_작품명 형식이어야 한다.",
+          "modality": "MUST",
+          "severity": "REVIEW",
+          "verifier": "DETERMINISTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "# 제출방법 · 줄 4",
+            "quote": "파일명은 이름_작품명 형식이어야 한다."
+          },
+          "confidence": 0.5,
+          "extraction_status": "EXTRACTED",
+          "evidence_start": 87,
+          "evidence_end": 108,
+          "issues": [],
+          "original": {
+            "requirement_id": "G003",
+            "rule": "파일명은 이름_작품명 형식이어야 한다.",
+            "modality": "MUST",
+            "severity": "REVIEW",
+            "verifier": "DETERMINISTIC",
+            "condition": "always",
+            "evidence": {
+              "source_section": "# 제출방법 · 줄 4",
+              "quote": "파일명은 이름_작품명 형식이어야 한다."
+            },
+            "confidence": 0.5
+          }
+        },
+        "after": {
+          "requirement_id": "G003",
+          "rule": "파일명은 이름_작품명 형식이어야 한다.",
+          "modality": "MUST",
+          "severity": "REVIEW",
+          "verifier": "DETERMINISTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "# 제출방법 · 줄 4",
+            "quote": "파일명은 이름_작품명 형식이어야 한다."
+          },
+          "confidence": 0.5,
+          "extraction_status": "CONFIRMED",
+          "evidence_start": 87,
+          "evidence_end": 108,
+          "issues": [],
+          "original": {
+            "requirement_id": "G003",
+            "rule": "파일명은 이름_작품명 형식이어야 한다.",
+            "modality": "MUST",
+            "severity": "REVIEW",
+            "verifier": "DETERMINISTIC",
+            "condition": "always",
+            "evidence": {
+              "source_section": "# 제출방법 · 줄 4",
+              "quote": "파일명은 이름_작품명 형식이어야 한다."
+            },
+            "confidence": 0.5
+          }
+        }
+      },
+      {
+        "action": "APPROVE",
+        "requirement_id": "G004",
+        "at": "2026-09-04T09:49:14.700261Z",
+        "before": {
+          "requirement_id": "G004",
+          "rule": "영상 제출은 권장한다.",
+          "modality": "SHOULD",
+          "severity": "REVIEW",
+          "verifier": "SEMANTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "# 제출방법 · 줄 5",
+            "quote": "영상 제출은 권장한다."
+          },
+          "confidence": 0.5,
+          "extraction_status": "EXTRACTED",
+          "evidence_start": 109,
+          "evidence_end": 121,
+          "issues": [],
+          "original": {
+            "requirement_id": "G004",
+            "rule": "영상 제출은 권장한다.",
+            "modality": "SHOULD",
+            "severity": "REVIEW",
+            "verifier": "SEMANTIC",
+            "condition": "always",
+            "evidence": {
+              "source_section": "# 제출방법 · 줄 5",
+              "quote": "영상 제출은 권장한다."
+            },
+            "confidence": 0.5
+          }
+        },
+        "after": {
+          "requirement_id": "G004",
+          "rule": "영상 제출은 권장한다.",
+          "modality": "SHOULD",
+          "severity": "REVIEW",
+          "verifier": "SEMANTIC",
+          "condition": "always",
+          "evidence": {
+            "source_section": "# 제출방법 · 줄 5",
+            "quote": "영상 제출은 권장한다."
+          },
+          "confidence": 0.5,
+          "extraction_status": "CONFIRMED",
+          "evidence_start": 109,
+          "evidence_end": 121,
+          "issues": [],
+          "original": {
+            "requirement_id": "G004",
+            "rule": "영상 제출은 권장한다.",
+            "modality": "SHOULD",
+            "severity": "REVIEW",
+            "verifier": "SEMANTIC",
+            "condition": "always",
+            "evidence": {
+              "source_section": "# 제출방법 · 줄 5",
+              "quote": "영상 제출은 권장한다."
+            },
+            "confidence": 0.5
+          }
+        }
+      },
+      {
+        "action": "APPROVE",
+        "requirement_id": "G005",
+        "at": "2026-09-04T09:49:14.703106Z",
+        "before": {
+          "requirement_id": "G005",
+          "rule": "접수 마감은 2026년 10월 1일 18시이다.",
+          "modality": "INFO",
+          "severity": "EXTERNAL",
+          "verifier": "EXTERNAL",
+          "condition": "always",
+          "evidence": {
+            "source_section": "# 접수 · 줄 7",
+            "quote": "접수 마감은 2026년 10월 1일 18시이다."
+          },
+          "confidence": 0.5,
+          "extraction_status": "EXTRACTED",
+          "evidence_start": 127,
+          "evidence_end": 153,
+          "issues": [],
+          "original": {
+            "requirement_id": "G005",
+            "rule": "접수 마감은 2026년 10월 1일 18시이다.",
+            "modality": "INFO",
+            "severity": "EXTERNAL",
+            "verifier": "EXTERNAL",
+            "condition": "always",
+            "evidence": {
+              "source_section": "# 접수 · 줄 7",
+              "quote": "접수 마감은 2026년 10월 1일 18시이다."
+            },
+            "confidence": 0.5
+          }
+        },
+        "after": {
+          "requirement_id": "G005",
+          "rule": "접수 마감은 2026년 10월 1일 18시이다.",
+          "modality": "INFO",
+          "severity": "EXTERNAL",
+          "verifier": "EXTERNAL",
+          "condition": "always",
+          "evidence": {
+            "source_section": "# 접수 · 줄 7",
+            "quote": "접수 마감은 2026년 10월 1일 18시이다."
+          },
+          "confidence": 0.5,
+          "extraction_status": "CONFIRMED",
+          "evidence_start": 127,
+          "evidence_end": 153,
+          "issues": [],
+          "original": {
+            "requirement_id": "G005",
+            "rule": "접수 마감은 2026년 10월 1일 18시이다.",
+            "modality": "INFO",
+            "severity": "EXTERNAL",
+            "verifier": "EXTERNAL",
+            "condition": "always",
+            "evidence": {
+              "source_section": "# 접수 · 줄 7",
+              "quote": "접수 마감은 2026년 10월 1일 18시이다."
+            },
+            "confidence": 0.5
+          }
+        }
+      },
+      {
+        "action": "CONFIRM_PROFILE",
+        "requirement_id": null,
+        "at": "2026-09-04T09:49:14.707481Z",
+        "before": null,
+        "after": null
+      }
+    ],
+    "version": 10,
+    "created_at": "2026-09-04T09:49:14.677016Z",
+    "updated_at": "2026-09-04T09:49:14.707478Z"
+  },
+  "engine_sha256": null,
+  "run_state": "COMPLETE",
+  "validation_complete": false,
+  "run_error": null,
+  "announcement_name": "synthetic announcement",
+  "requirements": [
+    {
+      "id": "G001",
+      "title": "제안서는 PDF 형식으로 제출해야 한다",
+      "description": "always",
+      "verifier": "DETERMINISTIC",
+      "announcement_evidence": {
+        "source": "synthetic announcement",
+        "locator": "제출방법 · chars 45:67",
+        "excerpt": "제안서는 PDF 형식으로 제출해야 한다."
+      }
+    },
+    {
+      "id": "G002",
+      "title": "PDF는 10페이지 이하여야",
+      "description": "always",
+      "verifier": "DETERMINISTIC",
+      "announcement_evidence": {
+        "source": "synthetic announcement",
+        "locator": "# 제출방법 · 줄 4 · chars 68:83",
+        "excerpt": "PDF는 10페이지 이하여야"
+      }
+    },
+    {
+      "id": "G003",
+      "title": "파일명은 이름_작품명 형식이어야 한다.",
+      "description": "always",
+      "verifier": "DETERMINISTIC",
+      "announcement_evidence": {
+        "source": "synthetic announcement",
+        "locator": "# 제출방법 · 줄 4 · chars 87:108",
+        "excerpt": "파일명은 이름_작품명 형식이어야 한다."
+      }
+    },
+    {
+      "id": "G004",
+      "title": "영상 제출은 권장한다.",
+      "description": "always",
+      "verifier": "SEMANTIC",
+      "announcement_evidence": {
+        "source": "synthetic announcement",
+        "locator": "# 제출방법 · 줄 5 · chars 109:121",
+        "excerpt": "영상 제출은 권장한다."
+      }
+    },
+    {
+      "id": "G005",
+      "title": "접수 마감은 2026년 10월 1일 18시이다.",
+      "description": "always",
+      "verifier": "EXTERNAL",
+      "announcement_evidence": {
+        "source": "synthetic announcement",
+        "locator": "# 접수 · 줄 7 · chars 127:153",
+        "excerpt": "접수 마감은 2026년 10월 1일 18시이다."
+      }
+    }
+  ],
+  "files": [
+    {
+      "name": "submission.pdf",
+      "size_bytes": 1705116,
+      "media_type": "application/pdf",
+      "sha256": "90a5dcac18bb34c25dfbc528bfe84ad2e49144a65200495155b673e55aa12427"
+    }
+  ],
+  "results": [
+    {
+      "id": "450996a2-7e1a-4f4b-a022-6a11b935943d:G001",
+      "requirement_id": "G001",
+      "status": "REVIEW",
+      "title": "제안서는 PDF 형식으로 제출해야 한다",
+      "explanation": "UNSUPPORTED: 이 요구사항의 자동 제출파일 검증은 아직 구현되지 않았습니다.",
+      "action": "확정한 공고 근거와 제출파일을 직접 대조하세요. 사용자 승인은 파일 조건 충족 판정이 아닙니다.",
+      "announcement_evidence": {
+        "source": "synthetic announcement",
+        "locator": "제출방법 · chars 45:67",
+        "excerpt": "제안서는 PDF 형식으로 제출해야 한다."
+      },
+      "submission_evidence": null,
+      "source_mode": "generic_review"
+    },
+    {
+      "id": "450996a2-7e1a-4f4b-a022-6a11b935943d:G002",
+      "requirement_id": "G002",
+      "status": "REVIEW",
+      "title": "PDF는 10페이지 이하여야",
+      "explanation": "UNSUPPORTED: 이 요구사항의 자동 제출파일 검증은 아직 구현되지 않았습니다.",
+      "action": "확정한 공고 근거와 제출파일을 직접 대조하세요. 사용자 승인은 파일 조건 충족 판정이 아닙니다.",
+      "announcement_evidence": {
+        "source": "synthetic announcement",
+        "locator": "# 제출방법 · 줄 4 · chars 68:83",
+        "excerpt": "PDF는 10페이지 이하여야"
+      },
+      "submission_evidence": null,
+      "source_mode": "generic_review"
+    },
+    {
+      "id": "450996a2-7e1a-4f4b-a022-6a11b935943d:G003",
+      "requirement_id": "G003",
+      "status": "REVIEW",
+      "title": "파일명은 이름_작품명 형식이어야 한다.",
+      "explanation": "UNSUPPORTED: 이 요구사항의 자동 제출파일 검증은 아직 구현되지 않았습니다.",
+      "action": "확정한 공고 근거와 제출파일을 직접 대조하세요. 사용자 승인은 파일 조건 충족 판정이 아닙니다.",
+      "announcement_evidence": {
+        "source": "synthetic announcement",
+        "locator": "# 제출방법 · 줄 4 · chars 87:108",
+        "excerpt": "파일명은 이름_작품명 형식이어야 한다."
+      },
+      "submission_evidence": null,
+      "source_mode": "generic_review"
+    },
+    {
+      "id": "450996a2-7e1a-4f4b-a022-6a11b935943d:G004",
+      "requirement_id": "G004",
+      "status": "REVIEW",
+      "title": "영상 제출은 권장한다.",
+      "explanation": "UNSUPPORTED: 이 요구사항의 자동 제출파일 검증은 아직 구현되지 않았습니다.",
+      "action": "확정한 공고 근거와 제출파일을 직접 대조하세요. 사용자 승인은 파일 조건 충족 판정이 아닙니다.",
+      "announcement_evidence": {
+        "source": "synthetic announcement",
+        "locator": "# 제출방법 · 줄 5 · chars 109:121",
+        "excerpt": "영상 제출은 권장한다."
+      },
+      "submission_evidence": null,
+      "source_mode": "generic_review"
+    },
+    {
+      "id": "450996a2-7e1a-4f4b-a022-6a11b935943d:G005",
+      "requirement_id": "G005",
+      "status": "EXTERNAL",
+      "title": "접수 마감은 2026년 10월 1일 18시이다.",
+      "explanation": "외부에서 직접 확인해야 하는 요구사항입니다.",
+      "action": "확정한 공고 근거와 제출파일을 직접 대조하세요. 사용자 승인은 파일 조건 충족 판정이 아닙니다.",
+      "announcement_evidence": {
+        "source": "synthetic announcement",
+        "locator": "# 접수 · 줄 7 · chars 127:153",
+        "excerpt": "접수 마감은 2026년 10월 1일 18시이다."
+      },
+      "submission_evidence": null,
+      "source_mode": "generic_review"
+    }
+  ],
+  "previous_results": [],
+  "status": "REVIEW_REQUIRED",
+  "revision": 1,
+  "fixture": null
+}

@@ -1,0 +1,82 @@
+{
+  "matched": 119,
+  "modality_correct": 115,
+  "exact_quotes": 354,
+  "semantic_supported": 254,
+  "atomicity_violations": 7,
+  "hallucinated_rules": 0,
+  "blockers": 156,
+  "unsupported_blockers": 5,
+  "gold_total": 173,
+  "extracted_total": 354,
+  "recall": 0.6878612716763006,
+  "precision": 0.3361581920903955,
+  "modality_accuracy": 0.9663865546218487,
+  "evidence_exactness": 1.0,
+  "evidence_semantic_support": 0.7175141242937854,
+  "atomicity_rate": 0.01977401129943503,
+  "candidate_failure_counts": {
+    "FRAGMENTATION": 92,
+    "FALSE_POSITIVE": 48,
+    "FORM_LABEL": 43,
+    "OUTSIDE_GOLD": 22,
+    "DUPLICATE": 18,
+    "WRONG_MODALITY": 13,
+    "ATOMICITY": 7,
+    "EVIDENCE_NOT_SUPPORTING": 7,
+    "MISS_CONDITION": 4,
+    "SOURCE_CONFLICT": 2
+  },
+  "fully_uncovered_gold": 7,
+  "partial_only_gold": 47,
+  "per_case": [
+    {
+      "case_id": "C01",
+      "gold": 49,
+      "extracted": 117,
+      "matched": 36
+    },
+    {
+      "case_id": "C02",
+      "gold": 14,
+      "extracted": 27,
+      "matched": 9
+    },
+    {
+      "case_id": "C03",
+      "gold": 6,
+      "extracted": 10,
+      "matched": 2
+    },
+    {
+      "case_id": "C04",
+      "gold": 44,
+      "extracted": 77,
+      "matched": 27
+    },
+    {
+      "case_id": "C05",
+      "gold": 2,
+      "extracted": 4,
+      "matched": 2
+    },
+    {
+      "case_id": "C06",
+      "gold": 7,
+      "extracted": 6,
+      "matched": 5
+    },
+    {
+      "case_id": "C07",
+      "gold": 19,
+      "extracted": 44,
+      "matched": 17
+    },
+    {
+      "case_id": "C08",
+      "gold": 32,
+      "extracted": 69,
+      "matched": 21
+    }
+  ]
+}

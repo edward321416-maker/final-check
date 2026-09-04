@@ -1,0 +1,11 @@
+case_id	extracted_id	gold_ids	match_type	semantic_support	atomicity	hallucinated	failure_categories	reason
+C03	R01	1	PARTIAL	1	0	0	FRAGMENTATION	Department membership omits complete current-undergraduate eligibility.
+C03	R02	1	PARTIAL	1	0	0	FRAGMENTATION	Enrollment status alone omits department and undergraduate scope.
+C03	R03	1	PARTIAL	1	0	0	FRAGMENTATION	Undergraduate status alone omits department and enrollment scope.
+C03	R04	5	MATCH	1	0	0	-	Application deadline preserved.
+C03	R05	6	MATCH	1	0	0	-	Correct Google Forms application route in evidence.
+C03	R06	-	NO_MATCH	0	0	0	FALSE_POSITIVE	Evaluation criterion is an organizer operation.
+C03	R07	-	NO_MATCH	0	0	0	FALSE_POSITIVE	Evaluation criterion is an organizer operation.
+C03	R08	-	NO_MATCH	0	0	0	FALSE_POSITIVE	Evaluation criterion is an organizer operation.
+C03	R09	-	NO_MATCH	0	0	0	FALSE_POSITIVE	Evaluation criterion is an organizer operation.
+C03	R10	3,4	PARTIAL	1	1	0	ATOMICITY,WRONG_MODALITY	Combines five-person size and cross-consortium formation as INFO.

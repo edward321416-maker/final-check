@@ -1,0 +1,45 @@
+case_id	extracted_id	gold_ids	match_type	semantic_support	atomicity	hallucinated	failure_categories	reason
+C07	R01	1	MATCH	1	0	0	-	Korean nationality.
+C07	R02	2	MATCH	1	0	0	-	Festival program theme and permitted alternatives.
+C07	R03	3	MATCH	1	0	0	-	Complete receipt interval and 18:00 cutoff.
+C07	R04	4	MATCH	1	0	0	-	All permitted channels and correct addresses preserved as alternatives.
+C07	R05	5	MATCH	1	0	0	-	Application/proposal attachment submitted.
+C07	R06	6	MATCH	1	0	0	-	Privacy consent attachment submitted.
+C07	R07	10	MATCH	1	0	0	-	Application receipt number must remain blank.
+C07	R08	11	MATCH	1	0	0	-	Title expresses proposal concisely.
+C07	R09	-	NO_MATCH	0	0	0	FORM_LABEL	Empty applicant name label alone.
+C07	R10	-	NO_MATCH	0	0	0	FORM_LABEL	Empty birth-date label alone.
+C07	R11	-	NO_MATCH	0	0	0	FORM_LABEL	Empty contact label alone.
+C07	R12	-	NO_MATCH	0	0	0	FORM_LABEL	Empty email label alone.
+C07	R13	12	MATCH	1	0	0	-	Public applicant address condition preserved.
+C07	R14	13	MATCH	1	0	0	-	Internal employee affiliation condition preserved.
+C07	R15	14	MATCH	1	0	0	-	Understandable proposal summary.
+C07	R16	15	MATCH	1	0	0	-	Concrete program description.
+C07	R17	16	MATCH	1	0	0	-	Expected outcomes described.
+C07	R18	17	MATCH	1	0	0	-	Additional sheet permitted when content is extensive.
+C07	R19	-	NO_MATCH	0	0	0	FORM_LABEL	Consent-choice checkbox converted into an independent MUST.
+C07	R20	-	NO_MATCH	0	0	0	FORM_LABEL	Empty date line alone.
+C07	R21	-	NO_MATCH	0	0	0	FORM_LABEL	Name label alone; signing is separately scored in R22.
+C07	R22	19	MATCH	1	0	0	-	Consent signature or seal, accepted explicit signing field under frozen protocol.
+C07	R23	-	NO_MATCH	1	0	0	OUTSIDE_GOLD	Supported privacy-use purpose information without another frozen Gold unit.
+C07	R24	-	NO_MATCH	1	0	0	OUTSIDE_GOLD	Supported collected-data disclosure, not an extra Gold obligation.
+C07	R25	-	NO_MATCH	1	0	0	OUTSIDE_GOLD	Supported privacy-retention information outside frozen Gold.
+C07	R26	18	PARTIAL	1	0	0	FRAGMENTATION	Refusal permission omits possible award restriction.
+C07	R27	18	PARTIAL	1	0	0	FRAGMENTATION	Possible award restriction omits permission to refuse consent.
+C07	R28	-	NO_MATCH	0	0	0	FALSE_POSITIVE	Organizer scoring criterion excluded.
+C07	R29	-	NO_MATCH	0	0	0	FALSE_POSITIVE	Organizer scoring criterion excluded.
+C07	R30	-	NO_MATCH	0	0	0	FALSE_POSITIVE	Organizer scoring criterion excluded.
+C07	R31	-	NO_MATCH	0	0	0	FALSE_POSITIVE	Organizer scoring criterion excluded.
+C07	R32	-	NO_MATCH	0	0	0	FALSE_POSITIVE	Organizer scoring criterion excluded.
+C07	R33	-	NO_MATCH	0	0	0	FALSE_POSITIVE	Organizer priority procedure excluded.
+C07	R34	-	NO_MATCH	0	0	0	FALSE_POSITIVE	Award allocation excluded.
+C07	R35	7	MATCH	1	0	0	-	False personal particulars prohibited.
+C07	R36	7	NO_MATCH	1	0	0	DUPLICATE	Possible exclusion repeats consequence of already matched false-information ban.
+C07	R37	7	NO_MATCH	1	0	0	DUPLICATE	Possible future restriction repeats consequence of false-information ban.
+C07	R38	-	NO_MATCH	0	0	0	FALSE_POSITIVE	Document return administration excluded.
+C07	R39	8	PARTIAL	1	0	0	FRAGMENTATION,WRONG_MODALITY	Rights transfer alone omits promotional use and modification consent.
+C07	R40	8	PARTIAL	1	0	0	FRAGMENTATION,WRONG_MODALITY	Promotional use alone omits rights transfer and modification consent.
+C07	R41	8	PARTIAL	1	0	0	FRAGMENTATION,WRONG_MODALITY	Modification use alone omits remaining rights and consent scope.
+C07	R42	-	NO_MATCH	0	0	0	FALSE_POSITIVE	Organizer implementation discretion excluded.
+C07	R43	-	NO_MATCH	1	0	0	OUTSIDE_GOLD	Explicit residual city-decision duty absent from immutable Gold; no retrospective addition.
+C07	R44	9	MATCH	1	0	0	-	No objection to judging result.

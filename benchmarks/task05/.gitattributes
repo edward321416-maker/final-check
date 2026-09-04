@@ -1,5 +1,5 @@
-*.json -text
-*.jsonl -text
-*.txt -text
+*.json -text whitespace=cr-at-eol
+*.jsonl -text whitespace=cr-at-eol
+*.txt -text whitespace=cr-at-eol
 *.md text eol=lf
 *.csv text eol=lf
