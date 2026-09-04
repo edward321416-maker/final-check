@@ -4,6 +4,10 @@ Date: 2026-09-04 (Asia/Seoul). Repository: edward321416-maker/final-check.
 Branch: `codex/task-05-blind-ai-extractor-comparison`.
 Base: `0125f05e8b7d68362dcf9e781f0a627e097eaddd` (TASK04 PR #3, MERGED).
 
+Delivery: [PR #4](https://github.com/edward321416-maker/final-check/pull/4), verified
+**OPEN / NOT MERGED**. Benchmark commit:
+`a48bfbff28cacf053eab848710c05632eaeb6fbc`.
+
 ## TASK05 STATUS
 
 **PASS — measurement completed. AI-FIRST — STOP for this locked candidate.**

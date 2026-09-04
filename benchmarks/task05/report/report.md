@@ -152,7 +152,10 @@ This locked primary candidate is STOP. FINAL CHECK remains GO and local rules
 remain STOP AS PRIMARY. Product/Business Lead should review these failure types
 and the frozen Gold granularity before authorizing any new, separately frozen
 experiment or assisted workflow. No later task, tuning or integration was started.
-The delivery PR must remain OPEN / NOT MERGED.
+Delivery [PR #4](https://github.com/edward321416-maker/final-check/pull/4) is verified
+OPEN / NOT MERGED. Benchmark commit is
+`a48bfbff28cacf053eab848710c05632eaeb6fbc`; later delivery-document changes contain
+no candidate, Gold, prompt, gate or scoring changes.
 
 Artifacts: `../raw/`, `../gated/`, `../execution.json`, `../scoring/candidates.tsv`,
 both pair CSVs, `comparison.json`, `failure-taxonomy.md`, and

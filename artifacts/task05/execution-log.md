@@ -39,3 +39,10 @@
   Measurement PASS; locked candidate AI-FIRST — STOP. No TASK06 work or integration.
 - All actual regression logs remain here. Earlier prerequisite BLOCKED attempts,
   synthetic probe and regression are excluded from the real benchmark population.
+- Git formatting initially flagged CRLF and terminal whitespace in untouched raw
+  evidence. Applied byte-preserving attributes; terminal logs follow TASK04's
+  whitespace policy. Source/JSON bytes were not rewritten. Final diff check PASS.
+- Published benchmark a48bfbff28cacf053eab848710c05632eaeb6fbc and PR4:
+  https://github.com/edward321416-maker/final-check/pull/4. Verified OPEN, not draft,
+  mergedAt=null. Verified all19 frozen/execution artifact Git blobs against their
+  recorded SHA256 values. A final documentation-only commit records publication.
