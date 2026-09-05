@@ -21,7 +21,7 @@
 - [x] Document actual execution, tests, limitations and source integrity.
 
 ## Future work requiring scoped input
-- TASK 04 completed below. Product/Business Lead review is required before choosing the next task.
+- TASK 06 completed below. Product/Business Lead review is required before choosing the next task.
 - Select a Vision provider only with required authorization and test it separately.
 - Confirm production storage, deployment, retention and supported announcement profiles.
 - Historical 39-case reproduction requires the exact original corpus; do not substitute new fixtures.
@@ -62,4 +62,19 @@
 - [x] Apply unchanged TASK03 gate and TASK04 scoring; Gold and local extractor unchanged.
 - [x] Score every candidate/Gold pair; measurement PASS, locked AI candidate STOP.
 - [x] Backend47, browser14, TypeScript/build, diff and before/after integrity checks pass.
-- [x] Publish TASK05 PR #4 (https://github.com/edward321416-maker/final-check/pull/4); verified OPEN / NOT MERGED. Benchmark commit a48bfbff28cacf053eab848710c05632eaeb6fbc. No subsequent task.
+- [x] Publish TASK05 PR #4 (https://github.com/edward321416-maker/final-check/pull/4); merged at d5bbddac39645aa11076575e81d976579eba5d9f.
+
+## TASK 06 — Two-Stage AI Extraction MVP Integration
+
+- [x] Start from merged TASK05 main and verify Gold173 plus every locked TASK05/frozen hash.
+- [x] Add separate Stage1 generator and Stage2 semantic-reviewer provider boundaries.
+- [x] Run the actual local Codex provider with versioned Stage1/Stage2 prompts and provenance.
+- [x] Enforce deterministic schema, enum, unique-ID, source, exact-evidence and offset gates.
+- [x] Support KEEP/REVIEW/DROP, organizer/prize/form-label filtering, duplicate links and condition review.
+- [x] Replace the 100-candidate all-or-nothing failure with visible overflow, 50-item batches and a 500 hard ceiling.
+- [x] Preserve successful Stage2 batches and retry only failures; never silently fall back to local rules.
+- [x] Keep AI blockers provisional and non-authoritative until explicit human approval.
+- [x] Preserve edit/delete/approve/full-source confirmation and REVIEW/EXTERNAL-only generic handoff.
+- [x] Run actual public C03 E2E: real Stage1/Stage2, UI review, profile confirmation, upload and generic results.
+- [x] Pass 59 backend, 14 standard browser and 1 actual-AI browser tests; typecheck/build/diff and frozen integrity pass.
+- [ ] Product Lead review of the open TASK06 PR; do not merge within TASK06.

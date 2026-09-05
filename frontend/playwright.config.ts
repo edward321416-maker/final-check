@@ -12,7 +12,8 @@ export default defineConfig({
     { name: "mobile", use: { ...devices["iPhone 13"], defaultBrowserType: "chromium" } },
   ],
   webServer: [
-    { command: `"${python}" -m uvicorn app.main:app --host 127.0.0.1 --port 8100`, cwd: "../backend", url: "http://127.0.0.1:8100/api/health", reuseExistingServer: false, timeout: 30_000 },
+    { command: `"${python}" -m uvicorn app.main:app --host 127.0.0.1 --port 8100`, cwd: "../backend", url: "http://127.0.0.1:8100/api/health", reuseExistingServer: false, timeout: 30_000,
+      env: { ...process.env, FINAL_CHECK_AI_PROVIDER: process.env.FINAL_CHECK_AI_PROVIDER ?? "local-fallback" } },
     { command: "npm run start", url: "http://127.0.0.1:3100", reuseExistingServer: false, timeout: 30_000 },
   ],
 });

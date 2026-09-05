@@ -1,5 +1,11 @@
 # Engineering decisions
 
+- 2026-09-05 TASK06: FINAL CHECK GO. Two-stage extraction is GO for the local MVP; Stage1 and Stage2 remain provisional until mandatory human confirmation. AI pre-confirmation BLOCKER authority is NOT_ALLOWED.
+- 2026-09-05 TASK06: Use existing authenticated Codex CLI through separate provider adapters. Long calls run in a background task and the UI polls status. This is an ACTUAL LOCAL AI PROVIDER, not a production provider selection.
+- 2026-09-05 TASK06: Candidate overflow begins above100, Stage2 batches contain50, and500 is the hard ceiling. Preserve completed batches and retry only failed batches; never truncate or silently substitute local rules.
+- 2026-09-05 TASK06: Keep generic submission results REVIEW/EXTERNAL only. No Vision/OCR, automatic generic verifier, benchmark/rescoring, deployment or frozen-validator change.
+- 2026-09-05 TASK06: One public C03 flow is actual product acceptance, not accuracy measurement. Synthetic safety contracts are SELF and provider faults are SIMULATED.
+
 - 2026-09-04 TASK05: FINAL CHECK GO; local rules STOP AS PRIMARY. One real blind gpt-5.6-sol/high candidate, one frozen prompt, eight isolated sessions, zero tool calls or retries.
 - 2026-09-04 TASK05: Measurement PASS; AI-FIRST — STOP for this primary candidate. GATED recall47.98%, precision35.02%, semantic support78.48%, unsupported BLOCKER3. Improvement over local is insufficient for the authorized thresholds.
 - 2026-09-04 TASK05: Preserve existing100-candidate cap (C01 rejects117), Gold173, all matching units, scoring policy and source hashes. Do not tune prompts/regex, change Gold, integrate production or begin another task. Full evidence in benchmarks/task05/report/report.md.

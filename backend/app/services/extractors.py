@@ -60,8 +60,6 @@ class LocalRuleExtractor:
                     modality=modality, severity=severity, verifier=verifier, condition=condition,
                     evidence=SourceEvidence(source_section=f"{section} · 줄 {line_number}", quote=quote), confidence=0.5,
                 ))
-                if len(requirements) > 100:
-                    raise ValueError("추출 후보가 100개를 초과했습니다. 공고 입력 범위를 줄여 주세요.")
         return requirements
 
 

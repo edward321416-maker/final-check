@@ -9,6 +9,7 @@ from app.models.schemas import CheckSession, CreateSession, SubmissionFile, Subm
 from app.services import demo, sessions
 from app.services import generic_validation, profiles
 from app.services.announcement_input import MAX_ANNOUNCEMENT_BYTES, source_from_bytes
+from app.services.ai_providers import provider_status
 from app.api.profiles import custom_session, invalidate
 from app.services.policy import summarize
 from app.validators.v15_adapter import EXPECTED_SHA256, ValidatorUnavailable, profile_requirements, validator_v15
@@ -50,9 +51,11 @@ async def receive(upload: UploadFile, allowed: set[str], directory: Path | None 
 @router.get("/health")
 async def health() -> dict:
     available = await run_in_threadpool(lambda: validator_v15.available)
+    ai = await run_in_threadpool(provider_status)
     return {"status": "ok", "mode": "frozen_v15", "validator": "available" if available else "unavailable",
-            "engine_sha256": EXPECTED_SHA256, "vision_provider": "unavailable", "version": "0.3.0",
-            "generic_extractor": "local-rules-v1 (no AI model)", "generic_verification": "unsupported"}
+            "engine_sha256": EXPECTED_SHA256, "vision_provider": "unavailable", "version": "0.4.0",
+            "generic_extractor": "two-stage-ai-local-mvp", "generic_ai_provider": ai,
+            "generic_verification": "unsupported"}
 
 
 @router.post("/sessions", response_model=CheckSession, status_code=201)

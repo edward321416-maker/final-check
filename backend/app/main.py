@@ -12,8 +12,8 @@ async def lifespan(app: FastAPI):
     sessions.close_all()
 
 
-app = FastAPI(title="FINAL CHECK — AI Submission Preflight", version="0.3.0", lifespan=lifespan,
-              description="Frozen v1.5 with actual uploaded files and synthetic demo packages. No Vision provider.")
+app = FastAPI(title="FINAL CHECK — AI Submission Preflight", version="0.4.0", lifespan=lifespan,
+              description="Two-stage local AI requirement extraction with mandatory human confirmation. No Vision provider.")
 app.include_router(router)
 app.include_router(profile_router)
 
