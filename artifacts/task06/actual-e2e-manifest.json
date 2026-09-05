@@ -1,0 +1,69 @@
+{
+  "classification": "ACTUAL",
+  "purpose": "TASK06 product integration acceptance; not a benchmark",
+  "source": {
+    "case": "TASK04 C03 representative public announcement",
+    "public_url": "https://kibs.kookmin.ac.kr/notice/91",
+    "input_file": "benchmarks/task04/sources/C03.txt",
+    "sha256": "5c93e8ab7506e074db8bd983f078f96e6fc9e60cf33e48a53a571640d99f2db6"
+  },
+  "provider": {
+    "stage1": {
+      "provider": "OpenAI via ChatGPT-authenticated Codex CLI",
+      "model": "gpt-5.6-sol",
+      "prompt_version": "task06-stage1-v1",
+      "prompt_sha256": "52b226089eddf6fb109ab07f676110c7dea48c602397a7d6c283384e3be4d7f4",
+      "execution_kind": "ACTUAL"
+    },
+    "stage2": {
+      "provider": "OpenAI via ChatGPT-authenticated Codex CLI",
+      "model": "gpt-5.6-sol",
+      "prompt_version": "task06-stage2-v1",
+      "prompt_sha256": "be838b1ef8d57f921147a3dfb993fa3237fb56dd766b825c883b644aa131163f",
+      "execution_kind": "ACTUAL"
+    }
+  },
+  "pipeline": {
+    "status": "COMPLETE",
+    "raw_candidates": 24,
+    "gated_candidates": 24,
+    "stage2_decisions": {
+      "KEEP": 12,
+      "REVIEW": 4,
+      "DROP": 8
+    },
+    "retained_before_human_review": 16,
+    "stage2_batches": 1,
+    "failed_batches": []
+  },
+  "human_review": {
+    "edits": 3,
+    "deletes": 1,
+    "approvals": 15,
+    "whole_profile": "CONFIRMED",
+    "confirmed_requirements": 15
+  },
+  "generic_validation": {
+    "session_status": "REVIEW_REQUIRED",
+    "validation_complete": false,
+    "result_counts": {
+      "REVIEW": 14,
+      "EXTERNAL": 1
+    },
+    "forbidden_automatic_statuses_present": false
+  },
+  "artifacts": {
+    "actual-ai-extraction.json": {
+      "sha256": "d03d2dc156ab49289d1dc3019c97b8fb3dc083a4ff112682251ee1b7d6e04244",
+      "bytes": 66421
+    },
+    "actual-ai-confirmed-handoff.json": {
+      "sha256": "46ae5e2c5119b6b80ee5b0f8c73a9fa1247b9fe41e85225e68a3d92d154733a9",
+      "bytes": 165081
+    },
+    "actual-ai-results.png": {
+      "sha256": "c571bbc2e63d21cf369aca8e2ba8f548f17c08ce6bdaf714902d6590a0da8bec",
+      "bytes": 631563
+    }
+  }
+}
