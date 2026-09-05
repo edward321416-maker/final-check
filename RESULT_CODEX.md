@@ -135,3 +135,9 @@ authentication and durable job storage remain outside TASK06 and unimplemented.
 The next scoped task should evaluate and select a production execution/job boundary, including
 durable status and retry behavior, without changing frozen validation or starting Vision and
 generic-verifier work at the same time. Product Lead review is required before that task begins.
+
+## DELIVERY
+
+- Implementation commit: `b053e09ee47d939f9ac9e7e8b836cb1f1713b4dd`.
+- PR #5: `https://github.com/edward321416-maker/final-check/pull/5`.
+- Verified state after creation: **OPEN / NOT MERGED**.

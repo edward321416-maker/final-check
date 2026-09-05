@@ -77,4 +77,4 @@
 - [x] Preserve edit/delete/approve/full-source confirmation and REVIEW/EXTERNAL-only generic handoff.
 - [x] Run actual public C03 E2E: real Stage1/Stage2, UI review, profile confirmation, upload and generic results.
 - [x] Pass 59 backend, 14 standard browser and 1 actual-AI browser tests; typecheck/build/diff and frozen integrity pass.
-- [ ] Product Lead review of the open TASK06 PR; do not merge within TASK06.
+- [ ] Product Lead review of open TASK06 PR #5 (https://github.com/edward321416-maker/final-check/pull/5); do not merge within TASK06.
