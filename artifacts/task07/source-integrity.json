@@ -1,0 +1,10 @@
+{
+  "verified_at": "2026-09-05T11:39:40.270201+00:00",
+  "baseline_main": "07cd3e6587efd47661f2e42f72574f569bce9094",
+  "gold_count": 173,
+  "gold_manifest_sha256": "035ebc06d3d62db6ab9c47c53d30cbc206be02667d845e9db59da6b9c5f7fe89",
+  "validator_sha256": "4b506c3b692f2cef39e2be7cb44b4ce74bcc4ce829064ac655e16f545042bb11",
+  "stage1_prompt_sha256": "52b226089eddf6fb109ab07f676110c7dea48c602397a7d6c283384e3be4d7f4",
+  "stage2_prompt_sha256": "be838b1ef8d57f921147a3dfb993fa3237fb56dd766b825c883b644aa131163f",
+  "frozen_paths_diff_from_baseline": false
+}

@@ -1,11 +1,11 @@
 import asyncio
-from pathlib import Path
 from typing import Annotated
 from fastapi import APIRouter, Depends, HTTPException
 from starlette.concurrency import run_in_threadpool
 from app.models.profiles import ConfirmRequest, GenericRequirementProfile, ReviewRequest, TextAnnouncement, VersionRequest
+from app.models.jobs import JobStatus
 from app.models.schemas import CheckSession
-from app.services import profiles, sessions
+from app.services import jobs, profiles, sessions
 from app.services.announcement_input import source_from_bytes
 from app.services.ai_providers import (RequirementGenerator, SemanticRequirementReviewer,
                                        get_generator, get_reviewer)
@@ -32,29 +32,14 @@ def custom_session(session_id: str) -> CheckSession:
     return session
 
 
-async def complete_extraction(session_id: str, base: GenericRequirementProfile,
+async def complete_extraction(session_id: str, job_id: str,
                               generator: RequirementGenerator,
                               reviewer: SemanticRequirementReviewer) -> None:
-    try:
-        updated = await run_in_threadpool(profiles.extract, base, generator, reviewer)
-    except Exception as error:
-        updated = base.model_copy(deep=True)
-        updated.pipeline_status = "EXTRACTION_ERROR"
-        updated.pipeline_error = type(error).__name__
-        updated.status = "REVIEW_REQUIRED"
-        updated.notices = ["Two-stage provider 실행이 완료되지 않았습니다. 결과를 만들지 않았으며 다시 시도할 수 있습니다."]
-        updated.version += 1
-        updated.updated_at = profiles.now()
     lock = sessions.LOCKS.get(session_id)
     if lock is None:
         return
     async with lock:
-        session = sessions.get(session_id)
-        current = session.generic_profile
-        if current and current.profile_id == base.profile_id and current.version == base.version:
-            invalidate(session)
-            session.generic_profile = updated
-            sessions.save(session)
+        await run_in_threadpool(jobs.execute, job_id, generator, reviewer)
 
 
 def forget_extraction(session_id: str, completed: asyncio.Task[None]) -> None:
@@ -75,9 +60,9 @@ async def text_announcement(session_id: str, body: TextAnnouncement) -> CheckSes
             source = source_from_bytes(body.name, data, "TEXT")
         except ValueError as error:
             raise HTTPException(422, str(error)) from error
-        path = Path(sessions.WORKSPACES[session_id].name) / "announcement.bin"
-        await run_in_threadpool(path.write_bytes, data)
+        await run_in_threadpool(sessions.write_announcement, session_id, data)
         invalidate(session)
+        session.current_job_id, session.current_job = None, None
         session.announcement_name = source.name
         session.generic_profile = profiles.new_profile(source)
         return sessions.save(session)
@@ -99,24 +84,40 @@ async def extract(session_id: str, body: VersionRequest,
     session = custom_session(session_id)
     async with sessions.LOCKS[session_id]:
         profile = checked_profile(session, body)
-        if profile.pipeline_status == "RUNNING":
-            raise HTTPException(409, "Two-stage extraction is already running.")
+        current = None
+        if session.current_job_id:
+            try:
+                current = sessions.job_store().get_job(session.current_job_id)
+            except KeyError:
+                current = None
+        if current and current.profile_id == profile.profile_id:
+            if current.status in {JobStatus.PENDING, JobStatus.RUNNING}:
+                return session
+            if current.status == JobStatus.SUCCEEDED:
+                return session
+            if current.status == JobStatus.FAILED:
+                raise HTTPException(409, "AI extraction retry limit reached. Start a new announcement profile.")
+            extraction_job = current
+        else:
+            extraction_job = jobs.create_or_get(session, generator, reviewer)
         if not (getattr(generator, "requires_background", False)
                 or getattr(reviewer, "requires_background", False)):
-            try:
-                updated = await run_in_threadpool(profiles.extract, profile, generator, reviewer)
-            except ValueError as error:
-                raise HTTPException(422, str(error)) from error
-            except Exception as error:
-                raise HTTPException(503, "Two-stage provider 실행 실패. Profile은 확정되지 않았습니다.") from error
             invalidate(session)
-            session.generic_profile = updated
-            return sessions.save(session)
-        updated = profiles.mark_running(profile, generator, reviewer)
+            sessions.save(session)
+            await run_in_threadpool(jobs.execute, extraction_job.job_id, generator, reviewer)
+            return sessions.get(session_id)
+        updated = profile.model_copy(deep=True)
+        updated.pipeline_status = "RUNNING"
+        updated.pipeline_error = None
+        updated.status = "REVIEW_REQUIRED"
+        updated.notices = ["Stage 1 생성과 Stage 2 의미 검토를 실행 중입니다. 완료 상태를 자동으로 확인합니다."]
+        if extraction_job.attempt == 0:
+            updated.version += 1
+        updated.updated_at = profiles.now()
         invalidate(session)
         session.generic_profile = updated
         saved = sessions.save(session)
-        task = asyncio.create_task(complete_extraction(session_id, updated.model_copy(deep=True), generator, reviewer))
+        task = asyncio.create_task(complete_extraction(session_id, extraction_job.job_id, generator, reviewer))
         EXTRACTION_TASKS[session_id] = task
         task.add_done_callback(lambda completed, key=session_id: forget_extraction(key, completed))
         return saved

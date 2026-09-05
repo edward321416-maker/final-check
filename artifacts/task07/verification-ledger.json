@@ -1,0 +1,43 @@
+{
+  "recorded_at": "2026-09-05T11:42:16.380975+00:00",
+  "classification": {
+    "restart_process": "ACTUAL LOCAL TEST",
+    "checkpoint_faults": "SELF / SIMULATED",
+    "standard_browser": "ACTUAL",
+    "actual_ai": "ACTUAL LOCAL AI RUNTIME REGRESSION"
+  },
+  "checks": {
+    "backend": {
+      "tests": 77,
+      "failures": 0,
+      "errors": 0
+    },
+    "browser": {
+      "startTime": "2026-09-05T06:42:50.946Z",
+      "duration": 33203.546,
+      "expected": 14,
+      "skipped": 2,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "actual_ai_browser": {
+      "startTime": "2026-09-05T11:31:06.185Z",
+      "duration": 112601.991,
+      "expected": 1,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "typecheck": "PASS",
+    "production_build": "PASS",
+    "diff_check": "PASS"
+  },
+  "not_tested": [
+    "multi-worker or multi-node coordination",
+    "cloud volume and backup/restore",
+    "actual OS kill after provider response before checkpoint commit",
+    "Vision/OCR",
+    "generic verifier",
+    "public deployment"
+  ]
+}

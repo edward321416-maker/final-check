@@ -14,11 +14,17 @@ export interface ValidationResult {
   submission_evidence: Evidence | null; source_mode: "validator" | "generic_review";
 }
 export interface SubmissionFile { name: string; size_bytes: number; media_type: string; sha256: string }
+export interface JobSummary {
+  job_id: string; status: "PENDING" | "RUNNING" | "SUCCEEDED" | "RETRYABLE" | "FAILED";
+  stage: "NOT_STARTED" | "STAGE1_COMPLETE" | "GATE_COMPLETE" | "STAGE2_BATCH_N_COMPLETE" | "FINALIZED";
+  attempt: number; completed_stage2_batches: number[]; error_category: string | null; updated_at: string;
+}
 export interface CheckSession {
   id: string; created_at: string; updated_at: string; mode: "demo" | "custom";
   source_mode: "validator" | "generic_review" | "unavailable"; announcement_name: string | null;
   validation_profile: "frozen_v15" | "generic" | null; engine_sha256: string | null;
   generic_profile: GenericRequirementProfile | null;
+  current_job_id: string | null; current_job: JobSummary | null;
   run_state: "NOT_STARTED" | "RUNNING" | "COMPLETE" | "FAILED";
   validation_complete: boolean; run_error: string | null;
   requirements: Requirement[]; files: SubmissionFile[]; results: ValidationResult[];

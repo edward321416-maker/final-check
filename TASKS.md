@@ -21,7 +21,7 @@
 - [x] Document actual execution, tests, limitations and source integrity.
 
 ## Future work requiring scoped input
-- TASK 06 completed below. Product/Business Lead review is required before choosing the next task.
+- TASK 07 is delivered below for Product/Business Lead PR review. If accepted, the locked next priority is TASK08 Generic Verifier Engine.
 - Select a Vision provider only with required authorization and test it separately.
 - Confirm production storage, deployment, retention and supported announcement profiles.
 - Historical 39-case reproduction requires the exact original corpus; do not substitute new fixtures.
@@ -78,3 +78,17 @@
 - [x] Run actual public C03 E2E: real Stage1/Stage2, UI review, profile confirmation, upload and generic results.
 - [x] Pass 59 backend, 14 standard browser and 1 actual-AI browser tests; typecheck/build/diff and frozen integrity pass.
 - [x] Product Lead invoked the Issue-based GitHub task flow; final delivery and normal merge are tracked by Issue #6.
+
+## TASK 07 — Restart-Safe Durable Runtime MVP
+
+- [x] Verify merged PR #7 baseline `07cd3e6`, clean main, Gold173 and frozen hashes.
+- [x] Create Issue #8 before branch `issue/8-restart-safe-durable-runtime`.
+- [x] Add Python `sqlite3` session/job storage and application-owned durable artifact paths.
+- [x] Persist canonical profile, review, confirmation, validation and current-job state without pickle.
+- [x] Add explicit job states, provider provenance, attempts and safe error categories.
+- [x] Checkpoint Stage1, deterministic gate, each Stage2 batch and finalization.
+- [x] Recover stale RUNNING jobs as RETRYABLE and resume without repeating completed work.
+- [x] Enforce operation idempotency, three explicit attempts and active/retryable TTL protection.
+- [x] Pass an actual backend process stop/start acceptance and simulated checkpoint faults.
+- [x] Preserve TASK06 local Codex and human-safety contracts; no generic verifier or deployment work.
+- [ ] Product Lead reviews the open TASK07 PR and decides whether to merge.

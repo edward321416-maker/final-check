@@ -1,10 +1,10 @@
 # FINAL CHECK — AI Submission Preflight
 공고문과 실제 제출파일을 넣으면, AI가 제출 전에 탈락요인을 찾아주고 각 판정의 근거까지 보여준다.
 
-TASK 06 upgrades the generic announcement path to an **actual local two-stage AI provider**: provisional Stage 1 candidates → deterministic evidence gate → Stage 2 KEEP/REVIEW/DROP → mandatory human confirmation. Generic automatic submission verification remains unsupported and returns REVIEW/EXTERNAL.
+TASK 07 keeps the TASK06 **actual local two-stage AI provider** and adds a restart-safe single-node runtime: SQLite session/job metadata, durable local artifacts, checkpoint resume, bounded explicit retry, and mandatory human confirmation. Generic automatic submission verification remains unsupported and returns REVIEW/EXTERNAL.
 TASK 02 connects the original **frozen Validator v1.5** to real multipart uploads and remains unchanged in behavior.
 The demo uses newly generated synthetic files. Its findings come from actual Python execution, not canned JSON.
-[Product lock](docs/PRODUCT_SPEC_V1.md) · [Actual execution report](RESULT_CODEX.md) · [TASK06 architecture](docs/TASK06_TWO_STAGE_MVP.md) · [Demo script](docs/DEMO_SCRIPT.md)
+[Product lock](docs/PRODUCT_SPEC_V1.md) · [Actual execution report](RESULT_CODEX.md) · [TASK07 durable runtime](docs/TASK07_DURABLE_RUNTIME.md) · [TASK06 extraction](docs/TASK06_TWO_STAGE_MVP.md) · [Demo script](docs/DEMO_SCRIPT.md)
 
 TASK04 independently measured the unchanged local extractor on eight real
 announcements with 173 pre-output frozen Gold requirements: recall 18.50%, precision
@@ -62,7 +62,8 @@ Historical TASK 01 fixtures stay in their original directories and are never use
 - R19 uncertainty → REVIEW. R20/R21 licensing and provenance → REVIEW. No unsupported automatic PASS/BLOCKER.
 - Scanned PDF Vision is unavailable → REVIEW, incomplete. No invented model result.
 - Submission status: BLOCKED / REVIEW_REQUIRED / READY. Before a run: null plus run_state=NOT_STARTED.
-- Upload receipts, temporary files and raw outputs are isolated per local session; removed on replacement/expiry/shutdown. In-memory sessions expire after one hour or restart.
+- Session/profile/job metadata and announcement/submission/raw artifacts persist under `FINAL_CHECK_DATA_DIR` (default `.final-check/runtime/`). Safe expired sessions are removed after one hour; active/retryable jobs are protected. Backend restart no longer invalidates a session.
+- This is a single-node, single-backend-process durability contract. Multi-worker coordination is unsupported.
 - No product login, payment, analytics, automatic submission or public app deployment. The default generic extractor uses the already authenticated local Codex CLI; no production AI service is selected.
 - A public source repository is distinct from a publicly hosted application.
 - The exact historical 39-case corpus was not included or rerun. Its report is reference evidence only.
@@ -73,12 +74,12 @@ Review each original quote and its source offset; edit/delete candidates, keep N
 PDF input limit: 10 MiB, 50 pages, 100,000 extracted characters; no OCR/Vision. Textless pages require Vision and cannot produce a confirmed profile.
 Stage 1/2 outputs remain provisional and may miss, duplicate or misclassify requirements. More than 100 candidates is explicit overflow and runs in batches of 50; 500 is the hard ceiling. Local rules are an explicitly selected fallback suggestion path, never a silent provider-failure substitute. No new recall/precision or universal competition coverage is claimed.
 The generic pipeline checks actual upload identity but does not test submission compliance. Its findings remain REVIEW/EXTERNAL and its summary REVIEW_REQUIRED.
-Canonical schemas: backend/app/models/profiles.py and frontend/types/profile.ts. Provider boundary: backend/app/services/ai_providers.py. Human review and deterministic gate: backend/app/services/profiles.py. Generic handoff: backend/app/services/generic_validation.py.
+Canonical schemas: backend/app/models/profiles.py and frontend/types/profile.ts. Durable job/storage contracts: backend/app/models/jobs.py, backend/app/services/jobs.py and backend/app/services/storage.py. Provider boundary: backend/app/services/ai_providers.py. Human review and deterministic gate: backend/app/services/profiles.py. Generic handoff: backend/app/services/generic_validation.py.
 New checks run with the same pytest and Playwright commands above. To regenerate only TASK 03 synthetic PDF fixtures: `backend/.venv/Scripts/python.exe -X utf8 scripts/generate_announcement_fixtures.py`. Fixture generation and expected candidates are from the same session, so comparisons are SELF-BENCHMARK, not independent accuracy evidence.
 
 ## Layout
 frontend/: existing Next.js routes, UI and browser smoke.
-backend/: FastAPI, typed schema, session storage, immutable frozen source and adapter.
+backend/: FastAPI, typed schema, SQLite/local-artifact runtime, immutable frozen source and adapter.
 fixtures/v15/: real broken/fixed submissions.
 artifacts/: raw/adapted results, independent audit, tests and screenshots.
 docs/: product policy, demo, original handoff/reference gate.

@@ -8,12 +8,13 @@ from app.services import sessions
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
+    sessions.startup()
     yield
     sessions.close_all()
 
 
-app = FastAPI(title="FINAL CHECK — AI Submission Preflight", version="0.4.0", lifespan=lifespan,
-              description="Two-stage local AI requirement extraction with mandatory human confirmation. No Vision provider.")
+app = FastAPI(title="FINAL CHECK — AI Submission Preflight", version="0.5.0", lifespan=lifespan,
+              description="Restart-safe single-node two-stage local AI extraction with mandatory human confirmation. No Vision provider.")
 app.include_router(router)
 app.include_router(profile_router)
 

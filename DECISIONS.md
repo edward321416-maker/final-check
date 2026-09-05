@@ -1,5 +1,11 @@
 # Engineering decisions
 
+- 2026-09-05 TASK07: FINAL CHECK GO. Use Python `sqlite3` plus application-owned local files behind minimal SessionStore/JobStore/ArtifactStore boundaries; default `FINAL_CHECK_DATA_DIR` is `.final-check/runtime/`.
+- 2026-09-05 TASK07: Represent two-stage extraction as one idempotent durable job per session/profile/version/operation. Save Stage1, gate, each Stage2 batch and final checkpoints; restart changes abandoned PENDING/RUNNING to RETRYABLE.
+- 2026-09-05 TASK07: Retry only through explicit user action, at most three attempts. Persist safe error categories and provider provenance, never raw stderr, tokens, Codex auth, cookies or browser login data.
+- 2026-09-05 TASK07: Preserve the one-hour TTL but protect process-active and PENDING/RUNNING/RETRYABLE sessions. Claim only single-node, single-backend-process durability.
+- 2026-09-05 TASK07: Keep TASK06 model/prompts/provider/human confirmation unchanged. No cloud, Redis/Celery, Vision/OCR, benchmark, provider selection or TASK08 generic verifier implementation.
+
 - 2026-09-05 TASK06: FINAL CHECK GO. Two-stage extraction is GO for the local MVP; Stage1 and Stage2 remain provisional until mandatory human confirmation. AI pre-confirmation BLOCKER authority is NOT_ALLOWED.
 - 2026-09-05 TASK06: Use existing authenticated Codex CLI through separate provider adapters. Long calls run in a background task and the UI polls status. This is an ACTUAL LOCAL AI PROVIDER, not a production provider selection.
 - 2026-09-05 TASK06: Candidate overflow begins above100, Stage2 batches contain50, and500 is the hard ceiling. Preserve completed batches and retry only failed batches; never truncate or silently substitute local rules.

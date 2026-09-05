@@ -2,6 +2,7 @@ from datetime import datetime
 from enum import StrEnum
 from typing import Literal
 from pydantic import BaseModel, ConfigDict, Field, model_validator
+from app.models.jobs import JobSummary
 from app.models.profiles import GenericRequirementProfile
 
 
@@ -76,6 +77,8 @@ class CheckSession(Model):
     source_mode: Literal["validator", "generic_review", "unavailable"] = "unavailable"
     validation_profile: Literal["frozen_v15", "generic"] | None = None
     generic_profile: GenericRequirementProfile | None = None
+    current_job_id: str | None = None
+    current_job: JobSummary | None = None
     engine_sha256: str | None = None
     run_state: Literal["NOT_STARTED", "RUNNING", "COMPLETE", "FAILED"] = "NOT_STARTED"
     validation_complete: bool = False

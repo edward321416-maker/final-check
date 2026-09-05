@@ -1,143 +1,118 @@
-# RESULT_CODEX — TASK 06
+# RESULT_CODEX — TASK 07
 
-Date: 2026-09-05 (Asia/Seoul). Repository: `edward321416-maker/final-check`.
-Branch: `issue/6-two-stage-ai-extraction-mvp`.
-Baseline main: `d5bbddac39645aa11076575e81d976579eba5d9f` (TASK05 PR #4 merge commit).
-The previous TASK05 report is preserved at `artifacts/task05-baseline/RESULT_CODEX_TASK05.md`.
+Date: 2026-09-05 (Asia/Seoul)
 
-## GITHUB BASELINE
+Baseline main: `07cd3e6587efd47661f2e42f72574f569bce9094` (TASK06 PR #7 merge commit).
+Issue: [#8](https://github.com/edward321416-maker/final-check/issues/8).
+Branch: `issue/8-restart-safe-durable-runtime`.
 
-- PR #4 was verified merged before work began.
-- Local main was synchronized to `d5bbddac39645aa11076575e81d976579eba5d9f` and the worktree was clean.
-- TASK05 Gold count and all locked hashes matched before implementation.
+## Verdict
 
-## TASK06 STATUS
+- TASK07: **PASS**.
+- FINAL CHECK: **GO**.
+- Durable Runtime: **GO**.
+- Local Codex Provider: **KEEP**.
+- Single-node Deployability: **READY_FOR_DEPLOYMENT_TASK**.
+- Production AI Provider: **NOT_SELECTED**.
 
-**PASS — safe two-stage local MVP integration completed.** This task did not create Gold,
-rescore TASK04/05, compare models, or tune prompts against benchmark results.
+## Durable architecture
 
-## ARCHITECTURE
+- `SessionStore`, `JobStore`, and `ArtifactStore` define the minimal storage
+  boundary. The default metadata implementation is Python standard-library
+  `sqlite3`; model payloads use canonical Pydantic JSON and never pickle.
+- `FINAL_CHECK_DATA_DIR` configures the root. The local default is
+  `.final-check/runtime/`, excluded from Git. Metadata is in
+  `runtime.sqlite3`; announcement/submission/raw artifacts are under
+  `sessions/<application-session-id>/`.
+- Validated user basenames are stored only inside the application session tree.
+  Announcement replacement is atomic. Cleanup resolves and verifies the owned
+  session parent before removal.
 
-```text
-Announcement
-  → Stage 1 RequirementGenerator (provisional candidates)
-  → deterministic schema/evidence/offset/ID gate
-  → Stage 2 SemanticRequirementReviewer (KEEP / REVIEW / DROP)
-  → human edit/delete/approve and whole-source acknowledgement
-  → CONFIRMED Requirement Profile
-  → existing generic upload path (REVIEW / EXTERNAL only)
-```
+## Durable job behavior
 
-Provider-specific execution is isolated behind `RequirementGenerator` and
-`SemanticRequirementReviewer`. The application core does not call Codex CLI directly.
-Actual calls receive the prompt, output schema and current source/candidate payload in an
-ephemeral directory. The copied authentication transport is deleted after each call and is
-never stored in product artifacts.
+- States: `PENDING`, `RUNNING`, `SUCCEEDED`, `RETRYABLE`, `FAILED`.
+- Stored fields include job/session/profile identity, job kind, status, stage,
+  attempt, timestamps, safe error category, TASK06 provider provenance,
+  completed Stage2 batch indexes, and the typed profile checkpoint.
+- One database uniqueness constraint covers
+  `(session_id, profile_id, profile_version, job_kind)`. Duplicate extract
+  requests reuse the existing job.
+- Checkpoints: `STAGE1_COMPLETE`, `GATE_COMPLETE`,
+  `STAGE2_BATCH_N_COMPLETE`, `FINALIZED`. Retry skips a completed Stage1 and
+  every committed Stage2 batch.
+- Startup converts abandoned `PENDING`/`RUNNING` jobs from a dead process to `RETRYABLE` and
+  exposes `PROCESS_RESTART` plus a user-controlled resume action. There is no
+  automatic loop. Three explicit attempts are allowed; authentication failure
+  is stored only as a safe category.
+- One-hour cleanup removes safe expired metadata and artifacts. A process-active
+  session or a session with a PENDING/RUNNING/RETRYABLE job is retained.
 
-## PROVIDERS
+## Human safety persistence
 
-- **ACTUAL LOCAL AI PROVIDER:** existing ChatGPT-authenticated Codex CLI, requested
-  `gpt-5.6-sol` with high reasoning. This is a local MVP adapter, not a production provider decision.
-- **SIMULATED / SELF tests:** explicit fake providers and fault injection cover safety boundaries.
-- **Explicit fallback:** local rules remain available only when
-  `FINAL_CHECK_AI_PROVIDER=local-fallback`; the UI labels this path and requires human review.
-  Provider failure never silently changes to local rules.
+- Raw candidates, gated IDs, Stage2 reviews, retained requirements, edit/delete/
+  approval history, source acknowledgement and CONFIRMED status round-trip
+  through SQLite.
+- An AI-proposed BLOCKER remains `authoritative=false` after reconstruction.
+  Recovery and provider failure cannot confirm a profile or produce PASS/READY.
+- TASK06 prompts, model choice, deterministic gates and mandatory human
+  confirmation are unchanged.
 
-Prompt provenance:
+## Tests and evidence
 
-- Stage 1 `task06-stage1-v1`: `52b226089eddf6fb109ab07f676110c7dea48c602397a7d6c283384e3be4d7f4`
-- Stage 2 `task06-stage2-v1`: `be838b1ef8d57f921147a3dfb993fa3237fb56dd766b825c883b644aa131163f`
+- Backend: **77 passed** in the final suite: existing 59 plus 18 new
+  TASK07 persistence/recovery/security cases. The final JUnit is stored under
+  `artifacts/task07/backend-junit.xml`.
+- TASK07 TDD: the new test module first failed collection because the durable
+  job module did not exist, then passed after implementation.
+- Restart acceptance: **ACTUAL LOCAL TEST** starts a backend process, creates a
+  custom session and meaningful announcement profile, stops the process,
+  restarts against the same data directory, and retrieves the same profile.
+- AI recovery: **SELF / SIMULATED** fault injection verifies stale RUNNING
+  recovery, no Stage1 replay, no completed Stage2-batch replay, duplicate-job
+  reuse, retry limit, TTL protection and absence of provider secret/error text.
+- Standard browser: **14 passed, 2 opt-in skipped** on desktop/mobile. Existing
+  real uploads, human review, reload and five-screen flows remain intact.
+- Actual local AI: **1 passed** in 1.9 minutes. The C03 runtime regression used
+  the existing ChatGPT-authenticated Codex CLI once: job `SUCCEEDED / FINALIZED`,
+  attempt 1, completed batch `[0]`, 14 RAW, 14 GATED, 12 retained, human-confirmed
+  handoff, actual submission upload and safe `REVIEW_REQUIRED` generic result.
+- TypeScript typecheck: **PASS**. Production build: **PASS**.
+- `git diff --check`: recorded in final delivery evidence.
 
-## OVERFLOW
+## Frozen integrity
 
-- Normal overflow threshold: more than 100 raw candidates.
-- Stage 2 batch size: 50.
-- Hard ceiling: 500 raw candidates.
-- The SELF 117-candidate case retained and processed all 117 candidates in batches
-  `[50, 50, 17]`; it did not collapse to zero or truncate at 100.
-- Overflow is visible as `OVERFLOW_REVIEW`. Partial batch success is preserved and only failed
-  batches are retried. More than 500 produces explicit `EXTRACTION_ERROR`, cannot become READY,
-  and does not silently present a partial confirmed profile.
-
-## BLOCKER SAFETY
-
-Every AI candidate is `authoritative=false`. An AI-proposed BLOCKER is displayed as
-`PROVISIONAL_BLOCKER` and cannot block a submission before separate human approval.
-Stage 2 unsupported evidence becomes REVIEW. Only a human-approved requirement becomes
-`CONFIRMED` and `authoritative=true`; every retained item plus full-source acknowledgement is
-required before whole-profile confirmation.
-
-## ACTUAL DEMO
-
-One representative public announcement was run as product acceptance, not a benchmark:
-
-- Source: TASK04 C03, `https://kibs.kookmin.ac.kr/notice/91`
-- Source SHA-256: `5c93e8ab7506e074db8bd983f078f96e6fc9e60cf33e48a53a571640d99f2db6`
-- Actual Stage 1: 24 raw candidates; deterministic gate retained 24.
-- Actual Stage 2: KEEP 12, REVIEW 4, DROP 8; 16 retained for human review.
-- Human flow: 3 edits, 1 delete, 15 approvals, full-source acknowledgement, profile CONFIRMED.
-- Actual submission upload: 15 generic results, 14 REVIEW and 1 EXTERNAL;
-  `validation_complete=false`, session `REVIEW_REQUIRED`, no PASS/BLOCKER.
-- Evidence: `artifacts/task06/actual-e2e-manifest.json`, raw session JSON files and browser screenshot.
-
-## PROVIDER FAILURE
-
-Unavailable provider, timeout, nonzero exit, invalid JSON/schema and Stage 2 batch failure are
-explicit error/review states. Safe diagnostic categories contain no provider output or secrets.
-Completed Stage 2 batches and raw candidates remain available when another batch fails. No error
-path activates validation or produces READY/PASS.
-
-## TESTS
-
-- Backend: **59 passed**, including the pre-existing 47 and 12 TASK06 safety test cases.
-- Browser regression: **14 passed, 2 opt-in actual-AI cases skipped** in the standard suite.
-- Actual AI browser E2E: **1 passed** on desktop with real Stage 1 and Stage 2 calls.
-- TypeScript: PASS.
-- Production build: PASS.
-- `git diff --check`: PASS.
-- These are **ACTUAL LOCAL TEST** results. Hosted GitHub Actions were not run and no CI PASS is claimed.
-
-## SOURCE INTEGRITY
-
-- Gold count: **173**.
+- TASK04 Gold count: **173**.
 - Gold manifest SHA-256:
   `035ebc06d3d62db6ab9c47c53d30cbc206be02667d845e9db59da6b9c5f7fe89`.
-- Frozen Validator SHA-256:
+- Frozen Validator SHA-256 before/after:
   `4b506c3b692f2cef39e2be7cb44b4ce74bcc4ce829064ac655e16f545042bb11`.
-- TASK05 prompt/schema hashes remain unchanged. TASK04/05 historical scores were not recalculated.
+- No Gold, benchmark score, prompt, model or frozen Validator file changed.
 
-## CLASSIFICATION
+## Evidence classification
 
-- **ACTUAL:** public C03 source, real local Codex Stage 1/2 calls, backend/frontend review,
-  human interaction sequence, file upload and generic REVIEW/EXTERNAL handoff.
-- **SELF:** TASK06 synthetic 117/501-candidate and contract fixtures.
-- **SIMULATED:** mock semantic decisions, provider errors and partial-batch fault injection.
-- **NOT TESTED:** production AI provider/SLA, independent human usability/adjudication, Vision/OCR,
-  automatic generic submission verification, deployment, multi-worker durability and hosted CI.
+- **ACTUAL:** GitHub baseline verification; actual backend process stop/start;
+  actual SQLite/filesystem restore; 14 standard browser tests with actual local
+  uploads/validator; one actual local Codex product E2E.
+- **SELF:** canonical serialization, idempotency, checkpoint, retention and
+  safety tests authored and executed in this task.
+- **SIMULATED:** dead-process RUNNING row, provider interruption, Stage2 batch
+  interruption, secret-bearing exception and retry-limit injections.
+- **NOT TESTED:** actual OS kill during the narrow interval after provider return
+  but before checkpoint commit; multiple backend workers/nodes; cloud volume,
+  backup/restore, public deployment, production provider availability, Vision/
+  OCR and generic submission verification.
 
-## DIRECTION
+## Limits and next task
 
-- FINAL CHECK: **GO**.
-- Two-stage extraction: **GO for local MVP**.
-- Stage 1 AI: **GO for provisional local MVP candidates**.
-- Stage 2 semantic reviewer: **GO for local MVP filtering; human review remains required**.
-- Human confirmation: **REQUIRED**.
-- AI pre-confirmation BLOCKER authority: **NOT_ALLOWED**.
-- Candidate overflow: preserve all candidates through 500, review in batches of 50, show
-  `OVERFLOW_REVIEW` above 100, preserve successful batches, fail explicitly above 500.
+This is a restart-safe **single-node, single-backend-process** MVP. SQLite does
+not coordinate several workers. A provider call whose response was not committed
+may repeat after restart; committed Stage1 and Stage2 batches do not.
 
-## LIMITATIONS AND NEXT RECOMMENDATION
+The next recommended scope after Product Lead review and merge is **TASK08 —
+Generic Verifier Engine**. TASK08 was not started here.
 
-The provider uses a signed-in local Codex installation and in-memory single-process sessions.
-It is not a production service contract. Vision/OCR, an automatic generic verifier, deployment,
-authentication and durable job storage remain outside TASK06 and unimplemented.
+## Delivery
 
-The next scoped task should evaluate and select a production execution/job boundary, including
-durable status and retry behavior, without changing frozen validation or starting Vision and
-generic-verifier work at the same time. Product Lead review is required before that task begins.
-
-## DELIVERY
-
-- GitHub task: `https://github.com/edward321416-maker/final-check/issues/6`.
-- Final delivery branch: `issue/6-two-stage-ai-extraction-mvp`.
-- The earlier two-commit staging PR #5 is superseded by the Issue #6 single-Lore-commit flow and is closed before the final PR is merged.
+- One Korean Lore commit will reference Issue #8.
+- The TASK07 PR will be created against `main` and intentionally left
+  **OPEN / NOT MERGED** for Product Lead diff and runtime-evidence review.

@@ -1,5 +1,5 @@
 # FINAL CHECK — AI Submission Preflight
-Version: 1.2 | TASK 03 integration instructions supplied 2026-09-03.
+Version: 1.3 | TASK 07 durability instructions supplied 2026-09-05.
 
 ## Ownership and source of truth
 ChatGPT planning: Product / Business Lead. Codex: AI / Engineering Lead.
@@ -58,7 +58,7 @@ This limitation must be visible in the UI.
 
 ## Runtime limits
 Loopback-only local service; no cloud upload or new provider call.
-Session metadata, temporary submission files and raw results last until replacement, expiry (one hour), or shutdown. Restart invalidates sessions.
+Session/profile/job metadata and application-owned announcement/submission/raw artifacts persist across backend process restart until replacement or safe expiry (one hour). PENDING/RUNNING/RETRYABLE jobs and process-active sessions are not expired.
 100 concurrent stored sessions; one upload/run at a time per session; maximum 8 files, 320 MiB per file, 350 MiB package transport.
 These are local resource limits, not modifications to the frozen 300MB rule.
 Production storage, multi-worker coordination, public app deployment and arbitrary announcement extraction remain outside TASK 02.
@@ -82,4 +82,15 @@ Generic profile mutations invalidate its activation and prior results. Optimisti
 Only CONFIRMED generic profiles populate the validation handoff. Their automatic submission verifiers are not implemented: results are REVIEW/EXTERNAL, validation_complete=false, engine_sha256=null, never fake PASS/BLOCKER/READY. Confirmation means requirements reviewed, not submission verified.
 Input bounds: UTF-8 text, 100,000 characters; announcement uploads up to 10 MiB; PDF up to 50 pages with a 30-second parsing worker timeout. A PDF with a textless page is VISION_REQUIRED and generates zero candidates. Invalid/encrypted/oversized sources use unreadable/unsupported paths. Embedded image contents and complex PDF reading order are not interpreted.
 Generic profiles inherit the existing single-process, temporary-session lifetime. No paid provider, OAuth, Vision, production hosting, R19 change or historical benchmark claim is added.
+
+## TASK 07 durable runtime contract
+
+TASK07 supersedes the TASK03 temporary-session sentence above. The default local
+MVP persists canonical JSON metadata in SQLite and artifacts under
+`FINAL_CHECK_DATA_DIR` (default `.final-check/runtime/`). An abandoned PENDING or
+RUNNING AI job becomes RETRYABLE on startup and resumes only from its latest durable two-stage
+checkpoint after explicit retry. Completed Stage1 and Stage2 batches are not
+repeated. Retry is bounded to three attempts, and provider failure cannot confirm
+a profile or produce PASS/READY. This is single-node durability; multi-worker,
+cloud deployment and production provider selection remain unsupported.
 Correct delivery claim: **Generic announcement requirement-profile pipeline is integrated and executable.** General accuracy is for TASK 04 independent evaluation.
