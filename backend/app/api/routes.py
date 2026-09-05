@@ -53,7 +53,7 @@ async def health() -> dict:
     available = await run_in_threadpool(lambda: validator_v15.available)
     ai = await run_in_threadpool(provider_status)
     return {"status": "ok", "mode": "frozen_v15", "validator": "available" if available else "unavailable",
-            "engine_sha256": EXPECTED_SHA256, "vision_provider": "unavailable", "version": "0.4.0",
+            "engine_sha256": EXPECTED_SHA256, "vision_provider": "unavailable", "version": "0.5.0",
             "generic_extractor": "two-stage-ai-local-mvp", "generic_ai_provider": ai,
             "generic_verification": "unsupported"}
 
@@ -96,8 +96,9 @@ async def upload_announcement(session_id: str, file: Annotated[UploadFile, File(
             data = await run_in_threadpool(path.read_bytes)
             source = await run_in_threadpool(source_from_bytes, receipt.name, data,
                                             "PDF" if path.suffix.lower() == ".pdf" else "TEXT", path)
-            await run_in_threadpool((Path(sessions.WORKSPACES[session_id].name) / "announcement.bin").write_bytes, data)
+            await run_in_threadpool(sessions.write_announcement, session_id, data)
         invalidate(session)
+        session.current_job_id, session.current_job = None, None
         session.announcement_name = receipt.name
         session.generic_profile = profiles.new_profile(source)
         return sessions.save(session)
@@ -177,7 +178,7 @@ async def validate(session_id: str) -> CheckSession:
             runner = generic_validation.validate if session.validation_profile == "generic" else validator_v15.validate
             run = await run_in_threadpool(runner, session.model_copy(deep=True), package)
             # Preserve raw output privately without adding output files to the submitted package.
-            raw_path = Path(sessions.WORKSPACES[session_id].name) / f"run-{session.revision + 1}-raw.json"
+            raw_path = sessions.workspace_path(session_id) / f"run-{session.revision + 1}-raw.json"
             await run_in_threadpool(raw_path.write_text, json.dumps(run.raw, ensure_ascii=False, indent=2), encoding="utf-8")
             session.results = run.results
             session.validation_complete = run.complete

@@ -92,13 +92,15 @@ export function GenericProfileReview() {
       <p><strong>Profile: <span data-testid="profile-status">{profile.status}</span></strong> · {profile.announcement.ingestion_status}</p>
       <p>{profile.execution_kind ?? "아직 실행 전"} · {profile.provider ?? "Two-stage provider 대기 중"}</p>
       <p><strong>Pipeline: {profile.pipeline_status}</strong> · RAW {profile.raw_candidate_count} · GATED {profile.gated_candidate_count} · DROP {profile.dropped_candidate_count} · Stage2 batch {profile.review_batches}</p>
+      {session.current_job && <p className="info-note"><strong>Durable job: {session.current_job.status}</strong> · {session.current_job.stage} · attempt {session.current_job.attempt}/3 · completed batches {session.current_job.completed_stage2_batches.length}</p>}
       {profile.pipeline_status === "RUNNING" && <p className="info-note">실제 AI 추출을 실행 중입니다. 완료 상태를 자동으로 확인합니다.</p>}
       {profile.pipeline_error && <p className="info-note"><strong>Provider status:</strong> {profile.pipeline_error}</p>}
       {profile.overflow && <p className="info-note"><strong>OVERFLOW_REVIEW</strong> · 100개를 초과해도 전체를 버리지 않습니다. {profile.overflow_policy}</p>}
       {profile.failed_batches.length > 0 && <p className="info-note">실패 batch: {profile.failed_batches.map(i => i + 1).join(", ")} · 성공한 결과는 보존됐습니다.</p>}
       <p>{profile.announcement.notice}</p>
       {profile.notices.map((notice, i) => <p key={i}>{notice}</p>)}
-      {!profile.extraction_complete && profile.pipeline_status !== "RUNNING" && profile.announcement.ingestion_status === "READABLE" && <button className="button primary" disabled={busy} onClick={() => void run(extractAndWait)}>{profile.pipeline_status === "NOT_STARTED" ? "요구사항 추출 실행" : "실패 단계 다시 실행"}</button>}
+      {!profile.extraction_complete && profile.pipeline_status !== "RUNNING" && profile.announcement.ingestion_status === "READABLE" && session.current_job?.status !== "FAILED" && <button className="button primary" disabled={busy} onClick={() => void run(extractAndWait)}>{profile.pipeline_status === "NOT_STARTED" ? "요구사항 추출 실행" : "저장된 단계부터 다시 실행"}</button>}
+      {session.current_job?.status === "FAILED" && <p className="info-note">재시도 한도에 도달했습니다. 새 공고 profile로 다시 시작하세요.</p>}
       {profile.announcement.ingestion_status !== "READABLE" && <p className="info-note">요구사항 0개 · Vision 또는 읽을 수 있는 공고 원문이 필요합니다. 내용을 생성하지 않았습니다.</p>}
       <ErrorNotice error={error} />
     </div>

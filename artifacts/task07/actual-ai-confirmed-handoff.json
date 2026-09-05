@@ -1,0 +1,2762 @@
+{
+  "id": "95d35daa-0319-442d-a829-a4d20d79a8f5",
+  "created_at": "2026-09-05T11:31:14.402425Z",
+  "updated_at": "2026-09-05T11:32:57.866629Z",
+  "mode": "custom",
+  "source_mode": "generic_review",
+  "validation_profile": "generic",
+  "generic_profile": {
+    "profile_type": "generic",
+    "profile_id": "8dc8edc6-1e47-4246-981b-81135a969b78",
+    "announcement": {
+      "source_type": "TEXT",
+      "name": "직접 입력한 공고",
+      "sha256": "5c93e8ab7506e074db8bd983f078f96e6fc9e60cf33e48a53a571640d99f2db6",
+      "text_sha256": "5c93e8ab7506e074db8bd983f078f96e6fc9e60cf33e48a53a571640d99f2db6",
+      "text": "미래 사회 문제 해결을 위한 인문사회 융합 아이디어톤,\n「2025 HUSS 융합캠프(인사이트)」 참가자를 모집합니다!\n✅ 행사명\n2025 HUSS 융합캠프(인사이트) 해커톤\n✅ 행사 일정 및 장소\n*일시/장소: 2025.8.18.(월) ~ 8.20.(수) 2박 3일 / 곤지암리조트\n*대상: HUSS 수행대학 참여학생 250명 (국민대 5명 모집)\n*포상: 장관상 1팀(200만원), 이사장상 4팀(100만원), 협의회장상 5팀(50만원)\n​\n✅ 모집 인원: 5명 (서류 평가 진행)\n*지원 동기, 본인 역량, 해커톤 및 팀 프로젝트 관련 경험, 협업 태도 등을 평가\n*평가 결과 및 점수는 공개하지 않으며, 최종 선발자는 별도 공지 및 개별 연락을 통해 안내 될 예정임\n​\n✅ 참가 대상: HUSS 참여학과(한국어문학부, 한국역사학과, KIBS, 경영정보학부, 건설시스템공학부, 임산생명공학과, 행정학과, 사회학과, 정치외교학과) 재학생(학부생)\n✅ 해커톤 프로그램\nHUSS 해커톤은 인문사회 분야의 지혜를 기반으로, 다양한 영역과 협업하여 미래 사회 문제를 해결하는 융합 아이디어톤 입니다.\n*주제: \"지속가능한 미래를 위한 Futur-Agora\"\n- 각 대 주제 별 미래 사회 문제해결을 위한 하나의 팀을 구성\n- 10개 주제 * 5개 팀(팀당 5인) = 총 50개 팀\n- 대학 별 5인을 모집하되, 당일 현장에서 타 컨소시엄과 연합하여 5인 1연합 팀 구성\n✅ 신청 마감 : 2025년 6월 27일(금)까지\n✅ 신청 방법 : 구글폼 주소 (https://docs.google.com/forms/d/e/1FAIpQLSd_-S-43dgVzd1qI2uahdJ0zI15_rnsfVQ_VLlRhPhmvo4pJw/viewform)\n​\n✅ 해커톤 운영계획\n참가팀 신청 -> 설명회 개최 -> 사전 학습 -> [HUSS 해커톤] 문제해결 -> [HUSS 해커톤] 공유 및 디브리프\nKIBS 학생들의 많은 관심과 참여 부탁드립니다^^",
+      "ingestion_status": "READABLE",
+      "page_count": null,
+      "notice": ""
+    },
+    "status": "CONFIRMED",
+    "requirements": [
+      {
+        "requirement_id": "A001",
+        "rule": "The event is scheduled for August 18–20, 2025, for three days and two nights.",
+        "modality": "INFO",
+        "severity": "REVIEW",
+        "verifier": "DETERMINISTIC",
+        "condition": "If selected to participate (사람이 원문 확인)",
+        "evidence": {
+          "source_section": "행사 일정 및 장소",
+          "quote": "2025.8.18.(월) ~ 8.20.(수) 2박 3일"
+        },
+        "confidence": 1,
+        "extraction_status": "CONFIRMED",
+        "evidence_start": 118,
+        "evidence_end": 148,
+        "issues": [],
+        "original": {
+          "requirement_id": "A001",
+          "rule": "The event is scheduled for August 18–20, 2025, for three days and two nights.",
+          "modality": "INFO",
+          "severity": "REVIEW",
+          "verifier": "DETERMINISTIC",
+          "condition": "If selected to participate",
+          "evidence": {
+            "source_section": "행사 일정 및 장소",
+            "quote": "2025.8.18.(월) ~ 8.20.(수) 2박 3일"
+          },
+          "confidence": 1
+        },
+        "stage1": {
+          "provider": "OpenAI via ChatGPT-authenticated Codex CLI",
+          "model": "gpt-5.6-sol",
+          "prompt_version": "task06-stage1-v1",
+          "prompt_sha256": "52b226089eddf6fb109ab07f676110c7dea48c602397a7d6c283384e3be4d7f4",
+          "execution_kind": "ACTUAL"
+        },
+        "stage2_decision": "KEEP",
+        "stage2_reason": "The event dates and two-night, three-day duration are explicitly stated and are relevant to selected participants.",
+        "stage2": {
+          "provider": "OpenAI via ChatGPT-authenticated Codex CLI",
+          "model": "gpt-5.6-sol",
+          "prompt_version": "task06-stage2-v1",
+          "prompt_sha256": "be838b1ef8d57f921147a3dfb993fa3237fb56dd766b825c883b644aa131163f",
+          "execution_kind": "ACTUAL"
+        },
+        "authoritative": true
+      },
+      {
+        "requirement_id": "A003",
+        "rule": "Applicants must be participating students at a university carrying out HUSS.",
+        "modality": "MUST",
+        "severity": "BLOCKER",
+        "verifier": "SEMANTIC",
+        "condition": "When applying",
+        "evidence": {
+          "source_section": "행사 일정 및 장소",
+          "quote": "*대상: HUSS 수행대학 참여학생 250명 (국민대 5명 모집)"
+        },
+        "confidence": 0.98,
+        "extraction_status": "CONFIRMED",
+        "evidence_start": 158,
+        "evidence_end": 194,
+        "issues": [],
+        "original": {
+          "requirement_id": "A003",
+          "rule": "Applicants must be participating students at a university carrying out HUSS.",
+          "modality": "MUST",
+          "severity": "BLOCKER",
+          "verifier": "SEMANTIC",
+          "condition": "When applying",
+          "evidence": {
+            "source_section": "행사 일정 및 장소",
+            "quote": "*대상: HUSS 수행대학 참여학생 250명 (국민대 5명 모집)"
+          },
+          "confidence": 0.98
+        },
+        "stage1": {
+          "provider": "OpenAI via ChatGPT-authenticated Codex CLI",
+          "model": "gpt-5.6-sol",
+          "prompt_version": "task06-stage1-v1",
+          "prompt_sha256": "52b226089eddf6fb109ab07f676110c7dea48c602397a7d6c283384e3be4d7f4",
+          "execution_kind": "ACTUAL"
+        },
+        "stage2_decision": "KEEP",
+        "stage2_reason": "The stated target population is students participating through HUSS-performing universities, supporting an applicant eligibility rule.",
+        "stage2": {
+          "provider": "OpenAI via ChatGPT-authenticated Codex CLI",
+          "model": "gpt-5.6-sol",
+          "prompt_version": "task06-stage2-v1",
+          "prompt_sha256": "be838b1ef8d57f921147a3dfb993fa3237fb56dd766b825c883b644aa131163f",
+          "execution_kind": "ACTUAL"
+        },
+        "authoritative": true
+      },
+      {
+        "requirement_id": "A004",
+        "rule": "Kookmin University will recruit five participants.",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "DETERMINISTIC",
+        "condition": "For Kookmin University applicants",
+        "evidence": {
+          "source_section": "행사 일정 및 장소",
+          "quote": "국민대 5명 모집"
+        },
+        "confidence": 1,
+        "extraction_status": "CONFIRMED",
+        "evidence_start": 184,
+        "evidence_end": 193,
+        "issues": [],
+        "original": {
+          "requirement_id": "A004",
+          "rule": "Kookmin University will recruit five participants.",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "DETERMINISTIC",
+          "condition": "For Kookmin University applicants",
+          "evidence": {
+            "source_section": "행사 일정 및 장소",
+            "quote": "국민대 5명 모집"
+          },
+          "confidence": 1
+        },
+        "stage1": {
+          "provider": "OpenAI via ChatGPT-authenticated Codex CLI",
+          "model": "gpt-5.6-sol",
+          "prompt_version": "task06-stage1-v1",
+          "prompt_sha256": "52b226089eddf6fb109ab07f676110c7dea48c602397a7d6c283384e3be4d7f4",
+          "execution_kind": "ACTUAL"
+        },
+        "stage2_decision": "KEEP",
+        "stage2_reason": "The source explicitly states that Kookmin University is recruiting five people.",
+        "stage2": {
+          "provider": "OpenAI via ChatGPT-authenticated Codex CLI",
+          "model": "gpt-5.6-sol",
+          "prompt_version": "task06-stage2-v1",
+          "prompt_sha256": "be838b1ef8d57f921147a3dfb993fa3237fb56dd766b825c883b644aa131163f",
+          "execution_kind": "ACTUAL"
+        },
+        "authoritative": true
+      },
+      {
+        "requirement_id": "A005",
+        "rule": "Five participants will be selected through document evaluation.",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "DETERMINISTIC",
+        "condition": "During participant selection",
+        "evidence": {
+          "source_section": "모집 인원",
+          "quote": "✅ 모집 인원: 5명 (서류 평가 진행)"
+        },
+        "confidence": 1,
+        "extraction_status": "CONFIRMED",
+        "evidence_start": 248,
+        "evidence_end": 270,
+        "issues": [],
+        "original": {
+          "requirement_id": "A005",
+          "rule": "Five participants will be selected through document evaluation.",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "DETERMINISTIC",
+          "condition": "During participant selection",
+          "evidence": {
+            "source_section": "모집 인원",
+            "quote": "✅ 모집 인원: 5명 (서류 평가 진행)"
+          },
+          "confidence": 1
+        },
+        "stage1": {
+          "provider": "OpenAI via ChatGPT-authenticated Codex CLI",
+          "model": "gpt-5.6-sol",
+          "prompt_version": "task06-stage1-v1",
+          "prompt_sha256": "52b226089eddf6fb109ab07f676110c7dea48c602397a7d6c283384e3be4d7f4",
+          "execution_kind": "ACTUAL"
+        },
+        "stage2_decision": "KEEP",
+        "stage2_reason": "The recruitment count and use of document evaluation are explicitly stated and meaningful to applicants.",
+        "stage2": {
+          "provider": "OpenAI via ChatGPT-authenticated Codex CLI",
+          "model": "gpt-5.6-sol",
+          "prompt_version": "task06-stage2-v1",
+          "prompt_sha256": "be838b1ef8d57f921147a3dfb993fa3237fb56dd766b825c883b644aa131163f",
+          "execution_kind": "ACTUAL"
+        },
+        "authoritative": true
+      },
+      {
+        "requirement_id": "A006",
+        "rule": "The document evaluation considers motivation for applying, the applicant's capabilities, hackathon and team-project experience, and collaborative attitude.",
+        "modality": "INFO",
+        "severity": "REVIEW",
+        "verifier": "SEMANTIC",
+        "condition": "During document evaluation",
+        "evidence": {
+          "source_section": "모집 인원",
+          "quote": "*지원 동기, 본인 역량, 해커톤 및 팀 프로젝트 관련 경험, 협업 태도 등을 평가"
+        },
+        "confidence": 1,
+        "extraction_status": "CONFIRMED",
+        "evidence_start": 271,
+        "evidence_end": 317,
+        "issues": [],
+        "original": {
+          "requirement_id": "A006",
+          "rule": "The document evaluation considers motivation for applying, the applicant's capabilities, hackathon and team-project experience, and collaborative attitude.",
+          "modality": "INFO",
+          "severity": "REVIEW",
+          "verifier": "SEMANTIC",
+          "condition": "During document evaluation",
+          "evidence": {
+            "source_section": "모집 인원",
+            "quote": "*지원 동기, 본인 역량, 해커톤 및 팀 프로젝트 관련 경험, 협업 태도 등을 평가"
+          },
+          "confidence": 1
+        },
+        "stage1": {
+          "provider": "OpenAI via ChatGPT-authenticated Codex CLI",
+          "model": "gpt-5.6-sol",
+          "prompt_version": "task06-stage1-v1",
+          "prompt_sha256": "52b226089eddf6fb109ab07f676110c7dea48c602397a7d6c283384e3be4d7f4",
+          "execution_kind": "ACTUAL"
+        },
+        "stage2_decision": "KEEP",
+        "stage2_reason": "The source expressly lists these matters as document-evaluation criteria.",
+        "stage2": {
+          "provider": "OpenAI via ChatGPT-authenticated Codex CLI",
+          "model": "gpt-5.6-sol",
+          "prompt_version": "task06-stage2-v1",
+          "prompt_sha256": "be838b1ef8d57f921147a3dfb993fa3237fb56dd766b825c883b644aa131163f",
+          "execution_kind": "ACTUAL"
+        },
+        "authoritative": true
+      },
+      {
+        "requirement_id": "A007",
+        "rule": "Evaluation results and scores will not be disclosed.",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "DETERMINISTIC",
+        "condition": "After evaluation",
+        "evidence": {
+          "source_section": "모집 인원",
+          "quote": "*평가 결과 및 점수는 공개하지 않으며"
+        },
+        "confidence": 1,
+        "extraction_status": "CONFIRMED",
+        "evidence_start": 318,
+        "evidence_end": 339,
+        "issues": [],
+        "original": {
+          "requirement_id": "A007",
+          "rule": "Evaluation results and scores will not be disclosed.",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "DETERMINISTIC",
+          "condition": "After evaluation",
+          "evidence": {
+            "source_section": "모집 인원",
+            "quote": "*평가 결과 및 점수는 공개하지 않으며"
+          },
+          "confidence": 1
+        },
+        "stage1": {
+          "provider": "OpenAI via ChatGPT-authenticated Codex CLI",
+          "model": "gpt-5.6-sol",
+          "prompt_version": "task06-stage1-v1",
+          "prompt_sha256": "52b226089eddf6fb109ab07f676110c7dea48c602397a7d6c283384e3be4d7f4",
+          "execution_kind": "ACTUAL"
+        },
+        "stage2_decision": "KEEP",
+        "stage2_reason": "The source explicitly says evaluation results and scores will not be disclosed.",
+        "stage2": {
+          "provider": "OpenAI via ChatGPT-authenticated Codex CLI",
+          "model": "gpt-5.6-sol",
+          "prompt_version": "task06-stage2-v1",
+          "prompt_sha256": "be838b1ef8d57f921147a3dfb993fa3237fb56dd766b825c883b644aa131163f",
+          "execution_kind": "ACTUAL"
+        },
+        "authoritative": true
+      },
+      {
+        "requirement_id": "A008",
+        "rule": "Final selections will be announced separately and communicated individually.",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "If finally selected",
+        "evidence": {
+          "source_section": "모집 인원",
+          "quote": "최종 선발자는 별도 공지 및 개별 연락을 통해 안내 될 예정임"
+        },
+        "confidence": 1,
+        "extraction_status": "CONFIRMED",
+        "evidence_start": 341,
+        "evidence_end": 375,
+        "issues": [],
+        "original": {
+          "requirement_id": "A008",
+          "rule": "Final selections will be announced separately and communicated individually.",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "SEMANTIC",
+          "condition": "If finally selected",
+          "evidence": {
+            "source_section": "모집 인원",
+            "quote": "최종 선발자는 별도 공지 및 개별 연락을 통해 안내 될 예정임"
+          },
+          "confidence": 1
+        },
+        "stage1": {
+          "provider": "OpenAI via ChatGPT-authenticated Codex CLI",
+          "model": "gpt-5.6-sol",
+          "prompt_version": "task06-stage1-v1",
+          "prompt_sha256": "52b226089eddf6fb109ab07f676110c7dea48c602397a7d6c283384e3be4d7f4",
+          "execution_kind": "ACTUAL"
+        },
+        "stage2_decision": "KEEP",
+        "stage2_reason": "The source explicitly states that final selections will be announced separately and conveyed through individual contact.",
+        "stage2": {
+          "provider": "OpenAI via ChatGPT-authenticated Codex CLI",
+          "model": "gpt-5.6-sol",
+          "prompt_version": "task06-stage2-v1",
+          "prompt_sha256": "be838b1ef8d57f921147a3dfb993fa3237fb56dd766b825c883b644aa131163f",
+          "execution_kind": "ACTUAL"
+        },
+        "authoritative": true
+      },
+      {
+        "requirement_id": "A009",
+        "rule": "Applicants must be currently enrolled undergraduate students in one of these HUSS-participating departments: Korean Language and Literature, Korean History, KIBS, Management Information Systems, Civil and Environmental Engineering, Forest Products and Biotechnology, Public Administration, Sociology, or Political Science and Diplomacy.",
+        "modality": "MUST",
+        "severity": "BLOCKER",
+        "verifier": "SEMANTIC",
+        "condition": "When applying",
+        "evidence": {
+          "source_section": "참가 대상",
+          "quote": "✅ 참가 대상: HUSS 참여학과(한국어문학부, 한국역사학과, KIBS, 경영정보학부, 건설시스템공학부, 임산생명공학과, 행정학과, 사회학과, 정치외교학과) 재학생(학부생)"
+        },
+        "confidence": 1,
+        "extraction_status": "CONFIRMED",
+        "evidence_start": 378,
+        "evidence_end": 474,
+        "issues": [],
+        "original": {
+          "requirement_id": "A009",
+          "rule": "Applicants must be currently enrolled undergraduate students in one of these HUSS-participating departments: Korean Language and Literature, Korean History, KIBS, Management Information Systems, Civil and Environmental Engineering, Forest Products and Biotechnology, Public Administration, Sociology, or Political Science and Diplomacy.",
+          "modality": "MUST",
+          "severity": "BLOCKER",
+          "verifier": "SEMANTIC",
+          "condition": "When applying",
+          "evidence": {
+            "source_section": "참가 대상",
+            "quote": "✅ 참가 대상: HUSS 참여학과(한국어문학부, 한국역사학과, KIBS, 경영정보학부, 건설시스템공학부, 임산생명공학과, 행정학과, 사회학과, 정치외교학과) 재학생(학부생)"
+          },
+          "confidence": 1
+        },
+        "stage1": {
+          "provider": "OpenAI via ChatGPT-authenticated Codex CLI",
+          "model": "gpt-5.6-sol",
+          "prompt_version": "task06-stage1-v1",
+          "prompt_sha256": "52b226089eddf6fb109ab07f676110c7dea48c602397a7d6c283384e3be4d7f4",
+          "execution_kind": "ACTUAL"
+        },
+        "stage2_decision": "KEEP",
+        "stage2_reason": "The source expressly limits eligibility to currently enrolled undergraduates in the listed HUSS-participating departments.",
+        "stage2": {
+          "provider": "OpenAI via ChatGPT-authenticated Codex CLI",
+          "model": "gpt-5.6-sol",
+          "prompt_version": "task06-stage2-v1",
+          "prompt_sha256": "be838b1ef8d57f921147a3dfb993fa3237fb56dd766b825c883b644aa131163f",
+          "execution_kind": "ACTUAL"
+        },
+        "authoritative": true
+      },
+      {
+        "requirement_id": "A010",
+        "rule": "The hackathon theme is “Futur-Agora for a Sustainable Future.”",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "DETERMINISTIC",
+        "condition": "When participating in the hackathon",
+        "evidence": {
+          "source_section": "해커톤 프로그램",
+          "quote": "*주제: \"지속가능한 미래를 위한 Futur-Agora\""
+        },
+        "confidence": 1,
+        "extraction_status": "CONFIRMED",
+        "evidence_start": 557,
+        "evidence_end": 588,
+        "issues": [],
+        "original": {
+          "requirement_id": "A010",
+          "rule": "The hackathon theme is “Futur-Agora for a Sustainable Future.”",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "DETERMINISTIC",
+          "condition": "When participating in the hackathon",
+          "evidence": {
+            "source_section": "해커톤 프로그램",
+            "quote": "*주제: \"지속가능한 미래를 위한 Futur-Agora\""
+          },
+          "confidence": 1
+        },
+        "stage1": {
+          "provider": "OpenAI via ChatGPT-authenticated Codex CLI",
+          "model": "gpt-5.6-sol",
+          "prompt_version": "task06-stage1-v1",
+          "prompt_sha256": "52b226089eddf6fb109ab07f676110c7dea48c602397a7d6c283384e3be4d7f4",
+          "execution_kind": "ACTUAL"
+        },
+        "stage2_decision": "KEEP",
+        "stage2_reason": "The hackathon theme is quoted exactly and is meaningful event information for prospective participants.",
+        "stage2": {
+          "provider": "OpenAI via ChatGPT-authenticated Codex CLI",
+          "model": "gpt-5.6-sol",
+          "prompt_version": "task06-stage2-v1",
+          "prompt_sha256": "be838b1ef8d57f921147a3dfb993fa3237fb56dd766b825c883b644aa131163f",
+          "execution_kind": "ACTUAL"
+        },
+        "authoritative": true
+      },
+      {
+        "requirement_id": "A011",
+        "rule": "Each university recruits five people, who must form a five-person joint team with participants from another consortium on site on the event day.",
+        "modality": "MUST",
+        "severity": "REVIEW",
+        "verifier": "SEMANTIC",
+        "condition": "On the event day",
+        "evidence": {
+          "source_section": "해커톤 프로그램",
+          "quote": "- 대학 별 5인을 모집하되, 당일 현장에서 타 컨소시엄과 연합하여 5인 1연합 팀 구성"
+        },
+        "confidence": 1,
+        "extraction_status": "CONFIRMED",
+        "evidence_start": 658,
+        "evidence_end": 707,
+        "issues": [],
+        "original": {
+          "requirement_id": "A011",
+          "rule": "Each university recruits five people, who must form a five-person joint team with participants from another consortium on site on the event day.",
+          "modality": "MUST",
+          "severity": "REVIEW",
+          "verifier": "SEMANTIC",
+          "condition": "On the event day",
+          "evidence": {
+            "source_section": "해커톤 프로그램",
+            "quote": "- 대학 별 5인을 모집하되, 당일 현장에서 타 컨소시엄과 연합하여 5인 1연합 팀 구성"
+          },
+          "confidence": 1
+        },
+        "stage1": {
+          "provider": "OpenAI via ChatGPT-authenticated Codex CLI",
+          "model": "gpt-5.6-sol",
+          "prompt_version": "task06-stage1-v1",
+          "prompt_sha256": "52b226089eddf6fb109ab07f676110c7dea48c602397a7d6c283384e3be4d7f4",
+          "execution_kind": "ACTUAL"
+        },
+        "stage2_decision": "REVIEW",
+        "stage2_reason": "The source describes onsite formation of five-person joint teams, but it does not clearly impose a personal MUST obligation on each participant; the actor and modality require human confirmation.",
+        "stage2": {
+          "provider": "OpenAI via ChatGPT-authenticated Codex CLI",
+          "model": "gpt-5.6-sol",
+          "prompt_version": "task06-stage2-v1",
+          "prompt_sha256": "be838b1ef8d57f921147a3dfb993fa3237fb56dd766b825c883b644aa131163f",
+          "execution_kind": "ACTUAL"
+        },
+        "authoritative": true
+      },
+      {
+        "requirement_id": "A012",
+        "rule": "Applications must be submitted by June 27, 2025.",
+        "modality": "MUST",
+        "severity": "BLOCKER",
+        "verifier": "DETERMINISTIC",
+        "condition": "When applying",
+        "evidence": {
+          "source_section": "신청 마감",
+          "quote": "✅ 신청 마감 : 2025년 6월 27일(금)까지"
+        },
+        "confidence": 1,
+        "extraction_status": "CONFIRMED",
+        "evidence_start": 708,
+        "evidence_end": 735,
+        "issues": [],
+        "original": {
+          "requirement_id": "A012",
+          "rule": "Applications must be submitted by June 27, 2025.",
+          "modality": "MUST",
+          "severity": "BLOCKER",
+          "verifier": "DETERMINISTIC",
+          "condition": "When applying",
+          "evidence": {
+            "source_section": "신청 마감",
+            "quote": "✅ 신청 마감 : 2025년 6월 27일(금)까지"
+          },
+          "confidence": 1
+        },
+        "stage1": {
+          "provider": "OpenAI via ChatGPT-authenticated Codex CLI",
+          "model": "gpt-5.6-sol",
+          "prompt_version": "task06-stage1-v1",
+          "prompt_sha256": "52b226089eddf6fb109ab07f676110c7dea48c602397a7d6c283384e3be4d7f4",
+          "execution_kind": "ACTUAL"
+        },
+        "stage2_decision": "KEEP",
+        "stage2_reason": "The application deadline of June 27, 2025 is explicitly stated and supports the mandatory deadline.",
+        "stage2": {
+          "provider": "OpenAI via ChatGPT-authenticated Codex CLI",
+          "model": "gpt-5.6-sol",
+          "prompt_version": "task06-stage2-v1",
+          "prompt_sha256": "be838b1ef8d57f921147a3dfb993fa3237fb56dd766b825c883b644aa131163f",
+          "execution_kind": "ACTUAL"
+        },
+        "authoritative": true
+      },
+      {
+        "requirement_id": "A013",
+        "rule": "Applicants must apply through the specified Google Form.",
+        "modality": "MUST",
+        "severity": "BLOCKER",
+        "verifier": "URL_CHECK",
+        "condition": "When applying",
+        "evidence": {
+          "source_section": "신청 방법",
+          "quote": "✅ 신청 방법 : 구글폼 주소 (https://docs.google.com/forms/d/e/1FAIpQLSd_-S-43dgVzd1qI2uahdJ0zI15_rnsfVQ_VLlRhPhmvo4pJw/viewform)"
+        },
+        "confidence": 1,
+        "extraction_status": "CONFIRMED",
+        "evidence_start": 736,
+        "evidence_end": 854,
+        "issues": [],
+        "original": {
+          "requirement_id": "A013",
+          "rule": "Applicants must apply through the specified Google Form.",
+          "modality": "MUST",
+          "severity": "BLOCKER",
+          "verifier": "URL_CHECK",
+          "condition": "When applying",
+          "evidence": {
+            "source_section": "신청 방법",
+            "quote": "✅ 신청 방법 : 구글폼 주소 (https://docs.google.com/forms/d/e/1FAIpQLSd_-S-43dgVzd1qI2uahdJ0zI15_rnsfVQ_VLlRhPhmvo4pJw/viewform)"
+          },
+          "confidence": 1
+        },
+        "stage1": {
+          "provider": "OpenAI via ChatGPT-authenticated Codex CLI",
+          "model": "gpt-5.6-sol",
+          "prompt_version": "task06-stage1-v1",
+          "prompt_sha256": "52b226089eddf6fb109ab07f676110c7dea48c602397a7d6c283384e3be4d7f4",
+          "execution_kind": "ACTUAL"
+        },
+        "stage2_decision": "KEEP",
+        "stage2_reason": "The source identifies the linked Google Form as the application method, supporting the required submission channel.",
+        "stage2": {
+          "provider": "OpenAI via ChatGPT-authenticated Codex CLI",
+          "model": "gpt-5.6-sol",
+          "prompt_version": "task06-stage2-v1",
+          "prompt_sha256": "be838b1ef8d57f921147a3dfb993fa3237fb56dd766b825c883b644aa131163f",
+          "execution_kind": "ACTUAL"
+        },
+        "authoritative": true
+      }
+    ],
+    "raw_candidates": [
+      {
+        "requirement_id": "A001",
+        "rule": "The event is scheduled for August 18–20, 2025, for three days and two nights.",
+        "modality": "INFO",
+        "severity": "REVIEW",
+        "verifier": "DETERMINISTIC",
+        "condition": "If selected to participate",
+        "evidence": {
+          "source_section": "행사 일정 및 장소",
+          "quote": "2025.8.18.(월) ~ 8.20.(수) 2박 3일"
+        },
+        "confidence": 1
+      },
+      {
+        "requirement_id": "A002",
+        "rule": "The event will be held at Konjiam Resort.",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "DETERMINISTIC",
+        "condition": "If selected to participate",
+        "evidence": {
+          "source_section": "행사 일정 및 장소",
+          "quote": "곤지암리조트"
+        },
+        "confidence": 1
+      },
+      {
+        "requirement_id": "A003",
+        "rule": "Applicants must be participating students at a university carrying out HUSS.",
+        "modality": "MUST",
+        "severity": "BLOCKER",
+        "verifier": "SEMANTIC",
+        "condition": "When applying",
+        "evidence": {
+          "source_section": "행사 일정 및 장소",
+          "quote": "*대상: HUSS 수행대학 참여학생 250명 (국민대 5명 모집)"
+        },
+        "confidence": 0.98
+      },
+      {
+        "requirement_id": "A004",
+        "rule": "Kookmin University will recruit five participants.",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "DETERMINISTIC",
+        "condition": "For Kookmin University applicants",
+        "evidence": {
+          "source_section": "행사 일정 및 장소",
+          "quote": "국민대 5명 모집"
+        },
+        "confidence": 1
+      },
+      {
+        "requirement_id": "A005",
+        "rule": "Five participants will be selected through document evaluation.",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "DETERMINISTIC",
+        "condition": "During participant selection",
+        "evidence": {
+          "source_section": "모집 인원",
+          "quote": "✅ 모집 인원: 5명 (서류 평가 진행)"
+        },
+        "confidence": 1
+      },
+      {
+        "requirement_id": "A006",
+        "rule": "The document evaluation considers motivation for applying, the applicant's capabilities, hackathon and team-project experience, and collaborative attitude.",
+        "modality": "INFO",
+        "severity": "REVIEW",
+        "verifier": "SEMANTIC",
+        "condition": "During document evaluation",
+        "evidence": {
+          "source_section": "모집 인원",
+          "quote": "*지원 동기, 본인 역량, 해커톤 및 팀 프로젝트 관련 경험, 협업 태도 등을 평가"
+        },
+        "confidence": 1
+      },
+      {
+        "requirement_id": "A007",
+        "rule": "Evaluation results and scores will not be disclosed.",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "DETERMINISTIC",
+        "condition": "After evaluation",
+        "evidence": {
+          "source_section": "모집 인원",
+          "quote": "*평가 결과 및 점수는 공개하지 않으며"
+        },
+        "confidence": 1
+      },
+      {
+        "requirement_id": "A008",
+        "rule": "Final selections will be announced separately and communicated individually.",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "If finally selected",
+        "evidence": {
+          "source_section": "모집 인원",
+          "quote": "최종 선발자는 별도 공지 및 개별 연락을 통해 안내 될 예정임"
+        },
+        "confidence": 1
+      },
+      {
+        "requirement_id": "A009",
+        "rule": "Applicants must be currently enrolled undergraduate students in one of these HUSS-participating departments: Korean Language and Literature, Korean History, KIBS, Management Information Systems, Civil and Environmental Engineering, Forest Products and Biotechnology, Public Administration, Sociology, or Political Science and Diplomacy.",
+        "modality": "MUST",
+        "severity": "BLOCKER",
+        "verifier": "SEMANTIC",
+        "condition": "When applying",
+        "evidence": {
+          "source_section": "참가 대상",
+          "quote": "✅ 참가 대상: HUSS 참여학과(한국어문학부, 한국역사학과, KIBS, 경영정보학부, 건설시스템공학부, 임산생명공학과, 행정학과, 사회학과, 정치외교학과) 재학생(학부생)"
+        },
+        "confidence": 1
+      },
+      {
+        "requirement_id": "A010",
+        "rule": "The hackathon theme is “Futur-Agora for a Sustainable Future.”",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "DETERMINISTIC",
+        "condition": "When participating in the hackathon",
+        "evidence": {
+          "source_section": "해커톤 프로그램",
+          "quote": "*주제: \"지속가능한 미래를 위한 Futur-Agora\""
+        },
+        "confidence": 1
+      },
+      {
+        "requirement_id": "A011",
+        "rule": "Each university recruits five people, who must form a five-person joint team with participants from another consortium on site on the event day.",
+        "modality": "MUST",
+        "severity": "REVIEW",
+        "verifier": "SEMANTIC",
+        "condition": "On the event day",
+        "evidence": {
+          "source_section": "해커톤 프로그램",
+          "quote": "- 대학 별 5인을 모집하되, 당일 현장에서 타 컨소시엄과 연합하여 5인 1연합 팀 구성"
+        },
+        "confidence": 1
+      },
+      {
+        "requirement_id": "A012",
+        "rule": "Applications must be submitted by June 27, 2025.",
+        "modality": "MUST",
+        "severity": "BLOCKER",
+        "verifier": "DETERMINISTIC",
+        "condition": "When applying",
+        "evidence": {
+          "source_section": "신청 마감",
+          "quote": "✅ 신청 마감 : 2025년 6월 27일(금)까지"
+        },
+        "confidence": 1
+      },
+      {
+        "requirement_id": "A013",
+        "rule": "Applicants must apply through the specified Google Form.",
+        "modality": "MUST",
+        "severity": "BLOCKER",
+        "verifier": "URL_CHECK",
+        "condition": "When applying",
+        "evidence": {
+          "source_section": "신청 방법",
+          "quote": "✅ 신청 방법 : 구글폼 주소 (https://docs.google.com/forms/d/e/1FAIpQLSd_-S-43dgVzd1qI2uahdJ0zI15_rnsfVQ_VLlRhPhmvo4pJw/viewform)"
+        },
+        "confidence": 1
+      },
+      {
+        "requirement_id": "A014",
+        "rule": "The planned program sequence is team application, orientation, advance learning, hackathon problem-solving, and hackathon sharing and debriefing.",
+        "modality": "INFO",
+        "severity": "INFO",
+        "verifier": "SEMANTIC",
+        "condition": "As part of the hackathon program",
+        "evidence": {
+          "source_section": "해커톤 운영계획",
+          "quote": "참가팀 신청 -> 설명회 개최 -> 사전 학습 -> [HUSS 해커톤] 문제해결 -> [HUSS 해커톤] 공유 및 디브리프"
+        },
+        "confidence": 1
+      }
+    ],
+    "gated_candidate_ids": [
+      "A001",
+      "A002",
+      "A003",
+      "A004",
+      "A005",
+      "A006",
+      "A007",
+      "A008",
+      "A009",
+      "A010",
+      "A011",
+      "A012",
+      "A013",
+      "A014"
+    ],
+    "stage2_reviews": [
+      {
+        "requirement_id": "A001",
+        "decision": "KEEP",
+        "reason": "The event dates and two-night, three-day duration are explicitly stated and are relevant to selected participants.",
+        "semantic_support": true,
+        "condition_preserved": true,
+        "modality_supported": true,
+        "needs_more_context": false,
+        "duplicate_of": null,
+        "reviewer": {
+          "provider": "OpenAI via ChatGPT-authenticated Codex CLI",
+          "model": "gpt-5.6-sol",
+          "prompt_version": "task06-stage2-v1",
+          "prompt_sha256": "be838b1ef8d57f921147a3dfb993fa3237fb56dd766b825c883b644aa131163f",
+          "execution_kind": "ACTUAL"
+        }
+      },
+      {
+        "requirement_id": "A002",
+        "decision": "KEEP",
+        "reason": "The source explicitly identifies Konjiam Resort as the event location.",
+        "semantic_support": true,
+        "condition_preserved": true,
+        "modality_supported": true,
+        "needs_more_context": false,
+        "duplicate_of": null,
+        "reviewer": {
+          "provider": "OpenAI via ChatGPT-authenticated Codex CLI",
+          "model": "gpt-5.6-sol",
+          "prompt_version": "task06-stage2-v1",
+          "prompt_sha256": "be838b1ef8d57f921147a3dfb993fa3237fb56dd766b825c883b644aa131163f",
+          "execution_kind": "ACTUAL"
+        }
+      },
+      {
+        "requirement_id": "A003",
+        "decision": "KEEP",
+        "reason": "The stated target population is students participating through HUSS-performing universities, supporting an applicant eligibility rule.",
+        "semantic_support": true,
+        "condition_preserved": true,
+        "modality_supported": true,
+        "needs_more_context": false,
+        "duplicate_of": null,
+        "reviewer": {
+          "provider": "OpenAI via ChatGPT-authenticated Codex CLI",
+          "model": "gpt-5.6-sol",
+          "prompt_version": "task06-stage2-v1",
+          "prompt_sha256": "be838b1ef8d57f921147a3dfb993fa3237fb56dd766b825c883b644aa131163f",
+          "execution_kind": "ACTUAL"
+        }
+      },
+      {
+        "requirement_id": "A004",
+        "decision": "KEEP",
+        "reason": "The source explicitly states that Kookmin University is recruiting five people.",
+        "semantic_support": true,
+        "condition_preserved": true,
+        "modality_supported": true,
+        "needs_more_context": false,
+        "duplicate_of": null,
+        "reviewer": {
+          "provider": "OpenAI via ChatGPT-authenticated Codex CLI",
+          "model": "gpt-5.6-sol",
+          "prompt_version": "task06-stage2-v1",
+          "prompt_sha256": "be838b1ef8d57f921147a3dfb993fa3237fb56dd766b825c883b644aa131163f",
+          "execution_kind": "ACTUAL"
+        }
+      },
+      {
+        "requirement_id": "A005",
+        "decision": "KEEP",
+        "reason": "The recruitment count and use of document evaluation are explicitly stated and meaningful to applicants.",
+        "semantic_support": true,
+        "condition_preserved": true,
+        "modality_supported": true,
+        "needs_more_context": false,
+        "duplicate_of": null,
+        "reviewer": {
+          "provider": "OpenAI via ChatGPT-authenticated Codex CLI",
+          "model": "gpt-5.6-sol",
+          "prompt_version": "task06-stage2-v1",
+          "prompt_sha256": "be838b1ef8d57f921147a3dfb993fa3237fb56dd766b825c883b644aa131163f",
+          "execution_kind": "ACTUAL"
+        }
+      },
+      {
+        "requirement_id": "A006",
+        "decision": "KEEP",
+        "reason": "The source expressly lists these matters as document-evaluation criteria.",
+        "semantic_support": true,
+        "condition_preserved": true,
+        "modality_supported": true,
+        "needs_more_context": false,
+        "duplicate_of": null,
+        "reviewer": {
+          "provider": "OpenAI via ChatGPT-authenticated Codex CLI",
+          "model": "gpt-5.6-sol",
+          "prompt_version": "task06-stage2-v1",
+          "prompt_sha256": "be838b1ef8d57f921147a3dfb993fa3237fb56dd766b825c883b644aa131163f",
+          "execution_kind": "ACTUAL"
+        }
+      },
+      {
+        "requirement_id": "A007",
+        "decision": "KEEP",
+        "reason": "The source explicitly says evaluation results and scores will not be disclosed.",
+        "semantic_support": true,
+        "condition_preserved": true,
+        "modality_supported": true,
+        "needs_more_context": false,
+        "duplicate_of": null,
+        "reviewer": {
+          "provider": "OpenAI via ChatGPT-authenticated Codex CLI",
+          "model": "gpt-5.6-sol",
+          "prompt_version": "task06-stage2-v1",
+          "prompt_sha256": "be838b1ef8d57f921147a3dfb993fa3237fb56dd766b825c883b644aa131163f",
+          "execution_kind": "ACTUAL"
+        }
+      },
+      {
+        "requirement_id": "A008",
+        "decision": "KEEP",
+        "reason": "The source explicitly states that final selections will be announced separately and conveyed through individual contact.",
+        "semantic_support": true,
+        "condition_preserved": true,
+        "modality_supported": true,
+        "needs_more_context": false,
+        "duplicate_of": null,
+        "reviewer": {
+          "provider": "OpenAI via ChatGPT-authenticated Codex CLI",
+          "model": "gpt-5.6-sol",
+          "prompt_version": "task06-stage2-v1",
+          "prompt_sha256": "be838b1ef8d57f921147a3dfb993fa3237fb56dd766b825c883b644aa131163f",
+          "execution_kind": "ACTUAL"
+        }
+      },
+      {
+        "requirement_id": "A009",
+        "decision": "KEEP",
+        "reason": "The source expressly limits eligibility to currently enrolled undergraduates in the listed HUSS-participating departments.",
+        "semantic_support": true,
+        "condition_preserved": true,
+        "modality_supported": true,
+        "needs_more_context": false,
+        "duplicate_of": null,
+        "reviewer": {
+          "provider": "OpenAI via ChatGPT-authenticated Codex CLI",
+          "model": "gpt-5.6-sol",
+          "prompt_version": "task06-stage2-v1",
+          "prompt_sha256": "be838b1ef8d57f921147a3dfb993fa3237fb56dd766b825c883b644aa131163f",
+          "execution_kind": "ACTUAL"
+        }
+      },
+      {
+        "requirement_id": "A010",
+        "decision": "KEEP",
+        "reason": "The hackathon theme is quoted exactly and is meaningful event information for prospective participants.",
+        "semantic_support": true,
+        "condition_preserved": true,
+        "modality_supported": true,
+        "needs_more_context": false,
+        "duplicate_of": null,
+        "reviewer": {
+          "provider": "OpenAI via ChatGPT-authenticated Codex CLI",
+          "model": "gpt-5.6-sol",
+          "prompt_version": "task06-stage2-v1",
+          "prompt_sha256": "be838b1ef8d57f921147a3dfb993fa3237fb56dd766b825c883b644aa131163f",
+          "execution_kind": "ACTUAL"
+        }
+      },
+      {
+        "requirement_id": "A011",
+        "decision": "REVIEW",
+        "reason": "The source describes onsite formation of five-person joint teams, but it does not clearly impose a personal MUST obligation on each participant; the actor and modality require human confirmation.",
+        "semantic_support": false,
+        "condition_preserved": true,
+        "modality_supported": false,
+        "needs_more_context": true,
+        "duplicate_of": null,
+        "reviewer": {
+          "provider": "OpenAI via ChatGPT-authenticated Codex CLI",
+          "model": "gpt-5.6-sol",
+          "prompt_version": "task06-stage2-v1",
+          "prompt_sha256": "be838b1ef8d57f921147a3dfb993fa3237fb56dd766b825c883b644aa131163f",
+          "execution_kind": "ACTUAL"
+        }
+      },
+      {
+        "requirement_id": "A012",
+        "decision": "KEEP",
+        "reason": "The application deadline of June 27, 2025 is explicitly stated and supports the mandatory deadline.",
+        "semantic_support": true,
+        "condition_preserved": true,
+        "modality_supported": true,
+        "needs_more_context": false,
+        "duplicate_of": null,
+        "reviewer": {
+          "provider": "OpenAI via ChatGPT-authenticated Codex CLI",
+          "model": "gpt-5.6-sol",
+          "prompt_version": "task06-stage2-v1",
+          "prompt_sha256": "be838b1ef8d57f921147a3dfb993fa3237fb56dd766b825c883b644aa131163f",
+          "execution_kind": "ACTUAL"
+        }
+      },
+      {
+        "requirement_id": "A013",
+        "decision": "KEEP",
+        "reason": "The source identifies the linked Google Form as the application method, supporting the required submission channel.",
+        "semantic_support": true,
+        "condition_preserved": true,
+        "modality_supported": true,
+        "needs_more_context": false,
+        "duplicate_of": null,
+        "reviewer": {
+          "provider": "OpenAI via ChatGPT-authenticated Codex CLI",
+          "model": "gpt-5.6-sol",
+          "prompt_version": "task06-stage2-v1",
+          "prompt_sha256": "be838b1ef8d57f921147a3dfb993fa3237fb56dd766b825c883b644aa131163f",
+          "execution_kind": "ACTUAL"
+        }
+      },
+      {
+        "requirement_id": "A014",
+        "decision": "DROP",
+        "reason": "This is an organizer-facing operational sequence rather than an independently actionable applicant requirement.",
+        "semantic_support": true,
+        "condition_preserved": true,
+        "modality_supported": true,
+        "needs_more_context": false,
+        "duplicate_of": null,
+        "reviewer": {
+          "provider": "OpenAI via ChatGPT-authenticated Codex CLI",
+          "model": "gpt-5.6-sol",
+          "prompt_version": "task06-stage2-v1",
+          "prompt_sha256": "be838b1ef8d57f921147a3dfb993fa3237fb56dd766b825c883b644aa131163f",
+          "execution_kind": "ACTUAL"
+        }
+      }
+    ],
+    "provider": "OpenAI via ChatGPT-authenticated Codex CLI → OpenAI via ChatGPT-authenticated Codex CLI",
+    "execution_kind": "ACTUAL",
+    "stage1": {
+      "provider": "OpenAI via ChatGPT-authenticated Codex CLI",
+      "model": "gpt-5.6-sol",
+      "prompt_version": "task06-stage1-v1",
+      "prompt_sha256": "52b226089eddf6fb109ab07f676110c7dea48c602397a7d6c283384e3be4d7f4",
+      "execution_kind": "ACTUAL"
+    },
+    "stage2": {
+      "provider": "OpenAI via ChatGPT-authenticated Codex CLI",
+      "model": "gpt-5.6-sol",
+      "prompt_version": "task06-stage2-v1",
+      "prompt_sha256": "be838b1ef8d57f921147a3dfb993fa3237fb56dd766b825c883b644aa131163f",
+      "execution_kind": "ACTUAL"
+    },
+    "pipeline_status": "COMPLETE",
+    "pipeline_error": null,
+    "raw_candidate_count": 14,
+    "gated_candidate_count": 14,
+    "dropped_candidate_count": 1,
+    "review_batches": 1,
+    "failed_batches": [],
+    "overflow": false,
+    "overflow_policy": "100개 초과 후보도 50개 단위로 검토하며, 절대 상한은 500개입니다.",
+    "extraction_complete": true,
+    "notices": [
+      "AI가 공고에서 추출하고 검토한 후보입니다. 공식 공고 규칙이 아니며, 원문 전체와 모든 항목을 사람이 확인해야 합니다."
+    ],
+    "history": [
+      {
+        "action": "EXTRACT",
+        "requirement_id": null,
+        "at": "2026-09-05T11:32:54.620577Z",
+        "before": null,
+        "after": null
+      },
+      {
+        "action": "EDIT",
+        "requirement_id": "A001",
+        "at": "2026-09-05T11:32:55.473798Z",
+        "before": {
+          "requirement_id": "A001",
+          "rule": "The event is scheduled for August 18–20, 2025, for three days and two nights.",
+          "modality": "INFO",
+          "severity": "REVIEW",
+          "verifier": "DETERMINISTIC",
+          "condition": "If selected to participate",
+          "evidence": {
+            "source_section": "행사 일정 및 장소",
+            "quote": "2025.8.18.(월) ~ 8.20.(수) 2박 3일"
+          },
+          "confidence": 1,
+          "extraction_status": "EXTRACTED",
+          "evidence_start": 118,
+          "evidence_end": 148,
+          "issues": [],
+          "original": {
+            "requirement_id": "A001",
+            "rule": "The event is scheduled for August 18–20, 2025, for three days and two nights.",
+            "modality": "INFO",
+            "severity": "REVIEW",
+            "verifier": "DETERMINISTIC",
+            "condition": "If selected to participate",
+            "evidence": {
+              "source_section": "행사 일정 및 장소",
+              "quote": "2025.8.18.(월) ~ 8.20.(수) 2박 3일"
+            },
+            "confidence": 1
+          },
+          "stage1": {
+            "provider": "OpenAI via ChatGPT-authenticated Codex CLI",
+            "model": "gpt-5.6-sol",
+            "prompt_version": "task06-stage1-v1",
+            "prompt_sha256": "52b226089eddf6fb109ab07f676110c7dea48c602397a7d6c283384e3be4d7f4",
+            "execution_kind": "ACTUAL"
+          },
+          "stage2_decision": "KEEP",
+          "stage2_reason": "The event dates and two-night, three-day duration are explicitly stated and are relevant to selected participants.",
+          "stage2": {
+            "provider": "OpenAI via ChatGPT-authenticated Codex CLI",
+            "model": "gpt-5.6-sol",
+            "prompt_version": "task06-stage2-v1",
+            "prompt_sha256": "be838b1ef8d57f921147a3dfb993fa3237fb56dd766b825c883b644aa131163f",
+            "execution_kind": "ACTUAL"
+          },
+          "authoritative": false
+        },
+        "after": {
+          "requirement_id": "A001",
+          "rule": "The event is scheduled for August 18–20, 2025, for three days and two nights.",
+          "modality": "INFO",
+          "severity": "REVIEW",
+          "verifier": "DETERMINISTIC",
+          "condition": "If selected to participate (사람이 원문 확인)",
+          "evidence": {
+            "source_section": "행사 일정 및 장소",
+            "quote": "2025.8.18.(월) ~ 8.20.(수) 2박 3일"
+          },
+          "confidence": 1,
+          "extraction_status": "NEEDS_REVIEW",
+          "evidence_start": 118,
+          "evidence_end": 148,
+          "issues": [],
+          "original": {
+            "requirement_id": "A001",
+            "rule": "The event is scheduled for August 18–20, 2025, for three days and two nights.",
+            "modality": "INFO",
+            "severity": "REVIEW",
+            "verifier": "DETERMINISTIC",
+            "condition": "If selected to participate",
+            "evidence": {
+              "source_section": "행사 일정 및 장소",
+              "quote": "2025.8.18.(월) ~ 8.20.(수) 2박 3일"
+            },
+            "confidence": 1
+          },
+          "stage1": {
+            "provider": "OpenAI via ChatGPT-authenticated Codex CLI",
+            "model": "gpt-5.6-sol",
+            "prompt_version": "task06-stage1-v1",
+            "prompt_sha256": "52b226089eddf6fb109ab07f676110c7dea48c602397a7d6c283384e3be4d7f4",
+            "execution_kind": "ACTUAL"
+          },
+          "stage2_decision": "KEEP",
+          "stage2_reason": "The event dates and two-night, three-day duration are explicitly stated and are relevant to selected participants.",
+          "stage2": {
+            "provider": "OpenAI via ChatGPT-authenticated Codex CLI",
+            "model": "gpt-5.6-sol",
+            "prompt_version": "task06-stage2-v1",
+            "prompt_sha256": "be838b1ef8d57f921147a3dfb993fa3237fb56dd766b825c883b644aa131163f",
+            "execution_kind": "ACTUAL"
+          },
+          "authoritative": false
+        }
+      },
+      {
+        "action": "DELETE",
+        "requirement_id": "A002",
+        "at": "2026-09-05T11:32:55.589220Z",
+        "before": {
+          "requirement_id": "A002",
+          "rule": "The event will be held at Konjiam Resort.",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "DETERMINISTIC",
+          "condition": "If selected to participate",
+          "evidence": {
+            "source_section": "행사 일정 및 장소",
+            "quote": "곤지암리조트"
+          },
+          "confidence": 1,
+          "extraction_status": "EXTRACTED",
+          "evidence_start": 151,
+          "evidence_end": 157,
+          "issues": [],
+          "original": {
+            "requirement_id": "A002",
+            "rule": "The event will be held at Konjiam Resort.",
+            "modality": "INFO",
+            "severity": "INFO",
+            "verifier": "DETERMINISTIC",
+            "condition": "If selected to participate",
+            "evidence": {
+              "source_section": "행사 일정 및 장소",
+              "quote": "곤지암리조트"
+            },
+            "confidence": 1
+          },
+          "stage1": {
+            "provider": "OpenAI via ChatGPT-authenticated Codex CLI",
+            "model": "gpt-5.6-sol",
+            "prompt_version": "task06-stage1-v1",
+            "prompt_sha256": "52b226089eddf6fb109ab07f676110c7dea48c602397a7d6c283384e3be4d7f4",
+            "execution_kind": "ACTUAL"
+          },
+          "stage2_decision": "KEEP",
+          "stage2_reason": "The source explicitly identifies Konjiam Resort as the event location.",
+          "stage2": {
+            "provider": "OpenAI via ChatGPT-authenticated Codex CLI",
+            "model": "gpt-5.6-sol",
+            "prompt_version": "task06-stage2-v1",
+            "prompt_sha256": "be838b1ef8d57f921147a3dfb993fa3237fb56dd766b825c883b644aa131163f",
+            "execution_kind": "ACTUAL"
+          },
+          "authoritative": false
+        },
+        "after": null
+      },
+      {
+        "action": "APPROVE",
+        "requirement_id": "A001",
+        "at": "2026-09-05T11:32:55.687557Z",
+        "before": {
+          "requirement_id": "A001",
+          "rule": "The event is scheduled for August 18–20, 2025, for three days and two nights.",
+          "modality": "INFO",
+          "severity": "REVIEW",
+          "verifier": "DETERMINISTIC",
+          "condition": "If selected to participate (사람이 원문 확인)",
+          "evidence": {
+            "source_section": "행사 일정 및 장소",
+            "quote": "2025.8.18.(월) ~ 8.20.(수) 2박 3일"
+          },
+          "confidence": 1,
+          "extraction_status": "NEEDS_REVIEW",
+          "evidence_start": 118,
+          "evidence_end": 148,
+          "issues": [],
+          "original": {
+            "requirement_id": "A001",
+            "rule": "The event is scheduled for August 18–20, 2025, for three days and two nights.",
+            "modality": "INFO",
+            "severity": "REVIEW",
+            "verifier": "DETERMINISTIC",
+            "condition": "If selected to participate",
+            "evidence": {
+              "source_section": "행사 일정 및 장소",
+              "quote": "2025.8.18.(월) ~ 8.20.(수) 2박 3일"
+            },
+            "confidence": 1
+          },
+          "stage1": {
+            "provider": "OpenAI via ChatGPT-authenticated Codex CLI",
+            "model": "gpt-5.6-sol",
+            "prompt_version": "task06-stage1-v1",
+            "prompt_sha256": "52b226089eddf6fb109ab07f676110c7dea48c602397a7d6c283384e3be4d7f4",
+            "execution_kind": "ACTUAL"
+          },
+          "stage2_decision": "KEEP",
+          "stage2_reason": "The event dates and two-night, three-day duration are explicitly stated and are relevant to selected participants.",
+          "stage2": {
+            "provider": "OpenAI via ChatGPT-authenticated Codex CLI",
+            "model": "gpt-5.6-sol",
+            "prompt_version": "task06-stage2-v1",
+            "prompt_sha256": "be838b1ef8d57f921147a3dfb993fa3237fb56dd766b825c883b644aa131163f",
+            "execution_kind": "ACTUAL"
+          },
+          "authoritative": false
+        },
+        "after": {
+          "requirement_id": "A001",
+          "rule": "The event is scheduled for August 18–20, 2025, for three days and two nights.",
+          "modality": "INFO",
+          "severity": "REVIEW",
+          "verifier": "DETERMINISTIC",
+          "condition": "If selected to participate (사람이 원문 확인)",
+          "evidence": {
+            "source_section": "행사 일정 및 장소",
+            "quote": "2025.8.18.(월) ~ 8.20.(수) 2박 3일"
+          },
+          "confidence": 1,
+          "extraction_status": "CONFIRMED",
+          "evidence_start": 118,
+          "evidence_end": 148,
+          "issues": [],
+          "original": {
+            "requirement_id": "A001",
+            "rule": "The event is scheduled for August 18–20, 2025, for three days and two nights.",
+            "modality": "INFO",
+            "severity": "REVIEW",
+            "verifier": "DETERMINISTIC",
+            "condition": "If selected to participate",
+            "evidence": {
+              "source_section": "행사 일정 및 장소",
+              "quote": "2025.8.18.(월) ~ 8.20.(수) 2박 3일"
+            },
+            "confidence": 1
+          },
+          "stage1": {
+            "provider": "OpenAI via ChatGPT-authenticated Codex CLI",
+            "model": "gpt-5.6-sol",
+            "prompt_version": "task06-stage1-v1",
+            "prompt_sha256": "52b226089eddf6fb109ab07f676110c7dea48c602397a7d6c283384e3be4d7f4",
+            "execution_kind": "ACTUAL"
+          },
+          "stage2_decision": "KEEP",
+          "stage2_reason": "The event dates and two-night, three-day duration are explicitly stated and are relevant to selected participants.",
+          "stage2": {
+            "provider": "OpenAI via ChatGPT-authenticated Codex CLI",
+            "model": "gpt-5.6-sol",
+            "prompt_version": "task06-stage2-v1",
+            "prompt_sha256": "be838b1ef8d57f921147a3dfb993fa3237fb56dd766b825c883b644aa131163f",
+            "execution_kind": "ACTUAL"
+          },
+          "authoritative": true
+        }
+      },
+      {
+        "action": "APPROVE",
+        "requirement_id": "A003",
+        "at": "2026-09-05T11:32:55.789239Z",
+        "before": {
+          "requirement_id": "A003",
+          "rule": "Applicants must be participating students at a university carrying out HUSS.",
+          "modality": "MUST",
+          "severity": "BLOCKER",
+          "verifier": "SEMANTIC",
+          "condition": "When applying",
+          "evidence": {
+            "source_section": "행사 일정 및 장소",
+            "quote": "*대상: HUSS 수행대학 참여학생 250명 (국민대 5명 모집)"
+          },
+          "confidence": 0.98,
+          "extraction_status": "EXTRACTED",
+          "evidence_start": 158,
+          "evidence_end": 194,
+          "issues": [],
+          "original": {
+            "requirement_id": "A003",
+            "rule": "Applicants must be participating students at a university carrying out HUSS.",
+            "modality": "MUST",
+            "severity": "BLOCKER",
+            "verifier": "SEMANTIC",
+            "condition": "When applying",
+            "evidence": {
+              "source_section": "행사 일정 및 장소",
+              "quote": "*대상: HUSS 수행대학 참여학생 250명 (국민대 5명 모집)"
+            },
+            "confidence": 0.98
+          },
+          "stage1": {
+            "provider": "OpenAI via ChatGPT-authenticated Codex CLI",
+            "model": "gpt-5.6-sol",
+            "prompt_version": "task06-stage1-v1",
+            "prompt_sha256": "52b226089eddf6fb109ab07f676110c7dea48c602397a7d6c283384e3be4d7f4",
+            "execution_kind": "ACTUAL"
+          },
+          "stage2_decision": "KEEP",
+          "stage2_reason": "The stated target population is students participating through HUSS-performing universities, supporting an applicant eligibility rule.",
+          "stage2": {
+            "provider": "OpenAI via ChatGPT-authenticated Codex CLI",
+            "model": "gpt-5.6-sol",
+            "prompt_version": "task06-stage2-v1",
+            "prompt_sha256": "be838b1ef8d57f921147a3dfb993fa3237fb56dd766b825c883b644aa131163f",
+            "execution_kind": "ACTUAL"
+          },
+          "authoritative": false
+        },
+        "after": {
+          "requirement_id": "A003",
+          "rule": "Applicants must be participating students at a university carrying out HUSS.",
+          "modality": "MUST",
+          "severity": "BLOCKER",
+          "verifier": "SEMANTIC",
+          "condition": "When applying",
+          "evidence": {
+            "source_section": "행사 일정 및 장소",
+            "quote": "*대상: HUSS 수행대학 참여학생 250명 (국민대 5명 모집)"
+          },
+          "confidence": 0.98,
+          "extraction_status": "CONFIRMED",
+          "evidence_start": 158,
+          "evidence_end": 194,
+          "issues": [],
+          "original": {
+            "requirement_id": "A003",
+            "rule": "Applicants must be participating students at a university carrying out HUSS.",
+            "modality": "MUST",
+            "severity": "BLOCKER",
+            "verifier": "SEMANTIC",
+            "condition": "When applying",
+            "evidence": {
+              "source_section": "행사 일정 및 장소",
+              "quote": "*대상: HUSS 수행대학 참여학생 250명 (국민대 5명 모집)"
+            },
+            "confidence": 0.98
+          },
+          "stage1": {
+            "provider": "OpenAI via ChatGPT-authenticated Codex CLI",
+            "model": "gpt-5.6-sol",
+            "prompt_version": "task06-stage1-v1",
+            "prompt_sha256": "52b226089eddf6fb109ab07f676110c7dea48c602397a7d6c283384e3be4d7f4",
+            "execution_kind": "ACTUAL"
+          },
+          "stage2_decision": "KEEP",
+          "stage2_reason": "The stated target population is students participating through HUSS-performing universities, supporting an applicant eligibility rule.",
+          "stage2": {
+            "provider": "OpenAI via ChatGPT-authenticated Codex CLI",
+            "model": "gpt-5.6-sol",
+            "prompt_version": "task06-stage2-v1",
+            "prompt_sha256": "be838b1ef8d57f921147a3dfb993fa3237fb56dd766b825c883b644aa131163f",
+            "execution_kind": "ACTUAL"
+          },
+          "authoritative": true
+        }
+      },
+      {
+        "action": "APPROVE",
+        "requirement_id": "A004",
+        "at": "2026-09-05T11:32:55.904504Z",
+        "before": {
+          "requirement_id": "A004",
+          "rule": "Kookmin University will recruit five participants.",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "DETERMINISTIC",
+          "condition": "For Kookmin University applicants",
+          "evidence": {
+            "source_section": "행사 일정 및 장소",
+            "quote": "국민대 5명 모집"
+          },
+          "confidence": 1,
+          "extraction_status": "EXTRACTED",
+          "evidence_start": 184,
+          "evidence_end": 193,
+          "issues": [],
+          "original": {
+            "requirement_id": "A004",
+            "rule": "Kookmin University will recruit five participants.",
+            "modality": "INFO",
+            "severity": "INFO",
+            "verifier": "DETERMINISTIC",
+            "condition": "For Kookmin University applicants",
+            "evidence": {
+              "source_section": "행사 일정 및 장소",
+              "quote": "국민대 5명 모집"
+            },
+            "confidence": 1
+          },
+          "stage1": {
+            "provider": "OpenAI via ChatGPT-authenticated Codex CLI",
+            "model": "gpt-5.6-sol",
+            "prompt_version": "task06-stage1-v1",
+            "prompt_sha256": "52b226089eddf6fb109ab07f676110c7dea48c602397a7d6c283384e3be4d7f4",
+            "execution_kind": "ACTUAL"
+          },
+          "stage2_decision": "KEEP",
+          "stage2_reason": "The source explicitly states that Kookmin University is recruiting five people.",
+          "stage2": {
+            "provider": "OpenAI via ChatGPT-authenticated Codex CLI",
+            "model": "gpt-5.6-sol",
+            "prompt_version": "task06-stage2-v1",
+            "prompt_sha256": "be838b1ef8d57f921147a3dfb993fa3237fb56dd766b825c883b644aa131163f",
+            "execution_kind": "ACTUAL"
+          },
+          "authoritative": false
+        },
+        "after": {
+          "requirement_id": "A004",
+          "rule": "Kookmin University will recruit five participants.",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "DETERMINISTIC",
+          "condition": "For Kookmin University applicants",
+          "evidence": {
+            "source_section": "행사 일정 및 장소",
+            "quote": "국민대 5명 모집"
+          },
+          "confidence": 1,
+          "extraction_status": "CONFIRMED",
+          "evidence_start": 184,
+          "evidence_end": 193,
+          "issues": [],
+          "original": {
+            "requirement_id": "A004",
+            "rule": "Kookmin University will recruit five participants.",
+            "modality": "INFO",
+            "severity": "INFO",
+            "verifier": "DETERMINISTIC",
+            "condition": "For Kookmin University applicants",
+            "evidence": {
+              "source_section": "행사 일정 및 장소",
+              "quote": "국민대 5명 모집"
+            },
+            "confidence": 1
+          },
+          "stage1": {
+            "provider": "OpenAI via ChatGPT-authenticated Codex CLI",
+            "model": "gpt-5.6-sol",
+            "prompt_version": "task06-stage1-v1",
+            "prompt_sha256": "52b226089eddf6fb109ab07f676110c7dea48c602397a7d6c283384e3be4d7f4",
+            "execution_kind": "ACTUAL"
+          },
+          "stage2_decision": "KEEP",
+          "stage2_reason": "The source explicitly states that Kookmin University is recruiting five people.",
+          "stage2": {
+            "provider": "OpenAI via ChatGPT-authenticated Codex CLI",
+            "model": "gpt-5.6-sol",
+            "prompt_version": "task06-stage2-v1",
+            "prompt_sha256": "be838b1ef8d57f921147a3dfb993fa3237fb56dd766b825c883b644aa131163f",
+            "execution_kind": "ACTUAL"
+          },
+          "authoritative": true
+        }
+      },
+      {
+        "action": "APPROVE",
+        "requirement_id": "A005",
+        "at": "2026-09-05T11:32:56.038677Z",
+        "before": {
+          "requirement_id": "A005",
+          "rule": "Five participants will be selected through document evaluation.",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "DETERMINISTIC",
+          "condition": "During participant selection",
+          "evidence": {
+            "source_section": "모집 인원",
+            "quote": "✅ 모집 인원: 5명 (서류 평가 진행)"
+          },
+          "confidence": 1,
+          "extraction_status": "EXTRACTED",
+          "evidence_start": 248,
+          "evidence_end": 270,
+          "issues": [],
+          "original": {
+            "requirement_id": "A005",
+            "rule": "Five participants will be selected through document evaluation.",
+            "modality": "INFO",
+            "severity": "INFO",
+            "verifier": "DETERMINISTIC",
+            "condition": "During participant selection",
+            "evidence": {
+              "source_section": "모집 인원",
+              "quote": "✅ 모집 인원: 5명 (서류 평가 진행)"
+            },
+            "confidence": 1
+          },
+          "stage1": {
+            "provider": "OpenAI via ChatGPT-authenticated Codex CLI",
+            "model": "gpt-5.6-sol",
+            "prompt_version": "task06-stage1-v1",
+            "prompt_sha256": "52b226089eddf6fb109ab07f676110c7dea48c602397a7d6c283384e3be4d7f4",
+            "execution_kind": "ACTUAL"
+          },
+          "stage2_decision": "KEEP",
+          "stage2_reason": "The recruitment count and use of document evaluation are explicitly stated and meaningful to applicants.",
+          "stage2": {
+            "provider": "OpenAI via ChatGPT-authenticated Codex CLI",
+            "model": "gpt-5.6-sol",
+            "prompt_version": "task06-stage2-v1",
+            "prompt_sha256": "be838b1ef8d57f921147a3dfb993fa3237fb56dd766b825c883b644aa131163f",
+            "execution_kind": "ACTUAL"
+          },
+          "authoritative": false
+        },
+        "after": {
+          "requirement_id": "A005",
+          "rule": "Five participants will be selected through document evaluation.",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "DETERMINISTIC",
+          "condition": "During participant selection",
+          "evidence": {
+            "source_section": "모집 인원",
+            "quote": "✅ 모집 인원: 5명 (서류 평가 진행)"
+          },
+          "confidence": 1,
+          "extraction_status": "CONFIRMED",
+          "evidence_start": 248,
+          "evidence_end": 270,
+          "issues": [],
+          "original": {
+            "requirement_id": "A005",
+            "rule": "Five participants will be selected through document evaluation.",
+            "modality": "INFO",
+            "severity": "INFO",
+            "verifier": "DETERMINISTIC",
+            "condition": "During participant selection",
+            "evidence": {
+              "source_section": "모집 인원",
+              "quote": "✅ 모집 인원: 5명 (서류 평가 진행)"
+            },
+            "confidence": 1
+          },
+          "stage1": {
+            "provider": "OpenAI via ChatGPT-authenticated Codex CLI",
+            "model": "gpt-5.6-sol",
+            "prompt_version": "task06-stage1-v1",
+            "prompt_sha256": "52b226089eddf6fb109ab07f676110c7dea48c602397a7d6c283384e3be4d7f4",
+            "execution_kind": "ACTUAL"
+          },
+          "stage2_decision": "KEEP",
+          "stage2_reason": "The recruitment count and use of document evaluation are explicitly stated and meaningful to applicants.",
+          "stage2": {
+            "provider": "OpenAI via ChatGPT-authenticated Codex CLI",
+            "model": "gpt-5.6-sol",
+            "prompt_version": "task06-stage2-v1",
+            "prompt_sha256": "be838b1ef8d57f921147a3dfb993fa3237fb56dd766b825c883b644aa131163f",
+            "execution_kind": "ACTUAL"
+          },
+          "authoritative": true
+        }
+      },
+      {
+        "action": "APPROVE",
+        "requirement_id": "A006",
+        "at": "2026-09-05T11:32:56.170475Z",
+        "before": {
+          "requirement_id": "A006",
+          "rule": "The document evaluation considers motivation for applying, the applicant's capabilities, hackathon and team-project experience, and collaborative attitude.",
+          "modality": "INFO",
+          "severity": "REVIEW",
+          "verifier": "SEMANTIC",
+          "condition": "During document evaluation",
+          "evidence": {
+            "source_section": "모집 인원",
+            "quote": "*지원 동기, 본인 역량, 해커톤 및 팀 프로젝트 관련 경험, 협업 태도 등을 평가"
+          },
+          "confidence": 1,
+          "extraction_status": "EXTRACTED",
+          "evidence_start": 271,
+          "evidence_end": 317,
+          "issues": [],
+          "original": {
+            "requirement_id": "A006",
+            "rule": "The document evaluation considers motivation for applying, the applicant's capabilities, hackathon and team-project experience, and collaborative attitude.",
+            "modality": "INFO",
+            "severity": "REVIEW",
+            "verifier": "SEMANTIC",
+            "condition": "During document evaluation",
+            "evidence": {
+              "source_section": "모집 인원",
+              "quote": "*지원 동기, 본인 역량, 해커톤 및 팀 프로젝트 관련 경험, 협업 태도 등을 평가"
+            },
+            "confidence": 1
+          },
+          "stage1": {
+            "provider": "OpenAI via ChatGPT-authenticated Codex CLI",
+            "model": "gpt-5.6-sol",
+            "prompt_version": "task06-stage1-v1",
+            "prompt_sha256": "52b226089eddf6fb109ab07f676110c7dea48c602397a7d6c283384e3be4d7f4",
+            "execution_kind": "ACTUAL"
+          },
+          "stage2_decision": "KEEP",
+          "stage2_reason": "The source expressly lists these matters as document-evaluation criteria.",
+          "stage2": {
+            "provider": "OpenAI via ChatGPT-authenticated Codex CLI",
+            "model": "gpt-5.6-sol",
+            "prompt_version": "task06-stage2-v1",
+            "prompt_sha256": "be838b1ef8d57f921147a3dfb993fa3237fb56dd766b825c883b644aa131163f",
+            "execution_kind": "ACTUAL"
+          },
+          "authoritative": false
+        },
+        "after": {
+          "requirement_id": "A006",
+          "rule": "The document evaluation considers motivation for applying, the applicant's capabilities, hackathon and team-project experience, and collaborative attitude.",
+          "modality": "INFO",
+          "severity": "REVIEW",
+          "verifier": "SEMANTIC",
+          "condition": "During document evaluation",
+          "evidence": {
+            "source_section": "모집 인원",
+            "quote": "*지원 동기, 본인 역량, 해커톤 및 팀 프로젝트 관련 경험, 협업 태도 등을 평가"
+          },
+          "confidence": 1,
+          "extraction_status": "CONFIRMED",
+          "evidence_start": 271,
+          "evidence_end": 317,
+          "issues": [],
+          "original": {
+            "requirement_id": "A006",
+            "rule": "The document evaluation considers motivation for applying, the applicant's capabilities, hackathon and team-project experience, and collaborative attitude.",
+            "modality": "INFO",
+            "severity": "REVIEW",
+            "verifier": "SEMANTIC",
+            "condition": "During document evaluation",
+            "evidence": {
+              "source_section": "모집 인원",
+              "quote": "*지원 동기, 본인 역량, 해커톤 및 팀 프로젝트 관련 경험, 협업 태도 등을 평가"
+            },
+            "confidence": 1
+          },
+          "stage1": {
+            "provider": "OpenAI via ChatGPT-authenticated Codex CLI",
+            "model": "gpt-5.6-sol",
+            "prompt_version": "task06-stage1-v1",
+            "prompt_sha256": "52b226089eddf6fb109ab07f676110c7dea48c602397a7d6c283384e3be4d7f4",
+            "execution_kind": "ACTUAL"
+          },
+          "stage2_decision": "KEEP",
+          "stage2_reason": "The source expressly lists these matters as document-evaluation criteria.",
+          "stage2": {
+            "provider": "OpenAI via ChatGPT-authenticated Codex CLI",
+            "model": "gpt-5.6-sol",
+            "prompt_version": "task06-stage2-v1",
+            "prompt_sha256": "be838b1ef8d57f921147a3dfb993fa3237fb56dd766b825c883b644aa131163f",
+            "execution_kind": "ACTUAL"
+          },
+          "authoritative": true
+        }
+      },
+      {
+        "action": "APPROVE",
+        "requirement_id": "A007",
+        "at": "2026-09-05T11:32:56.303285Z",
+        "before": {
+          "requirement_id": "A007",
+          "rule": "Evaluation results and scores will not be disclosed.",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "DETERMINISTIC",
+          "condition": "After evaluation",
+          "evidence": {
+            "source_section": "모집 인원",
+            "quote": "*평가 결과 및 점수는 공개하지 않으며"
+          },
+          "confidence": 1,
+          "extraction_status": "EXTRACTED",
+          "evidence_start": 318,
+          "evidence_end": 339,
+          "issues": [],
+          "original": {
+            "requirement_id": "A007",
+            "rule": "Evaluation results and scores will not be disclosed.",
+            "modality": "INFO",
+            "severity": "INFO",
+            "verifier": "DETERMINISTIC",
+            "condition": "After evaluation",
+            "evidence": {
+              "source_section": "모집 인원",
+              "quote": "*평가 결과 및 점수는 공개하지 않으며"
+            },
+            "confidence": 1
+          },
+          "stage1": {
+            "provider": "OpenAI via ChatGPT-authenticated Codex CLI",
+            "model": "gpt-5.6-sol",
+            "prompt_version": "task06-stage1-v1",
+            "prompt_sha256": "52b226089eddf6fb109ab07f676110c7dea48c602397a7d6c283384e3be4d7f4",
+            "execution_kind": "ACTUAL"
+          },
+          "stage2_decision": "KEEP",
+          "stage2_reason": "The source explicitly says evaluation results and scores will not be disclosed.",
+          "stage2": {
+            "provider": "OpenAI via ChatGPT-authenticated Codex CLI",
+            "model": "gpt-5.6-sol",
+            "prompt_version": "task06-stage2-v1",
+            "prompt_sha256": "be838b1ef8d57f921147a3dfb993fa3237fb56dd766b825c883b644aa131163f",
+            "execution_kind": "ACTUAL"
+          },
+          "authoritative": false
+        },
+        "after": {
+          "requirement_id": "A007",
+          "rule": "Evaluation results and scores will not be disclosed.",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "DETERMINISTIC",
+          "condition": "After evaluation",
+          "evidence": {
+            "source_section": "모집 인원",
+            "quote": "*평가 결과 및 점수는 공개하지 않으며"
+          },
+          "confidence": 1,
+          "extraction_status": "CONFIRMED",
+          "evidence_start": 318,
+          "evidence_end": 339,
+          "issues": [],
+          "original": {
+            "requirement_id": "A007",
+            "rule": "Evaluation results and scores will not be disclosed.",
+            "modality": "INFO",
+            "severity": "INFO",
+            "verifier": "DETERMINISTIC",
+            "condition": "After evaluation",
+            "evidence": {
+              "source_section": "모집 인원",
+              "quote": "*평가 결과 및 점수는 공개하지 않으며"
+            },
+            "confidence": 1
+          },
+          "stage1": {
+            "provider": "OpenAI via ChatGPT-authenticated Codex CLI",
+            "model": "gpt-5.6-sol",
+            "prompt_version": "task06-stage1-v1",
+            "prompt_sha256": "52b226089eddf6fb109ab07f676110c7dea48c602397a7d6c283384e3be4d7f4",
+            "execution_kind": "ACTUAL"
+          },
+          "stage2_decision": "KEEP",
+          "stage2_reason": "The source explicitly says evaluation results and scores will not be disclosed.",
+          "stage2": {
+            "provider": "OpenAI via ChatGPT-authenticated Codex CLI",
+            "model": "gpt-5.6-sol",
+            "prompt_version": "task06-stage2-v1",
+            "prompt_sha256": "be838b1ef8d57f921147a3dfb993fa3237fb56dd766b825c883b644aa131163f",
+            "execution_kind": "ACTUAL"
+          },
+          "authoritative": true
+        }
+      },
+      {
+        "action": "APPROVE",
+        "requirement_id": "A008",
+        "at": "2026-09-05T11:32:56.503352Z",
+        "before": {
+          "requirement_id": "A008",
+          "rule": "Final selections will be announced separately and communicated individually.",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "SEMANTIC",
+          "condition": "If finally selected",
+          "evidence": {
+            "source_section": "모집 인원",
+            "quote": "최종 선발자는 별도 공지 및 개별 연락을 통해 안내 될 예정임"
+          },
+          "confidence": 1,
+          "extraction_status": "EXTRACTED",
+          "evidence_start": 341,
+          "evidence_end": 375,
+          "issues": [],
+          "original": {
+            "requirement_id": "A008",
+            "rule": "Final selections will be announced separately and communicated individually.",
+            "modality": "INFO",
+            "severity": "INFO",
+            "verifier": "SEMANTIC",
+            "condition": "If finally selected",
+            "evidence": {
+              "source_section": "모집 인원",
+              "quote": "최종 선발자는 별도 공지 및 개별 연락을 통해 안내 될 예정임"
+            },
+            "confidence": 1
+          },
+          "stage1": {
+            "provider": "OpenAI via ChatGPT-authenticated Codex CLI",
+            "model": "gpt-5.6-sol",
+            "prompt_version": "task06-stage1-v1",
+            "prompt_sha256": "52b226089eddf6fb109ab07f676110c7dea48c602397a7d6c283384e3be4d7f4",
+            "execution_kind": "ACTUAL"
+          },
+          "stage2_decision": "KEEP",
+          "stage2_reason": "The source explicitly states that final selections will be announced separately and conveyed through individual contact.",
+          "stage2": {
+            "provider": "OpenAI via ChatGPT-authenticated Codex CLI",
+            "model": "gpt-5.6-sol",
+            "prompt_version": "task06-stage2-v1",
+            "prompt_sha256": "be838b1ef8d57f921147a3dfb993fa3237fb56dd766b825c883b644aa131163f",
+            "execution_kind": "ACTUAL"
+          },
+          "authoritative": false
+        },
+        "after": {
+          "requirement_id": "A008",
+          "rule": "Final selections will be announced separately and communicated individually.",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "SEMANTIC",
+          "condition": "If finally selected",
+          "evidence": {
+            "source_section": "모집 인원",
+            "quote": "최종 선발자는 별도 공지 및 개별 연락을 통해 안내 될 예정임"
+          },
+          "confidence": 1,
+          "extraction_status": "CONFIRMED",
+          "evidence_start": 341,
+          "evidence_end": 375,
+          "issues": [],
+          "original": {
+            "requirement_id": "A008",
+            "rule": "Final selections will be announced separately and communicated individually.",
+            "modality": "INFO",
+            "severity": "INFO",
+            "verifier": "SEMANTIC",
+            "condition": "If finally selected",
+            "evidence": {
+              "source_section": "모집 인원",
+              "quote": "최종 선발자는 별도 공지 및 개별 연락을 통해 안내 될 예정임"
+            },
+            "confidence": 1
+          },
+          "stage1": {
+            "provider": "OpenAI via ChatGPT-authenticated Codex CLI",
+            "model": "gpt-5.6-sol",
+            "prompt_version": "task06-stage1-v1",
+            "prompt_sha256": "52b226089eddf6fb109ab07f676110c7dea48c602397a7d6c283384e3be4d7f4",
+            "execution_kind": "ACTUAL"
+          },
+          "stage2_decision": "KEEP",
+          "stage2_reason": "The source explicitly states that final selections will be announced separately and conveyed through individual contact.",
+          "stage2": {
+            "provider": "OpenAI via ChatGPT-authenticated Codex CLI",
+            "model": "gpt-5.6-sol",
+            "prompt_version": "task06-stage2-v1",
+            "prompt_sha256": "be838b1ef8d57f921147a3dfb993fa3237fb56dd766b825c883b644aa131163f",
+            "execution_kind": "ACTUAL"
+          },
+          "authoritative": true
+        }
+      },
+      {
+        "action": "APPROVE",
+        "requirement_id": "A009",
+        "at": "2026-09-05T11:32:56.640499Z",
+        "before": {
+          "requirement_id": "A009",
+          "rule": "Applicants must be currently enrolled undergraduate students in one of these HUSS-participating departments: Korean Language and Literature, Korean History, KIBS, Management Information Systems, Civil and Environmental Engineering, Forest Products and Biotechnology, Public Administration, Sociology, or Political Science and Diplomacy.",
+          "modality": "MUST",
+          "severity": "BLOCKER",
+          "verifier": "SEMANTIC",
+          "condition": "When applying",
+          "evidence": {
+            "source_section": "참가 대상",
+            "quote": "✅ 참가 대상: HUSS 참여학과(한국어문학부, 한국역사학과, KIBS, 경영정보학부, 건설시스템공학부, 임산생명공학과, 행정학과, 사회학과, 정치외교학과) 재학생(학부생)"
+          },
+          "confidence": 1,
+          "extraction_status": "EXTRACTED",
+          "evidence_start": 378,
+          "evidence_end": 474,
+          "issues": [],
+          "original": {
+            "requirement_id": "A009",
+            "rule": "Applicants must be currently enrolled undergraduate students in one of these HUSS-participating departments: Korean Language and Literature, Korean History, KIBS, Management Information Systems, Civil and Environmental Engineering, Forest Products and Biotechnology, Public Administration, Sociology, or Political Science and Diplomacy.",
+            "modality": "MUST",
+            "severity": "BLOCKER",
+            "verifier": "SEMANTIC",
+            "condition": "When applying",
+            "evidence": {
+              "source_section": "참가 대상",
+              "quote": "✅ 참가 대상: HUSS 참여학과(한국어문학부, 한국역사학과, KIBS, 경영정보학부, 건설시스템공학부, 임산생명공학과, 행정학과, 사회학과, 정치외교학과) 재학생(학부생)"
+            },
+            "confidence": 1
+          },
+          "stage1": {
+            "provider": "OpenAI via ChatGPT-authenticated Codex CLI",
+            "model": "gpt-5.6-sol",
+            "prompt_version": "task06-stage1-v1",
+            "prompt_sha256": "52b226089eddf6fb109ab07f676110c7dea48c602397a7d6c283384e3be4d7f4",
+            "execution_kind": "ACTUAL"
+          },
+          "stage2_decision": "KEEP",
+          "stage2_reason": "The source expressly limits eligibility to currently enrolled undergraduates in the listed HUSS-participating departments.",
+          "stage2": {
+            "provider": "OpenAI via ChatGPT-authenticated Codex CLI",
+            "model": "gpt-5.6-sol",
+            "prompt_version": "task06-stage2-v1",
+            "prompt_sha256": "be838b1ef8d57f921147a3dfb993fa3237fb56dd766b825c883b644aa131163f",
+            "execution_kind": "ACTUAL"
+          },
+          "authoritative": false
+        },
+        "after": {
+          "requirement_id": "A009",
+          "rule": "Applicants must be currently enrolled undergraduate students in one of these HUSS-participating departments: Korean Language and Literature, Korean History, KIBS, Management Information Systems, Civil and Environmental Engineering, Forest Products and Biotechnology, Public Administration, Sociology, or Political Science and Diplomacy.",
+          "modality": "MUST",
+          "severity": "BLOCKER",
+          "verifier": "SEMANTIC",
+          "condition": "When applying",
+          "evidence": {
+            "source_section": "참가 대상",
+            "quote": "✅ 참가 대상: HUSS 참여학과(한국어문학부, 한국역사학과, KIBS, 경영정보학부, 건설시스템공학부, 임산생명공학과, 행정학과, 사회학과, 정치외교학과) 재학생(학부생)"
+          },
+          "confidence": 1,
+          "extraction_status": "CONFIRMED",
+          "evidence_start": 378,
+          "evidence_end": 474,
+          "issues": [],
+          "original": {
+            "requirement_id": "A009",
+            "rule": "Applicants must be currently enrolled undergraduate students in one of these HUSS-participating departments: Korean Language and Literature, Korean History, KIBS, Management Information Systems, Civil and Environmental Engineering, Forest Products and Biotechnology, Public Administration, Sociology, or Political Science and Diplomacy.",
+            "modality": "MUST",
+            "severity": "BLOCKER",
+            "verifier": "SEMANTIC",
+            "condition": "When applying",
+            "evidence": {
+              "source_section": "참가 대상",
+              "quote": "✅ 참가 대상: HUSS 참여학과(한국어문학부, 한국역사학과, KIBS, 경영정보학부, 건설시스템공학부, 임산생명공학과, 행정학과, 사회학과, 정치외교학과) 재학생(학부생)"
+            },
+            "confidence": 1
+          },
+          "stage1": {
+            "provider": "OpenAI via ChatGPT-authenticated Codex CLI",
+            "model": "gpt-5.6-sol",
+            "prompt_version": "task06-stage1-v1",
+            "prompt_sha256": "52b226089eddf6fb109ab07f676110c7dea48c602397a7d6c283384e3be4d7f4",
+            "execution_kind": "ACTUAL"
+          },
+          "stage2_decision": "KEEP",
+          "stage2_reason": "The source expressly limits eligibility to currently enrolled undergraduates in the listed HUSS-participating departments.",
+          "stage2": {
+            "provider": "OpenAI via ChatGPT-authenticated Codex CLI",
+            "model": "gpt-5.6-sol",
+            "prompt_version": "task06-stage2-v1",
+            "prompt_sha256": "be838b1ef8d57f921147a3dfb993fa3237fb56dd766b825c883b644aa131163f",
+            "execution_kind": "ACTUAL"
+          },
+          "authoritative": true
+        }
+      },
+      {
+        "action": "APPROVE",
+        "requirement_id": "A010",
+        "at": "2026-09-05T11:32:56.802200Z",
+        "before": {
+          "requirement_id": "A010",
+          "rule": "The hackathon theme is “Futur-Agora for a Sustainable Future.”",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "DETERMINISTIC",
+          "condition": "When participating in the hackathon",
+          "evidence": {
+            "source_section": "해커톤 프로그램",
+            "quote": "*주제: \"지속가능한 미래를 위한 Futur-Agora\""
+          },
+          "confidence": 1,
+          "extraction_status": "EXTRACTED",
+          "evidence_start": 557,
+          "evidence_end": 588,
+          "issues": [],
+          "original": {
+            "requirement_id": "A010",
+            "rule": "The hackathon theme is “Futur-Agora for a Sustainable Future.”",
+            "modality": "INFO",
+            "severity": "INFO",
+            "verifier": "DETERMINISTIC",
+            "condition": "When participating in the hackathon",
+            "evidence": {
+              "source_section": "해커톤 프로그램",
+              "quote": "*주제: \"지속가능한 미래를 위한 Futur-Agora\""
+            },
+            "confidence": 1
+          },
+          "stage1": {
+            "provider": "OpenAI via ChatGPT-authenticated Codex CLI",
+            "model": "gpt-5.6-sol",
+            "prompt_version": "task06-stage1-v1",
+            "prompt_sha256": "52b226089eddf6fb109ab07f676110c7dea48c602397a7d6c283384e3be4d7f4",
+            "execution_kind": "ACTUAL"
+          },
+          "stage2_decision": "KEEP",
+          "stage2_reason": "The hackathon theme is quoted exactly and is meaningful event information for prospective participants.",
+          "stage2": {
+            "provider": "OpenAI via ChatGPT-authenticated Codex CLI",
+            "model": "gpt-5.6-sol",
+            "prompt_version": "task06-stage2-v1",
+            "prompt_sha256": "be838b1ef8d57f921147a3dfb993fa3237fb56dd766b825c883b644aa131163f",
+            "execution_kind": "ACTUAL"
+          },
+          "authoritative": false
+        },
+        "after": {
+          "requirement_id": "A010",
+          "rule": "The hackathon theme is “Futur-Agora for a Sustainable Future.”",
+          "modality": "INFO",
+          "severity": "INFO",
+          "verifier": "DETERMINISTIC",
+          "condition": "When participating in the hackathon",
+          "evidence": {
+            "source_section": "해커톤 프로그램",
+            "quote": "*주제: \"지속가능한 미래를 위한 Futur-Agora\""
+          },
+          "confidence": 1,
+          "extraction_status": "CONFIRMED",
+          "evidence_start": 557,
+          "evidence_end": 588,
+          "issues": [],
+          "original": {
+            "requirement_id": "A010",
+            "rule": "The hackathon theme is “Futur-Agora for a Sustainable Future.”",
+            "modality": "INFO",
+            "severity": "INFO",
+            "verifier": "DETERMINISTIC",
+            "condition": "When participating in the hackathon",
+            "evidence": {
+              "source_section": "해커톤 프로그램",
+              "quote": "*주제: \"지속가능한 미래를 위한 Futur-Agora\""
+            },
+            "confidence": 1
+          },
+          "stage1": {
+            "provider": "OpenAI via ChatGPT-authenticated Codex CLI",
+            "model": "gpt-5.6-sol",
+            "prompt_version": "task06-stage1-v1",
+            "prompt_sha256": "52b226089eddf6fb109ab07f676110c7dea48c602397a7d6c283384e3be4d7f4",
+            "execution_kind": "ACTUAL"
+          },
+          "stage2_decision": "KEEP",
+          "stage2_reason": "The hackathon theme is quoted exactly and is meaningful event information for prospective participants.",
+          "stage2": {
+            "provider": "OpenAI via ChatGPT-authenticated Codex CLI",
+            "model": "gpt-5.6-sol",
+            "prompt_version": "task06-stage2-v1",
+            "prompt_sha256": "be838b1ef8d57f921147a3dfb993fa3237fb56dd766b825c883b644aa131163f",
+            "execution_kind": "ACTUAL"
+          },
+          "authoritative": true
+        }
+      },
+      {
+        "action": "APPROVE",
+        "requirement_id": "A011",
+        "at": "2026-09-05T11:32:56.934770Z",
+        "before": {
+          "requirement_id": "A011",
+          "rule": "Each university recruits five people, who must form a five-person joint team with participants from another consortium on site on the event day.",
+          "modality": "MUST",
+          "severity": "REVIEW",
+          "verifier": "SEMANTIC",
+          "condition": "On the event day",
+          "evidence": {
+            "source_section": "해커톤 프로그램",
+            "quote": "- 대학 별 5인을 모집하되, 당일 현장에서 타 컨소시엄과 연합하여 5인 1연합 팀 구성"
+          },
+          "confidence": 1,
+          "extraction_status": "NEEDS_REVIEW",
+          "evidence_start": 658,
+          "evidence_end": 707,
+          "issues": [],
+          "original": {
+            "requirement_id": "A011",
+            "rule": "Each university recruits five people, who must form a five-person joint team with participants from another consortium on site on the event day.",
+            "modality": "MUST",
+            "severity": "REVIEW",
+            "verifier": "SEMANTIC",
+            "condition": "On the event day",
+            "evidence": {
+              "source_section": "해커톤 프로그램",
+              "quote": "- 대학 별 5인을 모집하되, 당일 현장에서 타 컨소시엄과 연합하여 5인 1연합 팀 구성"
+            },
+            "confidence": 1
+          },
+          "stage1": {
+            "provider": "OpenAI via ChatGPT-authenticated Codex CLI",
+            "model": "gpt-5.6-sol",
+            "prompt_version": "task06-stage1-v1",
+            "prompt_sha256": "52b226089eddf6fb109ab07f676110c7dea48c602397a7d6c283384e3be4d7f4",
+            "execution_kind": "ACTUAL"
+          },
+          "stage2_decision": "REVIEW",
+          "stage2_reason": "The source describes onsite formation of five-person joint teams, but it does not clearly impose a personal MUST obligation on each participant; the actor and modality require human confirmation.",
+          "stage2": {
+            "provider": "OpenAI via ChatGPT-authenticated Codex CLI",
+            "model": "gpt-5.6-sol",
+            "prompt_version": "task06-stage2-v1",
+            "prompt_sha256": "be838b1ef8d57f921147a3dfb993fa3237fb56dd766b825c883b644aa131163f",
+            "execution_kind": "ACTUAL"
+          },
+          "authoritative": false
+        },
+        "after": {
+          "requirement_id": "A011",
+          "rule": "Each university recruits five people, who must form a five-person joint team with participants from another consortium on site on the event day.",
+          "modality": "MUST",
+          "severity": "REVIEW",
+          "verifier": "SEMANTIC",
+          "condition": "On the event day",
+          "evidence": {
+            "source_section": "해커톤 프로그램",
+            "quote": "- 대학 별 5인을 모집하되, 당일 현장에서 타 컨소시엄과 연합하여 5인 1연합 팀 구성"
+          },
+          "confidence": 1,
+          "extraction_status": "CONFIRMED",
+          "evidence_start": 658,
+          "evidence_end": 707,
+          "issues": [],
+          "original": {
+            "requirement_id": "A011",
+            "rule": "Each university recruits five people, who must form a five-person joint team with participants from another consortium on site on the event day.",
+            "modality": "MUST",
+            "severity": "REVIEW",
+            "verifier": "SEMANTIC",
+            "condition": "On the event day",
+            "evidence": {
+              "source_section": "해커톤 프로그램",
+              "quote": "- 대학 별 5인을 모집하되, 당일 현장에서 타 컨소시엄과 연합하여 5인 1연합 팀 구성"
+            },
+            "confidence": 1
+          },
+          "stage1": {
+            "provider": "OpenAI via ChatGPT-authenticated Codex CLI",
+            "model": "gpt-5.6-sol",
+            "prompt_version": "task06-stage1-v1",
+            "prompt_sha256": "52b226089eddf6fb109ab07f676110c7dea48c602397a7d6c283384e3be4d7f4",
+            "execution_kind": "ACTUAL"
+          },
+          "stage2_decision": "REVIEW",
+          "stage2_reason": "The source describes onsite formation of five-person joint teams, but it does not clearly impose a personal MUST obligation on each participant; the actor and modality require human confirmation.",
+          "stage2": {
+            "provider": "OpenAI via ChatGPT-authenticated Codex CLI",
+            "model": "gpt-5.6-sol",
+            "prompt_version": "task06-stage2-v1",
+            "prompt_sha256": "be838b1ef8d57f921147a3dfb993fa3237fb56dd766b825c883b644aa131163f",
+            "execution_kind": "ACTUAL"
+          },
+          "authoritative": true
+        }
+      },
+      {
+        "action": "APPROVE",
+        "requirement_id": "A012",
+        "at": "2026-09-05T11:32:57.088785Z",
+        "before": {
+          "requirement_id": "A012",
+          "rule": "Applications must be submitted by June 27, 2025.",
+          "modality": "MUST",
+          "severity": "BLOCKER",
+          "verifier": "DETERMINISTIC",
+          "condition": "When applying",
+          "evidence": {
+            "source_section": "신청 마감",
+            "quote": "✅ 신청 마감 : 2025년 6월 27일(금)까지"
+          },
+          "confidence": 1,
+          "extraction_status": "EXTRACTED",
+          "evidence_start": 708,
+          "evidence_end": 735,
+          "issues": [],
+          "original": {
+            "requirement_id": "A012",
+            "rule": "Applications must be submitted by June 27, 2025.",
+            "modality": "MUST",
+            "severity": "BLOCKER",
+            "verifier": "DETERMINISTIC",
+            "condition": "When applying",
+            "evidence": {
+              "source_section": "신청 마감",
+              "quote": "✅ 신청 마감 : 2025년 6월 27일(금)까지"
+            },
+            "confidence": 1
+          },
+          "stage1": {
+            "provider": "OpenAI via ChatGPT-authenticated Codex CLI",
+            "model": "gpt-5.6-sol",
+            "prompt_version": "task06-stage1-v1",
+            "prompt_sha256": "52b226089eddf6fb109ab07f676110c7dea48c602397a7d6c283384e3be4d7f4",
+            "execution_kind": "ACTUAL"
+          },
+          "stage2_decision": "KEEP",
+          "stage2_reason": "The application deadline of June 27, 2025 is explicitly stated and supports the mandatory deadline.",
+          "stage2": {
+            "provider": "OpenAI via ChatGPT-authenticated Codex CLI",
+            "model": "gpt-5.6-sol",
+            "prompt_version": "task06-stage2-v1",
+            "prompt_sha256": "be838b1ef8d57f921147a3dfb993fa3237fb56dd766b825c883b644aa131163f",
+            "execution_kind": "ACTUAL"
+          },
+          "authoritative": false
+        },
+        "after": {
+          "requirement_id": "A012",
+          "rule": "Applications must be submitted by June 27, 2025.",
+          "modality": "MUST",
+          "severity": "BLOCKER",
+          "verifier": "DETERMINISTIC",
+          "condition": "When applying",
+          "evidence": {
+            "source_section": "신청 마감",
+            "quote": "✅ 신청 마감 : 2025년 6월 27일(금)까지"
+          },
+          "confidence": 1,
+          "extraction_status": "CONFIRMED",
+          "evidence_start": 708,
+          "evidence_end": 735,
+          "issues": [],
+          "original": {
+            "requirement_id": "A012",
+            "rule": "Applications must be submitted by June 27, 2025.",
+            "modality": "MUST",
+            "severity": "BLOCKER",
+            "verifier": "DETERMINISTIC",
+            "condition": "When applying",
+            "evidence": {
+              "source_section": "신청 마감",
+              "quote": "✅ 신청 마감 : 2025년 6월 27일(금)까지"
+            },
+            "confidence": 1
+          },
+          "stage1": {
+            "provider": "OpenAI via ChatGPT-authenticated Codex CLI",
+            "model": "gpt-5.6-sol",
+            "prompt_version": "task06-stage1-v1",
+            "prompt_sha256": "52b226089eddf6fb109ab07f676110c7dea48c602397a7d6c283384e3be4d7f4",
+            "execution_kind": "ACTUAL"
+          },
+          "stage2_decision": "KEEP",
+          "stage2_reason": "The application deadline of June 27, 2025 is explicitly stated and supports the mandatory deadline.",
+          "stage2": {
+            "provider": "OpenAI via ChatGPT-authenticated Codex CLI",
+            "model": "gpt-5.6-sol",
+            "prompt_version": "task06-stage2-v1",
+            "prompt_sha256": "be838b1ef8d57f921147a3dfb993fa3237fb56dd766b825c883b644aa131163f",
+            "execution_kind": "ACTUAL"
+          },
+          "authoritative": true
+        }
+      },
+      {
+        "action": "APPROVE",
+        "requirement_id": "A013",
+        "at": "2026-09-05T11:32:57.215013Z",
+        "before": {
+          "requirement_id": "A013",
+          "rule": "Applicants must apply through the specified Google Form.",
+          "modality": "MUST",
+          "severity": "BLOCKER",
+          "verifier": "URL_CHECK",
+          "condition": "When applying",
+          "evidence": {
+            "source_section": "신청 방법",
+            "quote": "✅ 신청 방법 : 구글폼 주소 (https://docs.google.com/forms/d/e/1FAIpQLSd_-S-43dgVzd1qI2uahdJ0zI15_rnsfVQ_VLlRhPhmvo4pJw/viewform)"
+          },
+          "confidence": 1,
+          "extraction_status": "EXTRACTED",
+          "evidence_start": 736,
+          "evidence_end": 854,
+          "issues": [],
+          "original": {
+            "requirement_id": "A013",
+            "rule": "Applicants must apply through the specified Google Form.",
+            "modality": "MUST",
+            "severity": "BLOCKER",
+            "verifier": "URL_CHECK",
+            "condition": "When applying",
+            "evidence": {
+              "source_section": "신청 방법",
+              "quote": "✅ 신청 방법 : 구글폼 주소 (https://docs.google.com/forms/d/e/1FAIpQLSd_-S-43dgVzd1qI2uahdJ0zI15_rnsfVQ_VLlRhPhmvo4pJw/viewform)"
+            },
+            "confidence": 1
+          },
+          "stage1": {
+            "provider": "OpenAI via ChatGPT-authenticated Codex CLI",
+            "model": "gpt-5.6-sol",
+            "prompt_version": "task06-stage1-v1",
+            "prompt_sha256": "52b226089eddf6fb109ab07f676110c7dea48c602397a7d6c283384e3be4d7f4",
+            "execution_kind": "ACTUAL"
+          },
+          "stage2_decision": "KEEP",
+          "stage2_reason": "The source identifies the linked Google Form as the application method, supporting the required submission channel.",
+          "stage2": {
+            "provider": "OpenAI via ChatGPT-authenticated Codex CLI",
+            "model": "gpt-5.6-sol",
+            "prompt_version": "task06-stage2-v1",
+            "prompt_sha256": "be838b1ef8d57f921147a3dfb993fa3237fb56dd766b825c883b644aa131163f",
+            "execution_kind": "ACTUAL"
+          },
+          "authoritative": false
+        },
+        "after": {
+          "requirement_id": "A013",
+          "rule": "Applicants must apply through the specified Google Form.",
+          "modality": "MUST",
+          "severity": "BLOCKER",
+          "verifier": "URL_CHECK",
+          "condition": "When applying",
+          "evidence": {
+            "source_section": "신청 방법",
+            "quote": "✅ 신청 방법 : 구글폼 주소 (https://docs.google.com/forms/d/e/1FAIpQLSd_-S-43dgVzd1qI2uahdJ0zI15_rnsfVQ_VLlRhPhmvo4pJw/viewform)"
+          },
+          "confidence": 1,
+          "extraction_status": "CONFIRMED",
+          "evidence_start": 736,
+          "evidence_end": 854,
+          "issues": [],
+          "original": {
+            "requirement_id": "A013",
+            "rule": "Applicants must apply through the specified Google Form.",
+            "modality": "MUST",
+            "severity": "BLOCKER",
+            "verifier": "URL_CHECK",
+            "condition": "When applying",
+            "evidence": {
+              "source_section": "신청 방법",
+              "quote": "✅ 신청 방법 : 구글폼 주소 (https://docs.google.com/forms/d/e/1FAIpQLSd_-S-43dgVzd1qI2uahdJ0zI15_rnsfVQ_VLlRhPhmvo4pJw/viewform)"
+            },
+            "confidence": 1
+          },
+          "stage1": {
+            "provider": "OpenAI via ChatGPT-authenticated Codex CLI",
+            "model": "gpt-5.6-sol",
+            "prompt_version": "task06-stage1-v1",
+            "prompt_sha256": "52b226089eddf6fb109ab07f676110c7dea48c602397a7d6c283384e3be4d7f4",
+            "execution_kind": "ACTUAL"
+          },
+          "stage2_decision": "KEEP",
+          "stage2_reason": "The source identifies the linked Google Form as the application method, supporting the required submission channel.",
+          "stage2": {
+            "provider": "OpenAI via ChatGPT-authenticated Codex CLI",
+            "model": "gpt-5.6-sol",
+            "prompt_version": "task06-stage2-v1",
+            "prompt_sha256": "be838b1ef8d57f921147a3dfb993fa3237fb56dd766b825c883b644aa131163f",
+            "execution_kind": "ACTUAL"
+          },
+          "authoritative": true
+        }
+      },
+      {
+        "action": "CONFIRM_PROFILE",
+        "requirement_id": null,
+        "at": "2026-09-05T11:32:57.487677Z",
+        "before": null,
+        "after": null
+      }
+    ],
+    "version": 18,
+    "created_at": "2026-09-05T11:31:14.465249Z",
+    "updated_at": "2026-09-05T11:32:57.487674Z"
+  },
+  "current_job_id": "f1de24af-f253-4bad-8086-b9827f577869",
+  "current_job": {
+    "job_id": "f1de24af-f253-4bad-8086-b9827f577869",
+    "status": "SUCCEEDED",
+    "stage": "FINALIZED",
+    "attempt": 1,
+    "completed_stage2_batches": [
+      0
+    ],
+    "error_category": null,
+    "updated_at": "2026-09-05T11:32:54.633373Z"
+  },
+  "engine_sha256": null,
+  "run_state": "COMPLETE",
+  "validation_complete": false,
+  "run_error": null,
+  "announcement_name": "직접 입력한 공고",
+  "requirements": [
+    {
+      "id": "A001",
+      "title": "The event is scheduled for August 18–20, 2025, for three days and two nights.",
+      "description": "If selected to participate (사람이 원문 확인)",
+      "verifier": "DETERMINISTIC",
+      "announcement_evidence": {
+        "source": "직접 입력한 공고",
+        "locator": "행사 일정 및 장소 · chars 118:148",
+        "excerpt": "2025.8.18.(월) ~ 8.20.(수) 2박 3일"
+      }
+    },
+    {
+      "id": "A003",
+      "title": "Applicants must be participating students at a university carrying out HUSS.",
+      "description": "When applying",
+      "verifier": "SEMANTIC",
+      "announcement_evidence": {
+        "source": "직접 입력한 공고",
+        "locator": "행사 일정 및 장소 · chars 158:194",
+        "excerpt": "*대상: HUSS 수행대학 참여학생 250명 (국민대 5명 모집)"
+      }
+    },
+    {
+      "id": "A004",
+      "title": "Kookmin University will recruit five participants.",
+      "description": "For Kookmin University applicants",
+      "verifier": "DETERMINISTIC",
+      "announcement_evidence": {
+        "source": "직접 입력한 공고",
+        "locator": "행사 일정 및 장소 · chars 184:193",
+        "excerpt": "국민대 5명 모집"
+      }
+    },
+    {
+      "id": "A005",
+      "title": "Five participants will be selected through document evaluation.",
+      "description": "During participant selection",
+      "verifier": "DETERMINISTIC",
+      "announcement_evidence": {
+        "source": "직접 입력한 공고",
+        "locator": "모집 인원 · chars 248:270",
+        "excerpt": "✅ 모집 인원: 5명 (서류 평가 진행)"
+      }
+    },
+    {
+      "id": "A006",
+      "title": "The document evaluation considers motivation for applying, the applicant's capabilities, hackathon and team-project experience, and collaborative attitude.",
+      "description": "During document evaluation",
+      "verifier": "SEMANTIC",
+      "announcement_evidence": {
+        "source": "직접 입력한 공고",
+        "locator": "모집 인원 · chars 271:317",
+        "excerpt": "*지원 동기, 본인 역량, 해커톤 및 팀 프로젝트 관련 경험, 협업 태도 등을 평가"
+      }
+    },
+    {
+      "id": "A007",
+      "title": "Evaluation results and scores will not be disclosed.",
+      "description": "After evaluation",
+      "verifier": "DETERMINISTIC",
+      "announcement_evidence": {
+        "source": "직접 입력한 공고",
+        "locator": "모집 인원 · chars 318:339",
+        "excerpt": "*평가 결과 및 점수는 공개하지 않으며"
+      }
+    },
+    {
+      "id": "A008",
+      "title": "Final selections will be announced separately and communicated individually.",
+      "description": "If finally selected",
+      "verifier": "SEMANTIC",
+      "announcement_evidence": {
+        "source": "직접 입력한 공고",
+        "locator": "모집 인원 · chars 341:375",
+        "excerpt": "최종 선발자는 별도 공지 및 개별 연락을 통해 안내 될 예정임"
+      }
+    },
+    {
+      "id": "A009",
+      "title": "Applicants must be currently enrolled undergraduate students in one of these HUSS-participating departments: Korean Language and Literature, Korean History, KIBS, Management Information Systems, Civil and Environmental Engineering, Forest Products and Biotechnology, Public Administration, Sociology, or Political Science and Diplomacy.",
+      "description": "When applying",
+      "verifier": "SEMANTIC",
+      "announcement_evidence": {
+        "source": "직접 입력한 공고",
+        "locator": "참가 대상 · chars 378:474",
+        "excerpt": "✅ 참가 대상: HUSS 참여학과(한국어문학부, 한국역사학과, KIBS, 경영정보학부, 건설시스템공학부, 임산생명공학과, 행정학과, 사회학과, 정치외교학과) 재학생(학부생)"
+      }
+    },
+    {
+      "id": "A010",
+      "title": "The hackathon theme is “Futur-Agora for a Sustainable Future.”",
+      "description": "When participating in the hackathon",
+      "verifier": "DETERMINISTIC",
+      "announcement_evidence": {
+        "source": "직접 입력한 공고",
+        "locator": "해커톤 프로그램 · chars 557:588",
+        "excerpt": "*주제: \"지속가능한 미래를 위한 Futur-Agora\""
+      }
+    },
+    {
+      "id": "A011",
+      "title": "Each university recruits five people, who must form a five-person joint team with participants from another consortium on site on the event day.",
+      "description": "On the event day",
+      "verifier": "SEMANTIC",
+      "announcement_evidence": {
+        "source": "직접 입력한 공고",
+        "locator": "해커톤 프로그램 · chars 658:707",
+        "excerpt": "- 대학 별 5인을 모집하되, 당일 현장에서 타 컨소시엄과 연합하여 5인 1연합 팀 구성"
+      }
+    },
+    {
+      "id": "A012",
+      "title": "Applications must be submitted by June 27, 2025.",
+      "description": "When applying",
+      "verifier": "DETERMINISTIC",
+      "announcement_evidence": {
+        "source": "직접 입력한 공고",
+        "locator": "신청 마감 · chars 708:735",
+        "excerpt": "✅ 신청 마감 : 2025년 6월 27일(금)까지"
+      }
+    },
+    {
+      "id": "A013",
+      "title": "Applicants must apply through the specified Google Form.",
+      "description": "When applying",
+      "verifier": "URL_CHECK",
+      "announcement_evidence": {
+        "source": "직접 입력한 공고",
+        "locator": "신청 방법 · chars 736:854",
+        "excerpt": "✅ 신청 방법 : 구글폼 주소 (https://docs.google.com/forms/d/e/1FAIpQLSd_-S-43dgVzd1qI2uahdJ0zI15_rnsfVQ_VLlRhPhmvo4pJw/viewform)"
+      }
+    }
+  ],
+  "files": [
+    {
+      "name": "submission.pdf",
+      "size_bytes": 1705116,
+      "media_type": "application/pdf",
+      "sha256": "90a5dcac18bb34c25dfbc528bfe84ad2e49144a65200495155b673e55aa12427"
+    }
+  ],
+  "results": [
+    {
+      "id": "8dc8edc6-1e47-4246-981b-81135a969b78:A001",
+      "requirement_id": "A001",
+      "status": "REVIEW",
+      "title": "The event is scheduled for August 18–20, 2025, for three days and two nights.",
+      "explanation": "UNSUPPORTED: 이 요구사항의 자동 제출파일 검증은 아직 구현되지 않았습니다.",
+      "action": "확정한 공고 근거와 제출파일을 직접 대조하세요. 사용자 승인은 파일 조건 충족 판정이 아닙니다.",
+      "announcement_evidence": {
+        "source": "직접 입력한 공고",
+        "locator": "행사 일정 및 장소 · chars 118:148",
+        "excerpt": "2025.8.18.(월) ~ 8.20.(수) 2박 3일"
+      },
+      "submission_evidence": null,
+      "source_mode": "generic_review"
+    },
+    {
+      "id": "8dc8edc6-1e47-4246-981b-81135a969b78:A003",
+      "requirement_id": "A003",
+      "status": "REVIEW",
+      "title": "Applicants must be participating students at a university carrying out HUSS.",
+      "explanation": "UNSUPPORTED: 이 요구사항의 자동 제출파일 검증은 아직 구현되지 않았습니다.",
+      "action": "확정한 공고 근거와 제출파일을 직접 대조하세요. 사용자 승인은 파일 조건 충족 판정이 아닙니다.",
+      "announcement_evidence": {
+        "source": "직접 입력한 공고",
+        "locator": "행사 일정 및 장소 · chars 158:194",
+        "excerpt": "*대상: HUSS 수행대학 참여학생 250명 (국민대 5명 모집)"
+      },
+      "submission_evidence": null,
+      "source_mode": "generic_review"
+    },
+    {
+      "id": "8dc8edc6-1e47-4246-981b-81135a969b78:A004",
+      "requirement_id": "A004",
+      "status": "REVIEW",
+      "title": "Kookmin University will recruit five participants.",
+      "explanation": "UNSUPPORTED: 이 요구사항의 자동 제출파일 검증은 아직 구현되지 않았습니다.",
+      "action": "확정한 공고 근거와 제출파일을 직접 대조하세요. 사용자 승인은 파일 조건 충족 판정이 아닙니다.",
+      "announcement_evidence": {
+        "source": "직접 입력한 공고",
+        "locator": "행사 일정 및 장소 · chars 184:193",
+        "excerpt": "국민대 5명 모집"
+      },
+      "submission_evidence": null,
+      "source_mode": "generic_review"
+    },
+    {
+      "id": "8dc8edc6-1e47-4246-981b-81135a969b78:A005",
+      "requirement_id": "A005",
+      "status": "REVIEW",
+      "title": "Five participants will be selected through document evaluation.",
+      "explanation": "UNSUPPORTED: 이 요구사항의 자동 제출파일 검증은 아직 구현되지 않았습니다.",
+      "action": "확정한 공고 근거와 제출파일을 직접 대조하세요. 사용자 승인은 파일 조건 충족 판정이 아닙니다.",
+      "announcement_evidence": {
+        "source": "직접 입력한 공고",
+        "locator": "모집 인원 · chars 248:270",
+        "excerpt": "✅ 모집 인원: 5명 (서류 평가 진행)"
+      },
+      "submission_evidence": null,
+      "source_mode": "generic_review"
+    },
+    {
+      "id": "8dc8edc6-1e47-4246-981b-81135a969b78:A006",
+      "requirement_id": "A006",
+      "status": "REVIEW",
+      "title": "The document evaluation considers motivation for applying, the applicant's capabilities, hackathon and team-project experience, and collaborative attitude.",
+      "explanation": "UNSUPPORTED: 이 요구사항의 자동 제출파일 검증은 아직 구현되지 않았습니다.",
+      "action": "확정한 공고 근거와 제출파일을 직접 대조하세요. 사용자 승인은 파일 조건 충족 판정이 아닙니다.",
+      "announcement_evidence": {
+        "source": "직접 입력한 공고",
+        "locator": "모집 인원 · chars 271:317",
+        "excerpt": "*지원 동기, 본인 역량, 해커톤 및 팀 프로젝트 관련 경험, 협업 태도 등을 평가"
+      },
+      "submission_evidence": null,
+      "source_mode": "generic_review"
+    },
+    {
+      "id": "8dc8edc6-1e47-4246-981b-81135a969b78:A007",
+      "requirement_id": "A007",
+      "status": "REVIEW",
+      "title": "Evaluation results and scores will not be disclosed.",
+      "explanation": "UNSUPPORTED: 이 요구사항의 자동 제출파일 검증은 아직 구현되지 않았습니다.",
+      "action": "확정한 공고 근거와 제출파일을 직접 대조하세요. 사용자 승인은 파일 조건 충족 판정이 아닙니다.",
+      "announcement_evidence": {
+        "source": "직접 입력한 공고",
+        "locator": "모집 인원 · chars 318:339",
+        "excerpt": "*평가 결과 및 점수는 공개하지 않으며"
+      },
+      "submission_evidence": null,
+      "source_mode": "generic_review"
+    },
+    {
+      "id": "8dc8edc6-1e47-4246-981b-81135a969b78:A008",
+      "requirement_id": "A008",
+      "status": "REVIEW",
+      "title": "Final selections will be announced separately and communicated individually.",
+      "explanation": "UNSUPPORTED: 이 요구사항의 자동 제출파일 검증은 아직 구현되지 않았습니다.",
+      "action": "확정한 공고 근거와 제출파일을 직접 대조하세요. 사용자 승인은 파일 조건 충족 판정이 아닙니다.",
+      "announcement_evidence": {
+        "source": "직접 입력한 공고",
+        "locator": "모집 인원 · chars 341:375",
+        "excerpt": "최종 선발자는 별도 공지 및 개별 연락을 통해 안내 될 예정임"
+      },
+      "submission_evidence": null,
+      "source_mode": "generic_review"
+    },
+    {
+      "id": "8dc8edc6-1e47-4246-981b-81135a969b78:A009",
+      "requirement_id": "A009",
+      "status": "REVIEW",
+      "title": "Applicants must be currently enrolled undergraduate students in one of these HUSS-participating departments: Korean Language and Literature, Korean History, KIBS, Management Information Systems, Civil and Environmental Engineering, Forest Products and Biotechnology, Public Administration, Sociology, or Political Science and Diplomacy.",
+      "explanation": "UNSUPPORTED: 이 요구사항의 자동 제출파일 검증은 아직 구현되지 않았습니다.",
+      "action": "확정한 공고 근거와 제출파일을 직접 대조하세요. 사용자 승인은 파일 조건 충족 판정이 아닙니다.",
+      "announcement_evidence": {
+        "source": "직접 입력한 공고",
+        "locator": "참가 대상 · chars 378:474",
+        "excerpt": "✅ 참가 대상: HUSS 참여학과(한국어문학부, 한국역사학과, KIBS, 경영정보학부, 건설시스템공학부, 임산생명공학과, 행정학과, 사회학과, 정치외교학과) 재학생(학부생)"
+      },
+      "submission_evidence": null,
+      "source_mode": "generic_review"
+    },
+    {
+      "id": "8dc8edc6-1e47-4246-981b-81135a969b78:A010",
+      "requirement_id": "A010",
+      "status": "REVIEW",
+      "title": "The hackathon theme is “Futur-Agora for a Sustainable Future.”",
+      "explanation": "UNSUPPORTED: 이 요구사항의 자동 제출파일 검증은 아직 구현되지 않았습니다.",
+      "action": "확정한 공고 근거와 제출파일을 직접 대조하세요. 사용자 승인은 파일 조건 충족 판정이 아닙니다.",
+      "announcement_evidence": {
+        "source": "직접 입력한 공고",
+        "locator": "해커톤 프로그램 · chars 557:588",
+        "excerpt": "*주제: \"지속가능한 미래를 위한 Futur-Agora\""
+      },
+      "submission_evidence": null,
+      "source_mode": "generic_review"
+    },
+    {
+      "id": "8dc8edc6-1e47-4246-981b-81135a969b78:A011",
+      "requirement_id": "A011",
+      "status": "REVIEW",
+      "title": "Each university recruits five people, who must form a five-person joint team with participants from another consortium on site on the event day.",
+      "explanation": "UNSUPPORTED: 이 요구사항의 자동 제출파일 검증은 아직 구현되지 않았습니다.",
+      "action": "확정한 공고 근거와 제출파일을 직접 대조하세요. 사용자 승인은 파일 조건 충족 판정이 아닙니다.",
+      "announcement_evidence": {
+        "source": "직접 입력한 공고",
+        "locator": "해커톤 프로그램 · chars 658:707",
+        "excerpt": "- 대학 별 5인을 모집하되, 당일 현장에서 타 컨소시엄과 연합하여 5인 1연합 팀 구성"
+      },
+      "submission_evidence": null,
+      "source_mode": "generic_review"
+    },
+    {
+      "id": "8dc8edc6-1e47-4246-981b-81135a969b78:A012",
+      "requirement_id": "A012",
+      "status": "REVIEW",
+      "title": "Applications must be submitted by June 27, 2025.",
+      "explanation": "UNSUPPORTED: 이 요구사항의 자동 제출파일 검증은 아직 구현되지 않았습니다.",
+      "action": "확정한 공고 근거와 제출파일을 직접 대조하세요. 사용자 승인은 파일 조건 충족 판정이 아닙니다.",
+      "announcement_evidence": {
+        "source": "직접 입력한 공고",
+        "locator": "신청 마감 · chars 708:735",
+        "excerpt": "✅ 신청 마감 : 2025년 6월 27일(금)까지"
+      },
+      "submission_evidence": null,
+      "source_mode": "generic_review"
+    },
+    {
+      "id": "8dc8edc6-1e47-4246-981b-81135a969b78:A013",
+      "requirement_id": "A013",
+      "status": "REVIEW",
+      "title": "Applicants must apply through the specified Google Form.",
+      "explanation": "UNSUPPORTED: 이 요구사항의 자동 제출파일 검증은 아직 구현되지 않았습니다.",
+      "action": "확정한 공고 근거와 제출파일을 직접 대조하세요. 사용자 승인은 파일 조건 충족 판정이 아닙니다.",
+      "announcement_evidence": {
+        "source": "직접 입력한 공고",
+        "locator": "신청 방법 · chars 736:854",
+        "excerpt": "✅ 신청 방법 : 구글폼 주소 (https://docs.google.com/forms/d/e/1FAIpQLSd_-S-43dgVzd1qI2uahdJ0zI15_rnsfVQ_VLlRhPhmvo4pJw/viewform)"
+      },
+      "submission_evidence": null,
+      "source_mode": "generic_review"
+    }
+  ],
+  "previous_results": [],
+  "status": "REVIEW_REQUIRED",
+  "revision": 1,
+  "fixture": null
+}
