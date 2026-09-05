@@ -20,7 +20,7 @@ class GenericFlow {
     const response = this.page.waitForResponse(r => r.url().endsWith("/extract") && r.request().method() === "POST");
     await this.page.getByRole("button", { name: "요구사항 추출 실행" }).click();
     const data = await (await response).json();
-    expect(data.generic_profile.execution_kind).toBe("ACTUAL");
+    expect(data.generic_profile.execution_kind).toBe("SIMULATED");
     expect(data.validation_profile).toBeNull();
     await expect(this.page.getByRole("article")).toHaveCount(5);
   }
@@ -32,21 +32,21 @@ test("generic text, evidence, human edit/delete/approve, confirmation and real h
   page.on("console", m => { if (m.type() === "error") errors.push(m.text()); });
   const flow = new GenericFlow(page, info);
   await flow.textInput();
-  await expect(flow.card("G001")).toContainText("EXTRACTED");
+  await expect(flow.card("G001")).toContainText("Needs Review");
   await expect(flow.card("G001").locator("blockquote")).toHaveText("제안서는 PDF 형식으로 제출해야 한다.");
   await expect(page.getByRole("button", { name: "Profile 확정" })).toBeDisabled();
   await flow.capture("01-extracted");
   await flow.card("G001").getByLabel("요구사항 문장").fill("제안서는 PDF 형식으로 제출해야 한다");
   await expect(flow.card("G002").getByRole("button", { name: "항목 승인" })).toBeDisabled();
   await flow.card("G001").getByRole("button", { name: "수정 저장" }).click();
-  await expect(flow.card("G001")).toContainText("NEEDS_REVIEW");
+  await expect(flow.card("G001")).toContainText("Needs Review");
   await flow.card("G001").getByRole("button", { name: "검토 필요로 유지" }).click();
   await expect(flow.card("G001").getByRole("button", { name: "항목 승인" })).toBeEnabled();
   await flow.card("G004").getByRole("button", { name: "항목 삭제" }).click();
   await expect(flow.card("G004")).toHaveCount(0);
   for (const id of ["G001", "G002", "G003", "G005"]) {
     await flow.card(id).getByRole("button", { name: "항목 승인" }).click();
-    await expect(flow.card(id)).toContainText("CONFIRMED");
+    await expect(flow.card(id)).toContainText("Human Confirmed");
   }
   await page.getByText("공고 원문과 provenance", { exact: true }).click();
   await expect(page.getByText("Source SHA-256:", { exact: false })).toBeVisible();

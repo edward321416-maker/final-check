@@ -1,17 +1,17 @@
 # FINAL CHECK — AI Submission Preflight
 공고문과 실제 제출파일을 넣으면, AI가 제출 전에 탈락요인을 찾아주고 각 판정의 근거까지 보여준다.
 
-TASK 03 adds a generic announcement → human-reviewed requirement profile → validation handoff path to the existing five-screen UI. Its default extractor is local rules, **not an external AI model**. Generic automatic submission verification is unsupported and returns REVIEW/EXTERNAL.
+TASK 06 upgrades the generic announcement path to an **actual local two-stage AI provider**: provisional Stage 1 candidates → deterministic evidence gate → Stage 2 KEEP/REVIEW/DROP → mandatory human confirmation. Generic automatic submission verification remains unsupported and returns REVIEW/EXTERNAL.
 TASK 02 connects the original **frozen Validator v1.5** to real multipart uploads and remains unchanged in behavior.
 The demo uses newly generated synthetic files. Its findings come from actual Python execution, not canned JSON.
-[Product lock](docs/PRODUCT_SPEC_V1.md) · [Actual execution report](RESULT_CODEX.md) · [Demo script](docs/DEMO_SCRIPT.md)
+[Product lock](docs/PRODUCT_SPEC_V1.md) · [Actual execution report](RESULT_CODEX.md) · [TASK06 architecture](docs/TASK06_TWO_STAGE_MVP.md) · [Demo script](docs/DEMO_SCRIPT.md)
 
 TASK04 independently measured the unchanged local extractor on eight real
 announcements with 173 pre-output frozen Gold requirements: recall 18.50%, precision
 15.17%, modality accuracy 25.00%. Exact quotes were 100%, semantic support 24.17%.
 This is a same-agent manual benchmark, not independent human adjudication.
-[Report and limitations](benchmarks/task04/report/report.md). Engineering recommends
-an AI-first comparison for Product Lead review; no AI provider or TASK05 work is added.
+[Report and limitations](benchmarks/task04/report/report.md). TASK05 preserved a separate
+blind AI comparison; TASK06 integrates the locked two-stage product architecture without rescoring it.
 
 Replay the saved benchmark and verify frozen hashes with
 `backend/.venv/Scripts/python.exe -X utf8 scripts/run_task04_benchmark.py`.
@@ -63,17 +63,17 @@ Historical TASK 01 fixtures stay in their original directories and are never use
 - Scanned PDF Vision is unavailable → REVIEW, incomplete. No invented model result.
 - Submission status: BLOCKED / REVIEW_REQUIRED / READY. Before a run: null plus run_state=NOT_STARTED.
 - Upload receipts, temporary files and raw outputs are isolated per local session; removed on replacement/expiry/shutdown. In-memory sessions expire after one hour or restart.
-- No auth, payment, analytics, automatic submission, remote AI call or public app deployment.
+- No product login, payment, analytics, automatic submission or public app deployment. The default generic extractor uses the already authenticated local Codex CLI; no production AI service is selected.
 - A public source repository is distinct from a publicly hosted application.
 - The exact historical 39-case corpus was not included or rerun. Its report is reference evidence only.
 
 ## Generic announcement review
-On Home, paste the source text or choose a UTF-8 TXT/text-based PDF. Run "요구사항 추출 실행" on Announcement Analysis.
+On Home, paste the source text or choose a UTF-8 TXT/text-based PDF. Run "요구사항 추출 실행" on Announcement Analysis. The actual local provider may take longer than 30 seconds; the UI starts a background extraction and polls its status.
 Review each original quote and its source offset; edit/delete candidates, keep NEEDS_REVIEW or approve each item. Check the full-source acknowledgement and choose "Profile 확정" before handing off to validation.
 PDF input limit: 10 MiB, 50 pages, 100,000 extracted characters; no OCR/Vision. Textless pages require Vision and cannot produce a confirmed profile.
-The local provider uses narrow Korean patterns. Confidence 0.5 is uncalibrated. It can miss rules, misclassify modality/conditions or require manual splitting. No recall/precision or universal competition coverage is claimed.
+Stage 1/2 outputs remain provisional and may miss, duplicate or misclassify requirements. More than 100 candidates is explicit overflow and runs in batches of 50; 500 is the hard ceiling. Local rules are an explicitly selected fallback suggestion path, never a silent provider-failure substitute. No new recall/precision or universal competition coverage is claimed.
 The generic pipeline checks actual upload identity but does not test submission compliance. Its findings remain REVIEW/EXTERNAL and its summary REVIEW_REQUIRED.
-Canonical schemas: backend/app/models/profiles.py and frontend/types/profile.ts. Provider interface: backend/app/services/extractors.py. Human review: backend/app/services/profiles.py. Generic handoff: backend/app/services/generic_validation.py.
+Canonical schemas: backend/app/models/profiles.py and frontend/types/profile.ts. Provider boundary: backend/app/services/ai_providers.py. Human review and deterministic gate: backend/app/services/profiles.py. Generic handoff: backend/app/services/generic_validation.py.
 New checks run with the same pytest and Playwright commands above. To regenerate only TASK 03 synthetic PDF fixtures: `backend/.venv/Scripts/python.exe -X utf8 scripts/generate_announcement_fixtures.py`. Fixture generation and expected candidates are from the same session, so comparisons are SELF-BENCHMARK, not independent accuracy evidence.
 
 ## Layout

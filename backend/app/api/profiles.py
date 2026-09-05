@@ -1,3 +1,4 @@
+import asyncio
 from pathlib import Path
 from typing import Annotated
 from fastapi import APIRouter, Depends, HTTPException
@@ -6,10 +7,12 @@ from app.models.profiles import ConfirmRequest, GenericRequirementProfile, Revie
 from app.models.schemas import CheckSession
 from app.services import profiles, sessions
 from app.services.announcement_input import source_from_bytes
-from app.services.extractors import RequirementExtractor, get_extractor
+from app.services.ai_providers import (RequirementGenerator, SemanticRequirementReviewer,
+                                       get_generator, get_reviewer)
 from app.services.generic_validation import canonical_requirements
 
 router = APIRouter(prefix="/api/sessions")
+EXTRACTION_TASKS: dict[str, asyncio.Task[None]] = {}
 
 
 def invalidate(session: CheckSession) -> None:
@@ -27,6 +30,40 @@ def custom_session(session_id: str) -> CheckSession:
     if sessions.LOCKS[session_id].locked():
         raise HTTPException(409, "Another operation is running.")
     return session
+
+
+async def complete_extraction(session_id: str, base: GenericRequirementProfile,
+                              generator: RequirementGenerator,
+                              reviewer: SemanticRequirementReviewer) -> None:
+    try:
+        updated = await run_in_threadpool(profiles.extract, base, generator, reviewer)
+    except Exception as error:
+        updated = base.model_copy(deep=True)
+        updated.pipeline_status = "EXTRACTION_ERROR"
+        updated.pipeline_error = type(error).__name__
+        updated.status = "REVIEW_REQUIRED"
+        updated.notices = ["Two-stage provider 실행이 완료되지 않았습니다. 결과를 만들지 않았으며 다시 시도할 수 있습니다."]
+        updated.version += 1
+        updated.updated_at = profiles.now()
+    lock = sessions.LOCKS.get(session_id)
+    if lock is None:
+        return
+    async with lock:
+        session = sessions.get(session_id)
+        current = session.generic_profile
+        if current and current.profile_id == base.profile_id and current.version == base.version:
+            invalidate(session)
+            session.generic_profile = updated
+            sessions.save(session)
+
+
+def forget_extraction(session_id: str, completed: asyncio.Task[None]) -> None:
+    if EXTRACTION_TASKS.get(session_id) is completed:
+        EXTRACTION_TASKS.pop(session_id, None)
+    try:
+        completed.exception()
+    except asyncio.CancelledError:
+        pass
 
 
 @router.post("/{session_id}/announcement-text", response_model=CheckSession)
@@ -57,19 +94,32 @@ def checked_profile(session: CheckSession, body: VersionRequest) -> GenericRequi
 
 @router.post("/{session_id}/extract", response_model=CheckSession)
 async def extract(session_id: str, body: VersionRequest,
-                  provider: Annotated[RequirementExtractor, Depends(get_extractor)]) -> CheckSession:
+                  generator: Annotated[RequirementGenerator, Depends(get_generator)],
+                  reviewer: Annotated[SemanticRequirementReviewer, Depends(get_reviewer)]) -> CheckSession:
     session = custom_session(session_id)
     async with sessions.LOCKS[session_id]:
         profile = checked_profile(session, body)
-        try:
-            updated = await run_in_threadpool(profiles.extract, profile, provider)
-        except ValueError as error:
-            raise HTTPException(422, str(error)) from error
-        except Exception as error:
-            raise HTTPException(503, "추출 provider 실행 실패. 요구사항을 생성하지 않았습니다.") from error
+        if profile.pipeline_status == "RUNNING":
+            raise HTTPException(409, "Two-stage extraction is already running.")
+        if not (getattr(generator, "requires_background", False)
+                or getattr(reviewer, "requires_background", False)):
+            try:
+                updated = await run_in_threadpool(profiles.extract, profile, generator, reviewer)
+            except ValueError as error:
+                raise HTTPException(422, str(error)) from error
+            except Exception as error:
+                raise HTTPException(503, "Two-stage provider 실행 실패. Profile은 확정되지 않았습니다.") from error
+            invalidate(session)
+            session.generic_profile = updated
+            return sessions.save(session)
+        updated = profiles.mark_running(profile, generator, reviewer)
         invalidate(session)
         session.generic_profile = updated
-        return sessions.save(session)
+        saved = sessions.save(session)
+        task = asyncio.create_task(complete_extraction(session_id, updated.model_copy(deep=True), generator, reviewer))
+        EXTRACTION_TASKS[session_id] = task
+        task.add_done_callback(lambda completed, key=session_id: forget_extraction(key, completed))
+        return saved
 
 
 @router.post("/{session_id}/requirements/{requirement_id}/review", response_model=CheckSession)

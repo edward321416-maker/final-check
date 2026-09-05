@@ -10,7 +10,9 @@ from app.main import app
 from app.models.profiles import ExtractedRequirement, GenericRequirementProfile
 from app.models.schemas import ValidationResult
 from app.services import sessions, profiles, announcement_input
-from app.services.extractors import LocalRuleExtractor, get_extractor
+from app.services.ai_providers import (LocalFallbackRequirementGenerator, LocalFallbackSemanticReviewer,
+                                       get_generator, get_reviewer, provenance)
+from app.services.extractors import LocalRuleExtractor
 from app.services.announcement_input import source_from_bytes
 from app.validators.v15_adapter import FROZEN, EXPECTED_SHA256
 
@@ -23,6 +25,8 @@ QUOTE = "제안서는 PDF 형식으로 제출해야 한다."
 @pytest.fixture
 def client():
     sessions.close_all()
+    app.dependency_overrides[get_generator] = lambda: LocalFallbackRequirementGenerator()
+    app.dependency_overrides[get_reviewer] = lambda: LocalFallbackSemanticReviewer()
     with TestClient(app) as value:
         yield value
     app.dependency_overrides.clear()
@@ -54,13 +58,12 @@ def candidate(**values):
 
 
 class MockProvider:
-    name = "test-only-fixture-provider"
-    execution_kind = "SIMULATED"
+    provenance = provenance("stage1", "SIMULATED", "test-only-fixture-provider")
 
     def __init__(self, items):
         self.items = items
 
-    def extract(self, source):
+    def generate(self, source):
         return self.items
 
 
@@ -77,7 +80,7 @@ def test_no_evidence_no_rule(evidence):
 
 
 def test_provider_evidence_gate_rejects_rewritten_or_invented_quotes(client):
-    app.dependency_overrides[get_extractor] = lambda: MockProvider([
+    app.dependency_overrides[get_generator] = lambda: MockProvider([
         candidate(evidence={"source_section": "제출방법", "quote": "PDF 제출이 필요합니다."}),
         candidate(requirement_id="G002"),
     ])
@@ -91,7 +94,7 @@ def test_provider_evidence_gate_rejects_rewritten_or_invented_quotes(client):
 
 def test_compound_provider_rule_is_flagged_and_cannot_approve(client):
     compound = "PDF는 10페이지 이하여야 하며 파일명은 이름_작품명 형식이어야 한다."
-    app.dependency_overrides[get_extractor] = lambda: MockProvider([candidate(rule=compound, evidence={"source_section": "제출방법", "quote": compound})])
+    app.dependency_overrides[get_generator] = lambda: MockProvider([candidate(rule=compound, evidence={"source_section": "제출방법", "quote": compound})])
     data = extracted(client)
     assert data["generic_profile"]["requirements"][0]["extraction_status"] == "NEEDS_REVIEW"
     assert mutate(client, data, "requirements/G001/review", action="APPROVE").status_code == 422
@@ -100,7 +103,7 @@ def test_compound_provider_rule_is_flagged_and_cannot_approve(client):
 def test_actual_text_profile_atomic_candidates_and_provenance(client):
     data = extracted(client)
     p = data["generic_profile"]
-    assert p["execution_kind"] == "ACTUAL" and p["provider"].startswith("local-rules")
+    assert p["execution_kind"] == "SIMULATED" and p["provider"].startswith("Fallback suggestions")
     assert p["status"] == "DRAFT" and data["requirements"] == []
     # SELF-BENCHMARK: this input and these expectations were authored together.
     assert len(p["requirements"]) == 5
@@ -109,7 +112,7 @@ def test_actual_text_profile_atomic_candidates_and_provenance(client):
     assert all(not ("10페이지" in r["rule"] and "파일명" in r["rule"]) for r in p["requirements"])
     for r in p["requirements"]:
         assert TEXT[r["evidence_start"]:r["evidence_end"]] == r["evidence"]["quote"]
-        assert r["rule"] in TEXT and r["extraction_status"] == "EXTRACTED"
+        assert r["rule"] in TEXT and r["extraction_status"] == "NEEDS_REVIEW"
     assert p["announcement"]["sha256"] == hashlib.sha256(TEXT.encode()).hexdigest()
     assert p["announcement"]["text_sha256"] == p["announcement"]["sha256"]
     (ROOT / "artifacts/task03/text-profile-extracted.json").write_text(json.dumps(p, ensure_ascii=False, indent=2), encoding="utf-8")
@@ -233,13 +236,15 @@ def test_unreadable_pdf_and_timeout_do_not_generate_contents(client, monkeypatch
 
 def test_provider_exception_does_not_confirm_or_create_findings(client):
     class BrokenProvider(MockProvider):
-        def extract(self, source):
+        def generate(self, source):
             raise RuntimeError("test-only injected provider failure")
-    app.dependency_overrides[get_extractor] = lambda: BrokenProvider([])
+    app.dependency_overrides[get_generator] = lambda: BrokenProvider([])
     data = input_text(client)
-    assert mutate(client, data, "extract").status_code == 503
+    failed = mutate(client, data, "extract")
+    assert failed.status_code == 200
+    assert failed.json()["generic_profile"]["pipeline_status"] == "EXTRACTION_ERROR"
     saved = client.get(f"/api/sessions/{data['id']}").json()
-    assert saved["generic_profile"]["status"] == "DRAFT" and saved["results"] == []
+    assert saved["generic_profile"]["status"] == "REVIEW_REQUIRED" and saved["results"] == []
 
 
 def test_frozen_before_and_current_directory_hashes_match():
