@@ -85,6 +85,9 @@ export function GenericProfileReview() {
     setAcknowledged(false);
     setDirtyId(null);
   }
+  async function compilePlan() {
+    update(await sessionRequest(sid, "verification-plan/compile", { expected_version: profile!.version }));
+  }
   const ready = profile.extraction_complete && profile.failed_batches.length === 0 && profile.requirements.length > 0
     && profile.requirements.every(item => item.extraction_status === "CONFIRMED" && item.authoritative);
   return <div className="content-grid"><section className="panel"><div className="panel-heading"><h2>요구사항 검토</h2><span>{profile.requirements.length}개 항목</span></div>
@@ -114,7 +117,12 @@ export function GenericProfileReview() {
     <details><summary>검토 이력 {profile.history.length}개</summary><ul className="checklist">{profile.history.map((event, i) => <li key={i}>{event.action} {event.requirement_id} · {event.at}</li>)}</ul></details>
     {profile.status !== "CONFIRMED" ? <><label className={styles.ack}><input type="checkbox" checked={acknowledged} disabled={busy} onChange={e => setAcknowledged(e.target.checked)} />공고 원문 전체와 누락 가능성을 직접 검토했습니다.</label>
       <button className="button primary full" disabled={busy || dirtyId !== null || !ready || !acknowledged} onClick={() => void run(() => mutate("profile/confirm", { reviewed_full_source: true }))}>Profile 확정</button></>
-      : <><p className="info-note">Human Confirmed · 확인된 requirement profile만 검증 파이프라인에 전달합니다. Generic 자동 검증은 미지원이므로 REVIEW / EXTERNAL만 표시합니다.</p>{dirtyId ? <p>수정 중인 항목을 먼저 저장하거나 승인하세요.</p> : <Link href="/upload" className="button primary full">제출파일 선택하기 →</Link>}</>}
+      : <><p className="info-note">Human Confirmed · 공고에서 확인된 요구사항을 자동 검사 계획으로 변환합니다. AI는 계획만 제안하며 판정 권한이 없습니다.</p>
+        <p className="info-note"><strong>Plan Gate: {session.verification_plan_state}</strong>{session.verification_plan_error ? ` · ${session.verification_plan_error}` : ""}</p>
+        {session.verification_plan?.plans.length ? <section aria-label="자동 검사 계획 요약"><h4>자동 검사 계획</h4><ul className="checklist">{session.verification_plan.plans.map(plan => <li key={plan.plan_id}><strong>{plan.requirement_id} · {plan.status === "VERIFIED" ? "자동 검사 가능" : plan.status === "EXTERNAL" ? "외부 확인" : "검토 필요"}</strong><br />{plan.checker_type} · {plan.constraint.field} {plan.constraint.operator} {String(plan.constraint.value)} {plan.constraint.unit}<br /><small>공고 근거: {plan.parameter_provenance.source_substring}</small></li>)}</ul><p className={styles.provenance}>{session.verification_plan.planner_provenance.provider} · {session.verification_plan.planner_provenance.model}<br />{session.verification_plan.planner_provenance.prompt_version} · {session.verification_plan.planner_provenance.prompt_sha256}</p></section> : null}
+        {session.verification_plan_state !== "READY" && <button className="button secondary full" disabled={busy} onClick={() => void run(compilePlan)}>자동 검사 계획 생성</button>}
+        <p className="info-note">현재 MVP 자동 검사 지원: PDF / MP4. 자동 검사가 안전하지 않은 항목은 검토 필요로 남깁니다.</p>
+        {dirtyId ? <p>수정 중인 항목을 먼저 저장하거나 승인하세요.</p> : <Link href="/upload" className="button primary full">제출파일 선택하기 →</Link>}</>}
     <p><Link href="/" className="text-link">다른 공고로 새 검사</Link></p>
   </aside></div>;
 }

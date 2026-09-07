@@ -21,7 +21,7 @@
 - [x] Document actual execution, tests, limitations and source integrity.
 
 ## Future work requiring scoped input
-- TASK 07 is delivered below for Product/Business Lead PR review. If accepted, the locked next priority is TASK08 Generic Verifier Engine.
+- TASK08 is delivered below for Product/Business Lead PR review. Select the next priority only after that review; do not preselect deployment, semantic, Vision/OCR or file-format expansion.
 - Select a Vision provider only with required authorization and test it separately.
 - Confirm production storage, deployment, retention and supported announcement profiles.
 - Historical 39-case reproduction requires the exact original corpus; do not substitute new fixtures.
@@ -91,4 +91,19 @@
 - [x] Enforce operation idempotency, three explicit attempts and active/retryable TTL protection.
 - [x] Pass an actual backend process stop/start acceptance and simulated checkpoint faults.
 - [x] Preserve TASK06 local Codex and human-safety contracts; no generic verifier or deployment work.
-- [ ] Product Lead reviews the open TASK07 PR and decides whether to merge.
+- [x] Product Lead merged TASK07 PR #9 at `fa3108db4074499ddefffca53e34f51bd7f95395`.
+
+## TASK 08 — Typed Verifier Compiler + Deterministic Checker Engine MVP
+
+- [x] Verify merged TASK07 baseline `fa3108d`, clean main, Gold173 and frozen hashes.
+- [x] Create Issue #10 before branch `issue/10-typed-verifier-compiler` using `github-task-flow`.
+- [x] Add a submission-independent `VerificationPlanner` boundary using the existing authenticated Codex CLI.
+- [x] Freeze `task08-planner-v1` and its structured-output schema before the first actual planner output.
+- [x] Add a closed typed plan DSL, parameter provenance and deterministic source-grounding gate.
+- [x] Implement FILE_PRESENCE, FILE_COUNT, FILE_NAME, FILE_TYPE, FILE_SIZE, PDF_PAGE_COUNT and VIDEO_METADATA.
+- [x] Keep `generic_review` review-only and add evidence-required `generic_verifier` results plus a separate generic readiness policy.
+- [x] Persist PlanSets through TASK07 storage, recover interrupted planner state, reuse plans across submissions and invalidate them on profile/source changes.
+- [x] Run ACTUAL public C01 exact-excerpt E2E with actual Stage1/Stage2/planner, 61-second BLOCKED result and 45-second READY result using one PlanSet.
+- [x] Pass 134 backend tests, 16 standard browser tests, one existing TASK06 actual-AI regression and one TASK08 actual product E2E; typecheck/build/diff pass.
+- [x] Preserve Gold173, TASK04/TASK05 scores and frozen Validator bytes; no benchmark, prompt tuning, deployment, Vision/OCR or new format work.
+- [ ] Product Lead reviews the TASK08 PR, which remains OPEN / NOT MERGED.

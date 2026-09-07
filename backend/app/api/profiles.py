@@ -8,8 +8,10 @@ from app.models.schemas import CheckSession
 from app.services import jobs, profiles, sessions
 from app.services.announcement_input import source_from_bytes
 from app.services.ai_providers import (RequirementGenerator, SemanticRequirementReviewer,
-                                       get_generator, get_reviewer)
+                                       ProviderExecutionError, get_generator, get_reviewer)
 from app.services.generic_validation import canonical_requirements
+from app.services.verifier_compiler import VerificationPlanner, compile_or_reuse
+from app.services.verifier_planner import get_verification_planner
 
 router = APIRouter(prefix="/api/sessions")
 EXTRACTION_TASKS: dict[str, asyncio.Task[None]] = {}
@@ -20,6 +22,9 @@ def invalidate(session: CheckSession) -> None:
     session.validation_profile, session.engine_sha256, session.status = None, None, None
     session.source_mode, session.run_state = "unavailable", "NOT_STARTED"
     session.validation_complete, session.run_error = False, None
+    session.verification_plan = None
+    session.verification_plan_state = "NOT_STARTED"
+    session.verification_plan_error = None
     session.revision = 0
 
 
@@ -151,4 +156,37 @@ async def confirm(session_id: str, body: ConfirmRequest) -> CheckSession:
         session.generic_profile = updated
         session.requirements = requirements
         session.validation_profile, session.source_mode = "generic", "generic_review"
+        return sessions.save(session)
+
+
+@router.post("/{session_id}/verification-plan/compile", response_model=CheckSession)
+async def compile_verification_plan(
+    session_id: str,
+    body: VersionRequest,
+    planner: Annotated[VerificationPlanner, Depends(get_verification_planner)],
+) -> CheckSession:
+    session = custom_session(session_id)
+    async with sessions.LOCKS[session_id]:
+        profile = checked_profile(session, body)
+        if profile.status != "CONFIRMED":
+            raise HTTPException(422, "Human-confirmed profile required before verifier compilation.")
+        if session.verification_plan and session.verification_plan.is_valid_for(profile):
+            return session
+        session.verification_plan_state = "RUNNING"
+        session.verification_plan_error = None
+        sessions.save(session)
+        try:
+            plan_set = await run_in_threadpool(compile_or_reuse, profile, planner, session.verification_plan)
+        except (ProviderExecutionError, ValueError) as error:
+            session.verification_plan = None
+            session.verification_plan_state = "REVIEW_REQUIRED"
+            session.verification_plan_error = "PLANNER_UNAVAILABLE" if isinstance(error, ProviderExecutionError) else "PLANNER_SCHEMA_REJECTED"
+            session.source_mode = "generic_review"
+            session.status = None
+            return sessions.save(session)
+        session.verification_plan = plan_set
+        session.verification_plan_state = "READY"
+        session.verification_plan_error = None
+        session.source_mode = "generic_verifier"
+        session.status = None
         return sessions.save(session)

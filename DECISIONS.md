@@ -1,5 +1,12 @@
 # Engineering decisions
 
+- 2026-09-07 TASK08: FINAL CHECK GO and Typed Verifier Compiler GO. AI may propose only a closed typed plan; it has no PASS/BLOCKER/READY/BLOCKED authority. Code assigns VERIFIED only after deterministic source grounding.
+- 2026-09-07 TASK08: Planner input contains the human-confirmed profile, source and evidence only. Submission names, bytes, metadata, prior results, Gold and benchmark output are excluded. Use the existing ChatGPT-authenticated Codex CLI through `VerificationPlanner`; production provider remains unselected.
+- 2026-09-07 TASK08: The v1 closed checker families are FILE_PRESENCE, FILE_COUNT, FILE_NAME, FILE_TYPE, FILE_SIZE, PDF_PAGE_COUNT and VIDEO_METADATA. Support remains PDF/MP4. Conditional, qualified, ambiguous, ungrounded, unsupported and failed checks require review.
+- 2026-09-07 TASK08: Preserve `generic_review` as REVIEW/EXTERNAL only. `generic_verifier` PASS/BLOCKER requires a valid durable PlanSet, definite checker result, unambiguous target, actual submission evidence and source evidence. Severity other than BLOCKER cannot become an automatic BLOCKER.
+- 2026-09-07 TASK08: Bind durable PlanSets to profile identity/version, announcement byte/text hashes and confirmed requirement contents. Reuse a valid PlanSet when only submission bytes change; invalidate it on any bound profile/source change.
+- 2026-09-07 TASK08: The actual acceptance uses a public C01 exact excerpt plus real generated/test MP4 bytes. It is product E2E evidence, not full-source coverage or an accuracy benchmark. No deployment, Vision/OCR, semantic/URL checker, new formats or next-task implementation.
+
 - 2026-09-05 TASK07: FINAL CHECK GO. Use Python `sqlite3` plus application-owned local files behind minimal SessionStore/JobStore/ArtifactStore boundaries; default `FINAL_CHECK_DATA_DIR` is `.final-check/runtime/`.
 - 2026-09-05 TASK07: Represent two-stage extraction as one idempotent durable job per session/profile/version/operation. Save Stage1, gate, each Stage2 batch and final checkpoints; restart changes abandoned PENDING/RUNNING to RETRYABLE.
 - 2026-09-05 TASK07: Retry only through explicit user action, at most three attempts. Persist safe error categories and provider provenance, never raw stderr, tokens, Codex auth, cookies or browser login data.
