@@ -31,7 +31,9 @@ DISABLED = [
 
 
 class ProviderExecutionError(RuntimeError):
-    pass
+    def __init__(self, message: str, category: str | None = None):
+        super().__init__(message)
+        self.category = category
 
 
 def _failure_category(stderr: str) -> str:
@@ -212,23 +214,37 @@ class LocalFallbackSemanticReviewer:
 
 
 def get_generator() -> RequirementGenerator:
-    if os.environ.get("FINAL_CHECK_AI_PROVIDER", "codex").lower() == "local-fallback":
+    selected = os.environ.get("FINAL_CHECK_AI_PROVIDER", "codex").lower()
+    if selected == "local-fallback":
         return LocalFallbackRequirementGenerator()
-    return CodexCliRequirementGenerator()
+    if selected == "codex":
+        return CodexCliRequirementGenerator()
+    raise ProviderExecutionError("Unknown AI provider", category="CONFIGURATION_REJECTED")
 
 
 def get_reviewer() -> SemanticRequirementReviewer:
-    if os.environ.get("FINAL_CHECK_AI_PROVIDER", "codex").lower() == "local-fallback":
+    selected = os.environ.get("FINAL_CHECK_AI_PROVIDER", "codex").lower()
+    if selected == "local-fallback":
         return LocalFallbackSemanticReviewer()
-    return CodexCliSemanticReviewer()
+    if selected == "codex":
+        return CodexCliSemanticReviewer()
+    raise ProviderExecutionError("Unknown AI provider", category="CONFIGURATION_REJECTED")
 
 
 def provider_status() -> dict:
+    selected = os.environ.get("FINAL_CHECK_AI_PROVIDER", "codex").lower()
+    if selected == "local-fallback":
+        return {"mode": "safe-fallback", "provider": "local-fallback", "configured": True,
+                "model": None, "reasoning": None}
+    model = os.environ.get("FINAL_CHECK_AI_MODEL", MODEL)
+    reasoning = os.environ.get("FINAL_CHECK_AI_REASONING", EFFORT)
     try:
         cli = codex_binary()
         version = subprocess.check_output([str(cli), "--version"], text=True, timeout=10).strip()
+        codex_home = Path(os.environ.get("CODEX_HOME", Path.home() / ".codex"))
+        configured = (codex_home / "auth.json").is_file() and model == MODEL and reasoning == EFFORT
         return {"mode": "actual-local-ai", "provider": "Codex CLI", "version": version,
-                "model": os.environ.get("FINAL_CHECK_AI_MODEL", MODEL)}
+                "configured": configured, "model": model, "reasoning": reasoning}
     except Exception:
         return {"mode": "unavailable", "provider": "Codex CLI", "version": None,
-                "model": os.environ.get("FINAL_CHECK_AI_MODEL", MODEL)}
+                "configured": False, "model": model, "reasoning": reasoning}

@@ -1,0 +1,104 @@
+{
+  "classification": "ACTUAL",
+  "public_url": "https://uncoy-joelle-macrodont.ngrok-free.dev",
+  "session_id": "72643acd-1d4c-42ff-91a8-6fb3da54da24",
+  "source": "C01 public announcement exact excerpt from benchmarks/task04/sources/C01.txt",
+  "provider": {
+    "provider": "Codex CLI",
+    "configured": true,
+    "model": "gpt-5.6-sol",
+    "reasoning": "high"
+  },
+  "ffprobe": {
+    "status": "available",
+    "version": "ffprobe version 8.1.2-full_build-www.gyan.dev Copyright (c) 2007-2026 the FFmpeg developers"
+  },
+  "plan_set_id": "a0d8c469-e4cf-4255-b90f-d716217c564e",
+  "planner": {
+    "provider": "OpenAI via ChatGPT-authenticated Codex CLI",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "task08-planner-v1",
+    "prompt_sha256": "096fd93cd2c3770cd49dcdbe6131e0abda4ea8b3e074728dc7b45e219f36a4a6",
+    "execution_kind": "ACTUAL"
+  },
+  "extraction": {
+    "job": {
+      "job_id": "1c4aa186-c2bb-4ad2-8c72-8afb4dfb7df9",
+      "status": "SUCCEEDED",
+      "stage": "FINALIZED",
+      "attempt": 1,
+      "completed_stage2_batches": [
+        0
+      ],
+      "error_category": null,
+      "updated_at": "2026-09-07T11:57:44.550977Z"
+    },
+    "stage1": {
+      "provider": "OpenAI via ChatGPT-authenticated Codex CLI",
+      "model": "gpt-5.6-sol",
+      "prompt_version": "task06-stage1-v1",
+      "prompt_sha256": "52b226089eddf6fb109ab07f676110c7dea48c602397a7d6c283384e3be4d7f4",
+      "execution_kind": "ACTUAL"
+    },
+    "stage2": {
+      "provider": "OpenAI via ChatGPT-authenticated Codex CLI",
+      "model": "gpt-5.6-sol",
+      "prompt_version": "task06-stage2-v1",
+      "prompt_sha256": "be838b1ef8d57f921147a3dfb993fa3237fb56dd766b825c883b644aa131163f",
+      "execution_kind": "ACTUAL"
+    }
+  },
+  "broken": {
+    "status": "BLOCKED",
+    "result": {
+      "id": "A001:3b224b0f-9f80-4a32-ba64-5b131f046d39",
+      "requirement_id": "A001",
+      "status": "BLOCKER",
+      "title": "영상 전체 길이는 60초 이내여야 합니다.",
+      "explanation": "코드 검사 결과: duration_seconds=61.0; expected LTE 60 SECONDS",
+      "action": "위반한 제출 조건을 수정하세요.",
+      "announcement_evidence": {
+        "source": "직접 입력한 공고",
+        "locator": "직접 입력한 공고 · chars 2:17",
+        "excerpt": "전체 길이 60초 이내 영상"
+      },
+      "submission_evidence": {
+        "source": "테스트어린이집_숏폼영상.MP4",
+        "locator": "deterministic checker",
+        "excerpt": "duration_seconds=61.0; expected LTE 60 SECONDS"
+      },
+      "source_mode": "generic_verifier",
+      "verification_plan_id": "3b224b0f-9f80-4a32-ba64-5b131f046d39",
+      "checker_type": "VIDEO_METADATA",
+      "measured_fact": "duration_seconds=61.0; expected LTE 60 SECONDS",
+      "expected_constraint": "{\"field\": \"DURATION_SECONDS\", \"operator\": \"LTE\", \"unit\": \"SECONDS\", \"value\": 60}"
+    }
+  },
+  "fixed": {
+    "status": "READY",
+    "result": {
+      "id": "A001:3b224b0f-9f80-4a32-ba64-5b131f046d39",
+      "requirement_id": "A001",
+      "status": "PASS",
+      "title": "영상 전체 길이는 60초 이내여야 합니다.",
+      "explanation": "코드 검사 결과: duration_seconds=45.0; expected LTE 60 SECONDS",
+      "action": "측정 근거와 공고 조건을 확인하세요.",
+      "announcement_evidence": {
+        "source": "직접 입력한 공고",
+        "locator": "직접 입력한 공고 · chars 2:17",
+        "excerpt": "전체 길이 60초 이내 영상"
+      },
+      "submission_evidence": {
+        "source": "테스트어린이집_숏폼영상.MP4",
+        "locator": "deterministic checker",
+        "excerpt": "duration_seconds=45.0; expected LTE 60 SECONDS"
+      },
+      "source_mode": "generic_verifier",
+      "verification_plan_id": "3b224b0f-9f80-4a32-ba64-5b131f046d39",
+      "checker_type": "VIDEO_METADATA",
+      "measured_fact": "duration_seconds=45.0; expected LTE 60 SECONDS",
+      "expected_constraint": "{\"field\": \"DURATION_SECONDS\", \"operator\": \"LTE\", \"unit\": \"SECONDS\", \"value\": 60}"
+    }
+  },
+  "same_plan_set": true
+}

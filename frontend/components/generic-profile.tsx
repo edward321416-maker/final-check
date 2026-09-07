@@ -20,7 +20,8 @@ export function TextAnnouncementInput() {
     router.push("/announcement");
   }
   return <div className={styles.form}><label>공고문 텍스트<textarea value={text} onChange={e => setText(e.target.value)} rows={6} maxLength={100000} disabled={busy} placeholder="제출방법과 파일 조건이 포함된 공고 원문을 붙여 넣으세요." /></label>
-    <p>ACTUAL LOCAL AI PROVIDER · AI가 후보를 생성하고 별도 단계에서 검토합니다. 결과는 사람이 승인하기 전까지 공식 규칙이 아닙니다.</p>
+    <p>AI가 후보를 생성하고 별도 단계에서 검토합니다. 결과는 사람이 승인하기 전까지 공식 규칙이 아닙니다.</p>
+    <p className="info-note">입력한 공고 내용은 이 PC의 ChatGPT 인증 Codex CLI를 통해 AI 요구사항 분석에 사용됩니다.</p>
     <div><button className="button secondary" disabled={busy || !text.trim()} onClick={() => void run(start)}>텍스트 공고로 시작 →</button></div><ErrorNotice error={error} /></div>;
 }
 

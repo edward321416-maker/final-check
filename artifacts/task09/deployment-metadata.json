@@ -1,0 +1,30 @@
+{
+  "classification": "ACTUAL",
+  "deployed_at": "2026-09-07",
+  "source_baseline_main_sha": "ad08ccb3a2c8dbf07dbfed6eae2c2e6a0d64e111",
+  "deployment_kind": "LOCAL_PRODUCTION_BUILD_VIA_NGROK_FREE",
+  "public_url": "https://uncoy-joelle-macrodont.ngrok-free.dev",
+  "public_domain_kind": "assigned stable development domain",
+  "frontend": "Next.js production server on 127.0.0.1:3100",
+  "backend": "FastAPI/Uvicorn on 127.0.0.1:8100",
+  "backend_workers": 1,
+  "persistence": "local SQLite and application-owned filesystem under .final-check/runtime",
+  "ai_provider": "existing ChatGPT-authenticated Codex CLI",
+  "openai_responses_api": "DEFERRED",
+  "railway": "CANCELED_NOT_USED",
+  "public_guard": "ENABLED",
+  "versions": {
+    "ngrok": "3.39.9-msix-stable",
+    "codex_cli": "0.153.4",
+    "ffprobe": "8.1.2-full_build-www.gyan.dev",
+    "node": "24.14.0",
+    "npm": "11.9.0",
+    "python": "3.14.0"
+  },
+  "limitations": [
+    "Judge availability depends on the host PC and network remaining online.",
+    "No cloud failover.",
+    "ngrok Free 1 GB/month outbound limit.",
+    "No production SLA."
+  ]
+}

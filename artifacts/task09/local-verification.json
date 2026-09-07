@@ -1,0 +1,45 @@
+{
+  "classification": "SELF_VERIFICATION",
+  "baseline_main_sha": "ad08ccb3a2c8dbf07dbfed6eae2c2e6a0d64e111",
+  "backend_pytest": {
+    "status": "PASS",
+    "passed": 155
+  },
+  "task09_focused": {
+    "status": "PASS",
+    "passed": 11
+  },
+  "task08_focused": {
+    "status": "PASS",
+    "passed": 67
+  },
+  "browser_standard": {
+    "status": "PASS",
+    "passed": 16,
+    "skipped": 6
+  },
+  "frontend_typecheck": "PASS",
+  "frontend_production_build": "PASS",
+  "secret_scan": "PASS",
+  "git_diff_check": "PASS",
+  "public_actual_e2e": "PASS",
+  "public_restart_recovery": "PASS",
+  "public_url": "https://uncoy-joelle-macrodont.ngrok-free.dev",
+  "runtime_path": "LOCAL_PRODUCTION_BUILD_VIA_NGROK_FREE",
+  "ai_provider": "CHATGPT_AUTHENTICATED_CODEX_CLI",
+  "openai_api_provider": "DEFERRED",
+  "openai_api_billing": "NOT_USED",
+  "railway": "CANCELED_NOT_USED",
+  "gold_count": 173,
+  "gold_manifest_sha256": "035ebc06d3d62db6ab9c47c53d30cbc206be02667d845e9db59da6b9c5f7fe89",
+  "frozen_validator_sha256": "4b506c3b692f2cef39e2be7cb44b4ce74bcc4ce829064ac655e16f545042bb11",
+  "stage1_prompt_sha256": "52b226089eddf6fb109ab07f676110c7dea48c602397a7d6c283384e3be4d7f4",
+  "stage2_prompt_sha256": "be838b1ef8d57f921147a3dfb993fa3237fb56dd766b825c883b644aa131163f",
+  "planner_prompt_sha256": "096fd93cd2c3770cd49dcdbe6131e0abda4ea8b3e074728dc7b45e219f36a4a6",
+  "limitations": [
+    "Judge availability depends on the host PC and network.",
+    "No cloud failover.",
+    "ngrok Free 1 GB/month outbound limit.",
+    "No production SLA."
+  ]
+}

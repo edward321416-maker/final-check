@@ -102,4 +102,9 @@ class CodexCliVerificationPlanner:
 
 
 def get_verification_planner() -> CodexCliVerificationPlanner:
-    return CodexCliVerificationPlanner()
+    selected = os.environ.get("FINAL_CHECK_AI_PROVIDER", "codex").lower()
+    if selected == "codex":
+        return CodexCliVerificationPlanner()
+    if selected == "local-fallback":
+        return CodexCliVerificationPlanner()
+    raise ProviderExecutionError("Unknown AI provider", category="CONFIGURATION_REJECTED")

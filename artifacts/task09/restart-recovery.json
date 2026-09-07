@@ -1,0 +1,24 @@
+{
+  "classification": "ACTUAL",
+  "public_url": "https://uncoy-joelle-macrodont.ngrok-free.dev",
+  "restarted_at": "2026-09-07T11:59:43.6251333Z",
+  "session_id": "72643acd-1d4c-42ff-91a8-6fb3da54da24",
+  "session_status": "READY",
+  "profile_id": "0d9b4d82-fef0-41c5-8f08-8e9c27661f78",
+  "profile_status": "CONFIRMED",
+  "plan_set_id": "a0d8c469-e4cf-4255-b90f-d716217c564e",
+  "expected_plan_set_id": "a0d8c469-e4cf-4255-b90f-d716217c564e",
+  "same_plan_set": true,
+  "final_result": "PASS",
+  "storage": "available",
+  "ffprobe": {
+    "status": "available",
+    "version": "ffprobe version 8.1.2-full_build-www.gyan.dev Copyright (c) 2007-2026 the FFmpeg developers"
+  },
+  "provider": {
+    "provider": "Codex CLI",
+    "configured": true,
+    "model": "gpt-5.6-sol",
+    "reasoning": "high"
+  }
+}

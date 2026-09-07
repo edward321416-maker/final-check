@@ -1,0 +1,17 @@
+{
+  "classification": "ACTUAL",
+  "provider": "ChatGPT-authenticated Codex CLI",
+  "codex_cli_version": "0.153.4",
+  "model": "gpt-5.6-sol",
+  "reasoning": "high",
+  "extraction_attempt": 1,
+  "successful_invocations": [
+    "Stage1",
+    "Stage2",
+    "Planner"
+  ],
+  "api_token_usage": "UNAVAILABLE_FROM_CODEX_CLI",
+  "openai_api_key_used": false,
+  "openai_api_billing": "NOT_APPLICABLE",
+  "note": "The existing ChatGPT account usage policy may apply to Codex CLI execution."
+}
