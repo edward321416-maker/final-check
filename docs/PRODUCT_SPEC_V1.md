@@ -112,6 +112,13 @@ ambiguous, unsupported or failed checks become REVIEW_ONLY/REVIEW. Automatic
 BLOCKER additionally requires severity BLOCKER. READY requires a definite PASS
 for every MUST/MUST_NOT rule; SHOULD/MAY/INFO do not block readiness.
 
+Any definite result that depends on a declared PDF/MP4 type requires actual type
+trust: PDF signature plus parser, or a successful ffprobe container result.
+ffprobe unavailable, timeout, malformed output, unreadable media or execution
+failure is REVIEW and can never become PASS/BLOCKER. An extension/content
+mismatch is REVIEW for presence/count/size and extension-targeted name checks;
+FILE_TYPE may emit VIOLATION only after a successful definite mismatch.
+
 PlanSets persist with the session and bind to profile identity/version,
 announcement byte/text hashes and confirmed requirement contents. Submission
 replacement reuses a valid PlanSet; any bound source/profile change invalidates

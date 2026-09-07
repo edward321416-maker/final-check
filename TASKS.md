@@ -104,6 +104,11 @@
 - [x] Keep `generic_review` review-only and add evidence-required `generic_verifier` results plus a separate generic readiness policy.
 - [x] Persist PlanSets through TASK07 storage, recover interrupted planner state, reuse plans across submissions and invalidate them on profile/source changes.
 - [x] Run ACTUAL public C01 exact-excerpt E2E with actual Stage1/Stage2/planner, 61-second BLOCKED result and 45-second READY result using one PlanSet.
-- [x] Pass 134 backend tests, 16 standard browser tests, one existing TASK06 actual-AI regression and one TASK08 actual product E2E; typecheck/build/diff pass.
+- [x] Initial TASK08 head: pass 134 backend tests, 16 standard browser tests, one existing TASK06 actual-AI regression and one TASK08 actual product E2E; typecheck/build/diff pass.
 - [x] Preserve Gold173, TASK04/TASK05 scores and frozen Validator bytes; no benchmark, prompt tuning, deployment, Vision/OCR or new format work.
+- [x] Reproduce the two Product Lead safety findings with failing tests on the original PR head.
+- [x] Add a common PDF signature/parser and MP4 ffprobe type-trust boundary for extension-dependent file checks.
+- [x] Keep FILE_TYPE MP4 probe failures at REVIEW; allow VIOLATION only after a successful definite non-MP4 container result.
+- [x] Prove fake `.mp4` presence/count/size/name cannot PASS and a sole mandatory fake-MP4 profile cannot become READY.
+- [x] Fresh corrective verification: 144 backend, 16 standard browser and one actual 61s/45s TASK08 E2E pass.
 - [ ] Product Lead reviews the TASK08 PR, which remains OPEN / NOT MERGED.

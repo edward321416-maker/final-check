@@ -1,4 +1,5 @@
 import hashlib
+import subprocess
 from pathlib import Path
 
 import pytest
@@ -17,7 +18,7 @@ from app.models.verifier_plans import (
     PlannerProvenance,
     TargetSelector,
 )
-from app.services import generic_policy, generic_validation, profiles
+from app.services import generic_inspection, generic_policy, generic_validation, profiles
 from app.services import sessions
 from app.services.ai_providers import ProviderExecutionError
 from app.services.generic_inspection import CheckerOutcome, inspect_submission, run_checker
@@ -274,7 +275,7 @@ def test_t11_file_presence_pass_and_violation_have_evidence(tmp_path):
     plan.parameter_provenance.normalized_value = "PRESENT"
     gated = gate_candidate(profile, plan)
     assert run_checker(gated, tmp_path).status == "VIOLATION"
-    (tmp_path / "proposal.pdf").write_bytes(b"%PDF-1.4\n%%EOF")
+    write_pdf(tmp_path / "proposal.pdf")
     outcome = run_checker(gated, tmp_path)
     assert outcome.status == "PASS" and outcome.submission_evidence
 
@@ -288,9 +289,40 @@ def test_t11b_extension_file_presence_pass_and_violation_have_evidence(tmp_path)
     gated = gate_candidate(profile, plan)
     assert gated.status == "VERIFIED"
     assert run_checker(gated, tmp_path).status == "VIOLATION"
-    (tmp_path / "entry.mp4").write_bytes(b"actual inventory evidence")
+    (tmp_path / "entry.mp4").write_bytes(b"not a video")
+    outcome = run_checker(gated, tmp_path)
+    assert outcome.status == "REVIEW" and outcome.submission_evidence
+    fixture = Path(__file__).resolve().parents[2] / "fixtures/v15/demo-fixed/테스트어린이집_숏폼영상.MP4"
+    (tmp_path / "entry.mp4").write_bytes(fixture.read_bytes())
     outcome = run_checker(gated, tmp_path)
     assert outcome.status == "PASS" and outcome.submission_evidence
+
+
+def test_fake_mp4_presence_cannot_make_sole_mandatory_rule_ready(tmp_path):
+    profile = confirmed_profile("MP4 파일을 제출해야 합니다.", rule="MP4 파일 제출")
+    proposed = candidate(profile, checker_type="FILE_PRESENCE", field="PRESENCE", operator="EQ", value="PRESENT",
+                         unit="NONE", selector_kind="ALL_BY_EXTENSION", selector_value=".mp4")
+    proposed.parameter_provenance.source_substring = "MP4 파일을 제출"
+    proposed.parameter_provenance.normalized_value = "PRESENT"
+    plan_set = compile_profile(profile, Planner([proposed]))
+    (tmp_path / "entry.mp4").write_bytes(b"not a video")
+    session = CheckSession(
+        id="fake-mp4-presence",
+        created_at=profiles.now(),
+        updated_at=profiles.now(),
+        mode="custom",
+        source_mode="generic_verifier",
+        validation_profile="generic",
+        generic_profile=profile,
+        verification_plan=plan_set,
+        verification_plan_state="READY",
+        announcement_name=profile.announcement.name,
+        requirements=generic_validation.canonical_requirements(profile),
+        files=inspect_submission(tmp_path),
+    )
+    run = generic_validation.validate(session, tmp_path)
+    assert run.results[0].status == "REVIEW"
+    assert generic_policy.summarize(profile, run.results) == "REVIEW_REQUIRED"
 
 
 def test_t12_file_count_pass_and_violation(tmp_path):
@@ -301,7 +333,7 @@ def test_t12_file_count_pass_and_violation(tmp_path):
     plan.parameter_provenance.normalized_value = 1
     gated = gate_candidate(profile, plan)
     assert run_checker(gated, tmp_path).status == "VIOLATION"
-    (tmp_path / "one.pdf").write_bytes(b"%PDF-1.4\n%%EOF")
+    write_pdf(tmp_path / "one.pdf")
     assert run_checker(gated, tmp_path).status == "PASS"
 
 
@@ -313,9 +345,9 @@ def test_t12b_total_file_count_all_files_is_grounded(tmp_path):
     plan.parameter_provenance.normalized_value = 2
     gated = gate_candidate(profile, plan)
     assert gated.status == "VERIFIED"
-    (tmp_path / "one.pdf").write_bytes(b"%PDF-1.4\n%%EOF")
+    (tmp_path / "one.txt").write_text("one", encoding="utf-8")
     assert run_checker(gated, tmp_path).status == "VIOLATION"
-    (tmp_path / "two.mp4").write_bytes(b"not inspected for a count rule")
+    (tmp_path / "two.bin").write_bytes(b"two")
     assert run_checker(gated, tmp_path).status == "PASS"
 
 
@@ -366,6 +398,73 @@ def test_t14_extension_spoofing_cannot_pass_file_type(tmp_path):
     assert run_checker(gated, tmp_path).status != "PASS"
 
 
+def test_t14a_file_type_mp4_ffprobe_unavailable_is_review(tmp_path, monkeypatch):
+    profile = confirmed_profile("제출 파일 형식은 MP4여야 합니다.", rule="MP4 형식")
+    plan = candidate(profile, checker_type="FILE_TYPE", field="TYPE", operator="EQ", value="MP4",
+                     unit="NONE", selector_kind="UNIQUE_EXTENSION", selector_value=".mp4")
+    plan.parameter_provenance.source_substring = "MP4"
+    plan.parameter_provenance.normalized_value = "MP4"
+    gated = gate_candidate(profile, plan)
+    (tmp_path / "entry.mp4").write_bytes(b"untrusted bytes")
+    monkeypatch.setattr(generic_inspection.shutil, "which", lambda _name: None)
+    assert run_checker(gated, tmp_path).status == "REVIEW"
+
+
+@pytest.mark.parametrize("error", [
+    RuntimeError("FFPROBE_UNAVAILABLE"),
+    subprocess.TimeoutExpired("ffprobe", 30),
+    RuntimeError("FFPROBE_MALFORMED"),
+    OSError("ffprobe execution failed"),
+])
+def test_t14b_file_type_mp4_probe_failure_is_review(tmp_path, monkeypatch, error):
+    profile = confirmed_profile("제출 파일 형식은 MP4여야 합니다.", rule="MP4 형식")
+    plan = candidate(profile, checker_type="FILE_TYPE", field="TYPE", operator="EQ", value="MP4",
+                     unit="NONE", selector_kind="UNIQUE_EXTENSION", selector_value=".mp4")
+    plan.parameter_provenance.source_substring = "MP4"
+    plan.parameter_provenance.normalized_value = "MP4"
+    gated = gate_candidate(profile, plan)
+    (tmp_path / "entry.mp4").write_bytes(b"untrusted bytes")
+    monkeypatch.setattr(generic_inspection, "_probe", lambda _path: (_ for _ in ()).throw(error))
+    outcome = run_checker(gated, tmp_path)
+    assert outcome.status == "REVIEW"
+    result = result_for(profile.requirements[0], profile.announcement, gated, outcome)
+    assert result.status == "REVIEW"
+    assert generic_policy.summarize(profile, [result]) == "REVIEW_REQUIRED"
+
+
+def test_t14c_file_type_mp4_confirmed_container_mismatch_is_violation(tmp_path, monkeypatch):
+    profile = confirmed_profile("제출 파일 형식은 MP4여야 합니다.", rule="MP4 형식")
+    plan = candidate(profile, checker_type="FILE_TYPE", field="TYPE", operator="EQ", value="MP4",
+                     unit="NONE", selector_kind="UNIQUE_EXTENSION", selector_value=".mp4")
+    plan.parameter_provenance.source_substring = "MP4"
+    plan.parameter_provenance.normalized_value = "MP4"
+    gated = gate_candidate(profile, plan)
+    (tmp_path / "entry.mp4").write_bytes(b"container supplied by controlled probe")
+    monkeypatch.setattr(generic_inspection, "_probe", lambda _path: {
+        "stream": {"codec_type": "video"}, "format": {"format_name": "matroska,webm"},
+    })
+    assert run_checker(gated, tmp_path).status == "VIOLATION"
+
+
+@pytest.mark.parametrize(("checker_type", "field", "operator", "value", "unit", "quote", "substring", "extension"), [
+    ("FILE_COUNT", "COUNT", "EQ", 1, "COUNT", "PDF 파일은 1개여야 합니다.", "1개여야", ".pdf"),
+    ("FILE_SIZE", "SIZE", "LTE", 1, "MB", "MP4 파일은 1MB 이하여야 합니다.", "1MB 이하", ".mp4"),
+    ("FILE_NAME", "NAME", "EXACT_LITERAL", "entry.mp4", "NONE", "MP4 파일명은 entry.mp4여야 합니다.", "entry.mp4", ".mp4"),
+])
+def test_extension_target_checker_type_inspection_failure_cannot_pass(
+    tmp_path, checker_type, field, operator, value, unit, quote, substring, extension,
+):
+    profile = confirmed_profile(quote, rule="확장자 대상 규칙")
+    plan = candidate(profile, checker_type=checker_type, field=field, operator=operator, value=value,
+                     unit=unit, selector_kind="ALL_BY_EXTENSION", selector_value=extension)
+    plan.parameter_provenance.source_substring = substring
+    plan.parameter_provenance.normalized_value = value
+    gated = gate_candidate(profile, plan)
+    name = str(value) if checker_type == "FILE_NAME" else f"fake{extension}"
+    (tmp_path / name).write_bytes(b"not the declared media type")
+    assert run_checker(gated, tmp_path).status == "REVIEW"
+
+
 def test_t15_file_size_ambiguous_mb_boundary_is_review(tmp_path):
     profile = confirmed_profile("파일 크기는 1MB 이하여야 합니다.", rule="파일 크기 1MB 이하")
     plan = candidate(profile, checker_type="FILE_SIZE", field="SIZE", operator="LTE", value=1,
@@ -373,7 +472,8 @@ def test_t15_file_size_ambiguous_mb_boundary_is_review(tmp_path):
     plan.parameter_provenance.source_substring = "1MB 이하"
     plan.parameter_provenance.normalized_value = 1
     gated = gate_candidate(profile, plan)
-    with (tmp_path / "entry.pdf").open("wb") as stream:
+    write_pdf(tmp_path / "entry.pdf")
+    with (tmp_path / "entry.pdf").open("r+b") as stream:
         stream.truncate(1_020_000)
     assert run_checker(gated, tmp_path).status == "REVIEW"
 

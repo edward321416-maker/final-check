@@ -7,6 +7,7 @@ import shutil
 import subprocess
 from dataclasses import dataclass
 from pathlib import Path
+from typing import Literal
 
 from pypdf import PdfReader
 
@@ -19,6 +20,12 @@ class CheckerOutcome:
     status: str
     measured_fact: str
     submission_evidence: Evidence | None
+
+
+@dataclass(frozen=True)
+class TypeInspection:
+    status: Literal["MATCH", "MISMATCH", "REVIEW"]
+    fact: str
 
 
 def inspect_submission(package: Path) -> list[SubmissionFile]:
@@ -107,6 +114,56 @@ def _probe(path: Path) -> dict:
     return {"stream": videos[0], "format": payload["format"]}
 
 
+def _inspect_declared_type(path: Path, expected: str | None = None) -> TypeInspection:
+    declared = (expected or path.suffix.lstrip(".")).casefold()
+    if declared == "pdf":
+        try:
+            with path.open("rb") as stream:
+                signature = stream.read(5)
+        except OSError:
+            return TypeInspection("REVIEW", f"{path.name}: PDF bytes unavailable")
+        if signature != b"%PDF-":
+            return TypeInspection("MISMATCH", f"{path.name}: PDF signature mismatch")
+        try:
+            PdfReader(path)
+        except Exception:
+            return TypeInspection("REVIEW", f"{path.name}: PDF parser could not confirm type")
+        return TypeInspection("MATCH", f"{path.name}: PDF signature and parser confirmed")
+    if declared == "mp4":
+        try:
+            data = _probe(path)
+            media_format = data.get("format")
+            format_name = media_format.get("format_name") if isinstance(media_format, dict) else None
+            if not isinstance(format_name, str) or not format_name.strip():
+                return TypeInspection("REVIEW", f"{path.name}: ffprobe returned no trusted container")
+        except Exception:
+            return TypeInspection("REVIEW", f"{path.name}: ffprobe could not confirm type")
+        containers = {item.strip() for item in format_name.casefold().split(",")}
+        if "mp4" in containers:
+            return TypeInspection("MATCH", f"{path.name}: ffprobe container={format_name}")
+        return TypeInspection("MISMATCH", f"{path.name}: ffprobe container={format_name}")
+    return TypeInspection("REVIEW", f"{path.name}: unsupported declared type")
+
+
+def _type_boundary(files: list[Path]) -> CheckerOutcome | None:
+    inspections = [_inspect_declared_type(path) for path in files]
+    if all(item.status == "MATCH" for item in inspections):
+        return None
+    fact = "; ".join(item.fact for item in inspections)
+    return CheckerOutcome("REVIEW", fact, _evidence(files, fact, "declared-type trust boundary"))
+
+
+def _targets_trusted_media_extension(plan: GatedVerificationPlan) -> bool:
+    selector = plan.target_selector
+    if selector.kind in {"UNIQUE_EXTENSION", "ALL_BY_EXTENSION"}:
+        declared = str(selector.value or "").casefold()
+    elif selector.kind == "EXACT_NAME":
+        declared = Path(str(selector.value or "")).suffix.casefold()
+    else:
+        return False
+    return declared in {".pdf", ".mp4"}
+
+
 def run_checker(plan: GatedVerificationPlan, package: Path) -> CheckerOutcome:
     if plan.status != "VERIFIED":
         return CheckerOutcome("REVIEW", "Plan is not VERIFIED", None)
@@ -117,6 +174,9 @@ def run_checker(plan: GatedVerificationPlan, package: Path) -> CheckerOutcome:
     if plan.checker_type == "FILE_PRESENCE":
         if plan.target_selector.kind == "UNIQUE_EXTENSION" and len(files) > 1:
             return CheckerOutcome("REVIEW", "TARGET_AMBIGUOUS", _evidence(files, "target ambiguous", "actual file inventory"))
+        type_review = _type_boundary(files) if files and _targets_trusted_media_extension(plan) else None
+        if type_review:
+            return type_review
         present = bool(files)
         expected = plan.constraint.value == "PRESENT"
         target = plan.target_selector.value or "all files"
@@ -125,6 +185,15 @@ def run_checker(plan: GatedVerificationPlan, package: Path) -> CheckerOutcome:
         return CheckerOutcome(status, fact, _evidence(files, fact, "actual file inventory"))
     if target_error:
         return CheckerOutcome("REVIEW", target_error, _evidence(files, target_error, "actual file inventory"))
+
+    needs_type_boundary = (
+        plan.checker_type in {"FILE_COUNT", "FILE_SIZE", "FILE_NAME"}
+        and _targets_trusted_media_extension(plan)
+    )
+    if needs_type_boundary and files:
+        type_review = _type_boundary(files)
+        if type_review:
+            return type_review
 
     if plan.checker_type == "FILE_COUNT":
         return _numeric_result(files, "file_count", len(files), plan)
@@ -164,26 +233,12 @@ def run_checker(plan: GatedVerificationPlan, package: Path) -> CheckerOutcome:
 
     if plan.checker_type == "FILE_TYPE":
         expected = str(plan.constraint.value).upper()
-        valid: list[bool] = []
-        facts: list[str] = []
-        for path in files:
-            if expected == "PDF":
-                try:
-                    signature = path.read_bytes()[:5] == b"%PDF-"
-                    PdfReader(path)
-                    ok = signature
-                except Exception:
-                    ok = False
-            else:
-                try:
-                    data = _probe(path)
-                    ok = "mp4" in str(data["format"].get("format_name", "")).casefold()
-                except Exception:
-                    ok = False
-            valid.append(ok)
-            facts.append(f"{path.name}:{expected.lower()}_valid={str(ok).lower()}")
-        fact = "; ".join(facts)
-        return CheckerOutcome("PASS" if all(valid) else "VIOLATION", fact, _evidence(files, fact, "signature/parser inspection"))
+        inspections = [_inspect_declared_type(path, expected) for path in files]
+        fact = "; ".join(item.fact for item in inspections)
+        if any(item.status == "REVIEW" for item in inspections):
+            return CheckerOutcome("REVIEW", fact, _evidence(files, fact, "signature/parser/ffprobe type inspection"))
+        status = "PASS" if all(item.status == "MATCH" for item in inspections) else "VIOLATION"
+        return CheckerOutcome(status, fact, _evidence(files, fact, "signature/parser/ffprobe type inspection"))
 
     if plan.checker_type == "VIDEO_METADATA":
         try:

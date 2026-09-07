@@ -5,7 +5,7 @@
     "fixtures/v15/demo-broken/테스트어린이집_숏폼영상.MP4",
     "fixtures/v15/demo-fixed/테스트어린이집_숏폼영상.MP4"
   ],
-  "plan_set_id": "e4642e91-0539-4ae3-a5b9-251ba19c2637",
+  "plan_set_id": "879773aa-d52f-4bd3-87eb-f5fcfba95828",
   "planner": {
     "provider": "OpenAI via ChatGPT-authenticated Codex CLI",
     "model": "gpt-5.6-sol",
@@ -15,7 +15,7 @@
   },
   "extraction": {
     "job": {
-      "job_id": "bc6d0527-a476-4093-a3d7-228c3d467a22",
+      "job_id": "12f205b7-bce5-441b-8fd2-09f9bbf71696",
       "status": "SUCCEEDED",
       "stage": "FINALIZED",
       "attempt": 1,
@@ -23,7 +23,7 @@
         0
       ],
       "error_category": null,
-      "updated_at": "2026-09-07T02:20:21.964357Z"
+      "updated_at": "2026-09-07T02:44:22.486213Z"
     },
     "stage1": {
       "provider": "OpenAI via ChatGPT-authenticated Codex CLI",
@@ -43,7 +43,7 @@
   "broken": {
     "status": "BLOCKED",
     "result": {
-      "id": "A001:92d0917d-edf5-48e7-9534-16bd50eb93ad",
+      "id": "A001:bcccab2d-26ad-43dd-94b7-87d262c6c660",
       "requirement_id": "A001",
       "status": "BLOCKER",
       "title": "영상 전체 길이는 60초 이내여야 합니다.",
@@ -60,7 +60,7 @@
         "excerpt": "duration_seconds=61.0; expected LTE 60 SECONDS"
       },
       "source_mode": "generic_verifier",
-      "verification_plan_id": "92d0917d-edf5-48e7-9534-16bd50eb93ad",
+      "verification_plan_id": "bcccab2d-26ad-43dd-94b7-87d262c6c660",
       "checker_type": "VIDEO_METADATA",
       "measured_fact": "duration_seconds=61.0; expected LTE 60 SECONDS",
       "expected_constraint": "{\"field\": \"DURATION_SECONDS\", \"operator\": \"LTE\", \"unit\": \"SECONDS\", \"value\": 60}"
@@ -69,7 +69,7 @@
   "fixed": {
     "status": "READY",
     "result": {
-      "id": "A001:92d0917d-edf5-48e7-9534-16bd50eb93ad",
+      "id": "A001:bcccab2d-26ad-43dd-94b7-87d262c6c660",
       "requirement_id": "A001",
       "status": "PASS",
       "title": "영상 전체 길이는 60초 이내여야 합니다.",
@@ -86,7 +86,7 @@
         "excerpt": "duration_seconds=45.0; expected LTE 60 SECONDS"
       },
       "source_mode": "generic_verifier",
-      "verification_plan_id": "92d0917d-edf5-48e7-9534-16bd50eb93ad",
+      "verification_plan_id": "bcccab2d-26ad-43dd-94b7-87d262c6c660",
       "checker_type": "VIDEO_METADATA",
       "measured_fact": "duration_seconds=45.0; expected LTE 60 SECONDS",
       "expected_constraint": "{\"field\": \"DURATION_SECONDS\", \"operator\": \"LTE\", \"unit\": \"SECONDS\", \"value\": 60}"

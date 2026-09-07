@@ -1,5 +1,9 @@
 # Engineering decisions
 
+- 2026-09-07 TASK08 corrective review: Treat actual PDF/MP4 type confirmation as a shared trust boundary for file presence, count, size and extension-targeted name checks. Extension/content mismatch or inspection failure cannot yield PASS/READY.
+- 2026-09-07 TASK08 corrective review: FILE_TYPE MP4 maps ffprobe unavailable, timeout, malformed output, unreadable bytes and execution failure to REVIEW. Only a successful probe that definitively reports another container may yield VIOLATION and enter blocker policy.
+- 2026-09-07 TASK08 corrective review: Preserve the original Lore commit and add a separate corrective commit to Issue #10 / PR #11. Keep TASK08 implementation MODIFY and PR DO NOT MERGE YET until Product Lead re-review.
+
 - 2026-09-07 TASK08: FINAL CHECK GO and Typed Verifier Compiler GO. AI may propose only a closed typed plan; it has no PASS/BLOCKER/READY/BLOCKED authority. Code assigns VERIFIED only after deterministic source grounding.
 - 2026-09-07 TASK08: Planner input contains the human-confirmed profile, source and evidence only. Submission names, bytes, metadata, prior results, Gold and benchmark output are excluded. Use the existing ChatGPT-authenticated Codex CLI through `VerificationPlanner`; production provider remains unselected.
 - 2026-09-07 TASK08: The v1 closed checker families are FILE_PRESENCE, FILE_COUNT, FILE_NAME, FILE_TYPE, FILE_SIZE, PDF_PAGE_COUNT and VIDEO_METADATA. Support remains PDF/MP4. Conditional, qualified, ambiguous, ungrounded, unsupported and failed checks require review.

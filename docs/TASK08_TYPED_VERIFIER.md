@@ -93,6 +93,15 @@ metadata helper.
 - MP4 type and video metadata use a closed ffprobe command assembled only by
   application code. Unavailable, timed-out, malformed or unreadable ffprobe
   output returns REVIEW.
+- FILE_PRESENCE, FILE_COUNT and FILE_SIZE also pass through the same declared
+  PDF/MP4 type-trust boundary before they can return a definite result for an
+  existing file. FILE_NAME uses it when its target selector is extension-based.
+  A `.pdf` name requires a PDF signature plus parser confirmation; a `.mp4`
+  name requires a successful ffprobe container confirmation. Failure or an
+  extension/content mismatch returns REVIEW for these non-type checkers.
+- FILE_TYPE returns VIOLATION for MP4 only when ffprobe executes successfully
+  and reports a definite non-MP4 container. Missing ffprobe, timeout, execution
+  failure, malformed output or unreadable media returns REVIEW.
 - File size uses actual bytes. A decimal MB versus binary MiB boundary that
   changes the result returns REVIEW.
 - Every definite PASS or violation records the measured fact and actual file
@@ -141,11 +150,22 @@ The passing acceptance therefore claims the exact public excerpt flow, not
 full-announcement coverage. It is product acceptance, not an accuracy
 benchmark.
 
+## Corrective safety review
+
+Product Lead review found two merge-blocking paths on the initial TASK08 head:
+FILE_TYPE mapped every MP4 probe failure to VIOLATION, and extension-targeted
+presence/count/size checks could PASS arbitrary bytes. The corrective TDD run
+first reproduced these as seven failures. The common type-trust boundary and
+result-policy regressions now ensure probe failure cannot become BLOCKER and a
+fake `.mp4` sole mandatory presence rule cannot produce READY. The original
+commit remains in history; delivery uses a new corrective commit on Issue #10
+and PR #11.
+
 ## Verification and limits
 
-- Backend: 134 passed.
+- Backend: 144 passed, including 67 focused TASK08 tests.
 - Standard browser suite: 16 passed, 4 opt-in actual-AI cases skipped.
-- Separate actual TASK08 product E2E: 1 passed.
+- Separate actual TASK08 product E2E: 1 fresh pass on the corrective code.
 - Separate existing TASK06 actual-AI regression: 1 passed.
 - TypeScript typecheck and production build: PASS.
 - Gold count/hash and frozen Validator hash: unchanged.
