@@ -5,7 +5,7 @@ import re
 import shutil
 import sqlite3
 import threading
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Protocol
 from uuid import uuid4
@@ -69,6 +69,28 @@ class SQLiteRuntimeStore:
                 "FOREIGN KEY(session_id) REFERENCES sessions(id) ON DELETE CASCADE)"
             )
             connection.execute("CREATE INDEX IF NOT EXISTS jobs_status_idx ON jobs(status)")
+            connection.execute(
+                "CREATE TABLE IF NOT EXISTS ai_operations ("
+                "operation_id TEXT PRIMARY KEY, session_id TEXT NOT NULL, operation_kind TEXT NOT NULL, "
+                "created_at TEXT NOT NULL)"
+            )
+            connection.execute(
+                "CREATE INDEX IF NOT EXISTS ai_operations_created_idx "
+                "ON ai_operations(created_at)"
+            )
+            connection.execute(
+                "CREATE INDEX IF NOT EXISTS ai_operations_session_created_idx "
+                "ON ai_operations(session_id, created_at)"
+            )
+            connection.execute(
+                "CREATE TABLE IF NOT EXISTS ai_leases ("
+                "token TEXT PRIMARY KEY, operation_id TEXT NOT NULL UNIQUE, "
+                "expires_at TEXT NOT NULL, "
+                "FOREIGN KEY(operation_id) REFERENCES ai_operations(operation_id) ON DELETE CASCADE)"
+            )
+            connection.execute(
+                "CREATE INDEX IF NOT EXISTS ai_leases_expires_idx ON ai_leases(expires_at)"
+            )
 
     def save_session(self, session: CheckSession) -> CheckSession:
         payload = session.model_dump_json()
@@ -141,6 +163,67 @@ class SQLiteRuntimeStore:
     def count_jobs(self) -> int:
         with self._lock, self._connect() as connection:
             return int(connection.execute("SELECT COUNT(*) FROM jobs").fetchone()[0])
+
+    def reserve_ai_operation(
+        self,
+        *,
+        operation_id: str,
+        session_id: str,
+        operation_kind: str,
+        now: datetime,
+        global_per_hour: int,
+        session_per_hour: int,
+        max_concurrent: int,
+        lease_seconds: int,
+    ) -> tuple[str, str | None]:
+        """Atomically count an AI operation and acquire its execution lease.
+
+        Returns ``(status, token)`` where status is RESERVED, REUSED,
+        GLOBAL_LIMIT, SESSION_LIMIT, or CONCURRENCY_LIMIT. Reusing the same
+        durable operation id never consumes another quota slot.
+        """
+        stamp = now.astimezone(timezone.utc)
+        cutoff = (stamp - timedelta(hours=1)).isoformat()
+        expires_at = (stamp + timedelta(seconds=lease_seconds)).isoformat()
+        token = uuid4().hex
+        with self._lock, self._connect() as connection:
+            connection.execute("BEGIN IMMEDIATE")
+            connection.execute("DELETE FROM ai_leases WHERE expires_at <= ?", (stamp.isoformat(),))
+            existing = connection.execute(
+                "SELECT 1 FROM ai_operations WHERE operation_id = ?", (operation_id,)
+            ).fetchone()
+            if existing:
+                return "REUSED", None
+            global_count = int(connection.execute(
+                "SELECT COUNT(*) FROM ai_operations WHERE created_at >= ?", (cutoff,)
+            ).fetchone()[0])
+            if global_count >= global_per_hour:
+                return "GLOBAL_LIMIT", None
+            session_count = int(connection.execute(
+                "SELECT COUNT(*) FROM ai_operations WHERE session_id = ? AND created_at >= ?",
+                (session_id, cutoff),
+            ).fetchone()[0])
+            if session_count >= session_per_hour:
+                return "SESSION_LIMIT", None
+            concurrent = int(connection.execute("SELECT COUNT(*) FROM ai_leases").fetchone()[0])
+            if concurrent >= max_concurrent:
+                return "CONCURRENCY_LIMIT", None
+            connection.execute(
+                "INSERT INTO ai_operations(operation_id, session_id, operation_kind, created_at) "
+                "VALUES (?, ?, ?, ?)",
+                (operation_id, session_id, operation_kind, stamp.isoformat()),
+            )
+            connection.execute(
+                "INSERT INTO ai_leases(token, operation_id, expires_at) VALUES (?, ?, ?)",
+                (token, operation_id, expires_at),
+            )
+            return "RESERVED", token
+
+    def release_ai_operation(self, token: str | None) -> None:
+        if not token:
+            return
+        with self._lock, self._connect() as connection:
+            connection.execute("DELETE FROM ai_leases WHERE token = ?", (token,))
 
     def recover_stale_jobs(self) -> list[str]:
         recovered: list[str] = []

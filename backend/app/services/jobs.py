@@ -18,6 +18,8 @@ def now() -> datetime:
 def _category(error: Exception) -> str:
     message = str(error).casefold()
     if isinstance(error, ProviderExecutionError):
+        if error.category:
+            return error.category
         if "auth" in message or "login" in message:
             return "AUTH_UNAVAILABLE"
         if "timeout" in message or "timed out" in message:

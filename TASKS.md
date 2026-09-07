@@ -111,4 +111,19 @@
 - [x] Keep FILE_TYPE MP4 probe failures at REVIEW; allow VIOLATION only after a successful definite non-MP4 container result.
 - [x] Prove fake `.mp4` presence/count/size/name cannot PASS and a sole mandatory fake-MP4 profile cannot become READY.
 - [x] Fresh corrective verification: 144 backend, 16 standard browser and one actual 61s/45s TASK08 E2E pass.
-- [ ] Product Lead reviews the TASK08 PR, which remains OPEN / NOT MERGED.
+- [x] Product Lead approved TASK08 and PR #11 was merged at `ad08ccb3a2c8dbf07dbfed6eae2c2e6a0d64e111`.
+
+## TASK 09 — Zero-Cost Public Deployment MVP
+
+- [x] Verify merged TASK08 baseline, clean main, Gold173, frozen validator and all locked prompt hashes.
+- [x] Create Issue #12 and branch `issue/12-public-deployment-openai` using `github-task-flow`.
+- [x] Apply the Product Lead zero-cost pivot: cancel Railway/OpenAI billing and defer the Responses provider.
+- [x] Keep the authenticated Codex CLI with exact `gpt-5.6-sol` and reasoning `high`.
+- [x] Keep submission data out of Stage1/Stage2/Planner and preserve deterministic verdict authority.
+- [x] Add durable global/per-session quotas and concurrent-workflow leases with safe 429 behavior.
+- [x] Add production health, configurable upload limits, privacy copy, cache/security headers and robots exclusion.
+- [x] Add ngrok Free launch/recovery scripts and zero-cost operator/judging runbooks.
+- [x] Confirm the assigned stable development domain and retain local SQLite/filesystem persistence.
+- [x] Start the public ngrok HTTPS runtime and verify one local backend worker plus ffprobe.
+- [x] Run ACTUAL public Codex Stage1/Stage2/Planner, restart recovery and same-PlanSet 61s BLOCKED → 45s READY.
+- [x] Capture sanitized ACTUAL evidence and prepare the OPEN / NOT MERGED PR.

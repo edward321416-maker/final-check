@@ -1,0 +1,31 @@
+{
+  "status": "ok",
+  "runtime": "single-node",
+  "storage": "available",
+  "mode": "frozen_v15",
+  "validator": "available",
+  "ffprobe": {
+    "status": "available",
+    "version": "ffprobe version 8.1.2-full_build-www.gyan.dev Copyright (c) 2007-2026 the FFmpeg developers"
+  },
+  "ai": {
+    "provider": "Codex CLI",
+    "configured": true,
+    "model": "gpt-5.6-sol",
+    "reasoning": "high"
+  },
+  "public_guard": "enabled",
+  "engine_sha256": "4b506c3b692f2cef39e2be7cb44b4ce74bcc4ce829064ac655e16f545042bb11",
+  "vision_provider": "unavailable",
+  "version": "0.6.0",
+  "generic_extractor": "two-stage-ai-mvp",
+  "generic_ai_provider": {
+    "mode": "actual-local-ai",
+    "provider": "Codex CLI",
+    "version": "codex-cli 0.153.4",
+    "configured": true,
+    "model": "gpt-5.6-sol",
+    "reasoning": "high"
+  },
+  "generic_verification": "typed-verifier-compiler-local-mvp"
+}

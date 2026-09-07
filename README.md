@@ -79,6 +79,14 @@ After profile confirmation, choose "자동 검사 계획 생성". The isolated p
 Canonical schemas: backend/app/models/profiles.py, backend/app/models/verifier_plans.py, frontend/types/profile.ts and frontend/types/check.ts. Durable job/storage contracts: backend/app/models/jobs.py, backend/app/services/jobs.py and backend/app/services/storage.py. Provider boundaries: backend/app/services/ai_providers.py and backend/app/services/verifier_planner.py. Human review and deterministic gates: backend/app/services/profiles.py and backend/app/services/verifier_compiler.py. Generic checking/policy: backend/app/services/generic_inspection.py, backend/app/services/verifier_engine.py and backend/app/services/generic_policy.py.
 New checks run with the same pytest and Playwright commands above. To regenerate only TASK 03 synthetic PDF fixtures: `backend/.venv/Scripts/python.exe -X utf8 scripts/generate_announcement_fixtures.py`. Fixture generation and expected candidates are from the same session, so comparisons are SELF-BENCHMARK, not independent accuracy evidence.
 
+## TASK09 zero-cost public deployment
+
+The competition MVP keeps the existing ChatGPT-authenticated Codex CLI (`FINAL_CHECK_AI_PROVIDER=codex`) for Stage1, Stage2, and Planner. Human confirmation and the deterministic Plan Gate retain verdict authority. Railway Hobby, OpenAI API billing, and the OpenAI Responses production provider are deferred.
+
+The local Next.js production server is exposed only through the account-assigned ngrok Free HTTPS development domain. FastAPI, SQLite/session files, Codex authentication, and ffprobe stay on the host PC. Deployment settings and operator steps are in [TASK09 public deployment](docs/TASK09_PUBLIC_DEPLOYMENT.md), [operator runbook](docs/TASK09_OPERATOR_RUNBOOK.md), and [judging runbook](docs/JUDGING_RUNBOOK.md).
+
+Judge availability depends on the host PC/network. There is no cloud failover, ngrok Free outbound transfer is limited to 1 GB/month, and no production SLA is claimed.
+
 ## Layout
 frontend/: existing Next.js routes, UI and browser smoke.
 backend/: FastAPI, typed schema, SQLite/local-artifact runtime, immutable frozen source and adapter.

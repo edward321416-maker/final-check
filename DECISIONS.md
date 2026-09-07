@@ -1,5 +1,12 @@
 # Engineering decisions
 
+- 2026-09-07 TASK09 zero-cost pivot: Cancel Railway Hobby and OpenAI API billing. Expose the current local production build through the ngrok Free account-assigned HTTPS development domain; defer the OpenAI Responses production provider.
+- 2026-09-07 TASK09 zero-cost pivot: Public Stage1, Stage2 and Planner keep the existing ChatGPT-authenticated Codex CLI with exact `gpt-5.6-sol` and reasoning `high`. Provider failure stays REVIEW_REQUIRED/RETRYABLE without silent fallback.
+- 2026-09-07 TASK09: Stage1/Stage2 receive announcement source and Planner receives the confirmed profile. Submission material remains local to the deterministic verifier. Gold, frozen validator and prompt bytes stay immutable.
+- 2026-09-07 TASK09: Protect public AI use with durable SQLite global/per-session hourly counters and two workflow leases. Do not trust forwarded IP identity; `PER_IP_LIMIT = NOT_IMPLEMENTED`.
+- 2026-09-07 TASK09: Production upload limits are 16 MiB/file, 24 MiB/package and eight files, based on more than nine times the largest measured TASK08 fixture. Local defaults stay 320/350 MiB/eight.
+- 2026-09-07 TASK09 zero-cost pivot: Persist SQLite/session files on the host PC. Judge availability depends on that PC and network; there is no cloud failover, ngrok Free outbound is limited to 1 GB/month, and no production SLA is claimed.
+
 - 2026-09-07 TASK08 corrective review: Treat actual PDF/MP4 type confirmation as a shared trust boundary for file presence, count, size and extension-targeted name checks. Extension/content mismatch or inspection failure cannot yield PASS/READY.
 - 2026-09-07 TASK08 corrective review: FILE_TYPE MP4 maps ffprobe unavailable, timeout, malformed output, unreadable bytes and execution failure to REVIEW. Only a successful probe that definitively reports another container may yield VIOLATION and enter blocker policy.
 - 2026-09-07 TASK08 corrective review: Preserve the original Lore commit and add a separate corrective commit to Issue #10 / PR #11. Keep TASK08 implementation MODIFY and PR DO NOT MERGE YET until Product Lead re-review.

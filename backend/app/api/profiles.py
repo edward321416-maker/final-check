@@ -1,5 +1,6 @@
 import asyncio
 from typing import Annotated
+from uuid import uuid4
 from fastapi import APIRouter, Depends, HTTPException
 from starlette.concurrency import run_in_threadpool
 from app.models.profiles import ConfirmRequest, GenericRequirementProfile, ReviewRequest, TextAnnouncement, VersionRequest
@@ -10,7 +11,9 @@ from app.services.announcement_input import source_from_bytes
 from app.services.ai_providers import (RequirementGenerator, SemanticRequirementReviewer,
                                        ProviderExecutionError, get_generator, get_reviewer)
 from app.services.generic_validation import canonical_requirements
+from app.services.public_guard import GuardRejected, GuardReservation, PublicGuard
 from app.services.verifier_compiler import VerificationPlanner, compile_or_reuse
+from app.models.verifier_plans import confirmed_requirements_sha256
 from app.services.verifier_planner import get_verification_planner
 
 router = APIRouter(prefix="/api/sessions")
@@ -39,12 +42,17 @@ def custom_session(session_id: str) -> CheckSession:
 
 async def complete_extraction(session_id: str, job_id: str,
                               generator: RequirementGenerator,
-                              reviewer: SemanticRequirementReviewer) -> None:
-    lock = sessions.LOCKS.get(session_id)
-    if lock is None:
-        return
-    async with lock:
-        await run_in_threadpool(jobs.execute, job_id, generator, reviewer)
+                              reviewer: SemanticRequirementReviewer,
+                              guard: PublicGuard,
+                              reservation: GuardReservation) -> None:
+    try:
+        lock = sessions.LOCKS.get(session_id)
+        if lock is None:
+            return
+        async with lock:
+            await run_in_threadpool(jobs.execute, job_id, generator, reviewer)
+    finally:
+        await run_in_threadpool(guard.release, reservation)
 
 
 def forget_extraction(session_id: str, completed: asyncio.Task[None]) -> None:
@@ -103,13 +111,28 @@ async def extract(session_id: str, body: VersionRequest,
             if current.status == JobStatus.FAILED:
                 raise HTTPException(409, "AI extraction retry limit reached. Start a new announcement profile.")
             extraction_job = current
-        else:
-            extraction_job = jobs.create_or_get(session, generator, reviewer)
+        guard = PublicGuard(sessions.session_store())
+        try:
+            reservation = guard.reserve(
+                session_id,
+                "EXTRACT",
+                f"extract:{profile.profile_id}:attempt:{(current.attempt if current else 0) + 1}",
+            )
+        except GuardRejected as error:
+            raise HTTPException(429, str(error)) from error
+        try:
+            extraction_job = current or jobs.create_or_get(session, generator, reviewer)
+        except Exception:
+            guard.release(reservation)
+            raise
         if not (getattr(generator, "requires_background", False)
                 or getattr(reviewer, "requires_background", False)):
             invalidate(session)
             sessions.save(session)
-            await run_in_threadpool(jobs.execute, extraction_job.job_id, generator, reviewer)
+            try:
+                await run_in_threadpool(jobs.execute, extraction_job.job_id, generator, reviewer)
+            finally:
+                await run_in_threadpool(guard.release, reservation)
             return sessions.get(session_id)
         updated = profile.model_copy(deep=True)
         updated.pipeline_status = "RUNNING"
@@ -122,7 +145,9 @@ async def extract(session_id: str, body: VersionRequest,
         invalidate(session)
         session.generic_profile = updated
         saved = sessions.save(session)
-        task = asyncio.create_task(complete_extraction(session_id, extraction_job.job_id, generator, reviewer))
+        task = asyncio.create_task(
+            complete_extraction(session_id, extraction_job.job_id, generator, reviewer, guard, reservation)
+        )
         EXTRACTION_TASKS[session_id] = task
         task.add_done_callback(lambda completed, key=session_id: forget_extraction(key, completed))
         return saved
@@ -172,6 +197,15 @@ async def compile_verification_plan(
             raise HTTPException(422, "Human-confirmed profile required before verifier compilation.")
         if session.verification_plan and session.verification_plan.is_valid_for(profile):
             return session
+        guard = PublicGuard(sessions.session_store())
+        try:
+            reservation = guard.reserve(
+                session_id,
+                "PLAN",
+                f"plan:{profile.profile_id}:{profile.version}:{confirmed_requirements_sha256(profile)}:{uuid4().hex}",
+            )
+        except GuardRejected as error:
+            raise HTTPException(429, str(error)) from error
         session.verification_plan_state = "RUNNING"
         session.verification_plan_error = None
         sessions.save(session)
@@ -184,6 +218,8 @@ async def compile_verification_plan(
             session.source_mode = "generic_review"
             session.status = None
             return sessions.save(session)
+        finally:
+            await run_in_threadpool(guard.release, reservation)
         session.verification_plan = plan_set
         session.verification_plan_state = "READY"
         session.verification_plan_error = None

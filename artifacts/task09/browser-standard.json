@@ -1,0 +1,1009 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "D:\\Users\\admin\\Desktop\\ai공모전\\final-check\\frontend\\node_modules\\@playwright\\test\\cli.js",
+      "test"
+    ],
+    "configFile": "D:\\Users\\admin\\Desktop\\ai공모전\\final-check\\frontend\\playwright.config.ts",
+    "rootDir": "D:/Users/admin/Desktop/ai공모전/final-check/frontend/tests",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": true,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 2
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "D:/Users/admin/Desktop/ai공모전/final-check/frontend/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 2
+        },
+        "id": "desktop",
+        "name": "desktop",
+        "testDir": "D:/Users/admin/Desktop/ai공모전/final-check/frontend/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 45000
+      },
+      {
+        "outputDir": "D:/Users/admin/Desktop/ai공모전/final-check/frontend/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 2
+        },
+        "id": "mobile",
+        "name": "mobile",
+        "testDir": "D:/Users/admin/Desktop/ai공모전/final-check/frontend/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 45000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "../artifacts/playwright-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.62.1",
+    "workers": 2,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "generic-profile.spec.ts",
+      "file": "generic-profile.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "generic text, evidence, human edit/delete/approve, confirmation and real handoff",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5010,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-07T12:02:11.219Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "37097ad93203f65dd1a8-130c42be99463315a301",
+          "file": "generic-profile.spec.ts",
+          "line": 29,
+          "column": 5
+        },
+        {
+          "title": "actual text PDF announcement path",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 3481,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-07T12:02:11.262Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "37097ad93203f65dd1a8-7cd28c331a1063811282",
+          "file": "generic-profile.spec.ts",
+          "line": 85,
+          "column": 7
+        },
+        {
+          "title": "actual scanned PDF announcement path",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 2143,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-07T12:02:15.076Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "37097ad93203f65dd1a8-e6d1d4baf7f5901e3121",
+          "file": "generic-profile.spec.ts",
+          "line": 85,
+          "column": 7
+        },
+        {
+          "title": "generic text, evidence, human edit/delete/approve, confirmation and real handoff",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 7801,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-07T12:02:25.231Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "37097ad93203f65dd1a8-8d79a93434ecd8ce3886",
+          "file": "generic-profile.spec.ts",
+          "line": 29,
+          "column": 5
+        },
+        {
+          "title": "actual text PDF announcement path",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2389,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-07T12:02:31.960Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "37097ad93203f65dd1a8-96b0f83375e016cc6ba3",
+          "file": "generic-profile.spec.ts",
+          "line": 85,
+          "column": 7
+        },
+        {
+          "title": "actual scanned PDF announcement path",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 2253,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-07T12:02:33.430Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "37097ad93203f65dd1a8-6e8e93272a458a946855",
+          "file": "generic-profile.spec.ts",
+          "line": 85,
+          "column": 7
+        }
+      ]
+    },
+    {
+      "title": "golden-path.spec.ts",
+      "file": "golden-path.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "five-screen golden path, evidence, filter, reload and recheck",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 11699,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-07T12:02:16.611Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d6dd496e245cb9874cb8-93f6c634d14ca4ee27d6",
+          "file": "golden-path.spec.ts",
+          "line": 28,
+          "column": 5
+        },
+        {
+          "title": "deep link without a session has a recovery path",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 608,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-07T12:02:17.250Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d6dd496e245cb9874cb8-56c27c7a80b60f06a88f",
+          "file": "golden-path.spec.ts",
+          "line": 88,
+          "column": 5
+        },
+        {
+          "title": "custom file upload never receives mocked findings",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 1137,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-07T12:02:17.876Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d6dd496e245cb9874cb8-f84235045008e96381d7",
+          "file": "golden-path.spec.ts",
+          "line": 95,
+          "column": 5
+        },
+        {
+          "title": "backend failure is recoverable and does not advance",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 728,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-07T12:02:19.029Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d6dd496e245cb9874cb8-072a2553f3c765e3b2f2",
+          "file": "golden-path.spec.ts",
+          "line": 113,
+          "column": 5
+        },
+        {
+          "title": "five-screen golden path, evidence, filter, reload and recheck",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 16370,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-07T12:02:34.761Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d6dd496e245cb9874cb8-c88d2ff960ab847fae0f",
+          "file": "golden-path.spec.ts",
+          "line": 28,
+          "column": 5
+        },
+        {
+          "title": "deep link without a session has a recovery path",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 701,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-07T12:02:35.722Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d6dd496e245cb9874cb8-962beb5023d2eef6082f",
+          "file": "golden-path.spec.ts",
+          "line": 88,
+          "column": 5
+        },
+        {
+          "title": "custom file upload never receives mocked findings",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 1677,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-07T12:02:36.453Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d6dd496e245cb9874cb8-b6737c3cdaa64c4e462b",
+          "file": "golden-path.spec.ts",
+          "line": 95,
+          "column": 5
+        },
+        {
+          "title": "backend failure is recoverable and does not advance",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 697,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-07T12:02:38.168Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d6dd496e245cb9874cb8-85f2f6a85149f7ba29f3",
+          "file": "golden-path.spec.ts",
+          "line": 113,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "task06-actual-ai.spec.ts",
+      "file": "task06-actual-ai.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "TASK06 actual local AI two-stage public-announcement flow",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [
+                {
+                  "type": "skip",
+                  "description": "Run explicitly with TASK06_ACTUAL_AI=1 and the actual local Codex provider.",
+                  "location": {
+                    "file": "D:\\Users\\admin\\Desktop\\ai공모전\\final-check\\frontend\\tests\\task06-actual-ai.spec.ts",
+                    "line": 6,
+                    "column": 8
+                  }
+                }
+              ],
+              "expectedStatus": "skipped",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
+                  "status": "skipped",
+                  "duration": 280,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-07T12:02:19.781Z",
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Run explicitly with TASK06_ACTUAL_AI=1 and the actual local Codex provider.",
+                      "location": {
+                        "file": "D:\\Users\\admin\\Desktop\\ai공모전\\final-check\\frontend\\tests\\task06-actual-ai.spec.ts",
+                        "line": 6,
+                        "column": 8
+                      }
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "skipped"
+            }
+          ],
+          "id": "758bc902204164183fa3-11e28247ebfb532f6987",
+          "file": "task06-actual-ai.spec.ts",
+          "line": 5,
+          "column": 5
+        },
+        {
+          "title": "TASK06 actual local AI two-stage public-announcement flow",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [
+                {
+                  "type": "skip",
+                  "description": "Run explicitly with TASK06_ACTUAL_AI=1 and the actual local Codex provider.",
+                  "location": {
+                    "file": "D:\\Users\\admin\\Desktop\\ai공모전\\final-check\\frontend\\tests\\task06-actual-ai.spec.ts",
+                    "line": 6,
+                    "column": 8
+                  }
+                }
+              ],
+              "expectedStatus": "skipped",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 1,
+                  "status": "skipped",
+                  "duration": 358,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-07T12:02:38.940Z",
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Run explicitly with TASK06_ACTUAL_AI=1 and the actual local Codex provider.",
+                      "location": {
+                        "file": "D:\\Users\\admin\\Desktop\\ai공모전\\final-check\\frontend\\tests\\task06-actual-ai.spec.ts",
+                        "line": 6,
+                        "column": 8
+                      }
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "skipped"
+            }
+          ],
+          "id": "758bc902204164183fa3-95c6881ce02b0f4a3963",
+          "file": "task06-actual-ai.spec.ts",
+          "line": 5,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "task08-actual-ai.spec.ts",
+      "file": "task08-actual-ai.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "TASK08 actual public announcement C01 excerpt to planner, broken and fixed verifier flow",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [
+                {
+                  "type": "skip",
+                  "description": "Run explicitly with TASK08_ACTUAL_AI=1 and the actual local Codex provider.",
+                  "location": {
+                    "file": "D:\\Users\\admin\\Desktop\\ai공모전\\final-check\\frontend\\tests\\task08-actual-ai.spec.ts",
+                    "line": 6,
+                    "column": 8
+                  }
+                }
+              ],
+              "expectedStatus": "skipped",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
+                  "status": "skipped",
+                  "duration": 287,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-07T12:02:20.087Z",
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Run explicitly with TASK08_ACTUAL_AI=1 and the actual local Codex provider.",
+                      "location": {
+                        "file": "D:\\Users\\admin\\Desktop\\ai공모전\\final-check\\frontend\\tests\\task08-actual-ai.spec.ts",
+                        "line": 6,
+                        "column": 8
+                      }
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "skipped"
+            }
+          ],
+          "id": "abf4b1de88b6b0a7a725-8ce675e83ef0a647dd83",
+          "file": "task08-actual-ai.spec.ts",
+          "line": 5,
+          "column": 5
+        },
+        {
+          "title": "TASK08 actual public announcement C01 excerpt to planner, broken and fixed verifier flow",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [
+                {
+                  "type": "skip",
+                  "description": "Run explicitly with TASK08_ACTUAL_AI=1 and the actual local Codex provider.",
+                  "location": {
+                    "file": "D:\\Users\\admin\\Desktop\\ai공모전\\final-check\\frontend\\tests\\task08-actual-ai.spec.ts",
+                    "line": 6,
+                    "column": 8
+                  }
+                }
+              ],
+              "expectedStatus": "skipped",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 1,
+                  "status": "skipped",
+                  "duration": 482,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-07T12:02:39.324Z",
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Run explicitly with TASK08_ACTUAL_AI=1 and the actual local Codex provider.",
+                      "location": {
+                        "file": "D:\\Users\\admin\\Desktop\\ai공모전\\final-check\\frontend\\tests\\task08-actual-ai.spec.ts",
+                        "line": 6,
+                        "column": 8
+                      }
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "skipped"
+            }
+          ],
+          "id": "abf4b1de88b6b0a7a725-c731790694498a3eb7f4",
+          "file": "task08-actual-ai.spec.ts",
+          "line": 5,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "task08-plan-ui.spec.ts",
+      "file": "task08-plan-ui.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "TASK08 plan summary labels verified and review-only plans without granting AI verdict authority",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 3745,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-07T12:02:20.415Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "14d7aa4e641bc0623e8e-db1f7bc184fc655a5dd7",
+          "file": "task08-plan-ui.spec.ts",
+          "line": 5,
+          "column": 5
+        },
+        {
+          "title": "TASK08 plan summary labels verified and review-only plans without granting AI verdict authority",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 3997,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-07T12:02:39.826Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "14d7aa4e641bc0623e8e-b1d73d62715431f6a66d",
+          "file": "task08-plan-ui.spec.ts",
+          "line": 5,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "task09-public-actual.spec.ts",
+      "file": "task09-public-actual.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "TASK09 public ngrok Codex flow reuses one plan for 61s BLOCKED and 45s READY",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [
+                {
+                  "type": "skip",
+                  "description": "Run explicitly with TASK09_ACTUAL_AI=1 against the public ngrok URL.",
+                  "location": {
+                    "file": "D:\\Users\\admin\\Desktop\\ai공모전\\final-check\\frontend\\tests\\task09-public-actual.spec.ts",
+                    "line": 6,
+                    "column": 8
+                  }
+                }
+              ],
+              "expectedStatus": "skipped",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
+                  "status": "skipped",
+                  "duration": 245,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-07T12:02:24.183Z",
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Run explicitly with TASK09_ACTUAL_AI=1 against the public ngrok URL.",
+                      "location": {
+                        "file": "D:\\Users\\admin\\Desktop\\ai공모전\\final-check\\frontend\\tests\\task09-public-actual.spec.ts",
+                        "line": 6,
+                        "column": 8
+                      }
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "skipped"
+            }
+          ],
+          "id": "ad2d6952fdb83822cea3-493ac4027bd313b37ca4",
+          "file": "task09-public-actual.spec.ts",
+          "line": 5,
+          "column": 5
+        },
+        {
+          "title": "TASK09 public ngrok Codex flow reuses one plan for 61s BLOCKED and 45s READY",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [
+                {
+                  "type": "skip",
+                  "description": "Run explicitly with TASK09_ACTUAL_AI=1 against the public ngrok URL.",
+                  "location": {
+                    "file": "D:\\Users\\admin\\Desktop\\ai공모전\\final-check\\frontend\\tests\\task09-public-actual.spec.ts",
+                    "line": 6,
+                    "column": 8
+                  }
+                }
+              ],
+              "expectedStatus": "skipped",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 1,
+                  "status": "skipped",
+                  "duration": 356,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-07T12:02:43.847Z",
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Run explicitly with TASK09_ACTUAL_AI=1 against the public ngrok URL.",
+                      "location": {
+                        "file": "D:\\Users\\admin\\Desktop\\ai공모전\\final-check\\frontend\\tests\\task09-public-actual.spec.ts",
+                        "line": 6,
+                        "column": 8
+                      }
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "skipped"
+            }
+          ],
+          "id": "ad2d6952fdb83822cea3-171ac3ef19a0b2abf094",
+          "file": "task09-public-actual.spec.ts",
+          "line": 5,
+          "column": 5
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-09-07T12:02:07.491Z",
+    "duration": 45519.975999999995,
+    "expected": 16,
+    "skipped": 6,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}
