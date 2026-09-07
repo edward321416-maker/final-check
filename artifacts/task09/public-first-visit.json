@@ -1,0 +1,23 @@
+{
+  "classification": "ACTUAL",
+  "test_kind": "JUDGE_FIRST_VISIT",
+  "public_url": "https://uncoy-joelle-macrodont.ngrok-free.dev",
+  "fresh_browser_context": true,
+  "initial_cookie_count": 0,
+  "initial_storage_origin_count": 0,
+  "ngrok_skip_browser_warning_header_used": false,
+  "initial_response_status": 200,
+  "initial_error_code": "ERR_NGROK_6024",
+  "interstitial_shown": true,
+  "visit_site_visible": true,
+  "visit_site_clicked": true,
+  "final_check_landing_visible": true,
+  "final_url": "https://uncoy-joelle-macrodont.ngrok-free.dev/",
+  "post_click_cookie_count": 1,
+  "screenshots": [
+    "screenshots/public-first-visit.png",
+    "screenshots/public-after-interstitial.png"
+  ],
+  "application_e2e_evidence": "public-e2e.json",
+  "other_network_browser": "NOT_TESTED"
+}
