@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["plans"],
+  "properties": {
+    "plans": {
+      "type": "array",
+      "maxItems": 500,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["requirement_id", "planner_disposition", "checker_type", "target_selector", "constraint", "parameter_provenance", "planner_reason"],
+        "properties": {
+          "requirement_id": {"type": "string", "pattern": "^[A-Za-z][A-Za-z0-9_-]{0,39}$"},
+          "planner_disposition": {"type": "string", "enum": ["CANDIDATE", "REVIEW_ONLY", "EXTERNAL"]},
+          "checker_type": {"type": "string", "enum": ["FILE_PRESENCE", "FILE_COUNT", "FILE_NAME", "FILE_TYPE", "FILE_SIZE", "PDF_PAGE_COUNT", "VIDEO_METADATA"]},
+          "target_selector": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["kind", "value"],
+            "properties": {
+              "kind": {"type": "string", "enum": ["EXACT_NAME", "UNIQUE_EXTENSION", "ALL_BY_EXTENSION", "ALL_FILES"]},
+              "value": {"type": ["string", "null"]}
+            }
+          },
+          "constraint": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["field", "operator", "value", "unit"],
+            "properties": {
+              "field": {"type": "string", "enum": ["PRESENCE", "COUNT", "NAME", "TYPE", "SIZE", "PAGE_COUNT", "DURATION_SECONDS", "WIDTH", "HEIGHT", "ASPECT_RATIO", "CONTAINER"]},
+              "operator": {"type": "string", "enum": ["EQ", "LT", "LTE", "GT", "GTE", "EXACT_LITERAL", "PREFIX_LITERAL", "SUFFIX_LITERAL", "CONTAINS_LITERAL"]},
+              "value": {"type": ["string", "number"]},
+              "unit": {"type": "string", "enum": ["NONE", "COUNT", "BYTES", "MB", "MIB", "SECONDS", "PIXELS", "RATIO"]}
+            }
+          },
+          "parameter_provenance": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["evidence_quote", "evidence_start", "evidence_end", "source_substring", "normalized_value", "operator"],
+            "properties": {
+              "evidence_quote": {"type": "string", "minLength": 1, "maxLength": 4000},
+              "evidence_start": {"type": "integer", "minimum": 0},
+              "evidence_end": {"type": "integer", "minimum": 1},
+              "source_substring": {"type": "string", "minLength": 1, "maxLength": 500},
+              "normalized_value": {"type": ["string", "number"]},
+              "operator": {"type": "string", "enum": ["EQ", "LT", "LTE", "GT", "GTE", "EXACT_LITERAL", "PREFIX_LITERAL", "SUFFIX_LITERAL", "CONTAINS_LITERAL"]}
+            }
+          },
+          "planner_reason": {"type": "string", "minLength": 1, "maxLength": 1000}
+        }
+      }
+    }
+  }
+}

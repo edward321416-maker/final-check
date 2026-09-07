@@ -73,6 +73,10 @@ def configure(data_dir: Path | str | None = None) -> list[str]:
             session.generic_profile.notices = [
                 "이전 backend process의 AI job을 복구했습니다. 완료된 checkpoint부터 명시적으로 다시 시도하세요."
             ]
+        if session.verification_plan_state == "RUNNING":
+            session.verification_plan_state = "REVIEW_REQUIRED"
+            session.verification_plan_error = "PROCESS_RESTART"
+            session.source_mode = "generic_review"
         _STORE.save_session(session)
     return recovered
 

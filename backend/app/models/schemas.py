@@ -4,6 +4,7 @@ from typing import Literal
 from pydantic import BaseModel, ConfigDict, Field, model_validator
 from app.models.jobs import JobSummary
 from app.models.profiles import GenericRequirementProfile
+from app.models.verifier_plans import CheckerType, VerificationPlanSet
 
 
 class Model(BaseModel):
@@ -46,12 +47,20 @@ class ValidationResult(Model):
     action: str
     announcement_evidence: Evidence | None = None
     submission_evidence: Evidence | None = None
-    source_mode: Literal["validator", "generic_review"] = "validator"
+    source_mode: Literal["validator", "generic_review", "generic_verifier"] = "validator"
+    verification_plan_id: str | None = None
+    checker_type: CheckerType | None = None
+    measured_fact: str | None = None
+    expected_constraint: str | None = None
 
     @model_validator(mode="after")
     def enforce_product_lock(self) -> "ValidationResult":
         if self.source_mode == "generic_review" and self.status not in {FindingStatus.REVIEW, FindingStatus.EXTERNAL}:
             raise ValueError("Generic automatic verification is unsupported; no PASS/BLOCKER")
+        if self.source_mode == "generic_verifier" and self.status in {FindingStatus.PASS, FindingStatus.BLOCKER}:
+            if not all((self.announcement_evidence, self.submission_evidence, self.verification_plan_id,
+                        self.checker_type, self.measured_fact, self.expected_constraint)):
+                raise ValueError("Generic verifier PASS/BLOCKER requires plan and both evidence sources")
         if self.requirement_id in {"R20", "R21"} and self.status not in {FindingStatus.REVIEW, FindingStatus.EXTERNAL}:
             raise ValueError("Licensing and AI provenance have no automatic verification")
         if self.status == FindingStatus.BLOCKER:
@@ -74,9 +83,12 @@ class CheckSession(Model):
     created_at: datetime
     updated_at: datetime
     mode: Literal["demo", "custom"]
-    source_mode: Literal["validator", "generic_review", "unavailable"] = "unavailable"
+    source_mode: Literal["validator", "generic_review", "generic_verifier", "unavailable"] = "unavailable"
     validation_profile: Literal["frozen_v15", "generic"] | None = None
     generic_profile: GenericRequirementProfile | None = None
+    verification_plan: VerificationPlanSet | None = None
+    verification_plan_state: Literal["NOT_STARTED", "RUNNING", "READY", "REVIEW_REQUIRED"] = "NOT_STARTED"
+    verification_plan_error: str | None = Field(default=None, max_length=300)
     current_job_id: str | None = None
     current_job: JobSummary | None = None
     engine_sha256: str | None = None

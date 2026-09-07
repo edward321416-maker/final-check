@@ -1,5 +1,5 @@
 # FINAL CHECK — AI Submission Preflight
-Version: 1.3 | TASK 07 durability instructions supplied 2026-09-05.
+Version: 1.4 | TASK 08 typed verifier instructions supplied 2026-09-07.
 
 ## Ownership and source of truth
 ChatGPT planning: Product / Business Lead. Codex: AI / Engineering Lead.
@@ -94,3 +94,34 @@ repeated. Retry is bounded to three attempts, and provider failure cannot confir
 a profile or produce PASS/READY. This is single-node durability; multi-worker,
 cloud deployment and production provider selection remain unsupported.
 Correct delivery claim: **Generic announcement requirement-profile pipeline is integrated and executable.** General accuracy is for TASK 04 independent evaluation.
+
+## TASK 08 typed verifier contract
+
+TASK08 supersedes the TASK03 statement that every generic finding is review-only.
+`generic_review` remains REVIEW/EXTERNAL only. A separate `generic_verifier`
+lane may produce PASS/BLOCKER only when a human-confirmed authoritative,
+mandatory, unconditional deterministic requirement has a source-grounded plan
+authorized by the code gate and a definite result from actual submission bytes.
+AI proposes a closed typed plan and has no finding or submission-status authority.
+
+The closed v1 checker set is FILE_PRESENCE, FILE_COUNT, FILE_NAME, FILE_TYPE,
+FILE_SIZE, PDF_PAGE_COUNT and VIDEO_METADATA. Selectors, operators and units are
+enumerated; arbitrary code, regex, paths, commands, network access and ffprobe
+options cannot come from the planner. Conditional, ungrounded, qualified,
+ambiguous, unsupported or failed checks become REVIEW_ONLY/REVIEW. Automatic
+BLOCKER additionally requires severity BLOCKER. READY requires a definite PASS
+for every MUST/MUST_NOT rule; SHOULD/MAY/INFO do not block readiness.
+
+Any definite result that depends on a declared PDF/MP4 type requires actual type
+trust: PDF signature plus parser, or a successful ffprobe container result.
+ffprobe unavailable, timeout, malformed output, unreadable media or execution
+failure is REVIEW and can never become PASS/BLOCKER. An extension/content
+mismatch is REVIEW for presence/count/size and extension-targeted name checks;
+FILE_TYPE may emit VIOLATION only after a successful definite mismatch.
+
+PlanSets persist with the session and bind to profile identity/version,
+announcement byte/text hashes and confirmed requirement contents. Submission
+replacement reuses a valid PlanSet; any bound source/profile change invalidates
+it. Current MVP automatic file support is PDF / MP4. Vision, OCR, semantic and
+URL checking, new formats, multi-worker coordination, deployment and production
+provider selection remain outside this contract.

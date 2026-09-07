@@ -1,118 +1,43 @@
-# RESULT_CODEX — TASK 07
+# RESULT_CODEX — TASK 08
 
-Date: 2026-09-05 (Asia/Seoul)
+Date: 2026-09-07 (Asia/Seoul)
 
-Baseline main: `07cd3e6587efd47661f2e42f72574f569bce9094` (TASK06 PR #7 merge commit).
-Issue: [#8](https://github.com/edward321416-maker/final-check/issues/8).
-Branch: `issue/8-restart-safe-durable-runtime`.
+1. **TASK08 implementation:** MODIFY — 두 merge-blocking safety issue를 corrective change로 수정했으며 Product Lead 재검수를 기다린다.
+2. **Baseline main SHA:** `fa3108db4074499ddefffca53e34f51bd7f95395` (TASK07 PR #9 merge commit).
+3. **Issue:** [#10](https://github.com/edward321416-maker/final-check/issues/10), OPEN.
+4. **Branch:** `issue/10-typed-verifier-compiler`.
+5. **FINAL CHECK:** GO.
+6. **Typed Verifier Compiler:** GO.
+7. **Planner provider:** OpenAI through the existing ChatGPT-authenticated Codex CLI. No API key, paid API, new account or OAuth was added.
+8. **Planner model:** `gpt-5.6-sol`, reasoning `high`.
+9. **Planner prompt version:** `task08-planner-v1`.
+10. **Planner prompt SHA-256:** `096fd93cd2c3770cd49dcdbe6131e0abda4ea8b3e074728dc7b45e219f36a4a6`. It was frozen before the first actual planner output and remained unchanged.
+11. **Typed schema:** closed Pydantic/JSON schema `task08-verification-plan-v1`; extra keys, executable code, regex, paths, network instructions and arbitrary commands are rejected.
+12. **Checker families:** `FILE_PRESENCE`, `FILE_COUNT`, `FILE_NAME`, `FILE_TYPE`, `FILE_SIZE`, `PDF_PAGE_COUNT`, `VIDEO_METADATA`.
+13. **Plan gate:** REQUIRED and passing. Only code can assign `VERIFIED`; rejected or unsupported plans become `REVIEW_ONLY` or `EXTERNAL`.
+14. **Parameter provenance:** exact evidence quote and offsets, source substring, normalized value and operator are persisted and deterministically grounded.
+15. **Condition policy:** `condition != always` cannot enter the automatic verdict lane and becomes `REVIEW_ONLY`.
+16. **Target ambiguity policy:** unresolved or non-unique targets return REVIEW; the checker never chooses a file semantically.
+17. **False PASS policy:** STRICT. PASS requires a human-confirmed authoritative rule, valid PlanSet, VERIFIED plan, definite checker completion, unambiguous target, trusted actual PDF/MP4 type and actual submission evidence. Extension-only spoofing cannot PASS or READY.
+18. **False BLOCKER policy:** automatic BLOCKER additionally requires mandatory modality, `severity=BLOCKER`, deterministic verifier, `condition=always` and a definite measured violation. ffprobe unavailable/timeout/malformed/execution failure remains REVIEW and cannot become BLOCKER.
+19. **`generic_review` safety:** unchanged; it still permits REVIEW/EXTERNAL only.
+20. **`generic_verifier` behavior:** PASS/BLOCKER is allowed only for a VERIFIED executable plan and always carries announcement evidence, submission evidence, plan ID, checker type, measured fact and expected constraint.
+21. **PlanSet durability:** plan data and profile/source/confirmed-requirement bindings round-trip through the TASK07 SQLite session store. Abandoned planner RUNNING state becomes `REVIEW_REQUIRED` after restart.
+22. **No-replan behavior:** the same valid PlanSet is reused after submission replacement; profile identity/version, confirmed requirement content, announcement SHA or text SHA changes invalidate it.
+23. **Actual public announcement:** C01 public announcement exact excerpt `- 전체 길이 60초 이내 영상(최소 길이 제한 없음)`. The passing product run used actual TASK06 Stage1/Stage2, operator confirmation, the actual TASK08 planner, deterministic gate and actual upload/checker paths. Full C01/C02 source attempts were not claimed as passing E2E: earlier Stage1 malformed-output attempts and one transient provider-unavailable attempt were observed; the final exact-excerpt run passed on attempt 1.
+24. **Broken submission ACTUAL result:** actual 61-second MP4 bytes measured by ffprobe as `duration_seconds=61.0`; plan `LTE 60 SECONDS`; finding BLOCKER; summary BLOCKED; both evidence sources present.
+25. **Fixed submission ACTUAL result:** the same PlanSet checked actual 45-second MP4 bytes as `duration_seconds=45.0`; finding PASS; summary READY; both evidence sources present.
+26. **Backend regression:** 144 passed. TASK08 has 67 focused contract/checker tests. The corrective TDD run reproduced the review findings as 7 failures before the common type-trust boundary was implemented.
+27. **Browser regression:** fresh standard desktop/mobile suite 16 passed and 4 actual-AI opt-in cases skipped. TASK08 actual public-excerpt product E2E passed fresh once on the corrective code; the pre-existing TASK06 actual local-AI regression passed on the initial TASK08 head.
+28. **Type/build/diff:** TypeScript typecheck PASS; production build PASS; `git diff --check` PASS.
+29. **Gold lock:** 173 requirements; manifest SHA-256 `035ebc06d3d62db6ab9c47c53d30cbc206be02667d845e9db59da6b9c5f7fe89`; unchanged and not scored.
+30. **Frozen Validator lock:** SHA-256 `4b506c3b692f2cef39e2be7cb44b4ce74bcc4ce829064ac655e16f545042bb11`; unchanged. Generic inspection does not import the frozen metadata helper.
+31. **Evidence classes:** ACTUAL — public excerpt, real local Codex Stage1/Stage2/planner calls, FastAPI/frontend, real MP4 bytes and ffprobe, durable PlanSet reuse; SELF — authored deterministic fixtures and unit/integration/browser tests; SIMULATED — malformed planner/schema/provider/parser/ffprobe/restart faults; NOT TESTED — public deployment, production provider availability, multiple workers/nodes, actual encrypted PDF, Vision/OCR, semantic submission verification, URL verification and formats other than PDF/MP4.
+32. **Known limitations:** the planner remains a local authenticated CLI dependency; only closed file and metadata constraints are automated; unsupported wording, qualifiers and target semantics deliberately require review. The passing public E2E is an exact C01 excerpt, not full-announcement coverage or an accuracy benchmark. GitHub's CodeRabbit status says success because automated review was skipped and manual review is required; it is not treated as a substantive review pass.
+33. **Next recommendation:** Product Lead reviews the open PR and actual evidence, then chooses the next scope. No deployment, semantic, Vision/OCR or format-expansion task is preselected.
+34. **Commit history:** original TASK08 commit `d64c5d53871a5f53f49d381344260d61a25a1e80` is preserved; the new corrective head SHA is supplied by the final delivery report.
+35. **PR:** [#11](https://github.com/edward321416-maker/final-check/pull/11), OPEN / NOT MERGED / **DO NOT MERGE YET** until Product Lead re-review of the corrective head.
 
-## Verdict
+Direction locks: FINAL CHECK = GO; Typed Verifier Compiler = GO; TASK08 implementation = MODIFY; AI Planner = GO for the local MVP; AI verdict authority = NOT_ALLOWED; Plan Gate = REQUIRED; conditional automatic verification = NOT_ALLOWED; False PASS policy = STRICT; Generic deterministic verifier = GO; current file support = PDF / MP4; PR #11 = DO NOT MERGE YET.
 
-- TASK07: **PASS**.
-- FINAL CHECK: **GO**.
-- Durable Runtime: **GO**.
-- Local Codex Provider: **KEEP**.
-- Single-node Deployability: **READY_FOR_DEPLOYMENT_TASK**.
-- Production AI Provider: **NOT_SELECTED**.
-
-## Durable architecture
-
-- `SessionStore`, `JobStore`, and `ArtifactStore` define the minimal storage
-  boundary. The default metadata implementation is Python standard-library
-  `sqlite3`; model payloads use canonical Pydantic JSON and never pickle.
-- `FINAL_CHECK_DATA_DIR` configures the root. The local default is
-  `.final-check/runtime/`, excluded from Git. Metadata is in
-  `runtime.sqlite3`; announcement/submission/raw artifacts are under
-  `sessions/<application-session-id>/`.
-- Validated user basenames are stored only inside the application session tree.
-  Announcement replacement is atomic. Cleanup resolves and verifies the owned
-  session parent before removal.
-
-## Durable job behavior
-
-- States: `PENDING`, `RUNNING`, `SUCCEEDED`, `RETRYABLE`, `FAILED`.
-- Stored fields include job/session/profile identity, job kind, status, stage,
-  attempt, timestamps, safe error category, TASK06 provider provenance,
-  completed Stage2 batch indexes, and the typed profile checkpoint.
-- One database uniqueness constraint covers
-  `(session_id, profile_id, profile_version, job_kind)`. Duplicate extract
-  requests reuse the existing job.
-- Checkpoints: `STAGE1_COMPLETE`, `GATE_COMPLETE`,
-  `STAGE2_BATCH_N_COMPLETE`, `FINALIZED`. Retry skips a completed Stage1 and
-  every committed Stage2 batch.
-- Startup converts abandoned `PENDING`/`RUNNING` jobs from a dead process to `RETRYABLE` and
-  exposes `PROCESS_RESTART` plus a user-controlled resume action. There is no
-  automatic loop. Three explicit attempts are allowed; authentication failure
-  is stored only as a safe category.
-- One-hour cleanup removes safe expired metadata and artifacts. A process-active
-  session or a session with a PENDING/RUNNING/RETRYABLE job is retained.
-
-## Human safety persistence
-
-- Raw candidates, gated IDs, Stage2 reviews, retained requirements, edit/delete/
-  approval history, source acknowledgement and CONFIRMED status round-trip
-  through SQLite.
-- An AI-proposed BLOCKER remains `authoritative=false` after reconstruction.
-  Recovery and provider failure cannot confirm a profile or produce PASS/READY.
-- TASK06 prompts, model choice, deterministic gates and mandatory human
-  confirmation are unchanged.
-
-## Tests and evidence
-
-- Backend: **77 passed** in the final suite: existing 59 plus 18 new
-  TASK07 persistence/recovery/security cases. The final JUnit is stored under
-  `artifacts/task07/backend-junit.xml`.
-- TASK07 TDD: the new test module first failed collection because the durable
-  job module did not exist, then passed after implementation.
-- Restart acceptance: **ACTUAL LOCAL TEST** starts a backend process, creates a
-  custom session and meaningful announcement profile, stops the process,
-  restarts against the same data directory, and retrieves the same profile.
-- AI recovery: **SELF / SIMULATED** fault injection verifies stale RUNNING
-  recovery, no Stage1 replay, no completed Stage2-batch replay, duplicate-job
-  reuse, retry limit, TTL protection and absence of provider secret/error text.
-- Standard browser: **14 passed, 2 opt-in skipped** on desktop/mobile. Existing
-  real uploads, human review, reload and five-screen flows remain intact.
-- Actual local AI: **1 passed** in 1.9 minutes. The C03 runtime regression used
-  the existing ChatGPT-authenticated Codex CLI once: job `SUCCEEDED / FINALIZED`,
-  attempt 1, completed batch `[0]`, 14 RAW, 14 GATED, 12 retained, human-confirmed
-  handoff, actual submission upload and safe `REVIEW_REQUIRED` generic result.
-- TypeScript typecheck: **PASS**. Production build: **PASS**.
-- `git diff --check`: recorded in final delivery evidence.
-
-## Frozen integrity
-
-- TASK04 Gold count: **173**.
-- Gold manifest SHA-256:
-  `035ebc06d3d62db6ab9c47c53d30cbc206be02667d845e9db59da6b9c5f7fe89`.
-- Frozen Validator SHA-256 before/after:
-  `4b506c3b692f2cef39e2be7cb44b4ce74bcc4ce829064ac655e16f545042bb11`.
-- No Gold, benchmark score, prompt, model or frozen Validator file changed.
-
-## Evidence classification
-
-- **ACTUAL:** GitHub baseline verification; actual backend process stop/start;
-  actual SQLite/filesystem restore; 14 standard browser tests with actual local
-  uploads/validator; one actual local Codex product E2E.
-- **SELF:** canonical serialization, idempotency, checkpoint, retention and
-  safety tests authored and executed in this task.
-- **SIMULATED:** dead-process RUNNING row, provider interruption, Stage2 batch
-  interruption, secret-bearing exception and retry-limit injections.
-- **NOT TESTED:** actual OS kill during the narrow interval after provider return
-  but before checkpoint commit; multiple backend workers/nodes; cloud volume,
-  backup/restore, public deployment, production provider availability, Vision/
-  OCR and generic submission verification.
-
-## Limits and next task
-
-This is a restart-safe **single-node, single-backend-process** MVP. SQLite does
-not coordinate several workers. A provider call whose response was not committed
-may repeat after restart; committed Stage1 and Stage2 batches do not.
-
-The next recommended scope after Product Lead review and merge is **TASK08 —
-Generic Verifier Engine**. TASK08 was not started here.
-
-## Delivery
-
-- One Korean Lore commit will reference Issue #8.
-- The TASK07 PR will be created against `main` and intentionally left
-  **OPEN / NOT MERGED** for Product Lead diff and runtime-evidence review.
+Evidence is stored under `artifacts/task08/`, including the actual planner result, actual product E2E envelope, screenshots and backend JUnit output.

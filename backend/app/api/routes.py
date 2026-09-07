@@ -7,7 +7,7 @@ from fastapi.responses import FileResponse
 from starlette.concurrency import run_in_threadpool
 from app.models.schemas import CheckSession, CreateSession, SubmissionFile, SubmissionStatus
 from app.services import demo, sessions
-from app.services import generic_validation, profiles
+from app.services import generic_policy, generic_validation, profiles
 from app.services.announcement_input import MAX_ANNOUNCEMENT_BYTES, source_from_bytes
 from app.services.ai_providers import provider_status
 from app.api.profiles import custom_session, invalidate
@@ -55,7 +55,7 @@ async def health() -> dict:
     return {"status": "ok", "mode": "frozen_v15", "validator": "available" if available else "unavailable",
             "engine_sha256": EXPECTED_SHA256, "vision_provider": "unavailable", "version": "0.5.0",
             "generic_extractor": "two-stage-ai-local-mvp", "generic_ai_provider": ai,
-            "generic_verification": "unsupported"}
+            "generic_verification": "typed-verifier-compiler-local-mvp"}
 
 
 @router.post("/sessions", response_model=CheckSession, status_code=201)
@@ -182,7 +182,11 @@ async def validate(session_id: str) -> CheckSession:
             await run_in_threadpool(raw_path.write_text, json.dumps(run.raw, ensure_ascii=False, indent=2), encoding="utf-8")
             session.results = run.results
             session.validation_complete = run.complete
-            session.status = summarize(session.requirements, run.results, validation_complete=run.complete)
+            session.status = (
+                generic_policy.summarize(session.generic_profile, run.results)
+                if session.validation_profile == "generic" and session.generic_profile is not None
+                else summarize(session.requirements, run.results, validation_complete=run.complete)
+            )
             session.engine_sha256 = run.engine_sha256
             session.run_state = "COMPLETE"
             session.revision += 1

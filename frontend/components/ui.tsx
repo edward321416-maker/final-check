@@ -38,7 +38,15 @@ export function Badge({ status }: { status: FindingStatus }) {
 }
 export function ModeNote() {
   const { session } = useSession();
-  if (session?.generic_profile) return <div className="mode-note"><span className="dot" /><strong>GENERIC · {session.generic_profile.execution_kind ?? "실행 전"}</strong><span>로컬 규칙 후보 · AI 모델 미연결. 자동 검증 미지원 → REVIEW / EXTERNAL. 스캔 PDF Vision 미연결.</span></div>;
+  if (session?.generic_profile) {
+    const verifierReady = session.source_mode === "generic_verifier";
+    return <div className="mode-note"><span className="dot" />
+      <strong>GENERIC · {session.generic_profile.execution_kind ?? "실행 전"}{verifierReady ? " · CODE CHECK" : ""}</strong>
+      <span>{verifierReady
+        ? "사람이 확정한 요구사항과 게이트를 통과한 계획만 코드로 검사합니다. 현재 지원 PDF / MP4. 스캔 PDF Vision 미연결."
+        : "AI 요구사항 후보는 사람의 검토·확정이 필요합니다. 자동 검사 계획 전에는 REVIEW / EXTERNAL. 스캔 PDF Vision 미연결."}</span>
+    </div>;
+  }
   return <div className="mode-note"><span className="dot" /><strong>{session?.validation_profile ? "DEMO FILES · VALIDATOR v1.5" : "임의 공고 · 분석 미연결"}</strong>
     <span>{session?.validation_profile ? "실제 파일을 동결 규칙으로 검사합니다. 스캔 PDF Vision 미연결 → REVIEW." : "공고 추출기가 연결되지 않아 요구사항과 판정을 만들지 않습니다."}</span></div>;
 }
