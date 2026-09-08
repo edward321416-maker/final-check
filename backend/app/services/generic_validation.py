@@ -4,7 +4,7 @@ from dataclasses import dataclass
 from pathlib import Path
 
 from app.models.profiles import GenericRequirementProfile
-from app.models.schemas import CheckSession, Evidence, Requirement, ValidationResult
+from app.models.schemas import CheckSession, Evidence, Requirement, SubmissionFile, ValidationResult
 from app.services.generic_inspection import inspect_submission, run_checker
 from app.services.verifier_engine import result_for
 
@@ -42,6 +42,15 @@ def engine_sha256() -> str:
     return digest.hexdigest()
 
 
+def assert_submission_integrity(session: CheckSession, package: Path) -> list[SubmissionFile]:
+    actual_files = inspect_submission(package)
+    actual = sorted((item.name, item.size_bytes, item.sha256) for item in actual_files)
+    expected = sorted((item.name, item.size_bytes, item.sha256) for item in session.files)
+    if not expected or actual != expected:
+        raise ValueError("Submission receipts do not match uploaded bytes")
+    return actual_files
+
+
 def validate(session: CheckSession, package: Path) -> GenericRun:
     if session.validation_profile != "generic" or session.generic_profile is None:
         raise ValueError("Generic confirmed profile required")
@@ -49,11 +58,7 @@ def validate(session: CheckSession, package: Path) -> GenericRun:
     canonical = canonical_requirements(profile)
     if canonical != session.requirements:
         raise ValueError("Canonical profile handoff mismatch")
-    actual_files = inspect_submission(package)
-    actual = sorted((item.name, item.size_bytes, item.sha256) for item in actual_files)
-    expected = sorted((item.name, item.size_bytes, item.sha256) for item in session.files)
-    if not expected or actual != expected:
-        raise ValueError("Submission receipts do not match uploaded bytes")
+    actual_files = assert_submission_integrity(session, package)
 
     plan_set = session.verification_plan
     valid_plan_set = plan_set is not None and plan_set.is_valid_for(profile)

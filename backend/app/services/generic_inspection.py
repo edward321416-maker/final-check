@@ -145,6 +145,10 @@ def _inspect_declared_type(path: Path, expected: str | None = None) -> TypeInspe
     return TypeInspection("REVIEW", f"{path.name}: unsupported declared type")
 
 
+def confirm_pdf_type(path: Path) -> TypeInspection:
+    return _inspect_declared_type(path, "PDF")
+
+
 def _type_boundary(files: list[Path]) -> CheckerOutcome | None:
     inspections = [_inspect_declared_type(path) for path in files]
     if all(item.status == "MATCH" for item in inspections):
