@@ -74,6 +74,8 @@ class ValidationResult(Model):
                 raise ValueError("Generic verifier PASS/BLOCKER requires plan and both evidence sources")
         if self.semantic_review is not None and self.status != FindingStatus.REVIEW:
             raise ValueError("Semantic review can only produce REVIEW")
+        if self.semantic_review is not None and self.source_mode != "generic_review":
+            raise ValueError("Semantic review requires generic_review")
         if self.requirement_id in {"R20", "R21"} and self.status not in {FindingStatus.REVIEW, FindingStatus.EXTERNAL}:
             raise ValueError("Licensing and AI provenance have no automatic verification")
         if self.status == FindingStatus.BLOCKER:

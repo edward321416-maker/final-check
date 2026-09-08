@@ -47,6 +47,35 @@ def test_semantic_metadata_forces_review_only():
         )
 
 
+def test_semantic_metadata_rejects_external_status_independently():
+    with pytest.raises(ValidationError, match="Semantic review can only produce REVIEW"):
+        ValidationResult(
+            id="G001:semantic",
+            requirement_id="G001",
+            status="EXTERNAL",
+            title="기대효과를 포함해야 한다",
+            explanation="x",
+            action="x",
+            source_mode="generic_review",
+            semantic_review=metadata(),
+        )
+
+
+@pytest.mark.parametrize("source_mode", ["validator", "generic_verifier"])
+def test_semantic_metadata_requires_generic_review_source_mode(source_mode):
+    with pytest.raises(ValidationError, match="Semantic review requires generic_review"):
+        ValidationResult(
+            id="G001:semantic",
+            requirement_id="G001",
+            status="REVIEW",
+            title="기대효과를 포함해야 한다",
+            explanation="x",
+            action="x",
+            source_mode=source_mode,
+            semantic_review=metadata(),
+        )
+
+
 def test_semantic_ai_schema_has_no_verdict_field():
     payload = {
         "reviews": [{
@@ -77,6 +106,31 @@ def test_ai_evidence_candidate_count_is_bounded():
     }
     with pytest.raises(ValidationError):
         SemanticAIResponse.model_validate(payload)
+
+
+def test_related_evidence_found_requires_candidates():
+    with pytest.raises(ValidationError):
+        SemanticAIResponse.model_validate({
+            "reviews": [{
+                "requirement_id": "G001",
+                "assessment": "RELATED_EVIDENCE_FOUND",
+            }]
+        })
+
+
+def test_no_clear_evidence_rejects_candidates():
+    with pytest.raises(ValidationError):
+        SemanticAIResponse.model_validate({
+            "reviews": [{
+                "requirement_id": "G001",
+                "assessment": "NO_CLEAR_EVIDENCE",
+                "evidence_candidates": [{
+                    "document_id": "D01",
+                    "page_id": "D01-P002",
+                    "quote": "기대효과를 설명한다",
+                }],
+            }]
+        })
 
 
 def test_semantic_literals_are_strict():
