@@ -39,6 +39,16 @@ class SemanticReviewMetadata(Model):
     evidence_fingerprint: str | None = Field(default=None, pattern=r"^[0-9a-f]{64}$")
     provider: ProviderProvenance | None = None
 
+    @model_validator(mode="after")
+    def trusted_evidence_shape(self) -> "SemanticReviewMetadata":
+        if self.assessment == "RELATED_EVIDENCE_FOUND" and not self.evidence:
+            raise ValueError("RELATED_EVIDENCE_FOUND requires trusted evidence")
+        if self.assessment != "RELATED_EVIDENCE_FOUND" and self.evidence:
+            raise ValueError("Only RELATED_EVIDENCE_FOUND can include trusted evidence")
+        if self.assessment == "NO_CLEAR_EVIDENCE" and self.coverage != "FULL":
+            raise ValueError("NO_CLEAR_EVIDENCE requires FULL text coverage")
+        return self
+
 
 class Requirement(Model):
     id: str
@@ -76,6 +86,12 @@ class ValidationResult(Model):
             raise ValueError("Semantic review can only produce REVIEW")
         if self.semantic_review is not None and self.source_mode != "generic_review":
             raise ValueError("Semantic review requires generic_review")
+        if self.semantic_review is not None:
+            evidence = self.semantic_review.evidence
+            if evidence and self.submission_evidence != evidence[0]:
+                raise ValueError("Primary submission evidence must match semantic evidence")
+            if not evidence and self.submission_evidence is not None:
+                raise ValueError("Semantic review without trusted evidence cannot set submission evidence")
         if self.requirement_id in {"R20", "R21"} and self.status not in {FindingStatus.REVIEW, FindingStatus.EXTERNAL}:
             raise ValueError("Licensing and AI provenance have no automatic verification")
         if self.status == FindingStatus.BLOCKER:

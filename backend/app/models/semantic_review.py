@@ -1,6 +1,6 @@
-from typing import Literal
+from typing import Annotated, Literal
 
-from pydantic import BaseModel, ConfigDict, Field, model_validator
+from pydantic import BaseModel, ConfigDict, Field, StringConstraints, model_validator
 
 
 class StrictModel(BaseModel):
@@ -9,12 +9,13 @@ class StrictModel(BaseModel):
 
 SemanticAssessment = Literal["RELATED_EVIDENCE_FOUND", "NO_CLEAR_EVIDENCE"]
 SemanticCoverage = Literal["FULL", "PARTIAL", "NONE"]
+ExactQuote = Annotated[str, StringConstraints(strip_whitespace=False, min_length=1, max_length=2000)]
 
 
 class SemanticEvidenceCandidate(StrictModel):
     document_id: Literal["D01"]
     page_id: str = Field(pattern=r"^D01-P\d{3}$")
-    quote: str = Field(min_length=1, max_length=2000)
+    quote: ExactQuote
 
 
 class SemanticAIReviewItem(StrictModel):
