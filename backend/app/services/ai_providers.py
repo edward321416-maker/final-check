@@ -85,10 +85,18 @@ def codex_binary() -> Path:
 
 
 class CodexCliJsonProvider:
-    def __init__(self, stage: Literal["stage1", "stage2"]):
+    def __init__(
+        self,
+        stage: Literal["stage1", "stage2", "task10-semantic"],
+        *,
+        prompt_path: Path | None = None,
+        schema_path: Path | None = None,
+    ):
         self.stage = stage
-        self.prompt_path = PROMPT_ROOT / f"{stage}-v1.txt"
-        self.schema_path = PROMPT_ROOT / f"{stage}.schema.json"
+        if stage == "task10-semantic" and (prompt_path is None or schema_path is None):
+            raise ValueError("TASK10 semantic prompt and schema paths are required")
+        self.prompt_path = prompt_path or PROMPT_ROOT / f"{stage}-v1.txt"
+        self.schema_path = schema_path or PROMPT_ROOT / f"{stage}.schema.json"
         self.model = os.environ.get("FINAL_CHECK_AI_MODEL", MODEL)
         self.effort = os.environ.get("FINAL_CHECK_AI_REASONING", EFFORT)
         self.timeout = int(os.environ.get("FINAL_CHECK_AI_TIMEOUT_SECONDS", "600"))

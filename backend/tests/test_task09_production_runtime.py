@@ -7,7 +7,7 @@ from fastapi.testclient import TestClient
 
 from app.api import routes
 from app.main import app
-from app.services import ai_providers, sessions, verifier_planner
+from app.services import ai_providers, semantic_provider, sessions, verifier_planner
 from app.services.public_guard import GuardConfig, GuardRejected, PublicGuard
 from app.services.storage import SQLiteRuntimeStore
 
@@ -31,6 +31,10 @@ def test_zero_cost_provider_keeps_codex_and_rejects_openai_api(monkeypatch):
     assert isinstance(ai_providers.get_generator(), ai_providers.CodexCliRequirementGenerator)
     assert isinstance(ai_providers.get_reviewer(), ai_providers.CodexCliSemanticReviewer)
     assert isinstance(verifier_planner.get_verification_planner(), verifier_planner.CodexCliVerificationPlanner)
+    assert isinstance(
+        semantic_provider.get_submission_semantic_reviewer(),
+        semantic_provider.CodexCliSubmissionSemanticReviewer,
+    )
 
     monkeypatch.setenv("FINAL_CHECK_AI_PROVIDER", "openai-api")
     with pytest.raises(ai_providers.ProviderExecutionError):
@@ -39,6 +43,8 @@ def test_zero_cost_provider_keeps_codex_and_rejects_openai_api(monkeypatch):
         ai_providers.get_reviewer()
     with pytest.raises(ai_providers.ProviderExecutionError):
         verifier_planner.get_verification_planner()
+    with pytest.raises(ai_providers.ProviderExecutionError):
+        semantic_provider.get_submission_semantic_reviewer()
 
 
 def test_codex_status_requires_auth_and_locked_model(monkeypatch, tmp_path):
