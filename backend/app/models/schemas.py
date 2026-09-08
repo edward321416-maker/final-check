@@ -3,7 +3,8 @@ from enum import StrEnum
 from typing import Literal
 from pydantic import BaseModel, ConfigDict, Field, model_validator
 from app.models.jobs import JobSummary
-from app.models.profiles import GenericRequirementProfile
+from app.models.profiles import GenericRequirementProfile, ProviderProvenance
+from app.models.semantic_review import SemanticAssessment, SemanticCoverage
 from app.models.verifier_plans import CheckerType, VerificationPlanSet
 
 
@@ -30,6 +31,15 @@ class Evidence(Model):
     excerpt: str = Field(min_length=1)
 
 
+class SemanticReviewMetadata(Model):
+    assessment: SemanticAssessment | None = None
+    coverage: SemanticCoverage
+    reason_code: str | None = Field(default=None, max_length=100)
+    evidence: list[Evidence] = Field(default_factory=list, max_length=3)
+    evidence_fingerprint: str | None = Field(default=None, pattern=r"^[0-9a-f]{64}$")
+    provider: ProviderProvenance | None = None
+
+
 class Requirement(Model):
     id: str
     title: str
@@ -52,6 +62,7 @@ class ValidationResult(Model):
     checker_type: CheckerType | None = None
     measured_fact: str | None = None
     expected_constraint: str | None = None
+    semantic_review: SemanticReviewMetadata | None = None
 
     @model_validator(mode="after")
     def enforce_product_lock(self) -> "ValidationResult":
@@ -61,6 +72,8 @@ class ValidationResult(Model):
             if not all((self.announcement_evidence, self.submission_evidence, self.verification_plan_id,
                         self.checker_type, self.measured_fact, self.expected_constraint)):
                 raise ValueError("Generic verifier PASS/BLOCKER requires plan and both evidence sources")
+        if self.semantic_review is not None and self.status != FindingStatus.REVIEW:
+            raise ValueError("Semantic review can only produce REVIEW")
         if self.requirement_id in {"R20", "R21"} and self.status not in {FindingStatus.REVIEW, FindingStatus.EXTERNAL}:
             raise ValueError("Licensing and AI provenance have no automatic verification")
         if self.status == FindingStatus.BLOCKER:

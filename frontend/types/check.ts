@@ -3,6 +3,19 @@ import type { GenericRequirementProfile, Verifier } from "./profile";
 export type FindingStatus = "BLOCKER" | "REVIEW" | "PASS" | "EXTERNAL";
 export type SubmissionStatus = "BLOCKED" | "REVIEW_REQUIRED" | "READY";
 export interface Evidence { source: string; locator: string; excerpt: string }
+export type SemanticAssessment = "RELATED_EVIDENCE_FOUND" | "NO_CLEAR_EVIDENCE";
+export type SemanticCoverage = "FULL" | "PARTIAL" | "NONE";
+export interface SemanticReviewMetadata {
+  assessment: SemanticAssessment | null;
+  coverage: SemanticCoverage;
+  reason_code: string | null;
+  evidence: Evidence[];
+  evidence_fingerprint: string | null;
+  provider: {
+    provider: string; model: string | null; prompt_version: string;
+    prompt_sha256: string; execution_kind: "ACTUAL" | "SIMULATED";
+  } | null;
+}
 export interface Requirement {
   id: string; title: string; description: string;
   verifier: Verifier | "VISION";
@@ -14,6 +27,7 @@ export interface ValidationResult {
   submission_evidence: Evidence | null; source_mode: "validator" | "generic_review" | "generic_verifier";
   verification_plan_id: string | null; checker_type: CheckerType | null;
   measured_fact: string | null; expected_constraint: string | null;
+  semantic_review: SemanticReviewMetadata | null;
 }
 export type CheckerType = "FILE_PRESENCE" | "FILE_COUNT" | "FILE_NAME" | "FILE_TYPE" | "FILE_SIZE" | "PDF_PAGE_COUNT" | "VIDEO_METADATA";
 export interface VerificationPlan {
