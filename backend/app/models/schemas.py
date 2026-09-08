@@ -1,7 +1,7 @@
 from datetime import datetime
 from enum import StrEnum
-from typing import Literal
-from pydantic import BaseModel, ConfigDict, Field, model_validator
+from typing import Annotated, Literal
+from pydantic import BaseModel, ConfigDict, Field, StringConstraints, model_validator
 from app.models.jobs import JobSummary
 from app.models.profiles import GenericRequirementProfile, ProviderProvenance
 from app.models.semantic_review import SemanticAssessment, SemanticCoverage
@@ -25,10 +25,19 @@ class SubmissionStatus(StrEnum):
     READY = "READY"
 
 
+VerbatimExcerpt = Annotated[str, StringConstraints(strip_whitespace=False, min_length=1)]
+
+
 class Evidence(Model):
     source: str = Field(min_length=1)
     locator: str = Field(min_length=1)
-    excerpt: str = Field(min_length=1)
+    excerpt: VerbatimExcerpt
+
+    @model_validator(mode="after")
+    def nonblank_excerpt(self) -> "Evidence":
+        if not self.excerpt.strip():
+            raise ValueError("Evidence excerpt must be nonblank")
+        return self
 
 
 class SemanticReviewMetadata(Model):

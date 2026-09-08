@@ -52,7 +52,7 @@ def profile(*items):
     return result
 
 
-def preparation(*, coverage: str = "FULL") -> SemanticPreparation:
+def preparation(*, coverage: str = "FULL", page_two_text: str | None = None) -> SemanticPreparation:
     return SemanticPreparation(
         eligible_requirement_ids=("R01",),
         document_id="D01",
@@ -69,7 +69,7 @@ def preparation(*, coverage: str = "FULL") -> SemanticPreparation:
             SemanticPage(
                 page_id="D01-P002",
                 page_number=2,
-                text="둘째 페이지는 기대효과를 구체적으로 설명합니다.",
+                text=page_two_text or "둘째 페이지는 기대효과를 구체적으로 설명합니다.",
                 text_sha256="b" * 64,
             ),
         ),
@@ -157,6 +157,25 @@ def test_whitespace_rewritten_quote_is_rejected_without_normalization():
 
     assert result.semantic_review.assessment is None
     assert result.semantic_review.reason_code == "SEMANTIC_EVIDENCE_REJECTED"
+
+
+def test_accepted_boundary_whitespace_is_preserved_verbatim():
+    quote = " 기대효과 "
+    result = gate(
+        preparation_value=preparation(page_two_text=f"앞{quote}뒤"),
+        response_value=response(candidates=[{
+            "document_id": "D01",
+            "page_id": "D01-P002",
+            "quote": quote,
+        }]),
+    )
+
+    assert result.submission_evidence.excerpt == quote
+    assert result.semantic_review.evidence[0].excerpt == quote
+    assert result.semantic_review.evidence_fingerprint != semantic_evidence_module().semantic_evidence_fingerprint(
+        "R01", "RELATED_EVIDENCE_FOUND", "FULL", None,
+        [{"source": "submission.pdf", "locator": "page 2 · chars 1:7", "excerpt": quote.strip()}],
+    )
 
 
 def test_unknown_requirement_id_is_rejected():
