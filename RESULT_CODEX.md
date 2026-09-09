@@ -70,3 +70,15 @@ Date: 2026-09-09 (Asia/Seoul)
 - Modified files: `frontend/lib/poll-session.ts`, `frontend/components/screens.tsx`, `frontend/tests/task10-semantic-ui.spec.ts`, `RESULT_CODEX.md`.
 - Evidence label: SELF. Playwright used mocked local HTTP responses, including a simulated transient 503; no public/ACTUAL AI test or provider call was run.
 - NOT TESTED: actual network interruption/retry behavior against a live server, actual semantic provider execution, the complete frontend suite, deployment, multi-worker behavior, and production provider availability.
+
+## TASK10 Task 8 — controlled fixtures and ACTUAL semantic E2E harness
+
+Date: 2026-09-09 (Asia/Seoul)
+
+- Added deterministic CJK PyMuPDF fixtures for an explicit Korean content requirement: text-native positive, missing-effect, prompt-injection, and raster-only scanned PDFs plus their announcement source.
+- TDD RED (backend cwd): `./.venv/Scripts/python.exe -m pytest tests/test_task10_semantic_submission.py -q` -> `2 failed, 10 passed` before the generator/fixtures existed. GREEN -> `12 passed` after generator and fixed SHA/text-layer/exact-quote contracts were implemented.
+- Final focused non-AI (backend cwd): `./.venv/Scripts/python.exe -m pytest tests/test_task10_semantic_submission.py tests/test_task10_semantic_provider.py tests/test_task10_semantic_evidence.py -q` -> `36 passed`. Frontend `npm run typecheck` -> PASS. Opt-in browser harness without its flag -> `1 skipped`. `git diff --check` -> PASS.
+- The opt-in desktop ACTUAL test uses `TASK10_ACTUAL_AI=1` and the configured ChatGPT-authenticated Codex CLI; it requires acknowledgement, checks only REVIEW/generic_review, and writes a bounded artifact only after terminal positive and missing runs. It never persists full extracted document text or a full prompt payload.
+- ACTUAL classification: **NOT TESTED for TASK10 Semantic terminal behavior**. An isolated local attempt did observe actual Stage1/Stage2 provenance (`OpenAI via ChatGPT-authenticated Codex CLI`, configured `gpt-5.6-sol`/`high`), then found and repaired an upload/readiness race in the new test. A fresh retry was interrupted before semantic terminal output. No success artifact or screenshots were retained; no evidence gate was weakened.
+- Requested implementer model/effort: `gpt-5.6-terra`/`medium`; configured spawn override: UNKNOWN; agent-observed runtime metadata: UNKNOWN; token usage UNKNOWN.
+- NOT TESTED: ACTUAL semantic positive/missing/recheck outcome, full backend/frontend suites, build, TASK08/TASK09 regressions, public runtime/deployment, multi-worker behavior, and production availability.
