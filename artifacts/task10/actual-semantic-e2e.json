@@ -12,7 +12,7 @@
     "version": "task10-semantic-review-v1",
     "sha256": "c242a7cdcc9d4a1feddba58ce9a02a8db488227fe8bf8cf8f050d152f0d469cf"
   },
-  "profile_id": "5ac2477e-5ad6-4232-9f2c-8e67e68bb537",
+  "profile_id": "3a646fe8-e87e-4806-ab68-7187602edbd4",
   "fixture_sha256": {
     "positive": "c5ce8d12a1af8f67daf3aeefea68dba85a8030364e5354be01c5907244087038",
     "missing": "c96b274eac8a450e4eb08a45714b193632569a1f62fc63f49faee63bb5581fdc",
