@@ -192,6 +192,25 @@ def test_semantic_replacement_preserves_deterministic_results_and_no_persisted_t
     assert "EPHEMERAL_SENTINEL" not in sessions.session_store().get_session("task08-session").model_dump_json()
 
 
+@pytest.mark.parametrize("failure", ["timeout", "schema"])
+def test_attempted_semantic_failure_preserves_trusted_provider_and_prompt_provenance(api, failure):
+    client, reviewer = api
+    base = seed(client)
+    if failure == "timeout":
+        reviewer.error = TimeoutError("semantic provider timed out")
+    else:
+        reviewer.malformed = True
+
+    client.post(base + "/validate", json={"semantic_text_ai_acknowledged": True})
+    body = finish(client, base)
+
+    expected = reviewer.provenance.model_dump(mode="json")
+    assert body["results"][1]["semantic_review"]["provider"] == expected
+    raw_paths = list(sessions.workspace_path("task08-session").glob("run-*-raw.json"))
+    assert len(raw_paths) == 1
+    assert json.loads(raw_paths[0].read_text(encoding="utf-8"))["semantic"]["provider"] == expected
+
+
 def test_package_change_before_commit_fails_and_publishes_no_current_results(api):
     client, reviewer = api
     base = seed(client)

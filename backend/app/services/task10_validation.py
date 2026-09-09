@@ -59,9 +59,9 @@ def run_generic_preflight(
             reservation = guard.reserve(session.id, "SEMANTIC",
                 f"semantic:{session.id}:{session.revision + 1}:{preparation.file_sha256}:{profile.profile_id}:{profile.version}")
             check_integrity(session, package)
+            provenance = ProviderProvenance.model_validate(reviewer.provenance)
             response = reviewer.review(eligible_semantic_requirements(profile), preparation)
             response = SemanticAIResponse.model_validate(response)
-            provenance = ProviderProvenance.model_validate(reviewer.provenance)
             semantic_results = gate_semantic_reviews(profile, preparation, response, provenance)
         except PackageChangedDuringRun:
             raise
@@ -83,7 +83,8 @@ def run_generic_preflight(
             metadata = SemanticReviewMetadata(coverage=preparation.coverage,
                 reason_code=reason or "SEMANTIC_PROVIDER_UNAVAILABLE",
                 evidence_fingerprint=semantic_evidence_fingerprint(requirement_id, None,
-                    preparation.coverage, reason or "SEMANTIC_PROVIDER_UNAVAILABLE", []))
+                    preparation.coverage, reason or "SEMANTIC_PROVIDER_UNAVAILABLE", []),
+                provider=provenance)
             semantic_results[requirement_id] = ValidationResult.model_validate({
                 **by_id[requirement_id].model_dump(),
                 "id": f"{requirement_id}:semantic", "status": "REVIEW", "source_mode": "generic_review",

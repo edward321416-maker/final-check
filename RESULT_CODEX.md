@@ -41,3 +41,16 @@ Date: 2026-09-07 (Asia/Seoul)
 Direction locks: FINAL CHECK = GO; Typed Verifier Compiler = GO; TASK08 implementation = MODIFY; AI Planner = GO for the local MVP; AI verdict authority = NOT_ALLOWED; Plan Gate = REQUIRED; conditional automatic verification = NOT_ALLOWED; False PASS policy = STRICT; Generic deterministic verifier = GO; current file support = PDF / MP4; PR #11 = DO NOT MERGE YET.
 
 Evidence is stored under `artifacts/task08/`, including the actual planner result, actual product E2E envelope, screenshots and backend JUnit output.
+
+## TASK10 Task 6 resume fix round 1
+
+Date: 2026-09-09 (Asia/Seoul)
+
+- Scope: Important finding 1 only. Trusted reviewer provenance is captured before an attempted semantic review and retained in degraded result metadata and bounded raw output after timeout or schema rejection. Semantic output remains REVIEW-only; deterministic findings and provider/model configuration are unchanged.
+- RED (backend cwd): `.\.venv\Scripts\python.exe -m pytest tests/test_task10_api.py::test_attempted_semantic_failure_preserves_trusted_provider_and_prompt_provenance -q` -> expected `2 failed, 1 warning`; both cases observed missing `semantic_review.provider`.
+- GREEN (backend cwd): `.\.venv\Scripts\python.exe -m pytest tests/test_task10_api.py::test_attempted_semantic_failure_preserves_trusted_provider_and_prompt_provenance -q` -> `2 passed, 1 warning`.
+- Relevant backend suite (backend cwd): `.\.venv\Scripts\python.exe -m pytest tests/test_task10_api.py tests/test_task08_verifier.py tests/test_smoke.py -q` -> `119 passed, 1 warning`.
+- Diff check: `git diff --check` -> PASS before commit.
+- Modified files: `backend/app/services/task10_validation.py`, `backend/tests/test_task10_api.py`, `RESULT_CODEX.md`.
+- Evidence label: SELF. Timeout and invalid-schema provider behavior used the existing simulated external-reviewer test double; no actual Codex provider call was made.
+- NOT TESTED: actual Codex CLI timeout/schema failure, frontend/browser behavior, the full backend suite, deployment, multi-worker behavior, and production provider availability.
