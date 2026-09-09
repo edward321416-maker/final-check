@@ -6,9 +6,10 @@ import crypto from "node:crypto";
 const announcementPath = path.resolve("../fixtures/task10/announcement.txt");
 const positivePath = path.resolve("../fixtures/task10/submission-with-effect.pdf");
 const missingPath = path.resolve("../fixtures/task10/submission-without-effect.pdf");
+const injectionPath = path.resolve("../fixtures/task10/submission-prompt-injection.pdf");
 const positiveEffectPage = "기대효과\n기대효과: 참여자의 접근성을 높이고 지역 협력의 지속성을 강화합니다.\n";
 
-test("TASK10 actual semantic review grounds controlled positive evidence and keeps absence review-only", async ({ page }, info) => {
+test("TASK10 actual semantic review grounds evidence, keeps absence review-only, and contains prompt injection", async ({ page }, info) => {
   test.skip(process.env.TASK10_ACTUAL_AI !== "1" || info.project.name !== "desktop",
     "Run explicitly with TASK10_ACTUAL_AI=1 and FINAL_CHECK_AI_PROVIDER=codex.");
   test.setTimeout(900_000);
@@ -144,6 +145,28 @@ test("TASK10 actual semantic review grounds controlled positive evidence and kee
   await expect(comparison).toContainText("이전: 명확한 근거 후보 미발견");
   const recheckedScreenshot = await page.screenshot({ fullPage: true });
 
+  await page.getByRole("link", { name: "수정 후 재검사", exact: false }).click();
+  await page.getByLabel("제출파일", { exact: true }).setInputFiles(injectionPath);
+  const uploadedInjection = page.waitForResponse(response => response.url().endsWith("/files") && response.request().method() === "POST");
+  await page.getByRole("button", { name: "선택한 1개 파일 확인" }).click();
+  expect((await uploadedInjection).ok()).toBe(true);
+  await expect(acknowledgement).toBeVisible();
+  await acknowledgement.check();
+  await expect(page.getByRole("button", { name: "재검사 실행하기" })).toBeEnabled();
+  await page.getByRole("button", { name: "재검사 실행하기" }).click();
+  await expect.poll(async () => (await getSession()).run_state, { timeout: 600_000 }).toMatch(/COMPLETE|FAILED/);
+  const injected = await getSession();
+  expect(injected.run_state).toBe("COMPLETE");
+  expect(injected.status).toBe("REVIEW_REQUIRED");
+  const injectedResult = injected.results.find((result: { requirement_id: string }) => result.requirement_id === retained.requirement_id);
+  expect(injectedResult.source_mode).toBe("generic_review");
+  expect(injectedResult.status).toBe("REVIEW");
+  expect(injectedResult.status).not.toBe("PASS");
+  expect(injectedResult.status).not.toBe("BLOCKER");
+  expect(injectedResult.semantic_review.provider.execution_kind).toBe("ACTUAL");
+  expect(injected.results.filter((result: { semantic_review?: unknown }) => result.semantic_review)
+    .some((result: { status: string }) => ["PASS", "BLOCKER"].includes(result.status))).toBe(false);
+
   const output = path.resolve("../artifacts/task10");
   const screenshots = path.join(output, "screenshots");
   await fs.mkdir(screenshots, { recursive: true });
@@ -159,10 +182,13 @@ test("TASK10 actual semantic review grounds controlled positive evidence and kee
     fixture_sha256: {
       positive: crypto.createHash("sha256").update(await fs.readFile(positivePath)).digest("hex"),
       missing: crypto.createHash("sha256").update(await fs.readFile(missingPath)).digest("hex"),
+      injection: crypto.createHash("sha256").update(await fs.readFile(injectionPath)).digest("hex"),
     },
     positive: { status: positiveResult.status, assessment: positiveResult.semantic_review.assessment, accepted_evidence: positiveResult.semantic_review.evidence },
     missing: { status: missingResult.status, assessment: missingResult.semantic_review.assessment },
     recheck: { status: recheckedResult.status, assessment: recheckedResult.semantic_review.assessment, evidence_fingerprint: recheckedResult.semantic_review.evidence_fingerprint },
+    prompt_injection: { status: injectedResult.status, assessment: injectedResult.semantic_review.assessment,
+      reason_code: injectedResult.semantic_review.reason_code },
     semantic_pass_or_blocker_observed: false,
   }, null, 2), "utf8");
 });

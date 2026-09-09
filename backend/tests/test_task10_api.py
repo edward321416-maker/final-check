@@ -1,22 +1,29 @@
 """Real local API/storage checks; only the external semantic reviewer is simulated."""
 import json
+from pathlib import Path
 import threading
 import time
 
 import pymupdf
 import pytest
 from fastapi.testclient import TestClient
+from pydantic import ValidationError
 
 from app.main import app
 from app.models.profiles import ExtractedRequirement, ProviderProvenance
 from app.models.semantic_review import SemanticAIResponse
 from app.services import generic_validation, profiles, sessions
+from app.api import routes
 from app.api.routes import semantic_reviewer_factory
+from app.services.ai_providers import ProviderExecutionError
 from app.services.verifier_compiler import compile_profile
 from app.services.public_guard import GuardConfig, GuardRejected, PublicGuard
 from app.services.semantic_submission import prepare_semantic_submission
 from app.services.task10_validation import run_generic_preflight
 from test_task08_verifier import Planner, candidate, confirmed_profile, seeded_session
+
+
+ROOT = Path(__file__).resolve().parents[2]
 
 
 class Reviewer:
@@ -32,6 +39,7 @@ class Reviewer:
         self.error = None
         self.mutate = None
         self.malformed = False
+        self.raw_response = None
 
     def review(self, requirements, preparation):
         self.calls += 1
@@ -41,6 +49,8 @@ class Reviewer:
             self.mutate()
         if self.error:
             raise self.error
+        if self.raw_response is not None:
+            return self.raw_response
         if self.malformed:
             return {"reviews": [{"requirement_id": "G002", "status": "PASS"}]}
         return SemanticAIResponse(reviews=[dict(requirement_id=r.requirement_id,
@@ -60,7 +70,7 @@ def api():
         app.dependency_overrides.clear()
 
 
-def seed(client, *, semantic=True, pdf=True):
+def seed(client, *, semantic=True, pdf=True, partial_pdf=False, pdf_fixture=None):
     quote = "PDF는 2페이지 이내여야 합니다.\n사업의 기대효과를 설명해야 합니다."
     profile = confirmed_profile(quote, rule="PDF는 2페이지 이내여야 합니다.")
     if semantic:
@@ -79,11 +89,19 @@ def seed(client, *, semantic=True, pdf=True):
         proposals.append(proposed.model_copy(update={"requirement_id": "G002"}))
     session.verification_plan = compile_profile(profile, Planner(proposals))
     sessions.save(session)
-    document = pymupdf.open()
-    page = document.new_page()
-    page.insert_text((30, 30), "EPHEMERAL_SENTINEL full private proposal text.")
-    content = document.tobytes()
-    document.close()
+    if pdf_fixture is not None:
+        content = (ROOT / "fixtures" / "task10" / pdf_fixture).read_bytes()
+    else:
+        document = pymupdf.open()
+        page = document.new_page()
+        page.insert_text((30, 30), "EPHEMERAL_SENTINEL full private proposal text.")
+        if partial_pdf:
+            image_page = document.new_page()
+            pixmap = pymupdf.Pixmap(pymupdf.csRGB, pymupdf.IRect(0, 0, 8, 8), False)
+            pixmap.clear_with(0xEEEEEE)
+            image_page.insert_image(image_page.rect, pixmap=pixmap)
+        content = document.tobytes()
+        document.close()
     name = "private.pdf" if pdf else "video.mp4"
     response = client.post("/api/sessions/task08-session/files", files={"files": (name, content)})
     assert response.status_code == 200
@@ -98,6 +116,17 @@ def finish(client, base):
             return body
         time.sleep(.01)
     pytest.fail("background run did not finish")
+
+
+class RejectingSemanticGuard:
+    def __init__(self, reason):
+        self.reason = reason
+
+    def reserve(self, *_args):
+        raise GuardRejected(self.reason)
+
+    def release(self, _reservation):
+        return None
 
 
 def test_deterministic_only_validate_remains_synchronous_and_zero_semantic_calls(api):
@@ -190,6 +219,123 @@ def test_semantic_replacement_preserves_deterministic_results_and_no_persisted_t
     raw = list(sessions.workspace_path("task08-session").glob("run-*-raw.json"))
     assert len(raw) == 1 and "EPHEMERAL_SENTINEL" not in raw[0].read_text(encoding="utf-8")
     assert "EPHEMERAL_SENTINEL" not in sessions.session_store().get_session("task08-session").model_dump_json()
+
+
+def test_task9_adversarial_fabricated_quote_is_absent_from_api_trusted_evidence(api):
+    client, reviewer = api
+    fake_quote = "이 문장은 PDF에 존재하지 않는다."
+    reviewer.raw_response = {
+        "reviews": [{
+            "requirement_id": "G002",
+            "assessment": "RELATED_EVIDENCE_FOUND",
+            "evidence_candidates": [{
+                "document_id": "D01",
+                "page_id": "D01-P001",
+                "quote": fake_quote,
+            }],
+        }],
+    }
+    base = seed(client)
+
+    client.post(base + "/validate", json={"semantic_text_ai_acknowledged": True})
+    body = finish(client, base)
+    semantic = body["results"][1]
+
+    assert semantic["status"] == "REVIEW"
+    assert semantic["semantic_review"]["reason_code"] == "SEMANTIC_EVIDENCE_REJECTED"
+    assert semantic["semantic_review"]["evidence"] == []
+    assert semantic["submission_evidence"] is None
+    assert fake_quote not in json.dumps(body, ensure_ascii=False)
+
+
+def test_task9_adversarial_injection_fixture_verdict_field_is_rejected_and_review_only(api):
+    client, reviewer = api
+    attempted_verdict = {
+        "reviews": [{
+            "requirement_id": "G002",
+            "assessment": "NO_CLEAR_EVIDENCE",
+            "evidence_candidates": [],
+            "verdict": "PASS",
+        }],
+    }
+    with pytest.raises(ValidationError, match="Extra inputs are not permitted"):
+        SemanticAIResponse.model_validate(attempted_verdict)
+    reviewer.raw_response = attempted_verdict
+    base = seed(client, pdf_fixture="submission-prompt-injection.pdf")
+
+    client.post(base + "/validate", json={"semantic_text_ai_acknowledged": True})
+    body = finish(client, base)
+    semantic = body["results"][1]
+
+    assert reviewer.calls == 1
+    assert semantic["status"] == "REVIEW"
+    assert semantic["status"] not in {"PASS", "BLOCKER"}
+    assert semantic["semantic_review"]["reason_code"] == "SEMANTIC_PROVIDER_UNAVAILABLE"
+    assert semantic["submission_evidence"] is None
+    assert "verdict" not in json.dumps(body)
+
+
+def test_task9_adversarial_partial_image_page_cannot_become_whole_document_absence(api):
+    client, reviewer = api
+    base = seed(client, partial_pdf=True)
+
+    client.post(base + "/validate", json={"semantic_text_ai_acknowledged": True})
+    body = finish(client, base)
+    semantic = body["results"][1]
+
+    assert reviewer.calls == 1
+    assert body["results"][0]["status"] == "PASS"
+    assert semantic["status"] == "REVIEW"
+    assert semantic["semantic_review"]["coverage"] == "PARTIAL"
+    assert semantic["semantic_review"]["assessment"] is None
+    assert semantic["semantic_review"]["reason_code"] == "PARTIAL_TEXT_COVERAGE"
+    assert "명확한 관련 근거 후보를 찾지 못했습니다" not in json.dumps(body, ensure_ascii=False)
+
+
+@pytest.mark.parametrize(
+    "failure",
+    ["timeout", "auth_unavailable", "transport_unavailable", "invalid_json",
+     "schema_rejection", "public_guard_quota", "public_guard_concurrency"],
+)
+def test_task9_adversarial_provider_failure_matrix_preserves_deterministic_finding(api, monkeypatch, failure):
+    client, reviewer = api
+    base = seed(client)
+    if failure == "timeout":
+        reviewer.error = TimeoutError("semantic provider timed out")
+    elif failure == "auth_unavailable":
+        reviewer.error = ProviderExecutionError("authentication unavailable", category="AUTH_UNAVAILABLE")
+    elif failure == "transport_unavailable":
+        reviewer.error = ConnectionError("semantic provider transport unavailable")
+    elif failure == "invalid_json":
+        reviewer.raw_response = "{not valid json"
+    elif failure == "schema_rejection":
+        reviewer.raw_response = {"reviews": [{
+            "requirement_id": "G002",
+            "assessment": "NO_CLEAR_EVIDENCE",
+            "evidence_candidates": [],
+            "status": "BLOCKER",
+        }]}
+    else:
+        reason = "GLOBAL_QUOTA" if failure == "public_guard_quota" else "CONCURRENCY"
+        monkeypatch.setattr(routes, "PublicGuard", lambda _store: RejectingSemanticGuard(reason))
+
+    client.post(base + "/validate", json={"semantic_text_ai_acknowledged": True})
+    body = finish(client, base)
+    deterministic, semantic = body["results"]
+
+    assert body["run_state"] == "COMPLETE"
+    assert body["status"] == "REVIEW_REQUIRED"
+    assert body["validation_complete"] is False
+    assert deterministic["requirement_id"] == "G001"
+    assert deterministic["status"] == "PASS"
+    assert semantic["requirement_id"] == "G002"
+    assert semantic["status"] == "REVIEW"
+    assert semantic["submission_evidence"] is None
+    assert semantic["semantic_review"]["reason_code"] == (
+        "SEMANTIC_GUARD_UNAVAILABLE" if failure.startswith("public_guard_")
+        else "SEMANTIC_PROVIDER_UNAVAILABLE"
+    )
+    assert reviewer.calls == (0 if failure.startswith("public_guard_") else 1)
 
 
 @pytest.mark.parametrize("failure", ["timeout", "schema"])

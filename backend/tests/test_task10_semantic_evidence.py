@@ -3,6 +3,7 @@ import importlib
 import importlib.util
 
 import pytest
+from pydantic import ValidationError
 
 from app.models.profiles import AnnouncementSource, ExtractedRequirement, ProviderProvenance
 from app.models.semantic_review import SemanticAIResponse
@@ -137,15 +138,34 @@ def test_quote_on_wrong_page_is_rejected():
     assert result.submission_evidence is None
 
 
-def test_fabricated_quote_is_rejected():
+def test_task9_adversarial_fabricated_quote_is_rejected_from_trusted_result():
+    fake_quote = "이 문장은 PDF에 존재하지 않는다."
     result = gate(response_value=response(candidates=[{
         "document_id": "D01",
-        "page_id": "D01-P002",
-        "quote": "존재하지 않는 문장",
+        "page_id": "D01-P001",
+        "quote": fake_quote,
     }]))
 
+    assert result.status == "REVIEW"
     assert result.semantic_review.reason_code == "SEMANTIC_EVIDENCE_REJECTED"
+    assert result.semantic_review.evidence == []
+    assert result.submission_evidence is None
     assert result.explanation == "AI가 제시한 제출물 근거를 원문에서 확인하지 못했습니다."
+    assert fake_quote not in result.model_dump_json()
+
+
+def test_task9_adversarial_verdict_shaped_extra_field_is_schema_rejected():
+    attempted_verdict = {
+        "reviews": [{
+            "requirement_id": "R01",
+            "assessment": "NO_CLEAR_EVIDENCE",
+            "evidence_candidates": [],
+            "verdict": "PASS",
+        }],
+    }
+
+    with pytest.raises(ValidationError, match="Extra inputs are not permitted"):
+        SemanticAIResponse.model_validate(attempted_verdict)
 
 
 def test_whitespace_rewritten_quote_is_rejected_without_normalization():
@@ -192,7 +212,7 @@ def test_positive_partial_coverage_can_show_grounded_quote_with_warning():
     assert "읽을 수 없는 페이지" in result.action
 
 
-def test_negative_partial_coverage_never_claims_absence():
+def test_task9_adversarial_negative_partial_coverage_never_claims_absence():
     result = gate(
         preparation_value=preparation(coverage="PARTIAL"),
         response_value=response(assessment="NO_CLEAR_EVIDENCE", candidates=[]),
@@ -200,7 +220,9 @@ def test_negative_partial_coverage_never_claims_absence():
 
     assert result.semantic_review.assessment is None
     assert result.semantic_review.reason_code == "PARTIAL_TEXT_COVERAGE"
+    assert result.status == "REVIEW"
     assert result.explanation == "일부 페이지는 자동으로 읽을 수 없어 전체 내용을 직접 확인해야 합니다."
+    assert "명확한 관련 근거 후보를 찾지 못했습니다" not in result.model_dump_json()
 
 
 def test_negative_full_coverage_uses_no_clear_evidence_template():

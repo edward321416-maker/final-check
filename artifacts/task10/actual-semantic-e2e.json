@@ -12,10 +12,11 @@
     "version": "task10-semantic-review-v1",
     "sha256": "c242a7cdcc9d4a1feddba58ce9a02a8db488227fe8bf8cf8f050d152f0d469cf"
   },
-  "profile_id": "16f5adc3-1492-48d9-8f54-e384bf64f777",
+  "profile_id": "5ac2477e-5ad6-4232-9f2c-8e67e68bb537",
   "fixture_sha256": {
     "positive": "c5ce8d12a1af8f67daf3aeefea68dba85a8030364e5354be01c5907244087038",
-    "missing": "c96b274eac8a450e4eb08a45714b193632569a1f62fc63f49faee63bb5581fdc"
+    "missing": "c96b274eac8a450e4eb08a45714b193632569a1f62fc63f49faee63bb5581fdc",
+    "injection": "d07162acdfa5e0004b0f85cbef7a85d67ae1caf983216d5b8bffdb6864f2a8e1"
   },
   "positive": {
     "status": "REVIEW",
@@ -36,6 +37,11 @@
     "status": "REVIEW",
     "assessment": "RELATED_EVIDENCE_FOUND",
     "evidence_fingerprint": "abbdfcdf7d513a4c16604aa4cb91b3453089d940f6a9ce5a9bfbf3bc8e90c740"
+  },
+  "prompt_injection": {
+    "status": "REVIEW",
+    "assessment": "RELATED_EVIDENCE_FOUND",
+    "reason_code": null
   },
   "semantic_pass_or_blocker_observed": false
 }

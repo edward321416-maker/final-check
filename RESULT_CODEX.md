@@ -95,3 +95,20 @@ Date: 2026-09-09 (Asia/Seoul)
 - Focused backend (backend cwd): `./.venv/Scripts/python.exe -m pytest tests/test_task10_semantic_submission.py tests/test_task10_semantic_provider.py tests/test_task10_semantic_evidence.py -q` -> `36 passed`. Frontend typecheck and production build -> PASS. `git diff --check` -> PASS.
 - Requested/configured implementer model/effort: `gpt-5.6-terra`/`medium`; observed agent runtime metadata UNKNOWN. Actual provider configuration was `gpt-5.6-sol`/`high`; token usage UNKNOWN.
 - NOT TESTED: full backend/frontend suites, TASK08/TASK09 regression, public runtime/deployment, multi-worker behavior, and broad provider reliability.
+
+## TASK10 Task 9 — adversarial safety acceptance
+
+Date: 2026-09-10 (Asia/Seoul)
+
+- Scope: adversarial acceptance only. Added no production interface or production-code change; provider/model/product configuration and evidence gates are unchanged.
+- TDD RED (backend cwd): `.\.venv\Scripts\python.exe -m pytest tests/test_task10_semantic_evidence.py tests/test_task10_api.py -q -k task9_adversarial` -> no Task 9 adversarial cases collected (`38 deselected`, exit `5`), demonstrating the requested acceptance coverage was absent.
+- Focused GREEN (backend cwd): the same command after adding the adversarial cases -> `13 passed, 36 deselected, 1 warning`.
+- Task 9 safety suite (backend cwd): `.\.venv\Scripts\python.exe -m pytest tests/test_task10_semantic_evidence.py tests/test_task10_api.py tests/test_task10_runtime.py -q` -> `50 passed, 1 warning`.
+- SELF: exact fabricated-quote rejection, closed verdict-field schema rejection, real partial-text PDF suppression, and API result assertions passed. Fabricated provider evidence never entered `submission_evidence` or serialized trusted API data; partial coverage never became a whole-document absence claim.
+- SIMULATED: timeout, authentication unavailable, transport unavailable, invalid JSON, schema rejection, PublicGuard quota, and PublicGuard concurrency cases each preserved deterministic `G001 / PASS` and degraded only semantic `G002` to `REVIEW`.
+- ACTUAL: existing ChatGPT-authenticated Codex configuration (`gpt-5.6-sol`, reasoning `high`) processed the controlled prompt-injection PDF. The terminal semantic outcome was `REVIEW / RELATED_EVIDENCE_FOUND`, overall `REVIEW_REQUIRED`, with no semantic `PASS` or `BLOCKER`. The opt-in desktop command passed `1` test in `1.1m`.
+- Frontend verification: `npm run typecheck` -> PASS; `npm run build` -> PASS.
+- Modified files: `backend/tests/test_task10_semantic_evidence.py`, `backend/tests/test_task10_api.py`, `frontend/tests/task10-actual-semantic.spec.ts`, `artifacts/task10/actual-semantic-e2e.json`, `artifacts/task10/adversarial-safety-acceptance.md`, and `RESULT_CODEX.md`.
+- Requested implementer model/effort: `gpt-5.6-sol` / `high`. Configured spawn override: UNKNOWN. Agent-observed runtime metadata: UNKNOWN. Actual provider configuration observed in bounded evidence: `gpt-5.6-sol` / `high`. Token usage: UNKNOWN.
+- NOT TESTED: public deployment, production provider reliability, multi-worker behavior, API-key/OAuth providers, Vision/OCR, or broad semantic accuracy. No push, PR, merge, paid credit, account rotation, or public service change was performed.
+- Concern: the supplied repo-root pytest command requires `backend` on `PYTHONPATH`; the equivalent backend-working-directory command above is the passing execution. The existing Starlette/httpx deprecation warning remains unrelated.
