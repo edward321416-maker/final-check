@@ -82,3 +82,16 @@ Date: 2026-09-09 (Asia/Seoul)
 - ACTUAL classification: **NOT TESTED for TASK10 Semantic terminal behavior**. An isolated local attempt did observe actual Stage1/Stage2 provenance (`OpenAI via ChatGPT-authenticated Codex CLI`, configured `gpt-5.6-sol`/`high`), then found and repaired an upload/readiness race in the new test. A fresh retry was interrupted before semantic terminal output. No success artifact or screenshots were retained; no evidence gate was weakened.
 - Requested implementer model/effort: `gpt-5.6-terra`/`medium`; configured spawn override: UNKNOWN; agent-observed runtime metadata: UNKNOWN; token usage UNKNOWN.
 - NOT TESTED: ACTUAL semantic positive/missing/recheck outcome, full backend/frontend suites, build, TASK08/TASK09 regressions, public runtime/deployment, multi-worker behavior, and production availability.
+
+## TASK10 Task 8 fix round 1 — ACTUAL semantic acceptance
+
+Date: 2026-09-09 (Asia/Seoul)
+
+- The opt-in harness now asserts task10 semantic provider provenance separately from Stage1/Stage2: `OpenAI via ChatGPT-authenticated Codex CLI`, `execution_kind=ACTUAL`, and `task10-semantic-review-v1` prompt provenance.
+- The human-confirmed rule is intentionally narrowed to expected-effect content. Positive evidence accepts any non-empty locally accepted excerpt only if it is an exact substring of the controlled expected-effect page; no arbitrary full model sentence is required.
+- The flow is positive -> missing -> positive recheck. All terminal results are REVIEW: positive/recheck `RELATED_EVIDENCE_FOUND`; missing `FULL`/`NO_CLEAR_EVIDENCE`; evidence fingerprints differ; the REVIEW-to-REVIEW Korean comparison is asserted. Semantic never produces PASS/BLOCKER.
+- Screenshots and bounded ACTUAL JSON are published only after every assertion passes. Artifact fields exclude the full extracted text and prompt payload.
+- ACTUAL (fresh local isolated data, configured authenticated Codex provider): `npm run test:smoke -- task10-actual-semantic.spec.ts --project=desktop --reporter=list` -> `1 passed (55.5s)`. Positive accepted page-2 excerpt: `기대효과: 참여자의 접근성을 높이고 지역 협력의 지속성을 강화합니다.` Missing result: REVIEW/NO_CLEAR_EVIDENCE/FULL. Recheck: REVIEW/RELATED_EVIDENCE_FOUND with changed fingerprint.
+- Focused backend (backend cwd): `./.venv/Scripts/python.exe -m pytest tests/test_task10_semantic_submission.py tests/test_task10_semantic_provider.py tests/test_task10_semantic_evidence.py -q` -> `36 passed`. Frontend typecheck and production build -> PASS. `git diff --check` -> PASS.
+- Requested/configured implementer model/effort: `gpt-5.6-terra`/`medium`; observed agent runtime metadata UNKNOWN. Actual provider configuration was `gpt-5.6-sol`/`high`; token usage UNKNOWN.
+- NOT TESTED: full backend/frontend suites, TASK08/TASK09 regression, public runtime/deployment, multi-worker behavior, and broad provider reliability.

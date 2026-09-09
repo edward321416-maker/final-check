@@ -6,16 +6,12 @@ import crypto from "node:crypto";
 const announcementPath = path.resolve("../fixtures/task10/announcement.txt");
 const positivePath = path.resolve("../fixtures/task10/submission-with-effect.pdf");
 const missingPath = path.resolve("../fixtures/task10/submission-without-effect.pdf");
-const expectedEffectQuote = "기대효과: 참여자의 접근성을 높이고 지역 협력의 지속성을 강화합니다.";
+const positiveEffectPage = "기대효과\n기대효과: 참여자의 접근성을 높이고 지역 협력의 지속성을 강화합니다.\n";
 
 test("TASK10 actual semantic review grounds controlled positive evidence and keeps absence review-only", async ({ page }, info) => {
   test.skip(process.env.TASK10_ACTUAL_AI !== "1" || info.project.name !== "desktop",
     "Run explicitly with TASK10_ACTUAL_AI=1 and FINAL_CHECK_AI_PROVIDER=codex.");
   test.setTimeout(900_000);
-  const output = path.resolve("../artifacts/task10");
-  const screenshots = path.join(output, "screenshots");
-  await fs.mkdir(screenshots, { recursive: true });
-
   await page.goto("/");
   await page.getByLabel("공고문 텍스트", { exact: true }).fill(await fs.readFile(announcementPath, "utf8"));
   const startedResponse = page.waitForResponse(response => response.url().endsWith("/announcement-text"));
@@ -45,7 +41,7 @@ test("TASK10 actual semantic review grounds controlled positive evidence and kee
     if (item.requirement_id === retained.requirement_id) {
       const requirement = {
         requirement_id: item.requirement_id,
-        rule: "제안서 PDF에는 사업 추진 배경과 기대효과를 포함해야 합니다.",
+        rule: "제안서 PDF에는 기대효과를 포함해야 합니다.",
         modality: "MUST",
         severity: "REVIEW",
         verifier: "SEMANTIC",
@@ -73,11 +69,13 @@ test("TASK10 actual semantic review grounds controlled positive evidence and kee
   const uploadedPositive = page.waitForResponse(response => response.url().endsWith("/files") && response.request().method() === "POST");
   await page.getByRole("button", { name: "선택한 1개 파일 확인" }).click();
   expect((await uploadedPositive).ok()).toBe(true);
-  await expect(page.getByRole("button", { name: "Preflight 실행하기" })).toBeEnabled();
+  const acknowledgement = page.getByRole("checkbox", { name: "PDF에서 추출된 전체 텍스트가 AI 내용 검토에 사용되는 것을 확인했습니다." });
+  await expect(acknowledgement).toBeVisible();
   const readiness = await page.request.get(`/api/sessions/${sessionId}/semantic-readiness`);
   expect(readiness.ok()).toBe(true);
   expect((await readiness.json()).ack_required).toBe(true);
-  await page.getByRole("checkbox", { name: "PDF에서 추출된 전체 텍스트가 AI 내용 검토에 사용되는 것을 확인했습니다." }).check();
+  await acknowledgement.check();
+  await expect(page.getByRole("button", { name: "Preflight 실행하기" })).toBeEnabled();
   const firstRun = page.waitForResponse(response => response.url().endsWith("/validate") && response.request().method() === "POST");
   await page.getByRole("button", { name: "Preflight 실행하기" }).click();
   const firstResponse = await firstRun;
@@ -91,16 +89,24 @@ test("TASK10 actual semantic review grounds controlled positive evidence and kee
   expect(positiveResult.status).toBe("REVIEW");
   expect(positiveResult.source_mode).toBe("generic_review");
   expect(positiveResult.semantic_review.assessment).toBe("RELATED_EVIDENCE_FOUND");
-  expect(positiveResult.submission_evidence.excerpt).toContain(expectedEffectQuote);
-  await page.screenshot({ path: path.join(screenshots, "actual-semantic-positive.png"), fullPage: true });
+  const semanticProvider = positiveResult.semantic_review.provider;
+  expect(semanticProvider.execution_kind).toBe("ACTUAL");
+  expect(semanticProvider.provider).toContain("ChatGPT-authenticated Codex CLI");
+  expect(semanticProvider.prompt_version).toBe("task10-semantic-review-v1");
+  const acceptedPositiveEvidence = positiveResult.semantic_review.evidence.find(
+    (evidence: { excerpt?: unknown }) => typeof evidence.excerpt === "string" && evidence.excerpt.trim().length > 0,
+  );
+  expect(acceptedPositiveEvidence, "Semantic acceptance must retain a non-empty locally grounded excerpt").toBeTruthy();
+  expect(positiveEffectPage).toContain(acceptedPositiveEvidence.excerpt);
 
   await page.getByRole("link", { name: "수정 후 재검사", exact: false }).click();
   await page.getByLabel("제출파일", { exact: true }).setInputFiles(missingPath);
   const uploadedMissing = page.waitForResponse(response => response.url().endsWith("/files") && response.request().method() === "POST");
   await page.getByRole("button", { name: "선택한 1개 파일 확인" }).click();
   expect((await uploadedMissing).ok()).toBe(true);
+  await expect(acknowledgement).toBeVisible();
+  await acknowledgement.check();
   await expect(page.getByRole("button", { name: "재검사 실행하기" })).toBeEnabled();
-  await page.getByRole("checkbox", { name: "PDF에서 추출된 전체 텍스트가 AI 내용 검토에 사용되는 것을 확인했습니다." }).check();
   await page.getByRole("button", { name: "재검사 실행하기" }).click();
   await expect.poll(async () => (await getSession()).run_state, { timeout: 600_000 }).toMatch(/COMPLETE|FAILED/);
   const missing = await getSession();
@@ -110,13 +116,45 @@ test("TASK10 actual semantic review grounds controlled positive evidence and kee
   expect(missingResult.status).not.toBe("BLOCKER");
   expect(missingResult.semantic_review.coverage).toBe("FULL");
   expect(missingResult.semantic_review.assessment).toBe("NO_CLEAR_EVIDENCE");
-  await page.screenshot({ path: path.join(screenshots, "actual-semantic-missing.png"), fullPage: true });
+  const missingFingerprint = missingResult.semantic_review.evidence_fingerprint;
+  expect(missingFingerprint).not.toBe(positiveResult.semantic_review.evidence_fingerprint);
+  await page.goto("/results");
+  await expect(page.getByRole("region", { name: "재검사 비교" })).toContainText("내용 근거 상태가 변경되었습니다.");
+  const missingScreenshot = await page.screenshot({ fullPage: true });
+
+  await page.getByRole("link", { name: "수정 후 재검사", exact: false }).click();
+  await page.getByLabel("제출파일", { exact: true }).setInputFiles(positivePath);
+  const uploadedPositiveRecheck = page.waitForResponse(response => response.url().endsWith("/files") && response.request().method() === "POST");
+  await page.getByRole("button", { name: "선택한 1개 파일 확인" }).click();
+  expect((await uploadedPositiveRecheck).ok()).toBe(true);
+  await expect(acknowledgement).toBeVisible();
+  await acknowledgement.check();
+  await expect(page.getByRole("button", { name: "재검사 실행하기" })).toBeEnabled();
+  await page.getByRole("button", { name: "재검사 실행하기" }).click();
+  await expect.poll(async () => (await getSession()).run_state, { timeout: 600_000 }).toMatch(/COMPLETE|FAILED/);
+  const rechecked = await getSession();
+  expect(rechecked.run_state).toBe("COMPLETE");
+  const recheckedResult = rechecked.results.find((result: { requirement_id: string }) => result.requirement_id === retained.requirement_id);
+  expect(recheckedResult.status).toBe("REVIEW");
+  expect(recheckedResult.semantic_review.assessment).toBe("RELATED_EVIDENCE_FOUND");
+  expect(recheckedResult.semantic_review.evidence_fingerprint).not.toBe(missingFingerprint);
+  await page.goto("/results");
+  const comparison = page.getByRole("region", { name: "재검사 비교" });
+  await expect(comparison).toContainText("내용 근거 상태가 변경되었습니다.");
+  await expect(comparison).toContainText("이전: 명확한 근거 후보 미발견");
+  const recheckedScreenshot = await page.screenshot({ fullPage: true });
+
+  const output = path.resolve("../artifacts/task10");
+  const screenshots = path.join(output, "screenshots");
+  await fs.mkdir(screenshots, { recursive: true });
+  await fs.writeFile(path.join(screenshots, "actual-semantic-missing.png"), missingScreenshot);
+  await fs.writeFile(path.join(screenshots, "actual-semantic-positive-recheck.png"), recheckedScreenshot);
 
   await fs.writeFile(path.join(output, "actual-semantic-e2e.json"), JSON.stringify({
     classification: "ACTUAL",
     baseline: "d90f53ae8e20b8a51b3a4559a3e7e5651dd204a0",
-    provider: positiveResult.semantic_review.provider,
-    prompt: { version: "task10-semantic-review-v1", sha256: positiveResult.semantic_review.provider.prompt_sha256 },
+    provider: semanticProvider,
+    prompt: { version: "task10-semantic-review-v1", sha256: semanticProvider.prompt_sha256 },
     profile_id: positive.generic_profile.profile_id,
     fixture_sha256: {
       positive: crypto.createHash("sha256").update(await fs.readFile(positivePath)).digest("hex"),
@@ -124,6 +162,7 @@ test("TASK10 actual semantic review grounds controlled positive evidence and kee
     },
     positive: { status: positiveResult.status, assessment: positiveResult.semantic_review.assessment, accepted_evidence: positiveResult.semantic_review.evidence },
     missing: { status: missingResult.status, assessment: missingResult.semantic_review.assessment },
+    recheck: { status: recheckedResult.status, assessment: recheckedResult.semantic_review.assessment, evidence_fingerprint: recheckedResult.semantic_review.evidence_fingerprint },
     semantic_pass_or_blocker_observed: false,
   }, null, 2), "utf8");
 });
