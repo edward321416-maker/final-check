@@ -1,9 +1,10 @@
 "use client";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState, type ChangeEvent } from "react";
+import { useEffect, useRef, useState, type ChangeEvent } from "react";
 import { request, sessionRequest } from "@/lib/api";
-import type { CheckSession, FindingStatus, SubmissionFile } from "@/types/check";
+import { pollSession } from "@/lib/poll-session";
+import type { CheckSession, FindingStatus, SemanticReadiness, SubmissionFile, ValidationResult } from "@/types/check";
 import { useSession } from "./session-provider";
 import { Badge, ErrorNotice, EvidenceBox, FileList, Guard, ModeNote, PageTitle, useAction } from "./ui";
 import { GenericProfileReview, TextAnnouncementInput } from "./generic-profile";
@@ -63,6 +64,43 @@ export function UploadScreen({ recheck = false }: { recheck?: boolean }) {
   const router = useRouter();
   const { busy, error, run } = useAction();
   const [selected, setSelected] = useState<File[]>([]);
+  const [readiness, setReadiness] = useState<SemanticReadiness | null>(null);
+  const [acknowledged, setAcknowledged] = useState(false);
+  const [pollError, setPollError] = useState("");
+  const pollingSession = useRef<string | null>(null);
+  async function loadReadiness(current: CheckSession) {
+    setAcknowledged(false);
+    setReadiness(null);
+    setReadiness(await request<SemanticReadiness>(`/sessions/${current.id}/semantic-readiness`));
+  }
+  async function resumePolling(current: CheckSession) {
+    if (pollingSession.current === current.id) return;
+    pollingSession.current = current.id;
+    setPollError("");
+    try {
+      const completed = await pollSession(current.id, update);
+      if (completed.run_state === "COMPLETE") router.push("/results");
+    } catch (pollingError) {
+      setPollError(pollingError instanceof Error ? pollingError.message : "검사 진행 상태를 불러오지 못했습니다.");
+    } finally {
+      pollingSession.current = null;
+    }
+  }
+  useEffect(() => {
+    let active = true;
+    if (!session?.files.length) {
+      setReadiness(null);
+      setAcknowledged(false);
+      return;
+    }
+    request<SemanticReadiness>(`/sessions/${session.id}/semantic-readiness`)
+      .then(value => { if (active) setReadiness(value); })
+      .catch(value => { if (active) setPollError(value instanceof Error ? value.message : "내용 검토 준비 상태를 불러오지 못했습니다."); });
+    return () => { active = false; };
+  }, [session?.id, session?.files.length]);
+  useEffect(() => {
+    if (session?.run_state === "RUNNING") void resumePolling(session);
+  }, [session?.id, session?.run_state]);
   async function choose(fixture: "demo-broken" | "demo-fixed") {
     if (!session) return;
     const manifest = await request<SubmissionFile[]>(`/demo-files/${fixture}`);
@@ -72,25 +110,37 @@ export function UploadScreen({ recheck = false }: { recheck?: boolean }) {
       if (!response.ok) throw new Error("demo 파일을 불러오지 못했습니다.");
       form.append("files", await response.blob(), file.name);
     }
-    update(await sessionRequest(session.id, "files", form));
+    const next = await sessionRequest(session.id, "files", form);
+    update(next);
+    await loadReadiness(next);
     setSelected([]);
   }
   async function upload() {
     if (!session || !selected.length) return;
     const form = new FormData();
     selected.forEach(file => form.append("files", file));
-    update(await sessionRequest(session.id, "files", form));
+    const next = await sessionRequest(session.id, "files", form);
+    update(next);
+    await loadReadiness(next);
     setSelected([]);
   }
   async function validate() {
     if (!session) return;
     try {
-      update(await sessionRequest(session.id, "validate", {}));
+      const next = await sessionRequest(session.id, "validate", {
+        semantic_text_ai_acknowledged: readiness?.ack_required ? acknowledged : false,
+      });
+      update(next);
+      if (next.run_state === "RUNNING") {
+        void resumePolling(next);
+        return;
+      }
+      if (next.run_state === "FAILED") return;
+      router.push("/results");
     } catch (error) {
       update(await request<CheckSession>(`/sessions/${session.id}`));
       throw error;
     }
-    router.push("/results");
   }
   function selectFiles(event: ChangeEvent<HTMLInputElement>) { setSelected(Array.from(event.target.files ?? [])); }
   const previous = session?.results.length ? session.results : session?.previous_results ?? [];
@@ -99,17 +149,33 @@ export function UploadScreen({ recheck = false }: { recheck?: boolean }) {
       {session?.mode === "demo" && <div className="fixture-options"><button className={`fixture-option ${session.fixture === "demo-broken" ? "selected" : ""}`} aria-pressed={session.fixture === "demo-broken"} disabled={busy} onClick={() => void run(() => choose("demo-broken"))}><span className="fixture-kicker">DEMO / BEFORE</span><strong>문제 있는 demo 불러오기</strong><small>개인정보 동의서 누락 · 영상 61초</small></button><button className={`fixture-option ${session.fixture === "demo-fixed" ? "selected" : ""}`} aria-pressed={session.fixture === "demo-fixed"} disabled={busy} onClick={() => void run(() => choose("demo-fixed"))}><span className="fixture-kicker">DEMO / AFTER</span><strong>수정한 demo 불러오기</strong><small>개인정보 동의서 복원 · 영상 45초</small></button></div>}
       {session?.files.length ? <FileList files={session.files} /> : <div className="empty-inline"><span className="upload-glyph">↑</span><h3>검사할 패키지를 선택해 주세요</h3><p>demo 패키지를 불러오거나 아래에서 내 파일을 선택하세요.</p></div>}
       <details className="custom-upload" open={session?.mode === "custom"}><summary>내 제출파일 선택하기</summary><p>현재 MVP 자동 검사 지원: PDF / MP4. 최대 8개 파일을 지원하며 배포 환경의 업로드 제한이 적용됩니다. 확인된 검사 계획만 코드로 실행하며 나머지는 직접 확인해야 합니다.</p><p className="info-note">제출 파일은 현재 자동 형식 검사를 위해 FINAL CHECK 서버에서 처리되며, TASK09의 AI Planner에는 전송되지 않습니다. 개인정보·회사 기밀이 없는 테스트 파일 사용을 권장합니다.</p><label className="file-picker"><span>파일 찾아보기</span><input aria-label="제출파일" type="file" multiple accept=".pdf,.mp4" disabled={busy} onChange={selectFiles} /></label>{selected.length > 0 && <div><p>{selected.map(file => file.name).join(", ")}</p><button className="button secondary" disabled={busy} onClick={() => void run(upload)}>선택한 {selected.length}개 파일 확인</button></div>}</details>
-      <ErrorNotice error={error} />
+      <ErrorNotice error={error || pollError} />
     </section><aside className="side-panel"><span className="eyebrow">{recheck ? "RECHECK CHECKLIST" : "BEFORE YOU CHECK"}</span><h3>{recheck ? "무엇을 바꾸셨나요?" : "파일의 근거까지 함께"}</h3>
       {recheck && previous.length > 0 ? <ul className="checklist">{previous.filter(r => r.status === "BLOCKER").map(r => <li key={r.id}>{r.action}</li>)}</ul> : <p>필수 서류와 영상 조건을 확인하고, 문제가 있으면 수정 방법을 안내합니다.</p>}
       <div className="info-note">R19 사진 구성 의심은 자동 BLOCKER가 되지 않습니다. 사람의 검토가 필요합니다.</div>
-      <button className="button primary full" disabled={busy || !session?.files.length || selected.length > 0} onClick={() => void run(validate)}>{busy ? "확인 중…" : recheck ? "재검사 실행하기 →" : "Preflight 실행하기 →"}</button>
+      {readiness?.ack_required && <div className="info-note"><strong>AI 내용 검토 안내</strong><p>원본 PDF 파일 자체는 AI에 전달되지 않습니다.<br />PDF에서 로컬로 추출한 전체 텍스트가 내용 요구사항 검토를 위해<br />ChatGPT 인증 Codex CLI를 통한 AI 분석에 사용됩니다.<br />MP4 내용은 AI로 분석하지 않습니다.</p><label><input type="checkbox" checked={acknowledged} onChange={event => setAcknowledged(event.target.checked)} /> PDF에서 추출된 전체 텍스트가 AI 내용 검토에 사용되는 것을 확인했습니다.</label></div>}
+      {session?.run_state === "RUNNING" && <p className="info-note">객관적 조건과 PDF 내용을 확인하고 있습니다…</p>}
+      <button className="button primary full" disabled={busy || !session?.files.length || selected.length > 0 || (Boolean(session?.files.length) && readiness === null) || (readiness?.ack_required && !acknowledged) || session?.run_state === "RUNNING"} onClick={() => void run(validate)}>{busy ? "확인 중…" : recheck ? "재검사 실행하기 →" : "Preflight 실행하기 →"}</button>
       <Link href={recheck && session?.results.length ? "/results" : "/announcement"} className="text-link">{recheck && session?.results.length ? "이전 결과 보기" : "← 공고 조건 다시 보기"}</Link>
     </aside></div>
   </Guard>;
 }
 
 const statuses: FindingStatus[] = ["BLOCKER", "REVIEW", "PASS", "EXTERNAL"];
+function resultChanged(oldResult: ValidationResult, current: ValidationResult) {
+  if (oldResult.status !== current.status) return true;
+  return oldResult.semantic_review?.evidence_fingerprint !== current.semantic_review?.evidence_fingerprint
+    || oldResult.semantic_review?.assessment !== current.semantic_review?.assessment
+    || oldResult.semantic_review?.reason_code !== current.semantic_review?.reason_code;
+}
+function semanticState(result: ValidationResult) {
+  if (result.semantic_review?.assessment === "NO_CLEAR_EVIDENCE") return "명확한 근거 후보 미발견";
+  if (result.semantic_review?.assessment === "RELATED_EVIDENCE_FOUND") {
+    const locator = result.semantic_review.evidence[0]?.locator ?? result.submission_evidence?.locator ?? "제출물";
+    return `${locator} 관련 근거 후보 발견`;
+  }
+  return "내용 근거 확인 필요";
+}
 export function ResultsScreen() {
   const { session } = useSession();
   const [filter, setFilter] = useState<FindingStatus | "ALL">("ALL");
@@ -117,13 +183,17 @@ export function ResultsScreen() {
   const results = [...(session?.results ?? [])].sort((a, b) => priority[a.status] - priority[b.status]);
   const blockers = results.filter(result => result.status === "BLOCKER").length;
   const previous = session?.previous_results ?? [];
-  const changes = results.filter(result => previous.some(old => old.requirement_id === result.requirement_id && old.status !== result.status));
-  const title = blockers ? "제출 전, 수정이 필요합니다" : session?.status === "READY" ? "검사한 조건을 모두 충족했습니다" : previous.some(result => result.status === "BLOCKER") ? "수정 완료. 직접 확인할 항목이 남았어요" : "직접 확인할 항목이 남았어요";
+  const changes = results.flatMap(result => {
+    const old = previous.find(item => item.requirement_id === result.requirement_id);
+    return old && resultChanged(old, result) ? [{ old, result }] : [];
+  });
+  const statusChanges = changes.filter(({ old, result }) => old.status !== result.status);
+  const title = blockers ? "제출 전, 수정이 필요합니다" : session?.status === "READY" ? "자동 확인 가능한 필수 조건을 충족했습니다." : previous.some(result => result.status === "BLOCKER") ? "수정 완료. 직접 확인할 항목이 남았어요" : "직접 확인할 항목이 남았어요";
   return <Guard requireResults><ModeNote /><PageTitle step="03 / PREFLIGHT RESULTS" title="근거를 확인하고, 제출을 준비하세요" description="판정별 근거와 필요한 조치를 확인한 뒤 수정한 파일로 다시 검사할 수 있습니다." />
-    <section className={`result-banner ${blockers ? "has-blocker" : ""}`} aria-label="전체 검사 상태"><div className="result-title"><span className="alert-symbol">{blockers ? "!" : "↗"}</span><div><span className="eyebrow">{session?.status} · CHECK {String(session?.revision ?? 1).padStart(2, "0")}</span><h2>{title}</h2><p>{blockers ? `BLOCKER ${blockers}개를 수정한 후 재검사하세요.` : "REVIEW와 EXTERNAL을 직접 확인하기 전에는 제출 준비 완료로 판단하지 않습니다."}</p></div></div><Link className="button primary" href="/recheck">수정 후 재검사 →</Link></section>
-    {previous.length > 0 && <section className="comparison" aria-label="재검사 비교"><strong>이전 검사와 비교</strong><span>{changes.length}개 판정 변경</span>{changes.map(result => <span className="change" key={result.id}>{result.requirement_id} <Badge status={previous.find(old => old.requirement_id === result.requirement_id)!.status} /><span>→</span><Badge status={result.status} /></span>)}{changes.length === 0 && <span>변경된 판정이 없습니다.</span>}</section>}
+    <section className={`result-banner ${blockers ? "has-blocker" : ""}`} aria-label="전체 검사 상태"><div className="result-title"><span className="alert-symbol">{blockers ? "!" : "↗"}</span><div><span className="eyebrow">{session?.status} · CHECK {String(session?.revision ?? 1).padStart(2, "0")}</span><h2>{title}</h2><p>{blockers ? `BLOCKER ${blockers}개를 수정한 후 재검사하세요.` : "자동 확인 가능한 필수 조건의 결과와 남아 있는 REVIEW 항목을 함께 확인하세요."}</p></div></div><Link className="button primary" href="/recheck">수정 후 재검사 →</Link></section>
+    {previous.length > 0 && <section className="comparison" aria-label="재검사 비교"><strong>이전 검사와 비교</strong><span>{statusChanges.length}개 판정 변경</span>{changes.map(({ old, result }) => old.status !== result.status ? <span className="change" key={result.id}>{result.requirement_id} <Badge status={old.status} /><span>→</span><Badge status={result.status} /></span> : <span className="change" key={result.id}>{result.requirement_id} 내용 근거 상태가 변경되었습니다.<br />이전: {semanticState(old)}<br />현재: {semanticState(result)}</span>)}{changes.length === 0 && <span>변경된 판정이 없습니다.</span>}</section>}
     <div className="results-heading"><div className="filter-tabs" aria-label="판정 필터"><button aria-pressed={filter === "ALL"} onClick={() => setFilter("ALL")}>전체 <b>{results.length}</b></button>{statuses.map(status => <button key={status} aria-pressed={filter === status} onClick={() => setFilter(status)}>{status} <b>{results.filter(r => r.status === status).length}</b></button>)}</div><span className="muted">{session?.validation_profile === "generic" ? "Generic Profile · 확인된 계획의 코드 검사" : "근거 기반 검사 결과 · v1.5"}</span></div>
-    <section className="findings" aria-label="검사 결과 목록">{results.filter(r => filter === "ALL" || r.status === filter).map(result => <article className="finding" key={result.id} aria-label={`${result.requirement_id} ${result.title}`}><div className="finding-heading"><Badge status={result.status} /><span className="rule-id">{result.requirement_id}</span><h3>{result.title}</h3></div><p>{result.explanation}</p><div className="evidence-grid"><EvidenceBox label="공고문 근거" evidence={result.announcement_evidence} /><EvidenceBox label="제출파일 근거" evidence={result.submission_evidence} emptyText={result.source_mode === "generic_review" ? "이 항목의 제출파일 검증은 실행되지 않았습니다. 직접 대조가 필요합니다." : undefined} /></div><div className="action-line"><span>다음 조치</span>{result.action}</div></article>)}
+    <section className="findings" aria-label="검사 결과 목록">{results.filter(r => filter === "ALL" || r.status === filter).map(result => <article className="finding" key={result.id} aria-label={`${result.requirement_id} ${result.title}`}><div className="finding-heading"><Badge status={result.status} /><span className="rule-id">{result.requirement_id}</span><h3>{result.title}</h3></div><p>{result.explanation}</p><div className="evidence-grid"><EvidenceBox label="공고문 근거" evidence={result.announcement_evidence} /><EvidenceBox label="제출파일 근거" evidence={result.submission_evidence} emptyText={result.source_mode === "generic_review" ? "이 항목의 제출파일 검증은 실행되지 않았습니다. 직접 대조가 필요합니다." : undefined} /></div>{result.semantic_review && result.semantic_review.evidence.length > 1 && <section className="semantic-evidence"><span className="evidence-label">추가 근거 후보</span>{result.semantic_review.evidence.slice(1, 3).map((evidence, index) => <EvidenceBox key={`${evidence.locator}-${index}`} label={`근거 후보 ${index + 2}`} evidence={evidence} />)}</section>}{result.semantic_review?.reason_code && <details><summary>기술 세부</summary><code>{result.semantic_review.reason_code}</code></details>}<div className="action-line"><span>다음 조치</span>{result.action}</div></article>)}
       {results.filter(r => filter === "ALL" || r.status === filter).length === 0 && <div className="empty-inline">이 상태의 판정은 없습니다.</div>}
     </section><div className="results-footer"><span>{session?.validation_profile === "generic" ? "사람이 확정한 요구사항과 게이트를 통과한 계획만 코드로 검사했습니다. REVIEW / EXTERNAL은 직접 확인하세요." : "원본 Validator v1.5의 실제 검사 결과입니다. REVIEW 항목과 최종 제출은 직접 확인하세요."}</span><Link href="/recheck" className="text-link">수정 패키지 재검사 →</Link></div>
   </Guard>;

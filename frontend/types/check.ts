@@ -5,6 +5,11 @@ export type SubmissionStatus = "BLOCKED" | "REVIEW_REQUIRED" | "READY";
 export interface Evidence { source: string; locator: string; excerpt: string }
 export type SemanticAssessment = "RELATED_EVIDENCE_FOUND" | "NO_CLEAR_EVIDENCE";
 export type SemanticCoverage = "FULL" | "PARTIAL" | "NONE";
+export interface SemanticReadiness {
+  ack_required: boolean;
+  eligible_requirement_count: number;
+  reason_code: string | null;
+}
 export interface SemanticReviewMetadata {
   assessment: SemanticAssessment | null;
   coverage: SemanticCoverage;
