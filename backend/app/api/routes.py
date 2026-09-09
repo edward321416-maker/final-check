@@ -333,7 +333,6 @@ async def validate(session_id: str, reviewer_factory=Depends(semantic_reviewer_f
         raise HTTPException(409, "A validation run is already in progress.")
     if session.validation_profile not in {"frozen_v15", "generic"}:
         raise HTTPException(503, "Announcement extraction is not connected; no verified requirement profile.")
-    package = sessions.package_path(session_id)
     lock = sessions.LOCKS[session_id]
     if lock.locked():
         raise HTTPException(409, "Another upload or validation is already running.")
@@ -341,6 +340,8 @@ async def validate(session_id: str, reviewer_factory=Depends(semantic_reviewer_f
         preparation = None
         if session.validation_profile == "generic" and session.generic_profile is not None:
             try:
+                # Let receipt validation handle a missing directory as a failed run.
+                package = sessions.artifact_store().submission_path(session_id)
                 task10_validation.check_integrity(session, package)
                 preparation = await run_in_threadpool(prepare_semantic_submission, session.generic_profile, package)
                 task10_validation.check_integrity(session, package)
@@ -355,6 +356,8 @@ async def validate(session_id: str, reviewer_factory=Depends(semantic_reviewer_f
                 raise HTTPException(409, "Submission receipts do not match uploaded bytes") from error
             if preparation.call_ai and not (body and body.semantic_text_ai_acknowledged):
                 raise HTTPException(409, "Acknowledge submission text AI review before validation.")
+        else:
+            package = sessions.package_path(session_id)
         if session.results:
             session.previous_results = session.results
         session.results = []

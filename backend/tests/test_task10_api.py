@@ -305,18 +305,27 @@ def test_degraded_results_still_use_validated_finding_enums(api):
     assert isinstance(run.results[1].status, FindingStatus)
 
 
-def test_initial_receipt_mismatch_invalidates_previous_ready_results(api):
+@pytest.mark.parametrize("package_change", ["modified_file", "missing_directory"])
+def test_initial_receipt_mismatch_invalidates_previous_ready_results(api, tmp_path, package_change):
     client, reviewer = api
     base = seed(client, semantic=False)
     original = client.post(base + "/validate").json()
     assert original["status"] == "READY"
-    path = sessions.package_path("task08-session") / "private.pdf"
-    path.write_bytes(path.read_bytes() + b"changed")
+    package = sessions.package_path("task08-session")
+    if package_change == "missing_directory":
+        destination = tmp_path / "removed-package"
+        package.resolve().relative_to(tmp_path.resolve())
+        destination.resolve().relative_to(tmp_path.resolve())
+        package.rename(destination)
+    else:
+        path = package / "private.pdf"
+        path.write_bytes(path.read_bytes() + b"changed")
     response = client.post(base + "/validate")
     assert response.status_code in {409, 502}
     body = client.get(base).json()
     assert body["run_state"] == "FAILED"
     assert body["run_error"] == "PACKAGE_CHANGED_DURING_RUN"
     assert body["status"] == "REVIEW_REQUIRED" and body["results"] == []
+    assert body["validation_complete"] is False
     assert body["previous_results"] == original["results"]
     assert reviewer.calls == 0
