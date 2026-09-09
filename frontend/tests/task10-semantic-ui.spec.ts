@@ -76,6 +76,31 @@ test("polls a running semantic validation and routes only after completion", asy
   expect(gets).toBeGreaterThan(1);
 });
 
+test("retries a transient running-session poll failure and routes after a later completion", async ({ page }) => {
+  const running = baseSession({ run_state: "RUNNING", results: [] });
+  const complete = baseSession({ run_state: "COMPLETE", results: [semanticResult()] });
+  let gets = 0;
+  await page.addInitScript((id) => sessionStorage.setItem("final-check-session-id-v2", id), sessionId);
+  await page.route("**/api/sessions/**", async route => {
+    const path = new URL(route.request().url()).pathname;
+    if (path.endsWith("/semantic-readiness")) return route.fulfill({ contentType: "application/json", body: JSON.stringify({ ack_required: true, eligible_requirement_count: 1, reason_code: null }) });
+    if (path.endsWith("/validate")) return route.fulfill({ contentType: "application/json", body: JSON.stringify(running) });
+    if (path.endsWith(`/sessions/${sessionId}`)) {
+      gets += 1;
+      if (gets === 1) return route.fulfill({ contentType: "application/json", body: JSON.stringify(baseSession()) });
+      if (gets === 2) return route.fulfill({ status: 503, contentType: "application/json", body: '{"detail":"temporary poll failure"}' });
+      return route.fulfill({ contentType: "application/json", body: JSON.stringify(complete) });
+    }
+    return route.abort();
+  });
+  await page.goto("/upload");
+  await page.getByRole("checkbox").check();
+  await page.getByRole("button", { name: "Preflight 실행하기" }).click();
+  await expect(page.getByText("객관적 조건과 PDF 내용을 확인하고 있습니다…", { exact: true })).toBeVisible();
+  await expect(page).toHaveURL(/\/results$/);
+  expect(gets).toBe(3);
+});
+
 test("keeps a failed semantic poll actionable on the upload screen", async ({ page }) => {
   const running = baseSession({ run_state: "RUNNING", results: [] });
   const failed = baseSession({ run_state: "FAILED", run_error: "PACKAGE_CHANGED_DURING_RUN", results: [] });
@@ -128,6 +153,14 @@ test("renders no more than three verified semantic evidence excerpts", async ({ 
   await expect(finding.getByText("근거 후보 1", { exact: true })).toBeVisible();
   await expect(finding.locator(".evidence-label", { hasText: "근거 후보 3" })).toBeVisible();
   await expect(finding.getByText("근거 후보 4", { exact: true })).toHaveCount(0);
+});
+
+test("labels a completed full-coverage no-evidence review as no clear evidence, not unexecuted", async ({ page }) => {
+  await openWithSession(page, () => baseSession({ run_state: "COMPLETE", results: [semanticResult()] }));
+  await page.goto("/results");
+  const finding = page.getByRole("article", { name: "G001 내용 요구사항" });
+  await expect(finding.getByText("제출파일에서 명확한 관련 근거 후보를 찾지 못했습니다. 직접 대조가 필요합니다.", { exact: true })).toBeVisible();
+  await expect(finding.getByText("이 항목의 제출파일 검증은 실행되지 않았습니다. 직접 대조가 필요합니다.", { exact: true })).toHaveCount(0);
 });
 
 test("places the Korean semantic-unavailable explanation before its reason code", async ({ page }) => {

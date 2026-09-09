@@ -54,3 +54,19 @@ Date: 2026-09-09 (Asia/Seoul)
 - Modified files: `backend/app/services/task10_validation.py`, `backend/tests/test_task10_api.py`, `RESULT_CODEX.md`.
 - Evidence label: SELF. Timeout and invalid-schema provider behavior used the existing simulated external-reviewer test double; no actual Codex provider call was made.
 - NOT TESTED: actual Codex CLI timeout/schema failure, frontend/browser behavior, the full backend suite, deployment, multi-worker behavior, and production provider availability.
+
+## TASK10 Task 7 resume fix round 1
+
+Date: 2026-09-09 (Asia/Seoul)
+
+- Scope: Important finding 2 and the related semantic-evidence minor finding only. Polling retries a transient GET failure with capped backoff while the server session remains RUNNING; a completed FULL `NO_CLEAR_EVIDENCE` semantic review now states that no clear candidate was found instead of claiming validation was not executed. API timeout, semantic authority, navigation, providers and product settings are unchanged.
+- RED (frontend cwd): `npm run test:smoke -- task10-semantic-ui.spec.ts` -> expected `4 failed, 20 passed`; the new desktop/mobile transient-poll cases remained on `/upload`, and the new completed no-evidence copy cases could not find the truthful wording.
+- Build preparation (frontend cwd): `npm run build` -> PASS. The Playwright configuration uses `next start`, so rebuilding was required for the browser suite to exercise changed source.
+- Focused GREEN (frontend cwd): `npm run test:smoke -- task10-semantic-ui.spec.ts --grep "retries a transient|labels a completed"` -> `4 passed` across desktop/mobile.
+- Task10 semantic UI (frontend cwd): `npm run test:smoke -- task10-semantic-ui.spec.ts` -> `24 passed` across desktop/mobile.
+- Typecheck (frontend cwd): `npm run typecheck` -> PASS.
+- Build (frontend cwd): `npm run build` -> PASS.
+- Diff check: `git diff --check` -> PASS before commit.
+- Modified files: `frontend/lib/poll-session.ts`, `frontend/components/screens.tsx`, `frontend/tests/task10-semantic-ui.spec.ts`, `RESULT_CODEX.md`.
+- Evidence label: SELF. Playwright used mocked local HTTP responses, including a simulated transient 503; no public/ACTUAL AI test or provider call was run.
+- NOT TESTED: actual network interruption/retry behavior against a live server, actual semantic provider execution, the complete frontend suite, deployment, multi-worker behavior, and production provider availability.
