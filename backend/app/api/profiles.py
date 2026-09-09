@@ -33,6 +33,8 @@ def invalidate(session: CheckSession) -> None:
 
 def custom_session(session_id: str) -> CheckSession:
     session = sessions.get(session_id)
+    if session.run_state == "RUNNING":
+        raise HTTPException(409, "A validation run is already in progress.")
     if session.mode != "custom":
         raise HTTPException(409, "Start a custom announcement session.")
     if sessions.LOCKS[session_id].locked():

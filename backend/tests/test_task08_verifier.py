@@ -653,9 +653,18 @@ def test_compile_api_failure_stays_in_explicit_review_path():
 
 
 def test_actual_checker_api_broken_to_fixed_reuses_plan():
+    from app.api.routes import semantic_reviewer_factory
+
     profile = confirmed_profile()
     planner = Planner([candidate(profile)])
     app.dependency_overrides[get_verification_planner] = lambda: planner
+    semantic_calls = []
+
+    def unexpected_semantic_call():
+        semantic_calls.append(True)
+        raise AssertionError("Deterministic video validation must not resolve a semantic provider")
+
+    app.dependency_overrides[semantic_reviewer_factory] = lambda: unexpected_semantic_call
     root = Path(__file__).resolve().parents[2]
     broken = root / "fixtures/v15/demo-broken/테스트어린이집_숏폼영상.MP4"
     fixed = root / "fixtures/v15/demo-fixed/테스트어린이집_숏폼영상.MP4"
@@ -689,5 +698,6 @@ def test_actual_checker_api_broken_to_fixed_reuses_plan():
             assert second.json()["results"][0]["status"] == "PASS"
             assert second.json()["verification_plan"]["plan_set_id"] == plan_set_id
             assert planner.calls == 1
+            assert semantic_calls == []
     finally:
         app.dependency_overrides.clear()
