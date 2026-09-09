@@ -76,6 +76,30 @@ test("polls a running semantic validation and routes only after completion", asy
   expect(gets).toBeGreaterThan(1);
 });
 
+test("keeps a failed semantic poll actionable on the upload screen", async ({ page }) => {
+  const running = baseSession({ run_state: "RUNNING", results: [] });
+  const failed = baseSession({ run_state: "FAILED", run_error: "PACKAGE_CHANGED_DURING_RUN", results: [] });
+  let gets = 0;
+  await page.addInitScript((id) => sessionStorage.setItem("final-check-session-id-v2", id), sessionId);
+  await page.route("**/api/sessions/**", async route => {
+    const path = new URL(route.request().url()).pathname;
+    if (path.endsWith("/semantic-readiness")) return route.fulfill({ contentType: "application/json", body: JSON.stringify({ ack_required: true, eligible_requirement_count: 1, reason_code: null }) });
+    if (path.endsWith("/validate")) return route.fulfill({ contentType: "application/json", body: JSON.stringify(running) });
+    if (path.endsWith(`/sessions/${sessionId}`)) {
+      gets += 1;
+      const value = gets === 1 ? baseSession() : failed;
+      return route.fulfill({ contentType: "application/json", body: JSON.stringify(value) });
+    }
+    return route.abort();
+  });
+  await page.goto("/upload");
+  await page.getByRole("checkbox").check();
+  await page.getByRole("button", { name: "Preflight 실행하기" }).click();
+  await expect(page).toHaveURL(/\/upload$/);
+  await expect(page.getByRole("alert", { name: "작업 오류" })).toContainText("PACKAGE_CHANGED_DURING_RUN");
+  await expect(page.getByRole("button", { name: "Preflight 실행하기" })).toBeEnabled();
+});
+
 test("resumes polling after an upload screen reload", async ({ page }) => {
   let gets = 0;
   await page.addInitScript((id) => sessionStorage.setItem("final-check-session-id-v2", id), sessionId);
