@@ -3,8 +3,11 @@ import type { CheckSession } from "@/types/check";
 export class ApiError extends Error {
   constructor(public status: number, message: string) { super(message); }
 }
-export async function request<T>(path: string, body?: object | FormData): Promise<T> {
+export async function request<T>(path: string, body?: object | FormData, signal?: AbortSignal): Promise<T> {
   const controller = new AbortController();
+  const abortFromCaller = () => controller.abort();
+  if (signal?.aborted) controller.abort();
+  else signal?.addEventListener("abort", abortFromCaller, { once: true });
   const timer = setTimeout(() => controller.abort(), 200_000);
   try {
     const response = await fetch(`/api${path}`, {
@@ -24,8 +27,12 @@ export async function request<T>(path: string, body?: object | FormData): Promis
     return response.json() as Promise<T>;
   } catch (error) {
     if (error instanceof ApiError) throw error;
+    if (signal?.aborted) throw new DOMException("The operation was aborted.", "AbortError");
     throw new Error("검사 서버에 연결할 수 없습니다. 서버 실행 상태를 확인하고 다시 시도해 주세요.");
-  } finally { clearTimeout(timer); }
+  } finally {
+    clearTimeout(timer);
+    signal?.removeEventListener("abort", abortFromCaller);
+  }
 }
 export const sessionRequest = (id: string, action: string, body: object | FormData) =>
   request<CheckSession>(`/sessions/${id}/${action}`, body);

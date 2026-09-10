@@ -67,26 +67,44 @@ export function UploadScreen({ recheck = false }: { recheck?: boolean }) {
   const [readiness, setReadiness] = useState<SemanticReadiness | null>(null);
   const [acknowledged, setAcknowledged] = useState(false);
   const [pollError, setPollError] = useState("");
-  const pollingSession = useRef<string | null>(null);
+  const activeSessionId = useRef(session?.id);
+  activeSessionId.current = session?.id;
+  const pollingGeneration = useRef(0);
+  const pollingSession = useRef<{ id: string; generation: number; controller: AbortController } | null>(null);
   async function loadReadiness(current: CheckSession) {
     setAcknowledged(false);
     setReadiness(null);
     setReadiness(await request<SemanticReadiness>(`/sessions/${current.id}/semantic-readiness`));
   }
   async function resumePolling(current: CheckSession) {
-    if (pollingSession.current === current.id) return;
-    pollingSession.current = current.id;
+    if (pollingSession.current?.id === current.id) return;
+    pollingSession.current?.controller.abort();
+    const generation = pollingGeneration.current + 1;
+    pollingGeneration.current = generation;
+    const controller = new AbortController();
+    pollingSession.current = { id: current.id, generation, controller };
+    const isCurrent = () => !controller.signal.aborted
+      && pollingGeneration.current === generation
+      && pollingSession.current?.generation === generation
+      && activeSessionId.current === current.id;
     setPollError("");
     try {
-      const completed = await pollSession(current.id, update);
+      const completed = await pollSession(current.id, value => { if (isCurrent()) update(value); }, 1000, controller.signal);
+      if (!isCurrent()) return;
       if (completed.run_state === "COMPLETE") router.push("/results");
       if (completed.run_state === "FAILED") setPollError(completed.run_error ?? "검사를 완료하지 못했습니다. 다시 시도해 주세요.");
     } catch (pollingError) {
+      if (!isCurrent()) return;
       setPollError(pollingError instanceof Error ? pollingError.message : "검사 진행 상태를 불러오지 못했습니다.");
     } finally {
-      pollingSession.current = null;
+      if (pollingSession.current?.generation === generation) pollingSession.current = null;
     }
   }
+  useEffect(() => () => {
+    pollingGeneration.current += 1;
+    pollingSession.current?.controller.abort();
+    pollingSession.current = null;
+  }, [session?.id]);
   useEffect(() => {
     let active = true;
     if (!session?.files.length) {

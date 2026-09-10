@@ -76,6 +76,63 @@ test("polls a running semantic validation and routes only after completion", asy
   expect(gets).toBeGreaterThan(1);
 });
 
+test("ignores a stale semantic completion after the active session is replaced", async ({ page }) => {
+  const oldSessionId = "old-review-session";
+  const newSessionId = "new-review-session";
+  const oldRunning = baseSession({ id: oldSessionId, announcement_name: "이전 세션 공고.txt", run_state: "RUNNING", results: [] });
+  const oldComplete = baseSession({ id: oldSessionId, announcement_name: "이전 세션 공고.txt", run_state: "COMPLETE",
+    results: [semanticResult({ title: "오래된 세션 결과" })] });
+  const newSession = baseSession({ id: newSessionId, mode: "demo", announcement_name: "새 세션 공고.txt", files: [],
+    run_state: "NOT_STARTED", results: [] });
+  let oldSessionGets = 0;
+  let releaseOldCompletion!: () => void;
+  const oldCompletionHeld = new Promise<void>(resolve => { releaseOldCompletion = resolve; });
+  let markOldPollStarted!: () => void;
+  const oldPollStarted = new Promise<void>(resolve => { markOldPollStarted = resolve; });
+
+  await page.addInitScript((id) => sessionStorage.setItem("final-check-session-id-v2", id), oldSessionId);
+  await page.route("**/api/**", async route => {
+    const request = route.request();
+    const path = new URL(request.url()).pathname;
+    if (path.endsWith("/semantic-readiness")) {
+      return route.fulfill({ contentType: "application/json", body: JSON.stringify({ ack_required: true, eligible_requirement_count: 1, reason_code: null }) });
+    }
+    if (request.method() === "GET" && path.endsWith(`/sessions/${oldSessionId}`)) {
+      oldSessionGets += 1;
+      if (oldSessionGets === 1) return route.fulfill({ contentType: "application/json", body: JSON.stringify(oldRunning) });
+      markOldPollStarted();
+      await oldCompletionHeld;
+      return route.fulfill({ contentType: "application/json", body: JSON.stringify(oldComplete) });
+    }
+    if (request.method() === "POST" && path.endsWith("/api/sessions")) {
+      return route.fulfill({ contentType: "application/json", body: JSON.stringify(newSession) });
+    }
+    if (request.method() === "POST" && path.endsWith(`/sessions/${newSessionId}/demo-announcement`)) {
+      return route.fulfill({ contentType: "application/json", body: JSON.stringify(newSession) });
+    }
+    return route.fulfill({ status: 404, contentType: "application/json", body: '{"detail":"missing mock"}' });
+  });
+
+  await page.goto("/upload");
+  await expect(page.getByText("객관적 조건과 PDF 내용을 확인하고 있습니다…", { exact: true })).toBeVisible();
+  await oldPollStarted;
+  await page.getByRole("link", { name: /FINAL CHECK/ }).click();
+  await expect(page).toHaveURL(/\/$/);
+  await page.getByRole("button", { name: "demo 검사 시작하기" }).click();
+  await expect(page).toHaveURL(/\/announcement$/);
+  await expect(page.getByText("새 세션 공고.txt", { exact: true })).toBeVisible();
+  await expect.poll(() => page.evaluate(() => sessionStorage.getItem("final-check-session-id-v2"))).toBe(newSessionId);
+
+  releaseOldCompletion();
+  await page.waitForTimeout(250);
+
+  expect(oldSessionGets).toBe(2);
+  expect(await page.evaluate(() => sessionStorage.getItem("final-check-session-id-v2"))).toBe(newSessionId);
+  await expect(page).toHaveURL(/\/announcement$/);
+  await expect(page.getByText("오래된 세션 결과", { exact: true })).toHaveCount(0);
+  await expect(page.getByText("새 세션 공고.txt", { exact: true })).toBeVisible();
+});
+
 test("retries a transient running-session poll failure and routes after a later completion", async ({ page }) => {
   const running = baseSession({ run_state: "RUNNING", results: [] });
   const complete = baseSession({ run_state: "COMPLETE", results: [semanticResult()] });
