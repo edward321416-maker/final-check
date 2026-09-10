@@ -2,6 +2,28 @@ import { test, expect } from "@playwright/test";
 import fs from "node:fs/promises";
 import path from "node:path";
 import crypto from "node:crypto";
+import { DatabaseSync } from "node:sqlite";
+
+type OperationLedger = { EXTRACT: number; PLAN: number; SEMANTIC: number };
+
+function readOperationLedger(sessionId: string): OperationLedger {
+  const dataDir = process.env.FINAL_CHECK_DATA_DIR;
+  if (!dataDir) throw new Error("FINAL_CHECK_DATA_DIR is required for ACTUAL operation evidence");
+  const database = new DatabaseSync(path.join(dataDir, "runtime.sqlite3"), { readOnly: true });
+  try {
+    const ledger: OperationLedger = { EXTRACT: 0, PLAN: 0, SEMANTIC: 0 };
+    const rows = database.prepare(
+      "SELECT operation_kind, COUNT(*) AS operation_count FROM ai_operations WHERE session_id = ? GROUP BY operation_kind",
+    ).all(sessionId) as Array<{ operation_kind: string; operation_count: number | bigint }>;
+    for (const row of rows) {
+      if (!Object.hasOwn(ledger, row.operation_kind)) throw new Error(`Unexpected operation kind: ${row.operation_kind}`);
+      ledger[row.operation_kind as keyof OperationLedger] = Number(row.operation_count);
+    }
+    return ledger;
+  } finally {
+    database.close();
+  }
+}
 
 const announcementPath = path.resolve("../fixtures/task10/announcement.txt");
 const positivePath = path.resolve("../fixtures/task10/submission-with-effect.pdf");
@@ -166,6 +188,8 @@ test("TASK10 actual semantic review grounds evidence, keeps absence review-only,
   expect(injectedResult.semantic_review.provider.execution_kind).toBe("ACTUAL");
   expect(injected.results.filter((result: { semantic_review?: unknown }) => result.semantic_review)
     .some((result: { status: string }) => ["PASS", "BLOCKER"].includes(result.status))).toBe(false);
+  const operationLedger = readOperationLedger(sessionId);
+  expect(operationLedger).toEqual({ EXTRACT: 1, PLAN: 0, SEMANTIC: 4 });
 
   const output = path.resolve("../artifacts/task10");
   const screenshots = path.join(output, "screenshots");
@@ -176,6 +200,8 @@ test("TASK10 actual semantic review grounds evidence, keeps absence review-only,
   await fs.writeFile(path.join(output, "actual-semantic-e2e.json"), JSON.stringify({
     classification: "ACTUAL",
     baseline: "d90f53ae8e20b8a51b3a4559a3e7e5651dd204a0",
+    session_id: sessionId,
+    operation_ledger: operationLedger,
     provider: semanticProvider,
     prompt: { version: "task10-semantic-review-v1", sha256: semanticProvider.prompt_sha256 },
     profile_id: positive.generic_profile.profile_id,
@@ -184,10 +210,14 @@ test("TASK10 actual semantic review grounds evidence, keeps absence review-only,
       missing: crypto.createHash("sha256").update(await fs.readFile(missingPath)).digest("hex"),
       injection: crypto.createHash("sha256").update(await fs.readFile(injectionPath)).digest("hex"),
     },
-    positive: { status: positiveResult.status, assessment: positiveResult.semantic_review.assessment, accepted_evidence: positiveResult.semantic_review.evidence },
-    missing: { status: missingResult.status, assessment: missingResult.semantic_review.assessment },
-    recheck: { status: recheckedResult.status, assessment: recheckedResult.semantic_review.assessment, evidence_fingerprint: recheckedResult.semantic_review.evidence_fingerprint },
-    prompt_injection: { status: injectedResult.status, assessment: injectedResult.semantic_review.assessment,
+    positive: { run_state: positive.run_state, overall_status: positive.status, status: positiveResult.status,
+      assessment: positiveResult.semantic_review.assessment, accepted_evidence: positiveResult.semantic_review.evidence },
+    missing: { run_state: missing.run_state, overall_status: missing.status, status: missingResult.status,
+      assessment: missingResult.semantic_review.assessment, coverage: missingResult.semantic_review.coverage },
+    recheck: { run_state: rechecked.run_state, overall_status: rechecked.status, status: recheckedResult.status,
+      assessment: recheckedResult.semantic_review.assessment, evidence_fingerprint: recheckedResult.semantic_review.evidence_fingerprint },
+    prompt_injection: { run_state: injected.run_state, overall_status: injected.status, status: injectedResult.status,
+      assessment: injectedResult.semantic_review.assessment,
       reason_code: injectedResult.semantic_review.reason_code },
     semantic_pass_or_blocker_observed: false,
   }, null, 2), "utf8");
