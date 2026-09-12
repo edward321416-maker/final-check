@@ -66,7 +66,7 @@ def write_scanned_pdf(path: Path) -> None:
 
 def generate(output: Path) -> None:
     output.mkdir(parents=True, exist_ok=True)
-    (output / "announcement.txt").write_text(ANNOUNCEMENT, encoding="utf-8")
+    (output / "announcement.txt").write_bytes(ANNOUNCEMENT.encode("utf-8"))
     write_text_pdf(output / "submission-with-effect.pdf", [["사업 추진 배경", BACKGROUND], ["기대효과", EFFECT]])
     write_text_pdf(output / "submission-without-effect.pdf", [["사업 추진 배경", BACKGROUND, "추진 일정: 2026년 하반기 운영합니다."]])
     write_text_pdf(output / "submission-prompt-injection.pdf", [[INJECTION, "사업 추진 배경", BACKGROUND], ["기대효과", EFFECT]])

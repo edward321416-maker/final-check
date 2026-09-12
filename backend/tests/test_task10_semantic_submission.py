@@ -17,13 +17,28 @@ from app.services.semantic_submission import (
 FIXTURE_ROOT = Path(__file__).resolve().parents[2] / "fixtures" / "task10"
 FIXTURE_GENERATOR = Path(__file__).resolve().parents[2] / "scripts" / "generate_task10_fixtures.py"
 EXPECTED_EFFECT_QUOTE = "기대효과: 참여자의 접근성을 높이고 지역 협력의 지속성을 강화합니다."
+EXPECTED_ANNOUNCEMENT_TEXT = """# 제출 안내
+제안서 PDF에는 사업 추진 배경과 기대효과를 포함해야 합니다.
+PDF는 10페이지 이하여야 합니다.
+"""
 FIXTURE_SHA256 = {
-    "announcement.txt": "3b25e647da748542cd3f267cc9c719f50a27cbabe4bd73115adfa1c19e5dd8b3",
+    "announcement.txt": "951d9f786e144ffc52d68a9fa8760d84e1bf0c2e18e341ea86ebbe703ad50950",
     "submission-prompt-injection.pdf": "d07162acdfa5e0004b0f85cbef7a85d67ae1caf983216d5b8bffdb6864f2a8e1",
     "submission-scanned.pdf": "03579839da8ecb1aba718b8b1b6275ceb266bfb9cfc3690375e5a571c9eb2791",
     "submission-with-effect.pdf": "c5ce8d12a1af8f67daf3aeefea68dba85a8030364e5354be01c5907244087038",
     "submission-without-effect.pdf": "c96b274eac8a450e4eb08a45714b193632569a1f62fc63f49faee63bb5581fdc",
 }
+
+
+def fixture_hashes(root: Path) -> dict[str, str]:
+    result = {}
+    for path in sorted(root.iterdir()):
+        if path.name == "announcement.txt":
+            canonical = path.read_text(encoding="utf-8").encode("utf-8")
+            result[path.name] = hashlib.sha256(canonical).hexdigest()
+        else:
+            result[path.name] = hashlib.sha256(path.read_bytes()).hexdigest()
+    return result
 
 
 def test_task10_fixture_generator_preserves_text_and_raster_only_contract(tmp_path):
@@ -37,10 +52,10 @@ def test_task10_fixture_generator_preserves_text_and_raster_only_contract(tmp_pa
     )
 
     assert "generated" in completed.stdout.lower()
-    assert {
-        path.name: hashlib.sha256(path.read_bytes()).hexdigest()
-        for path in sorted(output.iterdir())
-    } == FIXTURE_SHA256
+    generated_announcement = (output / "announcement.txt").read_bytes()
+    assert generated_announcement == EXPECTED_ANNOUNCEMENT_TEXT.encode("utf-8")
+    assert b"\r\n" not in generated_announcement
+    assert fixture_hashes(output) == FIXTURE_SHA256
     announcement = (output / "announcement.txt").read_text(encoding="utf-8")
     assert "사업 추진 배경과 기대효과" in announcement
     assert "10페이지 이하여야" in announcement
@@ -67,10 +82,7 @@ def test_task10_positive_fixture_quote_is_an_exact_checked_in_extracted_substrin
         extracted = "\n".join(page.get_text() for page in document)
 
     assert EXPECTED_EFFECT_QUOTE in extracted
-    assert {
-        path.name: hashlib.sha256(path.read_bytes()).hexdigest()
-        for path in sorted(FIXTURE_ROOT.iterdir())
-    } == FIXTURE_SHA256
+    assert fixture_hashes(FIXTURE_ROOT) == FIXTURE_SHA256
 
 
 def announcement(text: str = "PDF에 제출 내용을 포함해야 합니다.") -> AnnouncementSource:
