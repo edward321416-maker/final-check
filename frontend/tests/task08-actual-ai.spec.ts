@@ -1,6 +1,28 @@
 import { test, expect } from "@playwright/test";
 import fs from "node:fs/promises";
 import path from "node:path";
+import { DatabaseSync } from "node:sqlite";
+
+type OperationLedger = { EXTRACT: number; PLAN: number; SEMANTIC: number };
+
+function readOperationLedger(sessionId: string): OperationLedger {
+  const dataDir = process.env.FINAL_CHECK_DATA_DIR;
+  if (!dataDir) throw new Error("FINAL_CHECK_DATA_DIR is required for ACTUAL operation evidence");
+  const database = new DatabaseSync(path.join(dataDir, "runtime.sqlite3"), { readOnly: true });
+  try {
+    const ledger: OperationLedger = { EXTRACT: 0, PLAN: 0, SEMANTIC: 0 };
+    const rows = database.prepare(
+      "SELECT operation_kind, COUNT(*) AS operation_count FROM ai_operations WHERE session_id = ? GROUP BY operation_kind",
+    ).all(sessionId) as Array<{ operation_kind: string; operation_count: number | bigint }>;
+    for (const row of rows) {
+      if (!Object.hasOwn(ledger, row.operation_kind)) throw new Error(`Unexpected operation kind: ${row.operation_kind}`);
+      ledger[row.operation_kind as keyof OperationLedger] = Number(row.operation_count);
+    }
+    return ledger;
+  } finally {
+    database.close();
+  }
+}
 
 test("TASK08 actual public announcement C01 excerpt to planner, broken and fixed verifier flow", async ({ page }, info) => {
   test.skip(process.env.TASK08_ACTUAL_AI !== "1" || info.project.name !== "desktop",
@@ -89,12 +111,18 @@ test("TASK08 actual public announcement C01 excerpt to planner, broken and fixed
   const fixed = await getSession();
   expect(fixed.verification_plan.plan_set_id).toBe(planSetId);
   expect(fixed.results[0].submission_evidence).toBeTruthy();
+  expect(fixed.results[0].semantic_review).toBeNull();
+  const operationLedger = readOperationLedger(sessionId);
+  expect(operationLedger).toEqual({ EXTRACT: 1, PLAN: 1, SEMANTIC: 0 });
   await page.screenshot({ path: path.join(directory, "actual-c01-excerpt-fixed.png"), fullPage: true });
   await fs.writeFile(path.resolve("../artifacts/task08/actual-product-e2e.json"), JSON.stringify({
     classification: "ACTUAL",
+    session_id: sessionId,
     source: "C01 public announcement exact excerpt from benchmarks/task04/sources/C01.txt",
     media: ["fixtures/v15/demo-broken/테스트어린이집_숏폼영상.MP4", "fixtures/v15/demo-fixed/테스트어린이집_숏폼영상.MP4"],
     plan_set_id: planSetId,
+    operation_ledger: operationLedger,
+    semantic_review: fixed.results[0].semantic_review,
     planner: fixed.verification_plan.planner_provenance,
     extraction: { job: fixed.current_job, stage1: fixed.generic_profile.stage1, stage2: fixed.generic_profile.stage2 },
     broken: { status: broken.status, result: broken.results[0] },

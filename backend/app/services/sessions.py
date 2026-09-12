@@ -10,7 +10,7 @@ from uuid import uuid4
 
 from fastapi import HTTPException
 
-from app.models.schemas import CheckSession
+from app.models.schemas import CheckSession, SubmissionStatus
 from app.services.storage import LocalArtifactStore, SQLiteRuntimeStore, default_data_dir
 
 SESSIONS: dict[str, CheckSession] = {}
@@ -58,6 +58,7 @@ def configure(data_dir: Path | str | None = None) -> list[str]:
     _DATA_DIR = Path(data_dir).resolve() if data_dir is not None else default_data_dir()
     _STORE = SQLiteRuntimeStore(_DATA_DIR)
     _ARTIFACTS = LocalArtifactStore(_DATA_DIR)
+    _STORE.clear_ai_leases()
     recovered = _STORE.recover_stale_jobs()
     for job_id in recovered:
         job = _STORE.get_job(job_id)
@@ -77,6 +78,14 @@ def configure(data_dir: Path | str | None = None) -> list[str]:
             session.verification_plan_state = "REVIEW_REQUIRED"
             session.verification_plan_error = "PROCESS_RESTART"
             session.source_mode = "generic_review"
+        _STORE.save_session(session)
+    for session_id in _STORE.running_validation_session_ids():
+        session = _STORE.get_session(session_id)
+        session.run_state = "FAILED"
+        session.status = SubmissionStatus.REVIEW_REQUIRED
+        session.validation_complete = False
+        session.run_error = "PROCESS_RESTART"
+        session.results = []
         _STORE.save_session(session)
     return recovered
 

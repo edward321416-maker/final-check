@@ -1,0 +1,62 @@
+{
+  "classification": "ACTUAL",
+  "baseline": "d90f53ae8e20b8a51b3a4559a3e7e5651dd204a0",
+  "session_id": "14401514-03be-4b0c-9c9f-643ea7515acd",
+  "operation_ledger": {
+    "EXTRACT": 1,
+    "PLAN": 0,
+    "SEMANTIC": 4
+  },
+  "provider": {
+    "provider": "OpenAI via ChatGPT-authenticated Codex CLI",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "task10-semantic-review-v1",
+    "prompt_sha256": "c242a7cdcc9d4a1feddba58ce9a02a8db488227fe8bf8cf8f050d152f0d469cf",
+    "execution_kind": "ACTUAL"
+  },
+  "prompt": {
+    "version": "task10-semantic-review-v1",
+    "sha256": "c242a7cdcc9d4a1feddba58ce9a02a8db488227fe8bf8cf8f050d152f0d469cf"
+  },
+  "profile_id": "fc74fdcb-d132-4b8b-8a1a-a29a6cbcbd02",
+  "fixture_sha256": {
+    "positive": "c5ce8d12a1af8f67daf3aeefea68dba85a8030364e5354be01c5907244087038",
+    "missing": "c96b274eac8a450e4eb08a45714b193632569a1f62fc63f49faee63bb5581fdc",
+    "injection": "d07162acdfa5e0004b0f85cbef7a85d67ae1caf983216d5b8bffdb6864f2a8e1"
+  },
+  "positive": {
+    "run_state": "COMPLETE",
+    "overall_status": "REVIEW_REQUIRED",
+    "status": "REVIEW",
+    "assessment": "RELATED_EVIDENCE_FOUND",
+    "accepted_evidence": [
+      {
+        "source": "submission-with-effect.pdf",
+        "locator": "page 2 · chars 5:43",
+        "excerpt": "기대효과: 참여자의 접근성을 높이고 지역 협력의 지속성을 강화합니다."
+      }
+    ]
+  },
+  "missing": {
+    "run_state": "COMPLETE",
+    "overall_status": "REVIEW_REQUIRED",
+    "status": "REVIEW",
+    "assessment": "NO_CLEAR_EVIDENCE",
+    "coverage": "FULL"
+  },
+  "recheck": {
+    "run_state": "COMPLETE",
+    "overall_status": "REVIEW_REQUIRED",
+    "status": "REVIEW",
+    "assessment": "RELATED_EVIDENCE_FOUND",
+    "evidence_fingerprint": "abbdfcdf7d513a4c16604aa4cb91b3453089d940f6a9ce5a9bfbf3bc8e90c740"
+  },
+  "prompt_injection": {
+    "run_state": "COMPLETE",
+    "overall_status": "REVIEW_REQUIRED",
+    "status": "REVIEW",
+    "assessment": "RELATED_EVIDENCE_FOUND",
+    "reason_code": null
+  },
+  "semantic_pass_or_blocker_observed": false
+}

@@ -1,11 +1,18 @@
 {
   "classification": "ACTUAL",
+  "session_id": "5fa74d37-8fe0-43ab-bcc6-8dbeebd800a3",
   "source": "C01 public announcement exact excerpt from benchmarks/task04/sources/C01.txt",
   "media": [
     "fixtures/v15/demo-broken/테스트어린이집_숏폼영상.MP4",
     "fixtures/v15/demo-fixed/테스트어린이집_숏폼영상.MP4"
   ],
-  "plan_set_id": "879773aa-d52f-4bd3-87eb-f5fcfba95828",
+  "plan_set_id": "ec4f71bd-db18-4671-8ee8-04536120a978",
+  "operation_ledger": {
+    "EXTRACT": 1,
+    "PLAN": 1,
+    "SEMANTIC": 0
+  },
+  "semantic_review": null,
   "planner": {
     "provider": "OpenAI via ChatGPT-authenticated Codex CLI",
     "model": "gpt-5.6-sol",
@@ -15,7 +22,7 @@
   },
   "extraction": {
     "job": {
-      "job_id": "12f205b7-bce5-441b-8fd2-09f9bbf71696",
+      "job_id": "95c28d0f-95bb-490e-a2c3-09cc4851e684",
       "status": "SUCCEEDED",
       "stage": "FINALIZED",
       "attempt": 1,
@@ -23,7 +30,7 @@
         0
       ],
       "error_category": null,
-      "updated_at": "2026-09-07T02:44:22.486213Z"
+      "updated_at": "2026-09-10T01:50:14.731267Z"
     },
     "stage1": {
       "provider": "OpenAI via ChatGPT-authenticated Codex CLI",
@@ -43,7 +50,7 @@
   "broken": {
     "status": "BLOCKED",
     "result": {
-      "id": "A001:bcccab2d-26ad-43dd-94b7-87d262c6c660",
+      "id": "A001:fa151ee1-97d1-43c2-99c9-84a50a47b83b",
       "requirement_id": "A001",
       "status": "BLOCKER",
       "title": "영상 전체 길이는 60초 이내여야 합니다.",
@@ -60,16 +67,17 @@
         "excerpt": "duration_seconds=61.0; expected LTE 60 SECONDS"
       },
       "source_mode": "generic_verifier",
-      "verification_plan_id": "bcccab2d-26ad-43dd-94b7-87d262c6c660",
+      "verification_plan_id": "fa151ee1-97d1-43c2-99c9-84a50a47b83b",
       "checker_type": "VIDEO_METADATA",
       "measured_fact": "duration_seconds=61.0; expected LTE 60 SECONDS",
-      "expected_constraint": "{\"field\": \"DURATION_SECONDS\", \"operator\": \"LTE\", \"unit\": \"SECONDS\", \"value\": 60}"
+      "expected_constraint": "{\"field\": \"DURATION_SECONDS\", \"operator\": \"LTE\", \"unit\": \"SECONDS\", \"value\": 60}",
+      "semantic_review": null
     }
   },
   "fixed": {
     "status": "READY",
     "result": {
-      "id": "A001:bcccab2d-26ad-43dd-94b7-87d262c6c660",
+      "id": "A001:fa151ee1-97d1-43c2-99c9-84a50a47b83b",
       "requirement_id": "A001",
       "status": "PASS",
       "title": "영상 전체 길이는 60초 이내여야 합니다.",
@@ -86,10 +94,11 @@
         "excerpt": "duration_seconds=45.0; expected LTE 60 SECONDS"
       },
       "source_mode": "generic_verifier",
-      "verification_plan_id": "bcccab2d-26ad-43dd-94b7-87d262c6c660",
+      "verification_plan_id": "fa151ee1-97d1-43c2-99c9-84a50a47b83b",
       "checker_type": "VIDEO_METADATA",
       "measured_fact": "duration_seconds=45.0; expected LTE 60 SECONDS",
-      "expected_constraint": "{\"field\": \"DURATION_SECONDS\", \"operator\": \"LTE\", \"unit\": \"SECONDS\", \"value\": 60}"
+      "expected_constraint": "{\"field\": \"DURATION_SECONDS\", \"operator\": \"LTE\", \"unit\": \"SECONDS\", \"value\": 60}",
+      "semantic_review": null
     }
   }
 }

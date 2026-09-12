@@ -7,7 +7,7 @@ from fastapi.testclient import TestClient
 
 from app.api import routes
 from app.main import app
-from app.services import ai_providers, sessions, verifier_planner
+from app.services import ai_providers, semantic_provider, sessions, verifier_planner
 from app.services.public_guard import GuardConfig, GuardRejected, PublicGuard
 from app.services.storage import SQLiteRuntimeStore
 
@@ -31,6 +31,10 @@ def test_zero_cost_provider_keeps_codex_and_rejects_openai_api(monkeypatch):
     assert isinstance(ai_providers.get_generator(), ai_providers.CodexCliRequirementGenerator)
     assert isinstance(ai_providers.get_reviewer(), ai_providers.CodexCliSemanticReviewer)
     assert isinstance(verifier_planner.get_verification_planner(), verifier_planner.CodexCliVerificationPlanner)
+    assert isinstance(
+        semantic_provider.get_submission_semantic_reviewer(),
+        semantic_provider.CodexCliSubmissionSemanticReviewer,
+    )
 
     monkeypatch.setenv("FINAL_CHECK_AI_PROVIDER", "openai-api")
     with pytest.raises(ai_providers.ProviderExecutionError):
@@ -39,6 +43,8 @@ def test_zero_cost_provider_keeps_codex_and_rejects_openai_api(monkeypatch):
         ai_providers.get_reviewer()
     with pytest.raises(ai_providers.ProviderExecutionError):
         verifier_planner.get_verification_planner()
+    with pytest.raises(ai_providers.ProviderExecutionError):
+        semantic_provider.get_submission_semantic_reviewer()
 
 
 def test_codex_status_requires_auth_and_locked_model(monkeypatch, tmp_path):
@@ -81,6 +87,13 @@ def test_global_and_session_hourly_quotas(tmp_path):
     assert global_rejection.value.reason == "GLOBAL_QUOTA"
 
 
+def test_semantic_is_counted_by_public_guard(tmp_path):
+    item = guard(tmp_path, global_limit=1, session_limit=1)
+    reservation = item.reserve("s1", "SEMANTIC", "semantic:s1:1")
+    assert reservation.counted
+    item.release(reservation)
+
+
 def test_polling_idempotency_and_concurrency(tmp_path):
     item = guard(tmp_path, global_limit=2, session_limit=2, concurrent=1)
     ignored = item.reserve("s1", "POLL", "poll:s1")
@@ -105,6 +118,24 @@ def test_quota_survives_store_reconstruction(tmp_path):
     second = guard(tmp_path, global_limit=1, now=stamp + timedelta(minutes=5))
     with pytest.raises(GuardRejected):
         second.reserve("s2", "PLAN", "plan:s2:1")
+
+
+def test_restart_clears_leases_but_preserves_hourly_operations(tmp_path):
+    first = guard(tmp_path, global_limit=2, session_limit=2, concurrent=1)
+    reservation = first.reserve("s1", "SEMANTIC", "semantic:s1:1")
+    assert reservation.counted
+
+    sessions.configure(tmp_path)
+    reconstructed = SQLiteRuntimeStore(tmp_path)
+    assert reconstructed.clear_ai_leases() == 0
+
+    second = guard(tmp_path, global_limit=2, session_limit=2, concurrent=1)
+    after_restart = second.reserve("s2", "PLAN", "plan:s2:1")
+    assert after_restart.counted
+    assert reconstructed.clear_ai_leases() == 1
+    with pytest.raises(GuardRejected) as raised:
+        second.reserve("s3", "EXTRACT", "extract:s3:1")
+    assert raised.value.reason == "GLOBAL_QUOTA"
 
 
 def test_public_health_uses_codex_without_exposing_auth(monkeypatch, tmp_path):

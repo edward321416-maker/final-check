@@ -56,6 +56,6 @@ API responses use `Cache-Control: no-store`; public responses add `nosniff`, `no
 - There is no production SLA.
 - Free endpoints can show an ngrok browser warning on a visitor's first visit.
 - The runtime is a public, unauthenticated competition MVP on one local process; it is not a distributed or high-traffic deployment.
-- Vision/OCR, semantic submission verification, new formats, product login, payments, analytics, and backups remain deferred.
+- Vision/OCR, new formats, product login, payments, analytics, and backups remain deferred. The documented TASK09 public runtime predates TASK10; current source supports local TASK10 semantic review, but the public health URL returned HTTP 404 on 2026-09-10 KST and was not redeployed, so public TASK10 ACTUAL remains NOT TESTED.
 
 The ngrok Free plan supplies one account-assigned stable development domain. The domain does not time out while its agent remains connected, but the local process and host must stay running. See the official [Free Plan Limits](https://ngrok.com/docs/pricing-limits/free-plan-limits) and [Agent CLI](https://ngrok.com/docs/agent/cli) documentation.

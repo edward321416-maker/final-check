@@ -225,6 +225,21 @@ class SQLiteRuntimeStore:
         with self._lock, self._connect() as connection:
             connection.execute("DELETE FROM ai_leases WHERE token = ?", (token,))
 
+    def clear_ai_leases(self) -> int:
+        with self._lock, self._connect() as connection:
+            count = int(connection.execute("SELECT COUNT(*) FROM ai_leases").fetchone()[0])
+            connection.execute("DELETE FROM ai_leases")
+        return count
+
+    def running_validation_session_ids(self) -> list[str]:
+        with self._lock, self._connect() as connection:
+            rows = connection.execute("SELECT id, payload FROM sessions ORDER BY id").fetchall()
+        return [
+            session_id
+            for session_id, payload in rows
+            if CheckSession.model_validate_json(payload).run_state == "RUNNING"
+        ]
+
     def recover_stale_jobs(self) -> list[str]:
         recovered: list[str] = []
         stamp = datetime.now(timezone.utc)

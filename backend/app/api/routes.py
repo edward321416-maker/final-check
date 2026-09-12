@@ -1,3 +1,4 @@
+import asyncio
 import hashlib
 import json
 import os
@@ -5,15 +6,19 @@ from pathlib import Path, PurePosixPath
 import shutil
 import subprocess
 from typing import Annotated, Literal
-from fastapi import APIRouter, File, HTTPException, Response, UploadFile
+from fastapi import APIRouter, Depends, File, HTTPException, Response, UploadFile
 from fastapi.responses import FileResponse
 from starlette.concurrency import run_in_threadpool
 from app.models.schemas import CheckSession, CreateSession, SubmissionFile, SubmissionStatus
 from app.services import demo, sessions
-from app.services import generic_policy, generic_validation, profiles
+from app.services import generic_policy, profiles
 from app.services.announcement_input import MAX_ANNOUNCEMENT_BYTES, source_from_bytes
 from app.services.ai_providers import provider_status
-from app.services.public_guard import GuardConfig
+from app.services.public_guard import GuardConfig, PublicGuard
+from app.models.semantic_review import SemanticReadiness, ValidateRequest
+from app.services import task10_validation
+from app.services.semantic_submission import prepare_semantic_submission
+from app.services.semantic_provider import get_submission_semantic_reviewer
 from app.api.profiles import custom_session, invalidate
 from app.services.policy import summarize
 from app.validators.v15_adapter import EXPECTED_SHA256, ValidatorUnavailable, profile_requirements, validator_v15
@@ -22,6 +27,12 @@ router = APIRouter(prefix="/api")
 MAX_FILE_BYTES = 320 * 1024 * 1024
 MAX_PACKAGE_BYTES = 350 * 1024 * 1024
 MAX_FILES = 8
+VALIDATION_TASKS: dict[str, asyncio.Task[None]] = {}
+
+
+def semantic_reviewer_factory():
+    # Resolve only inside callable background work, after acknowledgment.
+    return get_submission_semantic_reviewer
 
 
 def _positive_limit(name: str, default: int) -> int:
@@ -198,6 +209,8 @@ def demo_download(case: Literal["demo-broken", "demo-fixed"], filename: str) -> 
 @router.post("/sessions/{session_id}/files", response_model=CheckSession)
 async def upload_files(session_id: str, files: Annotated[list[UploadFile], File()]) -> CheckSession:
     session = sessions.get(session_id)
+    if session.run_state == "RUNNING":
+        raise HTTPException(409, "A validation run is already in progress.")
     _, package_limit, max_files = upload_limits()
     if not session.announcement_name:
         raise HTTPException(409, "Select an announcement first.")
@@ -234,16 +247,117 @@ async def upload_files(session_id: str, files: Annotated[list[UploadFile], File(
                 package.cleanup()
 
 
-@router.post("/sessions/{session_id}/validate", response_model=CheckSession)
-async def validate(session_id: str) -> CheckSession:
+@router.get("/sessions/{session_id}/semantic-readiness", response_model=SemanticReadiness)
+async def semantic_readiness_route(session_id: str) -> SemanticReadiness:
     session = sessions.get(session_id)
+    if session.validation_profile != "generic" or session.generic_profile is None:
+        return SemanticReadiness(ack_required=False, eligible_requirement_count=0, reason_code="NOT_GENERIC")
+    package = sessions.package_path(session_id)
+    try:
+        return await run_in_threadpool(task10_validation.semantic_readiness, session.model_copy(deep=True), package)
+    except task10_validation.PackageChangedDuringRun as error:
+        raise HTTPException(409, "Submission receipts do not match uploaded bytes") from error
+
+
+async def execute_validation(session: CheckSession, package: Path, preparation=None, reviewer=None) -> CheckSession:
+    try:
+        snapshot = session.model_copy(deep=True)
+        if session.validation_profile == "generic":
+            try:
+                guard = PublicGuard(sessions.session_store())
+            except Exception:
+                guard = None
+            run = await run_in_threadpool(task10_validation.run_generic_preflight,
+                snapshot, package, preparation, reviewer, guard)
+            task10_validation.check_integrity(snapshot, package)
+        else:
+            run = await run_in_threadpool(validator_v15.validate, snapshot, package)
+        raw_path = sessions.workspace_path(session.id) / f"run-{session.revision + 1}-raw.json"
+        await run_in_threadpool(raw_path.write_text, json.dumps(run.raw, ensure_ascii=False, indent=2), encoding="utf-8")
+        if session.validation_profile == "generic":
+            task10_validation.check_integrity(snapshot, package)
+        session.results = run.results
+        session.validation_complete = run.complete
+        session.status = (
+            generic_policy.summarize(session.generic_profile, run.results)
+            if session.validation_profile == "generic" and session.generic_profile is not None
+            else summarize(session.requirements, run.results, validation_complete=run.complete)
+        )
+        session.engine_sha256 = run.engine_sha256
+        session.run_state = "COMPLETE"
+        session.revision += 1
+        return sessions.save(session)
+    except Exception as error:
+        session.results = []
+        session.status = SubmissionStatus.REVIEW_REQUIRED
+        session.validation_complete = False
+        session.run_state = "FAILED"
+        session.run_error = ("PACKAGE_CHANGED_DURING_RUN" if isinstance(error, task10_validation.PackageChangedDuringRun)
+            else "실제 검증 실행이 완료되지 않았습니다. 파일을 확인하고 다시 시도하세요.")
+        sessions.save(session)
+        raise HTTPException(503 if isinstance(error, ValidatorUnavailable) else 502, session.run_error) from error
+
+
+async def complete_validation(session_id: str, preparation, reviewer_factory) -> None:
+    lock = sessions.LOCKS.get(session_id)
+    if lock is None:
+        return
+    async with lock:
+        session = sessions.session_store().get_session(session_id)
+        if session.run_state != "RUNNING":
+            return
+        try:
+            reviewer = await run_in_threadpool(reviewer_factory)
+        except Exception:
+            reviewer = None
+        try:
+            await execute_validation(session, sessions.artifact_store().submission_path(session_id), preparation, reviewer)
+        except HTTPException:
+            pass  # execute_validation has durably recorded the failure.
+
+
+def forget_validation(session_id: str, completed: asyncio.Task[None]) -> None:
+    if VALIDATION_TASKS.get(session_id) is completed:
+        VALIDATION_TASKS.pop(session_id, None)
+    try:
+        completed.exception()
+    except asyncio.CancelledError:
+        pass
+
+
+@router.post("/sessions/{session_id}/validate", response_model=CheckSession)
+async def validate(session_id: str, reviewer_factory=Depends(semantic_reviewer_factory),
+                   body: ValidateRequest | None = None) -> CheckSession:
+    session = sessions.get(session_id)
+    if session.run_state == "RUNNING":
+        raise HTTPException(409, "A validation run is already in progress.")
     if session.validation_profile not in {"frozen_v15", "generic"}:
         raise HTTPException(503, "Announcement extraction is not connected; no verified requirement profile.")
-    package = sessions.package_path(session_id)
     lock = sessions.LOCKS[session_id]
     if lock.locked():
         raise HTTPException(409, "Another upload or validation is already running.")
     async with lock:
+        preparation = None
+        if session.validation_profile == "generic" and session.generic_profile is not None:
+            try:
+                # Let receipt validation handle a missing directory as a failed run.
+                package = sessions.artifact_store().submission_path(session_id)
+                task10_validation.check_integrity(session, package)
+                preparation = await run_in_threadpool(prepare_semantic_submission, session.generic_profile, package)
+                task10_validation.check_integrity(session, package)
+            except task10_validation.PackageChangedDuringRun as error:
+                session.previous_results = session.results or session.previous_results
+                session.results = []
+                session.status = SubmissionStatus.REVIEW_REQUIRED
+                session.run_state = "FAILED"
+                session.validation_complete = False
+                session.run_error = "PACKAGE_CHANGED_DURING_RUN"
+                sessions.save(session)
+                raise HTTPException(409, "Submission receipts do not match uploaded bytes") from error
+            if preparation.call_ai and not (body and body.semantic_text_ai_acknowledged):
+                raise HTTPException(409, "Acknowledge submission text AI review before validation.")
+        else:
+            package = sessions.package_path(session_id)
         if session.results:
             session.previous_results = session.results
         session.results = []
@@ -252,28 +366,9 @@ async def validate(session_id: str) -> CheckSession:
         session.validation_complete = False
         session.run_error = None
         sessions.save(session)
-        try:
-            runner = generic_validation.validate if session.validation_profile == "generic" else validator_v15.validate
-            run = await run_in_threadpool(runner, session.model_copy(deep=True), package)
-            # Preserve raw output privately without adding output files to the submitted package.
-            raw_path = sessions.workspace_path(session_id) / f"run-{session.revision + 1}-raw.json"
-            await run_in_threadpool(raw_path.write_text, json.dumps(run.raw, ensure_ascii=False, indent=2), encoding="utf-8")
-            session.results = run.results
-            session.validation_complete = run.complete
-            session.status = (
-                generic_policy.summarize(session.generic_profile, run.results)
-                if session.validation_profile == "generic" and session.generic_profile is not None
-                else summarize(session.requirements, run.results, validation_complete=run.complete)
-            )
-            session.engine_sha256 = run.engine_sha256
-            session.run_state = "COMPLETE"
-            session.revision += 1
-            return sessions.save(session)
-        except Exception as error:
-            session.results = []
-            session.status = SubmissionStatus.REVIEW_REQUIRED
-            session.validation_complete = False
-            session.run_state = "FAILED"
-            session.run_error = "실제 검증 실행이 완료되지 않았습니다. 파일을 확인하고 다시 시도하세요."
-            sessions.save(session)
-            raise HTTPException(503 if isinstance(error, ValidatorUnavailable) else 502, session.run_error) from error
+        if preparation is not None and preparation.call_ai:
+            task = asyncio.create_task(complete_validation(session_id, preparation, reviewer_factory))
+            VALIDATION_TASKS[session_id] = task
+            task.add_done_callback(lambda completed: forget_validation(session_id, completed))
+            return session.model_copy(deep=True)
+        return await execute_validation(session, package, preparation)

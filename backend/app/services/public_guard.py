@@ -69,7 +69,7 @@ class PublicGuard:
     def reserve(self, session_id: str, operation_kind: str, operation_id: str) -> GuardReservation:
         if not self.config.enabled or operation_kind == "POLL":
             return GuardReservation(counted=False, reused=False, token=None)
-        if operation_kind not in {"EXTRACT", "PLAN"}:
+        if operation_kind not in {"EXTRACT", "PLAN", "SEMANTIC"}:
             raise ValueError("Unsupported public AI operation kind")
         status, token = self.store.reserve_ai_operation(
             operation_id=operation_id,

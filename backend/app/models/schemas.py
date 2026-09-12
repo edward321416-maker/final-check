@@ -1,9 +1,10 @@
 from datetime import datetime
 from enum import StrEnum
-from typing import Literal
-from pydantic import BaseModel, ConfigDict, Field, model_validator
+from typing import Annotated, Literal
+from pydantic import BaseModel, ConfigDict, Field, StringConstraints, model_validator
 from app.models.jobs import JobSummary
-from app.models.profiles import GenericRequirementProfile
+from app.models.profiles import GenericRequirementProfile, ProviderProvenance
+from app.models.semantic_review import SemanticAssessment, SemanticCoverage
 from app.models.verifier_plans import CheckerType, VerificationPlanSet
 
 
@@ -24,10 +25,38 @@ class SubmissionStatus(StrEnum):
     READY = "READY"
 
 
+VerbatimExcerpt = Annotated[str, StringConstraints(strip_whitespace=False, min_length=1)]
+
+
 class Evidence(Model):
     source: str = Field(min_length=1)
     locator: str = Field(min_length=1)
-    excerpt: str = Field(min_length=1)
+    excerpt: VerbatimExcerpt
+
+    @model_validator(mode="after")
+    def nonblank_excerpt(self) -> "Evidence":
+        if not self.excerpt.strip():
+            raise ValueError("Evidence excerpt must be nonblank")
+        return self
+
+
+class SemanticReviewMetadata(Model):
+    assessment: SemanticAssessment | None = None
+    coverage: SemanticCoverage
+    reason_code: str | None = Field(default=None, max_length=100)
+    evidence: list[Evidence] = Field(default_factory=list, max_length=3)
+    evidence_fingerprint: str | None = Field(default=None, pattern=r"^[0-9a-f]{64}$")
+    provider: ProviderProvenance | None = None
+
+    @model_validator(mode="after")
+    def trusted_evidence_shape(self) -> "SemanticReviewMetadata":
+        if self.assessment == "RELATED_EVIDENCE_FOUND" and not self.evidence:
+            raise ValueError("RELATED_EVIDENCE_FOUND requires trusted evidence")
+        if self.assessment != "RELATED_EVIDENCE_FOUND" and self.evidence:
+            raise ValueError("Only RELATED_EVIDENCE_FOUND can include trusted evidence")
+        if self.assessment == "NO_CLEAR_EVIDENCE" and self.coverage != "FULL":
+            raise ValueError("NO_CLEAR_EVIDENCE requires FULL text coverage")
+        return self
 
 
 class Requirement(Model):
@@ -52,6 +81,7 @@ class ValidationResult(Model):
     checker_type: CheckerType | None = None
     measured_fact: str | None = None
     expected_constraint: str | None = None
+    semantic_review: SemanticReviewMetadata | None = None
 
     @model_validator(mode="after")
     def enforce_product_lock(self) -> "ValidationResult":
@@ -61,6 +91,16 @@ class ValidationResult(Model):
             if not all((self.announcement_evidence, self.submission_evidence, self.verification_plan_id,
                         self.checker_type, self.measured_fact, self.expected_constraint)):
                 raise ValueError("Generic verifier PASS/BLOCKER requires plan and both evidence sources")
+        if self.semantic_review is not None and self.status != FindingStatus.REVIEW:
+            raise ValueError("Semantic review can only produce REVIEW")
+        if self.semantic_review is not None and self.source_mode != "generic_review":
+            raise ValueError("Semantic review requires generic_review")
+        if self.semantic_review is not None:
+            evidence = self.semantic_review.evidence
+            if evidence and self.submission_evidence != evidence[0]:
+                raise ValueError("Primary submission evidence must match semantic evidence")
+            if not evidence and self.submission_evidence is not None:
+                raise ValueError("Semantic review without trusted evidence cannot set submission evidence")
         if self.requirement_id in {"R20", "R21"} and self.status not in {FindingStatus.REVIEW, FindingStatus.EXTERNAL}:
             raise ValueError("Licensing and AI provenance have no automatic verification")
         if self.status == FindingStatus.BLOCKER:
