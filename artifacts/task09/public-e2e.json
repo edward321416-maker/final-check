@@ -1,7 +1,7 @@
 {
   "classification": "ACTUAL",
   "public_url": "https://uncoy-joelle-macrodont.ngrok-free.dev",
-  "session_id": "72643acd-1d4c-42ff-91a8-6fb3da54da24",
+  "session_id": "7e8be215-0c78-4fbd-938f-913003211524",
   "source": "C01 public announcement exact excerpt from benchmarks/task04/sources/C01.txt",
   "provider": {
     "provider": "Codex CLI",
@@ -13,7 +13,7 @@
     "status": "available",
     "version": "ffprobe version 8.1.2-full_build-www.gyan.dev Copyright (c) 2007-2026 the FFmpeg developers"
   },
-  "plan_set_id": "a0d8c469-e4cf-4255-b90f-d716217c564e",
+  "plan_set_id": "d9d9947d-743f-4fbc-8278-ca71395c022c",
   "planner": {
     "provider": "OpenAI via ChatGPT-authenticated Codex CLI",
     "model": "gpt-5.6-sol",
@@ -23,7 +23,7 @@
   },
   "extraction": {
     "job": {
-      "job_id": "1c4aa186-c2bb-4ad2-8c72-8afb4dfb7df9",
+      "job_id": "abd43533-dae2-406b-aead-9c6f5e7c739b",
       "status": "SUCCEEDED",
       "stage": "FINALIZED",
       "attempt": 1,
@@ -31,7 +31,7 @@
         0
       ],
       "error_category": null,
-      "updated_at": "2026-09-07T11:57:44.550977Z"
+      "updated_at": "2026-09-12T10:36:08.125655Z"
     },
     "stage1": {
       "provider": "OpenAI via ChatGPT-authenticated Codex CLI",
@@ -51,7 +51,7 @@
   "broken": {
     "status": "BLOCKED",
     "result": {
-      "id": "A001:3b224b0f-9f80-4a32-ba64-5b131f046d39",
+      "id": "A001:8c8e4e3d-dbff-4e2e-8960-4aac2870b866",
       "requirement_id": "A001",
       "status": "BLOCKER",
       "title": "영상 전체 길이는 60초 이내여야 합니다.",
@@ -68,16 +68,17 @@
         "excerpt": "duration_seconds=61.0; expected LTE 60 SECONDS"
       },
       "source_mode": "generic_verifier",
-      "verification_plan_id": "3b224b0f-9f80-4a32-ba64-5b131f046d39",
+      "verification_plan_id": "8c8e4e3d-dbff-4e2e-8960-4aac2870b866",
       "checker_type": "VIDEO_METADATA",
       "measured_fact": "duration_seconds=61.0; expected LTE 60 SECONDS",
-      "expected_constraint": "{\"field\": \"DURATION_SECONDS\", \"operator\": \"LTE\", \"unit\": \"SECONDS\", \"value\": 60}"
+      "expected_constraint": "{\"field\": \"DURATION_SECONDS\", \"operator\": \"LTE\", \"unit\": \"SECONDS\", \"value\": 60}",
+      "semantic_review": null
     }
   },
   "fixed": {
     "status": "READY",
     "result": {
-      "id": "A001:3b224b0f-9f80-4a32-ba64-5b131f046d39",
+      "id": "A001:8c8e4e3d-dbff-4e2e-8960-4aac2870b866",
       "requirement_id": "A001",
       "status": "PASS",
       "title": "영상 전체 길이는 60초 이내여야 합니다.",
@@ -94,10 +95,11 @@
         "excerpt": "duration_seconds=45.0; expected LTE 60 SECONDS"
       },
       "source_mode": "generic_verifier",
-      "verification_plan_id": "3b224b0f-9f80-4a32-ba64-5b131f046d39",
+      "verification_plan_id": "8c8e4e3d-dbff-4e2e-8960-4aac2870b866",
       "checker_type": "VIDEO_METADATA",
       "measured_fact": "duration_seconds=45.0; expected LTE 60 SECONDS",
-      "expected_constraint": "{\"field\": \"DURATION_SECONDS\", \"operator\": \"LTE\", \"unit\": \"SECONDS\", \"value\": 60}"
+      "expected_constraint": "{\"field\": \"DURATION_SECONDS\", \"operator\": \"LTE\", \"unit\": \"SECONDS\", \"value\": 60}",
+      "semantic_review": null
     }
   },
   "same_plan_set": true

@@ -1,7 +1,7 @@
 {
   "classification": "ACTUAL",
   "baseline": "d90f53ae8e20b8a51b3a4559a3e7e5651dd204a0",
-  "session_id": "d5c955c6-9507-446b-a26e-426ba45c7c35",
+  "session_id": "14401514-03be-4b0c-9c9f-643ea7515acd",
   "operation_ledger": {
     "EXTRACT": 1,
     "PLAN": 0,
@@ -18,7 +18,7 @@
     "version": "task10-semantic-review-v1",
     "sha256": "c242a7cdcc9d4a1feddba58ce9a02a8db488227fe8bf8cf8f050d152f0d469cf"
   },
-  "profile_id": "76547978-48ea-4134-b45b-4391d558d1db",
+  "profile_id": "fc74fdcb-d132-4b8b-8a1a-a29a6cbcbd02",
   "fixture_sha256": {
     "positive": "c5ce8d12a1af8f67daf3aeefea68dba85a8030364e5354be01c5907244087038",
     "missing": "c96b274eac8a450e4eb08a45714b193632569a1f62fc63f49faee63bb5581fdc",
