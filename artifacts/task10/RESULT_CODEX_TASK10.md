@@ -104,3 +104,14 @@ Adversarial/failure evidence retained from Task 9:
 - Backend tests were **NOT RERUN** in this round because no backend contract or code changed; the previously recorded backend suites remain historical evidence, not a claim about this new frontend diff.
 - Final-review fix base: `60148fe8ae13bb4720f458a25d463f50516505d2`. The new commit cannot truthfully embed its own SHA; the controller/reviewer reports it after creation and verifies the exact committed range.
 - Final decision: **DO NOT MERGE pending Astra re-review and Product Lead review.**
+
+## 2026-09-12 final whole-branch re-review
+
+- Reviewed source HEAD: `06227862042dae54d0252c294d5910f1dfe0cae4`, 20 commits after approved baseline `d90f53ae8e20b8a51b3a4559a3e7e5651dd204a0`.
+- GitHub state: `origin/main` remains the approved baseline; no remote TASK10 branch or TASK10 PR exists; main `backend` and `frontend` checks are both successful.
+- Fresh controller baseline at reviewed HEAD: backend `242 passed, 1 warning`; standard Playwright `42 passed, 10 skipped`; typecheck and build exit 0. The reviewer did not rerun these suites independently.
+- Fresh lock/authority hashes and secret scan passed. Fix-range `git diff --check 60148fe..0622786` passed; full-branch exit 2 remains limited to immutable Spec/Plan Markdown hard breaks.
+- Independent review requested/configured `gpt-5.6-sol/xhigh`; reviewer-observed model/effort `UNKNOWN/UNKNOWN`. Verdict: Spec Compliance `PASS`, stale-polling fix `PASS`, 0 Critical / 0 Important / 0 Minor findings, `READY_FOR_PRODUCT_LEAD_REVIEW`.
+- The review explicitly confirmed REVIEW-only authority, deterministic zero-call behavior, exact local evidence gating, FULL-only absence claims, bounded non-persistent semantic inputs, deterministic-result preservation on semantic failure, exact-one cardinality, trusted single-PDF limits, acknowledgement/integrity/mutation guards, durable quota/restart behavior, and stale update/navigation/error/cleanup guards.
+- Public health returned HTTP 404 again at `2026-09-12T09:51:06Z`; public TASK09/TASK10 ACTUAL remains **NOT TESTED** and no runtime change was attempted.
+- Final decision: **READY_FOR_PRODUCT_LEAD_REVIEW / DO NOT PUSH OR MERGE**. Public ACTUAL remains an explicit pre-merge gap.

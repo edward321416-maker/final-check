@@ -149,3 +149,20 @@ Date: 2026-09-10 (Asia/Seoul)
 - Public TASK09/TASK10 ACTUAL remain **NOT TESTED** after the previously recorded HTTP 404. No new public request, service start/replacement, deployment, push, PR, merge, paid credit, key, account, model setting, or global configuration change occurred. CI URLs: none.
 - Changed scope: `frontend/components/screens.tsx`, `frontend/lib/api.ts`, `frontend/lib/poll-session.ts`, `frontend/tests/task10-semantic-ui.spec.ts`, refreshed bounded `artifacts/task10/actual-semantic-e2e.json`, and evidence documentation only.
 - Delivery status: fix implemented and locally verified; **DO NOT MERGE pending Astra re-review and Product Lead review**. The exact new commit SHA is reported after commit because a commit cannot truthfully contain its own SHA.
+
+## TASK10 source-based resume and final whole-branch review
+
+Date: 2026-09-12 (Asia/Seoul)
+
+- GitHub state: repository `edward321416-maker/final-check` is PUBLIC with default branch `main`; fetched `origin/main` is exactly `d90f53ae8e20b8a51b3a4559a3e7e5651dd204a0`. No remote TASK10 branch or TASK10 PR exists. Both GitHub checks on the main SHA (`backend`, `frontend`) are completed with `success`.
+- Resume identity: isolated worktree `D:\Users\admin\Desktop\ai공모전\final-check-task10`, branch `task10-content-requirement-review`, recovered HEAD `06227862042dae54d0252c294d5910f1dfe0cae4`; the approved baseline is its ancestor and the worktree was clean before verification.
+- Authority: handoff Manifest entries matched SHA-256 and byte size. The canonical Spec and Plan working bytes and Git blobs matched `8a3b29da055a184779ed99aae9ffba99857e71ad030473172aec1b387d4f5019` and `714bee99708b9cebe61d2eddae111c3faa8bcdd94e343a5e5020127cac3663de`.
+- Fresh backend baseline, `backend/` cwd: `.\.venv\Scripts\python.exe -m pytest tests -q` -> `242 passed, 1 warning in 62.70s`, exit 0.
+- Fresh frontend baseline, `frontend/` cwd: `npm run typecheck` -> exit 0; `npm run build` -> exit 0 with 8 static pages; isolated `npm run test:smoke -- --reporter=list` -> `42 passed, 10 skipped in 45.9s`, exit 0. All skipped cases were explicit ACTUAL/public opt-ins. The 28 tracked test-generated `artifacts/**` paths were verified against the clean pre-run state and restored exactly; post-restore status was clean and `git diff --check` exited 0.
+- Fresh integrity: Gold, frozen Validator, TASK06 Stage1/Stage2, TASK08 Planner, and TASK10 prompt hashes matched; `backend/.venv/Scripts/python.exe scripts/scan_secrets.py` passed. `git diff --check 60148fe..0622786` passed. Full-branch diff check remains expected exit 2 only for immutable Spec/Plan Markdown hard breaks, whose authority hashes remain unchanged.
+- Independent final whole-branch review: requested `gpt-5.6-sol/xhigh`; configured dispatch `gpt-5.6-sol/xhigh`; reviewer-observed model/effort `UNKNOWN/UNKNOWN`. The reviewer read the complete 20-commit package and returned Spec Compliance `PASS`, stale-polling fix `PASS`, and 0 Critical / 0 Important / 0 Minor findings. The reviewer did not independently rerun automated tests and treated the fresh controller baseline as external evidence.
+- Stale-polling finding is closed at `0622786`: AbortSignal, poll generation, and active-session guards cover stale response updates, navigation, error display, retry-delay cancellation, and cleanup on unmount/session replacement.
+- Current public health read-only GET at `2026-09-12T09:51:06Z` returned HTTP 404. TASK09/TASK10 public ACTUAL remains **NOT TESTED**. No public runtime, deployment, account, paid resource, provider setting, global hook/configuration, push, PR, merge, or main change was made.
+- Controller requested model/effort: `gpt-5.6-sol/high`; controller-observed model/effort: `UNKNOWN/UNKNOWN`. Token usage: `UNKNOWN`.
+- Modified in this resume record: `RESULT_CODEX.md` and `artifacts/task10/RESULT_CODEX_TASK10.md`; SDD ledger updated in its ignored workspace. No production source, tests, fixtures, frozen authorities, or runtime configuration changed.
+- Delivery status: **READY_FOR_PRODUCT_LEAD_REVIEW / DO NOT PUSH OR MERGE**. Public ACTUAL remains an explicit pre-merge gap.
