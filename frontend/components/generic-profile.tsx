@@ -1,12 +1,11 @@
 "use client";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { request, sessionRequest } from "@/lib/api";
 import type { CheckSession } from "@/types/check";
-import type { ExtractedRequirement, ProfileRequirement, Modality, Severity, Verifier } from "@/types/profile";
+import type { ExtractedRequirement, ExtractionStatus, ProfileRequirement, Modality, Severity, Verifier } from "@/types/profile";
 import { useSession } from "./session-provider";
-import { ErrorNotice, EvidenceBox, useAction } from "./ui";
+import { EvidenceBox, ErrorNotice, useAction } from "./ui";
 import styles from "./profile.module.css";
 
 export function TextAnnouncementInput() {
@@ -25,9 +24,25 @@ export function TextAnnouncementInput() {
     <div><button className="button secondary" disabled={busy || !text.trim()} onClick={() => void run(start)}>텍스트 공고로 시작 →</button></div><ErrorNotice error={error} /></div>;
 }
 
-type Action = "EDIT" | "NEEDS_REVIEW" | "APPROVE" | "DELETE";
-function ReviewCard({ item, busy, act, onDirty }: { item: ProfileRequirement; busy: boolean; onDirty: () => void;
-  act: (id: string, action: Action, requirement?: ExtractedRequirement) => void }) {
+export type ProfileReviewAction = "EDIT" | "NEEDS_REVIEW" | "APPROVE" | "DELETE";
+
+const extractionStatusCopy = {
+  EXTRACTED: "AI EXTRACTED",
+  CONFIRMED: "HUMAN CONFIRMED",
+  NEEDS_REVIEW: "NEEDS REVIEW",
+  UNSUPPORTED: "UNSUPPORTED",
+} as const satisfies Record<ExtractionStatus, string>;
+
+export function formatExtractionStatus(status: ExtractionStatus): string {
+  return extractionStatusCopy[status];
+}
+
+export function RequirementInspector({ item, busy, act, onDirty }: {
+  item: ProfileRequirement;
+  busy: boolean;
+  onDirty: () => void;
+  act: (id: string, action: ProfileReviewAction, requirement?: ExtractedRequirement) => void;
+}) {
   const [draft, setDraft] = useState<ExtractedRequirement>(() => ({
     requirement_id: item.requirement_id, rule: item.rule, modality: item.modality, severity: item.severity,
     verifier: item.verifier, condition: item.condition, evidence: item.evidence, confidence: item.confidence,
@@ -35,14 +50,12 @@ function ReviewCard({ item, busy, act, onDirty }: { item: ProfileRequirement; bu
   const set = <K extends keyof ExtractedRequirement>(key: K, value: ExtractedRequirement[K]) => {
     onDirty(); setDraft(old => ({ ...old, [key]: value }));
   };
-  const reviewState = item.extraction_status === "CONFIRMED" ? "Human Confirmed"
-    : item.extraction_status === "NEEDS_REVIEW" ? "Needs Review"
-    : item.stage2_decision === "KEEP" ? "AI reviewed · human approval required"
-    : "Needs Review";
-  return <article className="requirement" aria-label={`요구사항 ${item.requirement_id}`}>
-    <div className={styles.actions}><span className="rule-id">{item.requirement_id}</span><strong>{reviewState}</strong><span className="verifier">AI generated · confidence {item.confidence.toFixed(2)} · 미보정</span></div>
+  const reviewState = formatExtractionStatus(item.extraction_status);
+  return <div>
+    <div className={styles.actions}><span className="rule-id">{item.requirement_id}</span><strong>{reviewState}</strong><span className="verifier">confidence {item.confidence.toFixed(2)} · 미보정</span></div>
     <p className="info-note">Stage 2: {item.stage2_decision ?? "pending"} · {item.stage2_reason || "semantic review pending"}</p>
     {item.severity === "BLOCKER" && !item.authoritative && <p className="info-note"><strong>PROVISIONAL_BLOCKER</strong> · authoritative=false · 사람의 승인 전에는 제출을 차단하지 않습니다.</p>}
+    <EvidenceBox label="공고문 근거" evidence={{ source: "입력 공고 원문", locator: `${item.evidence.source_section} · chars ${item.evidence_start}:${item.evidence_end}`, excerpt: item.evidence.quote }} />
     <div className={styles.form}><label>요구사항 문장<textarea rows={2} maxLength={2000} value={draft.rule} onChange={e => set("rule", e.target.value)} disabled={busy} /></label>
       <div className={styles.fields}>
         <label>modality<select value={draft.modality} onChange={e => set("modality", e.target.value as Modality)} disabled={busy}>{["MUST", "MUST_NOT", "SHOULD", "MAY", "INFO"].map(x => <option key={x}>{x}</option>)}</select></label>
@@ -53,77 +66,10 @@ function ReviewCard({ item, busy, act, onDirty }: { item: ProfileRequirement; bu
       <label>source section<input value={draft.evidence.source_section} maxLength={300} onChange={e => set("evidence", { ...draft.evidence, source_section: e.target.value })} disabled={busy} /></label>
       <label>exact evidence quote<textarea rows={2} maxLength={4000} value={draft.evidence.quote} onChange={e => set("evidence", { ...draft.evidence, quote: e.target.value })} disabled={busy} /></label>
     </div>
-    <EvidenceBox label="공고문 근거" evidence={{ source: "입력 공고 원문", locator: `${item.evidence.source_section} · chars ${item.evidence_start}:${item.evidence_end}`, excerpt: item.evidence.quote }} />
     {item.issues.map(issue => <p key={issue} className="info-note">{issue}</p>)}
     <div className={styles.actions}><button className="button secondary" disabled={busy} onClick={() => act(item.requirement_id, "EDIT", draft)}>수정 저장</button>
       <button className="button secondary" disabled={busy} onClick={() => act(item.requirement_id, "NEEDS_REVIEW", draft)}>검토 필요로 유지</button>
       <button className="button primary" disabled={busy} onClick={() => act(item.requirement_id, "APPROVE", draft)}>항목 승인</button>
       <button className="text-link" disabled={busy} onClick={() => act(item.requirement_id, "DELETE")}>항목 삭제</button></div>
-  </article>;
-}
-
-export function GenericProfileReview() {
-  const { session, update } = useSession();
-  const { busy, error, run } = useAction();
-  const [acknowledged, setAcknowledged] = useState(false);
-  const [dirtyId, setDirtyId] = useState<string | null>(null);
-  const profile = session?.generic_profile;
-  if (!session || !profile) return null;
-  const sid = session.id;
-  async function mutate(action: string, body: object = {}) {
-    update(await sessionRequest(sid, action, { ...body, expected_version: profile!.version }));
-    setAcknowledged(false);
-    setDirtyId(null);
-  }
-  async function extractAndWait() {
-    let next = await sessionRequest(sid, "extract", { expected_version: profile!.version });
-    update(next);
-    while (next.generic_profile?.pipeline_status === "RUNNING") {
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      next = await request<CheckSession>(`/sessions/${sid}`);
-      update(next);
-    }
-    setAcknowledged(false);
-    setDirtyId(null);
-  }
-  async function compilePlan() {
-    update(await sessionRequest(sid, "verification-plan/compile", { expected_version: profile!.version }));
-  }
-  const ready = profile.extraction_complete && profile.failed_batches.length === 0 && profile.requirements.length > 0
-    && profile.requirements.every(item => item.extraction_status === "CONFIRMED" && item.authoritative);
-  return <div className="content-grid"><section className="panel"><div className="panel-heading"><h2>요구사항 검토</h2><span>{profile.requirements.length}개 항목</span></div>
-    <div className={styles.notices}>
-      <p><strong>Profile: <span data-testid="profile-status">{profile.status}</span></strong> · {profile.announcement.ingestion_status}</p>
-      <p>{profile.execution_kind ?? "아직 실행 전"} · {profile.provider ?? "Two-stage provider 대기 중"}</p>
-      <p><strong>Pipeline: {profile.pipeline_status}</strong> · RAW {profile.raw_candidate_count} · GATED {profile.gated_candidate_count} · DROP {profile.dropped_candidate_count} · Stage2 batch {profile.review_batches}</p>
-      {session.current_job && <p className="info-note"><strong>Durable job: {session.current_job.status}</strong> · {session.current_job.stage} · attempt {session.current_job.attempt}/3 · completed batches {session.current_job.completed_stage2_batches.length}</p>}
-      {profile.pipeline_status === "RUNNING" && <p className="info-note">실제 AI 추출을 실행 중입니다. 완료 상태를 자동으로 확인합니다.</p>}
-      {profile.pipeline_error && <p className="info-note"><strong>Provider status:</strong> {profile.pipeline_error}</p>}
-      {profile.overflow && <p className="info-note"><strong>OVERFLOW_REVIEW</strong> · 100개를 초과해도 전체를 버리지 않습니다. {profile.overflow_policy}</p>}
-      {profile.failed_batches.length > 0 && <p className="info-note">실패 batch: {profile.failed_batches.map(i => i + 1).join(", ")} · 성공한 결과는 보존됐습니다.</p>}
-      <p>{profile.announcement.notice}</p>
-      {profile.notices.map((notice, i) => <p key={i}>{notice}</p>)}
-      {!profile.extraction_complete && profile.pipeline_status !== "RUNNING" && profile.announcement.ingestion_status === "READABLE" && session.current_job?.status !== "FAILED" && <button className="button primary" disabled={busy} onClick={() => void run(extractAndWait)}>{profile.pipeline_status === "NOT_STARTED" ? "요구사항 추출 실행" : "저장된 단계부터 다시 실행"}</button>}
-      {session.current_job?.status === "FAILED" && <p className="info-note">재시도 한도에 도달했습니다. 새 공고 profile로 다시 시작하세요.</p>}
-      {profile.announcement.ingestion_status !== "READABLE" && <p className="info-note">요구사항 0개 · Vision 또는 읽을 수 있는 공고 원문이 필요합니다. 내용을 생성하지 않았습니다.</p>}
-      <ErrorNotice error={error} />
-    </div>
-    {profile.requirements.map(item => <ReviewCard key={`${item.requirement_id}:${profile.version}`} item={item} busy={busy || (dirtyId !== null && dirtyId !== item.requirement_id)}
-      onDirty={() => { setDirtyId(item.requirement_id); setAcknowledged(false); }}
-      act={(id, action, requirement) => void run(() => mutate(`requirements/${id}/review`, { action, requirement }))} />)}
-  </section><aside className="side-panel"><span className="eyebrow">ANNOUNCEMENT / HUMAN REVIEW</span><h3>{profile.announcement.name}</h3>
-    <p>추출 후보를 원문과 대조해 수정·삭제·승인하세요. 항목 승인은 제출파일이 조건을 충족했다는 뜻이 아닙니다.</p>
-    <details><summary>공고 원문과 provenance</summary><pre className={styles.source}>{profile.announcement.text || "읽을 수 있는 텍스트 없음"}</pre>
-      <p className={styles.provenance}>Profile ID: {profile.profile_id}<br />Source SHA-256: {profile.announcement.sha256}<br />Text SHA-256: {profile.announcement.text_sha256}<br />Stage1 prompt: {profile.stage1?.prompt_version ?? "pending"} · {profile.stage1?.prompt_sha256 ?? "pending"}<br />Stage2 prompt: {profile.stage2?.prompt_version ?? "pending"} · {profile.stage2?.prompt_sha256 ?? "pending"}<br />Version: {profile.version}</p></details>
-    <details><summary>검토 이력 {profile.history.length}개</summary><ul className="checklist">{profile.history.map((event, i) => <li key={i}>{event.action} {event.requirement_id} · {event.at}</li>)}</ul></details>
-    {profile.status !== "CONFIRMED" ? <><label className={styles.ack}><input type="checkbox" checked={acknowledged} disabled={busy} onChange={e => setAcknowledged(e.target.checked)} />공고 원문 전체와 누락 가능성을 직접 검토했습니다.</label>
-      <button className="button primary full" disabled={busy || dirtyId !== null || !ready || !acknowledged} onClick={() => void run(() => mutate("profile/confirm", { reviewed_full_source: true }))}>Profile 확정</button></>
-      : <><p className="info-note">Human Confirmed · 공고에서 확인된 요구사항을 자동 검사 계획으로 변환합니다. AI는 계획만 제안하며 판정 권한이 없습니다.</p>
-        <p className="info-note"><strong>Plan Gate: {session.verification_plan_state}</strong>{session.verification_plan_error ? ` · ${session.verification_plan_error}` : ""}</p>
-        {session.verification_plan?.plans.length ? <section aria-label="자동 검사 계획 요약"><h4>자동 검사 계획</h4><ul className="checklist">{session.verification_plan.plans.map(plan => <li key={plan.plan_id}><strong>{plan.requirement_id} · {plan.status === "VERIFIED" ? "자동 검사 가능" : plan.status === "EXTERNAL" ? "외부 확인" : "검토 필요"}</strong><br />{plan.checker_type} · {plan.constraint.field} {plan.constraint.operator} {String(plan.constraint.value)} {plan.constraint.unit}<br /><small>공고 근거: {plan.parameter_provenance.source_substring}</small></li>)}</ul><p className={styles.provenance}>{session.verification_plan.planner_provenance.provider} · {session.verification_plan.planner_provenance.model}<br />{session.verification_plan.planner_provenance.prompt_version} · {session.verification_plan.planner_provenance.prompt_sha256}</p></section> : null}
-        {session.verification_plan_state !== "READY" && <button className="button secondary full" disabled={busy} onClick={() => void run(compilePlan)}>자동 검사 계획 생성</button>}
-        <p className="info-note">현재 MVP 자동 검사 지원: PDF / MP4. 자동 검사가 안전하지 않은 항목은 검토 필요로 남깁니다.</p>
-        {dirtyId ? <p>수정 중인 항목을 먼저 저장하거나 승인하세요.</p> : <Link href="/upload" className="button primary full">제출파일 선택하기 →</Link>}</>}
-    <p><Link href="/" className="text-link">다른 공고로 새 검사</Link></p>
-  </aside></div>;
+  </div>;
 }

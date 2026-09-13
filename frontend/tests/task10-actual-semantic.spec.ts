@@ -86,8 +86,7 @@ test("TASK10 actual semantic review grounds evidence, keeps absence review-only,
   })).json();
   expect(session.generic_profile.status).toBe("CONFIRMED");
 
-  await page.reload();
-  await page.getByRole("link", { name: "제출파일 선택하기" }).click();
+  await page.goto("/upload");
   await page.getByLabel("제출파일", { exact: true }).setInputFiles(positivePath);
   const uploadedPositive = page.waitForResponse(response => response.url().endsWith("/files") && response.request().method() === "POST");
   await page.getByRole("button", { name: "선택한 1개 파일 확인" }).click();

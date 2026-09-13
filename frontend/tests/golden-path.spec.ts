@@ -13,13 +13,18 @@ class GoldenPath {
   }
   async start() {
     await this.page.goto("/");
-    await expect(this.page.getByRole("heading", { level: 1 })).toContainText("마지막 한 번");
+    await expect(this.page.getByRole("heading", { level: 1, name: "제출 버튼을 누르기 전, 마지막 확인." })).toBeVisible();
     await this.capture("01-home");
     await this.page.getByRole("button", { name: "demo 검사 시작하기" }).click();
     await expect(this.page).toHaveURL(/\/announcement$/);
     await expect(this.page.getByRole("heading", { name: "동결 공고 요구사항" })).toBeVisible();
     await expect(this.page.getByText("16개 항목")).toBeVisible();
     await this.capture("02-announcement");
+    await this.page.getByRole("link", { name: "요구사항 검토로 이동" }).click();
+    await expect(this.page).toHaveURL(/\/requirements$/);
+    await expect(this.page.getByRole("heading", { name: "동결 공고 요구사항 · 읽기 전용" })).toBeVisible();
+    await expect(this.page.getByText("실시간 AI 추출 결과가 아닙니다.")).toBeVisible();
+    await expect(this.page.getByText("AI EXTRACTED", { exact: true })).toHaveCount(0);
     await this.page.getByRole("link", { name: "제출파일 선택하기" }).click();
     await expect(this.page).toHaveURL(/\/upload$/);
   }
@@ -40,6 +45,11 @@ test("five-screen golden path, evidence, filter, reload and recheck", async ({ p
   await expect(page.getByRole("button", { name: "Preflight 실행하기" })).toBeDisabled();
   await page.getByRole("button", { name: "문제 있는 demo 불러오기" }).click();
   await expect(page.getByText("테스트어린이집_숏폼공모서류.pdf", { exact: true })).toBeVisible();
+  const packagePane = page.getByRole("region", { name: "제출 패키지" });
+  await expect(packagePane).toContainText("application/pdf");
+  await expect(packagePane).not.toContainText("61.0s");
+  await expect(packagePane).not.toContainText("페이지 수:");
+  await expect(page.getByRole("region", { name: "이번 검사" })).toContainText("16개 동결 Validator 항목");
   await flow.capture("03-upload");
   const brokenRun = page.waitForResponse(response => response.url().endsWith("/validate") && response.request().method() === "POST");
   await page.getByRole("button", { name: "Preflight 실행하기" }).click();
@@ -53,6 +63,9 @@ test("five-screen golden path, evidence, filter, reload and recheck", async ({ p
   await expect(page.getByRole("article", { name: "R09 참가 신청서 및 개인정보 동의서" })).toContainText("BLOCKER");
   await expect(page.getByRole("article", { name: "R13 영상 길이 30~60초" })).toContainText("BLOCKER");
   for (const blocker of await blockers.all()) {
+    await expect(blocker.getByText("RULE", { exact: true })).toBeVisible();
+    await expect(blocker.getByText("EVIDENCE", { exact: true })).toBeVisible();
+    await expect(blocker.getByText("VERDICT", { exact: true })).toBeVisible();
     await expect(blocker.getByText("공고문 근거", { exact: true })).toBeVisible();
     await expect(blocker.getByText("제출파일 근거", { exact: true })).toBeVisible();
     await expect(blocker.locator("blockquote")).toHaveCount(2);
@@ -87,12 +100,14 @@ test("five-screen golden path, evidence, filter, reload and recheck", async ({ p
 
 test("deep link without a session has a recovery path", async ({ page }) => {
   await page.goto("/results");
-  await expect(page.getByRole("heading", { name: "먼저 검사를 시작해 주세요" })).toBeVisible();
-  await page.getByRole("link", { name: "홈으로 돌아가기" }).click();
+  await expect(page.getByRole("heading", { name: "이 단계를 아직 진행할 수 없습니다" })).toBeVisible();
+  const recovery = page.getByRole("link", { name: "홈으로 돌아가기" });
+  await expect(recovery).toHaveAttribute("href", "/");
+  await recovery.click();
   await expect(page).toHaveURL("/");
 });
 
-test("custom file upload never receives mocked findings", async ({ page }) => {
+test("unconfirmed custom profile cannot reach submission validation", async ({ page }) => {
   await page.goto("/");
   await page.getByLabel("공고문 파일").setInputFiles(path.resolve("../fixtures/demo-announcement.txt"));
   await page.getByRole("button", { name: "파일 정보 확인" }).click();
@@ -100,13 +115,9 @@ test("custom file upload never receives mocked findings", async ({ page }) => {
   await expect(page.getByRole("heading", { name: "요구사항 검토" })).toBeVisible();
   await expect(page.getByTestId("profile-status")).toHaveText("DRAFT");
   await expect(page.getByRole("article")).toHaveCount(0);
-  // TASK 03 adds extraction/review; merely receiving a file still grants no verified profile.
-  await page.getByRole("link", { name: /파일 업로드/ }).click();
-  await page.getByLabel("제출파일", { exact: true }).setInputFiles(path.resolve("../fixtures/demo-fixed/proposal.pdf"));
-  await page.getByRole("button", { name: "선택한 1개 파일 확인" }).click();
-  await page.getByRole("button", { name: "Preflight 실행하기" }).click();
-  await expect(page.getByRole("alert", { name: "작업 오류" })).toContainText("이 공고의 분석 프로필 또는 검증 엔진을 사용할 수 없습니다");
-  await expect(page).toHaveURL(/\/upload$/);
+  await page.goto("/upload");
+  await expect(page.getByRole("link", { name: "요구사항 검토로 돌아가기" })).toHaveAttribute("href", "/requirements");
+  await expect(page.getByRole("button", { name: "Preflight 실행하기" })).toHaveCount(0);
   await expect(page.getByRole("article")).toHaveCount(0);
 });
 

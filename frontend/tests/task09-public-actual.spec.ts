@@ -84,7 +84,7 @@ test("TASK09 public ngrok Codex flow reuses one plan for 61s BLOCKED and 45s REA
   expect(session.verification_plan.plans[0]).toMatchObject({ status: "VERIFIED", checker_type: "VIDEO_METADATA" });
   const planSetId = session.verification_plan.plan_set_id;
 
-  await page.reload();
+  await page.goto("/requirements");
   await page.getByRole("link", { name: "제출파일 선택하기" }).click();
   await page.getByLabel("제출파일", { exact: true }).setInputFiles(
     path.resolve("../fixtures/v15/demo-broken/테스트어린이집_숏폼영상.MP4"));
