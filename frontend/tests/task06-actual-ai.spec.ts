@@ -20,7 +20,7 @@ test("TASK06 actual local AI two-stage public-announcement flow", async ({ page 
   expect(extractionResponse.ok()).toBe(true);
   let session = await extractionResponse.json();
   expect(session.generic_profile.pipeline_status).toBe("RUNNING");
-  await expect(page.getByText(/Pipeline: (COMPLETE|OVERFLOW_REVIEW)/)).toBeVisible({ timeout: 300_000 });
+  await expect(page.getByText("검토 후보 준비 완료", { exact: false })).toBeVisible({ timeout: 300_000 });
   const completedResponse = await page.request.get(`/api/sessions/${session.id}`);
   expect(completedResponse.ok()).toBe(true);
   session = await completedResponse.json();
@@ -33,28 +33,32 @@ test("TASK06 actual local AI two-stage public-announcement flow", async ({ page 
   expect(profile.raw_candidate_count).toBeGreaterThanOrEqual(profile.gated_candidate_count);
   expect(profile.requirements.length).toBeGreaterThanOrEqual(2);
   await fs.writeFile(path.join(output, "actual-ai-extraction.json"), JSON.stringify(session, null, 2), "utf8");
+  await page.getByRole("link", { name: "요구사항 검토로 이동" }).click();
+  await expect(page).toHaveURL(/\/requirements$/);
 
   const editable = profile.requirements.find((item: { issues: string[] }) => item.issues.length === 0) ?? profile.requirements[0];
   const deleteItem = profile.requirements.find((item: { requirement_id: string }) => item.requirement_id !== editable.requirement_id);
   expect(deleteItem).toBeTruthy();
-  const editCard = page.getByRole("article", { name: `요구사항 ${editable.requirement_id}`, exact: true });
+  const inspector = page.getByRole("region", { name: "요구사항 Inspector" });
+  await page.getByRole("button", { name: `요구사항 ${editable.requirement_id}`, exact: true }).click();
   const editedCondition = `${editable.condition} (사람이 원문 확인)`;
-  await editCard.getByLabel("condition").fill(editedCondition);
-  await editCard.getByRole("button", { name: "수정 저장" }).click();
-  await expect(editCard).toContainText("Needs Review");
-  await page.getByRole("article", { name: `요구사항 ${deleteItem.requirement_id}`, exact: true })
-    .getByRole("button", { name: "항목 삭제" }).click();
+  await inspector.getByLabel("condition").fill(editedCondition);
+  await inspector.getByRole("button", { name: "수정 저장" }).click();
+  await expect(page.getByRole("article", { name: `요구사항 ${editable.requirement_id}`, exact: true })).toContainText("AI EXTRACTED");
+  await page.getByRole("button", { name: `요구사항 ${deleteItem.requirement_id}`, exact: true }).click();
+  await inspector.getByRole("button", { name: "항목 삭제" }).click();
 
   const retained = profile.requirements.filter((item: { requirement_id: string }) => item.requirement_id !== deleteItem.requirement_id);
   for (const item of retained) {
     const card = page.getByRole("article", { name: `요구사항 ${item.requirement_id}`, exact: true });
+    await page.getByRole("button", { name: `요구사항 ${item.requirement_id}`, exact: true }).click();
     if (item.issues.length > 0) {
       const simplified = item.rule.split(/이며|이고|하며|하고|그리고|또한|;|,|\s및\s|\n|[.!?]\s+/)[0].trim();
-      await card.getByLabel("요구사항 문장").fill(simplified || item.evidence.quote);
-      await card.getByRole("button", { name: "수정 저장" }).click();
+      await inspector.getByLabel("요구사항 문장").fill(simplified || item.evidence.quote);
+      await inspector.getByRole("button", { name: "수정 저장" }).click();
     }
-    await card.getByRole("button", { name: "항목 승인" }).click();
-    await expect(card).toContainText("Human Confirmed");
+    await inspector.getByRole("button", { name: "항목 승인" }).click();
+    await expect(card).toContainText("HUMAN CONFIRMED");
   }
 
   await page.getByText("공고 원문과 provenance", { exact: true }).click();

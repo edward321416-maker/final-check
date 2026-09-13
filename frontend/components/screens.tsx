@@ -7,7 +7,8 @@ import { pollSession } from "@/lib/poll-session";
 import type { CheckSession, FindingStatus, SemanticReadiness, SubmissionFile, ValidationResult } from "@/types/check";
 import { useSession } from "./session-provider";
 import { Badge, ErrorNotice, EvidenceBox, FileList, ModeNote, PageTitle, useAction, WorkflowGuard } from "./ui";
-import { GenericProfileReview } from "./generic-profile";
+import { AnnouncementWorkspace } from "./announcement-workspace";
+import { RequirementsWorkspace } from "./requirements-workspace";
 import { LandingScreen } from "./landing";
 
 export function HomeScreen() {
@@ -15,28 +16,14 @@ export function HomeScreen() {
 }
 
 export function AnnouncementScreen() {
-  const { session } = useSession();
   return <WorkflowGuard step="announcement"><ModeNote /><PageTitle step="01 / ANNOUNCEMENT ANALYSIS" title="공고의 조건부터 확인하세요" description="제출 전에 지켜야 할 조건과 공고문에 적힌 근거를 살펴봅니다." />
-    {session?.generic_profile ? <GenericProfileReview /> : <>
-    <div className="content-grid"><section className="panel"><div className="panel-heading"><h2>동결 공고 요구사항</h2><span>{session?.requirements.length ?? 0}개 항목</span></div>
-      {session?.requirements.length ? session.requirements.map(rule => <details className="requirement" key={rule.id} open><summary><span className="rule-id">{rule.id}</span><strong>{rule.title}</strong><span className="verifier">{rule.verifier}</span></summary><p>{rule.description}</p><EvidenceBox label="공고문 근거" evidence={rule.announcement_evidence} /></details>)
-        : <div className="empty-inline"><h3>실제 공고 분석은 아직 연결되지 않았습니다</h3><p>공고문 파일명만 수신했습니다. 요구사항을 임의로 만들지 않습니다.</p></div>}
-    </section><aside className="side-panel"><span className="eyebrow">ANNOUNCEMENT</span><h3>{session?.announcement_name}</h3><p>{session?.mode === "demo" ? "동결 엔진에 포함된 숏폼 공고 발췌입니다. 원문 공고 PDF를 자동 추출한 결과는 아닙니다." : "파일을 읽어 판정하는 기능은 다음 단계에서 연결합니다."}</p><hr /><strong>다음은 요구사항 검토입니다</strong><p>동결 요구사항과 공고 근거를 읽기 전용으로 확인합니다.</p><Link href="/requirements" className="button primary full">요구사항 검토로 이동 →</Link></aside></div>
-    </>}
+    <AnnouncementWorkspace />
   </WorkflowGuard>;
 }
 
 export function RequirementsScreen() {
-  const { session } = useSession();
-  const profile = session?.generic_profile;
-  const requirements = session?.mode === "demo" ? session.requirements : [];
   return <WorkflowGuard step="requirements"><ModeNote /><PageTitle step="02 / REQUIREMENTS REVIEW" title="확정 전 요구사항을 확인하세요" description="공고에서 확인된 요구사항과 원문 근거를 읽고 다음 검사 범위를 확인합니다." />
-    <div className="content-grid"><section className="panel"><div className="panel-heading"><h2>{session?.mode === "demo" ? "동결 공고 요구사항 · 읽기 전용" : "추출된 요구사항 · 읽기 전용"}</h2><span>{session?.mode === "demo" ? requirements.length : profile?.requirements.length ?? 0}개 항목</span></div>
-      {session?.mode === "demo" ? requirements.map(rule => <details className="requirement" key={rule.id} open><summary><span className="rule-id">{rule.id}</span><strong>{rule.title}</strong><span className="verifier">{rule.verifier}</span></summary><p>{rule.description}</p><EvidenceBox label="공고문 근거" evidence={rule.announcement_evidence} /></details>)
-        : profile?.requirements.length ? profile.requirements.map(rule => <article className="requirement" key={rule.requirement_id} aria-label={`${rule.requirement_id} ${rule.rule}`}><div className="requirement-summary"><span className="rule-id">{rule.requirement_id}</span><strong>{rule.rule}</strong><span className="verifier">{rule.extraction_status}</span></div><EvidenceBox label="공고문 근거" evidence={{ source: profile.announcement.name, locator: `${rule.evidence.source_section} · chars ${rule.evidence_start}:${rule.evidence_end}`, excerpt: rule.evidence.quote }} /></article>)
-          : <div className="empty-inline"><h3>검토할 요구사항이 없습니다</h3><p>공고 분석에서 실제 요구사항 후보가 준비된 뒤 이 단계에 들어올 수 있습니다.</p></div>}
-    </section><aside className="side-panel"><span className="eyebrow">HUMAN REVIEW</span><h3>{session?.mode === "demo" ? "Validator v1.5 요구사항" : profile?.status}</h3><p>{session?.mode === "demo" ? "동결 Validator v1.5에 포함된 요구사항과 공고 근거입니다. 실시간 AI 추출 결과가 아닙니다." : "현재 화면은 추출된 요구사항과 상태를 사실 그대로 보여주는 읽기 전용 요약입니다. 다음 구현 작업에서 항목 편집·승인 Inspector가 이 경로에 추가됩니다."}</p>
-      <Link href="/upload" className="button primary full">제출파일 선택하기 →</Link><Link href="/announcement" className="text-link">← 공고 조건 다시 보기</Link></aside></div>
+    <RequirementsWorkspace />
   </WorkflowGuard>;
 }
 

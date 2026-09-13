@@ -8,9 +8,13 @@ test("TASK08 plan summary labels verified and review-only plans without granting
   await page.getByRole("button", { name: "텍스트 공고로 시작" }).click();
   await page.getByRole("button", { name: "요구사항 추출 실행" }).click();
   await expect(page.getByRole("article")).toHaveCount(5);
-  await page.getByRole("article", { name: "요구사항 G004", exact: true }).getByRole("button", { name: "항목 삭제" }).click();
+  await page.getByRole("link", { name: "요구사항 검토로 이동" }).click();
+  const inspector = page.getByRole("region", { name: "요구사항 Inspector" });
+  await page.getByRole("button", { name: "요구사항 G004", exact: true }).click();
+  await inspector.getByRole("button", { name: "항목 삭제" }).click();
   for (const id of ["G001", "G002", "G003", "G005"]) {
-    await page.getByRole("article", { name: `요구사항 ${id}`, exact: true }).getByRole("button", { name: "항목 승인" }).click();
+    await page.getByRole("button", { name: `요구사항 ${id}`, exact: true }).click();
+    await inspector.getByRole("button", { name: "항목 승인" }).click();
   }
   await page.getByLabel("공고 원문 전체와 누락 가능성을 직접 검토했습니다.").check();
   const confirmedResponse = page.waitForResponse(response => response.url().endsWith("/profile/confirm"));

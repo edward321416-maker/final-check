@@ -87,7 +87,7 @@ test("TASK08 actual public announcement C01 excerpt to planner, broken and fixed
   expect(session.verification_plan.plans[0].checker_type).toBe("VIDEO_METADATA");
   const planSetId = session.verification_plan.plan_set_id;
 
-  await page.reload();
+  await page.goto("/requirements");
   await expect(page.getByRole("region", { name: "자동 검사 계획 요약" })).toContainText("자동 검사 가능");
   await page.getByRole("link", { name: "제출파일 선택하기" }).click();
   await page.getByLabel("제출파일", { exact: true }).setInputFiles(path.resolve("../fixtures/v15/demo-broken/테스트어린이집_숏폼영상.MP4"));
