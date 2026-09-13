@@ -236,3 +236,33 @@ test("distinguishes non-color identifiers from named colors in color positions",
   `, "fixture.css");
   assert.equal(colors.filter(item => item.reason.includes("raw color")).length, 3);
 });
+
+test("rejects named colors in paint-bearing shorthands without treating identifiers as colors", () => {
+  const findings = auditCssText(`
+    .paint {
+      border-inline: 1px solid red;
+      border-block-start: 2px dashed blue;
+      text-emphasis: filled green;
+      -webkit-text-stroke: 1px purple;
+    }
+    .identifiers {
+      animation-name: red;
+      font-family: blue;
+      counter-reset: green 1;
+    }
+    .tokenized {
+      border-block: var(--border-1) solid var(--border-subtle);
+      text-emphasis: filled var(--accent);
+      -webkit-text-stroke: var(--border-1) var(--text-primary);
+    }
+  `, "fixture.css");
+  const rawColors = findings.filter(item => item.reason.includes("raw color"));
+  assert.deepEqual(rawColors.map(item => item.property), [
+    "border-inline",
+    "border-block-start",
+    "text-emphasis",
+    "-webkit-text-stroke",
+  ]);
+  assert.equal(findings.length, 4);
+  assert.equal(findings.some(item => ["animation-name", "font-family", "counter-reset"].includes(item.property)), false);
+});

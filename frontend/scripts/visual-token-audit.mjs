@@ -53,6 +53,16 @@ const BORDER_WIDTH_PROPERTIES = new Set([
 
 const BORDER_SHORTHANDS = new Set([
   "border", "border-top", "border-right", "border-bottom", "border-left",
+  "border-block", "border-block-start", "border-block-end",
+  "border-inline", "border-inline-start", "border-inline-end",
+]);
+
+const TEXT_PAINT_SHORTHANDS = new Set([
+  "text-emphasis", "-webkit-text-emphasis", "text-stroke", "-webkit-text-stroke",
+]);
+
+const WIDTH_AND_COLOR_SHORTHANDS = new Set([
+  ...BORDER_SHORTHANDS, "text-stroke", "-webkit-text-stroke",
 ]);
 
 const ICON_SIZE_PROPERTIES = new Set(["width", "height", "min-width", "min-height"]);
@@ -187,6 +197,7 @@ function colorTokensOnly(value) {
 function isColorProperty(property) {
   return property === "color" || property === "background" || property === "background-color" ||
     property === "background-image" || property.endsWith("-color") || BORDER_SHORTHANDS.has(property) ||
+    TEXT_PAINT_SHORTHANDS.has(property) ||
     property === "outline" || property === "box-shadow" || property === "text-shadow" ||
     property === "fill" || property === "stroke" || property === "caret-color" ||
     property === "column-rule" || property === "text-decoration";
@@ -194,7 +205,7 @@ function isColorProperty(property) {
 
 function allowedColorVariables(property) {
   if (property === "box-shadow") return new Set(["--shadow-overlay"]);
-  if (BORDER_SHORTHANDS.has(property) || property === "outline" || property === "column-rule") {
+  if (WIDTH_AND_COLOR_SHORTHANDS.has(property) || property === "outline" || property === "column-rule") {
     return new Set([...COLOR_TOKENS, ...BORDER_TOKENS]);
   }
   return COLOR_TOKENS;
