@@ -40,7 +40,7 @@ test("TASK09 public first visit crosses the ngrok notice without a bypass header
   const firstTitle = await page.title();
   expect(firstTitle).toContain("ERR_NGROK_6024");
   await visitSite.click();
-  await expect(page.getByRole("heading", { name: /제출 버튼을 누르기 전/ })).toBeVisible();
+  await expect(page.getByRole("heading", { level: 1, name: "제출 버튼을 누르기 전, 마지막 확인." })).toBeVisible();
   await page.screenshot({ path: path.join(screenshots, "public-after-interstitial.png"), fullPage: true });
 
   const finalState = await context.storageState();

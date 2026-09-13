@@ -7,44 +7,11 @@ import { pollSession } from "@/lib/poll-session";
 import type { CheckSession, FindingStatus, SemanticReadiness, SubmissionFile, ValidationResult } from "@/types/check";
 import { useSession } from "./session-provider";
 import { Badge, ErrorNotice, EvidenceBox, FileList, ModeNote, PageTitle, useAction, WorkflowGuard } from "./ui";
-import { GenericProfileReview, TextAnnouncementInput } from "./generic-profile";
+import { GenericProfileReview } from "./generic-profile";
+import { LandingScreen } from "./landing";
 
 export function HomeScreen() {
-  const router = useRouter();
-  const { update } = useSession();
-  const { busy, error, run } = useAction();
-  const [announcement, setAnnouncement] = useState<File | null>(null);
-  async function startDemo() {
-    const session = await request<CheckSession>("/sessions", { mode: "demo" });
-    update(await sessionRequest(session.id, "demo-announcement", {}));
-    router.push("/announcement");
-  }
-  async function startCustom() {
-    if (!announcement) return;
-    const session = await request<CheckSession>("/sessions", { mode: "custom" });
-    const form = new FormData(); form.append("file", announcement);
-    update(await sessionRequest(session.id, "announcement", form));
-    router.push("/announcement");
-  }
-  return <><section className="hero"><div className="hero-copy"><span className="eyebrow"><span className="dot" /> AI SUBMISSION PREFLIGHT</span>
-    <h1>제출 버튼을 누르기 전,<br /><span>마지막 한 번의 확인.</span></h1>
-    <p className="hero-description">공고문과 제출파일을 함께 확인하고,<br />탈락으로 이어질 수 있는 문제를 근거와 함께 살펴보세요.</p>
-    <div className="hero-actions"><button className="button primary large" disabled={busy} onClick={() => void run(startDemo)}>{busy ? "검사 준비 중…" : "demo 검사 시작하기"}<span>↗</span></button><span className="muted">로그인 없이 · 5단계 체험</span></div>
-    <p className="demo-caption">원본 Validator v1.5가 실제 예시 파일을 검사합니다. 내 공고는 실제 AI 후보를 사람이 확정한 뒤 안전한 일부 조건만 코드로 검사합니다. Vision은 미연결입니다.</p>
-  </div><div className="preview" aria-label="demo 결과 미리보기"><div className="preview-top"><span>CHECK REPORT / SAMPLE</span><span className="tiny-tag">EXAMPLE</span></div>
-    <div className="preview-score"><span className="alert-symbol">!</span><div><small>제출 전 수정이 필요합니다</small><strong>2개의 BLOCKER</strong></div></div>
-    <div className="preview-finding"><Badge status="BLOCKER" /><strong>개인정보 동의서 누락</strong><p>공고에는 필수 첨부, 제출파일에는 없음.</p><div className="mini-evidence"><span>공고 근거 ✓</span><span>제출 근거 ✓</span></div></div>
-    <div className="preview-finding subtle"><Badge status="REVIEW" /><strong>영상 내용 확인 필요</strong><p>사진 구성 의심은 사람이 확인합니다.</p></div>
-    <div className="preview-bottom">문제 발견 <span>→</span> 근거 확인 <span>→</span> 수정 후 재검사</div>
-  </div></section>
-  <section className="home-bottom" id="start-check"><div><span className="eyebrow">01 / START WITH YOUR ANNOUNCEMENT</span><h2>내 공고문으로 시작하기</h2><p>텍스트를 붙여 넣거나 PDF / UTF-8 TXT를 선택하세요. 원문 근거를 확인한 뒤 요구사항을 직접 승인합니다. 파일은 10 MiB, PDF는 50페이지까지 지원합니다.</p>
-    <p className="info-note">입력한 공고 내용은 이 PC의 ChatGPT 인증 Codex CLI를 통해 AI 요구사항 분석에 사용됩니다.</p>
-    <TextAnnouncementInput />
-    <div className="inline-upload"><label className="file-picker"><span>공고문 선택</span><input aria-label="공고문 파일" type="file" accept=".pdf,.txt" disabled={busy} onChange={e => setAnnouncement(e.target.files?.[0] ?? null)} /></label>
-      {announcement && <span className="selected-name">{announcement.name}</span>}
-      <button className="button secondary" disabled={!announcement || busy} onClick={() => void run(startCustom)}>파일 정보 확인 →</button></div><ErrorNotice error={error} />
-  </div><aside className="principle"><span className="eyebrow">EVIDENCE FIRST</span><h3>판정만큼 중요한 건,<br />그 판정의 근거.</h3><p>모든 BLOCKER는 공고문과 제출파일,<br />두 곳의 근거를 함께 보여줍니다.</p></aside></section>
-  <div className="status-legend"><span><Badge status="BLOCKER" /> 수정 필요</span><span><Badge status="REVIEW" /> 직접 검토</span><span><Badge status="PASS" /> 조건 충족</span><span><Badge status="EXTERNAL" /> 외부 확인</span></div></>;
+  return <LandingScreen />;
 }
 
 export function AnnouncementScreen() {

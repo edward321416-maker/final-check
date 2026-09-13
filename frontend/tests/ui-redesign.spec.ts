@@ -43,6 +43,25 @@ test("landing is outside the numbered workflow", async ({ page }) => {
   await expect(page.getByRole("link", { name: "Evidence-first" })).toBeVisible();
 });
 
+test("landing uses approved copy and internally consistent example counts", async ({ page }) => {
+  await page.goto("/");
+  await expect(page.getByRole("heading", { level: 1, name: "제출 버튼을 누르기 전, 마지막 확인." })).toBeVisible();
+  await expect(page.getByText("AI는 근거를 찾고, 확실한 조건은 코드가 검증합니다.", { exact: true })).toBeVisible();
+  const preview = page.getByRole("region", { name: "Preflight 결과 예시" });
+  await expect(preview.getByText("1 BLOCKER", { exact: true })).toBeVisible();
+  await expect(preview.getByText("1 REVIEW", { exact: true })).toBeVisible();
+  await expect(preview.getByText("3 PASS", { exact: true })).toBeVisible();
+  await expect(preview).toContainText("61.0s");
+  await expect(preview).toContainText("proposal.pdf · p.2");
+  await expect(page.getByText("모든 BLOCKER는", { exact: false })).toHaveCount(0);
+});
+
+test("landing product proof is not intentionally tilted", async ({ page }) => {
+  await page.goto("/");
+  const transform = await page.getByRole("region", { name: "Preflight 결과 예시" }).evaluate(el => getComputedStyle(el).transform);
+  expect(transform).toBe("none");
+});
+
 test("confirmed generic profile can enter upload when planner is REVIEW_REQUIRED", async ({ page }) => {
   const session = baseSession({
     validation_profile: "generic", verification_plan_state: "REVIEW_REQUIRED",
