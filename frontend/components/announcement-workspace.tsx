@@ -19,10 +19,16 @@ const jobStageCopy = {
 } as const;
 
 export function splitEvidenceText(text: string, start: number, end: number, quote: string) {
-  if (!Number.isInteger(start) || !Number.isInteger(end) || start < 0 || end <= start || end > text.length) return null;
-  const match = text.slice(start, end);
+  if (!Number.isInteger(start) || !Number.isInteger(end) || start < 0 || end <= start) return null;
+  const codePoints = Array.from(text);
+  if (end > codePoints.length) return null;
+  const match = codePoints.slice(start, end).join("");
   if (match !== quote) return null;
-  return { before: text.slice(0, start), match, after: text.slice(end) };
+  return {
+    before: codePoints.slice(0, start).join(""),
+    match,
+    after: codePoints.slice(end).join(""),
+  };
 }
 
 function ExactSource({ text, item }: { text: string; item: ProfileRequirement | null }) {

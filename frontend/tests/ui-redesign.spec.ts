@@ -255,6 +255,77 @@ test("unconfirmed custom profile fails closed from upload to requirements", asyn
   await expect(page.getByRole("link", { name: /요구사항 검토/ })).toHaveAttribute("href", "/requirements");
 });
 
+function evidenceOffsetSession(text: string, quote: string, evidenceStart: number, evidenceEnd: number) {
+  const provenance = {
+    provider: "SIMULATED browser fixture", model: "fixture", prompt_version: "fixture-v1",
+    prompt_sha256: "a".repeat(64), execution_kind: "SIMULATED",
+  };
+  const original = {
+    requirement_id: "G001", rule: quote, modality: "MUST", severity: "REVIEW", verifier: "SEMANTIC",
+    condition: "", evidence: { source_section: "본문", quote }, confidence: 0.5,
+  };
+  const requirement = {
+    ...original,
+    extraction_status: "EXTRACTED", evidence_start: evidenceStart, evidence_end: evidenceEnd, issues: [],
+    original, stage1: provenance, stage2_decision: "KEEP", stage2_reason: "fixture", stage2: provenance,
+    authoritative: false,
+  };
+  return baseSession({
+    generic_profile: {
+      profile_type: "generic", profile_id: "profile-offset", status: "REVIEW_REQUIRED",
+      announcement: {
+        source_type: "TEXT", name: "공고.txt", sha256: "b".repeat(64), text_sha256: "c".repeat(64),
+        text, ingestion_status: "READABLE", page_count: null, notice: "",
+      },
+      requirements: [requirement], raw_candidates: [original], gated_candidate_ids: ["G001"],
+      stage2_reviews: [], provider: provenance.provider, execution_kind: "SIMULATED", stage1: provenance, stage2: provenance,
+      pipeline_status: "COMPLETE", pipeline_error: null, raw_candidate_count: 1, gated_candidate_count: 1,
+      dropped_candidate_count: 0, review_batches: 1, failed_batches: [], overflow: false, overflow_policy: "",
+      extraction_complete: true, notices: [], history: [], version: 1, created_at: stamp, updated_at: stamp,
+    },
+  });
+}
+
+test("non-BMP evidence offsets use Python code-point semantics for exact highlight", async ({ page }) => {
+  const prefix = "앞😀문장 ";
+  const quote = "기대효과를 포함해야 합니다.";
+  const suffix = " 뒷문장";
+  const evidenceStart = Array.from(prefix).length;
+  const evidenceEnd = evidenceStart + Array.from(quote).length;
+  await openWithSession(page, evidenceOffsetSession(`${prefix}${quote}${suffix}`, quote, evidenceStart, evidenceEnd), "/announcement");
+
+  const source = page.getByRole("region", { name: "공고 원문" });
+  await expect(source.locator("mark")).toHaveText(quote);
+  await expect(source.locator("pre")).toHaveText(`${prefix}${quote}${suffix}`);
+});
+
+test("repeated quote highlighting keeps the authoritative code-point offset", async ({ page }) => {
+  const quote = "기대효과를 포함해야 합니다.";
+  const prefix = `${quote} 사이 😀 `;
+  const text = `${prefix}${quote}`;
+  const evidenceStart = Array.from(prefix).length;
+  const evidenceEnd = evidenceStart + Array.from(quote).length;
+  await openWithSession(page, evidenceOffsetSession(text, quote, evidenceStart, evidenceEnd), "/announcement");
+
+  const mark = page.getByRole("region", { name: "공고 원문" }).locator("mark");
+  await expect(mark).toHaveText(quote);
+  expect(await mark.evaluate(node => node.previousSibling?.textContent)).toBe(prefix);
+});
+
+for (const scenario of [
+  { name: "end beyond code-point length", text: "정확한 근거", quote: "근거", start: 4, end: 99 },
+  { name: "quote mismatch", text: "정확한 근거", quote: "다른 근거", start: 4, end: 6 },
+  { name: "negative start", text: "정확한 근거", quote: "근거", start: -1, end: 2 },
+  { name: "end not after start", text: "정확한 근거", quote: "근거", start: 4, end: 4 },
+]) {
+  test(`exact offset fallback rejects ${scenario.name}`, async ({ page }) => {
+    await openWithSession(page, evidenceOffsetSession(scenario.text, scenario.quote, scenario.start, scenario.end), "/announcement");
+    const source = page.getByRole("region", { name: "공고 원문" });
+    await expect(source.locator("mark")).toHaveCount(0);
+    await expect(source.locator(".source-fallback")).toContainText(scenario.quote);
+  });
+}
+
 test("requirements Inspector highlights only the exact stored evidence offsets", async ({ page }) => {
   const text = "앞문장 기대효과를 포함해야 합니다. 뒷문장";
   const quote = "기대효과를 포함해야 합니다.";
