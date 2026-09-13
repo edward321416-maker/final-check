@@ -6,7 +6,7 @@ import { request, sessionRequest } from "@/lib/api";
 import { pollSession } from "@/lib/poll-session";
 import type { CheckSession, FindingStatus, SemanticReadiness, SubmissionFile, ValidationResult } from "@/types/check";
 import { useSession } from "./session-provider";
-import { Badge, ErrorNotice, EvidenceBox, FileList, Guard, ModeNote, PageTitle, useAction } from "./ui";
+import { Badge, ErrorNotice, EvidenceBox, FileList, ModeNote, PageTitle, useAction, WorkflowGuard } from "./ui";
 import { GenericProfileReview, TextAnnouncementInput } from "./generic-profile";
 
 export function HomeScreen() {
@@ -37,7 +37,7 @@ export function HomeScreen() {
     <div className="preview-finding subtle"><Badge status="REVIEW" /><strong>영상 내용 확인 필요</strong><p>사진 구성 의심은 사람이 확인합니다.</p></div>
     <div className="preview-bottom">문제 발견 <span>→</span> 근거 확인 <span>→</span> 수정 후 재검사</div>
   </div></section>
-  <section className="home-bottom"><div><span className="eyebrow">01 / START WITH YOUR ANNOUNCEMENT</span><h2>내 공고문으로 시작하기</h2><p>텍스트를 붙여 넣거나 PDF / UTF-8 TXT를 선택하세요. 원문 근거를 확인한 뒤 요구사항을 직접 승인합니다. 파일은 10 MiB, PDF는 50페이지까지 지원합니다.</p>
+  <section className="home-bottom" id="start-check"><div><span className="eyebrow">01 / START WITH YOUR ANNOUNCEMENT</span><h2>내 공고문으로 시작하기</h2><p>텍스트를 붙여 넣거나 PDF / UTF-8 TXT를 선택하세요. 원문 근거를 확인한 뒤 요구사항을 직접 승인합니다. 파일은 10 MiB, PDF는 50페이지까지 지원합니다.</p>
     <p className="info-note">입력한 공고 내용은 이 PC의 ChatGPT 인증 Codex CLI를 통해 AI 요구사항 분석에 사용됩니다.</p>
     <TextAnnouncementInput />
     <div className="inline-upload"><label className="file-picker"><span>공고문 선택</span><input aria-label="공고문 파일" type="file" accept=".pdf,.txt" disabled={busy} onChange={e => setAnnouncement(e.target.files?.[0] ?? null)} /></label>
@@ -49,14 +49,28 @@ export function HomeScreen() {
 
 export function AnnouncementScreen() {
   const { session } = useSession();
-  return <Guard><ModeNote /><PageTitle step="01 / ANNOUNCEMENT ANALYSIS" title="공고의 조건부터 확인하세요" description="제출 전에 지켜야 할 조건과 공고문에 적힌 근거를 살펴봅니다." />
+  return <WorkflowGuard step="announcement"><ModeNote /><PageTitle step="01 / ANNOUNCEMENT ANALYSIS" title="공고의 조건부터 확인하세요" description="제출 전에 지켜야 할 조건과 공고문에 적힌 근거를 살펴봅니다." />
     {session?.generic_profile ? <GenericProfileReview /> : <>
     <div className="content-grid"><section className="panel"><div className="panel-heading"><h2>동결 공고 요구사항</h2><span>{session?.requirements.length ?? 0}개 항목</span></div>
       {session?.requirements.length ? session.requirements.map(rule => <details className="requirement" key={rule.id} open><summary><span className="rule-id">{rule.id}</span><strong>{rule.title}</strong><span className="verifier">{rule.verifier}</span></summary><p>{rule.description}</p><EvidenceBox label="공고문 근거" evidence={rule.announcement_evidence} /></details>)
         : <div className="empty-inline"><h3>실제 공고 분석은 아직 연결되지 않았습니다</h3><p>공고문 파일명만 수신했습니다. 요구사항을 임의로 만들지 않습니다.</p></div>}
-    </section><aside className="side-panel"><span className="eyebrow">ANNOUNCEMENT</span><h3>{session?.announcement_name}</h3><p>{session?.mode === "demo" ? "동결 엔진에 포함된 숏폼 공고 발췌입니다. 원문 공고 PDF를 자동 추출한 결과는 아닙니다." : "파일을 읽어 판정하는 기능은 다음 단계에서 연결합니다."}</p><hr /><strong>다음은 제출파일입니다</strong><p>어떤 파일을 검사할지 확인한 뒤 preflight를 실행합니다.</p><Link href="/upload" className="button primary full">제출파일 선택하기 →</Link></aside></div>
+    </section><aside className="side-panel"><span className="eyebrow">ANNOUNCEMENT</span><h3>{session?.announcement_name}</h3><p>{session?.mode === "demo" ? "동결 엔진에 포함된 숏폼 공고 발췌입니다. 원문 공고 PDF를 자동 추출한 결과는 아닙니다." : "파일을 읽어 판정하는 기능은 다음 단계에서 연결합니다."}</p><hr /><strong>다음은 요구사항 검토입니다</strong><p>동결 요구사항과 공고 근거를 읽기 전용으로 확인합니다.</p><Link href="/requirements" className="button primary full">요구사항 검토로 이동 →</Link></aside></div>
     </>}
-  </Guard>;
+  </WorkflowGuard>;
+}
+
+export function RequirementsScreen() {
+  const { session } = useSession();
+  const profile = session?.generic_profile;
+  const requirements = session?.mode === "demo" ? session.requirements : [];
+  return <WorkflowGuard step="requirements"><ModeNote /><PageTitle step="02 / REQUIREMENTS REVIEW" title="확정 전 요구사항을 확인하세요" description="공고에서 확인된 요구사항과 원문 근거를 읽고 다음 검사 범위를 확인합니다." />
+    <div className="content-grid"><section className="panel"><div className="panel-heading"><h2>{session?.mode === "demo" ? "동결 공고 요구사항 · 읽기 전용" : "추출된 요구사항 · 읽기 전용"}</h2><span>{session?.mode === "demo" ? requirements.length : profile?.requirements.length ?? 0}개 항목</span></div>
+      {session?.mode === "demo" ? requirements.map(rule => <details className="requirement" key={rule.id} open><summary><span className="rule-id">{rule.id}</span><strong>{rule.title}</strong><span className="verifier">{rule.verifier}</span></summary><p>{rule.description}</p><EvidenceBox label="공고문 근거" evidence={rule.announcement_evidence} /></details>)
+        : profile?.requirements.length ? profile.requirements.map(rule => <article className="requirement" key={rule.requirement_id} aria-label={`${rule.requirement_id} ${rule.rule}`}><div className="requirement-summary"><span className="rule-id">{rule.requirement_id}</span><strong>{rule.rule}</strong><span className="verifier">{rule.extraction_status}</span></div><EvidenceBox label="공고문 근거" evidence={{ source: profile.announcement.name, locator: `${rule.evidence.source_section} · chars ${rule.evidence_start}:${rule.evidence_end}`, excerpt: rule.evidence.quote }} /></article>)
+          : <div className="empty-inline"><h3>검토할 요구사항이 없습니다</h3><p>공고 분석에서 실제 요구사항 후보가 준비된 뒤 이 단계에 들어올 수 있습니다.</p></div>}
+    </section><aside className="side-panel"><span className="eyebrow">HUMAN REVIEW</span><h3>{session?.mode === "demo" ? "Validator v1.5 요구사항" : profile?.status}</h3><p>{session?.mode === "demo" ? "동결 Validator v1.5에 포함된 요구사항과 공고 근거입니다. 실시간 AI 추출 결과가 아닙니다." : "현재 화면은 추출된 요구사항과 상태를 사실 그대로 보여주는 읽기 전용 요약입니다. 다음 구현 작업에서 항목 편집·승인 Inspector가 이 경로에 추가됩니다."}</p>
+      <Link href="/upload" className="button primary full">제출파일 선택하기 →</Link><Link href="/announcement" className="text-link">← 공고 조건 다시 보기</Link></aside></div>
+  </WorkflowGuard>;
 }
 
 export function UploadScreen({ recheck = false }: { recheck?: boolean }) {
@@ -162,7 +176,7 @@ export function UploadScreen({ recheck = false }: { recheck?: boolean }) {
   }
   function selectFiles(event: ChangeEvent<HTMLInputElement>) { setSelected(Array.from(event.target.files ?? [])); }
   const previous = session?.results.length ? session.results : session?.previous_results ?? [];
-  return <Guard><ModeNote /><PageTitle step={recheck ? "04 / RECHECK" : "02 / SUBMISSION UPLOAD"} title={recheck ? "수정한 파일로 다시 확인하세요" : "제출할 파일을 모아주세요"} description={recheck ? "수정 패키지를 선택하고 다시 검사하면 이전 판정과 달라진 항목을 보여줍니다." : "패키지에 포함된 파일을 확인한 뒤 제출 전 검사를 시작합니다."} />
+  return <WorkflowGuard step={recheck ? "recheck" : "upload"}><ModeNote /><PageTitle step={recheck ? "05 / RECHECK" : "03 / SUBMISSION UPLOAD"} title={recheck ? "수정한 파일로 다시 확인하세요" : "제출할 파일을 모아주세요"} description={recheck ? "수정 패키지를 선택하고 다시 검사하면 이전 판정과 달라진 항목을 보여줍니다." : "패키지에 포함된 파일을 확인한 뒤 제출 전 검사를 시작합니다."} />
     <div className="content-grid"><section className="panel"><div className="panel-heading"><h2>{recheck ? "수정 패키지" : "제출 패키지"}</h2><span>{session?.files.length ?? 0}개 파일</span></div>
       {session?.mode === "demo" && <div className="fixture-options"><button className={`fixture-option ${session.fixture === "demo-broken" ? "selected" : ""}`} aria-pressed={session.fixture === "demo-broken"} disabled={busy} onClick={() => void run(() => choose("demo-broken"))}><span className="fixture-kicker">DEMO / BEFORE</span><strong>문제 있는 demo 불러오기</strong><small>개인정보 동의서 누락 · 영상 61초</small></button><button className={`fixture-option ${session.fixture === "demo-fixed" ? "selected" : ""}`} aria-pressed={session.fixture === "demo-fixed"} disabled={busy} onClick={() => void run(() => choose("demo-fixed"))}><span className="fixture-kicker">DEMO / AFTER</span><strong>수정한 demo 불러오기</strong><small>개인정보 동의서 복원 · 영상 45초</small></button></div>}
       {session?.files.length ? <FileList files={session.files} /> : <div className="empty-inline"><span className="upload-glyph">↑</span><h3>검사할 패키지를 선택해 주세요</h3><p>demo 패키지를 불러오거나 아래에서 내 파일을 선택하세요.</p></div>}
@@ -176,7 +190,7 @@ export function UploadScreen({ recheck = false }: { recheck?: boolean }) {
       <button className="button primary full" disabled={busy || !session?.files.length || selected.length > 0 || (Boolean(session?.files.length) && readiness === null) || (readiness?.ack_required && !acknowledged) || session?.run_state === "RUNNING"} onClick={() => void run(validate)}>{busy ? "확인 중…" : recheck ? "재검사 실행하기 →" : "Preflight 실행하기 →"}</button>
       <Link href={recheck && session?.results.length ? "/results" : "/announcement"} className="text-link">{recheck && session?.results.length ? "이전 결과 보기" : "← 공고 조건 다시 보기"}</Link>
     </aside></div>
-  </Guard>;
+  </WorkflowGuard>;
 }
 
 const statuses: FindingStatus[] = ["BLOCKER", "REVIEW", "PASS", "EXTERNAL"];
@@ -217,12 +231,12 @@ export function ResultsScreen() {
   });
   const statusChanges = changes.filter(({ old, result }) => old.status !== result.status);
   const title = blockers ? "제출 전, 수정이 필요합니다" : session?.status === "READY" ? "자동 확인 가능한 필수 조건을 충족했습니다." : previous.some(result => result.status === "BLOCKER") ? "수정 완료. 직접 확인할 항목이 남았어요" : "직접 확인할 항목이 남았어요";
-  return <Guard requireResults><ModeNote /><PageTitle step="03 / PREFLIGHT RESULTS" title="근거를 확인하고, 제출을 준비하세요" description="판정별 근거와 필요한 조치를 확인한 뒤 수정한 파일로 다시 검사할 수 있습니다." />
+  return <WorkflowGuard step="results"><ModeNote /><PageTitle step="04 / PREFLIGHT RESULTS" title="근거를 확인하고, 제출을 준비하세요" description="판정별 근거와 필요한 조치를 확인한 뒤 수정한 파일로 다시 검사할 수 있습니다." />
     <section className={`result-banner ${blockers ? "has-blocker" : ""}`} aria-label="전체 검사 상태"><div className="result-title"><span className="alert-symbol">{blockers ? "!" : "↗"}</span><div><span className="eyebrow">{session?.status} · CHECK {String(session?.revision ?? 1).padStart(2, "0")}</span><h2>{title}</h2><p>{blockers ? `BLOCKER ${blockers}개를 수정한 후 재검사하세요.` : "자동 확인 가능한 필수 조건의 결과와 남아 있는 REVIEW 항목을 함께 확인하세요."}</p></div></div><Link className="button primary" href="/recheck">수정 후 재검사 →</Link></section>
     {previous.length > 0 && <section className="comparison" aria-label="재검사 비교"><strong>이전 검사와 비교</strong><span>{statusChanges.length}개 판정 변경</span>{changes.map(({ old, result }) => old.status !== result.status ? <span className="change" key={result.id}>{result.requirement_id} <Badge status={old.status} /><span>→</span><Badge status={result.status} /></span> : <span className="change" key={result.id}>{result.requirement_id} 내용 근거 상태가 변경되었습니다.<br />이전: {semanticState(old)}<br />현재: {semanticState(result)}</span>)}{changes.length === 0 && <span>변경된 판정이 없습니다.</span>}</section>}
     <div className="results-heading"><div className="filter-tabs" aria-label="판정 필터"><button aria-pressed={filter === "ALL"} onClick={() => setFilter("ALL")}>전체 <b>{results.length}</b></button>{statuses.map(status => <button key={status} aria-pressed={filter === status} onClick={() => setFilter(status)}>{status} <b>{results.filter(r => r.status === status).length}</b></button>)}</div><span className="muted">{session?.validation_profile === "generic" ? "Generic Profile · 확인된 계획의 코드 검사" : "근거 기반 검사 결과 · v1.5"}</span></div>
     <section className="findings" aria-label="검사 결과 목록">{results.filter(r => filter === "ALL" || r.status === filter).map(result => <article className="finding" key={result.id} aria-label={`${result.requirement_id} ${result.title}`}><div className="finding-heading"><Badge status={result.status} /><span className="rule-id">{result.requirement_id}</span><h3>{result.title}</h3></div><p>{result.explanation}</p><div className="evidence-grid"><EvidenceBox label="공고문 근거" evidence={result.announcement_evidence} /><EvidenceBox label="제출파일 근거" evidence={result.submission_evidence} emptyText={submissionEvidenceEmptyText(result)} /></div>{result.semantic_review && result.semantic_review.evidence.length > 1 && <section className="semantic-evidence"><span className="evidence-label">추가 근거 후보</span>{result.semantic_review.evidence.slice(1, 3).map((evidence, index) => <EvidenceBox key={`${evidence.locator}-${index}`} label={`근거 후보 ${index + 2}`} evidence={evidence} />)}</section>}{result.semantic_review?.reason_code && <details><summary>기술 세부</summary><code>{result.semantic_review.reason_code}</code></details>}<div className="action-line"><span>다음 조치</span>{result.action}</div></article>)}
       {results.filter(r => filter === "ALL" || r.status === filter).length === 0 && <div className="empty-inline">이 상태의 판정은 없습니다.</div>}
     </section><div className="results-footer"><span>{session?.validation_profile === "generic" ? "사람이 확정한 요구사항과 게이트를 통과한 계획만 코드로 검사했습니다. REVIEW / EXTERNAL은 직접 확인하세요." : "원본 Validator v1.5의 실제 검사 결과입니다. REVIEW 항목과 최종 제출은 직접 확인하세요."}</span><Link href="/recheck" className="text-link">수정 패키지 재검사 →</Link></div>
-  </Guard>;
+  </WorkflowGuard>;
 }

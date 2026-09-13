@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import { AppChrome } from "@/components/app-chrome";
 import { SessionProvider } from "@/components/session-provider";
-import { Navigation } from "@/components/ui";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -11,7 +10,6 @@ export const metadata: Metadata = {
 };
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return <html lang="ko"><body><SessionProvider><a className="skip-link" href="#main">본문으로 이동</a>
-    <header className="site-header"><Link href="/" className="brand"><span className="brand-mark">✓</span>FINAL CHECK<span className="brand-sub">AI SUBMISSION PREFLIGHT</span></Link><span className="header-note"><span className="dot" /> MVP / DEMO</span></header>
-    <div className="shell"><Navigation /><main id="main">{children}</main><footer className="site-footer"><strong>FINAL CHECK</strong><span>확신은, 근거에서 시작됩니다.</span><span>PUBLIC TUNNEL MVP · EVIDENCE FIRST</span></footer></div>
+    <AppChrome>{children}</AppChrome>
   </SessionProvider></body></html>;
 }

@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { useState, type ReactNode } from "react";
+import { canEnterStep, recoveryHref, type WorkflowStep } from "@/lib/workflow";
 import { useSession } from "./session-provider";
 import type { Evidence, FindingStatus, SubmissionFile } from "@/types/check";
 
@@ -16,22 +16,6 @@ export function useAction() {
     finally { setBusy(false); }
   }
   return { busy, error, run };
-}
-const steps = [
-  ["/", "Home", "시작"], ["/announcement", "Announcement Analysis", "공고 분석"],
-  ["/upload", "Submission Upload", "파일 업로드"], ["/results", "Preflight Results", "검사 결과"],
-  ["/recheck", "Recheck", "재검사"],
-];
-export function Navigation() {
-  const path = usePathname();
-  const { session } = useSession();
-  const current = steps.findIndex(([url]) => url === path);
-  return <nav aria-label="검사 단계" className="step-nav">{steps.map(([url, english, name], i) => {
-    const enabled = i === 0 || (i < 3 ? Boolean(session?.announcement_name) : i === 3 ? Boolean(session?.results.length) : (session?.revision ?? 0) > 0);
-    const content = <><span className="step-num">{String(i + 1).padStart(2, "0")}</span><span><small>{english}</small>{name}</span></>;
-    return enabled ? <Link href={url} key={url} className={i === current ? "step active" : "step"} aria-current={i === current ? "step" : undefined}>{content}</Link>
-      : <span key={url} className="step disabled" aria-disabled="true">{content}</span>;
-  })}</nav>;
 }
 export function Badge({ status }: { status: FindingStatus }) {
   return <span className={`badge ${status.toLowerCase()}`}>{status}</span>;
@@ -50,15 +34,22 @@ export function ModeNote() {
   return <div className="mode-note"><span className="dot" /><strong>{session?.validation_profile ? "DEMO FILES · VALIDATOR v1.5" : "임의 공고 · 분석 미연결"}</strong>
     <span>{session?.validation_profile ? "실제 파일을 동결 규칙으로 검사합니다. 스캔 PDF Vision 미연결 → REVIEW." : "공고 추출기가 연결되지 않아 요구사항과 판정을 만들지 않습니다."}</span></div>;
 }
-export function Guard({ children, requireResults = false }: { children: ReactNode; requireResults?: boolean }) {
+export function WorkflowGuard({ step, children }: { step: WorkflowStep; children: ReactNode }) {
   const { session, loading, recoveryError } = useSession();
   if (loading) return <div className="empty" role="status">검사 세션을 불러오는 중입니다…</div>;
-  if (!session?.announcement_name || (requireResults && !session.results.length)) return <div className="empty">
-    <span className="eyebrow">START A CHECK</span><h1>먼저 검사를 시작해 주세요</h1>
-    <p>{recoveryError || (requireResults ? "아직 완료된 검사 결과가 없습니다." : "공고를 선택하면 이 단계를 진행할 수 있습니다.")}</p>
-    <Link className="button primary" href="/">홈으로 돌아가기 →</Link>
-    {session?.announcement_name && <Link className="button secondary" href="/upload">제출파일 선택</Link>}
-  </div>;
+  if (!canEnterStep(session, step)) {
+    const href = recoveryHref(session, step);
+    const label = href === "/requirements" ? "요구사항 검토로 돌아가기"
+      : href === "/announcement" ? "공고 단계로 돌아가기"
+      : href === "/upload" ? "제출파일 단계로 돌아가기"
+      : href === "/results" ? "결과로 돌아가기"
+      : "홈으로 돌아가기";
+    return <section className="empty" aria-label="단계 준비 필요">
+      <h1>이 단계를 아직 진행할 수 없습니다</h1>
+      <p>{recoveryError || "앞 단계의 확인을 완료한 뒤 다시 진행해 주세요."}</p>
+      <Link className="button primary" href={href}>{label}</Link>
+    </section>;
+  }
   return <>{children}</>;
 }
 export function PageTitle({ step, title, description }: { step: string; title: string; description: string }) {
