@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useCallback, useState, type MouseEvent } from "react";
 import type { CheckSession, FindingStatus, ValidationResult } from "@/types/check";
 import { EvidenceDrawer } from "./evidence-drawer";
-import { Badge, EvidenceBox, semanticAssessmentLabel, submissionEvidenceEmptyText } from "./ui";
+import { Badge, EvidenceBox, semanticPresentationCopy } from "./ui";
 
 export const STATUS_PRIORITY: Record<FindingStatus, number> = { BLOCKER: 0, REVIEW: 1, PASS: 2, EXTERNAL: 3 };
 const STATUSES: FindingStatus[] = ["BLOCKER", "REVIEW", "PASS", "EXTERNAL"];
@@ -16,19 +16,10 @@ function resultChanged(oldResult: ValidationResult, current: ValidationResult) {
     || oldResult.semantic_review?.reason_code !== current.semantic_review?.reason_code;
 }
 
-function semanticState(result: ValidationResult) {
-  if (result.semantic_review?.assessment === "NO_CLEAR_EVIDENCE") return "명확한 근거 후보 미발견";
-  if (result.semantic_review?.assessment === "RELATED_EVIDENCE_FOUND") {
-    const locator = result.semantic_review.evidence[0]?.locator ?? result.submission_evidence?.locator ?? "제출물";
-    return `${locator} 관련 근거 후보 발견`;
-  }
-  return "내용 근거 확인 필요";
-}
-
 function EvidenceChainCard({ result, onInspect }: { result: ValidationResult; onInspect: (result: ValidationResult, opener: HTMLElement) => void }) {
   const semanticEvidence = result.semantic_review?.evidence.slice(0, 3) ?? [];
   const submissionEvidence = semanticEvidence[0] ?? result.submission_evidence;
-  const assessment = semanticAssessmentLabel(result);
+  const semanticCopy = semanticPresentationCopy(result);
   const openInspector = (event: MouseEvent<HTMLButtonElement>) => onInspect(result, event.currentTarget);
   return <article data-testid="result-card" className={`result-card status-${result.status.toLowerCase()}`} aria-label={`${result.requirement_id} ${result.title}`}>
     <section className="evidence-chain-zone rule-zone">
@@ -42,14 +33,14 @@ function EvidenceChainCard({ result, onInspect }: { result: ValidationResult; on
       {result.measured_fact && <p className="measured-fact"><span>실제 측정</span><code>{result.measured_fact}</code></p>}
       <div className="evidence-grid">
         <EvidenceBox label="공고문 근거" evidence={result.announcement_evidence} />
-        <EvidenceBox label="제출파일 근거" evidence={submissionEvidence} emptyText={submissionEvidenceEmptyText(result)} />
+        <EvidenceBox label="제출파일 근거" evidence={submissionEvidence} emptyText={semanticCopy.submissionEvidenceEmptyText} />
       </div>
       {semanticEvidence.length > 1 && <section className="semantic-evidence"><span className="evidence-label">추가 근거 후보</span>{semanticEvidence.slice(1).map((evidence, index) => <EvidenceBox key={`${evidence.source}-${evidence.locator}-${index}`} label={`근거 후보 ${index + 2}`} evidence={evidence} />)}</section>}
     </section>
     <section className="evidence-chain-zone verdict-zone">
       <span className="chain-label">VERDICT</span>
       <Badge status={result.status} />
-      {assessment && <p className="assessment-label">{assessment}</p>}
+      {semanticCopy.assessmentLabel && <p className="assessment-label">{semanticCopy.assessmentLabel}</p>}
       <p>{result.explanation}</p>
       <div className="action-line"><span>다음 조치</span>{result.action}</div>
       <button type="button" className="button secondary evidence-button" onClick={openInspector} aria-label={`${result.requirement_id} ${result.title} 근거 자세히 보기`}>근거 자세히 보기</button>
@@ -84,7 +75,7 @@ export function ResultsWorkspace({ session }: { session: CheckSession }) {
       <div className="result-summary-counts" aria-label="판정 요약">{STATUSES.map(status => <span key={status}><b>{counts[status]}</b>{status}</span>)}</div>
       <Link className="button primary" href="/recheck">수정 후 재검사 →</Link>
     </section>
-    {previous.length > 0 && <section className="comparison" aria-label="재검사 비교"><strong>이전 검사와 비교</strong><span>{statusChanges.length}개 판정 변경</span>{changes.map(({ old, result }) => old.status !== result.status ? <span className="change" key={result.id}>{result.requirement_id} <Badge status={old.status} /><span>→</span><Badge status={result.status} /></span> : <span className="change" key={result.id}>{result.requirement_id} 내용 근거 상태가 변경되었습니다.<br />이전: {semanticState(old)}<br />현재: {semanticState(result)}</span>)}{changes.length === 0 && <span>변경된 판정이 없습니다.</span>}</section>}
+    {previous.length > 0 && <section className="comparison" aria-label="재검사 비교"><strong>이전 검사와 비교</strong><span>{statusChanges.length}개 판정 변경</span>{changes.map(({ old, result }) => old.status !== result.status ? <span className="change" key={result.id}>{result.requirement_id} <Badge status={old.status} /><span>→</span><Badge status={result.status} /></span> : <span className="change" key={result.id}>{result.requirement_id} 내용 근거 상태가 변경되었습니다.<br />이전: {semanticPresentationCopy(old).comparisonState}<br />현재: {semanticPresentationCopy(result).comparisonState}</span>)}{changes.length === 0 && <span>변경된 판정이 없습니다.</span>}</section>}
     <div className="results-heading"><div className="filter-tabs" role="group" aria-label="판정 필터"><button type="button" aria-pressed={filter === "ALL"} onClick={() => setFilter("ALL")}>전체 <b>{results.length}</b></button>{STATUSES.map(status => <button type="button" key={status} aria-pressed={filter === status} onClick={() => setFilter(status)}>{status} <b>{counts[status]}</b></button>)}</div><span className="muted">{session.validation_profile === "generic" ? "Generic Profile · 확인된 계획의 코드 검사" : "근거 기반 검사 결과 · v1.5"}</span></div>
     <section className="findings" aria-label="검사 결과 목록">{visibleResults.map(result => <EvidenceChainCard key={result.id} result={result} onInspect={openInspector} />)}
       {visibleResults.length === 0 && <div className="empty-inline">이 상태의 판정은 없습니다.</div>}

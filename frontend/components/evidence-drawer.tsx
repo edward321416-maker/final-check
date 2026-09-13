@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import type { ValidationResult } from "@/types/check";
-import { Badge, EvidenceBox, semanticAssessmentLabel, submissionEvidenceEmptyText } from "./ui";
+import { Badge, EvidenceBox, semanticPresentationCopy } from "./ui";
 
 const FOCUSABLE_SELECTOR = [
   "button:not([disabled])",
@@ -72,7 +72,7 @@ export function EvidenceDrawer({ result, opener, onClose }: EvidenceDrawerProps)
   if (!result) return null;
   const semanticEvidence = result.semantic_review?.evidence.slice(0, 3) ?? [];
   const submissionEvidence = semanticEvidence[0] ?? result.submission_evidence;
-  const assessment = semanticAssessmentLabel(result);
+  const semanticCopy = semanticPresentationCopy(result);
 
   return <div className="evidence-drawer-layer">
     <div className="evidence-drawer-backdrop" aria-hidden="true" />
@@ -82,10 +82,10 @@ export function EvidenceDrawer({ result, opener, onClose }: EvidenceDrawerProps)
         <button ref={closeRef} type="button" className="drawer-close" aria-label="Evidence Inspector 닫기" onClick={onClose}>×</button>
       </header>
       <div className="drawer-body">
-        <div className="drawer-status"><Badge status={result.status} />{assessment && <span>{assessment}</span>}</div>
+        <div className="drawer-status"><Badge status={result.status} />{semanticCopy.assessmentLabel && <span>{semanticCopy.assessmentLabel}</span>}</div>
         <EvidenceBox label="공고 요구사항" evidence={result.announcement_evidence} />
         <section className="drawer-evidence-group" aria-label="제출파일 근거">
-          <EvidenceBox label="제출파일 근거" evidence={submissionEvidence} emptyText={submissionEvidenceEmptyText(result)} />
+          <EvidenceBox label="제출파일 근거" evidence={submissionEvidence} emptyText={semanticCopy.submissionEvidenceEmptyText} />
           {semanticEvidence.slice(1).map((evidence, index) => <EvidenceBox key={`${evidence.source}-${evidence.locator}-${index}`} label={`근거 후보 ${index + 2}`} evidence={evidence} />)}
         </section>
         <section className="drawer-explanation">

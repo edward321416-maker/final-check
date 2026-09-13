@@ -20,29 +20,50 @@ export function useAction() {
 export function Badge({ status }: { status: FindingStatus }) {
   return <span className={`badge status-chip ${status.toLowerCase()}`}>{status}</span>;
 }
-export function semanticAssessmentLabel(result: ValidationResult) {
+export function semanticPresentationCopy(result: ValidationResult) {
   const semantic = result.semantic_review;
-  if (!semantic) return null;
-  if (semantic.assessment === "RELATED_EVIDENCE_FOUND") return "Related evidence found · 관련 근거 후보";
-  if (semantic.assessment === "NO_CLEAR_EVIDENCE" && semantic.coverage === "FULL") return "No clear evidence candidate · 명확한 근거 후보 없음";
-  if (semantic.assessment === "NO_CLEAR_EVIDENCE") return "확인된 범위에서 명확한 근거 후보 없음";
-  return "내용 근거 직접 확인 필요";
-}
-export function submissionEvidenceEmptyText(result: ValidationResult) {
-  const semantic = result.semantic_review;
+  let submissionEvidenceEmptyText: string | undefined;
   if (semantic?.coverage === "FULL" && semantic.assessment === "NO_CLEAR_EVIDENCE") {
-    return "제출파일에서 명확한 관련 근거 후보를 찾지 못했습니다. 직접 대조가 필요합니다.";
+    submissionEvidenceEmptyText = "제출파일에서 명확한 관련 근거 후보를 찾지 못했습니다. 직접 대조가 필요합니다.";
+  } else if (semantic?.coverage === "PARTIAL") {
+    submissionEvidenceEmptyText = "문서 일부만 확인되어 문서 전체의 관련 근거 유무를 판단할 수 없습니다. 직접 대조가 필요합니다.";
+  } else if (semantic?.coverage === "NONE") {
+    submissionEvidenceEmptyText = "문서 내용 검토를 실행하지 못했거나 사용할 수 없어 관련 근거 후보 유무를 판단할 수 없습니다. 직접 대조가 필요합니다.";
+  } else if (result.source_mode === "generic_review") {
+    submissionEvidenceEmptyText = "이 항목의 제출파일 검증은 실행되지 않았습니다. 직접 대조가 필요합니다.";
   }
-  if (semantic?.coverage === "PARTIAL") {
-    return "문서 일부만 확인되어 문서 전체의 관련 근거 유무를 판단할 수 없습니다. 직접 대조가 필요합니다.";
+
+  if (!semantic) return { assessmentLabel: null, comparisonState: "내용 근거 확인 필요", submissionEvidenceEmptyText };
+  if (semantic.assessment === "RELATED_EVIDENCE_FOUND") {
+    const locator = semantic.evidence[0]?.locator ?? result.submission_evidence?.locator ?? "제출물";
+    return {
+      assessmentLabel: "Related evidence found · 관련 근거 후보",
+      comparisonState: `${locator} 관련 근거 후보 발견`,
+      submissionEvidenceEmptyText,
+    };
   }
-  if (semantic?.coverage === "NONE") {
-    return "문서 내용을 확인하지 못해 관련 근거 후보 유무를 판단할 수 없습니다. 직접 대조가 필요합니다.";
+  if (semantic.assessment === "NO_CLEAR_EVIDENCE" && semantic.coverage === "FULL") {
+    return {
+      assessmentLabel: "No clear evidence candidate · 명확한 근거 후보 없음",
+      comparisonState: "명확한 근거 후보 미발견",
+      submissionEvidenceEmptyText,
+    };
   }
-  if (result.source_mode === "generic_review") {
-    return "이 항목의 제출파일 검증은 실행되지 않았습니다. 직접 대조가 필요합니다.";
+  if (semantic.coverage === "PARTIAL") {
+    return {
+      assessmentLabel: "검토 범위 제한 · 관련 근거 후보 유무 판단 불가",
+      comparisonState: "문서 일부만 확인되어 관련 근거 후보 유무 판단 불가",
+      submissionEvidenceEmptyText,
+    };
   }
-  return undefined;
+  if (semantic.coverage === "NONE") {
+    return {
+      assessmentLabel: "내용 검토 미실행/사용 불가 · 관련 근거 후보 유무 판단 불가",
+      comparisonState: "문서 내용 검토 미실행/사용 불가로 관련 근거 후보 유무 판단 불가",
+      submissionEvidenceEmptyText,
+    };
+  }
+  return { assessmentLabel: "내용 근거 직접 확인 필요", comparisonState: "내용 근거 확인 필요", submissionEvidenceEmptyText };
 }
 export function ModeNote() {
   const { session } = useSession();

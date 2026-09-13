@@ -268,6 +268,34 @@ test("reports a REVIEW evidence change without a fake status transition", async 
   await expect(comparison).toContainText("현재: p.7 관련 근거 후보 발견");
 });
 
+test("keeps PARTIAL coverage explicit in a REVIEW-to-REVIEW fingerprint comparison", async ({ page }) => {
+  const partialReview = {
+    assessment: "NO_CLEAR_EVIDENCE", coverage: "PARTIAL", reason_code: null, evidence: [], provider: null,
+  };
+  const previous = semanticResult({ semantic_review: { ...partialReview, evidence_fingerprint: "partial-old" } });
+  const current = semanticResult({ semantic_review: { ...partialReview, evidence_fingerprint: "partial-new" } });
+  await openWithSession(page, () => baseSession({ run_state: "COMPLETE", results: [current], previous_results: [previous] }));
+  await page.goto("/results");
+  const comparison = page.getByRole("region", { name: "재검사 비교" });
+  await expect(comparison).toContainText("내용 근거 상태가 변경되었습니다.");
+  await expect(comparison).toContainText("현재: 문서 일부만 확인되어 관련 근거 후보 유무 판단 불가");
+  await expect(comparison.getByText("현재: 명확한 근거 후보 미발견", { exact: true })).toHaveCount(0);
+});
+
+test("keeps NONE coverage explicit in a REVIEW-to-REVIEW reason comparison", async ({ page }) => {
+  const noCoverage = {
+    assessment: "NO_CLEAR_EVIDENCE", coverage: "NONE", evidence: [], evidence_fingerprint: "none", provider: null,
+  };
+  const previous = semanticResult({ semantic_review: { ...noCoverage, reason_code: "PDF_TEXT_UNAVAILABLE" } });
+  const current = semanticResult({ semantic_review: { ...noCoverage, reason_code: "SEMANTIC_PROVIDER_UNAVAILABLE" } });
+  await openWithSession(page, () => baseSession({ run_state: "COMPLETE", results: [current], previous_results: [previous] }));
+  await page.goto("/results");
+  const comparison = page.getByRole("region", { name: "재검사 비교" });
+  await expect(comparison).toContainText("내용 근거 상태가 변경되었습니다.");
+  await expect(comparison).toContainText("현재: 문서 내용 검토 미실행/사용 불가로 관련 근거 후보 유무 판단 불가");
+  await expect(comparison.getByText("현재: 명확한 근거 후보 미발견", { exact: true })).toHaveCount(0);
+});
+
 test("keeps status-change comparison intact", async ({ page }) => {
   const previous = semanticResult({ status: "BLOCKER" });
   const current = semanticResult({ status: "PASS" });
