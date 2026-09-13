@@ -216,3 +216,23 @@ test("ignores named colors inside strings and url payloads", () => {
   `, "fixture.css");
   assert.deepEqual(findings, []);
 });
+
+test("distinguishes non-color identifiers from named colors in color positions", () => {
+  const identifiers = auditCssText(`
+    .motion {
+      animation-name: red;
+      font-family: blue;
+      counter-reset: green 1;
+    }
+  `, "fixture.css");
+  assert.deepEqual(identifiers, []);
+
+  const colors = auditCssText(`
+    .paint {
+      color: red;
+      border-image: linear-gradient(blue, var(--accent)) 1;
+      background: var(--surface, green);
+    }
+  `, "fixture.css");
+  assert.equal(colors.filter(item => item.reason.includes("raw color")).length, 3);
+});

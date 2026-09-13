@@ -127,6 +127,10 @@ function containsNamedColor(value) {
   return (value.toLowerCase().match(/[a-z]+/g) ?? []).some(word => NAMED_COLORS.has(word));
 }
 
+function containsPaintFunction(value) {
+  return /\b(?:(?:repeating-)?(?:linear|radial|conic)-gradient|drop-shadow)\s*\(/i.test(value);
+}
+
 function skipQuoted(value, start) {
   const quote = value[start];
   let index = start + 1;
@@ -258,7 +262,9 @@ export function auditCssText(source, filename) {
 
       const colorProperty = isColorProperty(property);
       const colorValue = colorTokensOnly(value);
-      const rawColor = RAW_COLOR_FUNCTION.test(colorValue) || containsNamedColor(colorValue);
+      const namedColorPosition = colorProperty || property.startsWith("--") || containsPaintFunction(colorValue);
+      const rawColor = RAW_COLOR_FUNCTION.test(colorValue) ||
+        (namedColorPosition && containsNamedColor(colorValue));
       if (!tokenFile && rawColor) {
         add(findings, filename, property, reportedValue, "raw color must use a visual token");
       }
