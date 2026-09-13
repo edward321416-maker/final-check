@@ -100,7 +100,7 @@ test("editable requirement form controls use compact editorial geometry", async 
   await page.getByRole("button", { name: "요구사항 G001" }).click();
 
   const inspector = page.getByRole("region", { name: "요구사항 Inspector" });
-  for (const control of [inspector.getByLabel("요구사항 문장"), inspector.getByLabel("exact evidence quote")]) {
+  for (const control of [inspector.getByLabel("condition"), inspector.getByLabel("요구사항 문장"), inspector.getByLabel("exact evidence quote")]) {
     await expect(control).toHaveCSS("border-radius", "4px");
     await expect(control).toHaveCSS("font-size", "14px");
     await expect(control).toHaveCSS("line-height", "20px");
