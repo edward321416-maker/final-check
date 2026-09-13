@@ -1,4 +1,5 @@
 import { expect, test, type Page } from "@playwright/test";
+import { recoveryHref } from "../lib/workflow";
 
 const sessionId = "ui-redesign-session";
 const stamp = "2026-09-13T00:00:00.000Z";
@@ -86,6 +87,49 @@ test("landing product proof is not intentionally tilted", async ({ page }) => {
   await page.goto("/");
   const transform = await page.getByRole("region", { name: "Preflight 결과 예시" }).evaluate(el => getComputedStyle(el).transform);
   expect(transform).toBe("none");
+});
+
+test("reduced motion disables nonessential product transitions", async ({ page }) => {
+  await page.goto("/");
+  const frame = page.locator(".product-frame").first();
+  const normalSeconds = await frame.evaluate(element => parseFloat(getComputedStyle(element).transitionDuration));
+  expect(normalSeconds).toBeGreaterThanOrEqual(0.12);
+  expect(normalSeconds).toBeLessThanOrEqual(0.2);
+
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  const reducedSeconds = await frame.evaluate(element => parseFloat(getComputedStyle(element).transitionDuration));
+  expect(reducedSeconds).toBeLessThanOrEqual(0.001);
+});
+
+test("landing and app workspaces do not overflow the viewport", async ({ page }) => {
+  await page.goto("/");
+  expect(await page.evaluate(() => document.documentElement.scrollWidth > window.innerWidth)).toBe(false);
+
+  const session = baseSession({
+    validation_profile: "generic",
+    generic_profile: { status: "CONFIRMED", requirements: [], extraction_complete: true },
+  });
+  await openWithSession(page, session, "/upload");
+  expect(await page.evaluate(() => document.documentElement.scrollWidth > window.innerWidth)).toBe(false);
+});
+
+test("deep links recover to the nearest available workflow step", async ({ page }) => {
+  await openWithSession(page, baseSession(), "/requirements");
+  await expect(page.getByRole("link", { name: "공고 단계로 돌아가기" })).toHaveAttribute("href", "/announcement");
+
+  await openWithSession(page, baseSession({ generic_profile: { status: "REVIEW_REQUIRED" } }), "/upload");
+  await expect(page.getByRole("link", { name: "요구사항 검토로 돌아가기" })).toHaveAttribute("href", "/requirements");
+
+  await openWithSession(page, baseSession({
+    validation_profile: "generic",
+    generic_profile: { status: "CONFIRMED", requirements: [], extraction_complete: true },
+  }), "/results");
+  await expect(page.getByRole("link", { name: "제출파일 단계로 돌아가기" })).toHaveAttribute("href", "/upload");
+});
+
+test("recheck recovery returns to existing results", () => {
+  const session = baseSession({ results: [result("REVIEW", "G001", "내용 요구사항")] });
+  expect(recoveryHref(session as Parameters<typeof recoveryHref>[0], "recheck")).toBe("/results");
 });
 
 test("confirmed generic profile can enter upload when planner is REVIEW_REQUIRED", async ({ page }) => {

@@ -101,7 +101,9 @@ test("five-screen golden path, evidence, filter, reload and recheck", async ({ p
 test("deep link without a session has a recovery path", async ({ page }) => {
   await page.goto("/results");
   await expect(page.getByRole("heading", { name: "이 단계를 아직 진행할 수 없습니다" })).toBeVisible();
-  await page.getByRole("link", { name: "홈으로 돌아가기" }).click();
+  const recovery = page.getByRole("link", { name: "홈으로 돌아가기" });
+  await expect(recovery).toHaveAttribute("href", "/");
+  await recovery.click();
   await expect(page).toHaveURL("/");
 });
 
