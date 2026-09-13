@@ -45,6 +45,11 @@ test("five-screen golden path, evidence, filter, reload and recheck", async ({ p
   await expect(page.getByRole("button", { name: "Preflight 실행하기" })).toBeDisabled();
   await page.getByRole("button", { name: "문제 있는 demo 불러오기" }).click();
   await expect(page.getByText("테스트어린이집_숏폼공모서류.pdf", { exact: true })).toBeVisible();
+  const packagePane = page.getByRole("region", { name: "제출 패키지" });
+  await expect(packagePane).toContainText("application/pdf");
+  await expect(packagePane).not.toContainText("61.0s");
+  await expect(packagePane).not.toContainText("페이지 수:");
+  await expect(page.getByRole("region", { name: "이번 검사" })).toContainText("16개 동결 Validator 항목");
   await flow.capture("03-upload");
   const brokenRun = page.waitForResponse(response => response.url().endsWith("/validate") && response.request().method() === "POST");
   await page.getByRole("button", { name: "Preflight 실행하기" }).click();

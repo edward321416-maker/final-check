@@ -7,7 +7,8 @@ function baseSession(overrides: Record<string, unknown> = {}) {
   return {
     id: sessionId, created_at: stamp, updated_at: stamp, mode: "custom",
     source_mode: "generic_review", announcement_name: "공고.txt", validation_profile: "generic", engine_sha256: null,
-    generic_profile: null, verification_plan: null, verification_plan_state: "REVIEW_REQUIRED", verification_plan_error: null,
+    generic_profile: { status: "CONFIRMED", requirements: [], extraction_complete: true },
+    verification_plan: null, verification_plan_state: "REVIEW_REQUIRED", verification_plan_error: null,
     current_job_id: null, current_job: null, run_state: "NOT_STARTED", validation_complete: false, run_error: null,
     requirements: [], files: [{ name: "submission.pdf", size_bytes: 100, media_type: "application/pdf", sha256: "a".repeat(64) }],
     results: [], previous_results: [], status: "REVIEW_REQUIRED", revision: 1, fixture: null,
@@ -52,6 +53,13 @@ test("requires the semantic text acknowledgement before preflight", async ({ pag
   await expect(page.getByRole("button", { name: "Preflight 실행하기" })).toBeEnabled();
 });
 
+test("uses deterministic-only activity copy when no semantic review is eligible", async ({ page }) => {
+  await openWithSession(page, () => baseSession({ run_state: "RUNNING" }));
+  await expect(page.getByText("객관적 제출 조건을 확인하고 있습니다.", { exact: true })).toBeVisible();
+  await expect(page.getByLabel("제출파일")).toBeDisabled();
+  await expect(page.getByRole("button", { name: "Preflight 실행하기" })).toBeDisabled();
+});
+
 test("polls a running semantic validation and routes only after completion", async ({ page }) => {
   const running = baseSession({ run_state: "RUNNING", results: [] });
   const complete = baseSession({ run_state: "COMPLETE", results: [semanticResult()] });
@@ -71,7 +79,7 @@ test("polls a running semantic validation and routes only after completion", asy
   await page.goto("/upload");
   await page.getByRole("checkbox").check();
   await page.getByRole("button", { name: "Preflight 실행하기" }).click();
-  await expect(page.getByText("객관적 조건과 PDF 내용을 확인하고 있습니다…", { exact: true })).toBeVisible();
+  await expect(page.getByText("객관적 조건과 PDF 내용 근거를 확인하고 있습니다.", { exact: true })).toBeVisible();
   await expect(page).toHaveURL(/\/results$/);
   expect(gets).toBeGreaterThan(1);
 });
@@ -82,8 +90,11 @@ test("ignores a stale semantic completion after the active session is replaced",
   const oldRunning = baseSession({ id: oldSessionId, announcement_name: "이전 세션 공고.txt", run_state: "RUNNING", results: [] });
   const oldComplete = baseSession({ id: oldSessionId, announcement_name: "이전 세션 공고.txt", run_state: "COMPLETE",
     results: [semanticResult({ title: "오래된 세션 결과" })] });
-  const newSession = baseSession({ id: newSessionId, mode: "demo", announcement_name: "새 세션 공고.txt", files: [],
-    run_state: "NOT_STARTED", results: [] });
+  const newSession = baseSession({ id: newSessionId, mode: "demo", source_mode: "validator", announcement_name: "새 세션 공고.txt",
+    validation_profile: "frozen_v15", generic_profile: null, files: [], run_state: "NOT_STARTED", results: [],
+    requirements: [{ id: "R01", title: "새 세션 동결 요구사항", description: "새 세션 확인", verifier: "DETERMINISTIC",
+      announcement_evidence: { source: "동결 공고", locator: "R01", excerpt: "동결 근거" } }],
+  });
   let oldSessionGets = 0;
   let releaseOldCompletion!: () => void;
   const oldCompletionHeld = new Promise<void>(resolve => { releaseOldCompletion = resolve; });
@@ -114,13 +125,13 @@ test("ignores a stale semantic completion after the active session is replaced",
   });
 
   await page.goto("/upload");
-  await expect(page.getByText("객관적 조건과 PDF 내용을 확인하고 있습니다…", { exact: true })).toBeVisible();
+  await expect(page.getByText("객관적 조건과 PDF 내용 근거를 확인하고 있습니다.", { exact: true })).toBeVisible();
   await oldPollStarted;
   await page.getByRole("link", { name: /FINAL CHECK/ }).click();
   await expect(page).toHaveURL(/\/$/);
   await page.getByRole("button", { name: "demo 검사 시작하기" }).click();
   await expect(page).toHaveURL(/\/announcement$/);
-  await expect(page.getByText("새 세션 공고.txt", { exact: true })).toBeVisible();
+  await expect(page.getByText("새 세션 동결 요구사항", { exact: true })).toBeVisible();
   await expect.poll(() => page.evaluate(() => sessionStorage.getItem("final-check-session-id-v2"))).toBe(newSessionId);
 
   releaseOldCompletion();
@@ -130,7 +141,7 @@ test("ignores a stale semantic completion after the active session is replaced",
   expect(await page.evaluate(() => sessionStorage.getItem("final-check-session-id-v2"))).toBe(newSessionId);
   await expect(page).toHaveURL(/\/announcement$/);
   await expect(page.getByText("오래된 세션 결과", { exact: true })).toHaveCount(0);
-  await expect(page.getByText("새 세션 공고.txt", { exact: true })).toBeVisible();
+  await expect(page.getByText("새 세션 동결 요구사항", { exact: true })).toBeVisible();
 });
 
 test("retries a transient running-session poll failure and routes after a later completion", async ({ page }) => {
@@ -153,7 +164,7 @@ test("retries a transient running-session poll failure and routes after a later 
   await page.goto("/upload");
   await page.getByRole("checkbox").check();
   await page.getByRole("button", { name: "Preflight 실행하기" }).click();
-  await expect(page.getByText("객관적 조건과 PDF 내용을 확인하고 있습니다…", { exact: true })).toBeVisible();
+  await expect(page.getByText("객관적 조건과 PDF 내용 근거를 확인하고 있습니다.", { exact: true })).toBeVisible();
   await expect(page).toHaveURL(/\/results$/);
   expect(gets).toBe(3);
 });
@@ -179,6 +190,7 @@ test("keeps a failed semantic poll actionable on the upload screen", async ({ pa
   await page.getByRole("button", { name: "Preflight 실행하기" }).click();
   await expect(page).toHaveURL(/\/upload$/);
   await expect(page.getByRole("alert", { name: "작업 오류" })).toContainText("PACKAGE_CHANGED_DURING_RUN");
+  await expect(page.getByRole("alert", { name: "작업 오류" })).toContainText("현재 제출 패키지를 확인한 뒤 다시 실행할 수 있습니다.");
   await expect(page.getByRole("button", { name: "Preflight 실행하기" })).toBeEnabled();
 });
 
@@ -196,7 +208,7 @@ test("resumes polling after an upload screen reload", async ({ page }) => {
     return route.abort();
   });
   await page.goto("/upload");
-  await expect(page.getByText("객관적 조건과 PDF 내용을 확인하고 있습니다…", { exact: true })).toBeVisible();
+  await expect(page.getByText("객관적 조건과 PDF 내용 근거를 확인하고 있습니다.", { exact: true })).toBeVisible();
   await page.reload();
   await expect(page).toHaveURL(/\/results$/);
 });

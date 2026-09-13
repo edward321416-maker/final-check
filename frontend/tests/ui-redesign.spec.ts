@@ -20,7 +20,8 @@ async function openWithSession(
   page: Page,
   session: object,
   path: string,
-  readiness = { ack_required: false, eligible_requirement_count: 0, reason_code: "NOT_GENERIC" },
+  readiness: { ack_required: boolean; eligible_requirement_count: number; reason_code: string | null }
+    = { ack_required: false, eligible_requirement_count: 0, reason_code: "NOT_GENERIC" },
 ) {
   await page.addInitScript(([key, id]) => sessionStorage.setItem(key, id), ["final-check-session-id-v2", sessionId]);
   await page.route("**/api/sessions/**", route => {
@@ -70,6 +71,58 @@ test("confirmed generic profile can enter upload when planner is REVIEW_REQUIRED
   await openWithSession(page, session, "/upload");
   await expect(page.getByRole("heading", { level: 1, name: /제출/ })).toBeVisible();
   await expect(page.getByRole("link", { name: /요구사항 검토로 돌아가기/ })).toHaveCount(0);
+});
+
+test("preflight scope comes from the verified plan and semantic readiness", async ({ page }) => {
+  const confirmedSession = baseSession({
+    validation_profile: "generic",
+    source_mode: "generic_verifier",
+    verification_plan_state: "READY",
+    generic_profile: { status: "CONFIRMED", requirements: [], extraction_complete: true },
+    verification_plan: {
+      plan_set_id: "plan-set", profile_id: "profile", profile_version: 1,
+      announcement_sha256: "a".repeat(64), announcement_text_sha256: "b".repeat(64),
+      confirmed_requirements_sha256: "c".repeat(64),
+      planner_provenance: { provider: "Codex CLI", model: "gpt-5.6-sol", prompt_version: "task08", prompt_sha256: "d".repeat(64), execution_kind: "ACTUAL" },
+      plan_schema_version: "task08-verification-plan-v1", created_at: stamp,
+      plans: [{
+        plan_id: "P1", requirement_id: "G001", planner_disposition: "CANDIDATE", checker_type: "VIDEO_METADATA", status: "VERIFIED", gate_reasons: [],
+        target_selector: { kind: "UNIQUE_EXTENSION", value: ".mp4" },
+        constraint: { field: "duration_seconds", operator: "<=", value: 60, unit: "seconds" },
+        parameter_provenance: { evidence_quote: "60초 이내", evidence_start: 0, evidence_end: 6, source_substring: "60초 이내", normalized_value: 60, operator: "<=" },
+        planner_reason: "deterministic video duration",
+      }],
+    },
+    files: [
+      { name: "submission.mp4", size_bytes: 1024, media_type: "video/mp4", sha256: "e".repeat(64) },
+      { name: "proposal.pdf", size_bytes: 2048, media_type: "application/pdf", sha256: "f".repeat(64) },
+    ],
+  });
+  await openWithSession(page, confirmedSession, "/upload", { ack_required: true, eligible_requirement_count: 1, reason_code: null });
+  const scope = page.getByRole("region", { name: "이번 검사" });
+  await expect(scope).toContainText("영상 길이");
+  await expect(scope).toContainText("PDF 내용 근거");
+  await expect(scope).toContainText("1개 자동 검사");
+  await expect(scope).toContainText("1개 AI 근거 검토");
+  const packagePane = page.getByRole("region", { name: "제출 패키지" });
+  await expect(packagePane).not.toContainText("61.0s");
+  await expect(packagePane).not.toContainText("45.0s");
+  await expect(packagePane).not.toContainText("페이지 수:");
+});
+
+test("preflight remains available when the automatic plan requires review", async ({ page }) => {
+  const session = baseSession({
+    validation_profile: "generic",
+    source_mode: "generic_review",
+    verification_plan: null,
+    verification_plan_state: "REVIEW_REQUIRED",
+    generic_profile: { status: "CONFIRMED", requirements: [], extraction_complete: true },
+  });
+  await openWithSession(page, session, "/upload");
+  await expect(page.getByRole("heading", { level: 1, name: /제출/ })).toBeVisible();
+  const scope = page.getByRole("region", { name: "이번 검사" });
+  await expect(scope).toContainText("자동 검사 계획이 확정되지 않았습니다.");
+  await expect(scope).toContainText("REVIEW/수동 검토");
 });
 
 test("unconfirmed custom profile fails closed from upload to requirements", async ({ page }) => {

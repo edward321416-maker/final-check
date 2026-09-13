@@ -61,8 +61,8 @@ export function EvidenceBox({ label, evidence, emptyText }: { label: string; evi
       : <p className="muted">{emptyText ?? "제출파일로 확인할 수 없는 외부 항목입니다."}</p>}</div>;
 }
 export function FileList({ files }: { files: SubmissionFile[] }) {
-  return <ul className="file-list">{files.map(file => <li key={file.name}><span className="file-icon">{file.name.toLowerCase().endsWith(".mp4") ? "MP4" : "PDF"}</span><div><strong>{file.name}</strong><small>{(file.size_bytes / 1024).toFixed(1)} KB · {file.media_type}</small></div><span className="file-check" aria-label="선택됨">✓</span></li>)}</ul>;
+  return <ul className="file-list">{files.map(file => <li key={file.name}><span className="file-icon">{file.name.toLowerCase().endsWith(".mp4") ? "MP4" : "PDF"}</span><div><strong>{file.name}</strong><small>{(file.size_bytes / 1024).toFixed(1)} KB · {file.media_type}</small></div><span className="file-state">접수됨</span></li>)}</ul>;
 }
-export function ErrorNotice({ error }: { error: string }) {
-  return error ? <div className="error-note" role="alert" aria-label="작업 오류">{error}</div> : null;
+export function ErrorNotice({ error, recovery }: { error: string; recovery?: string }) {
+  return error ? <div className="error-note" role="alert" aria-label="작업 오류"><strong>{error}</strong>{recovery && <p>{recovery}</p>}</div> : null;
 }
