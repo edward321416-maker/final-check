@@ -1,15 +1,34 @@
 import { test, expect, type Page } from "@playwright/test";
+import fs from "node:fs/promises";
+import path from "node:path";
+import type { CheckSession, SemanticAssessment, ValidationResult, VerificationPlanSet } from "../types/check";
+import type { ProfileRequirement } from "../types/profile";
+
+const qaStateNames = [
+  "01-landing",
+  "02-custom-extraction-provisional",
+  "03-human-review-selected",
+  "04-package-plan-ready",
+  "05-package-plan-review-required",
+  "06-result-blocker",
+  "07-result-ready",
+  "08-semantic-related-evidence-review",
+  "09-semantic-no-clear-evidence-review",
+  "10-evidence-inspector-open",
+  "11-actionable-recovery",
+  "12-recheck-comparison",
+] as const;
 
 const editorialSessionId = "editorial-precision-session";
 const editorialStamp = "2026-09-13T00:00:00.000Z";
 
-function confirmedGenericSession(overrides: Record<string, unknown> = {}) {
+function confirmedGenericSession(overrides: Partial<CheckSession> = {}): CheckSession {
   const quote = "영상은 60초 이내여야 합니다.";
   const provenance = {
     provider: "SIMULATED browser fixture", model: "fixture", prompt_version: "fixture-v1",
     prompt_sha256: "a".repeat(64), execution_kind: "SIMULATED",
-  };
-  const requirement = {
+  } as const;
+  const requirement: ProfileRequirement = {
     requirement_id: "G001", rule: quote, modality: "MUST", severity: "REVIEW", verifier: "SEMANTIC",
     condition: "", evidence: { source_section: "제출 규격", quote }, confidence: 0.9,
     extraction_status: "CONFIRMED", evidence_start: 0, evidence_end: quote.length, issues: [],
@@ -39,7 +58,7 @@ function editorialResult(
   status: "BLOCKER" | "REVIEW" | "PASS" | "EXTERNAL",
   requirementId: string,
   title: string,
-) {
+): ValidationResult {
   return {
     id: requirementId,
     requirement_id: requirementId,
@@ -57,6 +76,285 @@ function editorialResult(
     semantic_review: null,
   };
 }
+
+function provisionalGenericSession(): CheckSession {
+  const base = confirmedGenericSession();
+  const requirement = base.generic_profile!.requirements[0];
+  return {
+    ...base,
+    generic_profile: {
+      ...base.generic_profile!,
+      status: "REVIEW_REQUIRED",
+      requirements: [{ ...requirement, extraction_status: "EXTRACTED", authoritative: false }],
+    },
+  };
+}
+
+function verifiedPlanSet(): VerificationPlanSet {
+  const quote = "영상은 60초 이내여야 합니다.";
+  return {
+    plan_set_id: "plan-set-editorial",
+    profile_id: "profile-editorial",
+    profile_version: 1,
+    announcement_sha256: "b".repeat(64),
+    announcement_text_sha256: "c".repeat(64),
+    confirmed_requirements_sha256: "f".repeat(64),
+    planner_provenance: {
+      provider: "SIMULATED browser fixture",
+      model: "fixture",
+      prompt_version: "fixture-plan-v1",
+      prompt_sha256: "9".repeat(64),
+      execution_kind: "SIMULATED",
+    },
+    plan_schema_version: "task08-verification-plan-v1",
+    created_at: editorialStamp,
+    plans: [{
+      plan_id: "P-G001",
+      requirement_id: "G001",
+      planner_disposition: "CANDIDATE",
+      checker_type: "VIDEO_METADATA",
+      status: "VERIFIED",
+      gate_reasons: [],
+      target_selector: { kind: "UNIQUE_EXTENSION", value: ".mp4" },
+      constraint: { field: "duration_seconds", operator: "LTE", value: 60, unit: "seconds" },
+      parameter_provenance: {
+        evidence_quote: quote,
+        evidence_start: 0,
+        evidence_end: quote.length,
+        source_substring: "60초 이내",
+        normalized_value: 60,
+        operator: "LTE",
+      },
+      planner_reason: "Deterministic fixture plan for a human-confirmed duration rule.",
+    }],
+  };
+}
+
+function packageSession(planState: "READY" | "REVIEW_REQUIRED"): CheckSession {
+  const base = confirmedGenericSession();
+  const extracted = base.generic_profile!.requirements[0];
+  const deterministicRequirement: ProfileRequirement = {
+    ...extracted,
+    modality: "MUST",
+    severity: "BLOCKER",
+    verifier: "DETERMINISTIC",
+    condition: "always",
+  };
+  return {
+    ...base,
+    source_mode: planState === "READY" ? "generic_verifier" : "generic_review",
+    verification_plan: planState === "READY" ? verifiedPlanSet() : null,
+    verification_plan_state: planState,
+    verification_plan_error: planState === "REVIEW_REQUIRED" ? "PLANNER_FALLBACK" : null,
+    files: [{ name: "submission.mp4", size_bytes: 2048, media_type: "video/mp4", sha256: "d".repeat(64) }],
+    generic_profile: { ...base.generic_profile!, requirements: [deterministicRequirement] },
+  };
+}
+
+function singleResultSession(result: ValidationResult, status: "BLOCKED" | "REVIEW_REQUIRED" | "READY"): CheckSession {
+  const base = result.source_mode === "generic_verifier" ? packageSession("READY") : confirmedGenericSession();
+  return {
+    ...base,
+    source_mode: result.source_mode,
+    verification_plan: result.source_mode === "generic_verifier" ? verifiedPlanSet() : null,
+    verification_plan_state: result.source_mode === "generic_verifier" ? "READY" : "REVIEW_REQUIRED",
+    run_state: "COMPLETE",
+    validation_complete: status !== "REVIEW_REQUIRED",
+    status,
+    revision: 1,
+    files: result.source_mode === "generic_verifier"
+      ? [{ name: "submission.mp4", size_bytes: 4096, media_type: "video/mp4", sha256: "e".repeat(64) }]
+      : [{ name: "submission.pdf", size_bytes: 4096, media_type: "application/pdf", sha256: "e".repeat(64) }],
+    results: [result],
+  };
+}
+
+function deterministicVideoResult(status: "BLOCKER" | "PASS"): ValidationResult {
+  const duration = status === "BLOCKER" ? 61 : 45;
+  return {
+    id: "G001",
+    requirement_id: "G001",
+    status,
+    title: "영상 길이",
+    explanation: status === "BLOCKER" ? "영상이 60초를 초과했습니다." : "영상이 60초 이내입니다.",
+    action: status === "BLOCKER" ? "영상을 60초 이내로 줄이세요." : "추가 조치가 필요하지 않습니다.",
+    announcement_evidence: { source: "공고.txt", locator: "제출 규격", excerpt: "영상은 60초 이내여야 합니다." },
+    submission_evidence: { source: "submission.mp4", locator: "ffprobe", excerpt: `duration_seconds=${duration}.0` },
+    source_mode: "generic_verifier",
+    verification_plan_id: "P-G001",
+    checker_type: "VIDEO_METADATA",
+    measured_fact: `duration_seconds=${duration}.0; expected LTE 60 SECONDS`,
+    expected_constraint: "duration_seconds <= 60 seconds",
+    semantic_review: null,
+  };
+}
+
+function semanticReviewResult(assessment: SemanticAssessment): ValidationResult {
+  const related = assessment === "RELATED_EVIDENCE_FOUND";
+  const result = editorialResult("REVIEW", "G001", "기대효과를 구체적으로 작성");
+  return {
+    ...result,
+    source_mode: "generic_review",
+    checker_type: null,
+    verification_plan_id: null,
+    measured_fact: null,
+    expected_constraint: null,
+    submission_evidence: related
+      ? { source: "submission.pdf", locator: "2", excerpt: "참여자의 접근성을 높이고 지역 협력의 지속성을 강화합니다." }
+      : null,
+    semantic_review: {
+      assessment,
+      coverage: "FULL",
+      reason_code: related ? null : "NO_CLEAR_EVIDENCE",
+      evidence: related
+        ? [{ source: "submission.pdf", locator: "2", excerpt: "참여자의 접근성을 높이고 지역 협력의 지속성을 강화합니다." }]
+        : [],
+      evidence_fingerprint: related ? "1".repeat(64) : "2".repeat(64),
+      provider: {
+        provider: "SIMULATED browser fixture",
+        model: "fixture",
+        prompt_version: "fixture-semantic-v1",
+        prompt_sha256: "3".repeat(64),
+        execution_kind: "SIMULATED",
+      },
+    },
+  };
+}
+
+async function openQaSession(page: Page, routePath: string, session: CheckSession) {
+  await page.unroute("**/api/sessions/**");
+  await openConfirmedGenericSession(page, routePath, session);
+}
+
+async function captureQa(page: Page, project: string, state: typeof qaStateNames[number]) {
+  const directory = path.resolve("../artifacts/editorial-precision/screenshots", project);
+  await fs.mkdir(directory, { recursive: true });
+  await page.screenshot({ path: path.join(directory, `${state}.png`), fullPage: true });
+  const overflow = await page.evaluate(() => document.documentElement.scrollWidth > window.innerWidth);
+  expect(overflow, `${state} must not overflow horizontally`).toBe(false);
+}
+
+type QaScenario = {
+  name: typeof qaStateNames[number];
+  render: (page: Page) => Promise<void>;
+};
+
+const qaScenarios: readonly QaScenario[] = [
+  {
+    name: "01-landing",
+    render: async page => {
+      await page.goto("/");
+      await page.getByRole("link", { name: "제출 전 검사 시작하기" }).first().focus();
+    },
+  },
+  {
+    name: "02-custom-extraction-provisional",
+    render: async page => {
+      await openQaSession(page, "/announcement", provisionalGenericSession());
+      await page.getByRole("button", { name: "요구사항 G001" }).focus();
+    },
+  },
+  {
+    name: "03-human-review-selected",
+    render: async page => {
+      await openQaSession(page, "/requirements", provisionalGenericSession());
+      await page.getByRole("button", { name: "항목 승인" }).focus();
+    },
+  },
+  {
+    name: "04-package-plan-ready",
+    render: async page => {
+      await openQaSession(page, "/upload", packageSession("READY"));
+      await page.getByRole("button", { name: "Preflight 실행하기" }).focus();
+    },
+  },
+  {
+    name: "05-package-plan-review-required",
+    render: async page => {
+      await openQaSession(page, "/upload", packageSession("REVIEW_REQUIRED"));
+      await page.getByRole("button", { name: "Preflight 실행하기" }).focus();
+    },
+  },
+  {
+    name: "06-result-blocker",
+    render: async page => {
+      const blocker = deterministicVideoResult("BLOCKER");
+      await openQaSession(page, "/results", singleResultSession(blocker, "BLOCKED"));
+      await page.getByRole("button", { name: /G001 .*근거 자세히 보기/ }).focus();
+    },
+  },
+  {
+    name: "07-result-ready",
+    render: async page => {
+      const pass = deterministicVideoResult("PASS");
+      await openQaSession(page, "/results", singleResultSession(pass, "READY"));
+      await page.getByRole("button", { name: /G001 .*근거 자세히 보기/ }).focus();
+    },
+  },
+  {
+    name: "08-semantic-related-evidence-review",
+    render: async page => {
+      await openQaSession(page, "/results", singleResultSession(semanticReviewResult("RELATED_EVIDENCE_FOUND"), "REVIEW_REQUIRED"));
+      await page.getByRole("button", { name: /G001 .*근거 자세히 보기/ }).focus();
+    },
+  },
+  {
+    name: "09-semantic-no-clear-evidence-review",
+    render: async page => {
+      await openQaSession(page, "/results", singleResultSession(semanticReviewResult("NO_CLEAR_EVIDENCE"), "REVIEW_REQUIRED"));
+      await page.getByRole("button", { name: /G001 .*근거 자세히 보기/ }).focus();
+    },
+  },
+  {
+    name: "10-evidence-inspector-open",
+    render: async page => {
+      await openQaSession(page, "/results", singleResultSession(semanticReviewResult("RELATED_EVIDENCE_FOUND"), "REVIEW_REQUIRED"));
+      await page.getByRole("button", { name: /G001 .*근거 자세히 보기/ }).click();
+      const drawer = page.getByRole("dialog", { name: "Evidence Inspector" });
+      await expect(drawer).toBeVisible();
+      await drawer.evaluate(async node => Promise.all(node.getAnimations().map(animation => animation.finished)));
+      await page.evaluate(() => window.scrollTo(0, 0));
+    },
+  },
+  {
+    name: "11-actionable-recovery",
+    render: async page => {
+      const session = {
+        ...packageSession("READY"),
+        run_state: "FAILED" as const,
+        run_error: "검사 작업이 중단되었습니다. 현재 제출 패키지를 확인한 뒤 다시 실행하세요.",
+      };
+      await openQaSession(page, "/upload", session);
+      await page.getByRole("button", { name: "Preflight 실행하기" }).focus();
+    },
+  },
+  {
+    name: "12-recheck-comparison",
+    render: async page => {
+      const current = semanticReviewResult("RELATED_EVIDENCE_FOUND");
+      const session = {
+        ...singleResultSession(current, "REVIEW_REQUIRED"),
+        revision: 2,
+        previous_results: [semanticReviewResult("NO_CLEAR_EVIDENCE")],
+      };
+      await openQaSession(page, "/results", session);
+      await page.getByRole("link", { name: /수정 후 재검사/ }).first().focus();
+    },
+  },
+];
+
+test("visual QA matrix declares all required states", () => {
+  expect(qaScenarios.map(scenario => scenario.name)).toEqual(qaStateNames);
+});
+
+test("captures the 12-state editorial visual QA matrix", async ({ page }, info) => {
+  for (const scenario of qaScenarios) {
+    await test.step(scenario.name, async () => {
+      await scenario.render(page);
+      await captureQa(page, info.project.name, scenario.name);
+    });
+  }
+});
 
 function completedMixedStatusSession() {
   return confirmedGenericSession({
