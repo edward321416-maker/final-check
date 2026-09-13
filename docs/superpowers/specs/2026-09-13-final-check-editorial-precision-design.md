@@ -1,8 +1,8 @@
 # FINAL CHECK — Editorial Precision Visual System v2
 
-**Status:** USER-DIRECTION APPROVED / SPEC REVIEW REQUIRED  
+**Status:** SELF-REVIEW COMPLETED / USER SPEC REVIEW REQUIRED  
 **Date:** 2026-09-13  
-**Branch baseline:** `ui-redesign@a0f9f99c81674ff988d78093e7e6d048afaf781d` before this spec commit  
+**Branch baseline:** `ui-redesign@a0f9f99c81674ff988d78093e7e6d048afaf781d` before this spec series  
 **Scope:** Visual system refinement only — color, typography, spacing, radius, borders, elevation, density, and cross-screen visual consistency  
 **Product semantics:** unchanged  
 **Design direction:** Editorial Minimal × Evidence-first Product UI
@@ -22,11 +22,21 @@ The target feeling is:
 - status colors communicate BLOCKER / REVIEW / PASS / EXTERNAL without coloring whole surfaces;
 - every visible typography, spacing, radius, and border value belongs to an approved integer-pixel token scale.
 
-The visual reference supplied by the user is the primary mood reference: white canvas, strong black typography, generous whitespace, minimal chrome, precise alignment, very limited decorative color.
+The visual reference supplied by the user is the primary mood reference: white canvas, strong black typography, generous whitespace, minimal chrome, precise alignment, and very limited decorative color.
 
 ## 2. External reference principles
 
 Use references for principles, not visual cloning.
+
+Reference sources:
+
+- Linear UI refresh: `https://linear.app/now/behind-the-latest-design-refresh`
+- Vercel Geist colors: `https://vercel.com/geist/colors`
+- Vercel Geist typography: `https://vercel.com/geist/typography`
+- GitHub Primer foundations: `https://primer.style/product/getting-started/foundations/`
+- Stripe accessible color systems: `https://stripe.com/blog/accessible-color-systems`
+- Atlassian spacing: `https://atlassian.design/foundations/spacing`
+- Atlassian typography: `https://atlassian.design/foundations/typography`
 
 ### Linear
 
@@ -166,6 +176,16 @@ Rules:
 - status soft colors are limited to compact chips, micro-highlights, or exceptional warning regions;
 - Electric/brand blue never means PASS.
 
+### 4.4 Overlay shadow token
+
+Ordinary product surfaces have no shadow. The only approved default overlay shadow is:
+
+```css
+--shadow-overlay: 0 16px 48px rgba(10, 10, 10, 0.12);
+```
+
+The alpha value is a layout/elevation opacity and is exempt from the integer-pixel token rule. Do not introduce additional arbitrary shadow colors or geometries without amending this spec.
+
 ## 5. Typography system
 
 ### 5.1 Font family
@@ -186,7 +206,7 @@ Monospace is restricted to IDs, hashes, locators, measured facts, and technical 
 
 ### 5.2 Approved type tokens
 
-Every visible product text size must use one of these integer-pixel tokens:
+Every visible product text size and line-height must use one of these integer-pixel token pairs:
 
 | Token | Font size | Line height | Primary use |
 | --- | ---: | ---: | --- |
@@ -203,7 +223,18 @@ Every visible product text size must use one of these integer-pixel tokens:
 
 Prohibited production sizes include arbitrary values such as `13px`, `15px`, `17px`, `22px`, `23px`, `27px`, and similar one-off values unless this spec is formally amended.
 
-### 5.3 Font weights
+Production typography must use explicit `px` line-height tokens above. Do not use unitless or fractional line-height values for product text.
+
+### 5.3 Responsive typography
+
+Typography is part of the integer-token rule and therefore must not interpolate continuously.
+
+- do not use `clamp()` for `font-size` or `line-height`;
+- do not use `vw` typography;
+- switch between approved token pairs at breakpoints;
+- responsive layout calculations remain free to use `%`, `fr`, `clamp()`, `min()`, `max()`, and `calc()` for non-typographic geometry.
+
+### 5.4 Font weights
 
 Approved weights:
 
@@ -214,7 +245,7 @@ Approved weights:
 
 Do not use 650, 800, 900, or arbitrary intermediate weights.
 
-### 5.4 Letter spacing
+### 5.5 Letter spacing
 
 Approved visible letter-spacing tokens:
 
@@ -226,19 +257,20 @@ Do not use fractional letter spacing such as `.3px`, `.4px`, `.6px`, `1.2px`, or
 
 ## 6. Spacing system
 
-Every visible `margin`, `padding`, `gap`, `inset`, `scroll-margin`, and fixed layout spacing must use one of:
+Every visible `margin`, `padding`, `gap`, `inset`, `scroll-margin`, and fixed visual spacing must use one of:
 
 ```text
-4 / 8 / 12 / 16 / 24 / 32 / 48 / 64 / 80 / 96 / 120 px
+0 / 4 / 8 / 12 / 16 / 24 / 32 / 48 / 64 / 80 / 96 / 120 px
 ```
 
 Exceptions:
 
-- `0px` is always allowed;
-- layout calculations may use `%`, `fr`, `vw`, `vh`, `min()`, `max()`, `clamp()`, and `calc()` when not representing a visual spacing token;
-- positioning needed for icon geometry may use integers outside the spacing scale only when isolated inside the icon itself and documented.
+- layout calculations may use `%`, `fr`, `vw`, `vh`, `min()`, `max()`, `clamp()`, and `calc()` when they define layout geometry rather than a visual spacing token;
+- positioning needed for icon geometry may use integer values outside the spacing scale only when isolated inside the icon itself and documented.
 
 Avoid `5px`, `6px`, `9px`, `10px`, `13px`, `18px`, `20px`, `22px`, `25px`, `28px`, `33px`, `34px`, `35px`, `52px`, etc. in normal visual spacing.
+
+Container widths, media-query breakpoints, percentage widths, and grid ratios are layout dimensions, not spacing tokens, and are outside this scale.
 
 ## 7. Radius and border system
 
@@ -283,6 +315,8 @@ Allowed shadows:
 - modal/overlay if one exists;
 - exceptional floating control only.
 
+Allowed overlay shadow must use `--shadow-overlay`.
+
 Do not use card shadows simply to separate ordinary content.
 
 Prefer whitespace and `1px` borders.
@@ -300,7 +334,7 @@ Use an editorial header:
 - no filled header container;
 - no decorative pills.
 
-Navigation uses `14/20` or `12/16` tokens.
+Navigation uses `body` 14/20 or `small` 12/16.
 
 ### 9.2 Hero
 
@@ -319,7 +353,7 @@ The hero should resemble an editorial cover more than a SaaS dashboard.
 Wide desktop:
 
 - `display-lg` 56/64;
-- hero vertical padding 80–120px from the approved spacing scale;
+- hero vertical padding uses approved 80/96/120px tokens only;
 - body copy `body-lg` 16/24.
 
 ### 9.3 Product proof
@@ -330,7 +364,7 @@ Use:
 
 - white surface;
 - 1px border where necessary;
-- 0–8px radius;
+- 0/4/8px radius;
 - no generic shadow;
 - status expressed as small text/chip;
 - RULE / EVIDENCE / VERDICT aligned as a precise grid.
@@ -445,9 +479,9 @@ Visual refinement:
 
 - white background;
 - 1px left border;
-- minimal shadow only because it is an overlay;
+- `--shadow-overlay` only;
 - no tinted full drawer background;
-- source locator is small monospace;
+- source locator is `micro` monospace;
 - quote uses black text with one restrained highlight treatment;
 - technical details remain collapsed.
 
@@ -458,7 +492,7 @@ Visual refinement:
 - accent blue background;
 - white text;
 - 4px radius;
-- 14/20 text, 600 weight;
+- `body` 14/20, 600 weight;
 - integer spacing tokens only.
 
 ### Secondary button
@@ -481,7 +515,7 @@ The current breakpoint architecture may remain if functionally correct, but visi
 Rules:
 
 - landing becomes single column on mobile;
-- large display reduces from 56/64 to 40/48 or 32/40 as needed;
+- large display switches discretely from 56/64 to 40/48 or 32/40 at breakpoints;
 - evidence remains visible;
 - no horizontal overflow;
 - stepper remains usable without decorative density;
@@ -516,33 +550,36 @@ This applies to production UI CSS and inline style values.
 Audit at minimum:
 
 - `font-size`;
-- fixed `line-height` for product typography;
+- `line-height`;
 - `margin*`;
 - `padding*`;
 - `gap`, `row-gap`, `column-gap`;
 - `top/right/bottom/left/inset` when used as visible spacing;
+- `scroll-margin*`;
 - `border-radius`;
 - `border-width` and explicit border side widths;
 - `outline-width` and `outline-offset`;
-- fixed width/height values used for ordinary UI controls/icons when they form the visual system.
+- `letter-spacing`;
+- `font-weight` against its approved non-pixel token set.
+
+Width, height, max-width, min-width, grid fractions, and breakpoint dimensions are not part of the spacing-token gate unless they are intentionally reused as a spacing property.
 
 ### Exempt
 
 - `fr`;
 - `%`;
-- `vw`, `vh` used for responsive layout;
+- responsive layout `vw`, `vh`;
 - opacity;
 - transform ratios;
-- `calc()`, `min()`, `max()`, `clamp()` when used for responsive layout rather than arbitrary type/spacing values;
+- `calc()`, `min()`, `max()`, `clamp()` for non-typographic responsive layout;
 - animation duration;
 - z-index;
 - line-clamp counts;
 - grid column counts;
-- data-dependent values.
+- data-dependent values;
+- `transparent`, `currentColor`, and `inherit` color keywords.
 
-### Typography exception rule
-
-Responsive typography may use `clamp()` only if all min/max endpoints correspond to approved integer type tokens and the resulting design has explicit review approval. Prefer breakpoint token switching over continuously interpolated font sizes.
+Typography is not exempt: `font-size` and `line-height` must resolve to the approved discrete px tokens and may not use `clamp()`, `vw`, unitless values, or fractional px.
 
 ## 20. Visual Token Audit Gate
 
@@ -551,14 +588,17 @@ Add a deterministic audit for production UI styles.
 It must fail when it finds:
 
 - an unapproved font-size;
-- an unapproved fixed line-height;
+- an unapproved line-height;
 - an unapproved spacing value in a visible spacing property;
 - an unapproved border radius;
 - an unapproved border width;
 - fractional pixel values in included properties;
 - arbitrary font weights outside 400/500/600/700;
 - arbitrary letter-spacing outside 0/-1/1px;
-- raw production colors outside the approved palette unless explicitly allowlisted for browser/system behavior.
+- raw production colors outside the approved palette;
+- arbitrary shadow definitions outside `--shadow-overlay`.
+
+Explicit non-color keywords `transparent`, `currentColor`, and `inherit` are allowlisted.
 
 The audit must scan at least:
 
@@ -566,7 +606,9 @@ The audit must scan at least:
 - `frontend/components/profile.module.css`;
 - all new production `.css` / `.module.css` files added by this refinement.
 
-Do not scan generated build output or screenshot artifacts.
+It must also scan inline `style={{...}}` declarations in production TSX for included visual properties when present.
+
+Do not scan generated build output, third-party CSS, or screenshot artifacts.
 
 ## 21. Visual QA matrix
 
@@ -661,3 +703,18 @@ Expected primary implementation surfaces:
 - Playwright visual-contract assertions and screenshot matrix updates.
 
 Do not reopen settled route architecture or backend contracts.
+
+## 26. Self-review record
+
+Self-review completed on 2026-09-13.
+
+Checks performed:
+
+- placeholder scan: no TBD/TODO/incomplete implementation requirement remains;
+- scope check: one visual-system refinement, no new product subsystem;
+- authority check: TASK02–TASK10 semantics remain explicitly out of scope;
+- integer-rule consistency: typography now uses discrete breakpoint tokens only; `clamp()` is prohibited for type;
+- audit ambiguity fix: width/height/container dimensions are not conflated with spacing tokens;
+- color audit fix: approved overlay shadow and non-color keywords are explicitly allowlisted;
+- accessibility check: faint text restricted from critical body copy; semantic status colors remain text-labelled;
+- implementation path: existing PR #15 remains unmerged until this refinement and fresh CI are reviewed.
