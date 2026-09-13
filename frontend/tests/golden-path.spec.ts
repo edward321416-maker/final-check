@@ -63,6 +63,9 @@ test("five-screen golden path, evidence, filter, reload and recheck", async ({ p
   await expect(page.getByRole("article", { name: "R09 참가 신청서 및 개인정보 동의서" })).toContainText("BLOCKER");
   await expect(page.getByRole("article", { name: "R13 영상 길이 30~60초" })).toContainText("BLOCKER");
   for (const blocker of await blockers.all()) {
+    await expect(blocker.getByText("RULE", { exact: true })).toBeVisible();
+    await expect(blocker.getByText("EVIDENCE", { exact: true })).toBeVisible();
+    await expect(blocker.getByText("VERDICT", { exact: true })).toBeVisible();
     await expect(blocker.getByText("공고문 근거", { exact: true })).toBeVisible();
     await expect(blocker.getByText("제출파일 근거", { exact: true })).toBeVisible();
     await expect(blocker.locator("blockquote")).toHaveCount(2);

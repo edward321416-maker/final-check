@@ -16,6 +16,31 @@ function baseSession(overrides: Record<string, unknown> = {}) {
   };
 }
 
+function result(
+  status: "BLOCKER" | "REVIEW" | "PASS" | "EXTERNAL",
+  id: string,
+  title: string,
+  overrides: Record<string, unknown> = {},
+) {
+  return {
+    id,
+    requirement_id: id,
+    status,
+    title,
+    explanation: `${status} 설명`,
+    action: "확인하세요.",
+    announcement_evidence: { source: "공고", locator: "p.1", excerpt: `${title} 공고 근거` },
+    submission_evidence: { source: "submission.mp4", locator: "duration", excerpt: "61.0s" },
+    source_mode: "generic_verifier",
+    verification_plan_id: "P1",
+    checker_type: "VIDEO_METADATA",
+    measured_fact: "61.0s",
+    expected_constraint: "<= 60 seconds",
+    semantic_review: null,
+    ...overrides,
+  };
+}
+
 async function openWithSession(
   page: Page,
   session: object,
@@ -195,4 +220,68 @@ test("demo requirements Inspector uses padded content and action groups", async 
   const inspector = page.getByRole("region", { name: "요구사항 Inspector" });
   await expect(inspector.locator(".workspace-body")).toContainText("실시간 AI 추출 결과가 아닙니다.");
   await expect(inspector.locator(".workspace-actions").getByRole("link", { name: "제출파일 선택하기" })).toBeVisible();
+});
+
+test("results use the audited priority, counted status tabs, and evidence chain", async ({ page }, testInfo) => {
+  const completedSession = baseSession({
+    validation_profile: "generic",
+    generic_profile: { status: "CONFIRMED", requirements: [], extraction_complete: true },
+    run_state: "COMPLETE",
+    status: "BLOCKED",
+    results: [
+      result("EXTERNAL", "G004", "외부 확인"),
+      result("PASS", "G003", "파일 형식"),
+      result("REVIEW", "G002", "내용 요구사항", { checker_type: null, measured_fact: null }),
+      result("BLOCKER", "G001", "영상 길이"),
+    ],
+  });
+  await openWithSession(page, completedSession, "/results");
+
+  const cards = page.locator("[data-testid='result-card']");
+  await expect(cards).toHaveCount(4);
+  await expect(cards.nth(0)).toContainText("BLOCKER");
+  await expect(cards.nth(1)).toContainText("REVIEW");
+  await expect(cards.nth(2)).toContainText("PASS");
+  await expect(cards.nth(3)).toContainText("EXTERNAL");
+  for (const tab of ["전체 4", "BLOCKER 1", "REVIEW 1", "PASS 1", "EXTERNAL 1"]) {
+    await expect(page.getByRole("button", { name: tab, exact: true })).toBeVisible();
+  }
+  await expect(cards.nth(0).getByText("RULE", { exact: true })).toBeVisible();
+  await expect(cards.nth(0).getByText("EVIDENCE", { exact: true })).toBeVisible();
+  await expect(cards.nth(0).getByText("VERDICT", { exact: true })).toBeVisible();
+  const columns = await cards.nth(0).evaluate(element => getComputedStyle(element).gridTemplateColumns.trim().split(/\s+/).length);
+  expect(columns).toBe(testInfo.project.name === "mobile" ? 1 : 3);
+});
+
+test("Evidence Inspector traps focus, closes with Escape, and restores its opener", async ({ page }, testInfo) => {
+  const completedSession = baseSession({
+    validation_profile: "generic",
+    generic_profile: { status: "CONFIRMED", requirements: [], extraction_complete: true },
+    run_state: "COMPLETE",
+    status: "BLOCKED",
+    results: [result("BLOCKER", "G001", "영상 길이")],
+  });
+  await openWithSession(page, completedSession, "/results");
+
+  const opener = page.getByRole("button", { name: /근거 자세히 보기/ }).first();
+  await opener.focus();
+  await opener.click();
+  const drawer = page.getByRole("dialog", { name: "Evidence Inspector" });
+  await expect(drawer).toBeVisible();
+  await expect(drawer).toContainText("공고 요구사항");
+  await expect(drawer).toContainText("제출파일 근거");
+  if (testInfo.project.name === "mobile") {
+    const box = await drawer.boundingBox();
+    expect(box?.width).toBeCloseTo(page.viewportSize()?.width ?? 0, 3);
+  }
+
+  const close = drawer.getByRole("button", { name: "Evidence Inspector 닫기" });
+  await expect(close).toBeFocused();
+  await page.keyboard.press("Shift+Tab");
+  await expect.poll(() => drawer.evaluate(element => element.contains(document.activeElement))).toBe(true);
+  await page.keyboard.press("Tab");
+  await expect.poll(() => drawer.evaluate(element => element.contains(document.activeElement))).toBe(true);
+  await page.keyboard.press("Escape");
+  await expect(drawer).toBeHidden();
+  await expect(opener).toBeFocused();
 });

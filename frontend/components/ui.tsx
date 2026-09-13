@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useState, type ReactNode } from "react";
 import { canEnterStep, recoveryHref, type WorkflowStep } from "@/lib/workflow";
 import { useSession } from "./session-provider";
-import type { Evidence, FindingStatus, SubmissionFile } from "@/types/check";
+import type { Evidence, FindingStatus, SubmissionFile, ValidationResult } from "@/types/check";
 
 export function useAction() {
   const [busy, setBusy] = useState(false);
@@ -18,7 +18,31 @@ export function useAction() {
   return { busy, error, run };
 }
 export function Badge({ status }: { status: FindingStatus }) {
-  return <span className={`badge ${status.toLowerCase()}`}>{status}</span>;
+  return <span className={`badge status-chip ${status.toLowerCase()}`}>{status}</span>;
+}
+export function semanticAssessmentLabel(result: ValidationResult) {
+  const semantic = result.semantic_review;
+  if (!semantic) return null;
+  if (semantic.assessment === "RELATED_EVIDENCE_FOUND") return "Related evidence found · 관련 근거 후보";
+  if (semantic.assessment === "NO_CLEAR_EVIDENCE" && semantic.coverage === "FULL") return "No clear evidence candidate · 명확한 근거 후보 없음";
+  if (semantic.assessment === "NO_CLEAR_EVIDENCE") return "확인된 범위에서 명확한 근거 후보 없음";
+  return "내용 근거 직접 확인 필요";
+}
+export function submissionEvidenceEmptyText(result: ValidationResult) {
+  const semantic = result.semantic_review;
+  if (semantic?.coverage === "FULL" && semantic.assessment === "NO_CLEAR_EVIDENCE") {
+    return "제출파일에서 명확한 관련 근거 후보를 찾지 못했습니다. 직접 대조가 필요합니다.";
+  }
+  if (semantic?.coverage === "PARTIAL") {
+    return "문서 일부만 확인되어 문서 전체의 관련 근거 유무를 판단할 수 없습니다. 직접 대조가 필요합니다.";
+  }
+  if (semantic?.coverage === "NONE") {
+    return "문서 내용을 확인하지 못해 관련 근거 후보 유무를 판단할 수 없습니다. 직접 대조가 필요합니다.";
+  }
+  if (result.source_mode === "generic_review") {
+    return "이 항목의 제출파일 검증은 실행되지 않았습니다. 직접 대조가 필요합니다.";
+  }
+  return undefined;
 }
 export function ModeNote() {
   const { session } = useSession();

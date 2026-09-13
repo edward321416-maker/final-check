@@ -230,6 +230,19 @@ test("labels a completed full-coverage no-evidence review as no clear evidence, 
   const finding = page.getByRole("article", { name: "G001 내용 요구사항" });
   await expect(finding.getByText("제출파일에서 명확한 관련 근거 후보를 찾지 못했습니다. 직접 대조가 필요합니다.", { exact: true })).toBeVisible();
   await expect(finding.getByText("이 항목의 제출파일 검증은 실행되지 않았습니다. 직접 대조가 필요합니다.", { exact: true })).toHaveCount(0);
+  await expect(finding.getByText("위반", { exact: false })).toHaveCount(0);
+});
+
+test("does not turn partial semantic coverage into a whole-document absence claim", async ({ page }) => {
+  const partial = semanticResult({
+    submission_evidence: null,
+    semantic_review: { assessment: "NO_CLEAR_EVIDENCE", coverage: "PARTIAL", reason_code: null, evidence: [], evidence_fingerprint: "partial", provider: null },
+  });
+  await openWithSession(page, () => baseSession({ run_state: "COMPLETE", results: [partial] }));
+  await page.goto("/results");
+  const finding = page.getByRole("article", { name: "G001 내용 요구사항" });
+  await expect(finding.getByText("문서 일부만 확인되어 문서 전체의 관련 근거 유무를 판단할 수 없습니다. 직접 대조가 필요합니다.", { exact: true })).toBeVisible();
+  await expect(finding.getByText("제출파일에서 명확한 관련 근거 후보를 찾지 못했습니다. 직접 대조가 필요합니다.", { exact: true })).toHaveCount(0);
 });
 
 test("places the Korean semantic-unavailable explanation before its reason code", async ({ page }) => {
@@ -237,8 +250,10 @@ test("places the Korean semantic-unavailable explanation before its reason code"
   await openWithSession(page, () => baseSession({ run_state: "COMPLETE", results: [unavailable] }));
   await page.goto("/results");
   const finding = page.getByRole("article", { name: "G001 내용 요구사항" });
-  await finding.getByText("기술 세부", { exact: true }).click();
-  const text = await finding.innerText();
+  await finding.getByRole("button", { name: /근거 자세히 보기/ }).click();
+  const drawer = page.getByRole("dialog", { name: "Evidence Inspector" });
+  await drawer.getByText("기술 세부 보기", { exact: true }).click();
+  const text = await drawer.innerText();
   expect(text.indexOf("AI 내용 검토를 사용할 수 없어 직접 확인이 필요합니다.")).toBeLessThan(text.indexOf("SEMANTIC_PROVIDER_UNAVAILABLE"));
 });
 
