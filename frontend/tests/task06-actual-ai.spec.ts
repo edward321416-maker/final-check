@@ -44,7 +44,7 @@ test("TASK06 actual local AI two-stage public-announcement flow", async ({ page 
   const editedCondition = `${editable.condition} (사람이 원문 확인)`;
   await inspector.getByLabel("condition").fill(editedCondition);
   await inspector.getByRole("button", { name: "수정 저장" }).click();
-  await expect(page.getByRole("article", { name: `요구사항 ${editable.requirement_id}`, exact: true })).toContainText("AI EXTRACTED");
+  await expect(page.getByRole("article", { name: `요구사항 ${editable.requirement_id}`, exact: true })).toContainText("NEEDS REVIEW");
   await page.getByRole("button", { name: `요구사항 ${deleteItem.requirement_id}`, exact: true }).click();
   await inspector.getByRole("button", { name: "항목 삭제" }).click();
 

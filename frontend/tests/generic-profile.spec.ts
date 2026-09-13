@@ -42,16 +42,17 @@ test("generic text, evidence, human edit/delete/approve, confirmation and real h
   const flow = new GenericFlow(page, info);
   await flow.textInput();
   let inspector = await flow.select("G001");
-  await expect(flow.card("G001")).toContainText("AI EXTRACTED");
+  await expect(flow.card("G001")).toContainText("NEEDS REVIEW");
   await expect(inspector.locator("blockquote")).toHaveText("제안서는 PDF 형식으로 제출해야 한다.");
   await expect(page.getByRole("button", { name: "Profile 확정" })).toBeDisabled();
   await flow.capture("01-extracted");
   await inspector.getByLabel("요구사항 문장").fill("제안서는 PDF 형식으로 제출해야 한다");
   await expect(page.getByRole("button", { name: "요구사항 G002", exact: true })).toBeDisabled();
   await inspector.getByRole("button", { name: "수정 저장" }).click();
-  await expect(flow.card("G001")).toContainText("AI EXTRACTED");
+  await expect(flow.card("G001")).toContainText("NEEDS REVIEW");
   inspector = flow.inspector();
   await inspector.getByRole("button", { name: "검토 필요로 유지" }).click();
+  await expect(flow.card("G001")).toContainText("NEEDS REVIEW");
   await expect(inspector.getByRole("button", { name: "항목 승인" })).toBeEnabled();
   inspector = await flow.select("G004");
   await inspector.getByRole("button", { name: "항목 삭제" }).click();
@@ -61,6 +62,9 @@ test("generic text, evidence, human edit/delete/approve, confirmation and real h
     await inspector.getByRole("button", { name: "항목 승인" }).click();
     await expect(flow.card(id)).toContainText("HUMAN CONFIRMED");
   }
+  await page.goto("/announcement");
+  await expect(flow.card("G001")).toContainText("HUMAN CONFIRMED");
+  await page.goto("/requirements");
   await page.getByText("공고 원문과 provenance", { exact: true }).click();
   await expect(page.getByText("Source SHA-256:", { exact: false })).toBeVisible();
   await page.getByLabel("공고 원문 전체와 누락 가능성을 직접 검토했습니다.").check();

@@ -5,6 +5,7 @@ import { useState } from "react";
 import { request, sessionRequest } from "@/lib/api";
 import type { CheckSession } from "@/types/check";
 import type { ProfileRequirement } from "@/types/profile";
+import { formatExtractionStatus } from "./generic-profile";
 import { useSession } from "./session-provider";
 import { ErrorNotice, EvidenceBox, useAction } from "./ui";
 import styles from "./profile.module.css";
@@ -92,7 +93,7 @@ export function AnnouncementWorkspace() {
         <div className="panel-heading"><h2>{profile.requirements.length > 0 ? "Extracted Requirements" : "요구사항 검토 준비"}</h2><span>{profile.requirements.length}개 후보</span></div>
         {profile.requirements.map(item => <article className={`requirement requirement-candidate${selected?.requirement_id === item.requirement_id ? " selected" : ""}`} key={item.requirement_id} aria-label={`요구사항 ${item.requirement_id}`}>
           <button type="button" aria-label={`요구사항 ${item.requirement_id}`} onClick={() => setSelectedId(item.requirement_id)} onFocus={() => setSelectedId(item.requirement_id)}>
-            <span className="rule-id">{item.requirement_id}</span><strong>{item.rule}</strong><span className="verifier">{item.modality} · {item.verifier}</span><span className="candidate-state">AI EXTRACTED</span>
+            <span className="rule-id">{item.requirement_id}</span><strong>{item.rule}</strong><span className="verifier">{item.modality} · {item.verifier}</span><span className="candidate-state">{formatExtractionStatus(item.extraction_status)}</span>
           </button>
         </article>)}
         {profile.extraction_complete && profile.requirements.length > 0 && <div className="workspace-actions"><p>AI 후보는 아직 공식 규칙이 아닙니다. 다음 단계에서 원문과 대조해 승인합니다.</p><Link href="/requirements" className="button primary">요구사항 검토로 이동 →</Link></div>}

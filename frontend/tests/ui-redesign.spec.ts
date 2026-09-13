@@ -97,7 +97,12 @@ test("requirements Inspector highlights only the exact stored evidence offsets",
   const profile = {
     profile_type: "generic", profile_id: "profile-1", status: "REVIEW_REQUIRED",
     announcement: { source_type: "TEXT", name: "공고.txt", sha256: "b".repeat(64), text_sha256: "c".repeat(64), text, ingestion_status: "READABLE", page_count: null, notice: "" },
-    requirements: [requirement], raw_candidates: [requirement.original], gated_candidate_ids: ["G001"],
+    requirements: [
+      requirement,
+      { ...requirement, requirement_id: "G002", extraction_status: "CONFIRMED", authoritative: true, original: { ...requirement.original, requirement_id: "G002" } },
+      { ...requirement, requirement_id: "G003", extraction_status: "NEEDS_REVIEW", original: { ...requirement.original, requirement_id: "G003" } },
+      { ...requirement, requirement_id: "G004", extraction_status: "UNSUPPORTED", original: { ...requirement.original, requirement_id: "G004" } },
+    ], raw_candidates: [requirement.original], gated_candidate_ids: ["G001"],
     stage2_reviews: [], provider: provenance.provider, execution_kind: "SIMULATED", stage1: provenance, stage2: provenance,
     pipeline_status: "COMPLETE", pipeline_error: null, raw_candidate_count: 1, gated_candidate_count: 1,
     dropped_candidate_count: 0, review_batches: 1, failed_batches: [], overflow: false, overflow_policy: "",
@@ -106,9 +111,15 @@ test("requirements Inspector highlights only the exact stored evidence offsets",
   const session = baseSession({ generic_profile: profile });
   await openWithSession(page, session, "/announcement");
   await expect(page.getByRole("button", { name: "Profile 확정" })).toHaveCount(0);
+  for (const [id, label] of [["G001", "AI EXTRACTED"], ["G002", "HUMAN CONFIRMED"], ["G003", "NEEDS REVIEW"], ["G004", "UNSUPPORTED"]]) {
+    await expect(page.getByRole("article", { name: `요구사항 ${id}`, exact: true })).toContainText(label);
+  }
   await page.getByRole("button", { name: "요구사항 G001" }).click();
   await expect(page.getByRole("region", { name: "공고 원문" }).locator("mark")).toHaveText(quote);
   await page.goto("/requirements");
+  for (const [id, label] of [["G001", "AI EXTRACTED"], ["G002", "HUMAN CONFIRMED"], ["G003", "NEEDS REVIEW"], ["G004", "UNSUPPORTED"]]) {
+    await expect(page.getByRole("article", { name: `요구사항 ${id}`, exact: true })).toContainText(label);
+  }
 
   await page.getByRole("button", { name: "요구사항 G001" }).click();
   const sourcePane = page.getByRole("region", { name: "공고 원문" });
@@ -116,4 +127,19 @@ test("requirements Inspector highlights only the exact stored evidence offsets",
   const inspector = page.getByRole("region", { name: "요구사항 Inspector" });
   await expect(inspector.getByLabel("요구사항 문장")).toHaveValue(quote);
   await expect(inspector.getByRole("button", { name: "항목 승인" })).toBeVisible();
+});
+
+test("demo requirements Inspector uses padded content and action groups", async ({ page }) => {
+  const demo = baseSession({
+    mode: "demo", validation_profile: "frozen_v15", source_mode: "validator",
+    requirements: [{
+      id: "R01", title: "동결 요구사항", description: "Validator v1.5 예시",
+      verifier: "DETERMINISTIC",
+      announcement_evidence: { source: "동결 공고", locator: "R01", excerpt: "동결 근거" },
+    }],
+  });
+  await openWithSession(page, demo, "/requirements");
+  const inspector = page.getByRole("region", { name: "요구사항 Inspector" });
+  await expect(inspector.locator(".workspace-body")).toContainText("실시간 AI 추출 결과가 아닙니다.");
+  await expect(inspector.locator(".workspace-actions").getByRole("link", { name: "제출파일 선택하기" })).toBeVisible();
 });

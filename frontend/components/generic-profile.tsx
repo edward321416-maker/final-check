@@ -3,7 +3,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { request, sessionRequest } from "@/lib/api";
 import type { CheckSession } from "@/types/check";
-import type { ExtractedRequirement, ProfileRequirement, Modality, Severity, Verifier } from "@/types/profile";
+import type { ExtractedRequirement, ExtractionStatus, ProfileRequirement, Modality, Severity, Verifier } from "@/types/profile";
 import { useSession } from "./session-provider";
 import { EvidenceBox, ErrorNotice, useAction } from "./ui";
 import styles from "./profile.module.css";
@@ -26,6 +26,17 @@ export function TextAnnouncementInput() {
 
 export type ProfileReviewAction = "EDIT" | "NEEDS_REVIEW" | "APPROVE" | "DELETE";
 
+const extractionStatusCopy = {
+  EXTRACTED: "AI EXTRACTED",
+  CONFIRMED: "HUMAN CONFIRMED",
+  NEEDS_REVIEW: "NEEDS REVIEW",
+  UNSUPPORTED: "UNSUPPORTED",
+} as const satisfies Record<ExtractionStatus, string>;
+
+export function formatExtractionStatus(status: ExtractionStatus): string {
+  return extractionStatusCopy[status];
+}
+
 export function RequirementInspector({ item, busy, act, onDirty }: {
   item: ProfileRequirement;
   busy: boolean;
@@ -39,7 +50,7 @@ export function RequirementInspector({ item, busy, act, onDirty }: {
   const set = <K extends keyof ExtractedRequirement>(key: K, value: ExtractedRequirement[K]) => {
     onDirty(); setDraft(old => ({ ...old, [key]: value }));
   };
-  const reviewState = item.extraction_status === "CONFIRMED" ? "HUMAN CONFIRMED" : "AI EXTRACTED";
+  const reviewState = formatExtractionStatus(item.extraction_status);
   return <div>
     <div className={styles.actions}><span className="rule-id">{item.requirement_id}</span><strong>{reviewState}</strong><span className="verifier">confidence {item.confidence.toFixed(2)} · 미보정</span></div>
     <p className="info-note">Stage 2: {item.stage2_decision ?? "pending"} · {item.stage2_reason || "semantic review pending"}</p>

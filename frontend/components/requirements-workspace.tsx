@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { sessionRequest } from "@/lib/api";
 import type { ExtractedRequirement } from "@/types/profile";
-import { RequirementInspector, type ProfileReviewAction } from "./generic-profile";
+import { formatExtractionStatus, RequirementInspector, type ProfileReviewAction } from "./generic-profile";
 import { splitEvidenceText } from "./announcement-workspace";
 import { useSession } from "./session-provider";
 import { ErrorNotice, EvidenceBox, useAction } from "./ui";
@@ -23,7 +23,7 @@ export function RequirementsWorkspace() {
       <section className="review-list" aria-label="동결 요구사항 목록"><div className="panel-heading"><h2>동결 공고 요구사항 · 읽기 전용</h2><span>읽기 전용</span></div>
         {session.requirements.map(rule => <article className="requirement" key={rule.id} aria-label={`요구사항 ${rule.id}`}><div className="requirement-summary"><span className="rule-id">{rule.id}</span><strong>{rule.title}</strong><span className="verifier">{rule.verifier}</span></div><EvidenceBox label="공고문 근거" evidence={rule.announcement_evidence} /></article>)}
       </section>
-      <aside className="review-inspector" role="region" aria-label="요구사항 Inspector"><span className="eyebrow">HUMAN REVIEW</span><h2>Validator v1.5 · 이미 확정됨</h2><p>동결 Validator v1.5의 읽기 전용 요구사항입니다. 실시간 AI 추출 결과가 아닙니다.</p><Link href="/upload" className="button primary full">제출파일 선택하기 →</Link></aside>
+      <aside className="review-inspector" role="region" aria-label="요구사항 Inspector"><div className="workspace-body"><span className="eyebrow">HUMAN REVIEW</span><h2>Validator v1.5 · 이미 확정됨</h2><p>동결 Validator v1.5의 읽기 전용 요구사항입니다. 실시간 AI 추출 결과가 아닙니다.</p></div><div className="workspace-actions"><Link href="/upload" className="button primary full">제출파일 선택하기 →</Link></div></aside>
     </div>;
   }
 
@@ -56,7 +56,7 @@ export function RequirementsWorkspace() {
       <div className={styles.notices}><p><strong>Profile: <span data-testid="profile-status">{profile.status}</span></strong></p><p>AI가 찾은 후보를 사람이 원문과 대조해 공식 요구사항으로 확정합니다.</p></div>
       {profile.requirements.map(item => <article className={`requirement requirement-row${selected?.requirement_id === item.requirement_id ? " selected" : ""}`} key={item.requirement_id} aria-label={`요구사항 ${item.requirement_id}`}>
         <button type="button" aria-label={`요구사항 ${item.requirement_id}`} disabled={dirtyId !== null && dirtyId !== item.requirement_id} onClick={() => setSelectedId(item.requirement_id)}>
-          <span className="rule-id">{item.requirement_id}</span><strong>{item.rule}</strong><span className="verifier">{item.modality} · {item.verifier}</span><span className="candidate-state">{item.extraction_status === "CONFIRMED" ? "HUMAN CONFIRMED" : "AI EXTRACTED"}</span>
+          <span className="rule-id">{item.requirement_id}</span><strong>{item.rule}</strong><span className="verifier">{item.modality} · {item.verifier}</span><span className="candidate-state">{formatExtractionStatus(item.extraction_status)}</span>
         </button>
       </article>)}
       <div className="profile-controls">
