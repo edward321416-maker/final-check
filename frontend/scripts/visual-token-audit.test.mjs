@@ -1,6 +1,11 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { auditCssText } from "./visual-token-audit.mjs";
+import fs from "node:fs";
+import os from "node:os";
+import path from "node:path";
+import { spawnSync } from "node:child_process";
+import { fileURLToPath } from "node:url";
+import { auditCssText, collectProductionCssFiles } from "./visual-token-audit.mjs";
 
 function reasons(css) {
   return auditCssText(css, "fixture.css").map(item => item.reason);
@@ -51,4 +56,122 @@ test("accepts token-based declarations and layout calculations", () => {
     }
   `, "fixture.css");
   assert.deepEqual(findings, []);
+});
+
+test("rejects named colors and named gradient stops", () => {
+  const findings = auditCssText(`
+    .white { background: white; }
+    .red { color: red; }
+    .gradient { background: linear-gradient(black, var(--surface)); }
+    .allowed { color: transparent; border-color: currentColor; background: none; }
+  `, "fixture.css");
+  const rawColors = findings.filter(item => item.reason.includes("raw color"));
+  assert.equal(rawColors.length, 3);
+  assert.deepEqual(rawColors.map(item => item.value), [
+    "white",
+    "red",
+    "linear-gradient(black, var(--surface))",
+  ]);
+});
+
+test("enforces canonical literal and token typography pairs", () => {
+  const findings = auditCssText(`
+    .literal-mismatch { font-size: 56px; line-height: 16px; }
+    .token-mismatch {
+      font-size: var(--type-display-lg-size);
+      line-height: var(--type-micro-line);
+    }
+    .literal-ok { font-size: 56px; line-height: 64px; }
+    .token-ok {
+      font-size: var(--type-display-lg-size);
+      line-height: var(--type-display-lg-line);
+    }
+  `, "fixture.css");
+  const mismatches = findings.filter(item => item.reason.includes("typography pair"));
+  assert.equal(mismatches.length, 2);
+  assert(mismatches.some(item => item.value === "56px / 16px"));
+  assert(mismatches.some(item => item.value.includes("--type-display-lg-size") && item.value.includes("--type-micro-line")));
+});
+
+test("rejects arbitrary variables and non-pixel fixed lengths", () => {
+  const result = reasons(`
+    .rogue {
+      font-size: var(--rogue-size);
+      line-height: var(--rogue-line);
+      padding: var(--rogue-gap);
+      margin: 1rem;
+      border-radius: var(--rogue-radius);
+      border-width: var(--rogue-border);
+      border: 1rem solid var(--border-subtle);
+      color: var(--rogue-color);
+      letter-spacing: var(--rogue-letter);
+    }
+  `);
+  assert(result.some(reason => reason.includes("font-size")));
+  assert(result.some(reason => reason.includes("line-height")));
+  assert(result.filter(reason => reason.includes("spacing")).length >= 2);
+  assert(result.some(reason => reason.includes("radius")));
+  assert(result.some(reason => reason.includes("border")));
+  assert(result.some(reason => reason.includes("color token")));
+  assert(result.some(reason => reason.includes("letter spacing")));
+});
+
+test("audits semicolonless terminal declarations", () => {
+  const findings = auditCssText(`
+    .color { color: #2563eb }
+    .space { padding: 18px }
+  `, "fixture.css");
+  assert(findings.some(item => item.reason.includes("raw color")));
+  assert(findings.some(item => item.reason.includes("spacing")));
+});
+
+test("accepts canonical tokens with important", () => {
+  const findings = auditCssText(`
+    .ok {
+      font-size: var(--type-body-size) !important;
+      line-height: var(--type-body-line) !important;
+      padding: var(--space-4) !important;
+      color: var(--text-primary) !important;
+      box-shadow: var(--shadow-overlay) !important;
+    }
+  `, "fixture.css");
+  assert.deepEqual(findings, []);
+});
+
+test("collector and CLI include production CSS and exclude generated artifacts", t => {
+  const workspace = fs.mkdtempSync(path.join(os.tmpdir(), "visual-token-audit-"));
+  const frontendRoot = path.join(workspace, "frontend");
+  const appRoot = path.join(frontendRoot, "app");
+  const componentsRoot = path.join(frontendRoot, "components");
+  const scriptsRoot = path.join(frontendRoot, "scripts");
+  t.after(() => fs.rmSync(workspace, { recursive: true, force: true }));
+
+  fs.mkdirSync(path.join(appRoot, ".next"), { recursive: true });
+  fs.mkdirSync(path.join(componentsRoot, "generated"), { recursive: true });
+  fs.mkdirSync(path.join(workspace, "other"), { recursive: true });
+  fs.mkdirSync(scriptsRoot, { recursive: true });
+  fs.writeFileSync(path.join(appRoot, "keep.css"), ".bad { color: red }\n");
+  fs.writeFileSync(path.join(componentsRoot, "keep.module.css"), ".ok { color: var(--text-primary); }\n");
+  fs.writeFileSync(path.join(appRoot, ".next", "skip.css"), ".bad { color: white; }\n");
+  fs.writeFileSync(path.join(componentsRoot, "generated", "skip.css"), ".bad { color: white; }\n");
+  fs.writeFileSync(path.join(componentsRoot, "skip.generated.css"), ".bad { color: white; }\n");
+  fs.writeFileSync(path.join(componentsRoot, "skip.min.css"), ".bad { color: white; }\n");
+  fs.writeFileSync(path.join(workspace, "other", "skip.css"), ".bad { color: white; }\n");
+
+  const relativeFiles = collectProductionCssFiles(frontendRoot)
+    .map(file => path.relative(frontendRoot, file).replaceAll(path.sep, "/"));
+  assert.deepEqual(relativeFiles, ["app/keep.css", "components/keep.module.css"]);
+
+  const sourceScript = fileURLToPath(new URL("./visual-token-audit.mjs", import.meta.url));
+  const cliScript = path.join(scriptsRoot, "visual-token-audit.mjs");
+  fs.copyFileSync(sourceScript, cliScript);
+  const cli = spawnSync(process.execPath, [cliScript, "--check"], { encoding: "utf8" });
+  assert.equal(cli.status, 1);
+  assert.match(cli.stdout, /frontend\/app\/keep\.css :: color=red :: raw color/);
+  assert.doesNotMatch(cli.stdout, /skip/);
+
+  fs.writeFileSync(path.join(appRoot, "keep.css"), ".ok { color: var(--text-primary); }\n");
+  const cleanCli = spawnSync(process.execPath, [cliScript, "--check"], { encoding: "utf8" });
+  assert.equal(cleanCli.status, 0);
+  assert.equal(cleanCli.stdout, "");
 });
