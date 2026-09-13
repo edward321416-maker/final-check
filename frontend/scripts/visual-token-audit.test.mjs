@@ -175,3 +175,44 @@ test("collector and CLI include production CSS and exclude generated artifacts",
   assert.equal(cleanCli.status, 0);
   assert.equal(cleanCli.stdout, "");
 });
+
+test("rejects named gradient stops on color-bearing properties outside the property list", () => {
+  const findings = auditCssText(`
+    .border { border-image: linear-gradient(red, blue) 1; }
+  `, "fixture.css");
+  assert(findings.some(item => item.property === "border-image" && item.reason.includes("raw color")));
+});
+
+test("handles uppercase and mixed-case var functions without bypasses", () => {
+  const rogue = auditCssText(`
+    .rogue {
+      padding: VAR(--rogue-gap);
+      color: vAr(--rogue-color);
+    }
+  `, "fixture.css");
+  assert(rogue.some(item => item.property === "padding" && item.reason.includes("spacing")));
+  assert(rogue.some(item => item.property === "color" && item.reason.includes("color token")));
+
+  const canonical = auditCssText(`
+    .ok {
+      font-size: VaR(--type-body-size);
+      line-height: VAR(--type-body-line);
+      padding: vAr(--space-4);
+      color: VAR(--text-primary);
+    }
+  `, "fixture.css");
+  assert.deepEqual(canonical, []);
+});
+
+test("ignores named colors inside strings and url payloads", () => {
+  const findings = auditCssText(`
+    :root { --asset-label: "red"; }
+    .asset {
+      content: 'blue';
+      background-image: url("/icons/red.svg");
+      mask-image: URL('/icons/blue.svg');
+      border-image: linear-gradient(var(--accent), transparent) 1, url(/textures/black.png) 1;
+    }
+  `, "fixture.css");
+  assert.deepEqual(findings, []);
+});

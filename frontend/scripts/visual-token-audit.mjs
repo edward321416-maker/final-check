@@ -82,7 +82,7 @@ function pxNumbers(value) {
 }
 
 function usesVariableOrLayoutExpression(value) {
-  return /var\(|calc\(|min\(|max\(/.test(value);
+  return /var\(|calc\(|min\(|max\(/i.test(value);
 }
 
 function add(findings, file, property, value, reason) {
@@ -94,11 +94,11 @@ function withoutImportant(value) {
 }
 
 function variableNames(value) {
-  return [...value.matchAll(/var\(\s*(--[\w-]+)/g)].map(match => match[1]);
+  return [...value.matchAll(/var\(\s*(--[\w-]+)/gi)].map(match => match[1]);
 }
 
 function hasOnlyAllowedVariables(value, allowed) {
-  if (!usesVariableOrLayoutExpression(value) || !value.includes("var(")) return true;
+  if (!usesVariableOrLayoutExpression(value) || !/var\(/i.test(value)) return true;
   const names = variableNames(value);
   return names.length > 0 && names.every(name => allowed.has(name));
 }
@@ -115,7 +115,7 @@ function hasUnapprovedLength(value, approved, { allowPercent = false } = {}) {
 }
 
 function typographyValue(value, tokenMap, approved) {
-  const variable = value.match(/^var\(\s*(--[\w-]+)\s*\)$/);
+  const variable = value.match(/^var\(\s*(--[\w-]+)\s*\)$/i);
   if (variable) return tokenMap.get(variable[1]) ?? null;
   const literal = value.match(/^(-?\d+(?:\.\d+)?)px$/i);
   if (!literal) return null;
@@ -125,6 +125,59 @@ function typographyValue(value, tokenMap, approved) {
 
 function containsNamedColor(value) {
   return (value.toLowerCase().match(/[a-z]+/g) ?? []).some(word => NAMED_COLORS.has(word));
+}
+
+function skipQuoted(value, start) {
+  const quote = value[start];
+  let index = start + 1;
+  while (index < value.length) {
+    if (value[index] === "\\") {
+      index += 2;
+    } else if (value[index] === quote) {
+      return index + 1;
+    } else {
+      index += 1;
+    }
+  }
+  return index;
+}
+
+function colorTokensOnly(value) {
+  let result = "";
+  let index = 0;
+
+  while (index < value.length) {
+    if (value[index] === "\"" || value[index] === "'") {
+      index = skipQuoted(value, index);
+      result += " ";
+      continue;
+    }
+
+    const url = value.slice(index).match(/^url\s*\(/i);
+    const boundary = index === 0 || !/[\w-]/.test(value[index - 1]);
+    if (url && boundary) {
+      index += url[0].length;
+      let depth = 1;
+      while (index < value.length && depth > 0) {
+        if (value[index] === "\"" || value[index] === "'") {
+          index = skipQuoted(value, index);
+        } else if (value[index] === "\\") {
+          index += 2;
+        } else {
+          if (value[index] === "(") depth += 1;
+          if (value[index] === ")") depth -= 1;
+          index += 1;
+        }
+      }
+      result += " ";
+      continue;
+    }
+
+    result += value[index];
+    index += 1;
+  }
+
+  return result.replace(/var\(\s*--[\w-]+/gi, "var(");
 }
 
 function isColorProperty(property) {
@@ -204,8 +257,8 @@ export function auditCssText(source, filename) {
       }
 
       const colorProperty = isColorProperty(property);
-      const rawColor = RAW_COLOR_FUNCTION.test(value) ||
-        ((colorProperty || property.startsWith("--")) && containsNamedColor(value));
+      const colorValue = colorTokensOnly(value);
+      const rawColor = RAW_COLOR_FUNCTION.test(colorValue) || containsNamedColor(colorValue);
       if (!tokenFile && rawColor) {
         add(findings, filename, property, reportedValue, "raw color must use a visual token");
       }
