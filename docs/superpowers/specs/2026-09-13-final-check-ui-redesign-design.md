@@ -1,7 +1,7 @@
 # FINAL CHECK — UI Redesign Design
 
 **Status:** USER REVIEW REQUIRED  
-**Self-review:** PENDING  
+**Self-review:** COMPLETED (2026-09-13)  
 **Baseline:** `main@9f13866db1f14d917764a7d2865153f7aa6fbf3e`  
 **Product decision:** GO  
 **Scope:** Frontend information architecture, visual system, interaction design, responsive behavior, and presentation quality  
@@ -27,7 +27,7 @@ Primary success criteria:
 - BLOCKER, REVIEW, PASS, and EXTERNAL remain semantically distinct without turning the interface into a red/amber/green dashboard;
 - TASK10 evidence is inspectable without allowing AI evidence to appear as automatic compliance approval;
 - mobile keeps evidence visible instead of hiding it behind a summary-only view;
-- public judging screenshots can be captured from real product states without decorative mock data contradicting the visible result counts.
+- competition screenshots can be captured from real product states without decorative mock data contradicting visible counts.
 
 ## 2. Non-goals
 
@@ -38,64 +38,64 @@ This redesign does not change:
 - the Human-confirmed Requirement Profile authority boundary;
 - AI authority: AI still cannot produce automatic `PASS`, `BLOCKER`, `READY`, or `BLOCKED` decisions for semantic content;
 - TASK08 verifier families or Plan DSL;
-- TASK10 eligibility, PDF trust, evidence exact-match gate, coverage rules, or acknowledgement rules;
-- the one-backend-process TASK07/TASK09 runtime model;
+- TASK10 eligibility, PDF trust, exact evidence gate, coverage rules, or acknowledgement rules;
+- TASK07/TASK09 single-backend-process runtime behavior;
 - public hosting architecture;
-- support for OCR, Vision, MP4 semantic understanding, URL verification, or new file types;
+- OCR, Vision, MP4 semantic understanding, URL verification, or new file types;
 - dark mode;
 - user accounts, billing, collaboration, or analytics.
 
-No redesign task may silently broaden product claims beyond what the current engine actually verifies.
+No UI work may silently broaden product claims beyond what the current engine actually verifies.
 
 ## 3. Existing frontend context
 
-The current frontend already has working flows and should be evolved rather than replaced wholesale.
+The current frontend is working and should be evolved rather than replaced wholesale.
 
-Observed baseline structure includes:
+Observed baseline structure:
 
-- `frontend/app/globals.css` for the current paper/pine/lime visual system and shared layout;
-- `frontend/components/ui.tsx` for Navigation, Badge, evidence, file-list, guard, and common UI primitives;
-- `frontend/components/screens.tsx` for Home, Announcement, Upload, Results, and Recheck screen logic;
-- `frontend/components/generic-profile.tsx` for text announcement input, AI extraction, review/edit/approve, profile confirmation, and plan compile actions;
-- App Router paths for `/`, `/announcement`, `/upload`, `/results`, and `/recheck`.
+- `frontend/app/globals.css` — current paper/pine/lime visual system and shared layout;
+- `frontend/components/ui.tsx` — Navigation, Badge, EvidenceBox, FileList, Guard, and common UI helpers;
+- `frontend/components/screens.tsx` — Home, Announcement, Upload, Results, and Recheck screen logic;
+- `frontend/components/generic-profile.tsx` — text announcement input, AI extraction, review/edit/approve, profile confirmation, and plan compile actions;
+- App Router paths `/`, `/announcement`, `/upload`, `/results`, `/recheck`.
 
-Current `.preview` intentionally uses `transform: rotate(1deg)`; the redesign removes this and other scrapbook/paper styling. Existing data-fetching, durable polling, mutation, acknowledgement, and session recovery behavior remain the implementation source of truth.
+Current `.preview` intentionally uses `transform: rotate(1deg)`; the redesign removes this and the broader scrapbook/paper treatment. Existing data fetching, durable polling, mutation, semantic acknowledgement, session recovery, and result authority remain the implementation source of truth.
 
-The implementation may extract focused presentational components from the existing large screen files when that improves clarity, but must not rewrite working session/business logic merely for style consistency.
+Implementation may extract focused presentational components from the existing large screen files when that improves clarity, but must not rewrite working session/business logic merely for styling consistency.
 
 ## 4. Design principles
 
 ### 4.1 Evidence first
 
-The product should make the user ask "what is the evidence?" before "what color is the status?". Status is compact metadata; evidence is the main explanatory surface.
+The product should make the user ask "what is the evidence?" before "what color is the status?". Status is compact metadata; evidence is the primary explanatory surface.
 
 ### 4.2 Truthful progress
 
-Never invent completion percentages or model stages the backend cannot observe. Loading UI may show only real coarse-grained states supported by current session/job data.
+Never invent percentages, ETA, or processing stages the backend cannot observe. Loading UI may show only real coarse-grained states supported by current session/job data.
 
 ### 4.3 Human authority is visible
 
-AI-extracted requirements must look provisional until a person approves them. `AI EXTRACTED` and `HUMAN CONFIRMED` are different states and must never be visually interchangeable.
+AI-extracted requirements are provisional until a person approves them. `AI EXTRACTED` and `HUMAN CONFIRMED` must never look interchangeable.
 
-### 4.4 Deterministic certainty is visually different from semantic review
+### 4.4 Deterministic certainty differs from semantic review
 
-A measured 61.0-second video can produce a deterministic BLOCKER. A PDF sentence that appears related to a mandatory content requirement remains REVIEW. Both can use the same evidence-chain layout while keeping their authority different.
+A measured 61.0-second video can produce a deterministic BLOCKER. A PDF sentence related to a mandatory content requirement remains REVIEW. Both can share the Evidence Chain grammar while keeping different authority.
 
 ### 4.5 Quiet by default, detail on demand
 
-The default interface is neutral and scan-friendly. Provenance hashes, prompt IDs, offsets, and low-level diagnostic fields remain available but are moved behind secondary disclosure or the Evidence Inspector.
+The default interface is neutral and scan-friendly. Hashes, prompt IDs, offsets, and low-level diagnostics remain available behind secondary disclosure or the Evidence Inspector.
 
-### 4.6 Reference successful product patterns, do not clone them
+### 4.6 Reference proven patterns without cloning them
 
-Use proven interaction ideas as references:
+Reference interaction patterns from:
 
-- Linear: quiet product surfaces, split list/detail inspection, compact navigation;
-- Vercel: deployment/preflight status hierarchy and restrained use of status color;
-- GitHub Checks / review UI: check -> annotation -> source context traceability;
-- Stripe Radar: clear Block / Review / Allow conceptual separation without full-surface color fills;
-- Sentry: summary first, deep evidence/trace inspection on demand.
+- Linear — quiet product surfaces, list/detail inspection, compact navigation;
+- Vercel — deployment/preflight status hierarchy and restrained status color;
+- GitHub Checks/review — check -> annotation -> source-context traceability;
+- Stripe Radar — clear Block / Review / Allow conceptual separation without full-surface color fills;
+- Sentry — summary first, deeper evidence/trace inspection on demand.
 
-FINAL CHECK keeps its own evidence-first identity and Korean-first product copy.
+FINAL CHECK keeps a distinct Korean-first, evidence-first identity.
 
 ## 5. Visual system
 
@@ -107,65 +107,54 @@ Use a white SaaS foundation:
 - primary text: near-black neutral;
 - secondary text: cool neutral gray;
 - borders: low-contrast neutral gray;
-- primary signature color: Electric Blue;
+- signature color: Electric Blue;
 - cards: white with subtle border and minimal elevation.
 
-Electric Blue is reserved for:
-
-- primary CTA;
-- active step;
-- keyboard/focus ring;
-- selected/interactive evidence relationship;
-- source-to-evidence trace;
-- selected tabs and controls.
-
-Electric Blue must not mean PASS.
+Electric Blue is reserved for primary CTA, active step, focus ring, selected evidence relationship, source/evidence trace, active tab, and selected controls. It must not mean PASS.
 
 ### 5.2 Status colors
-
-Status color remains separate from brand color:
 
 - `BLOCKER`: red;
 - `REVIEW`: amber;
 - `PASS`: green;
 - `EXTERNAL`: cool gray / blue-gray.
 
-Cards remain neutral. Use a compact status chip plus an approximately 3px leading status indicator. BLOCKER may receive a very faint red surface tint, but no state receives a fully saturated card background.
+Cards remain neutral. Use a compact status chip plus an approximately 3px leading indicator. BLOCKER may receive a very faint red tint, but no state gets a fully saturated card background.
 
 ### 5.3 Typography
 
-- Primary: Pretendard, with existing system fallbacks retained.
+- Primary: Pretendard with existing system fallbacks.
 - Product/body text: proportional sans serif.
-- Monospace only for IDs, hashes, page/character locators, durations when shown as machine evidence, and technical provenance.
-- Avoid decorative uppercase tracking except for very small metadata labels.
+- Monospace only for IDs, hashes, page/character locators, durations shown as machine evidence, and technical provenance.
+- Avoid decorative uppercase tracking except very small metadata labels.
 
 ### 5.4 Shape and elevation
 
-- Product frames and major cards: approximately 12–16px radius.
-- Controls: moderate radius, not pill-heavy by default.
-- Border: 1px neutral.
-- Shadow: soft and restrained; product screenshots should appear crisp rather than floating heavily.
-- Remove intentional tilt/rotation from product preview surfaces.
+- major cards/product frames: approximately 12–16px radius;
+- controls: moderate radius, not pill-heavy;
+- border: 1px neutral;
+- shadow: soft and restrained;
+- remove intentional rotation/tilt from product surfaces.
 
 ## 6. Brand mark and header
 
 ### 6.1 Logo
 
-Use a `Scan Corners + Check` mark with the `FINAL CHECK` wordmark.
+Use a `Scan Corners + Check` symbol with the `FINAL CHECK` wordmark.
 
-The symbol should use a small number of open scan-corner strokes around a central check; it must not become a closed checkbox icon. The mark is Electric Blue on light surfaces. The header uses symbol + wordmark; favicon/small contexts may use the symbol only.
+The mark uses a small number of open scan-corner strokes around a central check; it must not become a closed checkbox icon. The symbol is Electric Blue on light surfaces. Header uses symbol + wordmark; favicon/small contexts may use symbol only.
 
 No complex illustration or gradient logo is required.
 
-### 6.2 Landing product header
+### 6.2 Product Header
 
-Landing header structure:
+Landing header:
 
 - left: brand mark + `FINAL CHECK`;
 - center: compact navigation such as `How it works`, `Evidence-first`, `검증 방식`;
 - right: primary CTA `제출 전 검사 시작하기`.
 
-The center navigation is for the landing page only. Once the user enters the app flow, navigation noise is reduced and the app header + stepper become dominant.
+Inside the app flow, remove the center landing navigation and prioritize brand + Segmented Stepper. Avoid duplicate navigation chrome.
 
 ## 7. Information architecture and routes
 
@@ -179,52 +168,81 @@ Target app stepper:
 4. `결과`
 5. `재검사`
 
-To make the approved five-step model truthful, add a dedicated frontend requirement-review route:
+Add a dedicated frontend requirement-review route so the approved five-step model is truthful:
 
-- `/` — landing/start, outside the numbered stepper;
+- `/` — landing/start, outside numbered stepper;
 - `/announcement` — Step 01, announcement ingestion/extraction workspace;
 - `/requirements` — Step 02, Human Review and profile confirmation;
 - `/upload` — Step 03, submission package workspace;
 - `/results` — Step 04, results and evidence;
-- `/recheck` — Step 05, revised package comparison/recheck.
+- `/recheck` — Step 05, revised-package comparison/recheck.
 
-This is a frontend workflow split only. It reuses existing profile/session endpoints and does not add a new backend authority boundary.
+This is a frontend workflow split only. It reuses existing profile/session endpoints and introduces no new backend authority boundary.
 
-The current combined `GenericProfileReview` behavior should be separated presentation-wise:
+The current combined `GenericProfileReview` behavior is separated presentation-wise:
 
 - extraction/job state and source-to-candidate mapping belong on `/announcement`;
 - edit/approve/delete/full-source acknowledgement/profile confirmation/plan compile belong on `/requirements`.
 
-If the session is not ready for a later step, existing Guard behavior remains fail-closed and provides an actionable recovery route.
+### 7.1 Session-mode behavior
 
-## 8. App shell and segmented stepper
+The route split must not fabricate AI stages for demo/frozen sessions.
+
+**Custom/generic session:**
+
+- `/announcement` shows real ingestion/extraction state and extracted candidates;
+- once candidates are available, CTA advances to `/requirements`;
+- `/requirements` owns Human Review, confirmation, and plan compile;
+- `/upload` becomes available after the current authoritative prerequisites are satisfied.
+
+**Demo/frozen session:**
+
+- `/announcement` shows the frozen announcement requirements/source evidence as a read-only product example and must not label them as a live AI extraction if no live extraction occurred;
+- `/requirements` shows a read-only or already-confirmed requirement review summary sufficient to explain the Human Review concept without creating fake edits/AI jobs;
+- the demo continues to `/upload` using the existing frozen validator behavior.
+
+The same visual system may serve both modes, but labels must describe what actually occurred.
+
+### 7.2 Step readiness and guards
+
+The stepper is navigation plus state communication, not a way to bypass workflow guards.
+
+- Step 01 requires an active session/announcement context.
+- Step 02 is enabled when the session has real candidate/frozen requirement data appropriate to its mode.
+- Step 03 is enabled only when the existing product contract considers the requirement/profile/plan state ready for package validation; demo uses its existing frozen readiness path.
+- Step 04 requires completed results.
+- Step 05 requires prior results/recheck context.
+
+If a user reaches a later route without prerequisites, preserve fail-closed Guard behavior and provide a specific link to the missing prior step rather than always returning to Home.
+
+## 8. App shell and Segmented Stepper
 
 Use a Wide App Canvas rather than full-bleed dashboard chrome.
 
 Recommended max widths:
 
-- landing content: 1240–1280px;
+- landing: 1240–1280px;
 - normal app screens: 1200–1240px;
-- Results / Evidence: up to 1320px;
+- Results/Evidence: up to 1320px;
 - desktop horizontal padding: 24–32px;
-- narrow screens: single-column layout.
+- narrow screens: single column.
 
-Segmented Stepper behavior:
+Stepper behavior:
 
-- one thin horizontal row;
-- each step includes `01`, `02`, etc. plus Korean step name;
-- current step: Electric Blue text and approximately 2px underline;
-- completed step: small check indicator and neutral/dark text;
-- future disabled step: neutral gray;
-- no large circles or checkout-style progress line;
-- keyboard focus remains visible;
+- thin horizontal row;
+- `01`, `02`, etc. + Korean step name;
+- current step: Electric Blue text + approximately 2px underline;
+- completed: small check + neutral/dark text;
+- future disabled: neutral gray;
+- no large circles or checkout-style connector line;
+- visible keyboard focus;
 - current step uses `aria-current="step"`.
 
 ## 9. Landing page
 
-### 9.1 Hero
+### 9.1 Split Hero
 
-Use a Split Hero, approximately 48% copy / 52% product proof.
+Approximately 48% copy / 52% product proof.
 
 Primary copy:
 
@@ -232,100 +250,78 @@ Primary copy:
 >
 > FINAL CHECK가 공고의 요구사항을 구조화하고, 실제 제출파일에서 놓친 조건과 근거를 찾아줍니다.
 
-Primary CTA:
-
-> 제출 전 검사 시작하기
-
-Secondary action:
-
-> 어떻게 작동하나요?
+Primary CTA: `제출 전 검사 시작하기`  
+Secondary: `어떻게 작동하나요?`
 
 Trust statement:
 
 > AI는 근거를 찾고, 확실한 조건은 코드가 검증합니다.
 
-The hero must not claim that every announcement requirement can be automatically checked.
+The hero must not claim every announcement requirement can be automatically checked.
 
-### 9.2 Hero proof window
+The primary CTA should move the user into the real start path or start chooser already supported by the product; it must not begin a fake validation animation.
 
-The right side uses a compact Mini Product Window, not an angled decorative mockup.
+### 9.2 Mini Product Window
 
-The preview should demonstrate the real result grammar:
+The right side is a compact product proof, not an angled decorative mockup.
 
-- compact counts such as `1 BLOCKER / 1 REVIEW / 3 PASS`;
+Demonstrate the real result grammar:
+
+- internally consistent counts such as `1 BLOCKER / 1 REVIEW / 3 PASS`;
 - deterministic example: `영상 60초 이내 -> 61.0s -> BLOCKER`;
 - semantic example: `기대효과 포함 -> proposal.pdf p.2 -> REVIEW`.
 
-Visible counts and visible sample rows must never contradict each other. If sample data is static, label it clearly as an example and keep the counts internally consistent.
+Static example data must be clearly example/demo content and must never contradict the visible rows.
 
-### 9.3 Three-step product story
+### 9.3 Three-step Product Story
 
-Below the hero, use an alternating product-story sequence:
+Alternating layout:
 
-- 01 text left / product frame right: 공고 읽기;
-- 02 product frame left / text right: 기준 확정;
-- 03 text left / product frame right: 제출물 검증.
+- 01 text left / product frame right — 공고 읽기;
+- 02 product frame left / text right — 기준 확정;
+- 03 text left / product frame right — 제출물 검증.
 
-Step 03 may have slightly more visual weight because evidence-backed preflight is the product differentiator.
+Step 03 may receive slightly greater visual weight because evidence-backed preflight is the differentiator.
 
-Actual product screenshots use a Clean Product Frame:
+Use Clean Product Frames:
 
 - no browser address-bar chrome;
 - 1px neutral border;
 - 12–16px radius;
 - restrained shadow;
-- UI large enough to read at judging screenshot scale.
+- actual FINAL CHECK UI/state whenever available;
+- readable at competition screenshot scale.
 
 ## 10. Step 01 — Split Extraction Workspace
 
-Desktop layout:
+Desktop:
 
-- left approximately 45%: `Announcement Source`;
-- right approximately 55%: `Extracted Requirements`.
+- left ~45%: `Announcement Source`;
+- right ~55%: `Extracted Requirements`.
 
-The screen should show AI extraction as transformation, not as a verdict.
+Show extraction as transformation, not verdict.
 
-Each candidate requirement may show:
-
-- requirement ID;
-- modality, such as `MUST` / `MUST_NOT`;
-- verifier family;
-- concise rule;
-- source section / locator;
-- provisional state `AI EXTRACTED` or equivalent.
-
-Do not show submission `PASS` or `BLOCKER` in this stage.
+Candidate rows/cards may show requirement ID, modality, verifier family, concise rule, source locator, and provisional state `AI EXTRACTED` or equivalent. Do not show submission PASS/BLOCKER here.
 
 Interaction:
 
-- selecting or focusing a requirement highlights its exact source evidence in the announcement pane;
-- selecting a source evidence region highlights the corresponding requirement when a reliable mapping already exists in current data;
-- source linkage uses a subtle Electric Blue highlight, not a permanent workflow diagram;
-- if exact mapping is unavailable, do not fabricate one; show the stored source section / exact quote instead.
+- selecting/focusing a requirement highlights its exact source evidence;
+- source evidence can highlight its mapped requirement only when the current stored mapping supports it;
+- use subtle Electric Blue highlight/trace;
+- if exact mapping is unavailable, do not fabricate it; show stored section + exact quote instead.
 
-During extraction, use Truthful Step Activity based only on real pipeline/session states. Do not invent percentage completion.
+During extraction, use Truthful Step Activity based only on real pipeline/session states.
 
 ## 11. Step 02 — Compact Review List + Inspector
 
-Desktop layout:
+Desktop:
 
-- left approximately 65%: compact requirement list;
-- right approximately 35%: selected-item Inspector.
+- left ~65%: compact requirement list;
+- right ~35%: selected-item Inspector.
 
-### 11.1 List
+List prioritizes rule summary, modality, verifier, confirmation state.
 
-Each row should prioritize:
-
-- rule summary;
-- modality;
-- verifier;
-- confirmation state.
-
-The list is for scanning, not for exposing every provenance field.
-
-### 11.2 Inspector
-
-Selected requirement detail order:
+Inspector order:
 
 1. AI/provisional state;
 2. exact announcement evidence;
@@ -338,98 +334,71 @@ Primary visual story:
 
 `AI EXTRACTED -> SOURCE EVIDENCE -> HUMAN CONFIRMED`
 
-`항목 승인` means the announcement requirement has been confirmed as authoritative. It must never read as if the submission already satisfies that requirement.
+`항목 승인` means the announcement requirement is confirmed as authoritative; it never means the submitted package already satisfies it.
 
-Full-source acknowledgement and Profile confirmation remain explicit. Plan compilation remains after profile confirmation. Low-level provenance/history stays available through secondary disclosure.
+Full-source acknowledgement and Profile confirmation remain explicit. Plan compilation remains after Profile confirmation. Low-level provenance/history moves to secondary disclosure.
 
 ## 12. Step 03 — Preflight Package Workspace
 
-Desktop layout:
+Desktop:
 
 - left 60–65%: `Submission Package`;
 - right 35–40%: `What will be checked`.
 
 ### 12.1 Submission Package
 
-Show:
+Show file selection/drop area, current package files, file type, size, and metadata such as page count/duration only when actually known.
 
-- drop/select files;
-- current package files;
-- file type;
-- size;
-- available metadata such as page count or duration only when actually known from the current pipeline;
-- package limits and supported types where useful.
-
-Before validation, file rows must not display final `PASS` or `BLOCKER`. They may use neutral preparation language such as `검사 가능`, `확인 필요`, or actual readiness states already supported by the backend.
+Before validation, file rows must not show final PASS/BLOCKER. Neutral readiness language is allowed only when derived from real backend/session readiness.
 
 ### 12.2 What will be checked
 
-Summarize the confirmed profile/plan in user language, for example:
+Summarize confirmed profile/plan in user language, e.g. file presence, PDF page count, video duration, PDF content evidence.
 
-- 파일 존재 여부;
-- PDF 페이지 수;
-- 영상 길이;
-- PDF 내용 근거.
-
-Where counts are reliable, show a concise summary such as:
+Where reliable, show derived counts such as:
 
 > 4개 자동 검사 · 1개 AI 근거 검토
 
-The summary must be derived from the actual confirmed plan/readiness rather than decorative hard-coded numbers in production.
+Never hard-code production counts that can diverge from the current plan.
 
 Primary CTA:
 
 > Preflight 검사 실행
 
-TASK10 acknowledgement copy remains explicit whenever an actual semantic AI call can occur.
+TASK10 acknowledgement copy remains explicit whenever a semantic AI call can actually occur.
 
 ## 13. Truthful processing states
 
-Replace generic spinner-only long-running states with Truthful Step Activity when the backend exposes a real stage.
+Replace spinner-only long waits with Truthful Step Activity when the backend exposes a real stage.
 
-Example announcement flow may render states corresponding to actual observed pipeline/job values such as:
-
-- source prepared;
-- AI extraction running/completed;
-- evidence gate/review batch processing when current backend state can distinguish it;
-- review candidates ready.
-
-Example semantic flow may render only states the current backend can truthfully expose, such as:
-
-- package ready;
-- run started;
-- semantic review running;
-- results committed.
+Allowed examples include only states supported by current data, such as source prepared, extraction running/completed, durable job batch progress where exposed, package ready, validation run started, semantic review running, or results committed.
 
 Rules:
 
-- no fake `%` progress;
-- no guessed remaining time;
-- no client-only stage names that imply backend work not actually occurring;
-- on restart recovery, represent restored/failed durable state truthfully;
-- a failed run remains actionable and does not visually masquerade as completion.
+- no fake `%`;
+- no guessed ETA;
+- no client-only stage names that imply nonexistent backend work;
+- restart/restored/failed state is represented truthfully;
+- failed runs remain actionable and never masquerade as completion.
 
 ## 14. Step 04 — Results and Evidence
-
-Results is the visual center of the redesign.
 
 ### 14.1 Hybrid Summary
 
 Top summary:
 
-- left: overall state and one-line explanation;
-- optional last-checked time if reliable;
-- right: compact counts for BLOCKER / REVIEW / PASS / EXTERNAL.
+- left: overall state + one-line explanation + reliable checked time when available;
+- right: compact BLOCKER / REVIEW / PASS / EXTERNAL counts.
 
-READY copy must stay scoped, for example:
+READY copy remains scoped:
 
 > 자동 확인 가능한 필수 조건을 충족했습니다.
 
-Do not imply all competition requirements have been proven satisfied.
+Do not imply all competition requirements are proven satisfied.
 
 ### 14.2 Status Tabs
 
-Place directly below the summary:
+Directly below summary:
 
 - `전체`;
 - `BLOCKER`;
@@ -437,24 +406,15 @@ Place directly below the summary:
 - `PASS`;
 - `EXTERNAL`.
 
-Include counts. Default is `전체`.
-
-Default result ordering:
-
-1. BLOCKER
-2. REVIEW
-3. PASS
-4. EXTERNAL
-
-The active tab uses Electric Blue underline/active treatment. Status labels retain their own status colors.
+Include counts; default `전체`. Default ordering: BLOCKER -> REVIEW -> PASS -> EXTERNAL. Active tab uses Electric Blue; status chips retain status colors.
 
 ### 14.3 Three-column Evidence Chain
 
 Desktop reading order:
 
-- RULE: approximately 25%;
-- EVIDENCE: approximately 50%;
-- VERDICT: approximately 25%.
+- RULE ~25%;
+- EVIDENCE ~50%;
+- VERDICT ~25%.
 
 Deterministic example:
 
@@ -464,111 +424,94 @@ Semantic example:
 
 `기대효과 포함 -> proposal.pdf · p.2 -> REVIEW`
 
-Cards remain neutral. On hover/focus of an evidence relationship, a subtle Electric Blue trace may connect/emphasize the three zones. The trace is an interaction affordance, not always-visible decoration.
+Cards stay neutral. Hover/focus may reveal a subtle Electric Blue trace linking the three zones. The trace is an affordance, not persistent decoration.
 
-### 14.4 Status card treatment
+### 14.4 Neutral Card + Status Chip
 
-Use Neutral Card + Status Chip:
-
-- compact chip;
-- leading status indicator;
-- neutral surface;
-- faint BLOCKER tint only when useful;
-- status icon/text must remain understandable without color alone.
+Use compact chip + leading status indicator + neutral surface. BLOCKER may receive a faint red tint. Status must remain understandable without color alone.
 
 ## 15. Evidence Inspector — Right Side Drawer
 
-Selecting an evidence result opens a right-side Evidence Inspector while preserving the result list context.
+Selecting a result opens a right-side Evidence Inspector while preserving list context.
 
 Desktop: right drawer.  
 Narrow/mobile: full-width sheet/panel.
 
-Use Evidence-first Hybrid order:
+Evidence-first Hybrid order:
 
 1. compact status + assessment label;
 2. `공고 요구사항`;
 3. `제출파일 근거`;
-4. prominent locator, e.g. `proposal.pdf · p.2 · chars 5:43`;
+4. locator such as `proposal.pdf · p.2 · chars 5:43`;
 5. exact evidence quote;
-6. explanation such as `왜 REVIEW인가`;
-7. collapsed `기술 세부 보기` for hashes/provider/prompt/provenance where available.
+6. `왜 REVIEW인가` or corresponding explanation;
+7. collapsed `기술 세부 보기` for hashes/provider/prompt/provenance when available.
 
-TASK10 example wording:
+TASK10 wording may use:
 
 > REVIEW · Related evidence found
 >
 > 관련 근거 후보는 확인됐지만 최종 충족 여부는 직접 확인이 필요합니다.
 
-For semantic findings, the drawer must never offer an action that converts AI evidence directly into automatic PASS/BLOCKER authority.
+For semantic findings, the Drawer must never provide an action that converts AI evidence directly into automatic PASS/BLOCKER authority.
 
 Drawer behavior:
 
-- close button is keyboard accessible;
+- accessible close button;
 - Escape closes;
-- focus is managed correctly;
-- background context remains visually recognizable;
-- opening/closing uses subtle product motion only.
+- correct focus management;
+- background context remains recognizable;
+- subtle slide/fade only.
 
 ## 16. Step 05 — Recheck
 
-Recheck retains the same visual language as Upload + Results rather than becoming a separate design system.
+Recheck reuses Upload + Results language rather than becoming a separate design system.
 
-The screen should emphasize:
-
-- revised submission package;
-- prior vs current result changes;
-- evidence/status changes even when both runs remain REVIEW;
-- deterministic changes, e.g. 61s BLOCKER -> 45s PASS, without implying unrelated requirements changed.
+Emphasize revised package, prior/current result changes, evidence changes even when REVIEW remains REVIEW, and deterministic changes such as 61s BLOCKER -> 45s PASS.
 
 Existing recheck fingerprint/change logic remains authoritative.
 
-## 17. Actionable recovery states
+## 17. Actionable Recovery States
 
-Use specific recovery copy instead of generic `오류가 발생했습니다` when the cause is known.
-
-Examples:
+Use specific recovery copy when the cause is known.
 
 ### PDF text unavailable
 
 > **PDF 내용을 읽을 수 없습니다**  
 > 이 파일에서는 텍스트를 추출하지 못해 내용 검토를 실행하지 않았습니다.
 >
-> Actions: `다른 PDF 업로드` / `수동으로 검토`
+> `다른 PDF 업로드` / `수동으로 검토`
 
-### Semantic AI run failure
+### Semantic AI failure
 
 > **AI 검토를 완료하지 못했습니다**  
 > 자동 PASS/BLOCKER로 처리하지 않았습니다. 이 항목은 REVIEW 상태로 남습니다.
 >
-> Actions: `다시 시도` / `근거 직접 확인`
+> `다시 시도` / `근거 직접 확인`
 
 ### Missing prerequisite
 
-Explain which prior step is incomplete and link to that step rather than sending all users generically to Home.
+Explain which prior step is incomplete and link to that exact step.
 
-Technical diagnostics may be placed behind a details disclosure where useful.
+Technical diagnostics may live behind a details disclosure.
 
 ## 18. Responsive behavior
 
-Primary breakpoints should follow content needs rather than device labels.
-
 ### Wide desktop
 
-- full Wide App Canvas;
+- Wide App Canvas;
 - three-column Evidence Chain;
-- split extraction workspace;
+- split extraction;
 - review list + inspector;
-- right-side Evidence Drawer.
+- right Evidence Drawer.
 
 ### Medium/narrow desktop or tablet
 
-- reduce gaps/padding before collapsing structure;
-- two-pane layouts may become stacked when each pane no longer remains readable;
-- stepper remains compact and horizontally understandable without forcing tiny text.
+Reduce gaps/padding before collapsing. Two-pane layouts stack when each pane no longer remains readable. Stepper stays understandable without tiny labels.
 
-### Mobile / narrow
+### Mobile/narrow
 
-Evidence results become a Vertical Evidence Stack:
+Evidence becomes Vertical Evidence Stack:
 
 `RULE`
 
@@ -576,59 +519,50 @@ Evidence results become a Vertical Evidence Stack:
 
 `VERDICT`
 
-A short Electric Blue trace may preserve the relationship. Evidence must not disappear merely to save space.
+A short Electric Blue trace may preserve relationship. Evidence must not disappear merely to save space.
 
 Other transformations:
 
-- Split Extraction -> source then extracted requirements in one column;
+- Split Extraction -> source then extracted requirements;
 - Human Review -> list then full-width inspector/sheet;
 - Preflight Package -> package then check scope;
 - Evidence Drawer -> full-width sheet;
-- landing split hero -> copy then proof window;
-- alternating product story -> linear vertical story.
+- split Hero -> copy then proof;
+- alternating Product Story -> linear vertical story.
 
-Avoid horizontal scrolling for the core Evidence Chain.
+Avoid horizontal scrolling for core Evidence workflows.
 
 ## 19. Motion
 
-Use Subtle Product Motion only:
+Use Subtle Product Motion:
 
-- button/card hover: approximately 120–160ms;
+- button/card hover: ~120–160ms;
 - step state: short fade;
 - evidence trace: subtle hover/focus reveal;
-- Evidence Drawer: approximately 180–220ms slide + fade;
-- status update: color/fade, no bounce;
-- hero Mini Product Window: one restrained initial fade-up is allowed.
+- Evidence Drawer: ~180–220ms slide + fade;
+- status update: color/fade only;
+- hero Mini Product Window: one restrained initial fade-up allowed.
 
-Do not use:
+Do not use parallax, continuous floating, bouncing status icons, aggressive scale, long stagger sequences, or animation that delays evidence reading.
 
-- parallax;
-- continuous floating;
-- bouncing success icons;
-- aggressive scaling;
-- long stagger sequences;
-- animation that delays evidence reading.
-
-Honor `prefers-reduced-motion` by removing nonessential transitions and movement.
+Honor `prefers-reduced-motion` by removing nonessential movement.
 
 ## 20. Accessibility
 
-The redesign must preserve or improve accessibility:
-
-- visible keyboard focus with Electric Blue focus ring;
-- status meaning is not color-only;
-- semantic HTML and existing ARIA labels are retained or improved;
-- stepper exposes `aria-current` and disabled state correctly;
-- tabs use appropriate tab/list semantics or equally clear accessible button semantics;
-- drawer traps/manages focus appropriately and closes via Escape;
-- buttons have disabled state and busy text where needed;
-- body text and status chips meet practical contrast requirements;
-- exact evidence quotes remain selectable/readable text;
-- reduced motion is respected.
+- visible Electric Blue keyboard focus;
+- status meaning not color-only;
+- semantic HTML / existing ARIA retained or improved;
+- stepper uses `aria-current` and disabled semantics;
+- status filters use accessible tab/button semantics;
+- drawer manages focus and Escape;
+- busy/disabled controls remain explicit;
+- practical text/chip contrast;
+- evidence quotes remain selectable text;
+- reduced motion honored.
 
 ## 21. Component architecture guidance
 
-Implementation should favor focused presentational components while keeping session/domain behavior stable.
+Favor focused presentational components while keeping domain/session behavior stable.
 
 Suggested responsibilities, names not mandatory:
 
@@ -646,69 +580,68 @@ Suggested responsibilities, names not mandatory:
 
 Rules:
 
-- domain/API calls remain in the existing screen/profile/session layer unless extraction is necessary to keep files understandable;
+- API/domain actions remain in existing screen/profile/session layers unless extraction is required to keep files understandable;
 - presentational components receive typed data and callbacks;
 - do not duplicate status computation in CSS/UI components;
-- do not infer backend state client-side when an authoritative field already exists;
-- do not create a parallel frontend result model that can drift from `ValidationResult` / current profile types.
+- do not infer backend state client-side when an authoritative field exists;
+- do not create a parallel frontend result model that can drift from current profile/result types.
 
 ## 22. Testing and regression requirements
 
-The redesign is complete only if product semantics and presentation both pass.
-
-Required verification categories:
+The redesign is complete only if semantics and presentation both pass.
 
 ### Existing behavior
 
 - frontend typecheck;
 - production build;
-- existing browser/Playwright suite;
-- public first-visit flow where still applicable;
-- existing TASK10 semantic acknowledgement and polling behavior;
+- existing Playwright/browser suite;
+- public first-visit flow where applicable;
+- TASK10 semantic acknowledgement + polling behavior;
 - recheck behavior;
-- guard/recovery behavior.
+- Guard/recovery behavior.
 
 ### New/updated UI behavior
 
 - landing CTA enters the real flow;
 - landing sample counts are internally consistent;
-- `/announcement` extraction states never show submission PASS/BLOCKER;
-- `/requirements` preserves edit / needs-review / approve / delete / profile-confirm / plan-compile actions;
-- stepper enable/disable rules match actual session readiness;
-- result status tabs filter correctly;
-- Evidence Drawer opens/closes and renders exact evidence locator/quote;
-- semantic evidence remains REVIEW in UI;
+- `/announcement` never presents extraction candidates as submission PASS/BLOCKER;
+- `/requirements` preserves edit / needs-review / approve / delete / profile-confirm / plan-compile behavior for custom sessions;
+- demo/frozen labels never imply a live AI extraction that did not occur;
+- step readiness matches actual session prerequisites;
+- status tabs filter correctly;
+- Evidence Drawer renders exact locator/quote and opens/closes accessibly;
+- semantic evidence remains REVIEW;
 - mobile Evidence Chain renders Rule -> Evidence -> Verdict vertically;
-- responsive layouts do not introduce horizontal scrolling for core workflows;
-- `prefers-reduced-motion` disables nonessential motion;
-- keyboard focus can reach and operate tabs, review actions, result cards, and drawer close.
+- core workflows avoid horizontal overflow;
+- `prefers-reduced-motion` removes nonessential motion;
+- keyboard focus reaches tabs, review actions, result rows, and Drawer close.
 
 ### Visual regression targets
 
-Capture representative screenshots for at least:
+Capture at least:
 
 - desktop landing;
 - desktop extraction workspace;
-- desktop human review inspector;
+- desktop Human Review inspector;
 - desktop BLOCKER result;
 - desktop TASK10 Evidence Drawer;
-- one narrow/mobile result state.
+- one mobile/narrow result state.
 
-The screenshot set is for regression and competition-submission selection, not a substitute for interaction tests.
+Screenshots support regression and competition selection but do not replace interaction tests.
 
 ## 23. Competition screenshot targets
 
-The redesigned product should naturally produce these five submission images:
+The redesigned product should naturally produce:
 
-1. **Landing** — value proposition + real product proof.
+1. **Landing** — value proposition + product proof.
 2. **Announcement -> AI extraction** — split source/candidate workspace.
 3. **Human Review** — selected requirement, source evidence, editable rule, human confirmation.
 4. **Deterministic validation** — actual 61s MP4 -> BLOCKER/BLOCKED evidence.
-5. **TASK10 semantic review** — REVIEW / RELATED_EVIDENCE_FOUND + `proposal.pdf` page/offset evidence in the Drawer.
+5. **TASK10 semantic review** — REVIEW / RELATED_EVIDENCE_FOUND + `proposal.pdf` page/offset evidence in Drawer.
 
-Suggested captions remain concise and factual. No screenshot should use a mock state that contradicts actual product semantics.
+No screenshot may use a mock state that contradicts actual product semantics.
 
-Representative-image message:
+Representative message:
 
 > 공고에서 요구사항 추출 -> 제출파일 사전검수
 >
@@ -716,47 +649,58 @@ Representative-image message:
 
 ## 24. Rollout strategy
 
-Implementation should occur on a dedicated UI redesign branch/worktree based on the approved baseline, not directly on `main` and not by editing the currently serving public runtime in place.
+Implementation occurs on a dedicated UI redesign branch/worktree, not directly on `main` and not by editing the currently serving public runtime in place.
 
-Recommended rollout:
+Recommended sequence:
 
-1. implement visual tokens/app shell and landing;
-2. split extraction vs requirement-review presentation while preserving existing backend calls;
-3. implement upload/package workspace;
-4. implement results Evidence Chain, tabs, and Drawer;
-5. implement responsive/recovery/motion polish;
-6. run full frontend regression and locked-contract checks relevant to the touched surface;
-7. perform a fresh public ACTUAL run on a review deployment/runtime before switching the judging URL/runtime;
-8. keep the prior known-good public runtime path available until the redesigned build is verified.
+1. visual tokens, app shell, brand, landing;
+2. split extraction vs requirement-review presentation while preserving existing calls;
+3. package workspace;
+4. Results Evidence Chain, tabs, Drawer;
+5. responsive/recovery/motion polish;
+6. full frontend regression plus relevant locked-contract checks;
+7. fresh public ACTUAL run on review runtime/build before switching judging runtime;
+8. retain prior known-good public runtime path until redesigned build is verified.
 
 Do not delete the existing public-runtime branch/worktree merely because the redesign branch is complete.
 
 ## 25. Acceptance criteria
 
-The UI redesign is acceptable when all are true:
+The redesign is acceptable only when all are true:
 
-- landing communicates FINAL CHECK as an AI Submission Preflight, not a generic AI chat or upload tool;
-- legacy paper/pine/lime/tilted-preview identity is removed from the redesigned surfaces;
-- Electric Blue is used as interaction/brand color, not PASS color;
-- Product Header, Scan Corners + Check mark, Segmented Stepper, and Wide App Canvas are implemented consistently;
-- landing uses Split Hero + Mini Product Window + alternating three-step Product Story + Clean Product Frames;
-- app IA exposes separate `공고` and `요구사항 검토` steps;
-- announcement uses Split Extraction Workspace;
-- human review uses Compact Review List + Inspector;
-- upload uses Preflight Package Workspace;
-- long-running AI states use truthful activity, not fake percentages;
-- results use Hybrid Summary + Status Tabs + three-column Evidence Chain;
+- landing communicates AI Submission Preflight rather than generic AI/upload tooling;
+- legacy paper/pine/lime/tilted-preview identity is removed from redesigned surfaces;
+- Electric Blue is interaction/brand color, never PASS color;
+- Product Header, Scan Corners + Check, Segmented Stepper, and Wide App Canvas are consistent;
+- landing uses Split Hero + Mini Product Window + alternating Product Story + Clean Product Frames;
+- app IA exposes separate `공고` and `요구사항 검토` steps without fabricating live AI stages for demo sessions;
+- Step 01 uses Split Extraction Workspace;
+- Step 02 uses Compact Review List + Inspector;
+- Step 03 uses Preflight Package Workspace;
+- long-running states use truthful activity, not fake percentages;
+- Results use Hybrid Summary + Status Tabs + three-column Evidence Chain;
 - result cards use Neutral Card + Status Chip;
-- Evidence detail uses a right-side Evidence-first Drawer;
+- evidence detail uses an Evidence-first Right Side Drawer;
 - mobile uses Vertical Evidence Stack and keeps evidence visible;
 - failures use Actionable Recovery States;
 - motion is subtle and reduced-motion compliant;
-- no backend authority or verification contract changes;
-- all required regression/typecheck/build/browser tests pass before merge;
-- the five competition screenshot states can be captured from a verified product build.
+- backend authority/verification contracts remain unchanged;
+- required regression/typecheck/build/browser checks pass before merge;
+- the five competition screenshot states can be captured from a verified build.
 
-## 26. Product decision
+## 26. Self-review record
+
+Completed against the brainstorming architectural checklist:
+
+- **Placeholder scan:** no `TBD`/`TODO` or unresolved design placeholder remains.
+- **Internal consistency:** landing is outside the numbered app flow; separate `/requirements` route makes the approved five-step Stepper consistent with the approved Split Extraction + Human Review screens.
+- **Mode consistency:** demo/frozen behavior is explicitly separated from live custom/generic AI extraction so the UI cannot falsely imply an AI action occurred.
+- **Authority consistency:** deterministic PASS/BLOCKER and semantic REVIEW boundaries are unchanged throughout all screens.
+- **Scope check:** this remains one frontend redesign effort; no backend feature expansion is required.
+- **Ambiguity check:** step readiness, demo handling, CTA behavior, responsive collapse, status color meaning, evidence disclosure, and rollout boundaries are explicit enough for one implementation plan.
+
+## 27. Product decision
 
 **GO.**
 
-This redesign is a presentation/UX refinement, not feature expansion. It should be the final major frontend polish pass before competition submission unless testing discovers a submission-blocking usability or correctness defect.
+This is a presentation/UX refinement, not feature expansion. It should be the final major frontend polish pass before competition submission unless verification discovers a submission-blocking usability or correctness defect.
