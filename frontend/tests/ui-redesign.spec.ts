@@ -119,8 +119,8 @@ test("keyboard focus indicators use the accessible Electric Blue token", async (
   const tokens = await page.evaluate(() => {
     const styles = getComputedStyle(document.documentElement);
     return {
-      blue: styles.getPropertyValue("--blue"),
-      background: styles.getPropertyValue("--bg"),
+      accent: styles.getPropertyValue("--accent"),
+      background: styles.getPropertyValue("--page"),
       surface: styles.getPropertyValue("--surface"),
     };
   });
@@ -138,7 +138,7 @@ test("keyboard focus indicators use the accessible Electric Blue token", async (
     });
     expect(outline.style).toBe("solid");
     expect(outline.width).toBe("3px");
-    expect(colorChannels(outline.color)).toEqual(colorChannels(tokens.blue));
+    expect(colorChannels(outline.color)).toEqual(colorChannels(tokens.accent));
     expect(contrastRatio(outline.color, tokens.surface)).toBeGreaterThanOrEqual(3);
     expect(contrastRatio(outline.color, tokens.background)).toBeGreaterThanOrEqual(3);
   }

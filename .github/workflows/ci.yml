@@ -40,6 +40,9 @@ jobs:
       - name: Install frontend dependencies
         working-directory: frontend
         run: npm ci
+      - name: Audit visual tokens
+        working-directory: frontend
+        run: npm run audit:visual-tokens
       - name: Typecheck
         working-directory: frontend
         run: npm run typecheck

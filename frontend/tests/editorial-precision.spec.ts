@@ -372,3 +372,17 @@ test("landing does not overflow the viewport", async ({ page }) => {
   await page.goto("/");
   expect(await page.evaluate(() => document.documentElement.scrollWidth > window.innerWidth)).toBe(false);
 });
+
+test("major surfaces remain monochrome-first and overflow-safe", async ({ page }) => {
+  await page.goto("/");
+  const overflow = await page.evaluate(() => document.documentElement.scrollWidth > window.innerWidth);
+  expect(overflow).toBe(false);
+  await expect(page.locator("body")).toHaveCSS("background-color", "rgb(255, 255, 255)");
+});
+
+test("reduced motion keeps visual refinement nonessential", async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.goto("/");
+  const duration = await page.locator(".product-frame").first().evaluate(el => getComputedStyle(el).transitionDuration);
+  expect(["0s", "0.001s", "0.000001s"]).toContain(duration);
+});

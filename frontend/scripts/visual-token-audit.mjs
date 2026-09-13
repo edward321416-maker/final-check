@@ -346,5 +346,9 @@ if (invokedAsScript && process.argv.includes("--check")) {
     console.log(`${finding.file} :: ${finding.property}=${finding.value} :: ${finding.reason}`);
   }
 
+  if (findings.length === 0) {
+    console.log("Visual token audit: 0 findings");
+  }
+
   process.exitCode = findings.length > 0 ? 1 : 0;
 }

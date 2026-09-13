@@ -11,6 +11,28 @@ function reasons(css) {
   return auditCssText(css, "fixture.css").map(item => item.reason);
 }
 
+test("canonical visual tokens retain their locked values", () => {
+  const frontendRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+  const tokenSource = fs.readFileSync(path.join(frontendRoot, "app", "visual-tokens.css"), "utf8");
+  const definitions = new Map(
+    [...tokenSource.matchAll(/(--[\w-]+)\s*:\s*([^;]+);/g)]
+      .map(([, name, value]) => [name, value.trim()]),
+  );
+  const required = new Map([
+    ["--page", "#FFFFFF"],
+    ["--text-primary", "#0A0A0A"],
+    ["--accent", "#3157FF"],
+    ["--status-blocker", "#C62828"],
+    ["--status-review", "#A15C00"],
+    ["--status-pass", "#17824B"],
+    ["--shadow-overlay", "0 16px 48px rgba(10, 10, 10, 0.12)"],
+  ]);
+
+  for (const [name, value] of required) {
+    assert.equal(definitions.get(name), value, `${name} must retain its canonical value`);
+  }
+});
+
 test("rejects unapproved visual values", () => {
   const result = reasons(`
     .x {
@@ -173,7 +195,7 @@ test("collector and CLI include production CSS and exclude generated artifacts",
   fs.writeFileSync(path.join(appRoot, "keep.css"), ".ok { color: var(--text-primary); }\n");
   const cleanCli = spawnSync(process.execPath, [cliScript, "--check"], { encoding: "utf8" });
   assert.equal(cleanCli.status, 0);
-  assert.equal(cleanCli.stdout, "");
+  assert.equal(cleanCli.stdout, "Visual token audit: 0 findings\n");
 });
 
 test("rejects named gradient stops on color-bearing properties outside the property list", () => {
