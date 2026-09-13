@@ -71,9 +71,11 @@ export function ResultsWorkspace({ session }: { session: CheckSession }) {
 
   return <>
     <section className={`result-banner ${blockers ? "has-blocker" : ""}`} aria-label="전체 검사 상태">
-      <div className="result-title"><span className="alert-symbol">{blockers ? "!" : "↗"}</span><div><span className="eyebrow">{session.status} · CHECK {String(session.revision).padStart(2, "0")}</span><h2>{title}</h2><p>{blockers ? `BLOCKER ${blockers}개를 수정한 후 재검사하세요.` : "자동 확인 가능한 필수 조건의 결과와 남아 있는 REVIEW 항목을 함께 확인하세요."}</p></div></div>
-      <div className="result-summary-counts" aria-label="판정 요약">{STATUSES.map(status => <span key={status}><b>{counts[status]}</b>{status}</span>)}</div>
-      <Link className="button primary" href="/recheck">수정 후 재검사 →</Link>
+      <div className="result-title"><span className="eyebrow">{session.status} · CHECK {String(session.revision).padStart(2, "0")}</span><h2>{title}</h2><p>{blockers ? `BLOCKER ${blockers}개를 수정한 후 재검사하세요.` : "자동 확인 가능한 필수 조건의 결과와 남아 있는 REVIEW 항목을 함께 확인하세요."}</p></div>
+      <div className="result-summary-actions">
+        <div className="result-summary-counts" aria-label="판정 요약">{STATUSES.map(status => <span key={status} className={`summary-status summary-${status.toLowerCase()}`}><b>{String(counts[status]).padStart(2, "0")}</b><span>{status}</span></span>)}</div>
+        <Link className="button primary" href="/recheck">수정 후 재검사 →</Link>
+      </div>
     </section>
     {previous.length > 0 && <section className="comparison" aria-label="재검사 비교"><strong>이전 검사와 비교</strong><span>{statusChanges.length}개 판정 변경</span>{changes.map(({ old, result }) => old.status !== result.status ? <span className="change" key={result.id}>{result.requirement_id} <Badge status={old.status} /><span>→</span><Badge status={result.status} /></span> : <span className="change" key={result.id}>{result.requirement_id} 내용 근거 상태가 변경되었습니다.<br />이전: {semanticPresentationCopy(old).comparisonState}<br />현재: {semanticPresentationCopy(result).comparisonState}</span>)}{changes.length === 0 && <span>변경된 판정이 없습니다.</span>}</section>}
     <div className="results-heading"><div className="filter-tabs" role="group" aria-label="판정 필터"><button type="button" aria-pressed={filter === "ALL"} onClick={() => setFilter("ALL")}>전체 <b>{results.length}</b></button>{STATUSES.map(status => <button type="button" key={status} aria-pressed={filter === status} onClick={() => setFilter(status)}>{status} <b>{counts[status]}</b></button>)}</div><span className="muted">{session.validation_profile === "generic" ? "Generic Profile · 확인된 계획의 코드 검사" : "근거 기반 검사 결과 · v1.5"}</span></div>

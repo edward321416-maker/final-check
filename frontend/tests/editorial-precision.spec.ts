@@ -35,6 +35,46 @@ function confirmedGenericSession(overrides: Record<string, unknown> = {}) {
   };
 }
 
+function editorialResult(
+  status: "BLOCKER" | "REVIEW" | "PASS" | "EXTERNAL",
+  requirementId: string,
+  title: string,
+) {
+  return {
+    id: requirementId,
+    requirement_id: requirementId,
+    status,
+    title,
+    explanation: `${status} 판정 근거입니다.`,
+    action: "해당 항목을 확인하세요.",
+    announcement_evidence: { source: "공고문.pdf", locator: "11/16", excerpt: `${title} 공고 근거` },
+    submission_evidence: { source: "submission.pdf", locator: "11/16", excerpt: `${title} 제출파일 근거` },
+    source_mode: "generic_verifier",
+    verification_plan_id: `P-${requirementId}`,
+    checker_type: "PDF_PAGE_COUNT",
+    measured_fact: "11 pages",
+    expected_constraint: "<= 16 pages",
+    semantic_review: null,
+  };
+}
+
+function completedMixedStatusSession() {
+  return confirmedGenericSession({
+    source_mode: "generic_verifier",
+    verification_plan_state: "READY",
+    run_state: "COMPLETE",
+    validation_complete: true,
+    status: "BLOCKED",
+    revision: 1,
+    results: [
+      editorialResult("EXTERNAL", "G004", "외부 확인"),
+      editorialResult("PASS", "G003", "파일 형식"),
+      editorialResult("REVIEW", "G002", "내용 요구사항"),
+      editorialResult("BLOCKER", "G001", "페이지 수"),
+    ],
+  });
+}
+
 async function openConfirmedGenericSession(
   page: Page,
   path: string,
@@ -58,6 +98,49 @@ async function openConfirmedGenericSession(
   });
   await page.goto(path);
 }
+
+test("results use editorial summary counts instead of colored metric cards", async ({ page }) => {
+  await openConfirmedGenericSession(page, "/results", completedMixedStatusSession());
+  await expect(page.getByRole("heading", { name: "Preflight Result" })).toBeVisible();
+  await expect(page.getByText("제출 전 점검이 완료되었습니다. 판정별 근거와 필요한 조치를 확인하세요.", { exact: true })).toBeVisible();
+  const summary = page.getByRole("region", { name: "전체 검사 상태" });
+  await expect(summary).toContainText("01");
+  await expect(summary).toContainText("BLOCKER");
+  await expect(summary).toContainText("REVIEW");
+  await expect(summary).toHaveCSS("box-shadow", "none");
+  await expect(summary).toHaveCSS("background-color", "rgba(0, 0, 0, 0)");
+});
+
+test("result rows are divider-led evidence chains", async ({ page }, info) => {
+  await openConfirmedGenericSession(page, "/results", completedMixedStatusSession());
+  const card = page.getByTestId("result-card").first();
+  await expect(card.getByText("RULE", { exact: true })).toBeVisible();
+  await expect(card.getByText("EVIDENCE", { exact: true })).toBeVisible();
+  await expect(card.getByText("VERDICT", { exact: true })).toBeVisible();
+  await expect(card).toHaveCSS("box-shadow", "none");
+  await expect(card).toHaveCSS("background-color", "rgba(0, 0, 0, 0)");
+  expect(["0px", "4px"]).toContain(await card.evaluate(node => getComputedStyle(node).borderRadius));
+  const columns = await card.evaluate(node => getComputedStyle(node).gridTemplateColumns.trim().split(/\s+/).length);
+  expect(columns).toBe(info.project.name === "mobile" ? 1 : 3);
+});
+
+test("evidence drawer uses the canonical editorial overlay treatment", async ({ page }) => {
+  await openConfirmedGenericSession(page, "/results", completedMixedStatusSession());
+  await page.getByRole("button", { name: /G001 .*근거 자세히 보기/ }).click();
+  const drawer = page.getByRole("dialog", { name: "Evidence Inspector" });
+  await expect(drawer).toHaveCSS("background-color", "rgb(255, 255, 255)");
+  await expect(drawer).toHaveCSS("border-left-width", "1px");
+  const shadows = await drawer.evaluate(node => {
+    const probe = document.createElement("div");
+    probe.style.boxShadow = "var(--shadow-overlay)";
+    document.body.appendChild(probe);
+    const canonical = getComputedStyle(probe).boxShadow;
+    probe.remove();
+    return { actual: getComputedStyle(node).boxShadow, canonical };
+  });
+  expect(shadows.actual).toBe(shadows.canonical);
+  await expect(drawer.locator(".evidence small").first()).toHaveCSS("font-family", "monospace");
+});
 
 test("extraction and review read as editorial columns rather than cards", async ({ page }) => {
   await openConfirmedGenericSession(page, "/announcement");
