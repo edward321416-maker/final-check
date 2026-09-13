@@ -21,6 +21,27 @@ const qaStateNames = [
 
 const editorialSessionId = "editorial-precision-session";
 const editorialStamp = "2026-09-13T00:00:00.000Z";
+const backendPlannerErrors = new Set(["PLANNER_UNAVAILABLE", "PLANNER_SCHEMA_REJECTED", "PROCESS_RESTART"]);
+
+function expectBackendReachablePlannerTransition(session: CheckSession) {
+  if (session.verification_plan_state === "READY") {
+    expect(session.verification_plan, "READY planner state requires a compiled plan").not.toBeNull();
+    expect(session.verification_plan_error, "READY planner state clears its error").toBeNull();
+    expect(session.source_mode, "READY planner state selects generic_verifier").toBe("generic_verifier");
+    return;
+  }
+
+  expect(session.verification_plan, `${session.verification_plan_state} planner state has no compiled plan`).toBeNull();
+  if (session.verification_plan_state === "REVIEW_REQUIRED") {
+    expect(
+      backendPlannerErrors.has(session.verification_plan_error ?? ""),
+      "REVIEW_REQUIRED planner state requires a backend-emitted error",
+    ).toBe(true);
+    expect(session.source_mode, "planner failure selects generic_review").toBe("generic_review");
+  } else {
+    expect(session.verification_plan_error, `${session.verification_plan_state} planner state clears its error`).toBeNull();
+  }
+}
 
 function confirmedGenericSession(overrides: Partial<CheckSession> = {}): CheckSession {
   const quote = "영상은 60초 이내여야 합니다.";
@@ -422,6 +443,7 @@ test("captures the 12-state editorial visual QA matrix", async ({ page }, info) 
 function completedMixedStatusSession() {
   return confirmedGenericSession({
     source_mode: "generic_verifier",
+    verification_plan: verifiedPlanSet(),
     verification_plan_state: "READY",
     run_state: "COMPLETE",
     validation_complete: true,
@@ -446,6 +468,7 @@ async function openConfirmedGenericSession(
     reason_code: "NOT_ELIGIBLE",
   },
 ) {
+  expectBackendReachablePlannerTransition(session);
   await page.addInitScript(([key, id]) => sessionStorage.setItem(key, id), ["final-check-session-id-v2", editorialSessionId]);
   await page.route("**/api/sessions/**", route => {
     const url = new URL(route.request().url()).pathname;
@@ -535,7 +558,7 @@ test("extraction and review read as editorial columns rather than cards", async 
 test("confirmed generic review-required package stays accessible and reads as a file sheet", async ({ page }) => {
   const session = confirmedGenericSession({
     verification_plan_state: "REVIEW_REQUIRED",
-    verification_plan_error: "PLANNER_FALLBACK",
+    verification_plan_error: "PLANNER_UNAVAILABLE",
     files: [{ name: "submission.pdf", size_bytes: 2048, media_type: "application/pdf", sha256: "d".repeat(64) }],
   });
   await openConfirmedGenericSession(page, "/upload", session);
@@ -558,6 +581,7 @@ test("confirmed generic review-required package stays accessible and reads as a 
 test("semantic acknowledgement keeps readable editorial body copy", async ({ page }) => {
   const session = confirmedGenericSession({
     verification_plan_state: "REVIEW_REQUIRED",
+    verification_plan_error: "PLANNER_UNAVAILABLE",
     files: [{ name: "submission.pdf", size_bytes: 2048, media_type: "application/pdf", sha256: "e".repeat(64) }],
   });
   await openConfirmedGenericSession(page, "/upload", session, {

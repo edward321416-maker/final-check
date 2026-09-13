@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import ts from "typescript";
 
 const TYPE = new Set([11, 12, 14, 16, 20, 24, 32, 40, 48, 56]);
 const LINE = new Set([16, 20, 24, 28, 32, 40, 48, 56, 64]);
@@ -39,16 +40,38 @@ const COLOR_TOKENS = new Set([
   "--status-pass", "--status-pass-soft",
   "--status-external", "--status-external-soft",
 ]);
+const CANONICAL_TOKEN_VALUES = new Map([
+  ["--page", "#FFFFFF"], ["--surface", "#FFFFFF"], ["--surface-subtle", "#FAFAF9"],
+  ["--text-primary", "#0A0A0A"], ["--text-secondary", "#525252"], ["--text-muted", "#737373"],
+  ["--text-faint", "#A3A3A3"], ["--border-subtle", "#E5E5E5"], ["--border-strong", "#D4D4D4"],
+  ["--accent", "#3157FF"], ["--accent-hover", "#2447E6"], ["--accent-soft", "#F4F6FF"],
+  ["--status-blocker", "#C62828"], ["--status-blocker-soft", "#FFF6F5"],
+  ["--status-review", "#A15C00"], ["--status-review-soft", "#FFF9EB"],
+  ["--status-pass", "#17824B"], ["--status-pass-soft", "#F0FBF5"],
+  ["--status-external", "#737373"], ["--status-external-soft", "#F5F5F5"],
+  ...TYPE_ROLES.flatMap(([role, size, line]) => [
+    [`--type-${role}-size`, `${size}px`],
+    [`--type-${role}-line`, `${line}px`],
+  ]),
+  ...[0, 4, 8, 12, 16, 24, 32, 48, 64, 80, 96, 120].map((value, index) => [`--space-${index}`, `${value}px`]),
+  ...[0, 4, 8, 12].map((value, index) => [`--radius-${index}`, `${value}px`]),
+  ["--border-1", "1px"], ["--border-2", "2px"], ["--border-3", "3px"],
+  ["--shadow-overlay", "0 16px 48px rgba(10, 10, 10, 0.12)"],
+]);
 
 const SPACING_PROPERTIES = new Set([
   "margin", "margin-top", "margin-right", "margin-bottom", "margin-left",
   "padding", "padding-top", "padding-right", "padding-bottom", "padding-left",
   "gap", "row-gap", "column-gap", "inset", "top", "right", "bottom", "left",
   "scroll-margin", "scroll-margin-top", "scroll-margin-right", "scroll-margin-bottom", "scroll-margin-left",
+  "outline-offset",
 ]);
 
 const BORDER_WIDTH_PROPERTIES = new Set([
   "border-width", "border-top-width", "border-right-width", "border-bottom-width", "border-left-width",
+  "border-block-width", "border-block-start-width", "border-block-end-width",
+  "border-inline-width", "border-inline-start-width", "border-inline-end-width",
+  "outline-width",
 ]);
 
 const BORDER_SHORTHANDS = new Set([
@@ -61,8 +84,9 @@ const TEXT_PAINT_SHORTHANDS = new Set([
   "text-emphasis", "-webkit-text-emphasis", "text-stroke", "-webkit-text-stroke",
 ]);
 
+const WIDTH_SHORTHANDS = new Set([...BORDER_SHORTHANDS, "outline"]);
 const WIDTH_AND_COLOR_SHORTHANDS = new Set([
-  ...BORDER_SHORTHANDS, "text-stroke", "-webkit-text-stroke",
+  ...WIDTH_SHORTHANDS, "text-stroke", "-webkit-text-stroke",
 ]);
 
 const ICON_SIZE_PROPERTIES = new Set(["width", "height", "min-width", "min-height"]);
@@ -211,10 +235,16 @@ function allowedColorVariables(property) {
   return COLOR_TOKENS;
 }
 
+function isAuthoritativeTokenFile(filename) {
+  const normalized = filename.replaceAll("\\", "/");
+  return normalized === COLOR_FILE || normalized.endsWith(`/app/${COLOR_FILE}`);
+}
+
 export function auditCssText(source, filename) {
   const findings = [];
   const css = source.replace(/\/\*[\s\S]*?\*\//g, "");
-  const tokenFile = path.basename(filename) === COLOR_FILE;
+  const tokenFile = isAuthoritativeTokenFile(filename);
+  const canonicalDefinitions = new Map();
   const blockPattern = /([^{}]+)\{([^{}]*)\}/g;
 
   for (const block of css.matchAll(blockPattern)) {
@@ -230,6 +260,25 @@ export function auditCssText(source, filename) {
       const property = declaration[1].toLowerCase();
       const reportedValue = declaration[2].trim();
       const value = withoutImportant(reportedValue);
+
+      if (property.startsWith("--")) {
+        if (!tokenFile && CANONICAL_TOKEN_VALUES.has(property)) {
+          add(findings, filename, property, reportedValue, "canonical visual token cannot be redeclared outside visual-tokens.css");
+        } else if (tokenFile) {
+          if (!CANONICAL_TOKEN_VALUES.has(property)) {
+            add(findings, filename, property, reportedValue, "unexpected visual token definition");
+          } else if (value !== CANONICAL_TOKEN_VALUES.get(property)) {
+            add(findings, filename, property, reportedValue, "canonical token value does not match the locked contract");
+          }
+          if (canonicalDefinitions.has(property)) {
+            add(findings, filename, property, reportedValue, "duplicate canonical token definition");
+          }
+          if (selector !== ":root") {
+            add(findings, filename, property, reportedValue, "canonical visual tokens must be defined in :root");
+          }
+          canonicalDefinitions.set(property, value);
+        }
+      }
 
       if (property === "font") {
         add(findings, filename, property, reportedValue, "font shorthand is not allowed");
@@ -257,7 +306,7 @@ export function auditCssText(source, filename) {
         if (!hasOnlyAllowedVariables(value, BORDER_TOKENS) || hasUnapprovedLength(value, BORDER) || /\b(?:thin|medium|thick)\b/i.test(value)) {
           add(findings, filename, property, reportedValue, "unapproved border width token");
         }
-      } else if (BORDER_SHORTHANDS.has(property)) {
+      } else if (WIDTH_SHORTHANDS.has(property)) {
         const borderTokens = new Set([...BORDER_TOKENS, ...COLOR_TOKENS]);
         if (!hasOnlyAllowedVariables(value, borderTokens) || hasUnapprovedLength(value, BORDER) || /\b(?:thin|medium|thick)\b/i.test(value)) {
           add(findings, filename, property, reportedValue, "unapproved border width token");
@@ -313,6 +362,29 @@ export function auditCssText(source, filename) {
     }
   }
 
+  if (tokenFile) {
+    for (const name of CANONICAL_TOKEN_VALUES.keys()) {
+      if (!canonicalDefinitions.has(name)) {
+        add(findings, filename, name, "missing", "missing canonical token definition");
+      }
+    }
+  }
+
+  return findings;
+}
+
+export function auditTsxText(source, filename) {
+  const findings = [];
+  const sourceFile = ts.createSourceFile(filename, source, ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX);
+
+  function visit(node) {
+    if (ts.isJsxAttribute(node) && ts.isIdentifier(node.name) && node.name.text === "style") {
+      add(findings, filename, "style", "style=", "inline JSX style attributes are not allowed in production TSX");
+    }
+    ts.forEachChild(node, visit);
+  }
+  visit(sourceFile);
+
   return findings;
 }
 
@@ -329,7 +401,10 @@ export function collectProductionCssFiles(frontendRoot) {
       const absolute = path.join(directory, entry.name);
       if (entry.isDirectory()) {
         visit(absolute);
-      } else if (entry.isFile() && normalizedName.endsWith(".css") && !normalizedName.endsWith(".generated.css") && !normalizedName.endsWith(".min.css")) {
+      } else if (entry.isFile() && (
+        (normalizedName.endsWith(".css") && !normalizedName.endsWith(".generated.css") && !normalizedName.endsWith(".min.css")) ||
+        normalizedName.endsWith(".tsx")
+      )) {
         files.push(absolute);
       }
     }
@@ -343,11 +418,17 @@ export function collectProductionCssFiles(frontendRoot) {
 const invokedAsScript = process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url);
 
 if (invokedAsScript && process.argv.includes("--check")) {
-  const frontendRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+  const rootArgument = process.argv.indexOf("--frontend-root");
+  const frontendRoot = rootArgument >= 0 && process.argv[rootArgument + 1]
+    ? path.resolve(process.argv[rootArgument + 1])
+    : path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
   const repositoryRoot = path.dirname(frontendRoot);
   const findings = collectProductionCssFiles(frontendRoot).flatMap(file => {
     const displayFile = path.relative(repositoryRoot, file).replaceAll(path.sep, "/");
-    return auditCssText(fs.readFileSync(file, "utf8"), displayFile);
+    const source = fs.readFileSync(file, "utf8");
+    return file.toLowerCase().endsWith(".tsx")
+      ? auditTsxText(source, displayFile)
+      : auditCssText(source, displayFile);
   });
 
   for (const finding of findings) {

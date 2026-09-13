@@ -5,7 +5,7 @@ import os from "node:os";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
-import { auditCssText, collectProductionCssFiles } from "./visual-token-audit.mjs";
+import { auditCssText, auditTsxText, collectProductionCssFiles } from "./visual-token-audit.mjs";
 
 function reasons(css) {
   return auditCssText(css, "fixture.css").map(item => item.reason);
@@ -20,17 +20,81 @@ test("canonical visual tokens retain their locked values", () => {
   );
   const required = new Map([
     ["--page", "#FFFFFF"],
+    ["--surface", "#FFFFFF"],
+    ["--surface-subtle", "#FAFAF9"],
     ["--text-primary", "#0A0A0A"],
+    ["--text-secondary", "#525252"],
+    ["--text-muted", "#737373"],
+    ["--text-faint", "#A3A3A3"],
+    ["--border-subtle", "#E5E5E5"],
+    ["--border-strong", "#D4D4D4"],
     ["--accent", "#3157FF"],
+    ["--accent-hover", "#2447E6"],
+    ["--accent-soft", "#F4F6FF"],
     ["--status-blocker", "#C62828"],
+    ["--status-blocker-soft", "#FFF6F5"],
     ["--status-review", "#A15C00"],
+    ["--status-review-soft", "#FFF9EB"],
     ["--status-pass", "#17824B"],
+    ["--status-pass-soft", "#F0FBF5"],
+    ["--status-external", "#737373"],
+    ["--status-external-soft", "#F5F5F5"],
+    ["--type-display-lg-size", "56px"],
+    ["--type-display-lg-line", "64px"],
+    ["--type-display-md-size", "48px"],
+    ["--type-display-md-line", "56px"],
+    ["--type-heading-1-size", "40px"],
+    ["--type-heading-1-line", "48px"],
+    ["--type-heading-2-size", "32px"],
+    ["--type-heading-2-line", "40px"],
+    ["--type-heading-3-size", "24px"],
+    ["--type-heading-3-line", "32px"],
+    ["--type-heading-4-size", "20px"],
+    ["--type-heading-4-line", "28px"],
+    ["--type-body-lg-size", "16px"],
+    ["--type-body-lg-line", "24px"],
+    ["--type-body-size", "14px"],
+    ["--type-body-line", "20px"],
+    ["--type-small-size", "12px"],
+    ["--type-small-line", "16px"],
+    ["--type-micro-size", "11px"],
+    ["--type-micro-line", "16px"],
+    ["--space-0", "0px"],
+    ["--space-1", "4px"],
+    ["--space-2", "8px"],
+    ["--space-3", "12px"],
+    ["--space-4", "16px"],
+    ["--space-5", "24px"],
+    ["--space-6", "32px"],
+    ["--space-7", "48px"],
+    ["--space-8", "64px"],
+    ["--space-9", "80px"],
+    ["--space-10", "96px"],
+    ["--space-11", "120px"],
+    ["--radius-0", "0px"],
+    ["--radius-1", "4px"],
+    ["--radius-2", "8px"],
+    ["--radius-3", "12px"],
+    ["--border-1", "1px"],
+    ["--border-2", "2px"],
+    ["--border-3", "3px"],
     ["--shadow-overlay", "0 16px 48px rgba(10, 10, 10, 0.12)"],
   ]);
 
-  for (const [name, value] of required) {
-    assert.equal(definitions.get(name), value, `${name} must retain its canonical value`);
-  }
+  assert.deepEqual(definitions, required);
+  assert.deepEqual(auditCssText(tokenSource, "visual-tokens.css"), []);
+});
+
+test("rejects incomplete, changed, or unexpected authoritative token definitions", () => {
+  const missing = auditCssText(":root { --page: #FFFFFF; }", "visual-tokens.css");
+  const changed = auditCssText(":root { --space-4: 18px; }", "visual-tokens.css");
+  const unexpected = auditCssText(":root { --rogue-space: 16px; }", "visual-tokens.css");
+  const wrongScope = auditCssText(".component { --page: #FFFFFF; }", "visual-tokens.css");
+
+  assert(missing.some(item => item.reason.includes("missing canonical token")));
+  assert(changed.some(item => item.property === "--space-4" && item.reason.includes("canonical token value")));
+  assert(unexpected.some(item => item.property === "--rogue-space" && item.reason.includes("unexpected visual token")));
+  assert(wrongScope.some(item => item.property === "--page" && item.reason.includes(":root")));
 });
 
 test("rejects unapproved visual values", () => {
@@ -55,6 +119,44 @@ test("rejects unapproved visual values", () => {
   assert(result.some(reason => reason.includes("font weight")));
   assert(result.some(reason => reason.includes("letter spacing")));
   assert(result.some(reason => reason.includes("raw color")));
+});
+
+test("rejects outline and every physical or logical border width bypass", () => {
+  const properties = [
+    "border-width", "border-top-width", "border-right-width", "border-bottom-width", "border-left-width",
+    "border-block-width", "border-block-start-width", "border-block-end-width",
+    "border-inline-width", "border-inline-start-width", "border-inline-end-width",
+  ];
+  const css = [
+    ".outline { outline-width: 99px; outline-offset: 99px; outline: 99px solid var(--accent); }",
+    ...properties.map((property, index) => `.border-${index} { ${property}: 99px; }`),
+  ].join("\n");
+  const findings = auditCssText(css, "fixture.css");
+
+  for (const property of ["outline-width", "outline-offset", "outline", ...properties]) {
+    assert(findings.some(item => item.property === property), `${property} must be audited`);
+  }
+});
+
+test("rejects canonical token shadowing outside the authoritative token file", () => {
+  const findings = auditCssText(".x { --space-4: 18px; padding: var(--space-4); }", "fixture.css");
+  const disguised = auditCssText(".x { --space-4: 18px; }", "frontend/components/visual-tokens.css");
+  assert(findings.some(item => item.property === "--space-4" && item.reason.includes("redeclared")));
+  assert(disguised.some(item => item.property === "--space-4" && item.reason.includes("redeclared")));
+});
+
+test("rejects production TSX style attributes without matching code or string text", () => {
+  const findings = auditTsxText(`
+    const style = { padding: "18px" };
+    const sample = '<div style={{ padding: "18px" }} />';
+    export const View = () => <Panel child={<div style={style} />} />;
+  `, "frontend/components/view.tsx");
+  assert.deepEqual(findings.map(item => [item.property, item.value]), [["style", "style="]]);
+
+  assert.deepEqual(
+    auditTsxText("export const View = () => <div className=\"style=example\" />;", "frontend/components/view.tsx"),
+    [],
+  );
 });
 
 test("rejects interpolated typography", () => {
@@ -180,20 +282,19 @@ test("accepts canonical tokens with important", () => {
   assert.deepEqual(findings, []);
 });
 
-test("collector and CLI include production CSS and exclude generated artifacts", t => {
+test("collector and CLI include production CSS and TSX while excluding generated artifacts", t => {
   const workspace = fs.mkdtempSync(path.join(os.tmpdir(), "visual-token-audit-"));
   const frontendRoot = path.join(workspace, "frontend");
   const appRoot = path.join(frontendRoot, "app");
   const componentsRoot = path.join(frontendRoot, "components");
-  const scriptsRoot = path.join(frontendRoot, "scripts");
   t.after(() => fs.rmSync(workspace, { recursive: true, force: true }));
 
   fs.mkdirSync(path.join(appRoot, ".next"), { recursive: true });
   fs.mkdirSync(path.join(componentsRoot, "generated"), { recursive: true });
   fs.mkdirSync(path.join(workspace, "other"), { recursive: true });
-  fs.mkdirSync(scriptsRoot, { recursive: true });
   fs.writeFileSync(path.join(appRoot, "keep.css"), ".bad { color: red }\n");
   fs.writeFileSync(path.join(componentsRoot, "keep.module.css"), ".ok { color: var(--text-primary); }\n");
+  fs.writeFileSync(path.join(componentsRoot, "inline.tsx"), "export const Bad = () => <div style={{ padding: '18px' }} />;\n");
   fs.writeFileSync(path.join(appRoot, ".next", "skip.css"), ".bad { color: white; }\n");
   fs.writeFileSync(path.join(componentsRoot, "generated", "skip.css"), ".bad { color: white; }\n");
   fs.writeFileSync(path.join(componentsRoot, "skip.generated.css"), ".bad { color: white; }\n");
@@ -202,18 +303,18 @@ test("collector and CLI include production CSS and exclude generated artifacts",
 
   const relativeFiles = collectProductionCssFiles(frontendRoot)
     .map(file => path.relative(frontendRoot, file).replaceAll(path.sep, "/"));
-  assert.deepEqual(relativeFiles, ["app/keep.css", "components/keep.module.css"]);
+  assert.deepEqual(relativeFiles, ["app/keep.css", "components/inline.tsx", "components/keep.module.css"]);
 
   const sourceScript = fileURLToPath(new URL("./visual-token-audit.mjs", import.meta.url));
-  const cliScript = path.join(scriptsRoot, "visual-token-audit.mjs");
-  fs.copyFileSync(sourceScript, cliScript);
-  const cli = spawnSync(process.execPath, [cliScript, "--check"], { encoding: "utf8" });
+  const cli = spawnSync(process.execPath, [sourceScript, "--check", "--frontend-root", frontendRoot], { encoding: "utf8" });
   assert.equal(cli.status, 1);
   assert.match(cli.stdout, /frontend\/app\/keep\.css :: color=red :: raw color/);
+  assert.match(cli.stdout, /frontend\/components\/inline\.tsx :: style=/);
   assert.doesNotMatch(cli.stdout, /skip/);
 
   fs.writeFileSync(path.join(appRoot, "keep.css"), ".ok { color: var(--text-primary); }\n");
-  const cleanCli = spawnSync(process.execPath, [cliScript, "--check"], { encoding: "utf8" });
+  fs.writeFileSync(path.join(componentsRoot, "inline.tsx"), "export const Good = () => <div className=\"ok\" />;\n");
+  const cleanCli = spawnSync(process.execPath, [sourceScript, "--check", "--frontend-root", frontendRoot], { encoding: "utf8" });
   assert.equal(cleanCli.status, 0);
   assert.equal(cleanCli.stdout, "Visual token audit: 0 findings\n");
 });
