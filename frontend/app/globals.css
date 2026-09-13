@@ -1,3 +1,5 @@
+@import "./visual-tokens.css";
+
 :root {
   --bg:#f8fafc; --surface:#fff; --ink:#101828; --muted:#667085; --line:#e4e7ec;
   --blue:#2563eb; --blue-soft:#eff6ff;
