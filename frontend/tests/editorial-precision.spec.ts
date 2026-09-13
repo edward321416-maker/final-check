@@ -84,7 +84,7 @@ function provisionalGenericSession(): CheckSession {
     ...base,
     generic_profile: {
       ...base.generic_profile!,
-      status: "REVIEW_REQUIRED",
+      status: "DRAFT",
       requirements: [{ ...requirement, extraction_status: "EXTRACTED", authoritative: false }],
     },
   };
@@ -145,7 +145,7 @@ function packageSession(planState: "READY" | "REVIEW_REQUIRED"): CheckSession {
     source_mode: planState === "READY" ? "generic_verifier" : "generic_review",
     verification_plan: planState === "READY" ? verifiedPlanSet() : null,
     verification_plan_state: planState,
-    verification_plan_error: planState === "REVIEW_REQUIRED" ? "PLANNER_FALLBACK" : null,
+    verification_plan_error: planState === "REVIEW_REQUIRED" ? "PLANNER_UNAVAILABLE" : null,
     files: [{ name: "submission.mp4", size_bytes: 2048, media_type: "video/mp4", sha256: "d".repeat(64) }],
     generic_profile: { ...base.generic_profile!, requirements: [deterministicRequirement] },
   };
@@ -157,7 +157,8 @@ function singleResultSession(result: ValidationResult, status: "BLOCKED" | "REVI
     ...base,
     source_mode: result.source_mode,
     verification_plan: result.source_mode === "generic_verifier" ? verifiedPlanSet() : null,
-    verification_plan_state: result.source_mode === "generic_verifier" ? "READY" : "REVIEW_REQUIRED",
+    verification_plan_state: result.source_mode === "generic_verifier" ? "READY" : "NOT_STARTED",
+    verification_plan_error: null,
     run_state: "COMPLETE",
     validation_complete: status !== "REVIEW_REQUIRED",
     status,
@@ -218,6 +219,17 @@ function semanticReviewResult(assessment: SemanticAssessment): ValidationResult 
         execution_kind: "SIMULATED",
       },
     },
+  };
+}
+
+function failedRunSession(): CheckSession {
+  return {
+    ...packageSession("READY"),
+    run_state: "FAILED",
+    run_error: "검사 작업이 중단되었습니다. 현재 제출 패키지를 확인한 뒤 다시 실행하세요.",
+    status: "REVIEW_REQUIRED",
+    validation_complete: false,
+    results: [],
   };
 }
 
@@ -319,12 +331,7 @@ const qaScenarios: readonly QaScenario[] = [
   {
     name: "11-actionable-recovery",
     render: async page => {
-      const session = {
-        ...packageSession("READY"),
-        run_state: "FAILED" as const,
-        run_error: "검사 작업이 중단되었습니다. 현재 제출 패키지를 확인한 뒤 다시 실행하세요.",
-      };
-      await openQaSession(page, "/upload", session);
+      await openQaSession(page, "/upload", failedRunSession());
       await page.getByRole("button", { name: "Preflight 실행하기" }).focus();
     },
   },
@@ -345,6 +352,62 @@ const qaScenarios: readonly QaScenario[] = [
 
 test("visual QA matrix declares all required states", () => {
   expect(qaScenarios.map(scenario => scenario.name)).toEqual(qaStateNames);
+});
+
+test("visual QA fixtures use backend-reachable transition pairs", () => {
+  const extracted = provisionalGenericSession();
+  expect.soft(
+    [extracted.generic_profile?.status, extracted.generic_profile?.history.length],
+    "successful retained extraction with no history finalizes as DRAFT",
+  ).toEqual(["DRAFT", 0]);
+
+  const planReview = packageSession("REVIEW_REQUIRED");
+  expect.soft(
+    [planReview.verification_plan_state, planReview.verification_plan_error],
+    "planner failure must use a backend-emitted error",
+  ).toEqual(["REVIEW_REQUIRED", "PLANNER_UNAVAILABLE"]);
+
+  for (const state of ["08", "09", "10", "12"] as const) {
+    const semantic = singleResultSession(semanticReviewResult("RELATED_EVIDENCE_FOUND"), "REVIEW_REQUIRED");
+    expect.soft(
+      [semantic.verification_plan_state, semantic.verification_plan_error],
+      `semantic state ${state} retains the Task10 NOT_STARTED/null plan pair`,
+    ).toEqual(["NOT_STARTED", null]);
+  }
+
+  const failed = failedRunSession();
+  expect.soft(
+    [failed.run_state, failed.status, failed.validation_complete, failed.results],
+    "backend failed-run transition clears results and requires review",
+  ).toEqual(["FAILED", "REVIEW_REQUIRED", false, []]);
+});
+
+test("focused evidence action clears the next-action copy", async ({ page }) => {
+  await openQaSession(page, "/results", singleResultSession(semanticReviewResult("NO_CLEAR_EVIDENCE"), "REVIEW_REQUIRED"));
+  const button = page.getByRole("button", { name: /G001 .*근거 자세히 보기/ });
+  await button.focus();
+  const action = page.locator(".result-card .action-line");
+  const [actionBox, buttonBox] = await Promise.all([action.boundingBox(), button.boundingBox()]);
+  expect(actionBox).not.toBeNull();
+  expect(buttonBox).not.toBeNull();
+  expect(
+    buttonBox!.y - (actionBox!.y + actionBox!.height),
+    "button box needs one space-2 beyond the next-action copy so its 7px focus outline cannot overlap",
+  ).toBeGreaterThanOrEqual(8);
+});
+
+test("mobile source content does not create a blank 420px pane", async ({ page }, info) => {
+  test.skip(info.project.name !== "mobile", "mobile-only stacked workspace assertion");
+  await openQaSession(page, "/announcement", provisionalGenericSession());
+  const sourceHeading = page.getByRole("heading", { name: "Announcement Source" });
+  const extractedHeading = page.getByRole("heading", { name: "Extracted Requirements" });
+  const [sourceHeadingBox, extractedHeadingBox] = await Promise.all([sourceHeading.boundingBox(), extractedHeading.boundingBox()]);
+  expect(sourceHeadingBox).not.toBeNull();
+  expect(extractedHeadingBox).not.toBeNull();
+  expect(
+    extractedHeadingBox!.y - (sourceHeadingBox!.y + sourceHeadingBox!.height),
+    "stacked source content and grid spacing should remain compact",
+  ).toBeLessThanOrEqual(180);
 });
 
 test("captures the 12-state editorial visual QA matrix", async ({ page }, info) => {

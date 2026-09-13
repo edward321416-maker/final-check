@@ -242,7 +242,7 @@ blockquote { margin:var(--space-2) 0 var(--space-3); font-size:var(--type-body-s
 .evidence-grid { display:grid; grid-template-columns:1fr 1fr; gap:var(--space-3); }
 .action-line { padding-top:var(--space-4); font-size:var(--type-small-size); line-height:var(--type-small-line); color:var(--text-primary); }
 .action-line>span { margin-right:var(--space-3); color:var(--text-muted); font-size:var(--type-micro-size); line-height:var(--type-micro-line); font-weight:700; }
-.evidence-button { width:100%; margin-top:auto; padding:var(--space-2) var(--space-3); font-size:var(--type-micro-size); line-height:var(--type-micro-line); }
+.evidence-button { width:100%; margin-top:var(--space-3); padding:var(--space-2) var(--space-3); font-size:var(--type-micro-size); line-height:var(--type-micro-line); }
 .results-footer { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:var(--space-4); margin:var(--space-6) 0; color:var(--text-muted); font-size:var(--type-micro-size); line-height:var(--type-micro-line); }
 .evidence-drawer-layer { position:fixed; inset:0; z-index:49; }
 .evidence-drawer-backdrop { position:absolute; inset:0; background:var(--text-primary); opacity:.24; }
@@ -335,7 +335,7 @@ blockquote { margin:var(--space-2) 0 var(--space-3); font-size:var(--type-body-s
   .site-footer { flex-wrap:wrap; gap:var(--space-3); } .site-footer span:last-child { margin-left:0; width:100%; }
   .mode-note { font-size:var(--type-small-size); line-height:var(--type-small-line); } .mode-note>span:last-child { width:100%; }
   .page-heading { margin:var(--space-6) 0 var(--space-5); } .page-heading h1 { font-size:var(--type-heading-3-size); line-height:var(--type-heading-3-line); } .stamp { display:none; }
-  .panel-heading { padding:var(--space-4); } .requirement { padding:var(--space-4); }
+  .panel-heading { padding:var(--space-4); } .requirement { padding:var(--space-4); } .source-pane>pre { min-height:0; }
   .fixture-options { padding:var(--space-4); gap:var(--space-2); } .fixture-option { padding:var(--space-4) var(--space-2); } .fixture-option strong { font-size:var(--type-small-size); line-height:var(--type-small-line); }
   .fixture-option small { font-size:var(--type-micro-size); line-height:var(--type-micro-line); } .file-list { padding:0 var(--space-4); }
   .result-banner { padding:var(--space-6) 0; gap:var(--space-5); } .result-title h2 { font-size:var(--type-heading-4-size); line-height:var(--type-heading-4-line); }
