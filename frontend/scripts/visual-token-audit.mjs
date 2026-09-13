@@ -223,6 +223,8 @@ export function auditCssText(source, filename) {
     const declarationPattern = /([\w-]+)\s*:\s*([^;]+?)(?:;|$)/g;
     let fontSize = null;
     let lineHeight = null;
+    let fontSizeDeclaration = null;
+    let lineHeightDeclaration = null;
 
     for (const declaration of body.matchAll(declarationPattern)) {
       const property = declaration[1].toLowerCase();
@@ -232,6 +234,7 @@ export function auditCssText(source, filename) {
       if (property === "font") {
         add(findings, filename, property, reportedValue, "font shorthand is not allowed");
       } else if (property === "font-size") {
+        fontSizeDeclaration = reportedValue;
         if (/clamp\(|\d(?:\.\d+)?vw\b/i.test(value)) {
           add(findings, filename, property, reportedValue, "responsive typography is not allowed for font-size");
         } else {
@@ -239,6 +242,7 @@ export function auditCssText(source, filename) {
           if (!fontSize) add(findings, filename, property, reportedValue, "unapproved font-size token");
         }
       } else if (property === "line-height") {
+        lineHeightDeclaration = reportedValue;
         lineHeight = typographyValue(value, TYPE_LINE_TOKENS, LINE);
         if (!lineHeight) add(findings, filename, property, reportedValue, "unapproved line-height token");
       } else if (SPACING_PROPERTIES.has(property)) {
@@ -294,7 +298,11 @@ export function auditCssText(source, filename) {
       }
     }
 
-    if (fontSize && lineHeight) {
+    if (fontSizeDeclaration !== null && lineHeightDeclaration === null) {
+      add(findings, filename, "font-size/line-height", `${fontSizeDeclaration} / missing`, "missing companion typography declaration");
+    } else if (fontSizeDeclaration === null && lineHeightDeclaration !== null) {
+      add(findings, filename, "font-size/line-height", `missing / ${lineHeightDeclaration}`, "missing companion typography declaration");
+    } else if (fontSize && lineHeight) {
       const roleMismatch = fontSize.role && lineHeight.role && fontSize.role !== lineHeight.role;
       const valueMismatch = TYPE_PAIRS.get(fontSize.pixels) !== lineHeight.pixels;
       if (roleMismatch || valueMismatch) {

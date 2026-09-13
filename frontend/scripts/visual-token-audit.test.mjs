@@ -115,6 +115,26 @@ test("enforces canonical literal and token typography pairs", () => {
   assert(mismatches.some(item => item.value.includes("--type-display-lg-size") && item.value.includes("--type-micro-line")));
 });
 
+test("requires an explicit companion for every typography declaration", () => {
+  const findings = auditCssText(`
+    .token-size-only { font-size: var(--type-body-size); }
+    .literal-size-only { font-size: 12px; }
+    .token-line-only { line-height: var(--type-body-line); }
+    .literal-line-only { line-height: 16px; }
+  `, "fixture.css");
+  const missingCompanions = findings.filter(item => item.reason.includes("missing companion"));
+
+  assert.deepEqual(
+    missingCompanions.map(item => [item.property, item.value]),
+    [
+      ["font-size/line-height", "var(--type-body-size) / missing"],
+      ["font-size/line-height", "12px / missing"],
+      ["font-size/line-height", "missing / var(--type-body-line)"],
+      ["font-size/line-height", "missing / 16px"],
+    ],
+  );
+});
+
 test("rejects arbitrary variables and non-pixel fixed lengths", () => {
   const result = reasons(`
     .rogue {

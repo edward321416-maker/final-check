@@ -299,6 +299,15 @@ test("header and five-step shell use the approved compact type and spacing", asy
   await expect(firstStep).toHaveCSS("font-weight", "500");
 });
 
+test("announcement requirement copy uses the canonical small typography pair", async ({ page }) => {
+  await page.goto("/");
+  await page.getByRole("button", { name: "demo 검사 시작하기" }).click();
+  await expect(page).toHaveURL(/\/announcement$/);
+  const requirementCopy = page.locator(".requirement > p").first();
+  await expect(requirementCopy).toHaveCSS("font-size", "12px");
+  await expect(requirementCopy).toHaveCSS("line-height", "16px");
+});
+
 test("proof and story metadata use approved editorial tokens", async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
   await page.goto("/");
