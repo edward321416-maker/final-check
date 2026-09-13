@@ -3,7 +3,7 @@ import { test, expect, type Page } from "@playwright/test";
 const editorialSessionId = "editorial-precision-session";
 const editorialStamp = "2026-09-13T00:00:00.000Z";
 
-function confirmedGenericSession() {
+function confirmedGenericSession(overrides: Record<string, unknown> = {}) {
   const quote = "영상은 60초 이내여야 합니다.";
   const provenance = {
     provider: "SIMULATED browser fixture", model: "fixture", prompt_version: "fixture-v1",
@@ -31,20 +31,105 @@ function confirmedGenericSession() {
       dropped_candidate_count: 0, review_batches: 1, failed_batches: [], overflow: false, overflow_policy: "",
       extraction_complete: true, notices: [], history: [], version: 1, created_at: editorialStamp, updated_at: editorialStamp,
     },
+    ...overrides,
   };
 }
 
-async function openConfirmedGenericSession(page: Page, path: string) {
+async function openConfirmedGenericSession(
+  page: Page,
+  path: string,
+  session = confirmedGenericSession(),
+  readiness: { ack_required: boolean; eligible_requirement_count: number; reason_code: string | null } = {
+    ack_required: false,
+    eligible_requirement_count: 0,
+    reason_code: "NOT_ELIGIBLE",
+  },
+) {
   await page.addInitScript(([key, id]) => sessionStorage.setItem(key, id), ["final-check-session-id-v2", editorialSessionId]);
   await page.route("**/api/sessions/**", route => {
     const url = new URL(route.request().url()).pathname;
+    if (url.endsWith("/semantic-readiness")) {
+      return route.fulfill({ contentType: "application/json", body: JSON.stringify(readiness) });
+    }
     if (url.endsWith(`/sessions/${editorialSessionId}`)) {
-      return route.fulfill({ contentType: "application/json", body: JSON.stringify(confirmedGenericSession()) });
+      return route.fulfill({ contentType: "application/json", body: JSON.stringify(session) });
     }
     return route.fulfill({ status: 404, contentType: "application/json", body: '{"detail":"missing mock"}' });
   });
   await page.goto(path);
 }
+
+test("extraction and review read as editorial columns rather than cards", async ({ page }) => {
+  await openConfirmedGenericSession(page, "/announcement");
+  const source = page.getByRole("region", { name: "공고 원문" });
+  const candidates = page.getByRole("region", { name: "AI 추출 후보" });
+  await expect(source).toHaveCSS("box-shadow", "none");
+  await expect(source).toHaveCSS("border-radius", "0px");
+  await expect(candidates).toHaveCSS("border-radius", "0px");
+  await expect(source.locator(".source-highlight")).toHaveCSS("background-color", "rgb(244, 246, 255)");
+
+  const selectedCandidate = candidates.locator(".requirement-candidate.selected");
+  await expect(selectedCandidate).toHaveCSS("border-left-width", "2px");
+  await expect(selectedCandidate.locator("button")).toHaveCSS("background-color", "rgb(255, 255, 255)");
+
+  await page.goto("/requirements");
+  const list = page.getByRole("region", { name: "요구사항 목록" });
+  const inspector = page.getByRole("region", { name: "요구사항 Inspector" });
+  await expect(list).toHaveCSS("box-shadow", "none");
+  await expect(inspector).toHaveCSS("box-shadow", "none");
+  await expect(list).toHaveCSS("border-radius", "0px");
+  await expect(inspector).toHaveCSS("border-radius", "0px");
+  await expect(inspector.locator(".inspector-source pre")).toHaveCSS("background-color", "rgb(255, 255, 255)");
+
+  const selectedRequirement = list.locator(".requirement-row.selected");
+  await expect(selectedRequirement).toHaveCSS("border-left-width", "2px");
+  await expect(selectedRequirement.locator("button")).toHaveCSS("background-color", "rgb(255, 255, 255)");
+  await expect(inspector.getByRole("button", { name: "항목 승인" })).toHaveCSS("background-color", "rgb(255, 255, 255)");
+  await expect(inspector.getByRole("button", { name: "항목 삭제" })).toHaveCSS("color", "rgb(198, 40, 40)");
+});
+
+test("confirmed generic review-required package stays accessible and reads as a file sheet", async ({ page }) => {
+  const session = confirmedGenericSession({
+    verification_plan_state: "REVIEW_REQUIRED",
+    verification_plan_error: "PLANNER_FALLBACK",
+    files: [{ name: "submission.pdf", size_bytes: 2048, media_type: "application/pdf", sha256: "d".repeat(64) }],
+  });
+  await openConfirmedGenericSession(page, "/upload", session);
+
+  await expect(page.getByRole("heading", { name: "제출 패키지" })).toBeVisible();
+  const packagePanel = page.getByRole("region", { name: "제출 패키지" });
+  const scope = page.getByRole("region", { name: "이번 검사" });
+  await expect(packagePanel).toHaveCSS("box-shadow", "none");
+  await expect(packagePanel).toHaveCSS("border-radius", "0px");
+  await expect(scope).toHaveCSS("background-color", "rgb(255, 255, 255)");
+  await expect(scope).toHaveCSS("box-shadow", "none");
+  await expect(scope).toHaveCSS("border-radius", "0px");
+  await expect(scope.locator(".scope-summary")).toHaveCSS("background-color", "rgb(255, 255, 255)");
+  await expect(scope.locator(".scope-summary")).toHaveCSS("border-radius", "0px");
+  await expect(page.getByText("자동 검사 계획이 확정되지 않았습니다.", { exact: true })).toBeVisible();
+  await expect(page.getByRole("button", { name: "Preflight 실행하기" })).toBeEnabled();
+  await expect(page.getByText(/(?:예상|소요).*(?:분|초)|\d+\s*페이지/)).toHaveCount(0);
+});
+
+test("semantic acknowledgement keeps readable editorial body copy", async ({ page }) => {
+  const session = confirmedGenericSession({
+    verification_plan_state: "REVIEW_REQUIRED",
+    files: [{ name: "submission.pdf", size_bytes: 2048, media_type: "application/pdf", sha256: "e".repeat(64) }],
+  });
+  await openConfirmedGenericSession(page, "/upload", session, {
+    ack_required: true,
+    eligible_requirement_count: 1,
+    reason_code: null,
+  });
+
+  const acknowledgement = page.locator(".semantic-acknowledgement");
+  await expect(acknowledgement.locator("p")).toHaveCSS("font-size", "14px");
+  await expect(acknowledgement.locator("p")).toHaveCSS("line-height", "20px");
+  await expect(acknowledgement.locator("label")).toHaveCSS("font-size", "14px");
+  await expect(page.getByRole("button", { name: "Preflight 실행하기" })).toBeDisabled();
+  await page.getByRole("checkbox").check();
+  await expect(page.getByRole("button", { name: "Preflight 실행하기" })).toBeEnabled();
+});
 
 test("landing uses the approved editorial type, white canvas, and no card shadow", async ({ page }, info) => {
   await page.goto("/");
