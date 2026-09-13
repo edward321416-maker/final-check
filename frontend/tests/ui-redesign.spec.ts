@@ -4,6 +4,31 @@ import { recoveryHref } from "../lib/workflow";
 const sessionId = "ui-redesign-session";
 const stamp = "2026-09-13T00:00:00.000Z";
 
+function colorChannels(value: string): [number, number, number] {
+  const normalized = value.trim();
+  if (/^#[0-9a-f]{3}$/i.test(normalized)) {
+    return normalized.slice(1).split("").map(channel => parseInt(channel + channel, 16)) as [number, number, number];
+  }
+  if (/^#[0-9a-f]{6}$/i.test(normalized)) {
+    return [1, 3, 5].map(index => parseInt(normalized.slice(index, index + 2), 16)) as [number, number, number];
+  }
+  const channels = normalized.match(/[\d.]+/g)?.slice(0, 3).map(Number);
+  if (!channels || channels.length !== 3) throw new Error(`Unsupported CSS color: ${value}`);
+  return channels as [number, number, number];
+}
+
+function contrastRatio(foreground: string, background: string): number {
+  const luminance = (value: string) => {
+    const [red, green, blue] = colorChannels(value).map(channel => {
+      const scaled = channel / 255;
+      return scaled <= 0.04045 ? scaled / 12.92 : ((scaled + 0.055) / 1.055) ** 2.4;
+    });
+    return 0.2126 * red + 0.7152 * green + 0.0722 * blue;
+  };
+  const [lighter, darker] = [luminance(foreground), luminance(background)].sort((a, b) => b - a);
+  return (lighter + 0.05) / (darker + 0.05);
+}
+
 function baseSession(overrides: Record<string, unknown> = {}) {
   return {
     id: sessionId, created_at: stamp, updated_at: stamp, mode: "custom",
@@ -87,6 +112,36 @@ test("landing product proof is not intentionally tilted", async ({ page }) => {
   await page.goto("/");
   const transform = await page.getByRole("region", { name: "Preflight 결과 예시" }).evaluate(el => getComputedStyle(el).transform);
   expect(transform).toBe("none");
+});
+
+test("keyboard focus indicators use the accessible Electric Blue token", async ({ page }) => {
+  await page.goto("/");
+  const tokens = await page.evaluate(() => {
+    const styles = getComputedStyle(document.documentElement);
+    return {
+      blue: styles.getPropertyValue("--blue"),
+      background: styles.getPropertyValue("--bg"),
+      surface: styles.getPropertyValue("--surface"),
+    };
+  });
+
+  const targets = [
+    page.getByRole("link", { name: "How it works" }),
+    page.getByRole("button", { name: "demo 검사 시작하기" }),
+    page.getByLabel("공고문 텍스트", { exact: true }),
+  ];
+  for (const target of targets) {
+    await target.focus();
+    const outline = await target.evaluate(element => {
+      const styles = getComputedStyle(element);
+      return { color: styles.outlineColor, style: styles.outlineStyle, width: styles.outlineWidth };
+    });
+    expect(outline.style).toBe("solid");
+    expect(outline.width).toBe("3px");
+    expect(colorChannels(outline.color)).toEqual(colorChannels(tokens.blue));
+    expect(contrastRatio(outline.color, tokens.surface)).toBeGreaterThanOrEqual(3);
+    expect(contrastRatio(outline.color, tokens.background)).toBeGreaterThanOrEqual(3);
+  }
 });
 
 test("reduced motion disables nonessential product transitions", async ({ page }) => {
