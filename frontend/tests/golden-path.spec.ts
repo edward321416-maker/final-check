@@ -13,7 +13,7 @@ class GoldenPath {
   }
   async start() {
     await this.page.goto("/");
-    await expect(this.page.getByRole("heading", { level: 1 })).toContainText("마지막 한 번");
+    await expect(this.page.getByRole("heading", { level: 1, name: "제출 버튼을 누르기 전, 마지막 확인." })).toBeVisible();
     await this.capture("01-home");
     await this.page.getByRole("button", { name: "demo 검사 시작하기" }).click();
     await expect(this.page).toHaveURL(/\/announcement$/);

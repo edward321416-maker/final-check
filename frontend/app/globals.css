@@ -75,7 +75,7 @@ main { min-height:65vh; }
 .story-copy { max-width:470px; }
 .story-number { color:var(--blue); font:700 12px/1.4 monospace; }
 .story-copy h3 { margin:10px 0 12px; font-size:28px; }
-.story-copy p { font-size:14px; line-height:1.85; }
+.story-copy p { font-size:16px; line-height:1.85; }
 .story-frame { min-height:210px; padding:28px; display:grid; align-items:center; gap:20px; }
 .story-step:not(.reverse) .story-frame { grid-template-columns:minmax(0,1fr) auto minmax(0,1fr); }
 .story-step:not(.reverse) .evidence-frame { grid-template-columns:minmax(0,1fr) auto minmax(0,1.3fr) auto minmax(0,.7fr); }
