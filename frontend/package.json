@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start --hostname 127.0.0.1 --port 3100",
     "typecheck": "tsc --noEmit",
-    "test:smoke": "playwright test"
+    "test:smoke": "playwright test",
+    "test:visual-tokens": "node --test scripts/visual-token-audit.test.mjs",
+    "audit:visual-tokens": "node scripts/visual-token-audit.mjs --check"
   },
   "dependencies": {
     "next": "16.3.4",

@@ -142,7 +142,7 @@ export function UploadScreen({ recheck = false }: { recheck?: boolean }) {
 
 export function ResultsScreen() {
   const { session } = useSession();
-  return <WorkflowGuard step="results"><ModeNote /><PageTitle step="04 / PREFLIGHT RESULTS" title="근거를 확인하고, 제출을 준비하세요" description="판정별 근거와 필요한 조치를 확인한 뒤 수정한 파일로 다시 검사할 수 있습니다." />
+  return <WorkflowGuard step="results"><ModeNote /><PageTitle step="04 / PREFLIGHT RESULTS" title="Preflight Result" description="제출 전 점검이 완료되었습니다. 판정별 근거와 필요한 조치를 확인하세요." />
     {session && <ResultsWorkspace session={session} />}
   </WorkflowGuard>;
 }
