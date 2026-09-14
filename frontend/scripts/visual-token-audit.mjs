@@ -11,6 +11,12 @@ const BORDER = new Set([0, 1, 2, 3]);
 const WEIGHTS = new Set([400, 500, 600, 700]);
 const LETTER = new Set([-1, 0, 1]);
 const COLOR_FILE = "visual-tokens.css";
+const DEFAULT_FRONTEND_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+const CSS_ESCAPE_SOURCE = String.raw`\\(?:[0-9a-fA-F]{1,6}(?:\r\n|[ \t\r\n\f])?|[^\r\n\f0-9a-fA-F])`;
+const DECLARATION_PATTERN = new RegExp(
+  String.raw`((?:[\w-]|${CSS_ESCAPE_SOURCE})+)\s*:\s*([^;]+?)(?:;|$)`,
+  "g",
+);
 
 const TYPE_ROLES = [
   ["display-lg", 56, 64],
@@ -66,6 +72,7 @@ const SPACING_PROPERTIES = new Set([
   "scroll-margin", "scroll-margin-top", "scroll-margin-right", "scroll-margin-bottom", "scroll-margin-left",
   "outline-offset",
 ]);
+const POSITIONAL_GEOMETRY_PROPERTIES = new Set(["inset", "top", "right", "bottom", "left"]);
 
 const BORDER_WIDTH_PROPERTIES = new Set([
   "border-width", "border-top-width", "border-right-width", "border-bottom-width", "border-left-width",
@@ -117,6 +124,24 @@ function pxNumbers(value) {
 
 function usesVariableOrLayoutExpression(value) {
   return /var\(|calc\(|min\(|max\(/i.test(value);
+}
+
+function usesGovernedValueComposition(value) {
+  return /\b(?:calc|min|max|clamp)\s*\(/i.test(value);
+}
+
+function decodeCssIdentifier(identifier) {
+  return identifier.replace(
+    /\\(?:([0-9a-fA-F]{1,6})(?:\r\n|[ \t\r\n\f])?|([^\r\n\f0-9a-fA-F]))/g,
+    (_escape, hexadecimal, escapedCharacter) => {
+      if (hexadecimal === undefined) return escapedCharacter;
+      const codePoint = Number.parseInt(hexadecimal, 16);
+      if (codePoint === 0 || codePoint > 0x10ffff || (codePoint >= 0xd800 && codePoint <= 0xdfff)) {
+        return "\uFFFD";
+      }
+      return String.fromCodePoint(codePoint);
+    },
+  );
 }
 
 function add(findings, file, property, value, reason) {
@@ -235,29 +260,34 @@ function allowedColorVariables(property) {
   return COLOR_TOKENS;
 }
 
-function isAuthoritativeTokenFile(filename) {
-  const normalized = filename.replaceAll("\\", "/");
-  return normalized === COLOR_FILE || normalized.endsWith(`/app/${COLOR_FILE}`);
+function normalizedAbsolutePath(filename) {
+  const resolved = path.resolve(filename);
+  return process.platform === "win32" ? resolved.toLowerCase() : resolved;
 }
 
-export function auditCssText(source, filename) {
+function isAuthoritativeTokenFile(filename, frontendRoot) {
+  const candidate = normalizedAbsolutePath(filename);
+  const canonical = normalizedAbsolutePath(path.join(frontendRoot, "app", COLOR_FILE));
+  return candidate === canonical;
+}
+
+export function auditCssText(source, filename, { frontendRoot = DEFAULT_FRONTEND_ROOT } = {}) {
   const findings = [];
   const css = source.replace(/\/\*[\s\S]*?\*\//g, "");
-  const tokenFile = isAuthoritativeTokenFile(filename);
+  const tokenFile = isAuthoritativeTokenFile(filename, frontendRoot);
   const canonicalDefinitions = new Map();
   const blockPattern = /([^{}]+)\{([^{}]*)\}/g;
 
   for (const block of css.matchAll(blockPattern)) {
     const selector = block[1].trim();
     const body = block[2];
-    const declarationPattern = /([\w-]+)\s*:\s*([^;]+?)(?:;|$)/g;
     let fontSize = null;
     let lineHeight = null;
     let fontSizeDeclaration = null;
     let lineHeightDeclaration = null;
 
-    for (const declaration of body.matchAll(declarationPattern)) {
-      const property = declaration[1].toLowerCase();
+    for (const declaration of body.matchAll(DECLARATION_PATTERN)) {
+      const property = decodeCssIdentifier(declaration[1]).toLowerCase();
       const reportedValue = declaration[2].trim();
       const value = withoutImportant(reportedValue);
 
@@ -295,20 +325,21 @@ export function auditCssText(source, filename) {
         lineHeight = typographyValue(value, TYPE_LINE_TOKENS, LINE);
         if (!lineHeight) add(findings, filename, property, reportedValue, "unapproved line-height token");
       } else if (SPACING_PROPERTIES.has(property)) {
-        if (!hasOnlyAllowedVariables(value, SPACE_TOKENS) || hasUnapprovedLength(value, SPACE, { allowPercent: true })) {
+        const forbiddenComposition = !POSITIONAL_GEOMETRY_PROPERTIES.has(property) && usesGovernedValueComposition(value);
+        if (forbiddenComposition || !hasOnlyAllowedVariables(value, SPACE_TOKENS) || hasUnapprovedLength(value, SPACE, { allowPercent: true })) {
           add(findings, filename, property, reportedValue, "unapproved spacing token");
         }
       } else if (property === "border-radius") {
-        if (!hasOnlyAllowedVariables(value, RADIUS_TOKENS) || hasUnapprovedLength(value, RADIUS)) {
+        if (usesGovernedValueComposition(value) || !hasOnlyAllowedVariables(value, RADIUS_TOKENS) || hasUnapprovedLength(value, RADIUS)) {
           add(findings, filename, property, reportedValue, "unapproved radius token");
         }
       } else if (BORDER_WIDTH_PROPERTIES.has(property)) {
-        if (!hasOnlyAllowedVariables(value, BORDER_TOKENS) || hasUnapprovedLength(value, BORDER) || /\b(?:thin|medium|thick)\b/i.test(value)) {
+        if (usesGovernedValueComposition(value) || !hasOnlyAllowedVariables(value, BORDER_TOKENS) || hasUnapprovedLength(value, BORDER) || /\b(?:thin|medium|thick)\b/i.test(value)) {
           add(findings, filename, property, reportedValue, "unapproved border width token");
         }
       } else if (WIDTH_SHORTHANDS.has(property)) {
         const borderTokens = new Set([...BORDER_TOKENS, ...COLOR_TOKENS]);
-        if (!hasOnlyAllowedVariables(value, borderTokens) || hasUnapprovedLength(value, BORDER) || /\b(?:thin|medium|thick)\b/i.test(value)) {
+        if (usesGovernedValueComposition(value) || !hasOnlyAllowedVariables(value, borderTokens) || hasUnapprovedLength(value, BORDER) || /\b(?:thin|medium|thick)\b/i.test(value)) {
           add(findings, filename, property, reportedValue, "unapproved border width token");
         }
       } else if (property === "font-weight") {
@@ -355,9 +386,7 @@ export function auditCssText(source, filename) {
       const roleMismatch = fontSize.role && lineHeight.role && fontSize.role !== lineHeight.role;
       const valueMismatch = TYPE_PAIRS.get(fontSize.pixels) !== lineHeight.pixels;
       if (roleMismatch || valueMismatch) {
-        const sizeDeclaration = [...body.matchAll(/font-size\s*:\s*([^;]+?)(?:;|$)/g)].at(-1)?.[1].trim() ?? String(fontSize.pixels);
-        const lineDeclaration = [...body.matchAll(/line-height\s*:\s*([^;]+?)(?:;|$)/g)].at(-1)?.[1].trim() ?? String(lineHeight.pixels);
-        add(findings, filename, "font-size/line-height", `${sizeDeclaration} / ${lineDeclaration}`, "unapproved typography pair");
+        add(findings, filename, "font-size/line-height", `${fontSizeDeclaration} / ${lineHeightDeclaration}`, "unapproved typography pair");
       }
     }
   }
@@ -426,9 +455,10 @@ if (invokedAsScript && process.argv.includes("--check")) {
   const findings = collectProductionCssFiles(frontendRoot).flatMap(file => {
     const displayFile = path.relative(repositoryRoot, file).replaceAll(path.sep, "/");
     const source = fs.readFileSync(file, "utf8");
-    return file.toLowerCase().endsWith(".tsx")
+    const fileFindings = file.toLowerCase().endsWith(".tsx")
       ? auditTsxText(source, displayFile)
-      : auditCssText(source, displayFile);
+      : auditCssText(source, file, { frontendRoot });
+    return fileFindings.map(finding => ({ ...finding, file: displayFile }));
   });
 
   for (const finding of findings) {

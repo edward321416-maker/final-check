@@ -13,7 +13,8 @@ function reasons(css) {
 
 test("canonical visual tokens retain their locked values", () => {
   const frontendRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-  const tokenSource = fs.readFileSync(path.join(frontendRoot, "app", "visual-tokens.css"), "utf8");
+  const tokenFile = path.join(frontendRoot, "app", "visual-tokens.css");
+  const tokenSource = fs.readFileSync(tokenFile, "utf8");
   const definitions = new Map(
     [...tokenSource.matchAll(/(--[\w-]+)\s*:\s*([^;]+);/g)]
       .map(([, name, value]) => [name, value.trim()]),
@@ -82,14 +83,81 @@ test("canonical visual tokens retain their locked values", () => {
   ]);
 
   assert.deepEqual(definitions, required);
-  assert.deepEqual(auditCssText(tokenSource, "visual-tokens.css"), []);
+  assert.deepEqual(auditCssText(tokenSource, tokenFile), []);
+});
+
+test("canonicalizes valid escaped CSS property identifiers before classification", () => {
+  const escapedHyphen = auditCssText(String.raw`
+    .x {
+      font\-size: 13px;
+      line-height: 20px;
+    }
+  `, "fixture.css");
+  const hexEscape = auditCssText(String.raw`
+    .x { border\2d radius: 14px; }
+  `, "fixture.css");
+  const escapedCanonicalToken = auditCssText(String.raw`
+    .x { --space\2d 4: 18px; }
+  `, "fixture.css");
+
+  assert(escapedHyphen.some(item => item.property === "font-size" && item.reason.includes("font-size")));
+  assert(hexEscape.some(item => item.property === "border-radius" && item.reason.includes("radius")));
+  assert(escapedCanonicalToken.some(item => item.property === "--space-4" && item.reason.includes("redeclared")));
+});
+
+test("rejects arithmetic composition for governed visual values", () => {
+  const findings = auditCssText(`
+    .x {
+      border-width: calc(var(--border-1) * 99);
+      padding: calc(var(--space-1) * 99);
+    }
+  `, "fixture.css");
+
+  assert(findings.some(item => item.property === "border-width"));
+  assert(findings.some(item => item.property === "padding"));
+});
+
+test("accepts direct governed tokens and exempt layout calculations", () => {
+  const findings = auditCssText(`
+    .x {
+      border-width: var(--border-1);
+      padding: var(--space-4);
+      width: calc(100% - 24px);
+      max-width: min(100%, 1240px);
+      top: calc(var(--space-9) * -1);
+      left: calc(var(--space-3) * -1);
+    }
+  `, "fixture.css");
+
+  assert.deepEqual(findings, []);
+});
+
+test("recognizes only the exact canonical token authority path", () => {
+  const frontendRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+  const canonicalFile = path.join(frontendRoot, "app", "visual-tokens.css");
+  const nestedSpoof = path.join(frontendRoot, "components", "fake", "app", "visual-tokens.css");
+  const basenameSpoof = path.join(frontendRoot, "components", "visual-tokens.css");
+  const tokenSource = fs.readFileSync(canonicalFile, "utf8");
+  const fakeSource = ":root { --page: #FFFFFF; }";
+
+  assert.deepEqual(auditCssText(tokenSource, canonicalFile), []);
+  for (const fakeFile of [nestedSpoof, basenameSpoof]) {
+    const findings = auditCssText(fakeSource, fakeFile);
+    assert(
+      findings.some(item => item.property === "--page" && item.reason.includes("redeclared")),
+      `${fakeFile} must not receive token authority`,
+    );
+    assert(findings.some(item => item.property === "--page" && item.reason.includes("raw color")));
+  }
 });
 
 test("rejects incomplete, changed, or unexpected authoritative token definitions", () => {
-  const missing = auditCssText(":root { --page: #FFFFFF; }", "visual-tokens.css");
-  const changed = auditCssText(":root { --space-4: 18px; }", "visual-tokens.css");
-  const unexpected = auditCssText(":root { --rogue-space: 16px; }", "visual-tokens.css");
-  const wrongScope = auditCssText(".component { --page: #FFFFFF; }", "visual-tokens.css");
+  const frontendRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+  const tokenFile = path.join(frontendRoot, "app", "visual-tokens.css");
+  const missing = auditCssText(":root { --page: #FFFFFF; }", tokenFile);
+  const changed = auditCssText(":root { --space-4: 18px; }", tokenFile);
+  const unexpected = auditCssText(":root { --rogue-space: 16px; }", tokenFile);
+  const wrongScope = auditCssText(".component { --page: #FFFFFF; }", tokenFile);
 
   assert(missing.some(item => item.reason.includes("missing canonical token")));
   assert(changed.some(item => item.property === "--space-4" && item.reason.includes("canonical token value")));
