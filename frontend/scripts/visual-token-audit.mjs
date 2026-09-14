@@ -17,6 +17,10 @@ const DECLARATION_PATTERN = new RegExp(
   String.raw`((?:[\w-]|${CSS_ESCAPE_SOURCE})+)\s*:\s*([^;]+?)(?:;|$)`,
   "g",
 );
+const CSS_IDENTIFIER_PATTERN = new RegExp(String.raw`^(?:[\w-]|${CSS_ESCAPE_SOURCE})+$`);
+const DIRECT_FUNCTION_PATTERN = new RegExp(
+  String.raw`^((?:[\w-]|${CSS_ESCAPE_SOURCE})+)\s*\(([\s\S]*)\)$`,
+);
 
 const TYPE_ROLES = [
   ["display-lg", 56, 64],
@@ -126,10 +130,6 @@ function usesVariableOrLayoutExpression(value) {
   return /var\(|calc\(|min\(|max\(/i.test(value);
 }
 
-function usesGovernedValueComposition(value) {
-  return /\b(?:calc|min|max|clamp)\s*\(/i.test(value);
-}
-
 function decodeCssIdentifier(identifier) {
   return identifier.replace(
     /\\(?:([0-9a-fA-F]{1,6})(?:\r\n|[ \t\r\n\f])?|([^\r\n\f0-9a-fA-F]))/g,
@@ -142,6 +142,202 @@ function decodeCssIdentifier(identifier) {
       return String.fromCodePoint(codePoint);
     },
   );
+}
+
+function cssIdentifierEnd(source, start) {
+  let index = start;
+  while (index < source.length) {
+    if (/[\w-]/.test(source[index])) {
+      index += 1;
+      continue;
+    }
+    if (source[index] !== "\\") break;
+
+    const escapeStart = index;
+    index += 1;
+    let hexadecimalDigits = 0;
+    while (index < source.length && hexadecimalDigits < 6 && /[0-9a-fA-F]/.test(source[index])) {
+      index += 1;
+      hexadecimalDigits += 1;
+    }
+    if (hexadecimalDigits > 0) {
+      if (source[index] === "\r" && source[index + 1] === "\n") index += 2;
+      else if (/[ \t\r\n\f]/.test(source[index] ?? "")) index += 1;
+    } else if (index < source.length && !/[\r\n\f]/.test(source[index])) {
+      index += 1;
+    } else {
+      return escapeStart;
+    }
+  }
+  return index;
+}
+
+function canonicalizeCssFunctionIdentifiers(value) {
+  let result = "";
+  let index = 0;
+  while (index < value.length) {
+    if (value[index] === "\"" || value[index] === "'") {
+      const end = skipQuoted(value, index);
+      result += value.slice(index, end);
+      index = end;
+      continue;
+    }
+
+    if (/[\w\\-]/.test(value[index])) {
+      const identifierEnd = cssIdentifierEnd(value, index);
+      if (identifierEnd > index) {
+        let functionStart = identifierEnd;
+        while (/[ \t\r\n\f]/.test(value[functionStart] ?? "")) functionStart += 1;
+        const identifier = value.slice(index, identifierEnd);
+        if (value[functionStart] === "(") {
+          result += decodeCssIdentifier(identifier).toLowerCase();
+          result += value.slice(identifierEnd, functionStart);
+          index = functionStart;
+        } else {
+          result += identifier;
+          index = identifierEnd;
+        }
+        continue;
+      }
+    }
+
+    result += value[index];
+    index += 1;
+  }
+  return result;
+}
+
+function directVariableName(value) {
+  const match = value.trim().match(DIRECT_FUNCTION_PATTERN);
+  if (!match || decodeCssIdentifier(match[1]).toLowerCase() !== "var") return null;
+  const argument = match[2].trim();
+  if (!CSS_IDENTIFIER_PATTERN.test(argument)) return null;
+  const name = decodeCssIdentifier(argument);
+  return name.startsWith("--") ? name : null;
+}
+
+function splitGovernedComponents(value) {
+  const components = [];
+  let current = "";
+  let depth = 0;
+  let quote = null;
+
+  for (let index = 0; index < value.length;) {
+    const character = value[index];
+    if (quote) {
+      current += character;
+      if (character === "\\" && index + 1 < value.length) {
+        current += value[index + 1];
+        index += 2;
+        continue;
+      }
+      if (character === quote) quote = null;
+      index += 1;
+      continue;
+    }
+    if (character === "\"" || character === "'") {
+      quote = character;
+      current += character;
+      index += 1;
+      continue;
+    }
+    if (character === "\\") {
+      const end = cssIdentifierEnd(value, index);
+      if (end === index) return null;
+      current += value.slice(index, end);
+      index = end;
+      continue;
+    }
+    if (character === "(") depth += 1;
+    if (character === ")") {
+      depth -= 1;
+      if (depth < 0) return null;
+    }
+    if (/\s/.test(character) && depth === 0) {
+      if (current) components.push(current);
+      current = "";
+      index += 1;
+      continue;
+    }
+    current += character;
+    index += 1;
+  }
+
+  if (quote || depth !== 0) return null;
+  if (current) components.push(current);
+  return components;
+}
+
+function approvedPixelLiteral(value, approved, { allowPercent = false } = {}) {
+  if (value === "0" && approved.has(0)) return true;
+  if (allowPercent && /^-?(?:\d+(?:\.\d+)?|\.\d+)%$/.test(value)) return true;
+  const literal = value.match(/^(-?\d+(?:\.\d+)?)px$/i);
+  if (!literal) return false;
+  const pixels = Number(literal[1]);
+  return Number.isInteger(pixels) && approved.has(pixels);
+}
+
+function approvedGovernedComponent(value, allowedVariables, approvedPixels, options = {}) {
+  const variable = directVariableName(value);
+  if (variable !== null) return allowedVariables.has(variable);
+  if (options.keywords?.has(value.toLowerCase())) return true;
+  return approvedPixelLiteral(value, approvedPixels, options);
+}
+
+function approvedGovernedValue(value, allowedVariables, approvedPixels, options = {}) {
+  const components = splitGovernedComponents(value);
+  const maximumComponents = options.maximumComponents ?? 1;
+  return components !== null && components.length >= 1 && components.length <= maximumComponents &&
+    components.every(component => approvedGovernedComponent(component, allowedVariables, approvedPixels, options));
+}
+
+function spacingGrammar(property, value) {
+  if (POSITIONAL_GEOMETRY_PROPERTIES.has(property) && /\b(?:calc|min|max|clamp)\s*\(/i.test(value)) {
+    return hasOnlyAllowedVariables(value, SPACE_TOKENS) && !hasUnapprovedLength(value, SPACE, { allowPercent: true });
+  }
+  const shorthand = new Set(["margin", "padding", "scroll-margin", "inset"]);
+  const maximumComponents = property === "gap" ? 2 : shorthand.has(property) ? 4 : 1;
+  const keywords = property.startsWith("margin") || POSITIONAL_GEOMETRY_PROPERTIES.has(property)
+    ? new Set(["auto"])
+    : new Set();
+  return approvedGovernedValue(value, SPACE_TOKENS, SPACE, {
+    allowPercent: true,
+    keywords,
+    maximumComponents,
+  });
+}
+
+function borderWidthGrammar(property, value) {
+  const maximumComponents = property === "border-width" ? 4 :
+    property === "border-block-width" || property === "border-inline-width" ? 2 : 1;
+  return approvedGovernedValue(value, BORDER_TOKENS, BORDER, { maximumComponents });
+}
+
+const BORDER_STYLE_KEYWORDS = new Set([
+  "none", "hidden", "dotted", "dashed", "solid", "double", "groove", "ridge", "inset", "outset", "auto",
+]);
+
+function borderShorthandGrammar(value) {
+  const components = splitGovernedComponents(value);
+  if (components === null || components.length < 1 || components.length > 3) return false;
+  let widths = 0;
+  let styles = 0;
+  let colors = 0;
+  for (const component of components) {
+    const variable = directVariableName(component);
+    if ((variable !== null && BORDER_TOKENS.has(variable)) || approvedPixelLiteral(component, BORDER)) {
+      widths += 1;
+    } else if (BORDER_STYLE_KEYWORDS.has(component.toLowerCase())) {
+      styles += 1;
+    } else if ((variable !== null && COLOR_TOKENS.has(variable)) ||
+        new Set(["transparent", "currentcolor", "inherit"]).has(component.toLowerCase()) ||
+        NAMED_COLORS.has(component.toLowerCase()) || RAW_COLOR_FUNCTION.test(component)) {
+      colors += 1;
+    } else {
+      return false;
+    }
+  }
+  return widths <= 1 && styles <= 1 && colors <= 1;
 }
 
 function add(findings, file, property, value, reason) {
@@ -174,8 +370,8 @@ function hasUnapprovedLength(value, approved, { allowPercent = false } = {}) {
 }
 
 function typographyValue(value, tokenMap, approved) {
-  const variable = value.match(/^var\(\s*(--[\w-]+)\s*\)$/i);
-  if (variable) return tokenMap.get(variable[1]) ?? null;
+  const variable = directVariableName(value);
+  if (variable !== null) return tokenMap.get(variable) ?? null;
   const literal = value.match(/^(-?\d+(?:\.\d+)?)px$/i);
   if (!literal) return null;
   const pixels = Number(literal[1]);
@@ -289,7 +485,8 @@ export function auditCssText(source, filename, { frontendRoot = DEFAULT_FRONTEND
     for (const declaration of body.matchAll(DECLARATION_PATTERN)) {
       const property = decodeCssIdentifier(declaration[1]).toLowerCase();
       const reportedValue = declaration[2].trim();
-      const value = withoutImportant(reportedValue);
+      const contractValue = withoutImportant(reportedValue);
+      const value = canonicalizeCssFunctionIdentifiers(contractValue);
 
       if (property.startsWith("--")) {
         if (!tokenFile && CANONICAL_TOKEN_VALUES.has(property)) {
@@ -297,7 +494,7 @@ export function auditCssText(source, filename, { frontendRoot = DEFAULT_FRONTEND
         } else if (tokenFile) {
           if (!CANONICAL_TOKEN_VALUES.has(property)) {
             add(findings, filename, property, reportedValue, "unexpected visual token definition");
-          } else if (value !== CANONICAL_TOKEN_VALUES.get(property)) {
+          } else if (contractValue !== CANONICAL_TOKEN_VALUES.get(property)) {
             add(findings, filename, property, reportedValue, "canonical token value does not match the locked contract");
           }
           if (canonicalDefinitions.has(property)) {
@@ -325,21 +522,19 @@ export function auditCssText(source, filename, { frontendRoot = DEFAULT_FRONTEND
         lineHeight = typographyValue(value, TYPE_LINE_TOKENS, LINE);
         if (!lineHeight) add(findings, filename, property, reportedValue, "unapproved line-height token");
       } else if (SPACING_PROPERTIES.has(property)) {
-        const forbiddenComposition = !POSITIONAL_GEOMETRY_PROPERTIES.has(property) && usesGovernedValueComposition(value);
-        if (forbiddenComposition || !hasOnlyAllowedVariables(value, SPACE_TOKENS) || hasUnapprovedLength(value, SPACE, { allowPercent: true })) {
+        if (!spacingGrammar(property, value)) {
           add(findings, filename, property, reportedValue, "unapproved spacing token");
         }
       } else if (property === "border-radius") {
-        if (usesGovernedValueComposition(value) || !hasOnlyAllowedVariables(value, RADIUS_TOKENS) || hasUnapprovedLength(value, RADIUS)) {
+        if (!approvedGovernedValue(value, RADIUS_TOKENS, RADIUS, { maximumComponents: 4 })) {
           add(findings, filename, property, reportedValue, "unapproved radius token");
         }
       } else if (BORDER_WIDTH_PROPERTIES.has(property)) {
-        if (usesGovernedValueComposition(value) || !hasOnlyAllowedVariables(value, BORDER_TOKENS) || hasUnapprovedLength(value, BORDER) || /\b(?:thin|medium|thick)\b/i.test(value)) {
+        if (!borderWidthGrammar(property, value)) {
           add(findings, filename, property, reportedValue, "unapproved border width token");
         }
       } else if (WIDTH_SHORTHANDS.has(property)) {
-        const borderTokens = new Set([...BORDER_TOKENS, ...COLOR_TOKENS]);
-        if (usesGovernedValueComposition(value) || !hasOnlyAllowedVariables(value, borderTokens) || hasUnapprovedLength(value, BORDER) || /\b(?:thin|medium|thick)\b/i.test(value)) {
+        if (!borderShorthandGrammar(value)) {
           add(findings, filename, property, reportedValue, "unapproved border width token");
         }
       } else if (property === "font-weight") {
@@ -373,7 +568,7 @@ export function auditCssText(source, filename, { frontendRoot = DEFAULT_FRONTEND
       }
 
       if (ICON_SELECTOR.test(selector) && ICON_SIZE_PROPERTIES.has(property) &&
-          (!hasOnlyAllowedVariables(value, SPACE_TOKENS) || hasUnapprovedLength(value, SPACE))) {
+          !approvedGovernedValue(value, SPACE_TOKENS, SPACE)) {
         add(findings, filename, property, reportedValue, "unapproved spacing token for fixed icon size");
       }
     }

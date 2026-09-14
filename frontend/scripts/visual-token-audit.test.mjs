@@ -117,6 +117,62 @@ test("rejects arithmetic composition for governed visual values", () => {
   assert(findings.some(item => item.property === "padding"));
 });
 
+test("rejects escaped arithmetic function identifiers for governed values", () => {
+  const findings = auditCssText(String.raw`
+    .x {
+      border-width: cal\63 (var(--border-1) * 99);
+      padding: c\61lc(var(--space-1) * 99);
+    }
+  `, "fixture.css");
+
+  assert(findings.some(item => item.property === "border-width"));
+  assert(findings.some(item => item.property === "padding"));
+});
+
+test("canonicalizes escaped var function names before token-family validation", () => {
+  const rogue = auditCssText(String.raw`
+    .x { border-width: v\61r(--not-a-real-token); }
+  `, "fixture.css");
+  const approved = auditCssText(String.raw`
+    .x {
+      border-width: v\61r(--border-1);
+      padding: v\61r(--space-4);
+    }
+  `, "fixture.css");
+
+  assert(rogue.some(item => item.property === "border-width"));
+  assert.deepEqual(approved, []);
+});
+
+test("governed value grammar rejects fallback and wrapped functions", () => {
+  const findings = auditCssText(`
+    .fallback { border-width: var(--border-1, 99px); }
+    .nested { border-width: calc(var(--border-1)); }
+    .minimum { padding: min(var(--space-4), 999px); }
+  `, "fixture.css");
+
+  assert(findings.some(item => item.property === "border-width" && item.value.includes(", 99px")));
+  assert(findings.some(item => item.property === "border-width" && item.value.startsWith("calc")));
+  assert(findings.some(item => item.property === "padding" && item.value.startsWith("min")));
+});
+
+test("governed direct tokens and layout functions remain accepted controls", () => {
+  const findings = auditCssText(`
+    .governed {
+      border-width: var(--border-1);
+      padding: var(--space-4);
+      font-size: var(--type-body-size);
+      line-height: var(--type-body-line);
+    }
+    .layout {
+      width: calc(100% - 24px);
+      grid-template-columns: minmax(0, 1fr) 2fr;
+    }
+  `, "fixture.css");
+
+  assert.deepEqual(findings, []);
+});
+
 test("accepts direct governed tokens and exempt layout calculations", () => {
   const findings = auditCssText(`
     .x {
